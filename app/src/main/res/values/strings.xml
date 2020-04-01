@@ -1,4 +1,5 @@
 <resources>
+<<<<<<< HEAD
     <string name="app_name">My Application</string>
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
@@ -9,4 +10,7 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+=======
+    <string name="app_name">海油巡检</string>
+>>>>>>> 44422bde2c852a074e8161b7a7b04d4b0aaef84f
 </resources>
