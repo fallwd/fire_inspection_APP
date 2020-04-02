@@ -24,6 +24,10 @@ android {
             google()
             jcenter()
             maven { url "https://jitpack.io" }
+//            //新加
+//            mavenCentral()
+//            //新加
+//            mavenLocal()
         }
     }
 }

@@ -6,6 +6,7 @@ logs/
 .factorypath
 .project
 .settings
+.gradle
 .springBeans
 log*/
 
