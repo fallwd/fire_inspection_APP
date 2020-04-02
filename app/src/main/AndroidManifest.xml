@@ -8,25 +8,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
-        <activity android:name=".activity.SystemTagProtectionAreaActivity">
-=======
         <activity android:name=".activity.MainActivity">
->>>>>>> 442add8a2dadf18a5904319930e1a06f8f32c160
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".activity.LoginActivity">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
-        <!--<activity android:name=".activity.MainActivity" />-->
+        <activity android:name=".activity.SystemTagProtectionAreaActivity"/>
+        <!--<activity android:name=".activity.MainActivity"/>-->
         <activity android:name=".activity.NavigationActivity" />
     </application>
 </manifest>
