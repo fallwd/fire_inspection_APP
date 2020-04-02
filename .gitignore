@@ -8,7 +8,7 @@ logs/
 .settings
 .springBeans
 log*/
-
+.gradle
 ### IntelliJ IDEA ###
 .idea
 *.iws
