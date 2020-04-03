@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="50dp"
+         android:gravity="center"
+         android:orientation="horizontal">
+
+          <!--系统位号-->
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textColor="#000000"
+                   android:textSize="14sp"
+                   android:text="系统位号:"/>
+
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="10dp"
+                   android:background="@drawable/linearborder"
+                   android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/system_tag"
+                        android:layout_width="200dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="请输入系统位号"
+                        android:imeOptions="flagNoExtractUi"
+                        android:textCursorDrawable="@drawable/edit_theme"
+                        android:textSize="12sp" />
+               </LinearLayout>
+
+          </LinearLayout>
+
+          <!--保护区域-->
+
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:layout_marginLeft="25dp">
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textColor="#000000"
+                   android:textSize="14sp"
+                   android:text="保护区域:"/>
+
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="10dp"
+                   android:background="@drawable/linearborder"
+                   android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/protect_area"
+                        android:layout_width="200dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="请输入保护区域"
+                        android:imeOptions="flagNoExtractUi"
+                        android:textCursorDrawable="@drawable/edit_theme"
+                        android:textSize="12sp" />
+               </LinearLayout>
+
+          </LinearLayout>
+
+     </LinearLayout>
+
+     <!--按钮操作-->
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal"
+         android:layout_marginTop="50dp"
+         android:gravity="right"
+         android:layout_marginRight="70dp">
+
+          <Button
+              android:id="@+id/cancel_btn"
+              android:layout_width="70dp"
+              android:layout_height="40dp"
+              android:text="取消"
+              android:onClick="cancelInput"
+              android:background="@drawable/cancel_btn"
+              android:textColor="#000000"
+              android:textSize="12dp"/>
+
+          <Button
+              android:id="@+id/submit_btn"
+              android:layout_width="70dp"
+              android:layout_height="40dp"
+              android:text="确认"
+              android:background="@drawable/submit_btn"
+              android:textColor="#FFFFFF"
+              android:textSize="12dp"
+              android:layout_marginLeft="20dp"/>
+     </LinearLayout>
+
+</LinearLayout>
+
+
+<!--android:textCursorDrawable="@null"-->
+<!--<LinearLayout-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="40dp"-->
+<!--android:radius="5dp"-->
+<!--android:layout_marginTop="10dp"-->
+<!--android:background="@drawable/linearborder"-->
+<!--android:orientation="horizontal">-->
+<!--<EditText-->
+<!--android:id="@+id/userName"-->
+<!--android:layout_width="250dp"-->
+<!--android:layout_gravity="center_vertical"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:background="@null"-->
+<!--android:hint="请输入系统位号"-->
+<!--android:textCursorDrawable="@null"-->
+<!--android:textSize="12sp" />-->
+<!--</LinearLayout>-->

@@ -9,7 +9,7 @@ import org.greenrobot.greendao.database.Database;
 
 
 public class GreenDaoHelper extends Application {
-    private DaoSession daoSession;
+    private static DaoSession daoSession;
 
     @Override
     public void onCreate() {
@@ -22,7 +22,7 @@ public class GreenDaoHelper extends Application {
         daoSession = new DaoMaster(db).newSession();
     }
 
-    public DaoSession getDaoSession() {
+    public static DaoSession getDaoSession() {
         return daoSession;
     }
 }

@@ -5,8 +5,9 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
-import com.hr.fire.inspection.dao.DaoSession;
+
 import com.hr.fire.inspection.dao.CheckTypeDao;
+import com.hr.fire.inspection.dao.DaoSession;
 
 @Entity(
         nameInDb = "t_check_type"
