@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <drawable name="shapee_grey">#E8E8E8</drawable>
+    <drawable name="shapee_grey">#000</drawable>
+    <drawable name="shapee_white">#fff</drawable>
 </resources>

@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,11 +35,16 @@ public class LoginActivity extends AppCompatActivity {
 //                  Toast toast = Toast.makeText(LoginActivity.this,pwdStr,Toast.LENGTH_SHORT );
 //                  toast.setGravity(Gravity.CENTER, 0, 0);
 //                  toast.show();
-//                   Toast.makeText(LoginActivity.this,usernameText.getText().toString().getClass().toString()+":"+usernameText.getText().toString(),Toast.LENGTH_SHORT).show();
+//                  Toast.makeText(LoginActivity.this,usernameText.getText().toString().getClass().toString()+":"+usernameText.getText().toString(),Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
             }
         });
+        // 得到从保护区域传过来的字符串
+        Intent intent = getIntent();
+        String message = intent.getStringExtra(SystemTagProtectionAreaActivity.EXTRA_MESSAGE);
+        TextView textView = findViewById(R.id.loginTitle);
+        textView.setText(message);
     }
 }

@@ -8,13 +8,13 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
-import com.hr.fire.inspection.entity.BottleInfo;
 import com.hr.fire.inspection.entity.CheckType;
+import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
 
-import com.hr.fire.inspection.dao.BottleInfoDao;
 import com.hr.fire.inspection.dao.CheckTypeDao;
+import com.hr.fire.inspection.dao.ItemInfoDao;
 import com.hr.fire.inspection.dao.YearCheckDao;
 import com.hr.fire.inspection.dao.YearCheckResultDao;
 
@@ -27,13 +27,13 @@ import com.hr.fire.inspection.dao.YearCheckResultDao;
  */
 public class DaoSession extends AbstractDaoSession {
 
-    private final DaoConfig bottleInfoDaoConfig;
     private final DaoConfig checkTypeDaoConfig;
+    private final DaoConfig itemInfoDaoConfig;
     private final DaoConfig yearCheckDaoConfig;
     private final DaoConfig yearCheckResultDaoConfig;
 
-    private final BottleInfoDao bottleInfoDao;
     private final CheckTypeDao checkTypeDao;
+    private final ItemInfoDao itemInfoDao;
     private final YearCheckDao yearCheckDao;
     private final YearCheckResultDao yearCheckResultDao;
 
@@ -41,11 +41,11 @@ public class DaoSession extends AbstractDaoSession {
             daoConfigMap) {
         super(db);
 
-        bottleInfoDaoConfig = daoConfigMap.get(BottleInfoDao.class).clone();
-        bottleInfoDaoConfig.initIdentityScope(type);
-
         checkTypeDaoConfig = daoConfigMap.get(CheckTypeDao.class).clone();
         checkTypeDaoConfig.initIdentityScope(type);
+
+        itemInfoDaoConfig = daoConfigMap.get(ItemInfoDao.class).clone();
+        itemInfoDaoConfig.initIdentityScope(type);
 
         yearCheckDaoConfig = daoConfigMap.get(YearCheckDao.class).clone();
         yearCheckDaoConfig.initIdentityScope(type);
@@ -53,30 +53,30 @@ public class DaoSession extends AbstractDaoSession {
         yearCheckResultDaoConfig = daoConfigMap.get(YearCheckResultDao.class).clone();
         yearCheckResultDaoConfig.initIdentityScope(type);
 
-        bottleInfoDao = new BottleInfoDao(bottleInfoDaoConfig, this);
         checkTypeDao = new CheckTypeDao(checkTypeDaoConfig, this);
+        itemInfoDao = new ItemInfoDao(itemInfoDaoConfig, this);
         yearCheckDao = new YearCheckDao(yearCheckDaoConfig, this);
         yearCheckResultDao = new YearCheckResultDao(yearCheckResultDaoConfig, this);
 
-        registerDao(BottleInfo.class, bottleInfoDao);
         registerDao(CheckType.class, checkTypeDao);
+        registerDao(ItemInfo.class, itemInfoDao);
         registerDao(YearCheck.class, yearCheckDao);
         registerDao(YearCheckResult.class, yearCheckResultDao);
     }
     
     public void clear() {
-        bottleInfoDaoConfig.clearIdentityScope();
         checkTypeDaoConfig.clearIdentityScope();
+        itemInfoDaoConfig.clearIdentityScope();
         yearCheckDaoConfig.clearIdentityScope();
         yearCheckResultDaoConfig.clearIdentityScope();
     }
 
-    public BottleInfoDao getBottleInfoDao() {
-        return bottleInfoDao;
-    }
-
     public CheckTypeDao getCheckTypeDao() {
         return checkTypeDao;
+    }
+
+    public ItemInfoDao getItemInfoDao() {
+        return itemInfoDao;
     }
 
     public YearCheckDao getYearCheckDao() {

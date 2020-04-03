@@ -1,23 +1,23 @@
 package com.hr.fire.inspection.entity;
 
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToMany;
 import org.greenrobot.greendao.annotation.ToOne;
 
 import java.util.Date;
 import java.util.List;
+import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
 import com.hr.fire.inspection.dao.DaoSession;
 import com.hr.fire.inspection.dao.YearCheckResultDao;
 import com.hr.fire.inspection.dao.CheckTypeDao;
-import com.hr.fire.inspection.dao.BottleInfoDao;
+import com.hr.fire.inspection.dao.ItemInfoDao;
 
 @Entity(
-        nameInDb = "t_bottle_info"
+        nameInDb = "t_item_info"
 )
-public class BottleInfo {
+public class ItemInfo {
 
     @Id(autoincrement = true)
     private Long id;
@@ -25,7 +25,9 @@ public class BottleInfo {
     private Long checkTypeId;
 
     @ToOne(joinProperty = "checkTypeId")
-    private CheckType checkType; //瓶子类型
+    private CheckType checkType; //设备类型
+
+    private String typeNo;//型号
 
     private String no; //编号
 
@@ -41,11 +43,45 @@ public class BottleInfo {
 
     private Date prodDate; //生产日期
 
+    private String typeConformity;//型号符合性
+
+    private String positionConformity;//位置符合性
+
+    private String appearance;//外观是否良好
+
+    private String check;//自检是否良好
+
+    private String  slience;//消音是否良好
+
+    private String reset;//复位功能是否良好
+
+    private String powerAlarmFunction;//电源线故障报警是否正常
+
+    private String alarmFunction;//报警功能是否正常
+
+    private String effectiveness;//有效性
+
+    private String responseTime;//响应时间
+
+    private String descrption;//隐患描述
+
+    private String setAlarm25;//设置高报值25LEL
+
+    private String setAlarm50;//设置高报值50LEL
+
+    private String testAlarm25;//测试高报值25LEL
+
+    private String testAlarm50;//测试高报值50LEL
+
     private Date observeDate;//检测日期/试验日期
 
     private String isPass;//合格
 
     private String labelNo;//标签号
+
+    private String SystemNumber;//系统位号
+
+    private String ProtectArea;//保护区域
 
     @ToMany(referencedJoinProperty = "targetId")
     private List<YearCheckResult> checkResultList;
@@ -55,15 +91,21 @@ public class BottleInfo {
 private transient DaoSession daoSession;
 
 /** Used for active entity operations. */
-@Generated(hash = 2028711350)
-private transient BottleInfoDao myDao;
+@Generated(hash = 547138643)
+private transient ItemInfoDao myDao;
 
-@Generated(hash = 708684117)
-public BottleInfo(Long id, Long checkTypeId, String no, String volume,
+@Generated(hash = 139795084)
+public ItemInfo(Long id, Long checkTypeId, String typeNo, String no, String volume,
         String weight, String goodsWeight, String pressure, String prodFactory,
-        Date prodDate, Date observeDate, String isPass, String labelNo) {
+        Date prodDate, String typeConformity, String positionConformity,
+        String appearance, String check, String slience, String reset,
+        String powerAlarmFunction, String alarmFunction, String effectiveness,
+        String responseTime, String descrption, String setAlarm25, String setAlarm50,
+        String testAlarm25, String testAlarm50, Date observeDate, String isPass,
+        String labelNo, String SystemNumber, String ProtectArea) {
     this.id = id;
     this.checkTypeId = checkTypeId;
+    this.typeNo = typeNo;
     this.no = no;
     this.volume = volume;
     this.weight = weight;
@@ -71,13 +113,30 @@ public BottleInfo(Long id, Long checkTypeId, String no, String volume,
     this.pressure = pressure;
     this.prodFactory = prodFactory;
     this.prodDate = prodDate;
+    this.typeConformity = typeConformity;
+    this.positionConformity = positionConformity;
+    this.appearance = appearance;
+    this.check = check;
+    this.slience = slience;
+    this.reset = reset;
+    this.powerAlarmFunction = powerAlarmFunction;
+    this.alarmFunction = alarmFunction;
+    this.effectiveness = effectiveness;
+    this.responseTime = responseTime;
+    this.descrption = descrption;
+    this.setAlarm25 = setAlarm25;
+    this.setAlarm50 = setAlarm50;
+    this.testAlarm25 = testAlarm25;
+    this.testAlarm50 = testAlarm50;
     this.observeDate = observeDate;
     this.isPass = isPass;
     this.labelNo = labelNo;
+    this.SystemNumber = SystemNumber;
+    this.ProtectArea = ProtectArea;
 }
 
-@Generated(hash = 40571089)
-public BottleInfo() {
+@Generated(hash = 1334958530)
+public ItemInfo() {
 }
 
 public Long getId() {
@@ -176,6 +235,22 @@ public void setLabelNo(String labelNo) {
     this.labelNo = labelNo;
 }
 
+public String getSystemNumber() {
+    return this.SystemNumber;
+}
+
+public void setSystemNumber(String SystemNumber) {
+    this.SystemNumber = SystemNumber;
+}
+
+public String getProtectArea() {
+    return this.ProtectArea;
+}
+
+public void setProtectArea(String ProtectArea) {
+    this.ProtectArea = ProtectArea;
+}
+
 @Generated(hash = 1822795957)
 private transient Long checkType__resolvedKey;
 
@@ -213,7 +288,7 @@ public void setCheckType(CheckType checkType) {
  * To-many relationship, resolved on first access (and after reset).
  * Changes to to-many relations are not persisted, make changes to the target entity.
  */
-@Generated(hash = 623968391)
+@Generated(hash = 1741583958)
 public List<YearCheckResult> getCheckResultList() {
     if (checkResultList == null) {
         final DaoSession daoSession = this.daoSession;
@@ -222,7 +297,7 @@ public List<YearCheckResult> getCheckResultList() {
         }
         YearCheckResultDao targetDao = daoSession.getYearCheckResultDao();
         List<YearCheckResult> checkResultListNew = targetDao
-                ._queryBottleInfo_CheckResultList(id);
+                ._queryItemInfo_CheckResultList(id);
         synchronized (this) {
             if (checkResultList == null) {
                 checkResultList = checkResultListNew;
@@ -275,9 +350,140 @@ public void update() {
 }
 
 /** called by internal mechanisms, do not call yourself. */
-@Generated(hash = 195501829)
+@Generated(hash = 747586935)
 public void __setDaoSession(DaoSession daoSession) {
     this.daoSession = daoSession;
-    myDao = daoSession != null ? daoSession.getBottleInfoDao() : null;
+    myDao = daoSession != null ? daoSession.getItemInfoDao() : null;
 }
+
+public String getTypeNo() {
+    return this.typeNo;
+}
+
+public void setTypeNo(String typeNo) {
+    this.typeNo = typeNo;
+}
+
+public String getTypeConformity() {
+    return this.typeConformity;
+}
+
+public void setTypeConformity(String typeConformity) {
+    this.typeConformity = typeConformity;
+}
+
+public String getPositionConformity() {
+    return this.positionConformity;
+}
+
+public void setPositionConformity(String positionConformity) {
+    this.positionConformity = positionConformity;
+}
+
+public String getAppearance() {
+    return this.appearance;
+}
+
+public void setAppearance(String appearance) {
+    this.appearance = appearance;
+}
+
+public String getCheck() {
+    return this.check;
+}
+
+public void setCheck(String check) {
+    this.check = check;
+}
+
+public String getSlience() {
+    return this.slience;
+}
+
+public void setSlience(String slience) {
+    this.slience = slience;
+}
+
+public String getReset() {
+    return this.reset;
+}
+
+public void setReset(String reset) {
+    this.reset = reset;
+}
+
+public String getPowerAlarmFunction() {
+    return this.powerAlarmFunction;
+}
+
+public void setPowerAlarmFunction(String powerAlarmFunction) {
+    this.powerAlarmFunction = powerAlarmFunction;
+}
+
+public String getAlarmFunction() {
+    return this.alarmFunction;
+}
+
+public void setAlarmFunction(String alarmFunction) {
+    this.alarmFunction = alarmFunction;
+}
+
+public String getEffectiveness() {
+    return this.effectiveness;
+}
+
+public void setEffectiveness(String effectiveness) {
+    this.effectiveness = effectiveness;
+}
+
+public String getResponseTime() {
+    return this.responseTime;
+}
+
+public void setResponseTime(String responseTime) {
+    this.responseTime = responseTime;
+}
+
+public String getDescrption() {
+    return this.descrption;
+}
+
+public void setDescrption(String descrption) {
+    this.descrption = descrption;
+}
+
+public String getSetAlarm25() {
+    return this.setAlarm25;
+}
+
+public void setSetAlarm25(String setAlarm25) {
+    this.setAlarm25 = setAlarm25;
+}
+
+public String getSetAlarm50() {
+    return this.setAlarm50;
+}
+
+public void setSetAlarm50(String setAlarm50) {
+    this.setAlarm50 = setAlarm50;
+}
+
+public String getTestAlarm25() {
+    return this.testAlarm25;
+}
+
+public void setTestAlarm25(String testAlarm25) {
+    this.testAlarm25 = testAlarm25;
+}
+
+public String getTestAlarm50() {
+    return this.testAlarm50;
+}
+
+public void setTestAlarm50(String testAlarm50) {
+    this.testAlarm50 = testAlarm50;
+}
+
+
+
 }

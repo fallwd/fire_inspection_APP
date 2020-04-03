@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">海油巡检</string>
     <string name="laws_regulations">法律法规</string>
+    <string name="home_special_tools">消防检维专用工具</string>
+    <string name="home_annual_fire_inspection">消防年检</string>
+    <string name="home_fire_inspection">消防巡检</string>
+    <string name="home_hidden_danger">隐患库</string>
+    <string name="home_legal_library">法律法规库</string>
 </resources>

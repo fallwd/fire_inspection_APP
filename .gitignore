@@ -10,6 +10,7 @@ logs/
 .springBeans
 log*/
 .gradle
+localproperties
 ### IntelliJ IDEA ###
 .idea
 *.iws
@@ -23,3 +24,4 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+local.properties

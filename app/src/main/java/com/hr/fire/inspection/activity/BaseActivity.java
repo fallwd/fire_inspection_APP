@@ -26,7 +26,7 @@ public abstract class BaseActivity extends Activity implements View.OnClickListe
     /**
      * 是否禁止旋转屏幕
      **/
-    private boolean isAllowScreenRoate = false;
+    private boolean isAllowScreenRoate = true;
     /**
      * 当前Activity渲染的视图View
      **/
@@ -62,14 +62,16 @@ public abstract class BaseActivity extends Activity implements View.OnClickListe
             steepStatusBar();
         }
         setContentView(mContextView);
+        //是否允许屏幕旋转
         if (!isAllowScreenRoate) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
-        initView(mContextView);
-//        //横屏显示
+        //横屏显示
         if (getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
+        initView(mContextView);
+
         setListener();
         doBusiness(this);
     }

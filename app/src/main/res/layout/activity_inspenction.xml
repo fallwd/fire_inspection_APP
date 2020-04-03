@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
     <!--<include layout="@layout/item_patrol_form" />-->
+    <!-- app:headtext="属性,用于设置标题", head_is_show = false表示不显示标题-->
     <com.hr.fire.inspection.view.tableview.TableView
         android:id="@+id/tabview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:colnum="10"
         app:head_is_show="true"
-        app:headtext="物联网141点名册"
-        app:rownum="6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
+        app:headtext="药剂瓶"
+        app:rownum="6" />
 </LinearLayout>

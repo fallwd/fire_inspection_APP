@@ -37,7 +37,7 @@ public class InspectionActivity extends BaseActivity {
     public void initView(View view) {
         tableView = findViewById(R.id.tabview);
         String[] mlistHead = {"序号", "瓶号", "容积/L", "瓶量/kg", "药剂量/kg", "生产厂家", "生产时间", "水压试验日期", "检查表", "是否合格"};
-        String[] mlistContent = {"序号", "瓶号", "容积/L", "瓶量/kg", "药剂量/kg", "生产厂家", "生产时间", "水压试验日期", "检查表", "是否合格"};
+        String[] mlistContent = {"号", "瓶", "/L", "瓶量/kg", "/kg", "厂家", "时间", "水压试验", "检查", "合格"};
         tableView.setTable(new OnTableClick() {
             @Override
             public void onTableClickListener(int row, int col) {
