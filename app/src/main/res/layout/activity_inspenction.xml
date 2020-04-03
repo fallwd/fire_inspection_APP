@@ -2,9 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
-    <include layout="@layout/item_patrol_form" />
+    <!--<include layout="@layout/item_patrol_form" />-->
+    <com.hr.fire.inspection.view.tableview.TableView
+        android:id="@+id/tabview"
+        app:colnum="10"
+        app:head_is_show="true"
+        app:headtext="物联网141点名册"
+        app:rownum="6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

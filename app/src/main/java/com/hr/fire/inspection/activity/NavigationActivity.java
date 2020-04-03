@@ -50,7 +50,7 @@ public class NavigationActivity extends AppCompatActivity {
         btn4.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ((ImageView) v).setImageDrawable(getResources().getDrawable(R.mipmap.navigation4_click));
-                Intent intent = new Intent(NavigationActivity.this, MainActivity.class);
+                Intent intent = new Intent(NavigationActivity.this, RulesActivity.class);
                 startActivity(intent);
             }
         });

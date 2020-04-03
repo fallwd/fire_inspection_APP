@@ -13,19 +13,26 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".activity.MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.SystemTagProtectionAreaActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".activity.SystemTagProtectionAreaActivity" />
         <!--<activity android:name=".activity.MainActivity"/>-->
-        <activity android:name=".activity.NavigationActivity" />
+        <activity
+            android:name=".activity.NavigationActivity"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".activity.InspectionActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.RuleContentActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.RulesActivity"
+            android:screenOrientation="landscape" />
+
     </application>
 </manifest>
