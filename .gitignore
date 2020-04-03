@@ -10,6 +10,7 @@ logs/
 .springBeans
 log*/
 .gradle
+localproperties
 ### IntelliJ IDEA ###
 .idea
 *.iws

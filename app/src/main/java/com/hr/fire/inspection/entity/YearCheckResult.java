@@ -6,7 +6,7 @@ import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
 import com.hr.fire.inspection.dao.DaoSession;
-import com.hr.fire.inspection.dao.BottleInfoDao;
+import com.hr.fire.inspection.dao.ItemInfoDao;
 import com.hr.fire.inspection.dao.YearCheckDao;
 import com.hr.fire.inspection.dao.YearCheckResultDao;
 
@@ -35,7 +35,7 @@ public class YearCheckResult {
     private Long bottleInfoId;
 
     @ToOne(joinProperty="bottleInfoId")
-    private BottleInfo bottleInfo;
+    private ItemInfo itemInfo;
 
     // 其他项的ID,这里就不做外键关联了
     private Long targetId;
@@ -163,36 +163,35 @@ public void setYearCheck(YearCheck yearCheck) {
     }
 }
 
-@Generated(hash = 1006901074)
-private transient Long bottleInfo__resolvedKey;
+@Generated(hash = 2126539768)
+private transient Long itemInfo__resolvedKey;
 
 /** To-one relationship, resolved on first access. */
-@Generated(hash = 253845410)
-public BottleInfo getBottleInfo() {
+@Generated(hash = 1997461449)
+public ItemInfo getItemInfo() {
     Long __key = this.bottleInfoId;
-    if (bottleInfo__resolvedKey == null
-            || !bottleInfo__resolvedKey.equals(__key)) {
+    if (itemInfo__resolvedKey == null || !itemInfo__resolvedKey.equals(__key)) {
         final DaoSession daoSession = this.daoSession;
         if (daoSession == null) {
             throw new DaoException("Entity is detached from DAO context");
         }
-        BottleInfoDao targetDao = daoSession.getBottleInfoDao();
-        BottleInfo bottleInfoNew = targetDao.load(__key);
+        ItemInfoDao targetDao = daoSession.getItemInfoDao();
+        ItemInfo itemInfoNew = targetDao.load(__key);
         synchronized (this) {
-            bottleInfo = bottleInfoNew;
-            bottleInfo__resolvedKey = __key;
+            itemInfo = itemInfoNew;
+            itemInfo__resolvedKey = __key;
         }
     }
-    return bottleInfo;
+    return itemInfo;
 }
 
 /** called by internal mechanisms, do not call yourself. */
-@Generated(hash = 1353677701)
-public void setBottleInfo(BottleInfo bottleInfo) {
+@Generated(hash = 2051489145)
+public void setItemInfo(ItemInfo itemInfo) {
     synchronized (this) {
-        this.bottleInfo = bottleInfo;
-        bottleInfoId = bottleInfo == null ? null : bottleInfo.getId();
-        bottleInfo__resolvedKey = bottleInfoId;
+        this.itemInfo = itemInfo;
+        bottleInfoId = itemInfo == null ? null : itemInfo.getId();
+        itemInfo__resolvedKey = bottleInfoId;
     }
 }
 

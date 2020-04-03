@@ -10,7 +10,11 @@
 <<<<<<< HEAD
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/classes" />
+<<<<<<< HEAD
 >>>>>>> 880066accb84f639d63def58eb5d1b9f4234d08f
+=======
+>>>>>>> 5c1f95e0cfce88aac719c2d809456bd85455cc48
+>>>>>>> jintang
   </component>
 =======
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK" />

@@ -14,7 +14,7 @@ import org.greenrobot.greendao.database.DatabaseStatement;
 import org.greenrobot.greendao.query.Query;
 import org.greenrobot.greendao.query.QueryBuilder;
 
-import com.hr.fire.inspection.entity.BottleInfo;
+import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.YearCheck;
 
 import com.hr.fire.inspection.entity.YearCheckResult;
@@ -44,7 +44,7 @@ public class YearCheckResultDao extends AbstractDao<YearCheckResult, Long> {
 
     private DaoSession daoSession;
 
-    private Query<YearCheckResult> bottleInfo_CheckResultListQuery;
+    private Query<YearCheckResult> itemInfo_CheckResultListQuery;
 
     public YearCheckResultDao(DaoConfig config) {
         super(config);
@@ -228,16 +228,16 @@ public class YearCheckResultDao extends AbstractDao<YearCheckResult, Long> {
         return true;
     }
     
-    /** Internal query to resolve the "checkResultList" to-many relationship of BottleInfo. */
-    public List<YearCheckResult> _queryBottleInfo_CheckResultList(Long targetId) {
+    /** Internal query to resolve the "checkResultList" to-many relationship of ItemInfo. */
+    public List<YearCheckResult> _queryItemInfo_CheckResultList(Long targetId) {
         synchronized (this) {
-            if (bottleInfo_CheckResultListQuery == null) {
+            if (itemInfo_CheckResultListQuery == null) {
                 QueryBuilder<YearCheckResult> queryBuilder = queryBuilder();
                 queryBuilder.where(Properties.TargetId.eq(null));
-                bottleInfo_CheckResultListQuery = queryBuilder.build();
+                itemInfo_CheckResultListQuery = queryBuilder.build();
             }
         }
-        Query<YearCheckResult> query = bottleInfo_CheckResultListQuery.forCurrentThread();
+        Query<YearCheckResult> query = itemInfo_CheckResultListQuery.forCurrentThread();
         query.setParameter(0, targetId);
         return query.list();
     }
@@ -251,10 +251,10 @@ public class YearCheckResultDao extends AbstractDao<YearCheckResult, Long> {
             builder.append(',');
             SqlUtils.appendColumns(builder, "T0", daoSession.getYearCheckDao().getAllColumns());
             builder.append(',');
-            SqlUtils.appendColumns(builder, "T1", daoSession.getBottleInfoDao().getAllColumns());
+            SqlUtils.appendColumns(builder, "T1", daoSession.getItemInfoDao().getAllColumns());
             builder.append(" FROM t_year_check_result T");
             builder.append(" LEFT JOIN t_year_check T0 ON T.\"YEAR_CHECK_ID\"=T0.\"_id\"");
-            builder.append(" LEFT JOIN t_bottle_info T1 ON T.\"BOTTLE_INFO_ID\"=T1.\"_id\"");
+            builder.append(" LEFT JOIN t_item_info T1 ON T.\"BOTTLE_INFO_ID\"=T1.\"_id\"");
             builder.append(' ');
             selectDeep = builder.toString();
         }
@@ -269,8 +269,8 @@ public class YearCheckResultDao extends AbstractDao<YearCheckResult, Long> {
         entity.setYearCheck(yearCheck);
         offset += daoSession.getYearCheckDao().getAllColumns().length;
 
-        BottleInfo bottleInfo = loadCurrentOther(daoSession.getBottleInfoDao(), cursor, offset);
-        entity.setBottleInfo(bottleInfo);
+        ItemInfo itemInfo = loadCurrentOther(daoSession.getItemInfoDao(), cursor, offset);
+        entity.setItemInfo(itemInfo);
 
         return entity;    
     }
