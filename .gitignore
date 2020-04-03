@@ -6,9 +6,10 @@ logs/
 .factorypath
 .project
 .settings
+.gradle
 .springBeans
 log*/
-
+.gradle
 ### IntelliJ IDEA ###
 .idea
 *.iws
