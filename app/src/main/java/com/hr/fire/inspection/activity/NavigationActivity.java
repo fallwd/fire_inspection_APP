@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hr.fire.inspection.R;
 
 
-
 public class NavigationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +20,7 @@ public class NavigationActivity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ((ImageView)v).setImageDrawable(getResources().getDrawable(R.mipmap.navigation1_click));
-                Intent intent = new Intent(NavigationActivity.this, MainActivity.class);
+                Intent intent = new Intent(NavigationActivity.this, SystemTagProtectionAreaActivity.class);
                 startActivity(intent);
             }
         });
@@ -52,6 +51,5 @@ public class NavigationActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 }

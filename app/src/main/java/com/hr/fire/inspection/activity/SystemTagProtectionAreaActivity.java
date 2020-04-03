@@ -29,6 +29,8 @@ public class SystemTagProtectionAreaActivity extends AppCompatActivity {
                 String  protectAreaValue = "";
                 EditText systemTagText =(EditText)findViewById(R.id.system_tag);
                 EditText protectAreaText = (EditText)findViewById(R.id.protect_area);
+                systemTagText.clearFocus();
+                protectAreaText.clearFocus();
                 systemTagValue = systemTagText.getText().toString();
                 protectAreaValue = protectAreaText.getText().toString();
 
