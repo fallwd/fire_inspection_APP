@@ -95,6 +95,7 @@
               android:layout_width="70dp"
               android:layout_height="40dp"
               android:text="取消"
+              android:onClick="cancelInput"
               android:background="@drawable/cancel_btn"
               android:textColor="#000000"
               android:textSize="12dp"/>
