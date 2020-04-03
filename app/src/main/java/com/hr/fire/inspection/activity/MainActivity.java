@@ -6,11 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.dao.BottleInfoDao;
-import com.hr.fire.inspection.dao.DaoSession;
-import com.hr.fire.inspection.utils.GreenDaoHelper;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
