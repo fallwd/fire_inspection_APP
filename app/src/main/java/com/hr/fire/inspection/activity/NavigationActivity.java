@@ -16,31 +16,31 @@ public class NavigationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
 
-        LinearLayout btn1 = (LinearLayout)findViewById(R.id.Navigation_Btn1);
+        LinearLayout btn1 = (LinearLayout) findViewById(R.id.Navigation_Btn1);
         btn1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(NavigationActivity.this, SystemTagProtectionAreaActivity.class);
                 startActivity(intent);
             }
         });
-        LinearLayout btn2 = (LinearLayout)findViewById(R.id.Navigation_Btn2);
+        LinearLayout btn2 = (LinearLayout) findViewById(R.id.Navigation_Btn2);
         btn2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(NavigationActivity.this, MainActivity.class);
+                Intent intent = new Intent(NavigationActivity.this, InspectionActivity.class);
                 startActivity(intent);
             }
         });
-        LinearLayout btn3 = (LinearLayout)findViewById(R.id.Navigation_Btn3);
+        LinearLayout btn3 = (LinearLayout) findViewById(R.id.Navigation_Btn3);
         btn3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(NavigationActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
-        LinearLayout btn4 = (LinearLayout)findViewById(R.id.Navigation_Btn4);
+        LinearLayout btn4 = (LinearLayout) findViewById(R.id.Navigation_Btn4);
         btn4.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(NavigationActivity.this, MainActivity.class);
+                Intent intent = new Intent(NavigationActivity.this, RulesActivity.class);
                 startActivity(intent);
             }
         });
