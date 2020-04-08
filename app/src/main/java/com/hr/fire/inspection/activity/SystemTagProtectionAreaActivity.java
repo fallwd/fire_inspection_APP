@@ -21,6 +21,10 @@ public class SystemTagProtectionAreaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_tag);
 
+        Bundle b = getIntent().getExtras();
+        //获取Bundle的信息
+        String infocont = b.getString("context");
+        String f_title = b.getString("f_title");
         // 获取btn元素
         Button cancel_btn = (Button) this.findViewById(R.id.cancel_btn);
         Button submit_btn = (Button) this.findViewById(R.id.submit_btn);
