@@ -24,12 +24,14 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:text="瓶号"
+            android:maxLines="1"
             android:textSize="12sp" />
 
         <EditText
             android:layout_width="32dp"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:maxLines="1"
             android:text="容积/L"
             android:textSize="12sp" />
 
@@ -37,6 +39,7 @@
             android:layout_width="36dp"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:maxLines="1"
             android:text="瓶量/kg"
             android:textSize="12sp" />
 
@@ -44,6 +47,7 @@
             android:layout_width="44dp"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:maxLines="1"
             android:text="药剂量/kg"
             android:textSize="12sp" />
 
@@ -51,6 +55,7 @@
             android:layout_width="46dp"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:maxLines="1"
             android:text="生产厂家"
             android:textSize="12sp" />
 
@@ -58,6 +63,7 @@
             android:layout_width="46dp"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:maxLines="1"
             android:text="生产时间"
             android:textSize="12sp" />
 
@@ -65,6 +71,7 @@
             android:layout_width="68dp"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:maxLines="1"
             android:text="水压试验日期"
             android:textSize="12sp" />
 
@@ -72,6 +79,7 @@
             android:layout_width="32dp"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:maxLines="1"
             android:text="检查表"
             android:textSize="12sp" />
 
@@ -79,6 +87,7 @@
             android:layout_width="46dp"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:maxLines="1"
             android:text="是否合格"
             android:textSize="12sp" />
 
@@ -86,6 +95,7 @@
             android:layout_width="24dp"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:maxLines="1"
             android:text="操作"
             android:textSize="12sp" />
     </TableRow>
