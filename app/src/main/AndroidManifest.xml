@@ -2,7 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.hr.fire.inspection">
-
+    <!-- 访问SD权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<!--    &lt;!&ndash; 7.0图片共享 &ndash;&gt;-->
+<!--    <provider-->
+<!--        android:name="android.support.v4.content.FileProvider"-->
+<!--        android:authorities="com.example.cameraalbumtest.fileprovider"-->
+<!--        android:exported="false"-->
+<!--        android:grantUriPermissions="true"-->
+<!--        tools:ignore="WrongManifestParent">-->
+<!--        <meta-data-->
+<!--            android:name="android.support.FILE_PROVIDER_PATHS"-->
+<!--            android:resource="@xml/file_paths" />-->
+<!--    </provider>-->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,15 +24,24 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".activity.PhotoUploadActivity"
+            android:screenOrientation="landscape"
+            ></activity>
+        <activity
             android:name=".activity.WelcomeActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
+        <activity
+            android:name=".activity.RoutingInspectionActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.FireActivity"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".activity.SystemTagProtectionAreaActivity"
             android:screenOrientation="landscape" />
@@ -42,6 +63,6 @@
         <activity
             android:name=".activity.CarbonDioxideAcitivty"
             android:screenOrientation="landscape" />
-
     </application>
+
 </manifest>

@@ -1,8 +1,12 @@
 package com.hr.fire.inspection.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -10,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,10 +33,12 @@ import com.hr.fire.inspection.fragment.CarbonFragment5;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CarbonDioxideAcitivty extends AppCompatActivity {
+    private static final int CAMERA_RESULT_CODE = Integer.parseInt(null);
     private List<String> titleList = new ArrayList<String>();
     private List<Fragment> fragments = new ArrayList<Fragment>();
     private TabLayout mTabLayout;
@@ -45,13 +52,26 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
         setContentView(R.layout.acitivty_carbon_dioxide);
         initView();
         initListner();
+        // 调取摄像头
+        ImageView photo_up = findViewById(R.id.photo_up);
+        photo_up.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"敬请期待", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void initView() {
         iv_finish = findViewById(R.id.iv_finish);
         tvInspectionPro = findViewById(R.id.tv_inspection_pro);
+        iv_finish = findViewById(R.id.iv_finish);
         String text = "消防巡检维护专用工具";
-        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#E51C23", 0, 3);
+        Bundle b=getIntent().getExtras();
+        //获取Bundle的信息
+        String infocont=b.getString("context");
+        String f_title = b.getString("f_title");
+        SpannableString showTextColor = TextSpannableUtil.showTextColor(infocont, "#E51C23", 0, 3);
         tvInspectionPro.setText(showTextColor);
 
         mTabLayout = findViewById(R.id.tl_tabs);
