@@ -39,7 +39,7 @@ public class TableView extends RelativeLayout {
     private int table_head_textcolor = Color.rgb(255, 255, 255);
     private int table_content_backgroumd = Color.WHITE;
     private int table_content_textcolor = Color.rgb(255, 255, 255);
-    private int head_height ;
+    private int head_height;
     private int tablehead_height;
     private int tablecontent_height;
 
@@ -73,9 +73,9 @@ public class TableView extends RelativeLayout {
         columns = colnum;
         head_is_show = typedArray.getBoolean(R.styleable.tableview_head_is_show, false);
         head_text = typedArray.getString(R.styleable.tableview_headtext);
-        head_height = typedArray.getInteger(R.styleable.tableview_head_height,80);
-        tablehead_height = typedArray.getInteger(R.styleable.tableview_tablehead_height,100);
-        tablecontent_height = typedArray.getInteger(R.styleable.tableview_tablecontent_height,100);
+        head_height = typedArray.getInteger(R.styleable.tableview_head_height, 80);
+        tablehead_height = typedArray.getInteger(R.styleable.tableview_tablehead_height, 100);
+        tablecontent_height = typedArray.getInteger(R.styleable.tableview_tablecontent_height, 100);
         typedArray.recycle();
         init(context);
     }
@@ -90,9 +90,9 @@ public class TableView extends RelativeLayout {
         columns = colnum;
         head_is_show = typedArray.getBoolean(R.styleable.tableview_head_is_show, false);
         head_text = typedArray.getString(R.styleable.tableview_headtext);
-        head_height = typedArray.getInteger(R.styleable.tableview_head_height,80);
-        tablehead_height = typedArray.getInteger(R.styleable.tableview_tablehead_height,100);
-        tablecontent_height = typedArray.getInteger(R.styleable.tableview_tablecontent_height,100);
+        head_height = typedArray.getInteger(R.styleable.tableview_head_height, 80);
+        tablehead_height = typedArray.getInteger(R.styleable.tableview_tablehead_height, 100);
+        tablecontent_height = typedArray.getInteger(R.styleable.tableview_tablecontent_height, 100);
         typedArray.recycle();
         init(context);
     }
@@ -108,7 +108,6 @@ public class TableView extends RelativeLayout {
 
     /**
      * 设置表格行数和列数
-     *
      *
      * @param onTableClick
      */
@@ -146,6 +145,7 @@ public class TableView extends RelativeLayout {
             int tempWith = 0;
             for (int col = 0; col < columns; col++) {
                 EditText mColumn = new EditText(mcontenx);
+                mColumn.setTextSize(14);
                 mColumn.setSingleLine(true);
                 mColumn.setSelected(true);
 //                mColumn.setEllipsize(TextUtils.TruncateAt.MARQUEE);
@@ -154,13 +154,13 @@ public class TableView extends RelativeLayout {
                 mColumn.setHeight(tablecontent_height);
                 if (col == 0) {
                     tempWith = (width - tempWith) / (columns);
-//                    mColumn.setWidth(tempWith);
-                    mColumn.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+                    mColumn.setWidth(tempWith);
                     tempWith = (width - tempWith) / (columns - 1);
                 } else {
-//                    mColumn.setWidth(tempWith);
-                    mColumn.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+                    mColumn.setWidth(tempWith);
+//                    mColumn.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
                 }
+
 
                 if (col < columns - 1) {
                     mColumn.setBackgroundResource(R.drawable.shapee_left);
@@ -193,13 +193,14 @@ public class TableView extends RelativeLayout {
             viewheader.setText(TextUtils.isEmpty(head_text) ? "默认标题" : head_text);
             viewheader.setTextColor(Color.WHITE);
             viewheader.setHeight(head_height);
-        }else{
+        } else {
             viewheader.setVisibility(View.GONE);
         }
         TableRow mTableRow = new TableRow(mcontenx);
         int tempWith = 0;
         for (int col = 0; col < columns; col++) {
             TextView mColumn = new TextView(mcontenx);
+            mColumn.setTextSize(14);
             mColumn.setSingleLine(true);
             mColumn.setSelected(true);
             mColumn.setEllipsize(TextUtils.TruncateAt.MARQUEE);

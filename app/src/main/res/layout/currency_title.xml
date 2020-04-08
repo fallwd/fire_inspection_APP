@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_marginTop="5dp"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/iv_finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:background="@mipmap/left_icon"
+        android:scaleX="0.8"
+        android:scaleY="0.8" />
+
+    <TextView
+        android:id="@+id/tv_inspection_pro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="@string/home_annual_fire_inspection"
+        android:textColor="@color/title_black"
+        android:textSize="14sp" />
+</LinearLayout>

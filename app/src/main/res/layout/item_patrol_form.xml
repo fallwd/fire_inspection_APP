@@ -12,7 +12,6 @@
         android:layout_marginLeft="11dp"
         android:layout_marginRight="11dp">
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -134,8 +133,6 @@
             android:layout_marginRight="1dp"
             android:hint="瓶量/kg"
             android:maxLines="1"
-
-
             android:singleLine="true" />
 
         <EditText
@@ -145,7 +142,6 @@
             android:layout_marginRight="1dp"
             android:hint="药剂量/kg"
             android:maxLines="1"
-
             android:singleLine="true" />
 
         <EditText
@@ -185,7 +181,6 @@
             android:layout_marginRight="1dp"
             android:hint="检查表"
             android:maxLines="1"
-
             android:singleLine="true" />
 
         <EditText
@@ -195,9 +190,7 @@
             android:layout_marginRight="1dp"
             android:hint="是否合格"
             android:maxLines="1"
-
             android:singleLine="true" />
     </TableRow>
-
 
 </TableLayout>
