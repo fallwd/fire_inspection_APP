@@ -6,7 +6,5 @@
     <string name="home_hidden_danger">隐患库</string>
     <string name="home_legal_library">法律法规库</string>
     <string name="laws_regulations">法律法规</string>
-    <string name="fire_regulations">消防年检</string>
     <string name="product_report">生成报告</string>
-    <string name="route_regulations">消防巡检</string>
 </resources>
