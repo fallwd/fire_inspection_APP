@@ -1,5 +1,6 @@
 package com.hr.fire.inspection.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,8 +9,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.adapter.CarBon1Adapter;
 
 public class CarbonFragment1 extends Fragment {
     View rootView;
@@ -47,6 +51,15 @@ public class CarbonFragment1 extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initView();
+    }
+
+    private void initView() {
+        RecyclerView rc_list = rootView.findViewById(R.id.rc_list);
+        @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        rc_list.setLayoutManager(layoutManager);
+        CarBon1Adapter adapter = new CarBon1Adapter();
+        rc_list.setAdapter(adapter);
     }
 
     @Override
