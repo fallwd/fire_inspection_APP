@@ -14,16 +14,16 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        Toast.makeText(WelcomeActivity.this,"系统将在三秒后为您自动跳转到首页",Toast.LENGTH_SHORT).show();
+        Toast.makeText(WelcomeActivity.this,"系统将在2秒后为您自动跳转到首页",Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                //执行在主线程
-                //启动主页面
+                // 执行在主线程
+                // 启动主页面
                 startActivity(new Intent(WelcomeActivity.this, NavigationActivity.class));
                 //关闭当前页面
                 finish();
             }
-        },3000);
+        },2000);
     }
 }
