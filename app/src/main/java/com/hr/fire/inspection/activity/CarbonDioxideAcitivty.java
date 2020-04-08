@@ -1,7 +1,11 @@
 package com.hr.fire.inspection.activity;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -21,6 +25,7 @@ import com.hr.fire.inspection.fragment.CarbonFragment2;
 import com.hr.fire.inspection.fragment.CarbonFragment3;
 import com.hr.fire.inspection.fragment.CarbonFragment4;
 import com.hr.fire.inspection.fragment.CarbonFragment5;
+import com.hr.fire.inspection.utils.TextSpannableUtil;
 
 
 import java.util.ArrayList;
@@ -45,6 +50,10 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
     public void initView() {
         iv_finish = findViewById(R.id.iv_finish);
         tvInspectionPro = findViewById(R.id.tv_inspection_pro);
+        String text = "消防巡检维护专用工具";
+        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#E51C23", 0, 3);
+        tvInspectionPro.setText(showTextColor);
+
         mTabLayout = findViewById(R.id.tl_tabs);
         mViewPager = findViewById(R.id.vp_content);
         titleList.add("药剂瓶");
