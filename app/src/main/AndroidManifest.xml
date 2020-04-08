@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".activity.InspectionActivity"
+            android:name=".activity.WelcomeActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,14 +30,15 @@
         <activity
             android:name=".activity.NavigationActivity"
             android:screenOrientation="landscape" />
-        <!--<activity-->
-            <!--android:name=".activity.InspectionActivity"-->
-            <!--android:screenOrientation="landscape" />-->
+        <activity
+            android:name=".activity.InspectionActivity"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".activity.RuleContentActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".activity.RulesActivity"
             android:screenOrientation="landscape" />
+
     </application>
 </manifest>
