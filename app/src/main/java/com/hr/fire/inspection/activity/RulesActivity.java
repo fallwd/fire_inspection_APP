@@ -8,16 +8,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ImageButton;
-import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.LawItemAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 public class RulesActivity extends AppCompatActivity {
@@ -49,8 +44,8 @@ public class RulesActivity extends AppCompatActivity {
                 String str = mList.get(position);
                 //跳转详情
                 Bundle bundle = new Bundle();
-                bundle.putString("id", str);
-                bundle.putString("context", "");
+                bundle.putString("id",String.valueOf(id));
+                bundle.putString("context",str);
                 Intent intent = new Intent(RulesActivity.this, RuleContentActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
