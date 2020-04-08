@@ -39,4 +39,5 @@
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:background="@drawable/listview_border" />
+
 </LinearLayout>
