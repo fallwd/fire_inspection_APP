@@ -29,12 +29,12 @@ public class YearCheckResult {
 
     private String videoUrl; //视频路径
 
-    private String descrption; //描述
+    private String description; //描述
 
-    //瓶子的ID
-    private Long bottleInfoId;
+    //设备的ID
+    private Long itemInfoId;
 
-    @ToOne(joinProperty="bottleInfoId")
+    @ToOne(joinProperty="itemInfoId")
     private ItemInfo itemInfo;
 
     // 其他项的ID,这里就不做外键关联了
@@ -48,17 +48,17 @@ private transient DaoSession daoSession;
 @Generated(hash = 232162975)
 private transient YearCheckResultDao myDao;
 
-@Generated(hash = 236090881)
+@Generated(hash = 342982955)
 public YearCheckResult(Long id, Long yearCheckId, String isPass,
-        String imageUrl, String videoUrl, String descrption, Long bottleInfoId,
+        String imageUrl, String videoUrl, String description, Long itemInfoId,
         Long targetId) {
     this.id = id;
     this.yearCheckId = yearCheckId;
     this.isPass = isPass;
     this.imageUrl = imageUrl;
     this.videoUrl = videoUrl;
-    this.descrption = descrption;
-    this.bottleInfoId = bottleInfoId;
+    this.description = description;
+    this.itemInfoId = itemInfoId;
     this.targetId = targetId;
 }
 
@@ -106,20 +106,20 @@ public void setVideoUrl(String videoUrl) {
     this.videoUrl = videoUrl;
 }
 
-public String getDescrption() {
-    return this.descrption;
+public String getDescription() {
+    return this.description;
 }
 
-public void setDescrption(String descrption) {
-    this.descrption = descrption;
+public void setDescription(String description) {
+    this.description = description;
 }
 
-public Long getBottleInfoId() {
-    return this.bottleInfoId;
+public Long getItemInfoId() {
+    return this.itemInfoId;
 }
 
-public void setBottleInfoId(Long bottleInfoId) {
-    this.bottleInfoId = bottleInfoId;
+public void setItemInfoId(Long itemInfoId) {
+    this.itemInfoId = itemInfoId;
 }
 
 public Long getTargetId() {
@@ -167,9 +167,9 @@ public void setYearCheck(YearCheck yearCheck) {
 private transient Long itemInfo__resolvedKey;
 
 /** To-one relationship, resolved on first access. */
-@Generated(hash = 1997461449)
+@Generated(hash = 1277888882)
 public ItemInfo getItemInfo() {
-    Long __key = this.bottleInfoId;
+    Long __key = this.itemInfoId;
     if (itemInfo__resolvedKey == null || !itemInfo__resolvedKey.equals(__key)) {
         final DaoSession daoSession = this.daoSession;
         if (daoSession == null) {
@@ -186,12 +186,12 @@ public ItemInfo getItemInfo() {
 }
 
 /** called by internal mechanisms, do not call yourself. */
-@Generated(hash = 2051489145)
+@Generated(hash = 1653646858)
 public void setItemInfo(ItemInfo itemInfo) {
     synchronized (this) {
         this.itemInfo = itemInfo;
-        bottleInfoId = itemInfo == null ? null : itemInfo.getId();
-        itemInfo__resolvedKey = bottleInfoId;
+        itemInfoId = itemInfo == null ? null : itemInfo.getId();
+        itemInfo__resolvedKey = itemInfoId;
     }
 }
 

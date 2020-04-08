@@ -13,6 +13,7 @@ import com.hr.fire.inspection.dao.DaoSession;
 import com.hr.fire.inspection.dao.YearCheckResultDao;
 import com.hr.fire.inspection.dao.CheckTypeDao;
 import com.hr.fire.inspection.dao.ItemInfoDao;
+import com.hr.fire.inspection.dao.CompanyInfoDao;
 
 @Entity(
         nameInDb = "t_item_info"
@@ -26,6 +27,10 @@ public class ItemInfo {
 
     @ToOne(joinProperty = "checkTypeId")
     private CheckType checkType; //设备类型
+
+    private Long companyInfoId;
+    @ToOne(joinProperty = "companyInfoId")
+    private CompanyInfo companyInfo;//公司选择信息
 
     private String typeNo;//型号
 
@@ -83,6 +88,8 @@ public class ItemInfo {
 
     private String ProtectArea;//保护区域
 
+    private Date checkDate;//检查日期
+
     @ToMany(referencedJoinProperty = "targetId")
     private List<YearCheckResult> checkResultList;
 
@@ -94,17 +101,19 @@ private transient DaoSession daoSession;
 @Generated(hash = 547138643)
 private transient ItemInfoDao myDao;
 
-@Generated(hash = 139795084)
-public ItemInfo(Long id, Long checkTypeId, String typeNo, String no, String volume,
-        String weight, String goodsWeight, String pressure, String prodFactory,
-        Date prodDate, String typeConformity, String positionConformity,
-        String appearance, String check, String slience, String reset,
-        String powerAlarmFunction, String alarmFunction, String effectiveness,
-        String responseTime, String descrption, String setAlarm25, String setAlarm50,
-        String testAlarm25, String testAlarm50, Date observeDate, String isPass,
-        String labelNo, String SystemNumber, String ProtectArea) {
+@Generated(hash = 2013420146)
+public ItemInfo(Long id, Long checkTypeId, Long companyInfoId, String typeNo, String no,
+        String volume, String weight, String goodsWeight, String pressure,
+        String prodFactory, Date prodDate, String typeConformity,
+        String positionConformity, String appearance, String check, String slience,
+        String reset, String powerAlarmFunction, String alarmFunction,
+        String effectiveness, String responseTime, String descrption, String setAlarm25,
+        String setAlarm50, String testAlarm25, String testAlarm50, Date observeDate,
+        String isPass, String labelNo, String SystemNumber, String ProtectArea,
+        Date checkDate) {
     this.id = id;
     this.checkTypeId = checkTypeId;
+    this.companyInfoId = companyInfoId;
     this.typeNo = typeNo;
     this.no = no;
     this.volume = volume;
@@ -133,6 +142,7 @@ public ItemInfo(Long id, Long checkTypeId, String typeNo, String no, String volu
     this.labelNo = labelNo;
     this.SystemNumber = SystemNumber;
     this.ProtectArea = ProtectArea;
+    this.checkDate = checkDate;
 }
 
 @Generated(hash = 1334958530)
@@ -253,6 +263,9 @@ public void setProtectArea(String ProtectArea) {
 
 @Generated(hash = 1822795957)
 private transient Long checkType__resolvedKey;
+
+@Generated(hash = 702142230)
+private transient Long companyInfo__resolvedKey;
 
 /** To-one relationship, resolved on first access. */
 @Generated(hash = 863167469)
@@ -482,6 +495,51 @@ public String getTestAlarm50() {
 
 public void setTestAlarm50(String testAlarm50) {
     this.testAlarm50 = testAlarm50;
+}
+
+public Long getCompanyInfoId() {
+    return this.companyInfoId;
+}
+
+public void setCompanyInfoId(Long companyInfoId) {
+    this.companyInfoId = companyInfoId;
+}
+
+/** To-one relationship, resolved on first access. */
+@Generated(hash = 1193346340)
+public CompanyInfo getCompanyInfo() {
+    Long __key = this.companyInfoId;
+    if (companyInfo__resolvedKey == null || !companyInfo__resolvedKey.equals(__key)) {
+        final DaoSession daoSession = this.daoSession;
+        if (daoSession == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        CompanyInfoDao targetDao = daoSession.getCompanyInfoDao();
+        CompanyInfo companyInfoNew = targetDao.load(__key);
+        synchronized (this) {
+            companyInfo = companyInfoNew;
+            companyInfo__resolvedKey = __key;
+        }
+    }
+    return companyInfo;
+}
+
+/** called by internal mechanisms, do not call yourself. */
+@Generated(hash = 777983097)
+public void setCompanyInfo(CompanyInfo companyInfo) {
+    synchronized (this) {
+        this.companyInfo = companyInfo;
+        companyInfoId = companyInfo == null ? null : companyInfo.getId();
+        companyInfo__resolvedKey = companyInfoId;
+    }
+}
+
+public Date getCheckDate() {
+    return this.checkDate;
+}
+
+public void setCheckDate(Date checkDate) {
+    this.checkDate = checkDate;
 }
 
 

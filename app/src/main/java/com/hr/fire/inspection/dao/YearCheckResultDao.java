@@ -37,8 +37,8 @@ public class YearCheckResultDao extends AbstractDao<YearCheckResult, Long> {
         public final static Property IsPass = new Property(2, String.class, "isPass", false, "IS_PASS");
         public final static Property ImageUrl = new Property(3, String.class, "imageUrl", false, "IMAGE_URL");
         public final static Property VideoUrl = new Property(4, String.class, "videoUrl", false, "VIDEO_URL");
-        public final static Property Descrption = new Property(5, String.class, "descrption", false, "DESCRPTION");
-        public final static Property BottleInfoId = new Property(6, Long.class, "bottleInfoId", false, "BOTTLE_INFO_ID");
+        public final static Property Description = new Property(5, String.class, "description", false, "DESCRIPTION");
+        public final static Property ItemInfoId = new Property(6, Long.class, "itemInfoId", false, "ITEM_INFO_ID");
         public final static Property TargetId = new Property(7, Long.class, "targetId", false, "TARGET_ID");
     }
 
@@ -64,8 +64,8 @@ public class YearCheckResultDao extends AbstractDao<YearCheckResult, Long> {
                 "\"IS_PASS\" TEXT," + // 2: isPass
                 "\"IMAGE_URL\" TEXT," + // 3: imageUrl
                 "\"VIDEO_URL\" TEXT," + // 4: videoUrl
-                "\"DESCRPTION\" TEXT," + // 5: descrption
-                "\"BOTTLE_INFO_ID\" INTEGER," + // 6: bottleInfoId
+                "\"DESCRIPTION\" TEXT," + // 5: description
+                "\"ITEM_INFO_ID\" INTEGER," + // 6: itemInfoId
                 "\"TARGET_ID\" INTEGER);"); // 7: targetId
     }
 
@@ -104,14 +104,14 @@ public class YearCheckResultDao extends AbstractDao<YearCheckResult, Long> {
             stmt.bindString(5, videoUrl);
         }
  
-        String descrption = entity.getDescrption();
-        if (descrption != null) {
-            stmt.bindString(6, descrption);
+        String description = entity.getDescription();
+        if (description != null) {
+            stmt.bindString(6, description);
         }
  
-        Long bottleInfoId = entity.getBottleInfoId();
-        if (bottleInfoId != null) {
-            stmt.bindLong(7, bottleInfoId);
+        Long itemInfoId = entity.getItemInfoId();
+        if (itemInfoId != null) {
+            stmt.bindLong(7, itemInfoId);
         }
  
         Long targetId = entity.getTargetId();
@@ -149,14 +149,14 @@ public class YearCheckResultDao extends AbstractDao<YearCheckResult, Long> {
             stmt.bindString(5, videoUrl);
         }
  
-        String descrption = entity.getDescrption();
-        if (descrption != null) {
-            stmt.bindString(6, descrption);
+        String description = entity.getDescription();
+        if (description != null) {
+            stmt.bindString(6, description);
         }
  
-        Long bottleInfoId = entity.getBottleInfoId();
-        if (bottleInfoId != null) {
-            stmt.bindLong(7, bottleInfoId);
+        Long itemInfoId = entity.getItemInfoId();
+        if (itemInfoId != null) {
+            stmt.bindLong(7, itemInfoId);
         }
  
         Long targetId = entity.getTargetId();
@@ -184,8 +184,8 @@ public class YearCheckResultDao extends AbstractDao<YearCheckResult, Long> {
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // isPass
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // imageUrl
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // videoUrl
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // descrption
-            cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6), // bottleInfoId
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // description
+            cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6), // itemInfoId
             cursor.isNull(offset + 7) ? null : cursor.getLong(offset + 7) // targetId
         );
         return entity;
@@ -198,8 +198,8 @@ public class YearCheckResultDao extends AbstractDao<YearCheckResult, Long> {
         entity.setIsPass(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setImageUrl(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setVideoUrl(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setDescrption(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setBottleInfoId(cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6));
+        entity.setDescription(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setItemInfoId(cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6));
         entity.setTargetId(cursor.isNull(offset + 7) ? null : cursor.getLong(offset + 7));
      }
     
@@ -254,7 +254,7 @@ public class YearCheckResultDao extends AbstractDao<YearCheckResult, Long> {
             SqlUtils.appendColumns(builder, "T1", daoSession.getItemInfoDao().getAllColumns());
             builder.append(" FROM t_year_check_result T");
             builder.append(" LEFT JOIN t_year_check T0 ON T.\"YEAR_CHECK_ID\"=T0.\"_id\"");
-            builder.append(" LEFT JOIN t_item_info T1 ON T.\"BOTTLE_INFO_ID\"=T1.\"_id\"");
+            builder.append(" LEFT JOIN t_item_info T1 ON T.\"ITEM_INFO_ID\"=T1.\"_id\"");
             builder.append(' ');
             selectDeep = builder.toString();
         }
