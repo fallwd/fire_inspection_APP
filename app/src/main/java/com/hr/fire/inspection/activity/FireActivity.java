@@ -1,6 +1,7 @@
 package com.hr.fire.inspection.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -74,10 +75,11 @@ public class FireActivity extends AppCompatActivity {
 
         // 点击生成报告
         Button pr_but = findViewById(R.id.product_report_button);
-        pr_but.setOnClickListener(new View.OnClickListener(){
+        pr_but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Toast.makeText(getApplicationContext(),"敬请期待", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "敬请期待", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(FireActivity.this, PhotoUploadActivity.class));
             }
         });
 
