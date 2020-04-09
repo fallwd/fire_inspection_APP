@@ -33,7 +33,7 @@ public class WelcomeActivity extends AppCompatActivity {
         // 调用接口测试
 //        String companyName = "辽东作业公司";
 //        String oilfieldName = "SZ36-1";
-//        String platformName = "SZ36-1C";
+//        String platformName = "SZ36-1B";
 //        String systemName = "高压二氧化碳系统灭火系统";
 //        String tableName = "药剂瓶";
 //        String number = "SD002";
@@ -92,7 +92,7 @@ public class WelcomeActivity extends AppCompatActivity {
         // 有itemId
 //        String companyName = "辽东作业公司";
 //        String oilfieldName = "SZ36-1";
-//        String platformName = "SZ36-1C";
+//        String platformName = "SZ36-1B";
 //        String systemName = "高压二氧化碳系统灭火系统";
 //        String itemTableName = "药剂瓶";
 //        String number = "SD002";
