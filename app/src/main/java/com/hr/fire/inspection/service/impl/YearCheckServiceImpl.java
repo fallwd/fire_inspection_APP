@@ -5,6 +5,7 @@ import android.util.Log;
 import com.hr.fire.inspection.dao.CheckTypeDao;
 import com.hr.fire.inspection.dao.CompanyInfoDao;
 import com.hr.fire.inspection.dao.ItemInfoDao;
+import com.hr.fire.inspection.dao.YearCheckDao;
 import com.hr.fire.inspection.dao.YearCheckResultDao;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.CompanyInfo;
@@ -100,5 +101,111 @@ public class YearCheckServiceImpl extends BaseServiceImpl<YearCheck> implements 
             dataList = queryBuilder.list();
         }
         return dataList;
+    }
+
+    @Override
+    public List<YearCheck> getCheckData(String tableName) {
+        QueryBuilder<YearCheck> yearCheckQB = daoSession.queryBuilder(YearCheck.class);
+        Join yearCheckJoin = yearCheckQB.join(YearCheckDao.Properties.CheckTypeId, CheckType.class).
+                where(CheckTypeDao.Properties.Name.eq(tableName));
+        List<YearCheck> dataList = yearCheckQB.list();
+        return dataList;
+    }
+
+    @Override
+    public long insertItemData(ItemInfo itemData, String companyName, String oilfieldName, String platformName, String systemName, String tableName, String number) {
+
+        // 先查询到companyinfo和checktype的对象
+        QueryBuilder<CompanyInfo> companyInfoQB = daoSession.queryBuilder(CompanyInfo.class).
+                where(
+                        CompanyInfoDao.Properties.CompanyName.eq(companyName),
+                        CompanyInfoDao.Properties.OilfieldName.eq(oilfieldName),
+                        CompanyInfoDao.Properties.PlatformName.eq(platformName)
+                );
+        CompanyInfo companyInfoObj = companyInfoQB.list().get(0);
+        QueryBuilder<CheckType> checkTypeQB = daoSession.queryBuilder(CheckType.class).
+                where(
+                        CheckTypeDao.Properties.Name.eq(tableName)
+                );
+        Join checkTypeJoin = checkTypeQB.join(CheckTypeDao.Properties.ParentId, CheckType.class).
+                where(
+                        CheckTypeDao.Properties.Name.eq(systemName)
+                );
+        CheckType checkTypeObj = checkTypeQB.list().get(0);
+
+        itemData.setCompanyInfo(companyInfoObj);
+        itemData.setCheckType(checkTypeObj);
+//        Log.i("result", itemData.toString());
+//        Log.i("result", itemData.getCompanyInfo().toString());
+//        Log.i("result", itemData.getCheckType().toString());
+//        Log.i("result", itemData.getCheckType().getParent().toString());
+        daoSession.insert(itemData);
+        Log.i("insertItemData", "插入设备信息数据完成-------------------------------------------");
+
+        return 0;
+    }
+
+    @Override
+    public long insertCheckResultData(YearCheckResult checkResultData, long itemId,long checkId,String companyName, String oilfieldName, String platformName, String systemName, String itemTableName, String checkTableName) {
+
+        QueryBuilder<CompanyInfo> companyInfoQB = daoSession.queryBuilder(CompanyInfo.class).
+                where(
+                        CompanyInfoDao.Properties.CompanyName.eq(companyName),
+                        CompanyInfoDao.Properties.OilfieldName.eq(oilfieldName),
+                        CompanyInfoDao.Properties.PlatformName.eq(platformName)
+                );
+        CompanyInfo companyInfoObj = companyInfoQB.list().get(0);
+
+
+        QueryBuilder<CheckType> checkTypeQB;
+        if(itemId!=0) {
+            // 获取设备对象
+            QueryBuilder<ItemInfo> itemInfoQB = daoSession.queryBuilder(ItemInfo.class).
+                    where(ItemInfoDao.Properties.Id.eq(itemId));
+            ItemInfo itemInfoObj = itemInfoQB.list().get(0);
+            checkResultData.setItemInfo(itemInfoObj);
+
+            checkTypeQB = daoSession.queryBuilder(CheckType.class).
+                    where(
+                            CheckTypeDao.Properties.Name.eq(checkTableName)
+                    );
+            Join checkTypeItemJoin = checkTypeQB.join(CheckTypeDao.Properties.ParentId, CheckType.class).
+                    where(
+                            CheckTypeDao.Properties.Name.eq(itemTableName)
+                    );
+            Join checkTypesysJoin = checkTypeQB.join(checkTypeItemJoin,CheckTypeDao.Properties.ParentId,CheckType.class,CheckTypeDao.Properties.Id).
+                    where(
+                            CheckTypeDao.Properties.Name.eq(systemName)
+                    );
+        }
+        else {
+            checkTypeQB = daoSession.queryBuilder(CheckType.class).
+                    where(
+                            CheckTypeDao.Properties.Name.eq(checkTableName)
+                    );
+            Join checkTypesysJoin = checkTypeQB.join(CheckTypeDao.Properties.ParentId, CheckType.class).
+                    where(
+                            CheckTypeDao.Properties.Name.eq(systemName)
+                    );
+        }
+
+        CheckType checkTypeObj = checkTypeQB.list().get(0);
+        checkResultData.setCompanyInfo(companyInfoObj);
+        checkResultData.setCheckType(checkTypeObj);
+        // 获取检查表对象
+        QueryBuilder<YearCheck> yearCheckQB = daoSession.queryBuilder(YearCheck.class).
+                where(YearCheckDao.Properties.Id.eq(checkId));
+        YearCheck yearCheckObj = yearCheckQB.list().get(0);
+        checkResultData.setYearCheck(yearCheckObj);
+        daoSession.insert(checkResultData);
+
+//        List<YearCheck> checkDataList = this.getCheckData(tableName);
+//        for (int i = 0;i < checkDataList.size();i++){
+//            YearCheck checkDataObj = checkDataList.get(i);
+//            checkResultData.setYearCheck(checkDataObj);
+//            daoSession.insert(checkResultData);
+//        }
+        Log.i("insertCheckResultData","插入检查结果数据完成------------------------------");
+        return 0;
     }
 }
