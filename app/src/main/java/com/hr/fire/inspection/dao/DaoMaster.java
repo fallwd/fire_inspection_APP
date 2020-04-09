@@ -25,6 +25,11 @@ public class DaoMaster extends AbstractDaoMaster {
         ItemInfoDao.createTable(db, ifNotExists);
         YearCheckDao.createTable(db, ifNotExists);
         YearCheckResultDao.createTable(db, ifNotExists);
+<<<<<<< HEAD
+        StandardInfoDao.createTable(db, ifNotExists);
+        StandardTypeDao.createTable(db, ifNotExists);
+=======
+>>>>>>> d88805a10bf5aeb2eb8f3466adf58ca12cc4a4ce
     }
 
     /** Drops underlying database table using DAOs. */
@@ -33,6 +38,11 @@ public class DaoMaster extends AbstractDaoMaster {
         ItemInfoDao.dropTable(db, ifExists);
         YearCheckDao.dropTable(db, ifExists);
         YearCheckResultDao.dropTable(db, ifExists);
+<<<<<<< HEAD
+        StandardInfoDao.dropTable(db, ifExists);
+        StandardTypeDao.dropTable(db, ifExists);
+=======
+>>>>>>> d88805a10bf5aeb2eb8f3466adf58ca12cc4a4ce
     }
 
     /**
@@ -55,6 +65,11 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(ItemInfoDao.class);
         registerDaoClass(YearCheckDao.class);
         registerDaoClass(YearCheckResultDao.class);
+<<<<<<< HEAD
+        registerDaoClass(StandardInfoDao.class);
+        registerDaoClass(StandardTypeDao.class);
+=======
+>>>>>>> d88805a10bf5aeb2eb8f3466adf58ca12cc4a4ce
     }
 
     public DaoSession newSession() {
