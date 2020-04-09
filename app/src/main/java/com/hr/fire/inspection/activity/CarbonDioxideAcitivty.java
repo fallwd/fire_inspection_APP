@@ -1,8 +1,12 @@
 package com.hr.fire.inspection.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -10,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +33,7 @@ import com.hr.fire.inspection.fragment.CarbonFragment5;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +56,7 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
     public void initView() {
         iv_finish = findViewById(R.id.iv_finish);
         tvInspectionPro = findViewById(R.id.tv_inspection_pro);
+        iv_finish = findViewById(R.id.iv_finish);
         String text = "消防巡检维护专用工具";
         SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#E51C23", 0, 3);
         tvInspectionPro.setText(showTextColor);

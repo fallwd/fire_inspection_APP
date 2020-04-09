@@ -17,90 +17,87 @@
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:text="序号"
-            android:textColor="@color/title_black"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textSize="12sp" />
 
-        <TextView
+        <EditText
             android:layout_width="22dp"
             android:layout_height="wrap_content"
+            android:background="@null"
             android:text="瓶号"
-            android:textColor="@color/title_black"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:maxLines="1"
+            android:textSize="12sp" />
 
-        <TextView
+        <EditText
             android:layout_width="32dp"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLines="1"
             android:text="容积/L"
-            android:textColor="@color/title_black"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textSize="12sp" />
 
-        <TextView
+        <EditText
             android:layout_width="36dp"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLines="1"
             android:text="瓶量/kg"
-            android:textColor="@color/title_black"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textSize="12sp" />
 
-        <TextView
+        <EditText
             android:layout_width="44dp"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLines="1"
             android:text="药剂量/kg"
-            android:textColor="@color/title_black"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textSize="12sp" />
 
-        <TextView
+        <EditText
             android:layout_width="46dp"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLines="1"
             android:text="生产厂家"
-            android:textColor="@color/title_black"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textSize="12sp" />
 
-        <TextView
+        <EditText
             android:layout_width="46dp"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLines="1"
             android:text="生产时间"
-            android:textColor="@color/title_black"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textSize="12sp" />
 
-        <TextView
+        <EditText
             android:layout_width="68dp"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLines="1"
             android:text="水压试验日期"
-            android:textColor="@color/title_black"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textSize="12sp" />
 
-        <TextView
+        <EditText
             android:layout_width="32dp"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLines="1"
             android:text="检查表"
-            android:textColor="@color/title_black"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textSize="12sp" />
 
-        <TextView
+        <EditText
             android:layout_width="46dp"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLines="1"
             android:text="是否合格"
-            android:textColor="@color/title_black"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textSize="12sp" />
 
-        <TextView
+        <EditText
             android:layout_width="24dp"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLines="1"
             android:text="操作"
-            android:textColor="@color/title_black"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textSize="12sp" />
     </TableRow>
-
 
 </TableLayout>
