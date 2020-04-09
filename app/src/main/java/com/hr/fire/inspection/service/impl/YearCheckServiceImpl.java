@@ -80,9 +80,10 @@ public class YearCheckServiceImpl extends BaseServiceImpl<YearCheck> implements 
         }
         else {
 //            QueryBuilder<ItemInfo> queryBuilder;
+//            Log.i("TTTT1",daoSession.queryBuilder(YearCheckResult.class).list().get(0).toString());
             if(number != null && number!=""){
                 queryBuilder = daoSession.queryBuilder(YearCheckResult.class).
-                        where(ItemInfoDao.Properties.SystemNumber.eq(number));
+                        where(YearCheckResultDao.Properties.SystemNumber.eq(number));
             }
             else {
                 queryBuilder = daoSession.queryBuilder(YearCheckResult.class);
@@ -99,6 +100,13 @@ public class YearCheckServiceImpl extends BaseServiceImpl<YearCheck> implements 
                             CompanyInfoDao.Properties.PlatformName.eq(platformName)
                     );
             dataList = queryBuilder.list();
+            Log.i("info", "查询完成02-------------------------------------------");
+            for (int i = 0; i < dataList.size(); i++) {
+                YearCheckResult result = dataList.get(i);
+                Log.i("result", result.toString());
+                Log.i("result", result.getYearCheck().toString());
+            }
+            Log.i("info", "查询完成02-------------------------------------------");
         }
         return dataList;
     }
@@ -197,6 +205,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<YearCheck> implements 
                 where(YearCheckDao.Properties.Id.eq(checkId));
         YearCheck yearCheckObj = yearCheckQB.list().get(0);
         checkResultData.setYearCheck(yearCheckObj);
+        Log.i("isnert rrrrr",checkResultData.toString());
         daoSession.insert(checkResultData);
 
 //        List<YearCheck> checkDataList = this.getCheckData(tableName);

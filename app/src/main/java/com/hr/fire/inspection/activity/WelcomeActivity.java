@@ -104,12 +104,52 @@ public class WelcomeActivity extends AppCompatActivity {
 //        long checkId = checkDataList.get(0).getId();
 //        YearCheckResult yearCheckResult = new YearCheckResult();
 //        String isPass1 = "是";
-//        String imageUrl1 = "imgs/xxx";
-//        String description1 = "xxxxxxxxxxxxxxxxxxx";
+//        String imageUrl1 = "imgs/xxx111111111111111111111111111111111";
+//        String description1 = "xxxxxxxxxxxxxxxxxxx1111111111111111111";
 //        yearCheckResult.setIsPass(isPass1);
 //        yearCheckResult.setImageUrl(imageUrl1);
 //        yearCheckResult.setDescription(description1);
+//        yearCheckResult.setSystemNumber(number);
 //        ServiceFactory.getYearCheckService().insertCheckResultData(yearCheckResult,itemId,checkId,companyName, oilfieldName, platformName, systemName, itemTableName, checkTableName);
+
+        //无itemId
+//        String companyName = "辽东作业公司";
+//        String oilfieldName = "SZ36-1";
+//        String platformName = "SZ36-1B";
+//        String systemName = "高压二氧化碳系统灭火系统";
+//        String itemTableName = "";
+//        String number = "SD002";
+////        List<ItemInfo> itemDataList = ServiceFactory.getYearCheckService().getItemData(companyName,oilfieldName,platformName,systemName,itemTableName, number);
+//        long itemId = 0;
+//        // 获取checkId
+//        String checkTableName = "管线管件";
+//        List<YearCheck> checkDataList = ServiceFactory.getYearCheckService().getCheckData(checkTableName);
+//        long checkId = checkDataList.get(0).getId();
+//        YearCheckResult yearCheckResult = new YearCheckResult();
+//        String isPass1 = "否";
+//        String imageUrl1 = "imgs/xxxwqewe";
+//        String description1 = "yyyyyyyyyyyyyyyyyyyyyyyy";
+//        yearCheckResult.setIsPass(isPass1);
+//        yearCheckResult.setImageUrl(imageUrl1);
+//        yearCheckResult.setDescription(description1);
+//        yearCheckResult.setSystemNumber(number);
+//        ServiceFactory.getYearCheckService().insertCheckResultData(yearCheckResult,itemId,checkId,companyName, oilfieldName, platformName, systemName, itemTableName, checkTableName);
+
+//        // 查询检测结果测试
+//        // 无itemId
+//        String companyName = "辽东作业公司";
+//        String oilfieldName = "SZ36-1";
+//        String platformName = "SZ36-1B";
+//        String systemName = "高压二氧化碳系统灭火系统";
+//        String tableName = "管线管件";
+//        String number = "SD002";
+//        long id = 0;
+//        List<YearCheckResult> dataList = ServiceFactory.getYearCheckService().getCheckResultData(id,companyName, oilfieldName, platformName, systemName, tableName, number);
+
+        // 有itemId
+
+
+
 
         Toast.makeText(WelcomeActivity.this,"系统将在2秒后为您自动跳转到首页",Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
