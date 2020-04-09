@@ -182,5 +182,16 @@ public void __setDaoSession(DaoSession daoSession) {
     myDao = daoSession != null ? daoSession.getYearCheckDao() : null;
 }
 
-
+    @Override
+    public String toString() {
+        return "YearCheck{" +
+                "id=" + id +
+                ", checkTypeId=" + checkTypeId +
+                ", checkType=" + checkType +
+                ", project='" + project + '\'' +
+                ", content='" + content + '\'' +
+                ", requirement='" + requirement + '\'' +
+                ", standard='" + standard + '\'' +
+                '}';
+    }
 }

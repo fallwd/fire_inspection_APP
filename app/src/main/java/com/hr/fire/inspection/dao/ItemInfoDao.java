@@ -59,9 +59,10 @@ public class ItemInfoDao extends AbstractDao<ItemInfo, Long> {
         public final static Property ObserveDate = new Property(26, java.util.Date.class, "observeDate", false, "OBSERVE_DATE");
         public final static Property IsPass = new Property(27, String.class, "isPass", false, "IS_PASS");
         public final static Property LabelNo = new Property(28, String.class, "labelNo", false, "LABEL_NO");
-        public final static Property SystemNumber = new Property(29, String.class, "SystemNumber", false, "SYSTEM_NUMBER");
-        public final static Property ProtectArea = new Property(30, String.class, "ProtectArea", false, "PROTECT_AREA");
-        public final static Property CheckDate = new Property(31, java.util.Date.class, "checkDate", false, "CHECK_DATE");
+        public final static Property CodePath = new Property(29, String.class, "codePath", false, "CODE_PATH");
+        public final static Property SystemNumber = new Property(30, String.class, "SystemNumber", false, "SYSTEM_NUMBER");
+        public final static Property ProtectArea = new Property(31, String.class, "ProtectArea", false, "PROTECT_AREA");
+        public final static Property CheckDate = new Property(32, java.util.Date.class, "checkDate", false, "CHECK_DATE");
     }
 
     private DaoSession daoSession;
@@ -109,9 +110,10 @@ public class ItemInfoDao extends AbstractDao<ItemInfo, Long> {
                 "\"OBSERVE_DATE\" INTEGER," + // 26: observeDate
                 "\"IS_PASS\" TEXT," + // 27: isPass
                 "\"LABEL_NO\" TEXT," + // 28: labelNo
-                "\"SYSTEM_NUMBER\" TEXT," + // 29: SystemNumber
-                "\"PROTECT_AREA\" TEXT," + // 30: ProtectArea
-                "\"CHECK_DATE\" INTEGER);"); // 31: checkDate
+                "\"CODE_PATH\" TEXT," + // 29: codePath
+                "\"SYSTEM_NUMBER\" TEXT," + // 30: SystemNumber
+                "\"PROTECT_AREA\" TEXT," + // 31: ProtectArea
+                "\"CHECK_DATE\" INTEGER);"); // 32: checkDate
     }
 
     /** Drops the underlying database table. */
@@ -269,19 +271,24 @@ public class ItemInfoDao extends AbstractDao<ItemInfo, Long> {
             stmt.bindString(29, labelNo);
         }
  
+        String codePath = entity.getCodePath();
+        if (codePath != null) {
+            stmt.bindString(30, codePath);
+        }
+ 
         String SystemNumber = entity.getSystemNumber();
         if (SystemNumber != null) {
-            stmt.bindString(30, SystemNumber);
+            stmt.bindString(31, SystemNumber);
         }
  
         String ProtectArea = entity.getProtectArea();
         if (ProtectArea != null) {
-            stmt.bindString(31, ProtectArea);
+            stmt.bindString(32, ProtectArea);
         }
  
         java.util.Date checkDate = entity.getCheckDate();
         if (checkDate != null) {
-            stmt.bindLong(32, checkDate.getTime());
+            stmt.bindLong(33, checkDate.getTime());
         }
     }
 
@@ -434,19 +441,24 @@ public class ItemInfoDao extends AbstractDao<ItemInfo, Long> {
             stmt.bindString(29, labelNo);
         }
  
+        String codePath = entity.getCodePath();
+        if (codePath != null) {
+            stmt.bindString(30, codePath);
+        }
+ 
         String SystemNumber = entity.getSystemNumber();
         if (SystemNumber != null) {
-            stmt.bindString(30, SystemNumber);
+            stmt.bindString(31, SystemNumber);
         }
  
         String ProtectArea = entity.getProtectArea();
         if (ProtectArea != null) {
-            stmt.bindString(31, ProtectArea);
+            stmt.bindString(32, ProtectArea);
         }
  
         java.util.Date checkDate = entity.getCheckDate();
         if (checkDate != null) {
-            stmt.bindLong(32, checkDate.getTime());
+            stmt.bindLong(33, checkDate.getTime());
         }
     }
 
@@ -493,9 +505,10 @@ public class ItemInfoDao extends AbstractDao<ItemInfo, Long> {
             cursor.isNull(offset + 26) ? null : new java.util.Date(cursor.getLong(offset + 26)), // observeDate
             cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27), // isPass
             cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28), // labelNo
-            cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29), // SystemNumber
-            cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30), // ProtectArea
-            cursor.isNull(offset + 31) ? null : new java.util.Date(cursor.getLong(offset + 31)) // checkDate
+            cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29), // codePath
+            cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30), // SystemNumber
+            cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31), // ProtectArea
+            cursor.isNull(offset + 32) ? null : new java.util.Date(cursor.getLong(offset + 32)) // checkDate
         );
         return entity;
     }
@@ -531,9 +544,10 @@ public class ItemInfoDao extends AbstractDao<ItemInfo, Long> {
         entity.setObserveDate(cursor.isNull(offset + 26) ? null : new java.util.Date(cursor.getLong(offset + 26)));
         entity.setIsPass(cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27));
         entity.setLabelNo(cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28));
-        entity.setSystemNumber(cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29));
-        entity.setProtectArea(cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30));
-        entity.setCheckDate(cursor.isNull(offset + 31) ? null : new java.util.Date(cursor.getLong(offset + 31)));
+        entity.setCodePath(cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29));
+        entity.setSystemNumber(cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30));
+        entity.setProtectArea(cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31));
+        entity.setCheckDate(cursor.isNull(offset + 32) ? null : new java.util.Date(cursor.getLong(offset + 32)));
      }
     
     @Override

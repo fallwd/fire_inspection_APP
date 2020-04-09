@@ -84,6 +84,8 @@ public class ItemInfo {
 
     private String labelNo;//标签号
 
+    private String codePath;//二维码路径
+
     private String SystemNumber;//系统位号
 
     private String ProtectArea;//保护区域
@@ -101,7 +103,7 @@ private transient DaoSession daoSession;
 @Generated(hash = 547138643)
 private transient ItemInfoDao myDao;
 
-@Generated(hash = 2013420146)
+@Generated(hash = 1530383196)
 public ItemInfo(Long id, Long checkTypeId, Long companyInfoId, String typeNo, String no,
         String volume, String weight, String goodsWeight, String pressure,
         String prodFactory, Date prodDate, String typeConformity,
@@ -109,8 +111,8 @@ public ItemInfo(Long id, Long checkTypeId, Long companyInfoId, String typeNo, St
         String reset, String powerAlarmFunction, String alarmFunction,
         String effectiveness, String responseTime, String descrption, String setAlarm25,
         String setAlarm50, String testAlarm25, String testAlarm50, Date observeDate,
-        String isPass, String labelNo, String SystemNumber, String ProtectArea,
-        Date checkDate) {
+        String isPass, String labelNo, String codePath, String SystemNumber,
+        String ProtectArea, Date checkDate) {
     this.id = id;
     this.checkTypeId = checkTypeId;
     this.companyInfoId = companyInfoId;
@@ -140,6 +142,7 @@ public ItemInfo(Long id, Long checkTypeId, Long companyInfoId, String typeNo, St
     this.observeDate = observeDate;
     this.isPass = isPass;
     this.labelNo = labelNo;
+    this.codePath = codePath;
     this.SystemNumber = SystemNumber;
     this.ProtectArea = ProtectArea;
     this.checkDate = checkDate;
@@ -542,6 +545,53 @@ public void setCheckDate(Date checkDate) {
     this.checkDate = checkDate;
 }
 
+public String getCodePath() {
+    return this.codePath;
+}
 
+public void setCodePath(String codePath) {
+    this.codePath = codePath;
+}
 
+    @Override
+    public String toString() {
+        return "ItemInfo{" +
+                "id=" + id +
+                ", checkTypeId=" + checkTypeId +
+                ", checkType=" + checkType +
+                ", companyInfoId=" + companyInfoId +
+                ", companyInfo=" + companyInfo +
+                ", typeNo='" + typeNo + '\'' +
+                ", no='" + no + '\'' +
+                ", volume='" + volume + '\'' +
+                ", weight='" + weight + '\'' +
+                ", goodsWeight='" + goodsWeight + '\'' +
+                ", pressure='" + pressure + '\'' +
+                ", prodFactory='" + prodFactory + '\'' +
+                ", prodDate=" + prodDate +
+                ", typeConformity='" + typeConformity + '\'' +
+                ", positionConformity='" + positionConformity + '\'' +
+                ", appearance='" + appearance + '\'' +
+                ", check='" + check + '\'' +
+                ", slience='" + slience + '\'' +
+                ", reset='" + reset + '\'' +
+                ", powerAlarmFunction='" + powerAlarmFunction + '\'' +
+                ", alarmFunction='" + alarmFunction + '\'' +
+                ", effectiveness='" + effectiveness + '\'' +
+                ", responseTime='" + responseTime + '\'' +
+                ", descrption='" + descrption + '\'' +
+                ", setAlarm25='" + setAlarm25 + '\'' +
+                ", setAlarm50='" + setAlarm50 + '\'' +
+                ", testAlarm25='" + testAlarm25 + '\'' +
+                ", testAlarm50='" + testAlarm50 + '\'' +
+                ", observeDate=" + observeDate +
+                ", isPass='" + isPass + '\'' +
+                ", labelNo='" + labelNo + '\'' +
+                ", codePath='" + codePath + '\'' +
+                ", SystemNumber='" + SystemNumber + '\'' +
+                ", ProtectArea='" + ProtectArea + '\'' +
+                ", checkDate=" + checkDate +
+                ", checkResultList=" + checkResultList +
+                '}';
+    }
 }

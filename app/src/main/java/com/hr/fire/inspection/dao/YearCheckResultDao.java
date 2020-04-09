@@ -14,6 +14,8 @@ import org.greenrobot.greendao.database.DatabaseStatement;
 import org.greenrobot.greendao.query.Query;
 import org.greenrobot.greendao.query.QueryBuilder;
 
+import com.hr.fire.inspection.entity.CheckType;
+import com.hr.fire.inspection.entity.CompanyInfo;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.YearCheck;
 
@@ -38,8 +40,13 @@ public class YearCheckResultDao extends AbstractDao<YearCheckResult, Long> {
         public final static Property ImageUrl = new Property(3, String.class, "imageUrl", false, "IMAGE_URL");
         public final static Property VideoUrl = new Property(4, String.class, "videoUrl", false, "VIDEO_URL");
         public final static Property Description = new Property(5, String.class, "description", false, "DESCRIPTION");
-        public final static Property ItemInfoId = new Property(6, Long.class, "itemInfoId", false, "ITEM_INFO_ID");
-        public final static Property TargetId = new Property(7, Long.class, "targetId", false, "TARGET_ID");
+        public final static Property SystemNumber = new Property(6, String.class, "SystemNumber", false, "SYSTEM_NUMBER");
+        public final static Property ProtectArea = new Property(7, String.class, "ProtectArea", false, "PROTECT_AREA");
+        public final static Property CheckDate = new Property(8, java.util.Date.class, "checkDate", false, "CHECK_DATE");
+        public final static Property ItemInfoId = new Property(9, Long.class, "itemInfoId", false, "ITEM_INFO_ID");
+        public final static Property CompanyInfoId = new Property(10, Long.class, "companyInfoId", false, "COMPANY_INFO_ID");
+        public final static Property CheckTypeId = new Property(11, Long.class, "checkTypeId", false, "CHECK_TYPE_ID");
+        public final static Property TargetId = new Property(12, Long.class, "targetId", false, "TARGET_ID");
     }
 
     private DaoSession daoSession;
@@ -65,8 +72,13 @@ public class YearCheckResultDao extends AbstractDao<YearCheckResult, Long> {
                 "\"IMAGE_URL\" TEXT," + // 3: imageUrl
                 "\"VIDEO_URL\" TEXT," + // 4: videoUrl
                 "\"DESCRIPTION\" TEXT," + // 5: description
-                "\"ITEM_INFO_ID\" INTEGER," + // 6: itemInfoId
-                "\"TARGET_ID\" INTEGER);"); // 7: targetId
+                "\"SYSTEM_NUMBER\" TEXT," + // 6: SystemNumber
+                "\"PROTECT_AREA\" TEXT," + // 7: ProtectArea
+                "\"CHECK_DATE\" INTEGER," + // 8: checkDate
+                "\"ITEM_INFO_ID\" INTEGER," + // 9: itemInfoId
+                "\"COMPANY_INFO_ID\" INTEGER," + // 10: companyInfoId
+                "\"CHECK_TYPE_ID\" INTEGER," + // 11: checkTypeId
+                "\"TARGET_ID\" INTEGER);"); // 12: targetId
     }
 
     /** Drops the underlying database table. */
@@ -109,14 +121,39 @@ public class YearCheckResultDao extends AbstractDao<YearCheckResult, Long> {
             stmt.bindString(6, description);
         }
  
+        String SystemNumber = entity.getSystemNumber();
+        if (SystemNumber != null) {
+            stmt.bindString(7, SystemNumber);
+        }
+ 
+        String ProtectArea = entity.getProtectArea();
+        if (ProtectArea != null) {
+            stmt.bindString(8, ProtectArea);
+        }
+ 
+        java.util.Date checkDate = entity.getCheckDate();
+        if (checkDate != null) {
+            stmt.bindLong(9, checkDate.getTime());
+        }
+ 
         Long itemInfoId = entity.getItemInfoId();
         if (itemInfoId != null) {
-            stmt.bindLong(7, itemInfoId);
+            stmt.bindLong(10, itemInfoId);
+        }
+ 
+        Long companyInfoId = entity.getCompanyInfoId();
+        if (companyInfoId != null) {
+            stmt.bindLong(11, companyInfoId);
+        }
+ 
+        Long checkTypeId = entity.getCheckTypeId();
+        if (checkTypeId != null) {
+            stmt.bindLong(12, checkTypeId);
         }
  
         Long targetId = entity.getTargetId();
         if (targetId != null) {
-            stmt.bindLong(8, targetId);
+            stmt.bindLong(13, targetId);
         }
     }
 
@@ -154,14 +191,39 @@ public class YearCheckResultDao extends AbstractDao<YearCheckResult, Long> {
             stmt.bindString(6, description);
         }
  
+        String SystemNumber = entity.getSystemNumber();
+        if (SystemNumber != null) {
+            stmt.bindString(7, SystemNumber);
+        }
+ 
+        String ProtectArea = entity.getProtectArea();
+        if (ProtectArea != null) {
+            stmt.bindString(8, ProtectArea);
+        }
+ 
+        java.util.Date checkDate = entity.getCheckDate();
+        if (checkDate != null) {
+            stmt.bindLong(9, checkDate.getTime());
+        }
+ 
         Long itemInfoId = entity.getItemInfoId();
         if (itemInfoId != null) {
-            stmt.bindLong(7, itemInfoId);
+            stmt.bindLong(10, itemInfoId);
+        }
+ 
+        Long companyInfoId = entity.getCompanyInfoId();
+        if (companyInfoId != null) {
+            stmt.bindLong(11, companyInfoId);
+        }
+ 
+        Long checkTypeId = entity.getCheckTypeId();
+        if (checkTypeId != null) {
+            stmt.bindLong(12, checkTypeId);
         }
  
         Long targetId = entity.getTargetId();
         if (targetId != null) {
-            stmt.bindLong(8, targetId);
+            stmt.bindLong(13, targetId);
         }
     }
 
@@ -185,8 +247,13 @@ public class YearCheckResultDao extends AbstractDao<YearCheckResult, Long> {
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // imageUrl
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // videoUrl
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // description
-            cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6), // itemInfoId
-            cursor.isNull(offset + 7) ? null : cursor.getLong(offset + 7) // targetId
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // SystemNumber
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // ProtectArea
+            cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)), // checkDate
+            cursor.isNull(offset + 9) ? null : cursor.getLong(offset + 9), // itemInfoId
+            cursor.isNull(offset + 10) ? null : cursor.getLong(offset + 10), // companyInfoId
+            cursor.isNull(offset + 11) ? null : cursor.getLong(offset + 11), // checkTypeId
+            cursor.isNull(offset + 12) ? null : cursor.getLong(offset + 12) // targetId
         );
         return entity;
     }
@@ -199,8 +266,13 @@ public class YearCheckResultDao extends AbstractDao<YearCheckResult, Long> {
         entity.setImageUrl(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setVideoUrl(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setDescription(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setItemInfoId(cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6));
-        entity.setTargetId(cursor.isNull(offset + 7) ? null : cursor.getLong(offset + 7));
+        entity.setSystemNumber(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setProtectArea(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setCheckDate(cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)));
+        entity.setItemInfoId(cursor.isNull(offset + 9) ? null : cursor.getLong(offset + 9));
+        entity.setCompanyInfoId(cursor.isNull(offset + 10) ? null : cursor.getLong(offset + 10));
+        entity.setCheckTypeId(cursor.isNull(offset + 11) ? null : cursor.getLong(offset + 11));
+        entity.setTargetId(cursor.isNull(offset + 12) ? null : cursor.getLong(offset + 12));
      }
     
     @Override
@@ -252,9 +324,15 @@ public class YearCheckResultDao extends AbstractDao<YearCheckResult, Long> {
             SqlUtils.appendColumns(builder, "T0", daoSession.getYearCheckDao().getAllColumns());
             builder.append(',');
             SqlUtils.appendColumns(builder, "T1", daoSession.getItemInfoDao().getAllColumns());
+            builder.append(',');
+            SqlUtils.appendColumns(builder, "T2", daoSession.getCompanyInfoDao().getAllColumns());
+            builder.append(',');
+            SqlUtils.appendColumns(builder, "T3", daoSession.getCheckTypeDao().getAllColumns());
             builder.append(" FROM t_year_check_result T");
             builder.append(" LEFT JOIN t_year_check T0 ON T.\"YEAR_CHECK_ID\"=T0.\"_id\"");
             builder.append(" LEFT JOIN t_item_info T1 ON T.\"ITEM_INFO_ID\"=T1.\"_id\"");
+            builder.append(" LEFT JOIN t_company_info T2 ON T.\"COMPANY_INFO_ID\"=T2.\"_id\"");
+            builder.append(" LEFT JOIN t_check_type T3 ON T.\"CHECK_TYPE_ID\"=T3.\"_id\"");
             builder.append(' ');
             selectDeep = builder.toString();
         }
@@ -271,6 +349,14 @@ public class YearCheckResultDao extends AbstractDao<YearCheckResult, Long> {
 
         ItemInfo itemInfo = loadCurrentOther(daoSession.getItemInfoDao(), cursor, offset);
         entity.setItemInfo(itemInfo);
+        offset += daoSession.getItemInfoDao().getAllColumns().length;
+
+        CompanyInfo companyInfo = loadCurrentOther(daoSession.getCompanyInfoDao(), cursor, offset);
+        entity.setCompanyInfo(companyInfo);
+        offset += daoSession.getCompanyInfoDao().getAllColumns().length;
+
+        CheckType checkType = loadCurrentOther(daoSession.getCheckTypeDao(), cursor, offset);
+        entity.setCheckType(checkType);
 
         return entity;    
     }

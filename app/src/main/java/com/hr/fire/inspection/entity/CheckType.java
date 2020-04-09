@@ -153,5 +153,14 @@ public void __setDaoSession(DaoSession daoSession) {
     myDao = daoSession != null ? daoSession.getCheckTypeDao() : null;
 }
 
-
+    @Override
+    public String toString() {
+        return "CheckType{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", parentId=" + parentId +
+                ", parent=" + parent +
+                '}';
+    }
 }

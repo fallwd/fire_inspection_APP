@@ -75,4 +75,14 @@ public void setIsNecessary(int isNecessary) {
     this.isNecessary = isNecessary;
 }
 
+    @Override
+    public String toString() {
+        return "CompanyInfo{" +
+                "id=" + id +
+                ", companyName='" + companyName + '\'' +
+                ", oilfieldName='" + oilfieldName + '\'' +
+                ", platformName='" + platformName + '\'' +
+                ", isNecessary=" + isNecessary +
+                '}';
+    }
 }
