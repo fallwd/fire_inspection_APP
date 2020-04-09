@@ -6,38 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="45dp"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<ImageButton-->
-            <!--android:id="@+id/backHome"-->
-            <!--android:layout_width="20dp"-->
-            <!--android:layout_height="24dp"-->
-            <!--android:layout_marginLeft="8dp"-->
-            <!--android:background="@mipmap/left_icon"-->
-            <!--android:scaleType="fitXY" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/account_pwd"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="8dp"-->
-            <!--android:text="@string/laws_regulations"-->
-            <!--android:textColor="@color/title_green"-->
-            <!--android:textSize="20dp" />-->
-        <!--&lt;!&ndash;android:textColor="#00A779" />&ndash;&gt;-->
-    <!--</LinearLayout>-->
-
     <include layout="@layout/currency_title" />
 
-<<<<<<< HEAD
-   <ListView
-=======
     <ListView
->>>>>>> 998c4b37eeb39dc5a983d687384d31539de44fc7
         android:id="@+id/main_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
