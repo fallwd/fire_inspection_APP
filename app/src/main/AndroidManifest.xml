@@ -2,25 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.hr.fire.inspection">
-        <!-- 访问SD权限 -->
-        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-        <!-- 摄像头权限 -->
-        <uses-permission android:name="android.permission.CAMERA"/>
-        <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-        <!-- 在SDCard读取数据的权限 -->
-        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-     
-<!--    &lt;!&ndash; 7.0图片共享 &ndash;&gt;-->
-<!--    <provider-->
-<!--        android:name="android.support.v4.content.FileProvider"-->
-<!--        android:authorities="com.example.cameraalbumtest.fileprovider"-->
-<!--        android:exported="false"-->
-<!--        android:grantUriPermissions="true"-->
-<!--        tools:ignore="WrongManifestParent">-->
-<!--        <meta-data-->
-<!--            android:name="android.support.FILE_PROVIDER_PATHS"-->
-<!--            android:resource="@xml/file_paths" />-->
-<!--    </provider>-->
+    <!-- 访问SD权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 摄像头权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!--&lt;!&ndash; 7.0图片共享 &ndash;&gt;-->
+    <!--<provider-->
+    <!--android:name="android.support.v4.content.FileProvider"-->
+    <!--android:authorities="com.example.cameraalbumtest.fileprovider"-->
+    <!--android:exported="false"-->
+    <!--android:grantUriPermissions="true"-->
+    <!--tools:ignore="WrongManifestParent">-->
+    <!--<meta-data-->
+    <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
+    <!--android:resource="@xml/file_paths" />-->
+    <!--</provider>-->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -31,8 +30,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".activity.PhotoUploadActivity"
-            android:screenOrientation="landscape"
-            ></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".activity.WelcomeActivity"
             android:screenOrientation="landscape">

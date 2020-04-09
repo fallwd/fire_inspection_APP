@@ -9,33 +9,46 @@
 
     <include layout="@layout/currency_title" />
 
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
-        android:background="@color/white"
-        android:orientation="vertical">
+        android:background="@color/white">
 
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tl_tabs"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            app:tabBackground="@drawable/tab_background"
-            app:tabIndicatorColor="@null"
-            app:tabRippleColor="@color/colorPrimary"
-            app:tabSelectedTextColor="@color/bgm_white"
-            app:tabTextColor="@color/title_gray" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/vp_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
-    </LinearLayout>
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tl_tabs"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:tabBackground="@drawable/tab_background"
+                app:tabIndicatorColor="@null"
+                app:tabRippleColor="@color/colorPrimary"
+                app:tabSelectedTextColor="@color/bgm_white"
+                app:tabTextColor="@color/title_gray" />
 
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/vp_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_add_table"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:background="@mipmap/add_item" />
+
+    </RelativeLayout>
 
 </LinearLayout>
