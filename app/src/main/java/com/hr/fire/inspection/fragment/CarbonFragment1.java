@@ -9,16 +9,21 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.CarBon1Adapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CarbonFragment1 extends Fragment {
     View rootView;
     private static CarbonFragment1 fragment1;
     private static String mKey;
+    private CarBon1Adapter adapter;
 
     public static CarbonFragment1 newInstance(String key, String value) {
         if (fragment1 == null) {
@@ -54,17 +59,35 @@ public class CarbonFragment1 extends Fragment {
         initView();
     }
 
+    private List list = new ArrayList<>();
+
     private void initView() {
+        list.clear();
+        //等待后台数据.
+        list.add("哈哈");
+        list.add("测试数据,默认先来两天数据");
+
         RecyclerView rc_list = rootView.findViewById(R.id.rc_list);
         @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rc_list.setLayoutManager(layoutManager);
-        CarBon1Adapter adapter = new CarBon1Adapter();
+        adapter = new CarBon1Adapter(getActivity(), list);
         rc_list.setAdapter(adapter);
+        //添加动画
+        rc_list.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    //动态添加条目
+    public void addItemView() {
+        if (adapter != null) {
+            adapter.addData(list.size());
+        }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
+        if (adapter != null) {
+            adapter = null;
+        }
     }
 }

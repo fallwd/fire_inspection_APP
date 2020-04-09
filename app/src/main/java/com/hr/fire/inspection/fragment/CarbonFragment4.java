@@ -13,18 +13,18 @@ import com.hr.fire.inspection.R;
 
 public class CarbonFragment4 extends Fragment {
     View rootView;
-    private static CarbonFragment1 fragment1;
+    private static CarbonFragment4 fragment4;
     private static String mKey;
 
-    public static CarbonFragment1 newInstance(String key, String value) {
-        if (fragment1 == null) {
-            fragment1 = new CarbonFragment1();
+    public static CarbonFragment4 newInstance(String key, String value) {
+        if (fragment4 == null) {
+            fragment4 = new CarbonFragment4();
         }
         mKey = key;
         Bundle args = new Bundle();
         args.putString(key, value);
-        fragment1.setArguments(args);
-        return fragment1;
+        fragment4.setArguments(args);
+        return fragment4;
     }
 
     @Override
@@ -53,11 +53,11 @@ public class CarbonFragment4 extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         Log.d("dong", "onDestroyView: ");
-        boolean mIsFirstLoad = true;
-        boolean mIsPrepare = false;
-        boolean mIsVisible = false;
-        if (rootView != null) {
-            ((ViewGroup) rootView.getParent()).removeView(rootView);
-        }
+//        boolean mIsFirstLoad = true;
+//        boolean mIsPrepare = false;
+//        boolean mIsVisible = false;
+//        if (rootView != null) {
+//            ((ViewGroup) rootView.getParent()).removeView(rootView);
+//        }
     }
 }
