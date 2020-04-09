@@ -4,46 +4,48 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
-
-
-import com.hr.fire.inspection.dao.CheckTypeDao;
 import com.hr.fire.inspection.dao.DaoSession;
+import com.hr.fire.inspection.dao.StandardTypeDao;
+import com.hr.fire.inspection.dao.StandardInfoDao;
 
 @Entity(
-        nameInDb = "t_check_type"
+        nameInDb = "t_standard_info"
 )
-public class CheckType {
+public class StandardInfo {
 
     @Id(autoincrement = true)
-    private Long id;
+    private Long id;//法规id
 
-    private String name; //类型名称
+    private Long standardTypeId;
+    @ToOne(joinProperty = "standardTypeId")
+    private StandardType standardType;//标准分类
 
-    private int type; //年检 月检 巡检等(1 年检)
+    private String name;//法规名称
 
-    private Long parentId;
+    private String path;//法规存放目录
 
-    @ToOne(joinProperty = "parentId")
-    private CheckType parent;
+    private String fileType;//法规文件类型
 
 /** Used to resolve relations */
 @Generated(hash = 2040040024)
 private transient DaoSession daoSession;
 
 /** Used for active entity operations. */
-@Generated(hash = 1270543700)
-private transient CheckTypeDao myDao;
+@Generated(hash = 1383898226)
+private transient StandardInfoDao myDao;
 
-@Generated(hash = 119751077)
-public CheckType(Long id, String name, int type, Long parentId) {
+@Generated(hash = 1016483075)
+public StandardInfo(Long id, Long standardTypeId, String name, String path,
+        String fileType) {
     this.id = id;
+    this.standardTypeId = standardTypeId;
     this.name = name;
-    this.type = type;
-    this.parentId = parentId;
+    this.path = path;
+    this.fileType = fileType;
 }
 
-@Generated(hash = 281386950)
-public CheckType() {
+@Generated(hash = 1393596397)
+public StandardInfo() {
 }
 
 public Long getId() {
@@ -54,6 +56,14 @@ public void setId(Long id) {
     this.id = id;
 }
 
+public Long getStandardTypeId() {
+    return this.standardTypeId;
+}
+
+public void setStandardTypeId(Long standardTypeId) {
+    this.standardTypeId = standardTypeId;
+}
+
 public String getName() {
     return this.name;
 }
@@ -62,51 +72,52 @@ public void setName(String name) {
     this.name = name;
 }
 
-public int getType() {
-    return this.type;
+public String getPath() {
+    return this.path;
 }
 
-public void setType(int type) {
-    this.type = type;
+public void setPath(String path) {
+    this.path = path;
 }
 
-public Long getParentId() {
-    return this.parentId;
+public String getFileType() {
+    return this.fileType;
 }
 
-public void setParentId(Long parentId) {
-    this.parentId = parentId;
+public void setFileType(String fileType) {
+    this.fileType = fileType;
 }
 
-@Generated(hash = 1293412156)
-private transient Long parent__resolvedKey;
+@Generated(hash = 18539822)
+private transient Long standardType__resolvedKey;
 
 /** To-one relationship, resolved on first access. */
-@Generated(hash = 38821098)
-public CheckType getParent() {
-    Long __key = this.parentId;
-    if (parent__resolvedKey == null || !parent__resolvedKey.equals(__key)) {
+@Generated(hash = 689736295)
+public StandardType getStandardType() {
+    Long __key = this.standardTypeId;
+    if (standardType__resolvedKey == null
+            || !standardType__resolvedKey.equals(__key)) {
         final DaoSession daoSession = this.daoSession;
         if (daoSession == null) {
             throw new DaoException("Entity is detached from DAO context");
         }
-        CheckTypeDao targetDao = daoSession.getCheckTypeDao();
-        CheckType parentNew = targetDao.load(__key);
+        StandardTypeDao targetDao = daoSession.getStandardTypeDao();
+        StandardType standardTypeNew = targetDao.load(__key);
         synchronized (this) {
-            parent = parentNew;
-            parent__resolvedKey = __key;
+            standardType = standardTypeNew;
+            standardType__resolvedKey = __key;
         }
     }
-    return parent;
+    return standardType;
 }
 
 /** called by internal mechanisms, do not call yourself. */
-@Generated(hash = 2094832494)
-public void setParent(CheckType parent) {
+@Generated(hash = 1227013789)
+public void setStandardType(StandardType standardType) {
     synchronized (this) {
-        this.parent = parent;
-        parentId = parent == null ? null : parent.getId();
-        parent__resolvedKey = parentId;
+        this.standardType = standardType;
+        standardTypeId = standardType == null ? null : standardType.getId();
+        standardType__resolvedKey = standardTypeId;
     }
 }
 
@@ -147,20 +158,11 @@ public void update() {
 }
 
 /** called by internal mechanisms, do not call yourself. */
-@Generated(hash = 1736019214)
+@Generated(hash = 948010742)
 public void __setDaoSession(DaoSession daoSession) {
     this.daoSession = daoSession;
-    myDao = daoSession != null ? daoSession.getCheckTypeDao() : null;
+    myDao = daoSession != null ? daoSession.getStandardInfoDao() : null;
 }
 
-    @Override
-    public String toString() {
-        return "CheckType{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type=" + type +
-                ", parentId=" + parentId +
-                ", parent=" + parent +
-                '}';
-    }
+
 }

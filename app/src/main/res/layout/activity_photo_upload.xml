@@ -1,22 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context=".activity.PhotoUploadActivity" android:layout_height="wrap_content" android:layout_width="match_parent">
-    <Button
-        android:id="@+id/photo_take"
-        android:text="照相机"
-        android:layout_height="60dp"
-        android:layout_width="match_parent" />
-    <Button
-        android:id="@+id/photo_chooser"
-        android:text="相册"
-        android:layout_height="60dp"
-        android:layout_width="match_parent" />
+    tools:context=".activity.PhotoUploadActivity" android:layout_height="wrap_content" android:layout_width="match_parent"
+    tools:ignore="Deprecated">
     <ImageView
         android:id="@+id/photo_img"
         android:src="@mipmap/ic_launcher"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:layout_width="match_parent" />
-</LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/alfa_box"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_x="0dp"
+        android:layout_y="0dp"
+        android:visibility="gone"
+        android:alpha="0.5"
+        android:background="#000000"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/photo_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/photo_take"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:text="照相机" />
+
+            <Button
+                android:id="@+id/photo_chooser"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:text="相册" />
+
+            <Button
+                android:id="@+id/close_box"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:text="取消" />
+        </LinearLayout>
+    </RelativeLayout>
+</AbsoluteLayout>

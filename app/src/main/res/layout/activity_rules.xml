@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activity.RulesActivity">
+    android:orientation="vertical">
 
     <!--<LinearLayout-->
         <!--android:layout_width="match_parent"-->
@@ -34,7 +33,11 @@
 
     <include layout="@layout/currency_title" />
 
+<<<<<<< HEAD
    <ListView
+=======
+    <ListView
+>>>>>>> 998c4b37eeb39dc5a983d687384d31539de44fc7
         android:id="@+id/main_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

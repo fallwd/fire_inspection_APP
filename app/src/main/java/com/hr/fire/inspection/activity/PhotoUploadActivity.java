@@ -1,6 +1,7 @@
 package com.hr.fire.inspection.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.ContentUris;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,10 +36,13 @@ public class PhotoUploadActivity extends AppCompatActivity {
 
     public static final int TAKE_PHOTO = 1;//拍照
     public static final int CHOOSE_PHOTO = 2;//相册获取
+    private static final String TAG =null ;
 
     private Button take_photo ;
     private Button chooser_photo;
     private ImageView img_photo;
+    private Button box_close;
+    private RelativeLayout photo_box;
     private Uri imgUri;
 
     @Override
@@ -146,17 +151,18 @@ public class PhotoUploadActivity extends AppCompatActivity {
         return path;
     }
 
-
-
     private void initView() {
         setContentView(R.layout.activity_photo_upload);
         take_photo = (Button) findViewById(R.id.photo_take);
         img_photo = (ImageView) findViewById(R.id.photo_img);
         chooser_photo = (Button) findViewById(R.id.photo_chooser);
+        box_close = (Button) findViewById(R.id.close_box);
         //调用摄像头
         take_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                photo_box = findViewById(R.id.alfa_box);
+                photo_box.setVisibility(View.GONE);
                 try {
                     camera();
                 } catch (IOException e) {
@@ -170,6 +176,8 @@ public class PhotoUploadActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //判断有无权限没有则添加
+                photo_box = findViewById(R.id.alfa_box);
+                photo_box.setVisibility(View.GONE);
                 if (ContextCompat.checkSelfPermission(PhotoUploadActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
                     ActivityCompat.requestPermissions(PhotoUploadActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
                 }else {
@@ -178,7 +186,24 @@ public class PhotoUploadActivity extends AppCompatActivity {
             }
         });
 
-
+        // 唤醒遮罩层
+        img_photo.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("WrongViewCast")
+            @Override
+            public void onClick(View v) {
+                photo_box = (RelativeLayout) findViewById(R.id.alfa_box);
+                photo_box.setVisibility(View.VISIBLE);
+            }
+        });
+        // 关闭遮罩层
+        box_close.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("WrongViewCast")
+            @Override
+            public void onClick(View v) {
+                photo_box = findViewById(R.id.alfa_box);
+                photo_box.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void openAlbum() {
@@ -210,7 +235,6 @@ public class PhotoUploadActivity extends AppCompatActivity {
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         intent.putExtra(MediaStore.EXTRA_OUTPUT,imgUri);
         startActivityForResult(intent,TAKE_PHOTO);
-
     }
 }
 
