@@ -16,17 +16,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
+import com.hr.fire.inspection.activity.CarbonDioxideAcitivty;
+import com.hr.fire.inspection.activity.SystemTagProtectionAreaActivity;
+import com.hr.fire.inspection.entity.ItemInfo;
 
 import java.util.List;
 
 public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
-    private List<String> mData;
+    private List<ItemInfo> mData;
 
     public CarBon1Adapter() {
     }
 
-    public CarBon1Adapter(Context mContext, List<String> mData) {
+    public CarBon1Adapter(Context mContext, List<ItemInfo> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
@@ -45,15 +49,21 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         ViewHolder vh = (ViewHolder) holder;
-
-        String s = mData.get(position);
+        ItemInfo info = mData.get(position);
         vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
         vh.et_2.setText(new StringBuffer().append("YJP00").append(position + 1));
+        vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
+        vh.et_4.setText(new StringBuffer().append(info.getWeight()).append(""));
+        vh.et_5.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));
+        vh.et_6.setText(new StringBuffer().append(info.getProdFactory()).append(""));
+        vh.et_7.setText(new StringBuffer().append(info.getProdDate()).append(""));
+        vh.et_8.setText(new StringBuffer().append(info.getCheckDate()).append(""));
         vh.tv_9.setText(new StringBuffer().append("药剂瓶").append(position + 1).append("号表"));
         vh.rl_9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "点击了", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, CarBonGoodsWeightAcitivty.class);
+                mContext.startActivity(intent);
             }
         });
         vh.rl_11.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +89,8 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void addData(int position) {
 //      在list中添加数据，并通知条目加入一条
         if (mData != null && mData.size() != 0) {
-            mData.add("动态添加数据" + position);
+            //添加最后一条数据
+            mData.add(mData.get(mData.size() - 1));
             //添加动画
             notifyItemInserted(position);
         }

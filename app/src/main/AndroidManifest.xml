@@ -68,6 +68,9 @@
         <activity
             android:name=".activity.CarbonDioxideAcitivty"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.CarBonGoodsWeightAcitivty"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>
