@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.dao.DaoSession;
+import com.hr.fire.inspection.entity.CompanyInfo;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
@@ -35,7 +36,7 @@ public class WelcomeActivity extends AppCompatActivity {
         // 调用接口测试
 //        String companyName = "辽东作业公司";
 //        String oilfieldName = "SZ36-1";
-//        String platformName = "SZ36-1B";
+//        String platformName = "SZ36-1D";
 //        String systemName = "高压二氧化碳系统灭火系统";
 //        String tableName = "药剂瓶";
 //        String number = "SD002";
@@ -48,9 +49,13 @@ public class WelcomeActivity extends AppCompatActivity {
         // 删除接口测试
 //        ItemInfo itemInfo = itemDataList.get(0);
 //        ServiceFactory.getYearCheckService().delete(itemInfo);
+
+
+
 //        String tableName = "药剂瓶检查表";
 //        List checkDataList = ServiceFactory.getYearCheckService().getCheckData(tableName);
 //        Log.i("getCheckData",checkDataList.get(0).toString());
+
 //        platformName = "SZ36-1C";
 //        ItemInfo itemObj = new ItemInfo();
 //        String no = "YJP0002";
@@ -96,13 +101,19 @@ public class WelcomeActivity extends AppCompatActivity {
 //        itemObj.setSystemNumber(systemNumber);
 //        itemObj.setProtectArea(protectArea);
 //        itemObj.setCodePath(codePath);
+//        String companyName = "辽东作业公司";
+//        String oilfieldName = "SZ36-1";
+//        String platformName = "SZ36-1D";
+//        String systemName = "高压二氧化碳系统灭火系统";
+//        String tableName = "药剂瓶";
+//        String number = "SD002";
 //
 //        ServiceFactory.getYearCheckService().insertItemData(itemObj,companyName,oilfieldName,platformName,systemName,tableName, number);
         // 插入检查结果数据测试
         // 有itemId
 //        String companyName = "辽东作业公司";
 //        String oilfieldName = "SZ36-1";
-//        String platformName = "SZ36-1B";
+//        String platformName = "SZ36-1D";
 //        String systemName = "高压二氧化碳系统灭火系统";
 //        String itemTableName = "药剂瓶";
 //        String number = "SD002";
@@ -114,8 +125,8 @@ public class WelcomeActivity extends AppCompatActivity {
 //        long checkId = checkDataList.get(1).getId();
 //        YearCheckResult yearCheckResult = new YearCheckResult();
 //        String isPass1 = "是";
-//        String imageUrl1 = "imgs/xxx1asdsa11112222211";
-//        String description1 = "这是药剂瓶的检查表数据22222";
+//        String imageUrl1 = "dddddddddddddddddd";
+//        String description1 = "这是药剂瓶的检查表数据ddddddddddd";
 //        yearCheckResult.setIsPass(isPass1);
 //        yearCheckResult.setImageUrl(imageUrl1);
 //        yearCheckResult.setDescription(description1);
@@ -125,7 +136,7 @@ public class WelcomeActivity extends AppCompatActivity {
         //无itemId
 //        String companyName = "辽东作业公司";
 //        String oilfieldName = "SZ36-1";
-//        String platformName = "SZ36-1B";
+//        String platformName = "SZ36-1D";
 //        String systemName = "高压二氧化碳系统灭火系统";
 //        String itemTableName = "";
 //        String number = "SD002";
@@ -137,8 +148,8 @@ public class WelcomeActivity extends AppCompatActivity {
 //        long checkId = checkDataList.get(0).getId();
 //        YearCheckResult yearCheckResult = new YearCheckResult();
 //        String isPass1 = "否";
-//        String imageUrl1 = "imgs/xxxwqewe";
-//        String description1 = "yyyyyyyyyyyyyyyyyyyyyyyy";
+//        String imageUrl1 = "imgs/xxxwqeweddddddddddddd";
+//        String description1 = "yyyyyyyyyyyyyyyyyyyyyyyydddddddddddddddddddddddddddd";
 //        yearCheckResult.setIsPass(isPass1);
 //        yearCheckResult.setImageUrl(imageUrl1);
 //        yearCheckResult.setDescription(description1);
@@ -149,7 +160,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //        // 无itemId
 //        String companyName = "辽东作业公司";
 //        String oilfieldName = "SZ36-1";
-//        String platformName = "SZ36-1B";
+//        String platformName = "SZ36-1D";
 //        String systemName = "高压二氧化碳系统灭火系统";
 //        String tableName = "管线管件";
 //        String number = "SD002";
@@ -157,6 +168,22 @@ public class WelcomeActivity extends AppCompatActivity {
 //        List<YearCheckResult> dataList = ServiceFactory.getYearCheckService().getCheckResultData(id,companyName, oilfieldName, platformName, systemName, tableName, number);
 
         // 有itemId
+//        String companyName = "辽东作业公司";
+//        String oilfieldName = "SZ36-1";
+//        String platformName = "SZ36-1D";
+//        String systemName = "高压二氧化碳系统灭火系统";
+//        String tableName = "药剂瓶";
+//        String number = "SD002";
+//        List<ItemInfo> itemDataList = ServiceFactory.getYearCheckService().getItemData(companyName,oilfieldName,platformName,systemName,tableName, number);
+//        long itemId = itemDataList.get(0).getId();
+//        List<YearCheckResult> dataList = ServiceFactory.getYearCheckService().getCheckResultData(itemId,companyName, oilfieldName, platformName, systemName, tableName, number);
+
+        // 测试公司平台信息查询接口
+//        List<CompanyInfo> dataList = ServiceFactory.getCompanyInfoService().getAll();
+//        for(int i = 0;i < dataList.size();i++){
+//            CompanyInfo result = dataList.get(i);
+//            Log.i("CompanyInfo",result.toString());
+//        }
 
 
 
