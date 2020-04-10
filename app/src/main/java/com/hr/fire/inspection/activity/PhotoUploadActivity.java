@@ -48,6 +48,7 @@ public class PhotoUploadActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_photo_upload);
         initView();
     }
 
@@ -152,7 +153,7 @@ public class PhotoUploadActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        setContentView(R.layout.activity_photo_upload);
+
         take_photo = (Button) findViewById(R.id.photo_take);
         img_photo = (ImageView) findViewById(R.id.photo_img);
         chooser_photo = (Button) findViewById(R.id.photo_chooser);

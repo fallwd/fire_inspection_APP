@@ -3,6 +3,7 @@ package com.hr.fire.inspection.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,8 +23,22 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
 
     private void initView() {
         TextView tv_title = findViewById(R.id.tv_title);
+        Button cancel_btn = findViewById(R.id.cancel_btn);
+        cancel_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        Button submit_btn = findViewById(R.id.submit_btn);
         ListView list = findViewById(R.id.list);
         GoodsAdapter goodsAdapter = new GoodsAdapter(this);
         list.setAdapter(goodsAdapter);
+        submit_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 }
