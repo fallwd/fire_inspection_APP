@@ -53,6 +53,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<YearCheck> implements 
             Log.i("result", result.toString());
             Log.i("result", result.getCompanyInfo().toString());
             Log.i("result", result.getCheckType().toString());
+            Log.i("result", result.getCheckResultList().toString());
         }
         Log.i("info","查询完成01-------------------------------------------");
 
@@ -205,6 +206,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<YearCheck> implements 
                 where(YearCheckDao.Properties.Id.eq(checkId));
         YearCheck yearCheckObj = yearCheckQB.list().get(0);
         checkResultData.setYearCheck(yearCheckObj);
+        checkResultData.setTargetId(itemId);
         Log.i("isnert rrrrr",checkResultData.toString());
         daoSession.insert(checkResultData);
 

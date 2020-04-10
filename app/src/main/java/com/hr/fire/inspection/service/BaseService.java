@@ -17,4 +17,11 @@ public interface BaseService<T> {
      * @return
      */
     void update(T t);
+
+    /**
+     *
+     * @param
+     * @return
+     */
+    void delete(T t);
 }

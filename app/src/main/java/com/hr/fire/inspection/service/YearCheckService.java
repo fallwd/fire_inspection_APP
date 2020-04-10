@@ -48,4 +48,12 @@ public interface YearCheckService extends BaseService<YearCheck>{
      */
     long insertCheckResultData(YearCheckResult checkResultData, long itemId,long checkId,String companyName, String oilfieldName, String platformName, String systemName, String itemTableName, String checkTableName);
 
+
+//    /**
+//     * 更新一条设备信息数据
+//     * @param
+//     * @return
+//     */
+//    long update
+
 }
