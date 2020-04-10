@@ -31,6 +31,8 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -65,14 +67,15 @@
             android:screenOrientation="landscape" />
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.cameraalbumtest.fileprovider"
+            android:authorities="com.hr.fire.inspection.fileProvider"
             android:exported="false"
             android:grantUriPermissions="true"
-            tools:ignore="WrongManifestParent">
+            xmlns:tools="http://schemas.android.com/tools"
+            tools:replace="android:authorities">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-</application>
 
+    </application>
 </manifest>
