@@ -22,23 +22,23 @@ public class DaoMaster extends AbstractDaoMaster {
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
         CheckTypeDao.createTable(db, ifNotExists);
-        CompanyInfoDao.createTable(db, ifNotExists);
         ItemInfoDao.createTable(db, ifNotExists);
-        StandardInfoDao.createTable(db, ifNotExists);
-        StandardTypeDao.createTable(db, ifNotExists);
         YearCheckDao.createTable(db, ifNotExists);
         YearCheckResultDao.createTable(db, ifNotExists);
+        CompanyInfoDao.createTable(db, ifNotExists);
+        StandardInfoDao.createTable(db, ifNotExists);
+        StandardTypeDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
         CheckTypeDao.dropTable(db, ifExists);
-        CompanyInfoDao.dropTable(db, ifExists);
         ItemInfoDao.dropTable(db, ifExists);
-        StandardInfoDao.dropTable(db, ifExists);
-        StandardTypeDao.dropTable(db, ifExists);
         YearCheckDao.dropTable(db, ifExists);
         YearCheckResultDao.dropTable(db, ifExists);
+        CompanyInfoDao.dropTable(db, ifExists);
+        StandardInfoDao.dropTable(db, ifExists);
+        StandardTypeDao.dropTable(db, ifExists);
     }
 
     /**
@@ -58,12 +58,12 @@ public class DaoMaster extends AbstractDaoMaster {
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
         registerDaoClass(CheckTypeDao.class);
-        registerDaoClass(CompanyInfoDao.class);
         registerDaoClass(ItemInfoDao.class);
-        registerDaoClass(StandardInfoDao.class);
-        registerDaoClass(StandardTypeDao.class);
         registerDaoClass(YearCheckDao.class);
         registerDaoClass(YearCheckResultDao.class);
+        registerDaoClass(CompanyInfoDao.class);
+        registerDaoClass(StandardInfoDao.class);
+        registerDaoClass(StandardTypeDao.class);
     }
 
     public DaoSession newSession() {
