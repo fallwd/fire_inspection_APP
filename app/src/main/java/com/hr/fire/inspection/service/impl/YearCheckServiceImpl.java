@@ -142,12 +142,10 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 );
         CheckType checkTypeObj = checkTypeQB.list().get(0);
 
-        itemData.setCompanyInfo(companyInfoObj);
-        itemData.setCheckType(checkTypeObj);
-//        Log.i("result", itemData.toString());
-//        Log.i("result", itemData.getCompanyInfo().toString());
-//        Log.i("result", itemData.getCheckType().toString());
-//        Log.i("result", itemData.getCheckType().getParent().toString());
+//        itemData.setCompanyInfo(companyInfoObj);
+        itemData.setCompanyInfoId(companyInfoObj.getId());
+//        itemData.setCheckType(checkTypeObj);
+        itemData.setCheckTypeId(checkTypeObj.getId());
         daoSession.insert(itemData);
         Log.i("insertItemData", "插入设备信息数据完成-------------------------------------------");
 
@@ -172,7 +170,8 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
             QueryBuilder<ItemInfo> itemInfoQB = daoSession.queryBuilder(ItemInfo.class).
                     where(ItemInfoDao.Properties.Id.eq(itemId));
             ItemInfo itemInfoObj = itemInfoQB.list().get(0);
-            checkResultData.setItemInfo(itemInfoObj);
+//            checkResultData.setItemInfo(itemInfoObj);
+            checkResultData.setItemInfoId(itemInfoObj.getId());
 
             checkTypeQB = daoSession.queryBuilder(CheckType.class).
                     where(
@@ -199,13 +198,16 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         }
 
         CheckType checkTypeObj = checkTypeQB.list().get(0);
-        checkResultData.setCompanyInfo(companyInfoObj);
-        checkResultData.setCheckType(checkTypeObj);
+//        checkResultData.setCompanyInfo(companyInfoObj);
+        checkResultData.setCompanyInfoId(companyInfoObj.getId());
+//        checkResultData.setCheckType(checkTypeObj);
+        checkResultData.setCheckTypeId(checkTypeObj.getId());
         // 获取检查表对象
         QueryBuilder<YearCheck> yearCheckQB = daoSession.queryBuilder(YearCheck.class).
                 where(YearCheckDao.Properties.Id.eq(checkId));
         YearCheck yearCheckObj = yearCheckQB.list().get(0);
-        checkResultData.setYearCheck(yearCheckObj);
+//        checkResultData.setYearCheck(yearCheckObj);
+        checkResultData.setYearCheckId(yearCheckObj.getId());
         checkResultData.setTargetId(itemId);
         Log.i("isnert rrrrr",checkResultData.toString());
         daoSession.insert(checkResultData);
