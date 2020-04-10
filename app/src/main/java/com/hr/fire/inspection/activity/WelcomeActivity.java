@@ -42,11 +42,12 @@ public class WelcomeActivity extends AppCompatActivity {
 //        List<ItemInfo> itemDataList = ServiceFactory.getYearCheckService().getItemData(companyName,oilfieldName,platformName,systemName,tableName, number);
         // 更新接口测试
 //        ItemInfo itemInfo = itemDataList.get(0);
-//        itemInfo.setWeight("1000");
-//        itemInfo.setGoodsWeight("222");
-//        daoSession.update(itemInfo);
-
-
+//        itemInfo.setWeight("1111");
+//        itemInfo.setGoodsWeight("2223");
+//        ServiceFactory.getYearCheckService().update(itemInfo);
+        // 删除接口测试
+//        ItemInfo itemInfo = itemDataList.get(0);
+//        ServiceFactory.getYearCheckService().delete(itemInfo);
 //        String tableName = "药剂瓶检查表";
 //        List checkDataList = ServiceFactory.getYearCheckService().getCheckData(tableName);
 //        Log.i("getCheckData",checkDataList.get(0).toString());

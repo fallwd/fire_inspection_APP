@@ -13,13 +13,13 @@ import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.YearCheckService;
-
+import com.hr.fire.inspection.R;
 import org.greenrobot.greendao.query.Join;
 import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.util.List;
 
-public class YearCheckServiceImpl extends BaseServiceImpl<YearCheck> implements YearCheckService {
+public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements YearCheckService {
 
     @Override
     public List<ItemInfo> getItemData(String companyName, String oilfieldName, String platformName, String systemName, String tableName, String number) {

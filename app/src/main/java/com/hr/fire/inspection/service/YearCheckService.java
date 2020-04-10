@@ -1,12 +1,13 @@
 package com.hr.fire.inspection.service;
 
+import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
 
 import java.util.List;
 
-public interface YearCheckService extends BaseService<YearCheck>{
+public interface YearCheckService extends BaseService<Object>{
     /**
      * 获取设备信息表信息
      * @param
@@ -54,6 +55,5 @@ public interface YearCheckService extends BaseService<YearCheck>{
 //     * @param
 //     * @return
 //     */
-//    long update
-
+//    long update(T t);
 }
