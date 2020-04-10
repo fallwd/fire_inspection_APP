@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hr.fire.inspection.R;
@@ -36,15 +37,17 @@ public class RuleContentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rule_content);
 
+        TextView textcont=(TextView)findViewById(R.id.textcont);
+        Bundle b=getIntent().getExtras();
+        //获取Bundle的信息
+        String infocont=b.getString("context");
+        String infoid=b.getString("id");
+        textcont.setText(infocont);
+
+
         list= (ListView) findViewById(R.id.list);
-
-
         File sdcard = Environment.getExternalStorageDirectory();
-
         wordfile = sdcard.listFiles();
-
-//        File directory_pictures = new File(sdcard, "Pictures");
-
 
         for (int i = 0; i < wordfile.length; i++) {
             Log.i(TAG,"11111111111111111111111directory_pictures="+wordfile[i]);
@@ -96,20 +99,15 @@ public class RuleContentActivity extends AppCompatActivity {
                 List list = packageManager.queryIntentActivities(testIntent,
                         PackageManager.MATCH_DEFAULT_ONLY);
 
-                Log.i(TAG,"list.sizelist.sizelist.sizelist.sizelist.sizelist.size="+list.size());
-                Log.i(TAG,"stringtofilestringtofilestringtofilestringtofilestringtofile="+stringtofile);
-
                 if (stringtofile.isFile()) {
                     Intent intent = new Intent("android.intent.action.VIEW");
                     intent.addCategory("android.intent.category.DEFAULT");
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.setAction(Intent.ACTION_VIEW);
 
-                    Uri uri = Uri.fromFile(stringtofile.getAbsoluteFile());
-                    Log.i(TAG,"222222222222222uri="+uri);
-
+//                    Uri uri = Uri.fromFile(stringtofile.getAbsoluteFile());
+                    Uri uri = FileProvider.getUriForFile(RuleContentActivity.this, getApplication().getApplicationContext().getPackageName() + ".fileProvider", stringtofile);
                     intent.setDataAndType(uri, "application/pdf");
-                    Log.i(TAG,"222222222222222uri="+intent);
 
                     startActivity(intent);
                 }
