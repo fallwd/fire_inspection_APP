@@ -15,4 +15,9 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     public void update(T o) {
         daoSession.update(o);
     }
+
+    @Override
+    public void delete(T o) {
+        daoSession.delete(o);
+    }
 }
