@@ -9,12 +9,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.dao.DaoSession;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.sqlHelpers.BaseData;
 import com.hr.fire.inspection.sqlHelpers.YearCheckData;
+import com.hr.fire.inspection.utils.GreenDaoHelper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,7 +28,7 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-
+//        DaoSession daoSession = GreenDaoHelper.getDaoSession();
 //         初始化数据库,插入测试数据
 //        BaseData baseData = new BaseData();
 //        baseData.initData();
@@ -38,6 +40,14 @@ public class WelcomeActivity extends AppCompatActivity {
 //        String tableName = "药剂瓶";
 //        String number = "SD002";
 //        List<ItemInfo> itemDataList = ServiceFactory.getYearCheckService().getItemData(companyName,oilfieldName,platformName,systemName,tableName, number);
+        // 更新接口测试
+//        ItemInfo itemInfo = itemDataList.get(0);
+//        itemInfo.setWeight("1111");
+//        itemInfo.setGoodsWeight("2223");
+//        ServiceFactory.getYearCheckService().update(itemInfo);
+        // 删除接口测试
+//        ItemInfo itemInfo = itemDataList.get(0);
+//        ServiceFactory.getYearCheckService().delete(itemInfo);
 //        String tableName = "药剂瓶检查表";
 //        List checkDataList = ServiceFactory.getYearCheckService().getCheckData(tableName);
 //        Log.i("getCheckData",checkDataList.get(0).toString());
@@ -101,11 +111,11 @@ public class WelcomeActivity extends AppCompatActivity {
 //        // 获取checkId
 //        String checkTableName = "药剂瓶检查表";
 //        List<YearCheck> checkDataList = ServiceFactory.getYearCheckService().getCheckData(checkTableName);
-//        long checkId = checkDataList.get(0).getId();
+//        long checkId = checkDataList.get(1).getId();
 //        YearCheckResult yearCheckResult = new YearCheckResult();
 //        String isPass1 = "是";
-//        String imageUrl1 = "imgs/xxx111111111111111111111111111111111";
-//        String description1 = "xxxxxxxxxxxxxxxxxxx1111111111111111111";
+//        String imageUrl1 = "imgs/xxx1asdsa11112222211";
+//        String description1 = "这是药剂瓶的检查表数据22222";
 //        yearCheckResult.setIsPass(isPass1);
 //        yearCheckResult.setImageUrl(imageUrl1);
 //        yearCheckResult.setDescription(description1);
