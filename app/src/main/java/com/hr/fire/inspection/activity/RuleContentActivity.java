@@ -1,5 +1,7 @@
 package com.hr.fire.inspection.activity;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+
 import com.hr.fire.inspection.R;
 
 import android.content.Intent;
@@ -96,16 +98,19 @@ public class RuleContentActivity extends AppCompatActivity {
 
                 Log.i(TAG,"list.sizelist.sizelist.sizelist.sizelist.sizelist.size="+list.size());
                 Log.i(TAG,"stringtofilestringtofilestringtofilestringtofilestringtofile="+stringtofile);
+
                 if (stringtofile.isFile()) {
                     Intent intent = new Intent("android.intent.action.VIEW");
                     intent.addCategory("android.intent.category.DEFAULT");
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.setAction(Intent.ACTION_VIEW);
-                    Uri uri = Uri.fromFile(stringtofile.getAbsoluteFile());
 
+                    Uri uri = Uri.fromFile(stringtofile.getAbsoluteFile());
                     Log.i(TAG,"222222222222222uri="+uri);
-//                    intent.setDataAndType(uri, "application/msword");
+
                     intent.setDataAndType(uri, "application/pdf");
+                    Log.i(TAG,"222222222222222uri="+intent);
+
                     startActivity(intent);
                 }
             }
