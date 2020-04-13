@@ -9,6 +9,13 @@ import java.util.List;
 
 public interface YearCheckService extends BaseService<Object>{
     /**
+     * 获取历史数据
+     * @param
+     * @return
+     */
+    List getHistoryList(String systemName);
+
+    /**
      * 获取设备信息表信息
      * @param
      * @return

@@ -16,9 +16,4 @@
         android:layout_marginRight="12dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/listview_border" />
-<<<<<<< HEAD
-
 </LinearLayout>
-=======
-</LinearLayout>
->>>>>>> 9452616125e88243015e8558f47a5d30bb90cb11

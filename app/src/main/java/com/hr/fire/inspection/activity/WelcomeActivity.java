@@ -169,15 +169,15 @@ public class WelcomeActivity extends AppCompatActivity {
 //        List<YearCheckResult> dataList = ServiceFactory.getYearCheckService().getCheckResultData(id,companyName, oilfieldName, platformName, systemName, tableName, number);
 
 //         有itemId
-        String companyName = "辽东作业公司";
-        String oilfieldName = "SZ36-1";
-        String platformName = "SZ36-1D";
-        String systemName = "高压二氧化碳系统灭火系统";
-        String tableName = "药剂瓶";
-        String number = "SD002";
-        List<ItemInfo> itemDataList = ServiceFactory.getYearCheckService().getItemData(companyName,oilfieldName,platformName,systemName,tableName, number);
-        long itemId = itemDataList.get(0).getId();
-        List<YearCheckResult> dataList = ServiceFactory.getYearCheckService().getCheckResultData(itemId,companyName, oilfieldName, platformName, systemName, tableName, number);
+//        String companyName = "辽东作业公司";
+//        String oilfieldName = "SZ36-1";
+//        String platformName = "SZ36-1D";
+//        String systemName = "高压二氧化碳系统灭火系统";
+//        String tableName = "药剂瓶";
+//        String number = "SD002";
+//        List<ItemInfo> itemDataList = ServiceFactory.getYearCheckService().getItemData(companyName,oilfieldName,platformName,systemName,tableName, number);
+//        long itemId = itemDataList.get(0).getId();
+//        List<YearCheckResult> dataList = ServiceFactory.getYearCheckService().getCheckResultData(itemId,companyName, oilfieldName, platformName, systemName, tableName, number);
 
         // 测试公司平台信息查询接口
 //        List<CompanyInfo> dataList = ServiceFactory.getCompanyInfoService().getAll();
@@ -185,6 +185,12 @@ public class WelcomeActivity extends AppCompatActivity {
 //            CompanyInfo result = dataList.get(i);
 //            Log.i("CompanyInfo",result.toString());
 //        }
+
+        //测试公司接口
+        List<CompanyInfo> dataList = ServiceFactory.getCompanyInfoService().getCompanyList();
+        dataList = ServiceFactory.getCompanyInfoService().getOilfieldList("曹妃甸作业公司");
+        dataList = ServiceFactory.getCompanyInfoService().getPlatformList("CFD11-1");
+
 
 
 
