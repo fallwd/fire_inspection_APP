@@ -1,6 +1,7 @@
 package com.hr.fire.inspection.service;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
@@ -8,12 +9,28 @@ import com.hr.fire.inspection.entity.YearCheckResult;
 import java.util.List;
 
 public interface YearCheckService extends BaseService<Object>{
+
+    /**
+     * 获取系统类型数据
+     * @param
+     * @return
+     */
+    List<CheckType> getSystemNameData();
+
+    /**
+     * 获取检查表类型数据
+     * @param
+     * @return
+     */
+    List<CheckType> gettableNameData(long checkTypeId);
+
+
     /**
      * 获取历史数据
      * @param
      * @return
      */
-    List getHistoryList(String systemName);
+    List getHistoryList(long companyId, long systemId);
 
     /**
      * 获取设备信息表信息
@@ -56,11 +73,4 @@ public interface YearCheckService extends BaseService<Object>{
      */
     long insertCheckResultData(YearCheckResult checkResultData, long itemId,long checkId,String companyName, String oilfieldName, String platformName, String systemName, String itemTableName, String checkTableName);
 
-
-//    /**
-//     * 更新一条设备信息数据
-//     * @param
-//     * @return
-//     */
-//    long update(T t);
 }
