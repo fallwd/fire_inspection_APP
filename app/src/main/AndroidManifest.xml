@@ -52,6 +52,9 @@
             android:name=".activity.NavigationActivity"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".activity.ChooseCompanyActivity"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".activity.InspectionActivity"
             android:screenOrientation="landscape" />
         <activity
@@ -63,6 +66,7 @@
         <activity
             android:name=".activity.CarbonDioxideAcitivty"
             android:screenOrientation="landscape" />
+
     </application>
 
 </manifest>
