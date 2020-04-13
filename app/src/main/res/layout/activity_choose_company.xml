@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".activity.ChooseCompanyActivity">
     <include layout="@layout/currency_title" />
 
     <LinearLayout
@@ -18,7 +22,9 @@
             <RelativeLayout
                 android:id="@+id/select_company_row"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -36,9 +42,99 @@
                     android:layout_alignParentRight="true">
                 </ImageView>
             </RelativeLayout>
-
         </LinearLayout>
 
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:background="@drawable/layer_border_bottom">-->
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/company_item_row"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:paddingLeft="5dp"-->
+                <!--android:paddingRight="5dp">-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="深圳分公司"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="16dp"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_alignParentLeft="true">-->
+                <!--</TextView>-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:background="@drawable/layer_border_bottom"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_alignParentRight="true">-->
+                    <!--<ImageView-->
+                        <!--android:layout_width="24dp"-->
+                        <!--android:layout_height="24dp"-->
+                        <!--android:src="@mipmap/edit_item"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_marginRight="30dp">-->
+                    <!--</ImageView>-->
+                    <!--<ImageView-->
+                        <!--android:layout_width="24dp"-->
+                        <!--android:layout_height="24dp"-->
+                        <!--android:src="@mipmap/remove_item"-->
+                        <!--android:layout_gravity="center">-->
+                    <!--</ImageView>-->
+                <!--</LinearLayout>-->
+            <!--</RelativeLayout>-->
+        <!--</LinearLayout>-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:background="@drawable/layer_border_bottom">-->
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/company_item_row2"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:paddingLeft="5dp"-->
+                <!--android:paddingRight="5dp">-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="辽东作业公司"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="16dp"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_alignParentLeft="true">-->
+                <!--</TextView>-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:background="@drawable/layer_border_bottom"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_alignParentRight="true">-->
+                    <!--<ImageView-->
+                        <!--android:layout_width="24dp"-->
+                        <!--android:layout_height="24dp"-->
+                        <!--android:src="@mipmap/edit_item"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_marginRight="30dp">-->
+                    <!--</ImageView>-->
+                    <!--<ImageView-->
+                        <!--android:layout_width="24dp"-->
+                        <!--android:layout_height="24dp"-->
+                        <!--android:src="@mipmap/remove_item"-->
+                        <!--android:layout_gravity="center">-->
+                    <!--</ImageView>-->
+                <!--</LinearLayout>-->
+            <!--</RelativeLayout>-->
+        <!--</LinearLayout>-->
     </LinearLayout>
+    <ListView
+        android:id="@+id/company_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/listview_border"
+        android:baselineAligned="false"
+        tools:ignore="MissingConstraints" />
 
 </LinearLayout>

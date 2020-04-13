@@ -65,25 +65,21 @@
         <activity
             android:name=".activity.CarbonDioxideAcitivty"
             android:screenOrientation="landscape" />
-<<<<<<< HEAD
-
     </application>
-=======
-        <activity
-            android:name=".activity.CarBonGoodsWeightAcitivty"
-            android:screenOrientation="landscape" />
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="com.hr.fire.inspection.fileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true"
-            xmlns:tools="http://schemas.android.com/tools"
-            tools:replace="android:authorities">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
-        </provider>
->>>>>>> 9452616125e88243015e8558f47a5d30bb90cb11
 
-    </application>
+        <!--<activity-->
+            <!--android:name=".activity.CarBonGoodsWeightAcitivty"-->
+            <!--android:screenOrientation="landscape" />-->
+        <!--<provider-->
+            <!--android:name="androidx.core.content.FileProvider"-->
+            <!--android:authorities="com.hr.fire.inspection.fileProvider"-->
+            <!--android:exported="false"-->
+            <!--android:grantUriPermissions="true"-->
+            <!--xmlns:tools="http://schemas.android.com/tools"-->
+            <!--tools:replace="android:authorities">-->
+            <!--<meta-data-->
+                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
+                <!--android:resource="@xml/provider_paths" />-->
+        <!--</provider>-->
+    <!--</application>-->
 </manifest>

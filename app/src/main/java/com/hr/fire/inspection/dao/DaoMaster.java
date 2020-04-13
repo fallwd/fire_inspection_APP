@@ -22,31 +22,23 @@ public class DaoMaster extends AbstractDaoMaster {
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
         CheckTypeDao.createTable(db, ifNotExists);
-<<<<<<< HEAD
-=======
-        CompanyInfoDao.createTable(db, ifNotExists);
-        ItemInfoDao.createTable(db, ifNotExists);
-        StandardInfoDao.createTable(db, ifNotExists);
-        StandardTypeDao.createTable(db, ifNotExists);
->>>>>>> 9452616125e88243015e8558f47a5d30bb90cb11
         YearCheckDao.createTable(db, ifNotExists);
         YearCheckResultDao.createTable(db, ifNotExists);
         ItemInfoDao.createTable(db, ifNotExists);
+        CompanyInfoDao.createTable(db, ifNotExists);
+        StandardInfoDao.createTable(db, ifNotExists);
+        StandardTypeDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
         CheckTypeDao.dropTable(db, ifExists);
-<<<<<<< HEAD
-=======
-        CompanyInfoDao.dropTable(db, ifExists);
-        ItemInfoDao.dropTable(db, ifExists);
-        StandardInfoDao.dropTable(db, ifExists);
-        StandardTypeDao.dropTable(db, ifExists);
->>>>>>> 9452616125e88243015e8558f47a5d30bb90cb11
         YearCheckDao.dropTable(db, ifExists);
         YearCheckResultDao.dropTable(db, ifExists);
         ItemInfoDao.dropTable(db, ifExists);
+        CompanyInfoDao.dropTable(db, ifExists);
+        StandardInfoDao.dropTable(db, ifExists);
+        StandardTypeDao.dropTable(db, ifExists);
     }
 
     /**
@@ -66,16 +58,12 @@ public class DaoMaster extends AbstractDaoMaster {
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
         registerDaoClass(CheckTypeDao.class);
-<<<<<<< HEAD
-=======
-        registerDaoClass(CompanyInfoDao.class);
-        registerDaoClass(ItemInfoDao.class);
-        registerDaoClass(StandardInfoDao.class);
-        registerDaoClass(StandardTypeDao.class);
->>>>>>> 9452616125e88243015e8558f47a5d30bb90cb11
         registerDaoClass(YearCheckDao.class);
         registerDaoClass(YearCheckResultDao.class);
         registerDaoClass(ItemInfoDao.class);
+        registerDaoClass(CompanyInfoDao.class);
+        registerDaoClass(StandardInfoDao.class);
+        registerDaoClass(StandardTypeDao.class);
     }
 
     public DaoSession newSession() {
