@@ -36,9 +36,9 @@ public class PhotoUploadActivity extends AppCompatActivity {
 
     public static final int TAKE_PHOTO = 1;//拍照
     public static final int CHOOSE_PHOTO = 2;//相册获取
-    private static final String TAG =null ;
+    private static final String TAG = null;
 
-    private Button take_photo ;
+    private Button take_photo;
     private Button chooser_photo;
     private ImageView img_photo;
     private Button box_close;
@@ -55,12 +55,12 @@ public class PhotoUploadActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode){
+        switch (requestCode) {
             case 1:
-                if (grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     openAlbum();
-                }else {
-                    Toast.makeText(PhotoUploadActivity.this,"You denied the permission",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(PhotoUploadActivity.this, "You denied the permission", Toast.LENGTH_SHORT).show();
                 }
                 break;
             default:
@@ -71,9 +71,9 @@ public class PhotoUploadActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
+        switch (requestCode) {
             case TAKE_PHOTO:
-                if (resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
                     try {
                         Bitmap bitmap = BitmapFactory
                                 .decodeStream(getContentResolver().openInputStream(imgUri));
@@ -84,11 +84,11 @@ public class PhotoUploadActivity extends AppCompatActivity {
                 }
                 break;
             case CHOOSE_PHOTO:
-                if (resultCode == RESULT_OK){
-                    if (Build.VERSION.SDK_INT >=19){
+                if (resultCode == RESULT_OK) {
+                    if (Build.VERSION.SDK_INT >= 19) {
                         //4.4以上图片处理
                         handleImageOnKitKat(data);
-                    }else {
+                    } else {
                         //4.4以下图片处理
                         handleImageBeforeKitKat(data);
                     }
@@ -104,21 +104,21 @@ public class PhotoUploadActivity extends AppCompatActivity {
     private void handleImageBeforeKitKat(Intent data) {
         String imagePath = null;
         Uri uri = data.getData();
-        if (DocumentsContract.isDocumentUri(this,uri)){
+        if (DocumentsContract.isDocumentUri(this, uri)) {
             //如果是 documents 类型的Uri ，则通过 document id 处理
             String docId = DocumentsContract.getDocumentId(uri);
-            if ("com.android.providers.media.documents".equals(uri.getAuthority()) ){
+            if ("com.android.providers.media.documents".equals(uri.getAuthority())) {
                 String id = docId.split(":")[1];//解析出数字格式的id
-                String selection = MediaStore.Images.Media._ID + "=" +id;
-                imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,selection);
-            }else if ("com.android.providers.downloads.documents".equals(uri.getAuthority())){
+                String selection = MediaStore.Images.Media._ID + "=" + id;
+                imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection);
+            } else if ("com.android.providers.downloads.documents".equals(uri.getAuthority())) {
                 Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(docId));
-                imagePath = getImagePath(contentUri , null);
+                imagePath = getImagePath(contentUri, null);
             }
-        }else if ("content".equalsIgnoreCase(uri.getScheme())){
+        } else if ("content".equalsIgnoreCase(uri.getScheme())) {
             //如果是 content 类型的 Uri，则使用普通方式
-            imagePath = getImagePath(uri,null);
-        }else if ("file".equalsIgnoreCase(uri.getScheme())){
+            imagePath = getImagePath(uri, null);
+        } else if ("file".equalsIgnoreCase(uri.getScheme())) {
             //如果是 file 类型的 Uri，直接获取图片路径即可
             imagePath = uri.getPath();
         }
@@ -141,9 +141,9 @@ public class PhotoUploadActivity extends AppCompatActivity {
     private String getImagePath(Uri uri, String selection) {
         String path = null;
         //通过Uri和selection获取真实的图片路径
-        Cursor cursor = getContentResolver().query(uri,null,selection,null,null);
-        if (cursor != null){
-            if (cursor.moveToFirst()){
+        Cursor cursor = getContentResolver().query(uri, null, selection, null, null);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
                 path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
             }
             cursor.close();
@@ -168,7 +168,7 @@ public class PhotoUploadActivity extends AppCompatActivity {
                     camera();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Log.d("FLY","出错了====="+e.toString());
+                    Log.d("FLY", "出错了=====" + e.toString());
                 }
             }
         });
@@ -179,9 +179,9 @@ public class PhotoUploadActivity extends AppCompatActivity {
                 //判断有无权限没有则添加
                 photo_box = findViewById(R.id.alfa_box);
                 photo_box.setVisibility(View.GONE);
-                if (ContextCompat.checkSelfPermission(PhotoUploadActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-                    ActivityCompat.requestPermissions(PhotoUploadActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-                }else {
+                if (ContextCompat.checkSelfPermission(PhotoUploadActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(PhotoUploadActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                } else {
                     openAlbum();
                 }
             }
@@ -211,31 +211,30 @@ public class PhotoUploadActivity extends AppCompatActivity {
         //调取相册
         Intent intent = new Intent("android.intent.action.GET_CONTENT");
         intent.setType("image/*");
-        startActivityForResult(intent,CHOOSE_PHOTO);
+        startActivityForResult(intent, CHOOSE_PHOTO);
 
     }
 
     private void camera() throws IOException {
         //储存拍照图片file
-        File outputImage = new File(getExternalCacheDir(),"putput_img.jpg");
-
-        if (outputImage.exists()){
+        File outputImage = new File(getExternalCacheDir(), "putput_img.jpg");
+        if (outputImage.exists()) {
             outputImage.delete();
         }
         outputImage.createNewFile();
         //
-        if (Build.VERSION.SDK_INT>=24){
-            //7.0以上新增的方法 共享文件 FileProvider是一种特殊的内容提供者
-            // 第二个参数为对应filepaths.xml中provider（内容提供者的）的name
+        if (Build.VERSION.SDK_INT >= 24) {
             imgUri = FileProvider
-                    .getUriForFile(PhotoUploadActivity.this,"com.example.cameraalbumtest.fileprovider",outputImage);
-        }else {
+                    .getUriForFile(PhotoUploadActivity.this, getApplication().getApplicationContext().getPackageName() + ".fileProvider", outputImage);
+        } else {
             imgUri = Uri.fromFile(outputImage);
         }
         //启动相机
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        intent.putExtra(MediaStore.EXTRA_OUTPUT,imgUri);
-        startActivityForResult(intent,TAKE_PHOTO);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imgUri);
+        startActivityForResult(intent, TAKE_PHOTO);
     }
+
+
 }
 

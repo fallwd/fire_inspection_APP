@@ -1,4 +1,5 @@
 package com.hr.fire.inspection.activity;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
@@ -26,31 +27,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RuleContentActivity extends AppCompatActivity {
-    public static final  String TAG="RuleContentActivity";
+    public static final String TAG = "RuleContentActivity";
     ArrayAdapter<String> adapter;
     ArrayList<String> listItems = new ArrayList<String>();
     ArrayList<String> listItems2 = new ArrayList<String>();
     private File[] wordfile;
     String[] wordlist, wordlist2;
     ListView list;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rule_content);
 
-        TextView textcont=(TextView)findViewById(R.id.textcont);
-        Bundle b=getIntent().getExtras();
+        TextView textcont = (TextView) findViewById(R.id.textcont);
+        Bundle b = getIntent().getExtras();
         //获取Bundle的信息
-        String infocont=b.getString("context");
-        String infoid=b.getString("id");
+        String infocont = b.getString("context");
+        String infoid = b.getString("id");
         textcont.setText(infocont);
 
 
-        list= (ListView) findViewById(R.id.list);
+        list = (ListView) findViewById(R.id.list);
+        // /storage/emulated/0
         File sdcard = Environment.getExternalStorageDirectory();
+        Log.d("dong", "sdcard= " + sdcard.getAbsolutePath());
         wordfile = sdcard.listFiles();
 
         for (int i = 0; i < wordfile.length; i++) {
-            Log.i(TAG,"11111111111111111111111directory_pictures="+wordfile[i]);
+            Log.i(TAG, "11111111111111111111111directory_pictures=" + wordfile[i]);
             if (wordfile[i].isDirectory()) {
                 walkdir(wordfile[i]);
             } else {
@@ -59,16 +63,16 @@ public class RuleContentActivity extends AppCompatActivity {
                     listItems.add(wordfile[i].getName());
                     listItems2.add(wordfile[i].getAbsolutePath());
 
-                }else if(wordfile[i].getAbsolutePath().endsWith(".doc")){
+                } else if (wordfile[i].getAbsolutePath().endsWith(".doc")) {
                     listItems.add(wordfile[i].getName());
                     listItems2.add(wordfile[i].getAbsolutePath());
-                }else if(wordfile[i].getAbsolutePath().endsWith(".txt")){
+                } else if (wordfile[i].getAbsolutePath().endsWith(".txt")) {
                     listItems.add(wordfile[i].getName());
                     listItems2.add(wordfile[i].getAbsolutePath());
-                }else if(wordfile[i].getAbsolutePath().endsWith(".docx")){
+                } else if (wordfile[i].getAbsolutePath().endsWith(".docx")) {
                     listItems.add(wordfile[i].getName());
                     listItems2.add(wordfile[i].getAbsolutePath());
-                }else if(wordfile[i].getAbsolutePath().endsWith(".xls")){
+                } else if (wordfile[i].getAbsolutePath().endsWith(".xls")) {
                     listItems.add(wordfile[i].getName());
                     listItems2.add(wordfile[i].getAbsolutePath());
                 }
@@ -91,7 +95,7 @@ public class RuleContentActivity extends AppCompatActivity {
                                     long arg3) {
                 // TODO Auto-generated method stub
                 Toast.makeText(RuleContentActivity.this,
-                        "Filepath::::" + wordlist2[arg2],Toast.LENGTH_LONG).show();
+                        "Filepath::::" + wordlist2[arg2], Toast.LENGTH_LONG).show();
                 File stringtofile = new File(wordlist2[arg2]);
                 PackageManager packageManager = getPackageManager();
                 Intent testIntent = new Intent(Intent.ACTION_VIEW);
@@ -138,19 +142,19 @@ public class RuleContentActivity extends AppCompatActivity {
                         listItems2.add(listFile[i].getAbsolutePath());
                         System.out.println(listFile[i]);
 
-                    }else if(listFile[i].getAbsolutePath().endsWith(docFile)){
+                    } else if (listFile[i].getAbsolutePath().endsWith(docFile)) {
                         listItems.add(listFile[i].getName());
                         listItems2.add(listFile[i].getAbsolutePath());
                         System.out.println(listFile[i]);
-                    }else if(listFile[i].getAbsolutePath().endsWith(txtFile)){
+                    } else if (listFile[i].getAbsolutePath().endsWith(txtFile)) {
                         listItems.add(listFile[i].getName());
                         listItems2.add(listFile[i].getAbsolutePath());
                         System.out.println(listFile[i]);
-                    }else if(listFile[i].getAbsolutePath().endsWith(docxFile)){
+                    } else if (listFile[i].getAbsolutePath().endsWith(docxFile)) {
                         listItems.add(listFile[i].getName());
                         listItems2.add(listFile[i].getAbsolutePath());
                         System.out.println(listFile[i]);
-                    }else if(listFile[i].getAbsolutePath().endsWith(excelFile)){
+                    } else if (listFile[i].getAbsolutePath().endsWith(excelFile)) {
                         listItems.add(listFile[i].getName());
                         listItems2.add(listFile[i].getAbsolutePath());
                         System.out.println(listFile[i]);

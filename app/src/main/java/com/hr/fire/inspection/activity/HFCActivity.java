@@ -1,6 +1,6 @@
 package com.hr.fire.inspection.activity;
 
-
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.util.Log;
@@ -16,18 +16,16 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.fragment.CarbonFragment1;
-import com.hr.fire.inspection.fragment.CarbonFragment2;
-import com.hr.fire.inspection.fragment.CarbonFragment3;
-import com.hr.fire.inspection.fragment.CarbonFragment4;
-import com.hr.fire.inspection.fragment.CarbonFragment5;
+import com.hr.fire.inspection.fragment.HFCFragment1;
+import com.hr.fire.inspection.fragment.HFCFragment2;
+import com.hr.fire.inspection.fragment.HFCFragment3;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarbonDioxideAcitivty extends AppCompatActivity {
+@SuppressLint("Registered")
+public class HFCActivity extends AppCompatActivity {
     private List<String> titleList = new ArrayList<String>();
     private List<Fragment> fragments = new ArrayList<Fragment>();
     private TabLayout mTabLayout;
@@ -37,11 +35,9 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
     private ImageView iv_add_table;
     private TextView tvInspectionPro;
     private int currentPager;
-    private CarbonFragment1 carbonFragment1;
-    private CarbonFragment2 carbonFragment2;
-    private CarbonFragment3 carbonFragment3;
-    private CarbonFragment4 carbonFragment4;
-    private CarbonFragment5 carbonFragment5;
+    private HFCFragment1 mHFCFragment1;
+    private HFCFragment2 mHFCFragment2;
+    private HFCFragment3 mHFCFragment3;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,21 +58,18 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
 
         mTabLayout = findViewById(R.id.tl_tabs);
         mViewPager = findViewById(R.id.vp_content);
-        titleList.add("药剂瓶");
-        titleList.add("氮气瓶");
-        titleList.add("保护区");
-        titleList.add("管线管件");
-        titleList.add("功能性试验");
-        carbonFragment1 = CarbonFragment1.newInstance("", "");
-        carbonFragment2 = CarbonFragment2.newInstance("", "");
-        carbonFragment3 = CarbonFragment3.newInstance("", "");
-        carbonFragment4 = CarbonFragment4.newInstance("", "");
-        carbonFragment5 = CarbonFragment5.newInstance("", "");
-        fragments.add(carbonFragment1);
-        fragments.add(carbonFragment2);
-        fragments.add(carbonFragment3);
-        fragments.add(carbonFragment4);
-        fragments.add(carbonFragment5);
+        titleList.add("七氟丙烷钢瓶信息采集");
+        titleList.add("氮气驱动瓶信息采集");
+        titleList.add("七氟丙烷钢瓶");
+
+        mHFCFragment1 = HFCFragment1.newInstance("", "");
+        mHFCFragment2 = HFCFragment2.newInstance("", "");
+        mHFCFragment3 = HFCFragment3.newInstance("", "");
+
+        fragments.add(mHFCFragment1);
+        fragments.add(mHFCFragment2);
+        fragments.add(mHFCFragment3);
+
         //设置缓存的页面数据
         mViewPager.setOffscreenPageLimit(fragments.size());
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
@@ -142,23 +135,30 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
                 if (fragments != null && fragments.size() != 0) {
                     Log.d("dong", "instanceof CarbonFragment1  onClick");
                     Fragment fragment = fragments.get(currentPager);
-                    if (fragment instanceof CarbonFragment1) {
+                    if (fragment instanceof HFCFragment1) {
                         Log.d("dong", "instanceof CarbonFragment1");
-                        carbonFragment1.addItemView();
-                    } else if (fragment instanceof CarbonFragment2) {
-                        carbonFragment2.addItemView();
+                        mHFCFragment1.addItemView();
+                    }else if (fragment instanceof HFCFragment2){
+                        mHFCFragment2.addItemView();
+                    }else if (fragment instanceof HFCFragment3){
+                        mHFCFragment3.addItemView();
                     }
                 }
 //                currentPager  拿到当前的页面
             }
         });
+        //点击保存时候调用
         iv_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (fragments != null && fragments.size() != 0) {
                     Fragment fragment = fragments.get(currentPager);
-                    if (fragment instanceof CarbonFragment1) {
-                        carbonFragment1.saveData();
+                    if (fragment instanceof HFCFragment1) {
+                        mHFCFragment1.saveData();
+                    } else if (fragment instanceof HFCFragment2) {
+                        mHFCFragment2.saveData();
+                    } else if (fragment instanceof HFCFragment3) {
+                        mHFCFragment3.saveData();
                     }
                 }
 
@@ -175,11 +175,6 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        carbonFragment1 = null;
-        carbonFragment2 = null;
-        carbonFragment3 = null;
-        carbonFragment4 = null;
-        carbonFragment5 = null;
         finish();
     }
 }

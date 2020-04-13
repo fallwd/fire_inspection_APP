@@ -2,12 +2,10 @@ package com.hr.fire.inspection.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,15 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
-import com.hr.fire.inspection.activity.CarbonDioxideAcitivty;
-import com.hr.fire.inspection.activity.SystemTagProtectionAreaActivity;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.service.ServiceFactory;
 
 import java.util.List;
 
 public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<ItemInfo> mData;
+
 
     public CarBon1Adapter() {
     }
@@ -49,20 +47,23 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         ViewHolder vh = (ViewHolder) holder;
-        ItemInfo info = mData.get(position);
-        vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
-        vh.et_2.setText(new StringBuffer().append("YJP00").append(position + 1));
-        vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
-        vh.et_4.setText(new StringBuffer().append(info.getWeight()).append(""));
-        vh.et_5.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));
-        vh.et_6.setText(new StringBuffer().append(info.getProdFactory()).append(""));
-        vh.et_7.setText(new StringBuffer().append(info.getProdDate()).append(""));
-        vh.et_8.setText(new StringBuffer().append(info.getCheckDate()).append(""));
-        vh.tv_9.setText(new StringBuffer().append("药剂瓶").append(position + 1).append("号表"));
+        if (mData != null && mData.size() != 0) {
+            ItemInfo info = mData.get(position);
+            vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
+            vh.et_2.setText(new StringBuffer().append("YJP00").append(position + 1));
+            vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
+            vh.et_4.setText(new StringBuffer().append(info.getWeight()).append(""));
+            vh.et_5.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));
+            vh.et_6.setText(new StringBuffer().append(info.getProdFactory()).append(""));
+            vh.et_7.setText(new StringBuffer().append(info.getProdDate()).append(""));
+            vh.et_8.setText(new StringBuffer().append(info.getCheckDate()).append(""));
+            vh.tv_9.setText(new StringBuffer().append("药剂瓶").append(position + 1).append("号表"));
+        }
         vh.rl_9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, CarBonGoodsWeightAcitivty.class);
+                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_ID, "ItemInfo,这里需要将ID传入");
                 mContext.startActivity(intent);
             }
         });
@@ -72,7 +73,6 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 removeData(position);
             }
         });
-
     }
 
     @Override
@@ -103,13 +103,19 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             return;
         }
         if (mData != null && mData.size() != 0 && mData.size() > 1) {
+            //1.删除数据库数据,
+            ItemInfo itemInfo = mData.get(position);
+            ServiceFactory.getYearCheckService().delete(itemInfo);
+            //2.刷新列表数据,  理论上应该是数据库删除成功后,有一个返回值,在进行刷新
             mData.remove(position);
             //删除动画
             notifyItemRemoved(position);
-            notifyDataSetChanged();
-        }
+            //通知重新绑定某一范围内的的数据与界面
+            notifyItemRangeChanged(position, mData.size() - position);//通知数据与界面重新绑定
 
+        }
     }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_1;
@@ -141,4 +147,5 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             rl_11 = (RelativeLayout) view.findViewById(R.id.rl_11);
         }
     }
+
 }
