@@ -16,10 +16,19 @@ import com.hr.fire.inspection.service.YearCheckService;
 import com.hr.fire.inspection.R;
 import org.greenrobot.greendao.query.Join;
 import org.greenrobot.greendao.query.QueryBuilder;
+import org.greenrobot.greendao.query.WhereCondition;
 
 import java.util.List;
 
 public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements YearCheckService {
+
+    @Override
+    public List getHistoryList(String systemName) {
+        QueryBuilder<ItemInfo> queryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(new WhereCondition.StringCondition("1 GROUP BY " + ItemInfoDao.Properties.CheckDate.name));
+
+        return null;
+    }
 
     @Override
     public List<ItemInfo> getItemData(String companyName, String oilfieldName, String platformName, String systemName, String tableName, String number) {
