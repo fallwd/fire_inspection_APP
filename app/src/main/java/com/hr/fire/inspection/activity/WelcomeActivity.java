@@ -33,7 +33,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //         初始化数据库,插入测试数据
 //        BaseData baseData = new BaseData();
 //        baseData.initData();
-        // 调用接口测试
+//        // 调用接口测试
 //        String companyName = "辽东作业公司";
 //        String oilfieldName = "SZ36-1";
 //        String platformName = "SZ36-1D";
@@ -41,12 +41,12 @@ public class WelcomeActivity extends AppCompatActivity {
 //        String tableName = "药剂瓶";
 //        String number = "SD002";
 //        List<ItemInfo> itemDataList = ServiceFactory.getYearCheckService().getItemData(companyName,oilfieldName,platformName,systemName,tableName, number);
-        // 更新接口测试
+//        // 更新接口测试
 //        ItemInfo itemInfo = itemDataList.get(0);
 //        itemInfo.setWeight("1111");
 //        itemInfo.setGoodsWeight("2223");
 //        ServiceFactory.getYearCheckService().update(itemInfo);
-        // 删除接口测试
+//        // 删除接口测试
 //        ItemInfo itemInfo = itemDataList.get(0);
 //        ServiceFactory.getYearCheckService().delete(itemInfo);
 
@@ -107,8 +107,9 @@ public class WelcomeActivity extends AppCompatActivity {
 //        String systemName = "高压二氧化碳系统灭火系统";
 //        String tableName = "药剂瓶";
 //        String number = "SD002";
-//
 //        ServiceFactory.getYearCheckService().insertItemData(itemObj,companyName,oilfieldName,platformName,systemName,tableName, number);
+
+
         // 插入检查结果数据测试
         // 有itemId
 //        String companyName = "辽东作业公司";
@@ -167,16 +168,16 @@ public class WelcomeActivity extends AppCompatActivity {
 //        long id = 0;
 //        List<YearCheckResult> dataList = ServiceFactory.getYearCheckService().getCheckResultData(id,companyName, oilfieldName, platformName, systemName, tableName, number);
 
-        // 有itemId
-//        String companyName = "辽东作业公司";
-//        String oilfieldName = "SZ36-1";
-//        String platformName = "SZ36-1D";
-//        String systemName = "高压二氧化碳系统灭火系统";
-//        String tableName = "药剂瓶";
-//        String number = "SD002";
-//        List<ItemInfo> itemDataList = ServiceFactory.getYearCheckService().getItemData(companyName,oilfieldName,platformName,systemName,tableName, number);
-//        long itemId = itemDataList.get(0).getId();
-//        List<YearCheckResult> dataList = ServiceFactory.getYearCheckService().getCheckResultData(itemId,companyName, oilfieldName, platformName, systemName, tableName, number);
+//         有itemId
+        String companyName = "辽东作业公司";
+        String oilfieldName = "SZ36-1";
+        String platformName = "SZ36-1D";
+        String systemName = "高压二氧化碳系统灭火系统";
+        String tableName = "药剂瓶";
+        String number = "SD002";
+        List<ItemInfo> itemDataList = ServiceFactory.getYearCheckService().getItemData(companyName,oilfieldName,platformName,systemName,tableName, number);
+        long itemId = itemDataList.get(0).getId();
+        List<YearCheckResult> dataList = ServiceFactory.getYearCheckService().getCheckResultData(itemId,companyName, oilfieldName, platformName, systemName, tableName, number);
 
         // 测试公司平台信息查询接口
 //        List<CompanyInfo> dataList = ServiceFactory.getCompanyInfoService().getAll();
