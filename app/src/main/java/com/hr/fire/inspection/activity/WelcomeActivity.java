@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.dao.DaoSession;
+import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.CompanyInfo;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.YearCheck;
@@ -57,6 +58,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //        Log.i("getCheckData",checkDataList.get(0).toString());
 
 //        platformName = "SZ36-1C";
+        // 插入设备数据测试
 //        ItemInfo itemObj = new ItemInfo();
 //        String no = "YJP0002";
 //        String volume = "9";
@@ -66,19 +68,19 @@ public class WelcomeActivity extends AppCompatActivity {
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //        Date prodDate = null;
 //        try {
-//            prodDate = format.parse("2018-08-03");
+//            prodDate = format.parse("2018-08-03 22:30:01");
 //        } catch (ParseException e) {
 //            e.printStackTrace();
 //        }
 //        Date observeDate = null;
 //        try {
-//            observeDate = format.parse("2020-04-09");
+//            observeDate = format.parse("2020-04-09 22:30:01");
 //        } catch (ParseException e) {
 //            e.printStackTrace();
 //        }
 //        Date checkDate = null;
 //        try {
-//            checkDate = format.parse("2020-04-09");
+//            checkDate = format.parse("2020-04-09 22:30:01");
 //        } catch (ParseException e) {
 //            e.printStackTrace();
 //        }
@@ -107,6 +109,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //        String systemName = "高压二氧化碳系统灭火系统";
 //        String tableName = "药剂瓶";
 //        String number = "SD002";
+//        Log.i("ItemInfo:::",itemObj.toString());
 //        ServiceFactory.getYearCheckService().insertItemData(itemObj,companyName,oilfieldName,platformName,systemName,tableName, number);
 
 
@@ -191,7 +194,24 @@ public class WelcomeActivity extends AppCompatActivity {
 //        dataList = ServiceFactory.getCompanyInfoService().getOilfieldList("曹妃甸作业公司");
 //        dataList = ServiceFactory.getCompanyInfoService().getPlatformList("CFD11-1");
 
+        // 测试获取系统列表接口
+//        List<CheckType> dataList = ServiceFactory.getYearCheckService().getSystemNameData();
+//        for(int i=0;i<dataList.size();i++){
+//            Log.i("getSystemData",dataList.get(i).getName());
+//            Log.i("getSystemData",dataList.get(i).getId().toString());
+//        }
+//        List<CheckType> dataList = ServiceFactory.getYearCheckService().gettableNameData(1);
+//        List<CheckType> dataList = ServiceFactory.getYearCheckService().gettableNameData(2);
+//        for(int i=0;i<dataList.size();i++){
+//            Log.i("gettableNameData",dataList.get(i).getName());
+//            Log.i("gettableNameData",dataList.get(i).getId().toString());
+//        }
 
+        // 测试历史数据接口
+//        List dataList = ServiceFactory.getYearCheckService().getHistoryList(4,1);
+//        for(int i=0;i<dataList.size();i++){
+//            Log.i("getHistoryList:::",""+dataList.get(i));
+//        }
 
 
 
