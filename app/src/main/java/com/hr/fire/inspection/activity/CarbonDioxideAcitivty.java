@@ -33,6 +33,7 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
     private ImageView iv_finish;
+    private TextView iv_save;
     private ImageView iv_add_table;
     private TextView tvInspectionPro;
     private int currentPager;
@@ -54,7 +55,7 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
         iv_finish = findViewById(R.id.iv_finish);
         iv_add_table = findViewById(R.id.iv_add_table);
         tvInspectionPro = findViewById(R.id.tv_inspection_pro);
-        iv_finish = findViewById(R.id.iv_finish);
+        iv_save = findViewById(R.id.iv_save);
         String text = "消防巡检维护专用工具";
         SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#E51C23", 0, 3);
         tvInspectionPro.setText(showTextColor);
@@ -147,6 +148,18 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
                     }
                 }
 //                currentPager  拿到当前的页面
+            }
+        });
+        iv_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (fragments != null && fragments.size() != 0) {
+                    Fragment fragment = fragments.get(currentPager);
+                    if (fragment instanceof CarbonFragment1) {
+                        carbonFragment1.saveData();
+                    }
+                }
+
             }
         });
         iv_finish.setOnClickListener(new View.OnClickListener() {
