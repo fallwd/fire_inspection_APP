@@ -45,7 +45,8 @@ public class SystemTagProtectionAreaActivity extends AppCompatActivity {
 
                 if (systemTagValue.isEmpty() && protectAreaValue.isEmpty()) {
                     Toast.makeText(SystemTagProtectionAreaActivity.this, "请将表单信息填写完整", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(SystemTagProtectionAreaActivity.this, CarbonDioxideAcitivty.class);
+//                    Intent intent = new Intent(SystemTagProtectionAreaActivity.this, CarbonDioxideAcitivty.class);
+                    Intent intent = new Intent(SystemTagProtectionAreaActivity.this, CarbondioxideRecordAcitivty.class);
                     startActivity(intent);
                     finish();
                 } else {

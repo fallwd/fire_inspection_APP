@@ -31,8 +31,8 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 //        DaoSession daoSession = GreenDaoHelper.getDaoSession();
 //         初始化数据库,插入测试数据
-//        BaseData baseData = new BaseData();
-//        baseData.initData();
+        BaseData baseData = new BaseData();
+        baseData.initData();
 //        // 调用接口测试
 //        String companyName = "辽东作业公司";
 //        String oilfieldName = "SZ36-1";

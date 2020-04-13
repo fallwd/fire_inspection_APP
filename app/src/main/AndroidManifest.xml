@@ -79,5 +79,8 @@
         <activity
             android:name=".activity.HFCActivity"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.CarbondioxideRecordAcitivty"
+            android:screenOrientation="landscape" />
     </application>
 </manifest>
