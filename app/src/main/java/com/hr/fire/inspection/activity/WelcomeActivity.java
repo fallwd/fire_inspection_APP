@@ -187,9 +187,9 @@ public class WelcomeActivity extends AppCompatActivity {
 //        }
 
         //测试公司接口
-        List<CompanyInfo> dataList = ServiceFactory.getCompanyInfoService().getCompanyList();
-        dataList = ServiceFactory.getCompanyInfoService().getOilfieldList("曹妃甸作业公司");
-        dataList = ServiceFactory.getCompanyInfoService().getPlatformList("CFD11-1");
+//        List<CompanyInfo> dataList = ServiceFactory.getCompanyInfoService().getCompanyList();
+//        dataList = ServiceFactory.getCompanyInfoService().getOilfieldList("曹妃甸作业公司");
+//        dataList = ServiceFactory.getCompanyInfoService().getPlatformList("CFD11-1");
 
 
 
