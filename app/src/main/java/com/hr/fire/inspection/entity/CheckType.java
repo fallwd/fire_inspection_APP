@@ -9,10 +9,12 @@ import org.greenrobot.greendao.DaoException;
 import com.hr.fire.inspection.dao.CheckTypeDao;
 import com.hr.fire.inspection.dao.DaoSession;
 
+import java.io.Serializable;
+
 @Entity(
         nameInDb = "t_check_type"
 )
-public class CheckType {
+public class CheckType  {
 
     @Id(autoincrement = true)
     private Long id;

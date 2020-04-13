@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -83,7 +84,7 @@ public class CarbonFragment1 extends Fragment {
         String number = "SD002";
         itemDataList = ServiceFactory.getYearCheckService().getItemData(companyName, oilfieldName, platformName, systemName, tableName, number);
         Log.d("dong", "数据查看:" + itemDataList.size());
-//        Log.d("dong", "数据查看===:" + itemDataList.get(0).toString());
+        Log.d("dong", "数据查看===:" + itemDataList.get(0).toString());
     }
 
     private void initView() {
@@ -153,12 +154,7 @@ public class CarbonFragment1 extends Fragment {
             itemObj.setCodePath("检查表图片路径:/src/YJP0002.jpg");
             long l = ServiceFactory.getYearCheckService().insertItemData(itemObj, companyName, oilfieldName, platformName, systemName, tableName, number);
         }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.d("dong", "onStop = ");
+        Toast.makeText(getContext(), "药剂瓶数据保存成功", Toast.LENGTH_SHORT).show();
     }
 
     @Override
