@@ -30,8 +30,24 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivty_goods_weight);
         initView();
+        initData();
         //动态申请权限
         requestPerssionAtFirst();
+    }
+
+    private void initData() {
+        Intent intent = getIntent();
+        String id = intent.getStringExtra(CHECK_ID);
+        String companyName = "辽东作业公司";
+//        String oilfieldName = "SZ36-1";
+//        String platformName = "SZ36-1D";
+//        String systemName = "高压二氧化碳系统灭火系统";
+//        String tableName = "药剂瓶";
+//        String number = "SD002";
+//        List<ItemInfo> itemDataList = ServiceFactory.getYearCheckService().getItemData(companyName,oilfieldName,platformName,systemName,tableName, number);
+//        long itemId = itemDataList.get(0).getId();
+//        List<YearCheckResult> dataList = ServiceFactory.getYearCheckService().getCheckResultData(itemId,companyName, oilfieldName, platformName, systemName, tableName, number);
+
     }
 
     private void initView() {

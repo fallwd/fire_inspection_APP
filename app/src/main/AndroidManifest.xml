@@ -11,7 +11,6 @@
     <!--&lt;!&ndash; 7.0图片共享 &ndash;&gt;-->
 
 
-
     <application
         android:name=".utils.GreenDaoHelper"
         android:allowBackup="true"
@@ -21,6 +20,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <provider xmlns:tools="http://schemas.android.com/tools"
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.hr.fire.inspection.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:ignore="RedundantNamespace"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
         <activity
             android:name=".activity.PhotoUploadActivity"
             android:screenOrientation="landscape" />
@@ -65,17 +76,8 @@
         <activity
             android:name=".activity.CarBonGoodsWeightAcitivty"
             android:screenOrientation="landscape" />
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="com.hr.fire.inspection.fileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true"
-            xmlns:tools="http://schemas.android.com/tools"
-            tools:replace="android:authorities">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
-        </provider>
-
+        <activity
+            android:name=".activity.HFCActivity"
+            android:screenOrientation="landscape" />
     </application>
 </manifest>

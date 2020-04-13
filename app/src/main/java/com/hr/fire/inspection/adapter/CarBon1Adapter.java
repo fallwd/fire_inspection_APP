@@ -2,13 +2,10 @@ package com.hr.fire.inspection.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.Editable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,15 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
-import com.hr.fire.inspection.activity.CarbonDioxideAcitivty;
-import com.hr.fire.inspection.activity.SystemTagProtectionAreaActivity;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.service.ServiceFactory;
 
 import java.util.List;
 
 public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<ItemInfo> mData;
+
 
     public CarBon1Adapter() {
     }
@@ -96,7 +93,6 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             mData.add(mData.get(mData.size() - 1));
             //添加动画
             notifyItemInserted(position);
-//            notifyDataSetChanged();
         }
     }
 
@@ -107,12 +103,16 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             return;
         }
         if (mData != null && mData.size() != 0 && mData.size() > 1) {
+            //1.删除数据库数据,
+            ItemInfo itemInfo = mData.get(position);
+            ServiceFactory.getYearCheckService().delete(itemInfo);
+            //2.刷新列表数据,  理论上应该是数据库删除成功后,有一个返回值,在进行刷新
             mData.remove(position);
             //删除动画
             notifyItemRemoved(position);
             //通知重新绑定某一范围内的的数据与界面
             notifyItemRangeChanged(position, mData.size() - position);//通知数据与界面重新绑定
-//            notifyDataSetChanged();
+
         }
     }
 
@@ -147,4 +147,5 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             rl_11 = (RelativeLayout) view.findViewById(R.id.rl_11);
         }
     }
+
 }

@@ -11,13 +11,14 @@ import com.hr.fire.inspection.dao.YearCheckDao;
 import com.hr.fire.inspection.dao.YearCheckResultDao;
 import com.hr.fire.inspection.dao.CheckTypeDao;
 
+import java.io.Serializable;
 import java.util.Date;
 import com.hr.fire.inspection.dao.CompanyInfoDao;
 
 @Entity(
         nameInDb = "t_year_check_result"
 )
-public class YearCheckResult {
+public class YearCheckResult   {
 
     @Id(autoincrement = true)
     private Long id;
