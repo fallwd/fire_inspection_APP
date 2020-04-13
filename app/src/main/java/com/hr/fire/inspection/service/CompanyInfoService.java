@@ -11,4 +11,27 @@ public interface CompanyInfoService extends BaseService<CompanyInfo> {
      * @return
      */
     List<CompanyInfo> getAll();
+
+    /**
+     * 获取公司名列表
+     * @param
+     * @return
+     */
+    List<CompanyInfo> getCompanyList();
+
+    /**
+     * 获取油田名列表
+     * @param
+     * @return
+     */
+    List<CompanyInfo> getOilfieldList(String companyName);
+
+
+    /**
+     * 获取平台名列表
+     * @param
+     * @return
+     */
+    List<CompanyInfo> getPlatformList(String oilfieldName);
+
 }
