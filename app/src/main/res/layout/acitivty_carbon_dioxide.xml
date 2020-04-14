@@ -9,11 +9,7 @@
 
     <include layout="@layout/currency_title" />
 
-<<<<<<< HEAD
-    <LinearLayout
-=======
     <RelativeLayout
->>>>>>> 9069637e91f76f416f6f181e0d49e06685d6224b
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="20dp"

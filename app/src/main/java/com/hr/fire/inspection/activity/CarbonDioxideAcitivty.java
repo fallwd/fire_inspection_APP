@@ -22,11 +22,6 @@ import com.hr.fire.inspection.fragment.CarbonFragment3;
 import com.hr.fire.inspection.fragment.CarbonFragment4;
 import com.hr.fire.inspection.fragment.CarbonFragment5;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 9069637e91f76f416f6f181e0d49e06685d6224b
 import java.util.ArrayList;
 import java.util.List;
 
