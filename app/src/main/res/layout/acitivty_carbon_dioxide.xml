@@ -9,12 +9,6 @@
 
     <include layout="@layout/currency_title" />
 
-    <ImageView
-        android:id="@+id/photo_up"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@mipmap/ic_folder_light_blue_700_24dp" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

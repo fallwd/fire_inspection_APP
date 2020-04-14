@@ -32,13 +32,10 @@ import com.hr.fire.inspection.fragment.CarbonFragment4;
 import com.hr.fire.inspection.fragment.CarbonFragment5;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CarbonDioxideAcitivty extends AppCompatActivity {
-    private static final int CAMERA_RESULT_CODE = Integer.parseInt(null);
     private List<String> titleList = new ArrayList<String>();
     private List<Fragment> fragments = new ArrayList<Fragment>();
     private TabLayout mTabLayout;
@@ -52,14 +49,6 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
         setContentView(R.layout.acitivty_carbon_dioxide);
         initView();
         initListner();
-        // 调取摄像头
-        ImageView photo_up = findViewById(R.id.photo_up);
-        photo_up.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"敬请期待", Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
     public void initView() {
