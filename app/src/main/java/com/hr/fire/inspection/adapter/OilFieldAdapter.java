@@ -55,8 +55,10 @@ public class OilFieldAdapter extends BaseAdapter {
         holder.oil_name.setText(stringArrayList.get(position));
         //给要被点击的控件加入点击监听，具体事件在创建adapter的地方实现
         holder.del_btn.setOnClickListener(listener);
+        holder.edit_btn.setOnClickListener(listener);
         //通过setTag 将被点击控件所在条目的位置传递出去
         holder.del_btn.setTag(position);
+        holder.edit_btn.setTag(position);
         return convertView;
     }
 

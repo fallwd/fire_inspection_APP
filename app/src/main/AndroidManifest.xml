@@ -68,10 +68,25 @@
             android:name=".activity.CompanyOperationActivity"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".activity.CompanyInsertActivity"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".activity.OilFieldActivity"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".activity.OilOperationActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.OilInsertActivity"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".activity.PlatformActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.PlatformOperationActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.PlatformInsertActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".activity.InspectionActivity"
@@ -85,8 +100,7 @@
         <activity
             android:name=".activity.CarbonDioxideAcitivty"
             android:screenOrientation="landscape" />
-<<<<<<< HEAD
-=======
+
         <activity
             android:name=".activity.CarBonGoodsWeightAcitivty"
             android:screenOrientation="landscape" />
@@ -96,22 +110,6 @@
         <activity
             android:name=".activity.CarbondioxideRecordAcitivty"
             android:screenOrientation="landscape" />
->>>>>>> 14845b1b17fea59071c755784a22119d9c2d7bae
     </application>
 
-        <!--<activity-->
-            <!--android:name=".activity.CarBonGoodsWeightAcitivty"-->
-            <!--android:screenOrientation="landscape" />-->
-        <!--<provider-->
-            <!--android:name="androidx.core.content.FileProvider"-->
-            <!--android:authorities="com.hr.fire.inspection.fileProvider"-->
-            <!--android:exported="false"-->
-            <!--android:grantUriPermissions="true"-->
-            <!--xmlns:tools="http://schemas.android.com/tools"-->
-            <!--tools:replace="android:authorities">-->
-            <!--<meta-data-->
-                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
-                <!--android:resource="@xml/provider_paths" />-->
-        <!--</provider>-->
-    <!--</application>-->
 </manifest>
