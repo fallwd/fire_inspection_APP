@@ -1,51 +1,47 @@
 package com.hr.fire.inspection.entity;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
-
-
-import com.hr.fire.inspection.dao.CheckTypeDao;
 import com.hr.fire.inspection.dao.DaoSession;
-
-import java.io.Serializable;
+import com.hr.fire.inspection.dao.CompanyTypeDao;
 
 @Entity(
-        nameInDb = "t_check_type"
+        nameInDb = "t_company_check"
 )
-public class CheckType  {
-
+public class CompanyType {
     @Id(autoincrement = true)
     private Long id;
 
-    private String name; //类型名称
+    private String name;//名称
 
-    private int type; //年检 月检 巡检等(1 年检)
+    private int type;// 1公司 2油田 3平台
 
     private Long parentId;
 
     @ToOne(joinProperty = "parentId")
-    private CheckType parent;
+    private CompanyType companyType;
 
 /** Used to resolve relations */
 @Generated(hash = 2040040024)
 private transient DaoSession daoSession;
 
 /** Used for active entity operations. */
-@Generated(hash = 1270543700)
-private transient CheckTypeDao myDao;
+@Generated(hash = 2012024077)
+private transient CompanyTypeDao myDao;
 
-@Generated(hash = 119751077)
-public CheckType(Long id, String name, int type, Long parentId) {
+@Generated(hash = 1597874674)
+public CompanyType(Long id, String name, int type, Long parentId) {
     this.id = id;
     this.name = name;
     this.type = type;
     this.parentId = parentId;
 }
 
-@Generated(hash = 281386950)
-public CheckType() {
+@Generated(hash = 177598857)
+public CompanyType() {
 }
 
 public Long getId() {
@@ -80,35 +76,36 @@ public void setParentId(Long parentId) {
     this.parentId = parentId;
 }
 
-@Generated(hash = 1293412156)
-private transient Long parent__resolvedKey;
+@Generated(hash = 1034066450)
+private transient Long companyType__resolvedKey;
 
 /** To-one relationship, resolved on first access. */
-@Generated(hash = 38821098)
-public CheckType getParent() {
+@Generated(hash = 1711028100)
+public CompanyType getCompanyType() {
     Long __key = this.parentId;
-    if (parent__resolvedKey == null || !parent__resolvedKey.equals(__key)) {
+    if (companyType__resolvedKey == null
+            || !companyType__resolvedKey.equals(__key)) {
         final DaoSession daoSession = this.daoSession;
         if (daoSession == null) {
             throw new DaoException("Entity is detached from DAO context");
         }
-        CheckTypeDao targetDao = daoSession.getCheckTypeDao();
-        CheckType parentNew = targetDao.load(__key);
+        CompanyTypeDao targetDao = daoSession.getCompanyTypeDao();
+        CompanyType companyTypeNew = targetDao.load(__key);
         synchronized (this) {
-            parent = parentNew;
-            parent__resolvedKey = __key;
+            companyType = companyTypeNew;
+            companyType__resolvedKey = __key;
         }
     }
-    return parent;
+    return companyType;
 }
 
 /** called by internal mechanisms, do not call yourself. */
-@Generated(hash = 2094832494)
-public void setParent(CheckType parent) {
+@Generated(hash = 907982089)
+public void setCompanyType(CompanyType companyType) {
     synchronized (this) {
-        this.parent = parent;
-        parentId = parent == null ? null : parent.getId();
-        parent__resolvedKey = parentId;
+        this.companyType = companyType;
+        parentId = companyType == null ? null : companyType.getId();
+        companyType__resolvedKey = parentId;
     }
 }
 
@@ -149,20 +146,9 @@ public void update() {
 }
 
 /** called by internal mechanisms, do not call yourself. */
-@Generated(hash = 1736019214)
+@Generated(hash = 647708127)
 public void __setDaoSession(DaoSession daoSession) {
     this.daoSession = daoSession;
-    myDao = daoSession != null ? daoSession.getCheckTypeDao() : null;
+    myDao = daoSession != null ? daoSession.getCompanyTypeDao() : null;
 }
-
-    @Override
-    public String toString() {
-        return "CheckType{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type=" + type +
-                ", parentId=" + parentId +
-                ", parent=" + parent +
-                '}';
-    }
 }

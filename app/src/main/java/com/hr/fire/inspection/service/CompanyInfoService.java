@@ -34,4 +34,25 @@ public interface CompanyInfoService extends BaseService<CompanyInfo> {
      */
     List<CompanyInfo> getPlatformList(String oilfieldName);
 
+    /**
+     * 插入一条新数据
+     * @param
+     * @return
+     */
+    long addData(String companyName, String oilfieldName, String platformName);
+
+    /**
+     * 重命名
+     * @param
+     * @return
+     */
+    long rename(String oldName, String newName, String type);
+
+    /**
+     * 删除数据
+     * @param
+     * @return
+     */
+    long deleteData(String name, String type);
+
 }

@@ -117,7 +117,6 @@ public class RuleContentActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
 

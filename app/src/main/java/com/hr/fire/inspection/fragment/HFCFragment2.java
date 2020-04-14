@@ -6,6 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -21,25 +24,24 @@ import com.hr.fire.inspection.service.ServiceFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarbonFragment2 extends Fragment {
+public class HFCFragment2 extends Fragment {
     View rootView;
-    private static CarbonFragment2 fragment2;
+    private static HFCFragment2 fragment1;
     private static String mKey;
     private CarBon1Adapter adapter;
     private List<ItemInfo> itemDataList = new ArrayList<>();
+    private RecyclerView rc_list;
 
-
-    public static CarbonFragment2 newInstance(String key, String value) {
-        if (fragment2 == null) {
-            fragment2 = new CarbonFragment2();
+    public static HFCFragment2 newInstance(String key, String value) {
+        if (fragment1 == null) {
+            fragment1 = new HFCFragment2();
         }
         mKey = key;
         Bundle args = new Bundle();
         args.putString(key, value);
-        fragment2.setArguments(args);
-        return fragment2;
+        fragment1.setArguments(args);
+        return fragment1;
     }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class CarbonFragment2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_carbon2, container, false);
+            rootView = inflater.inflate(R.layout.fragment_carbon1, container, false);
         }
         return rootView;
     }
@@ -67,40 +69,36 @@ public class CarbonFragment2 extends Fragment {
 
     private void initData() {
         // 调用接口测试
-        String companyName = "辽东作业公司";
-        String oilfieldName = "SZ36-1";
-        String platformName = "SZ36-1B";
-        String systemName = "高压二氧化碳系统灭火系统";
-        String tableName = "氮气瓶";
-        String number = "SD002";
-        itemDataList = ServiceFactory.getYearCheckService().getItemData(companyName, oilfieldName, platformName, systemName, tableName, number);
-        Log.d("dong", "数据查看:" + itemDataList.size());
-        Log.d("dong", "数据查看===:" + itemDataList.get(0).toString());
+
     }
 
     private void initView() {
 
-        RecyclerView rc_list2 = rootView.findViewById(R.id.rc_list2);
+        rc_list = rootView.findViewById(R.id.rc_list);
         @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        rc_list2.setLayoutManager(layoutManager);
+        rc_list.setLayoutManager(layoutManager);
         adapter = new CarBon1Adapter(getActivity(), itemDataList);
-
-        rc_list2.setAdapter(adapter);
+        rc_list.setAdapter(adapter);
         //添加动画
-        rc_list2.setItemAnimator(new DefaultItemAnimator());
+        rc_list.setItemAnimator(new DefaultItemAnimator());
     }
+
     //动态添加条目
     public void addItemView() {
-        if (adapter != null && itemDataList != null) {
+        if (adapter != null) {
             adapter.addData(itemDataList.size());
         }
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (adapter != null) {
-            adapter = null;
-        }
+    public void saveData() {
+//        int childCount = rc_list.getChildCount();
+//        Log.d("dong", "点击了保存数据的方法 " + childCount);
+//        for (int i = 0; i < rc_list.getChildCount(); i++) {
+//            LinearLayout childAt = (LinearLayout) rc_list.getChildAt(i);
+//            TextView tv_1 = childAt.findViewById(R.id.tv_1);
+//
+//        }
+        Toast.makeText(getActivity(), "氮气驱动瓶信息采集,保存成功", Toast.LENGTH_SHORT).show();
     }
+
 }

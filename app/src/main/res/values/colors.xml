@@ -10,4 +10,5 @@
     <color name="title_black">#000</color>
     <color name="white_view_line">#D0D0D0</color>
     <color name="fire_title">#000000</color>
+    <color name="bg_f1f1f1">#F1F1F1</color>
 </resources>
