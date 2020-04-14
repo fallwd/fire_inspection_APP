@@ -193,8 +193,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
 
 
-
-
         Toast.makeText(WelcomeActivity.this,"系统将在2秒后为您自动跳转到首页",Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -206,6 +204,5 @@ public class WelcomeActivity extends AppCompatActivity {
                 finish();
             }
         },2000);
-
     }
 }

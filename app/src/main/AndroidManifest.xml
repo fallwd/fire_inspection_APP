@@ -54,6 +54,15 @@
             android:name=".activity.ChooseCompanyActivity"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".activity.CompanyOperationActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.OilFieldActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.PlatformActivity"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".activity.InspectionActivity"
             android:screenOrientation="landscape" />
         <activity

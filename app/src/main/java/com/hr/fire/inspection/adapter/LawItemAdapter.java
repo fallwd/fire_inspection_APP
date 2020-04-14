@@ -21,6 +21,7 @@ public class LawItemAdapter extends BaseAdapter {
         mContext = rulesActivity;
     }
 
+
     @Override
     public int getCount() {
         return stringArrayList.size();
