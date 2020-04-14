@@ -22,29 +22,53 @@ public class DaoMaster extends AbstractDaoMaster {
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
         CheckTypeDao.createTable(db, ifNotExists);
+<<<<<<< HEAD
         YearCheckDao.createTable(db, ifNotExists);
         YearCheckResultDao.createTable(db, ifNotExists);
         ItemInfoDao.createTable(db, ifNotExists);
         CompanyInfoDao.createTable(db, ifNotExists);
         StandardInfoDao.createTable(db, ifNotExists);
         StandardTypeDao.createTable(db, ifNotExists);
+=======
+        ItemInfoDao.createTable(db, ifNotExists);
+        YearCheckDao.createTable(db, ifNotExists);
+        YearCheckResultDao.createTable(db, ifNotExists);
+>>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
         CheckPersonDao.createTable(db, ifNotExists);
+        CompanyInfoDao.createTable(db, ifNotExists);
         CompanyTypeDao.createTable(db, ifNotExists);
         InspectionResultDao.createTable(db, ifNotExists);
+<<<<<<< HEAD
+=======
+        StandardInfoDao.createTable(db, ifNotExists);
+        StandardTypeDao.createTable(db, ifNotExists);
+>>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
         CheckTypeDao.dropTable(db, ifExists);
+<<<<<<< HEAD
         YearCheckDao.dropTable(db, ifExists);
         YearCheckResultDao.dropTable(db, ifExists);
         ItemInfoDao.dropTable(db, ifExists);
         CompanyInfoDao.dropTable(db, ifExists);
         StandardInfoDao.dropTable(db, ifExists);
         StandardTypeDao.dropTable(db, ifExists);
+=======
+        ItemInfoDao.dropTable(db, ifExists);
+        YearCheckDao.dropTable(db, ifExists);
+        YearCheckResultDao.dropTable(db, ifExists);
+>>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
         CheckPersonDao.dropTable(db, ifExists);
+        CompanyInfoDao.dropTable(db, ifExists);
         CompanyTypeDao.dropTable(db, ifExists);
         InspectionResultDao.dropTable(db, ifExists);
+<<<<<<< HEAD
+=======
+        StandardInfoDao.dropTable(db, ifExists);
+        StandardTypeDao.dropTable(db, ifExists);
+>>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
     }
 
     /**
@@ -64,15 +88,27 @@ public class DaoMaster extends AbstractDaoMaster {
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
         registerDaoClass(CheckTypeDao.class);
+<<<<<<< HEAD
         registerDaoClass(YearCheckDao.class);
         registerDaoClass(YearCheckResultDao.class);
         registerDaoClass(ItemInfoDao.class);
         registerDaoClass(CompanyInfoDao.class);
         registerDaoClass(StandardInfoDao.class);
         registerDaoClass(StandardTypeDao.class);
+=======
+        registerDaoClass(ItemInfoDao.class);
+        registerDaoClass(YearCheckDao.class);
+        registerDaoClass(YearCheckResultDao.class);
+>>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
         registerDaoClass(CheckPersonDao.class);
+        registerDaoClass(CompanyInfoDao.class);
         registerDaoClass(CompanyTypeDao.class);
         registerDaoClass(InspectionResultDao.class);
+<<<<<<< HEAD
+=======
+        registerDaoClass(StandardInfoDao.class);
+        registerDaoClass(StandardTypeDao.class);
+>>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
     }
 
     public DaoSession newSession() {
