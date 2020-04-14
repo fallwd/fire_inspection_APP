@@ -29,26 +29,34 @@ public class DaoMaster extends AbstractDaoMaster {
         CompanyInfoDao.createTable(db, ifNotExists);
         StandardInfoDao.createTable(db, ifNotExists);
         StandardTypeDao.createTable(db, ifNotExists);
-<<<<<<< HEAD
 =======
+<<<<<<< HEAD
 =======
         ItemInfoDao.createTable(db, ifNotExists);
 >>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
+=======
+        ItemInfoDao.createTable(db, ifNotExists);
+>>>>>>> cy_dev
         YearCheckDao.createTable(db, ifNotExists);
         YearCheckResultDao.createTable(db, ifNotExists);
+>>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
         CheckPersonDao.createTable(db, ifNotExists);
         CompanyInfoDao.createTable(db, ifNotExists);
         CompanyTypeDao.createTable(db, ifNotExists);
         InspectionResultDao.createTable(db, ifNotExists);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> cy_dev
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
->>>>>>> 14845b1b17fea59071c755784a22119d9c2d7bae
-        CheckPersonDao.createTable(db, ifNotExists);
-=======
 >>>>>>> be2e63913f7d082439c2eb34ca3c024e4ea4f05b
 >>>>>>> 9069637e91f76f416f6f181e0d49e06685d6224b
 =======
+=======
+>>>>>>> cy_dev
         StandardInfoDao.createTable(db, ifNotExists);
         StandardTypeDao.createTable(db, ifNotExists);
 >>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
@@ -64,13 +72,15 @@ public class DaoMaster extends AbstractDaoMaster {
         CompanyInfoDao.dropTable(db, ifExists);
         StandardInfoDao.dropTable(db, ifExists);
         StandardTypeDao.dropTable(db, ifExists);
-<<<<<<< HEAD
 =======
+<<<<<<< HEAD
         YearCheckDao.dropTable(db, ifExists);
         YearCheckResultDao.dropTable(db, ifExists);
 <<<<<<< HEAD
 >>>>>>> 14845b1b17fea59071c755784a22119d9c2d7bae
 =======
+=======
+>>>>>>> cy_dev
         ItemInfoDao.dropTable(db, ifExists);
         YearCheckDao.dropTable(db, ifExists);
         YearCheckResultDao.dropTable(db, ifExists);
@@ -79,8 +89,11 @@ public class DaoMaster extends AbstractDaoMaster {
         CompanyInfoDao.dropTable(db, ifExists);
         CompanyTypeDao.dropTable(db, ifExists);
         InspectionResultDao.dropTable(db, ifExists);
+<<<<<<< HEAD
+=======
         StandardInfoDao.dropTable(db, ifExists);
         StandardTypeDao.dropTable(db, ifExists);
+>>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
     }
 
     /**
@@ -107,26 +120,34 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(CompanyInfoDao.class);
         registerDaoClass(StandardInfoDao.class);
         registerDaoClass(StandardTypeDao.class);
-<<<<<<< HEAD
 =======
+<<<<<<< HEAD
 =======
         registerDaoClass(ItemInfoDao.class);
 >>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
+=======
+        registerDaoClass(ItemInfoDao.class);
+>>>>>>> cy_dev
         registerDaoClass(YearCheckDao.class);
         registerDaoClass(YearCheckResultDao.class);
+>>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
         registerDaoClass(CheckPersonDao.class);
         registerDaoClass(CompanyInfoDao.class);
         registerDaoClass(CompanyTypeDao.class);
         registerDaoClass(InspectionResultDao.class);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> cy_dev
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
->>>>>>> 14845b1b17fea59071c755784a22119d9c2d7bae
-        registerDaoClass(CheckPersonDao.class);
-=======
 >>>>>>> be2e63913f7d082439c2eb34ca3c024e4ea4f05b
 >>>>>>> 9069637e91f76f416f6f181e0d49e06685d6224b
 =======
+=======
+>>>>>>> cy_dev
         registerDaoClass(StandardInfoDao.class);
         registerDaoClass(StandardTypeDao.class);
 >>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82

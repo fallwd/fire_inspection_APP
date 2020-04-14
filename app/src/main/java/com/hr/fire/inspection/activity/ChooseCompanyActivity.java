@@ -53,8 +53,6 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
         company_list_item.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-
-//               Toast.makeText(ChooseCompanyActivity.this,str ,Toast.LENGTH_SHORT).show();
                 final AlertDialog.Builder continue_builder = new AlertDialog.Builder(ChooseCompanyActivity.this);
                 continue_builder.setTitle( "是否选择该公司?");
                 continue_builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -73,7 +71,6 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
                 });
                 continue_builder.show();
 
-
             }
         });
         insert_btn.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +85,7 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
                 insert_builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(ChooseCompanyActivity.this, OilFieldActivity.class);
+                        Intent intent = new Intent(ChooseCompanyActivity.this, CompanyInsertActivity.class);
                         startActivity(intent);
                     }
                 });
@@ -103,7 +100,7 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
 
                 //点击删除按钮之后，给出dialog提示
                 AlertDialog.Builder builder = new AlertDialog.Builder(ChooseCompanyActivity.this);
-                builder.setTitle( position + "号位置的删除按钮被点击，确认删除?");
+                builder.setTitle( "确认删除?");
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -112,7 +109,26 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        list.remove(position);
+                        String companyValue = list.get(position);
+                        String type = "company";
+                        long ret = ServiceFactory.getCompanyInfoService().deleteData(companyValue,type);
+                        if(ret==0){
+                            Toast.makeText(ChooseCompanyActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+                            dataList = ServiceFactory.getCompanyInfoService().getCompanyList();
+                            list = new ArrayList<>();
+
+                            for(int i=0; i<dataList.size();i++){
+                                CompanyInfo CompanyListItem = dataList.get(i);
+                                String companyName = CompanyListItem.getCompanyName();
+                                list.add(companyName);
+                            }
+                            ListView company_list_item = findViewById(R.id.company_list_item);
+                            CompanyAdapter companyAdapter = new CompanyAdapter( ChooseCompanyActivity.this,ChooseCompanyActivity.this);
+                            companyAdapter.setData(list);
+                            company_list_item.setAdapter(companyAdapter);
+                        }else{
+                            Toast.makeText(ChooseCompanyActivity.this, "删除失败", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
                 builder.show();
@@ -136,7 +152,6 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
                         // 跳转携带参数
                         intent.putExtra("company_name", NameItem);
                         startActivity(intent);
-//                        Toast.makeText(ChooseCompanyActivity.this,NameItem ,Toast.LENGTH_SHORT).show();
                     }
                 });
                 edit_builder.show();

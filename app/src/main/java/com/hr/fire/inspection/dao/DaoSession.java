@@ -16,17 +16,22 @@ import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.CompanyInfo;
 import com.hr.fire.inspection.entity.StandardInfo;
 import com.hr.fire.inspection.entity.StandardType;
-<<<<<<< HEAD
 =======
+<<<<<<< HEAD
 =======
 import com.hr.fire.inspection.entity.ItemInfo;
 >>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
+=======
+import com.hr.fire.inspection.entity.ItemInfo;
+>>>>>>> cy_dev
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
+>>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
 import com.hr.fire.inspection.entity.CheckPerson;
 import com.hr.fire.inspection.entity.CompanyInfo;
 import com.hr.fire.inspection.entity.CompanyType;
 import com.hr.fire.inspection.entity.InspectionResult;
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -42,32 +47,49 @@ import com.hr.fire.inspection.entity.StandardType;
 
 import com.hr.fire.inspection.dao.CheckTypeDao;
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+import com.hr.fire.inspection.dao.CheckTypeDao;
+>>>>>>> cy_dev
 import com.hr.fire.inspection.dao.YearCheckDao;
 import com.hr.fire.inspection.dao.YearCheckResultDao;
 import com.hr.fire.inspection.dao.ItemInfoDao;
 import com.hr.fire.inspection.dao.CompanyInfoDao;
 import com.hr.fire.inspection.dao.StandardInfoDao;
 import com.hr.fire.inspection.dao.StandardTypeDao;
-<<<<<<< HEAD
 =======
+<<<<<<< HEAD
 =======
 import com.hr.fire.inspection.dao.ItemInfoDao;
 >>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
+=======
+import com.hr.fire.inspection.entity.StandardInfo;
+import com.hr.fire.inspection.entity.StandardType;
+
+import com.hr.fire.inspection.dao.CheckTypeDao;
+import com.hr.fire.inspection.dao.ItemInfoDao;
+>>>>>>> cy_dev
 import com.hr.fire.inspection.dao.YearCheckDao;
 import com.hr.fire.inspection.dao.YearCheckResultDao;
+>>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
 import com.hr.fire.inspection.dao.CheckPersonDao;
 import com.hr.fire.inspection.dao.CompanyInfoDao;
 import com.hr.fire.inspection.dao.CompanyTypeDao;
 import com.hr.fire.inspection.dao.InspectionResultDao;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> cy_dev
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
->>>>>>> 14845b1b17fea59071c755784a22119d9c2d7bae
-import com.hr.fire.inspection.dao.CheckPersonDao;
-=======
 >>>>>>> be2e63913f7d082439c2eb34ca3c024e4ea4f05b
 >>>>>>> 9069637e91f76f416f6f181e0d49e06685d6224b
 =======
+=======
+>>>>>>> cy_dev
 import com.hr.fire.inspection.dao.StandardInfoDao;
 import com.hr.fire.inspection.dao.StandardTypeDao;
 >>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
@@ -89,17 +111,22 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig companyInfoDaoConfig;
     private final DaoConfig standardInfoDaoConfig;
     private final DaoConfig standardTypeDaoConfig;
-<<<<<<< HEAD
 =======
+<<<<<<< HEAD
 =======
     private final DaoConfig itemInfoDaoConfig;
 >>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
+=======
+    private final DaoConfig itemInfoDaoConfig;
+>>>>>>> cy_dev
     private final DaoConfig yearCheckDaoConfig;
     private final DaoConfig yearCheckResultDaoConfig;
+>>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
     private final DaoConfig checkPersonDaoConfig;
     private final DaoConfig companyInfoDaoConfig;
     private final DaoConfig companyTypeDaoConfig;
     private final DaoConfig inspectionResultDaoConfig;
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -115,19 +142,30 @@ public class DaoSession extends AbstractDaoSession {
 
     private final CheckTypeDao checkTypeDao;
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+    private final CheckTypeDao checkTypeDao;
+>>>>>>> cy_dev
     private final YearCheckDao yearCheckDao;
     private final YearCheckResultDao yearCheckResultDao;
     private final ItemInfoDao itemInfoDao;
     private final CompanyInfoDao companyInfoDao;
     private final StandardInfoDao standardInfoDao;
     private final StandardTypeDao standardTypeDao;
-<<<<<<< HEAD
 =======
+<<<<<<< HEAD
     private final YearCheckDao yearCheckDao;
     private final YearCheckResultDao yearCheckResultDao;
 <<<<<<< HEAD
 >>>>>>> 14845b1b17fea59071c755784a22119d9c2d7bae
 =======
+=======
+    private final DaoConfig standardInfoDaoConfig;
+    private final DaoConfig standardTypeDaoConfig;
+
+    private final CheckTypeDao checkTypeDao;
+>>>>>>> cy_dev
     private final ItemInfoDao itemInfoDao;
     private final YearCheckDao yearCheckDao;
     private final YearCheckResultDao yearCheckResultDao;
@@ -136,8 +174,11 @@ public class DaoSession extends AbstractDaoSession {
     private final CompanyInfoDao companyInfoDao;
     private final CompanyTypeDao companyTypeDao;
     private final InspectionResultDao inspectionResultDao;
+<<<<<<< HEAD
+=======
     private final StandardInfoDao standardInfoDao;
     private final StandardTypeDao standardTypeDao;
+>>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
 
     public DaoSession(Database db, IdentityScopeType type, Map<Class<? extends AbstractDao<?, ?>>, DaoConfig>
             daoConfigMap) {
@@ -165,25 +206,32 @@ public class DaoSession extends AbstractDaoSession {
         standardTypeDaoConfig = daoConfigMap.get(StandardTypeDao.class).clone();
         standardTypeDaoConfig.initIdentityScope(type);
 
-<<<<<<< HEAD
+        checkPersonDaoConfig = daoConfigMap.get(CheckPersonDao.class).clone();
+        checkPersonDaoConfig.initIdentityScope(type);
 =======
+<<<<<<< HEAD
 =======
         itemInfoDaoConfig = daoConfigMap.get(ItemInfoDao.class).clone();
         itemInfoDaoConfig.initIdentityScope(type);
 
 >>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
+=======
+        itemInfoDaoConfig = daoConfigMap.get(ItemInfoDao.class).clone();
+        itemInfoDaoConfig.initIdentityScope(type);
+
+>>>>>>> cy_dev
         yearCheckDaoConfig = daoConfigMap.get(YearCheckDao.class).clone();
         yearCheckDaoConfig.initIdentityScope(type);
 
         yearCheckResultDaoConfig = daoConfigMap.get(YearCheckResultDao.class).clone();
         yearCheckResultDaoConfig.initIdentityScope(type);
 
->>>>>>> 14845b1b17fea59071c755784a22119d9c2d7bae
         checkPersonDaoConfig = daoConfigMap.get(CheckPersonDao.class).clone();
         checkPersonDaoConfig.initIdentityScope(type);
 
         companyInfoDaoConfig = daoConfigMap.get(CompanyInfoDao.class).clone();
         companyInfoDaoConfig.initIdentityScope(type);
+>>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
 
         companyTypeDaoConfig = daoConfigMap.get(CompanyTypeDao.class).clone();
         companyTypeDaoConfig.initIdentityScope(type);
@@ -191,6 +239,26 @@ public class DaoSession extends AbstractDaoSession {
         inspectionResultDaoConfig = daoConfigMap.get(InspectionResultDao.class).clone();
         inspectionResultDaoConfig.initIdentityScope(type);
 
+<<<<<<< HEAD
+        checkTypeDao = new CheckTypeDao(checkTypeDaoConfig, this);
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> cy_dev
+        yearCheckDao = new YearCheckDao(yearCheckDaoConfig, this);
+        yearCheckResultDao = new YearCheckResultDao(yearCheckResultDaoConfig, this);
+        itemInfoDao = new ItemInfoDao(itemInfoDaoConfig, this);
+        companyInfoDao = new CompanyInfoDao(companyInfoDaoConfig, this);
+        standardInfoDao = new StandardInfoDao(standardInfoDaoConfig, this);
+        standardTypeDao = new StandardTypeDao(standardTypeDaoConfig, this);
+=======
+<<<<<<< HEAD
+        yearCheckDao = new YearCheckDao(yearCheckDaoConfig, this);
+        yearCheckResultDao = new YearCheckResultDao(yearCheckResultDaoConfig, this);
+<<<<<<< HEAD
+>>>>>>> 14845b1b17fea59071c755784a22119d9c2d7bae
+=======
+=======
         standardInfoDaoConfig = daoConfigMap.get(StandardInfoDao.class).clone();
         standardInfoDaoConfig.initIdentityScope(type);
 
@@ -198,20 +266,7 @@ public class DaoSession extends AbstractDaoSession {
         standardTypeDaoConfig.initIdentityScope(type);
 
         checkTypeDao = new CheckTypeDao(checkTypeDaoConfig, this);
-<<<<<<< HEAD
-        yearCheckDao = new YearCheckDao(yearCheckDaoConfig, this);
-        yearCheckResultDao = new YearCheckResultDao(yearCheckResultDaoConfig, this);
-        itemInfoDao = new ItemInfoDao(itemInfoDaoConfig, this);
-        companyInfoDao = new CompanyInfoDao(companyInfoDaoConfig, this);
-        standardInfoDao = new StandardInfoDao(standardInfoDaoConfig, this);
-        standardTypeDao = new StandardTypeDao(standardTypeDaoConfig, this);
-<<<<<<< HEAD
-=======
-        yearCheckDao = new YearCheckDao(yearCheckDaoConfig, this);
-        yearCheckResultDao = new YearCheckResultDao(yearCheckResultDaoConfig, this);
-<<<<<<< HEAD
->>>>>>> 14845b1b17fea59071c755784a22119d9c2d7bae
-=======
+>>>>>>> cy_dev
         itemInfoDao = new ItemInfoDao(itemInfoDaoConfig, this);
         yearCheckDao = new YearCheckDao(yearCheckDaoConfig, this);
         yearCheckResultDao = new YearCheckResultDao(yearCheckResultDaoConfig, this);
@@ -220,24 +275,32 @@ public class DaoSession extends AbstractDaoSession {
         companyInfoDao = new CompanyInfoDao(companyInfoDaoConfig, this);
         companyTypeDao = new CompanyTypeDao(companyTypeDaoConfig, this);
         inspectionResultDao = new InspectionResultDao(inspectionResultDaoConfig, this);
-        standardInfoDao = new StandardInfoDao(standardInfoDaoConfig, this);
-        standardTypeDao = new StandardTypeDao(standardTypeDaoConfig, this);
+<<<<<<< HEAD
 
         registerDao(CheckType.class, checkTypeDao);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> cy_dev
         registerDao(YearCheck.class, yearCheckDao);
         registerDao(YearCheckResult.class, yearCheckResultDao);
         registerDao(ItemInfo.class, itemInfoDao);
         registerDao(CompanyInfo.class, companyInfoDao);
         registerDao(StandardInfo.class, standardInfoDao);
         registerDao(StandardType.class, standardTypeDao);
-<<<<<<< HEAD
 =======
+<<<<<<< HEAD
         registerDao(YearCheck.class, yearCheckDao);
         registerDao(YearCheckResult.class, yearCheckResultDao);
 <<<<<<< HEAD
 >>>>>>> 14845b1b17fea59071c755784a22119d9c2d7bae
 =======
+=======
+        standardInfoDao = new StandardInfoDao(standardInfoDaoConfig, this);
+        standardTypeDao = new StandardTypeDao(standardTypeDaoConfig, this);
+
+        registerDao(CheckType.class, checkTypeDao);
+>>>>>>> cy_dev
         registerDao(ItemInfo.class, itemInfoDao);
         registerDao(YearCheck.class, yearCheckDao);
         registerDao(YearCheckResult.class, yearCheckResultDao);
@@ -246,8 +309,11 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(CompanyInfo.class, companyInfoDao);
         registerDao(CompanyType.class, companyTypeDao);
         registerDao(InspectionResult.class, inspectionResultDao);
+<<<<<<< HEAD
+=======
         registerDao(StandardInfo.class, standardInfoDao);
         registerDao(StandardType.class, standardTypeDao);
+>>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
     }
     
     public void clear() {
@@ -259,13 +325,15 @@ public class DaoSession extends AbstractDaoSession {
         companyInfoDaoConfig.clearIdentityScope();
         standardInfoDaoConfig.clearIdentityScope();
         standardTypeDaoConfig.clearIdentityScope();
-<<<<<<< HEAD
 =======
+<<<<<<< HEAD
         yearCheckDaoConfig.clearIdentityScope();
         yearCheckResultDaoConfig.clearIdentityScope();
 <<<<<<< HEAD
 >>>>>>> 14845b1b17fea59071c755784a22119d9c2d7bae
 =======
+=======
+>>>>>>> cy_dev
         itemInfoDaoConfig.clearIdentityScope();
         yearCheckDaoConfig.clearIdentityScope();
         yearCheckResultDaoConfig.clearIdentityScope();
@@ -274,8 +342,11 @@ public class DaoSession extends AbstractDaoSession {
         companyInfoDaoConfig.clearIdentityScope();
         companyTypeDaoConfig.clearIdentityScope();
         inspectionResultDaoConfig.clearIdentityScope();
+<<<<<<< HEAD
+=======
         standardInfoDaoConfig.clearIdentityScope();
         standardTypeDaoConfig.clearIdentityScope();
+>>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
     }
 
     public CheckTypeDao getCheckTypeDao() {
@@ -308,33 +379,40 @@ public class DaoSession extends AbstractDaoSession {
 
     public StandardTypeDao getStandardTypeDao() {
         return standardTypeDao;
-    }
-
+=======
 <<<<<<< HEAD
 =======
-=======
 >>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
+=======
+>>>>>>> cy_dev
     public YearCheckDao getYearCheckDao() {
         return yearCheckDao;
     }
 
     public YearCheckResultDao getYearCheckResultDao() {
         return yearCheckResultDao;
+>>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 14845b1b17fea59071c755784a22119d9c2d7bae
 =======
 >>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
+=======
+>>>>>>> cy_dev
     public CheckPersonDao getCheckPersonDao() {
         return checkPersonDao;
     }
 
+<<<<<<< HEAD
+=======
     public CompanyInfoDao getCompanyInfoDao() {
         return companyInfoDao;
     }
 
+>>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
     public CompanyTypeDao getCompanyTypeDao() {
         return companyTypeDao;
     }
@@ -343,6 +421,8 @@ public class DaoSession extends AbstractDaoSession {
         return inspectionResultDao;
     }
 
+<<<<<<< HEAD
+=======
     public StandardInfoDao getStandardInfoDao() {
         return standardInfoDao;
     }
@@ -351,4 +431,5 @@ public class DaoSession extends AbstractDaoSession {
         return standardTypeDao;
     }
 
+>>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
 }
