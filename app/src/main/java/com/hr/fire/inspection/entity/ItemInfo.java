@@ -5,19 +5,23 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToMany;
 import org.greenrobot.greendao.annotation.ToOne;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
+
 import com.hr.fire.inspection.dao.DaoSession;
 import com.hr.fire.inspection.dao.YearCheckResultDao;
 import com.hr.fire.inspection.dao.CheckTypeDao;
 import com.hr.fire.inspection.dao.ItemInfoDao;
+import com.hr.fire.inspection.dao.CompanyInfoDao;
 
 @Entity(
         nameInDb = "t_item_info"
 )
-public class ItemInfo {
+public class ItemInfo   {
 
     @Id(autoincrement = true)
     private Long id;
@@ -26,6 +30,10 @@ public class ItemInfo {
 
     @ToOne(joinProperty = "checkTypeId")
     private CheckType checkType; //设备类型
+
+    private Long companyInfoId;
+    @ToOne(joinProperty = "companyInfoId")
+    private CompanyInfo companyInfo;//公司选择信息
 
     private String typeNo;//型号
 
@@ -51,7 +59,7 @@ public class ItemInfo {
 
     private String check;//自检是否良好
 
-    private String  slience;//消音是否良好
+    private String slience;//消音是否良好
 
     private String reset;//复位功能是否良好
 
@@ -79,411 +87,530 @@ public class ItemInfo {
 
     private String labelNo;//标签号
 
+    private String codePath;//二维码路径
+
     private String SystemNumber;//系统位号
 
     private String ProtectArea;//保护区域
 
+    private Date checkDate;//检查日期
+
     @ToMany(referencedJoinProperty = "targetId")
     private List<YearCheckResult> checkResultList;
 
-/** Used to resolve relations */
-@Generated(hash = 2040040024)
-private transient DaoSession daoSession;
+    /**
+     * Used to resolve relations
+     */
+    @Generated(hash = 2040040024)
+    private transient DaoSession daoSession;
 
-/** Used for active entity operations. */
-@Generated(hash = 547138643)
-private transient ItemInfoDao myDao;
+    /**
+     * Used for active entity operations.
+     */
+    @Generated(hash = 547138643)
+    private transient ItemInfoDao myDao;
 
-@Generated(hash = 139795084)
-public ItemInfo(Long id, Long checkTypeId, String typeNo, String no, String volume,
-        String weight, String goodsWeight, String pressure, String prodFactory,
-        Date prodDate, String typeConformity, String positionConformity,
-        String appearance, String check, String slience, String reset,
-        String powerAlarmFunction, String alarmFunction, String effectiveness,
-        String responseTime, String descrption, String setAlarm25, String setAlarm50,
-        String testAlarm25, String testAlarm50, Date observeDate, String isPass,
-        String labelNo, String SystemNumber, String ProtectArea) {
-    this.id = id;
-    this.checkTypeId = checkTypeId;
-    this.typeNo = typeNo;
-    this.no = no;
-    this.volume = volume;
-    this.weight = weight;
-    this.goodsWeight = goodsWeight;
-    this.pressure = pressure;
-    this.prodFactory = prodFactory;
-    this.prodDate = prodDate;
-    this.typeConformity = typeConformity;
-    this.positionConformity = positionConformity;
-    this.appearance = appearance;
-    this.check = check;
-    this.slience = slience;
-    this.reset = reset;
-    this.powerAlarmFunction = powerAlarmFunction;
-    this.alarmFunction = alarmFunction;
-    this.effectiveness = effectiveness;
-    this.responseTime = responseTime;
-    this.descrption = descrption;
-    this.setAlarm25 = setAlarm25;
-    this.setAlarm50 = setAlarm50;
-    this.testAlarm25 = testAlarm25;
-    this.testAlarm50 = testAlarm50;
-    this.observeDate = observeDate;
-    this.isPass = isPass;
-    this.labelNo = labelNo;
-    this.SystemNumber = SystemNumber;
-    this.ProtectArea = ProtectArea;
-}
-
-@Generated(hash = 1334958530)
-public ItemInfo() {
-}
-
-public Long getId() {
-    return this.id;
-}
-
-public void setId(Long id) {
-    this.id = id;
-}
-
-public Long getCheckTypeId() {
-    return this.checkTypeId;
-}
-
-public void setCheckTypeId(Long checkTypeId) {
-    this.checkTypeId = checkTypeId;
-}
-
-public String getNo() {
-    return this.no;
-}
-
-public void setNo(String no) {
-    this.no = no;
-}
-
-public String getVolume() {
-    return this.volume;
-}
-
-public void setVolume(String volume) {
-    this.volume = volume;
-}
-
-public String getWeight() {
-    return this.weight;
-}
-
-public void setWeight(String weight) {
-    this.weight = weight;
-}
-
-public String getGoodsWeight() {
-    return this.goodsWeight;
-}
-
-public void setGoodsWeight(String goodsWeight) {
-    this.goodsWeight = goodsWeight;
-}
-
-public String getPressure() {
-    return this.pressure;
-}
-
-public void setPressure(String pressure) {
-    this.pressure = pressure;
-}
-
-public String getProdFactory() {
-    return this.prodFactory;
-}
-
-public void setProdFactory(String prodFactory) {
-    this.prodFactory = prodFactory;
-}
-
-public Date getProdDate() {
-    return this.prodDate;
-}
-
-public void setProdDate(Date prodDate) {
-    this.prodDate = prodDate;
-}
-
-public Date getObserveDate() {
-    return this.observeDate;
-}
-
-public void setObserveDate(Date observeDate) {
-    this.observeDate = observeDate;
-}
-
-public String getIsPass() {
-    return this.isPass;
-}
-
-public void setIsPass(String isPass) {
-    this.isPass = isPass;
-}
-
-public String getLabelNo() {
-    return this.labelNo;
-}
-
-public void setLabelNo(String labelNo) {
-    this.labelNo = labelNo;
-}
-
-public String getSystemNumber() {
-    return this.SystemNumber;
-}
-
-public void setSystemNumber(String SystemNumber) {
-    this.SystemNumber = SystemNumber;
-}
-
-public String getProtectArea() {
-    return this.ProtectArea;
-}
-
-public void setProtectArea(String ProtectArea) {
-    this.ProtectArea = ProtectArea;
-}
-
-@Generated(hash = 1822795957)
-private transient Long checkType__resolvedKey;
-
-/** To-one relationship, resolved on first access. */
-@Generated(hash = 863167469)
-public CheckType getCheckType() {
-    Long __key = this.checkTypeId;
-    if (checkType__resolvedKey == null
-            || !checkType__resolvedKey.equals(__key)) {
-        final DaoSession daoSession = this.daoSession;
-        if (daoSession == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }
-        CheckTypeDao targetDao = daoSession.getCheckTypeDao();
-        CheckType checkTypeNew = targetDao.load(__key);
-        synchronized (this) {
-            checkType = checkTypeNew;
-            checkType__resolvedKey = __key;
-        }
+    @Generated(hash = 1530383196)
+    public ItemInfo(Long id, Long checkTypeId, Long companyInfoId, String typeNo, String no,
+                    String volume, String weight, String goodsWeight, String pressure,
+                    String prodFactory, Date prodDate, String typeConformity,
+                    String positionConformity, String appearance, String check, String slience,
+                    String reset, String powerAlarmFunction, String alarmFunction,
+                    String effectiveness, String responseTime, String descrption, String setAlarm25,
+                    String setAlarm50, String testAlarm25, String testAlarm50, Date observeDate,
+                    String isPass, String labelNo, String codePath, String SystemNumber,
+                    String ProtectArea, Date checkDate) {
+        this.id = id;
+        this.checkTypeId = checkTypeId;
+        this.companyInfoId = companyInfoId;
+        this.typeNo = typeNo;
+        this.no = no;
+        this.volume = volume;
+        this.weight = weight;
+        this.goodsWeight = goodsWeight;
+        this.pressure = pressure;
+        this.prodFactory = prodFactory;
+        this.prodDate = prodDate;
+        this.typeConformity = typeConformity;
+        this.positionConformity = positionConformity;
+        this.appearance = appearance;
+        this.check = check;
+        this.slience = slience;
+        this.reset = reset;
+        this.powerAlarmFunction = powerAlarmFunction;
+        this.alarmFunction = alarmFunction;
+        this.effectiveness = effectiveness;
+        this.responseTime = responseTime;
+        this.descrption = descrption;
+        this.setAlarm25 = setAlarm25;
+        this.setAlarm50 = setAlarm50;
+        this.testAlarm25 = testAlarm25;
+        this.testAlarm50 = testAlarm50;
+        this.observeDate = observeDate;
+        this.isPass = isPass;
+        this.labelNo = labelNo;
+        this.codePath = codePath;
+        this.SystemNumber = SystemNumber;
+        this.ProtectArea = ProtectArea;
+        this.checkDate = checkDate;
     }
-    return checkType;
-}
 
-/** called by internal mechanisms, do not call yourself. */
-@Generated(hash = 599256709)
-public void setCheckType(CheckType checkType) {
-    synchronized (this) {
-        this.checkType = checkType;
-        checkTypeId = checkType == null ? null : checkType.getId();
-        checkType__resolvedKey = checkTypeId;
+    @Generated(hash = 1334958530)
+    public ItemInfo() {
     }
-}
 
-/**
- * To-many relationship, resolved on first access (and after reset).
- * Changes to to-many relations are not persisted, make changes to the target entity.
- */
-@Generated(hash = 1741583958)
-public List<YearCheckResult> getCheckResultList() {
-    if (checkResultList == null) {
-        final DaoSession daoSession = this.daoSession;
-        if (daoSession == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }
-        YearCheckResultDao targetDao = daoSession.getYearCheckResultDao();
-        List<YearCheckResult> checkResultListNew = targetDao
-                ._queryItemInfo_CheckResultList(id);
-        synchronized (this) {
-            if (checkResultList == null) {
-                checkResultList = checkResultListNew;
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getCheckTypeId() {
+        return this.checkTypeId;
+    }
+
+    public void setCheckTypeId(Long checkTypeId) {
+        this.checkTypeId = checkTypeId;
+    }
+
+    public String getNo() {
+        return this.no;
+    }
+
+    public void setNo(String no) {
+        this.no = no;
+    }
+
+    public String getVolume() {
+        return this.volume;
+    }
+
+    public void setVolume(String volume) {
+        this.volume = volume;
+    }
+
+    public String getWeight() {
+        return this.weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getGoodsWeight() {
+        return this.goodsWeight;
+    }
+
+    public void setGoodsWeight(String goodsWeight) {
+        this.goodsWeight = goodsWeight;
+    }
+
+    public String getPressure() {
+        return this.pressure;
+    }
+
+    public void setPressure(String pressure) {
+        this.pressure = pressure;
+    }
+
+    public String getProdFactory() {
+        return this.prodFactory;
+    }
+
+    public void setProdFactory(String prodFactory) {
+        this.prodFactory = prodFactory;
+    }
+
+    public Date getProdDate() {
+        return this.prodDate;
+    }
+
+    public void setProdDate(Date prodDate) {
+        this.prodDate = prodDate;
+    }
+
+    public Date getObserveDate() {
+        return this.observeDate;
+    }
+
+    public void setObserveDate(Date observeDate) {
+        this.observeDate = observeDate;
+    }
+
+    public String getIsPass() {
+        return this.isPass;
+    }
+
+    public void setIsPass(String isPass) {
+        this.isPass = isPass;
+    }
+
+    public String getLabelNo() {
+        return this.labelNo;
+    }
+
+    public void setLabelNo(String labelNo) {
+        this.labelNo = labelNo;
+    }
+
+    public String getSystemNumber() {
+        return this.SystemNumber;
+    }
+
+    public void setSystemNumber(String SystemNumber) {
+        this.SystemNumber = SystemNumber;
+    }
+
+    public String getProtectArea() {
+        return this.ProtectArea;
+    }
+
+    public void setProtectArea(String ProtectArea) {
+        this.ProtectArea = ProtectArea;
+    }
+
+    @Generated(hash = 1822795957)
+    private transient Long checkType__resolvedKey;
+
+    @Generated(hash = 702142230)
+    private transient Long companyInfo__resolvedKey;
+
+    /**
+     * To-one relationship, resolved on first access.
+     */
+    @Generated(hash = 863167469)
+    public CheckType getCheckType() {
+        Long __key = this.checkTypeId;
+        if (checkType__resolvedKey == null
+                || !checkType__resolvedKey.equals(__key)) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            CheckTypeDao targetDao = daoSession.getCheckTypeDao();
+            CheckType checkTypeNew = targetDao.load(__key);
+            synchronized (this) {
+                checkType = checkTypeNew;
+                checkType__resolvedKey = __key;
             }
         }
+        return checkType;
     }
-    return checkResultList;
-}
 
-/** Resets a to-many relationship, making the next get call to query for a fresh result. */
-@Generated(hash = 1934777524)
-public synchronized void resetCheckResultList() {
-    checkResultList = null;
-}
-
-/**
- * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
- * Entity must attached to an entity context.
- */
-@Generated(hash = 128553479)
-public void delete() {
-    if (myDao == null) {
-        throw new DaoException("Entity is detached from DAO context");
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
+    @Generated(hash = 599256709)
+    public void setCheckType(CheckType checkType) {
+        synchronized (this) {
+            this.checkType = checkType;
+            checkTypeId = checkType == null ? null : checkType.getId();
+            checkType__resolvedKey = checkTypeId;
+        }
     }
-    myDao.delete(this);
-}
 
-/**
- * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
- * Entity must attached to an entity context.
- */
-@Generated(hash = 1942392019)
-public void refresh() {
-    if (myDao == null) {
-        throw new DaoException("Entity is detached from DAO context");
+    /**
+     * To-many relationship, resolved on first access (and after reset).
+     * Changes to to-many relations are not persisted, make changes to the target entity.
+     */
+    @Generated(hash = 1741583958)
+    public List<YearCheckResult> getCheckResultList() {
+        if (checkResultList == null) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            YearCheckResultDao targetDao = daoSession.getYearCheckResultDao();
+            List<YearCheckResult> checkResultListNew = targetDao
+                    ._queryItemInfo_CheckResultList(id);
+            synchronized (this) {
+                if (checkResultList == null) {
+                    checkResultList = checkResultListNew;
+                }
+            }
+        }
+        return checkResultList;
     }
-    myDao.refresh(this);
-}
 
-/**
- * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
- * Entity must attached to an entity context.
- */
-@Generated(hash = 713229351)
-public void update() {
-    if (myDao == null) {
-        throw new DaoException("Entity is detached from DAO context");
+    /**
+     * Resets a to-many relationship, making the next get call to query for a fresh result.
+     */
+    @Generated(hash = 1934777524)
+    public synchronized void resetCheckResultList() {
+        checkResultList = null;
     }
-    myDao.update(this);
-}
 
-/** called by internal mechanisms, do not call yourself. */
-@Generated(hash = 747586935)
-public void __setDaoSession(DaoSession daoSession) {
-    this.daoSession = daoSession;
-    myDao = daoSession != null ? daoSession.getItemInfoDao() : null;
-}
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 128553479)
+    public void delete() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.delete(this);
+    }
 
-public String getTypeNo() {
-    return this.typeNo;
-}
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 1942392019)
+    public void refresh() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.refresh(this);
+    }
 
-public void setTypeNo(String typeNo) {
-    this.typeNo = typeNo;
-}
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 713229351)
+    public void update() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.update(this);
+    }
 
-public String getTypeConformity() {
-    return this.typeConformity;
-}
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
+    @Generated(hash = 747586935)
+    public void __setDaoSession(DaoSession daoSession) {
+        this.daoSession = daoSession;
+        myDao = daoSession != null ? daoSession.getItemInfoDao() : null;
+    }
 
-public void setTypeConformity(String typeConformity) {
-    this.typeConformity = typeConformity;
-}
+    public String getTypeNo() {
+        return this.typeNo;
+    }
 
-public String getPositionConformity() {
-    return this.positionConformity;
-}
+    public void setTypeNo(String typeNo) {
+        this.typeNo = typeNo;
+    }
 
-public void setPositionConformity(String positionConformity) {
-    this.positionConformity = positionConformity;
-}
+    public String getTypeConformity() {
+        return this.typeConformity;
+    }
 
-public String getAppearance() {
-    return this.appearance;
-}
+    public void setTypeConformity(String typeConformity) {
+        this.typeConformity = typeConformity;
+    }
 
-public void setAppearance(String appearance) {
-    this.appearance = appearance;
-}
+    public String getPositionConformity() {
+        return this.positionConformity;
+    }
 
-public String getCheck() {
-    return this.check;
-}
+    public void setPositionConformity(String positionConformity) {
+        this.positionConformity = positionConformity;
+    }
 
-public void setCheck(String check) {
-    this.check = check;
-}
+    public String getAppearance() {
+        return this.appearance;
+    }
 
-public String getSlience() {
-    return this.slience;
-}
+    public void setAppearance(String appearance) {
+        this.appearance = appearance;
+    }
 
-public void setSlience(String slience) {
-    this.slience = slience;
-}
+    public String getCheck() {
+        return this.check;
+    }
 
-public String getReset() {
-    return this.reset;
-}
+    public void setCheck(String check) {
+        this.check = check;
+    }
 
-public void setReset(String reset) {
-    this.reset = reset;
-}
+    public String getSlience() {
+        return this.slience;
+    }
 
-public String getPowerAlarmFunction() {
-    return this.powerAlarmFunction;
-}
+    public void setSlience(String slience) {
+        this.slience = slience;
+    }
 
-public void setPowerAlarmFunction(String powerAlarmFunction) {
-    this.powerAlarmFunction = powerAlarmFunction;
-}
+    public String getReset() {
+        return this.reset;
+    }
 
-public String getAlarmFunction() {
-    return this.alarmFunction;
-}
+    public void setReset(String reset) {
+        this.reset = reset;
+    }
 
-public void setAlarmFunction(String alarmFunction) {
-    this.alarmFunction = alarmFunction;
-}
+    public String getPowerAlarmFunction() {
+        return this.powerAlarmFunction;
+    }
 
-public String getEffectiveness() {
-    return this.effectiveness;
-}
+    public void setPowerAlarmFunction(String powerAlarmFunction) {
+        this.powerAlarmFunction = powerAlarmFunction;
+    }
 
-public void setEffectiveness(String effectiveness) {
-    this.effectiveness = effectiveness;
-}
+    public String getAlarmFunction() {
+        return this.alarmFunction;
+    }
 
-public String getResponseTime() {
-    return this.responseTime;
-}
+    public void setAlarmFunction(String alarmFunction) {
+        this.alarmFunction = alarmFunction;
+    }
 
-public void setResponseTime(String responseTime) {
-    this.responseTime = responseTime;
-}
+    public String getEffectiveness() {
+        return this.effectiveness;
+    }
 
-public String getDescrption() {
-    return this.descrption;
-}
+    public void setEffectiveness(String effectiveness) {
+        this.effectiveness = effectiveness;
+    }
 
-public void setDescrption(String descrption) {
-    this.descrption = descrption;
-}
+    public String getResponseTime() {
+        return this.responseTime;
+    }
 
-public String getSetAlarm25() {
-    return this.setAlarm25;
-}
+    public void setResponseTime(String responseTime) {
+        this.responseTime = responseTime;
+    }
 
-public void setSetAlarm25(String setAlarm25) {
-    this.setAlarm25 = setAlarm25;
-}
+    public String getDescrption() {
+        return this.descrption;
+    }
 
-public String getSetAlarm50() {
-    return this.setAlarm50;
-}
+    public void setDescrption(String descrption) {
+        this.descrption = descrption;
+    }
 
-public void setSetAlarm50(String setAlarm50) {
-    this.setAlarm50 = setAlarm50;
-}
+    public String getSetAlarm25() {
+        return this.setAlarm25;
+    }
 
-public String getTestAlarm25() {
-    return this.testAlarm25;
-}
+    public void setSetAlarm25(String setAlarm25) {
+        this.setAlarm25 = setAlarm25;
+    }
 
-public void setTestAlarm25(String testAlarm25) {
-    this.testAlarm25 = testAlarm25;
-}
+    public String getSetAlarm50() {
+        return this.setAlarm50;
+    }
 
-public String getTestAlarm50() {
-    return this.testAlarm50;
-}
+    public void setSetAlarm50(String setAlarm50) {
+        this.setAlarm50 = setAlarm50;
+    }
 
-public void setTestAlarm50(String testAlarm50) {
-    this.testAlarm50 = testAlarm50;
-}
+    public String getTestAlarm25() {
+        return this.testAlarm25;
+    }
 
+    public void setTestAlarm25(String testAlarm25) {
+        this.testAlarm25 = testAlarm25;
+    }
 
+    public String getTestAlarm50() {
+        return this.testAlarm50;
+    }
 
+    public void setTestAlarm50(String testAlarm50) {
+        this.testAlarm50 = testAlarm50;
+    }
+
+    public Long getCompanyInfoId() {
+        return this.companyInfoId;
+    }
+
+    public void setCompanyInfoId(Long companyInfoId) {
+        this.companyInfoId = companyInfoId;
+    }
+
+    /**
+     * To-one relationship, resolved on first access.
+     */
+    @Generated(hash = 1193346340)
+    public CompanyInfo getCompanyInfo() {
+        Long __key = this.companyInfoId;
+        if (companyInfo__resolvedKey == null || !companyInfo__resolvedKey.equals(__key)) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            CompanyInfoDao targetDao = daoSession.getCompanyInfoDao();
+            CompanyInfo companyInfoNew = targetDao.load(__key);
+            synchronized (this) {
+                companyInfo = companyInfoNew;
+                companyInfo__resolvedKey = __key;
+            }
+        }
+        return companyInfo;
+    }
+
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
+    @Generated(hash = 777983097)
+    public void setCompanyInfo(CompanyInfo companyInfo) {
+        synchronized (this) {
+            this.companyInfo = companyInfo;
+            companyInfoId = companyInfo == null ? null : companyInfo.getId();
+            companyInfo__resolvedKey = companyInfoId;
+        }
+    }
+
+    public Date getCheckDate() {
+        return this.checkDate;
+    }
+
+    public void setCheckDate(Date checkDate) {
+        this.checkDate = checkDate;
+    }
+
+    public String getCodePath() {
+        return this.codePath;
+    }
+
+    public void setCodePath(String codePath) {
+        this.codePath = codePath;
+    }
+
+    @Override
+    public String toString() {
+        return "ItemInfo{" +
+                "id=" + id +
+                ", checkTypeId=" + checkTypeId +
+                ", checkType=" + checkType +
+                ", companyInfoId=" + companyInfoId +
+                ", companyInfo=" + companyInfo +
+                ", typeNo='" + typeNo + '\'' +
+                ", no='" + no + '\'' +
+                ", volume='" + volume + '\'' +
+                ", weight='" + weight + '\'' +
+                ", goodsWeight='" + goodsWeight + '\'' +
+                ", pressure='" + pressure + '\'' +
+                ", prodFactory='" + prodFactory + '\'' +
+                ", prodDate=" + prodDate +
+                ", typeConformity='" + typeConformity + '\'' +
+                ", positionConformity='" + positionConformity + '\'' +
+                ", appearance='" + appearance + '\'' +
+                ", check='" + check + '\'' +
+                ", slience='" + slience + '\'' +
+                ", reset='" + reset + '\'' +
+                ", powerAlarmFunction='" + powerAlarmFunction + '\'' +
+                ", alarmFunction='" + alarmFunction + '\'' +
+                ", effectiveness='" + effectiveness + '\'' +
+                ", responseTime='" + responseTime + '\'' +
+                ", descrption='" + descrption + '\'' +
+                ", setAlarm25='" + setAlarm25 + '\'' +
+                ", setAlarm50='" + setAlarm50 + '\'' +
+                ", testAlarm25='" + testAlarm25 + '\'' +
+                ", testAlarm50='" + testAlarm50 + '\'' +
+                ", observeDate=" + observeDate +
+                ", isPass='" + isPass + '\'' +
+                ", labelNo='" + labelNo + '\'' +
+                ", codePath='" + codePath + '\'' +
+                ", SystemNumber='" + SystemNumber + '\'' +
+                ", ProtectArea='" + ProtectArea + '\'' +
+                ", checkDate=" + checkDate +
+                ", checkResultList=" + checkResultList +
+                '}';
+    }
 }

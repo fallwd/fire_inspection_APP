@@ -9,11 +9,16 @@ import com.hr.fire.inspection.dao.DaoSession;
 import com.hr.fire.inspection.dao.ItemInfoDao;
 import com.hr.fire.inspection.dao.YearCheckDao;
 import com.hr.fire.inspection.dao.YearCheckResultDao;
+import com.hr.fire.inspection.dao.CheckTypeDao;
+
+import java.io.Serializable;
+import java.util.Date;
+import com.hr.fire.inspection.dao.CompanyInfoDao;
 
 @Entity(
         nameInDb = "t_year_check_result"
 )
-public class YearCheckResult {
+public class YearCheckResult   {
 
     @Id(autoincrement = true)
     private Long id;
@@ -29,13 +34,26 @@ public class YearCheckResult {
 
     private String videoUrl; //视频路径
 
-    private String descrption; //描述
+    private String description; //描述
 
-    //瓶子的ID
-    private Long bottleInfoId;
+    private String SystemNumber;//系统位号
 
-    @ToOne(joinProperty="bottleInfoId")
+    private String ProtectArea;//保护区域
+
+    private Date checkDate;//检查日期
+
+    //设备的ID
+    private Long itemInfoId;
+    @ToOne(joinProperty="itemInfoId")
     private ItemInfo itemInfo;
+
+    private Long companyInfoId;
+    @ToOne(joinProperty = "companyInfoId")
+    private CompanyInfo companyInfo;//公司选择信息
+
+    private Long checkTypeId;
+    @ToOne(joinProperty = "checkTypeId")
+    private CheckType checkType; //设备类型
 
     // 其他项的ID,这里就不做外键关联了
     private Long targetId;
@@ -48,17 +66,23 @@ private transient DaoSession daoSession;
 @Generated(hash = 232162975)
 private transient YearCheckResultDao myDao;
 
-@Generated(hash = 236090881)
+@Generated(hash = 19132713)
 public YearCheckResult(Long id, Long yearCheckId, String isPass,
-        String imageUrl, String videoUrl, String descrption, Long bottleInfoId,
-        Long targetId) {
+        String imageUrl, String videoUrl, String description,
+        String SystemNumber, String ProtectArea, Date checkDate,
+        Long itemInfoId, Long companyInfoId, Long checkTypeId, Long targetId) {
     this.id = id;
     this.yearCheckId = yearCheckId;
     this.isPass = isPass;
     this.imageUrl = imageUrl;
     this.videoUrl = videoUrl;
-    this.descrption = descrption;
-    this.bottleInfoId = bottleInfoId;
+    this.description = description;
+    this.SystemNumber = SystemNumber;
+    this.ProtectArea = ProtectArea;
+    this.checkDate = checkDate;
+    this.itemInfoId = itemInfoId;
+    this.companyInfoId = companyInfoId;
+    this.checkTypeId = checkTypeId;
     this.targetId = targetId;
 }
 
@@ -106,20 +130,20 @@ public void setVideoUrl(String videoUrl) {
     this.videoUrl = videoUrl;
 }
 
-public String getDescrption() {
-    return this.descrption;
+public String getDescription() {
+    return this.description;
 }
 
-public void setDescrption(String descrption) {
-    this.descrption = descrption;
+public void setDescription(String description) {
+    this.description = description;
 }
 
-public Long getBottleInfoId() {
-    return this.bottleInfoId;
+public Long getItemInfoId() {
+    return this.itemInfoId;
 }
 
-public void setBottleInfoId(Long bottleInfoId) {
-    this.bottleInfoId = bottleInfoId;
+public void setItemInfoId(Long itemInfoId) {
+    this.itemInfoId = itemInfoId;
 }
 
 public Long getTargetId() {
@@ -166,10 +190,16 @@ public void setYearCheck(YearCheck yearCheck) {
 @Generated(hash = 2126539768)
 private transient Long itemInfo__resolvedKey;
 
+@Generated(hash = 1822795957)
+private transient Long checkType__resolvedKey;
+
+@Generated(hash = 702142230)
+private transient Long companyInfo__resolvedKey;
+
 /** To-one relationship, resolved on first access. */
-@Generated(hash = 1997461449)
+@Generated(hash = 1277888882)
 public ItemInfo getItemInfo() {
-    Long __key = this.bottleInfoId;
+    Long __key = this.itemInfoId;
     if (itemInfo__resolvedKey == null || !itemInfo__resolvedKey.equals(__key)) {
         final DaoSession daoSession = this.daoSession;
         if (daoSession == null) {
@@ -186,12 +216,12 @@ public ItemInfo getItemInfo() {
 }
 
 /** called by internal mechanisms, do not call yourself. */
-@Generated(hash = 2051489145)
+@Generated(hash = 1653646858)
 public void setItemInfo(ItemInfo itemInfo) {
     synchronized (this) {
         this.itemInfo = itemInfo;
-        bottleInfoId = itemInfo == null ? null : itemInfo.getId();
-        itemInfo__resolvedKey = bottleInfoId;
+        itemInfoId = itemInfo == null ? null : itemInfo.getId();
+        itemInfo__resolvedKey = itemInfoId;
     }
 }
 
@@ -238,5 +268,124 @@ public void __setDaoSession(DaoSession daoSession) {
     myDao = daoSession != null ? daoSession.getYearCheckResultDao() : null;
 }
 
+    @Override
+    public String toString() {
+        return "YearCheckResult{" +
+                "id=" + id +
+                ", yearCheckId=" + yearCheckId +
+                ", yearCheck=" + yearCheck +
+                ", isPass='" + isPass + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", videoUrl='" + videoUrl + '\'' +
+                ", description='" + description + '\'' +
+                ", itemInfoId=" + itemInfoId +
+                ", itemInfo=" + itemInfo +
+                ", targetId=" + targetId +
+                ", daoSession=" + daoSession +
+                ", myDao=" + myDao +
+                ", yearCheck__resolvedKey=" + yearCheck__resolvedKey +
+                ", itemInfo__resolvedKey=" + itemInfo__resolvedKey +
+                '}';
+    }
+
+    public Long getCheckTypeId() {
+        return this.checkTypeId;
+    }
+
+    public void setCheckTypeId(Long checkTypeId) {
+        this.checkTypeId = checkTypeId;
+    }
+
+    /** To-one relationship, resolved on first access. */
+    @Generated(hash = 863167469)
+    public CheckType getCheckType() {
+        Long __key = this.checkTypeId;
+        if (checkType__resolvedKey == null
+                || !checkType__resolvedKey.equals(__key)) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            CheckTypeDao targetDao = daoSession.getCheckTypeDao();
+            CheckType checkTypeNew = targetDao.load(__key);
+            synchronized (this) {
+                checkType = checkTypeNew;
+                checkType__resolvedKey = __key;
+            }
+        }
+        return checkType;
+    }
+
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 599256709)
+    public void setCheckType(CheckType checkType) {
+        synchronized (this) {
+            this.checkType = checkType;
+            checkTypeId = checkType == null ? null : checkType.getId();
+            checkType__resolvedKey = checkTypeId;
+        }
+    }
+
+    public String getSystemNumber() {
+        return this.SystemNumber;
+    }
+
+    public void setSystemNumber(String SystemNumber) {
+        this.SystemNumber = SystemNumber;
+    }
+
+    public String getProtectArea() {
+        return this.ProtectArea;
+    }
+
+    public void setProtectArea(String ProtectArea) {
+        this.ProtectArea = ProtectArea;
+    }
+
+    public Date getCheckDate() {
+        return this.checkDate;
+    }
+
+    public void setCheckDate(Date checkDate) {
+        this.checkDate = checkDate;
+    }
+
+    public Long getCompanyInfoId() {
+        return this.companyInfoId;
+    }
+
+    public void setCompanyInfoId(Long companyInfoId) {
+        this.companyInfoId = companyInfoId;
+    }
+
+    /** To-one relationship, resolved on first access. */
+    @Generated(hash = 1193346340)
+    public CompanyInfo getCompanyInfo() {
+        Long __key = this.companyInfoId;
+        if (companyInfo__resolvedKey == null
+                || !companyInfo__resolvedKey.equals(__key)) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            CompanyInfoDao targetDao = daoSession.getCompanyInfoDao();
+            CompanyInfo companyInfoNew = targetDao.load(__key);
+            synchronized (this) {
+                companyInfo = companyInfoNew;
+                companyInfo__resolvedKey = __key;
+            }
+        }
+        return companyInfo;
+    }
+
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 777983097)
+    public void setCompanyInfo(CompanyInfo companyInfo) {
+        synchronized (this) {
+            this.companyInfo = companyInfo;
+            companyInfoId = companyInfo == null ? null : companyInfo.getId();
+            companyInfo__resolvedKey = companyInfoId;
+        }
+    }
 
 }

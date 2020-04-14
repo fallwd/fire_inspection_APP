@@ -7,4 +7,16 @@
     <string name="home_legal_library">法律法规库</string>
     <string name="laws_regulations">法律法规</string>
     <string name="product_report">生成报告</string>
+    <string name="serial_number">序号</string>
+    <string name="inspection_items">检查项目</string>
+    <string name="inspection_contents">检查内容</string>
+    <string name="demand">合格需求</string>
+    <string name="inspection_standard">检查标准</string>
+    <string name="is_qualified">是否合格</string>
+    <string name="scene_photos">现场照片</string>
+    <string name="hidden_danger">隐患描述</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="other"> --- </string>
+
 </resources>

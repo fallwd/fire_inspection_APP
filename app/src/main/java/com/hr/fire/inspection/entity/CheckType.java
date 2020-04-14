@@ -1,18 +1,20 @@
 package com.hr.fire.inspection.entity;
-
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
 
+
 import com.hr.fire.inspection.dao.CheckTypeDao;
 import com.hr.fire.inspection.dao.DaoSession;
+
+import java.io.Serializable;
 
 @Entity(
         nameInDb = "t_check_type"
 )
-public class CheckType {
+public class CheckType  {
 
     @Id(autoincrement = true)
     private Long id;
@@ -153,5 +155,14 @@ public void __setDaoSession(DaoSession daoSession) {
     myDao = daoSession != null ? daoSession.getCheckTypeDao() : null;
 }
 
-
+    @Override
+    public String toString() {
+        return "CheckType{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", parentId=" + parentId +
+                ", parent=" + parent +
+                '}';
+    }
 }

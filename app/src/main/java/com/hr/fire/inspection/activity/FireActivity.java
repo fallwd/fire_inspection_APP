@@ -2,10 +2,14 @@ package com.hr.fire.inspection.activity;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+<<<<<<< HEAD
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+=======
+
+>>>>>>> 9069637e91f76f416f6f181e0d49e06685d6224b
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -92,7 +96,7 @@ public class FireActivity extends AppCompatActivity {
                 bundle.putString("context", str);
                 bundle.putString("f_title", (String) F_title.getText());
                 // 执行跳转
-                Intent intent = new Intent(FireActivity.this, CarbonDioxideAcitivty.class);
+                Intent intent = new Intent(FireActivity.this, SystemTagProtectionAreaActivity.class);
                 // 页面传值
                 intent.putExtras(bundle);
                 startActivity(intent);
@@ -104,6 +108,7 @@ public class FireActivity extends AppCompatActivity {
         // 点击生成报告
         Button pr_but = findViewById(R.id.product_report_button);
         pr_but.setOnClickListener(new View.OnClickListener() {
+<<<<<<< HEAD
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
@@ -114,6 +119,13 @@ public class FireActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+=======
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "敬请期待", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(FireActivity.this, PhotoUploadActivity.class));
+            }
+>>>>>>> 9069637e91f76f416f6f181e0d49e06685d6224b
         });
 
         // 点击返回上一页
