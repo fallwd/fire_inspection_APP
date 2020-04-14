@@ -14,7 +14,7 @@
     <string name="inspection_standard">检查标准</string>
     <string name="is_qualified">是否合格</string>
     <string name="scene_photos">现场照片</string>
-    <string name="hidden_danger">隐患分析</string>
+    <string name="hidden_danger">隐患描述</string>
     <string name="yes">是</string>
     <string name="no">否</string>
     <string name="other"> --- </string>
