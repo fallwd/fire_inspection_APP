@@ -1,6 +1,9 @@
 package com.hr.fire.inspection.service.impl;
 
+import android.content.ClipData;
 import android.util.Log;
+
+import androidx.constraintlayout.solver.widgets.ChainHead;
 
 import com.hr.fire.inspection.dao.CheckTypeDao;
 import com.hr.fire.inspection.dao.CompanyInfoDao;
@@ -18,16 +21,69 @@ import org.greenrobot.greendao.query.Join;
 import org.greenrobot.greendao.query.QueryBuilder;
 import org.greenrobot.greendao.query.WhereCondition;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements YearCheckService {
 
     @Override
-    public List getHistoryList(String systemName) {
-        QueryBuilder<ItemInfo> queryBuilder = daoSession.queryBuilder(ItemInfo.class).
-                where(new WhereCondition.StringCondition("1 GROUP BY " + ItemInfoDao.Properties.CheckDate.name));
+    public List<CheckType> getSystemNameData() {
+        QueryBuilder<CheckType> queryBuilder = daoSession.queryBuilder(CheckType.class).
+                where(
+                        CheckTypeDao.Properties.ParentId.eq(0),
+                        CheckTypeDao.Properties.Type.eq(1)
+                        );
+        List<CheckType> dataList = queryBuilder.list();
+        return dataList;
+    }
 
-        return null;
+    @Override
+    public List<CheckType> gettableNameData(long checkTypeId) {
+        QueryBuilder<CheckType> queryBuilder = daoSession.queryBuilder(CheckType.class).
+                where(
+                        CheckTypeDao.Properties.ParentId.eq(checkTypeId),
+                        CheckTypeDao.Properties.Type.eq(1)
+                );
+        List<CheckType> dataList = queryBuilder.list();
+        return dataList;
+    }
+
+    @Override
+    public List getHistoryList(long companyId,long systemId) {
+        // checkTypeId companyInfoId CHECK_TYPE.PARENT_ID=%s AND
+        QueryBuilder<ItemInfo> queryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(new WhereCondition.StringCondition(
+                        String.format("COMPANY_INFO_ID=%s GROUP BY CHECK_DATE", companyId)));
+        Join checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
+                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+//        Log.i("getHistoryList:::",""+queryBuilder.toString());
+        List<ItemInfo> dataList = queryBuilder.list();
+        ArrayList resultList = new ArrayList();
+        Log.i("getHistoryList:::","查询完成");
+        for(int i=0;i<dataList.size();i++){
+            ItemInfo ret = dataList.get(i);
+            String systemName = ret.getCheckType().getParent().getName();
+            String companyName = ret.getCompanyInfo().getCompanyName();
+            String oilfieldName = ret.getCompanyInfo().getOilfieldName();
+            String platformName = ret.getCompanyInfo().getPlatformName();
+            Date checkDate = ret.getCheckDate();
+//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmm");
+            String checkDateStr;
+            if(checkDate!=null){
+                checkDateStr = formatter.format(checkDate);
+            }
+            else {
+                checkDateStr = "noDate";
+            }
+
+            String comboData = companyName + "_" + oilfieldName + "_" + platformName + "_" + systemName + "_" + checkDateStr;
+//            Log.i("getHistoryList:::",comboData);
+            resultList.add(comboData);
+        }
+        return resultList;
     }
 
     @Override
@@ -63,6 +119,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
             Log.i("result", result.getCompanyInfo().toString());
             Log.i("result", result.getCheckType().toString());
             Log.i("result", result.getCheckResultList().toString());
+            Log.i("result:getCheckDate", ""+ result.getCheckDate());
         }
         Log.i("info","查询完成01-------------------------------------------");
 
