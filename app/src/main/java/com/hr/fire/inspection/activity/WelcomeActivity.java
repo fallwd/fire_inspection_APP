@@ -191,8 +191,35 @@ public class WelcomeActivity extends AppCompatActivity {
 
         //测试公司接口
 //        List<CompanyInfo> dataList = ServiceFactory.getCompanyInfoService().getCompanyList();
-//        dataList = ServiceFactory.getCompanyInfoService().getOilfieldList("曹妃甸作业公司");
+//        ServiceFactory.getCompanyInfoService().getOilfieldList("T1");
 //        dataList = ServiceFactory.getCompanyInfoService().getPlatformList("CFD11-1");
+
+        // 测试公司增删改
+        // 增
+//        String companyName = "T1";
+//        String oilfieldName = "T1-A";
+//        String platformName = "T1-B-C";
+//        ServiceFactory.getCompanyInfoService().addData(companyName,oilfieldName,platformName);
+//        String oilfieldName = "ZZZ-1";
+//        ServiceFactory.getCompanyInfoService().addOilfield(companyName, oilfieldName);
+//        String platformName = "ZZZ-1-1";
+//        ServiceFactory.getCompanyInfoService().addPlatform(companyName, oilfieldName,platformName);
+        // 改
+//        String oldName = "T1-B-C";
+//        String newName = "T1-B-CC";
+//        String type = "platform";
+//        ServiceFactory.getCompanyInfoService().rename(oldName,newName,type);
+        // 删
+//        String name = "T1";
+//        String type = "company";
+//        ServiceFactory.getCompanyInfoService().deleteData(name,type);
+//
+//        List<CompanyInfo> dataList = ServiceFactory.getCompanyInfoService().getAll();
+//
+//                for(int i = 0;i < dataList.size();i++){
+//            CompanyInfo result = dataList.get(i);
+//            Log.i("CompanyInfo",result.toString());
+//        }
 
         // 测试获取系统列表接口
 //        List<CheckType> dataList = ServiceFactory.getYearCheckService().getSystemNameData();
@@ -212,6 +239,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //        for(int i=0;i<dataList.size();i++){
 //            Log.i("getHistoryList:::",""+dataList.get(i));
 //        }
+
 
 
 

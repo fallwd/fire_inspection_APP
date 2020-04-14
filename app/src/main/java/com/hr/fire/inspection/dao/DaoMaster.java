@@ -31,8 +31,14 @@ public class DaoMaster extends AbstractDaoMaster {
         YearCheckResultDao.createTable(db, ifNotExists);
 <<<<<<< HEAD
         CheckPersonDao.createTable(db, ifNotExists);
+        CompanyTypeDao.createTable(db, ifNotExists);
+        InspectionResultDao.createTable(db, ifNotExists);
+=======
+<<<<<<< HEAD
+        CheckPersonDao.createTable(db, ifNotExists);
 =======
 >>>>>>> be2e63913f7d082439c2eb34ca3c024e4ea4f05b
+>>>>>>> 9069637e91f76f416f6f181e0d49e06685d6224b
     }
 
     /** Drops underlying database table using DAOs. */
@@ -47,8 +53,14 @@ public class DaoMaster extends AbstractDaoMaster {
         YearCheckResultDao.dropTable(db, ifExists);
 <<<<<<< HEAD
         CheckPersonDao.dropTable(db, ifExists);
+        CompanyTypeDao.dropTable(db, ifExists);
+        InspectionResultDao.dropTable(db, ifExists);
+=======
+<<<<<<< HEAD
+        CheckPersonDao.dropTable(db, ifExists);
 =======
 >>>>>>> be2e63913f7d082439c2eb34ca3c024e4ea4f05b
+>>>>>>> 9069637e91f76f416f6f181e0d49e06685d6224b
     }
 
     /**
@@ -77,8 +89,14 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(YearCheckResultDao.class);
 <<<<<<< HEAD
         registerDaoClass(CheckPersonDao.class);
+        registerDaoClass(CompanyTypeDao.class);
+        registerDaoClass(InspectionResultDao.class);
+=======
+<<<<<<< HEAD
+        registerDaoClass(CheckPersonDao.class);
 =======
 >>>>>>> be2e63913f7d082439c2eb34ca3c024e4ea4f05b
+>>>>>>> 9069637e91f76f416f6f181e0d49e06685d6224b
     }
 
     public DaoSession newSession() {
