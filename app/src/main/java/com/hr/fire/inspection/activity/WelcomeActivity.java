@@ -210,16 +210,16 @@ public class WelcomeActivity extends AppCompatActivity {
 //        String type = "platform";
 //        ServiceFactory.getCompanyInfoService().rename(oldName,newName,type);
         // 删
-        String name = "T1";
-        String type = "company";
-        ServiceFactory.getCompanyInfoService().deleteData(name,type);
-
-        List<CompanyInfo> dataList = ServiceFactory.getCompanyInfoService().getAll();
-
-                for(int i = 0;i < dataList.size();i++){
-            CompanyInfo result = dataList.get(i);
-            Log.i("CompanyInfo",result.toString());
-        }
+//        String name = "T1";
+//        String type = "company";
+//        ServiceFactory.getCompanyInfoService().deleteData(name,type);
+//
+//        List<CompanyInfo> dataList = ServiceFactory.getCompanyInfoService().getAll();
+//
+//                for(int i = 0;i < dataList.size();i++){
+//            CompanyInfo result = dataList.get(i);
+//            Log.i("CompanyInfo",result.toString());
+//        }
 
         // 测试获取系统列表接口
 //        List<CheckType> dataList = ServiceFactory.getYearCheckService().getSystemNameData();
