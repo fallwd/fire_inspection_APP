@@ -1,6 +1,5 @@
 package com.hr.fire.inspection.sqlHelpers;
 
-import android.util.JsonReader;
 import android.util.Log;
 
 import com.hr.fire.inspection.dao.CheckTypeDao;
@@ -15,11 +14,8 @@ import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.utils.GreenDaoHelper;
 
 import org.greenrobot.greendao.query.Join;
-import org.greenrobot.greendao.query.Query;
 import org.greenrobot.greendao.query.QueryBuilder;
-import org.json.JSONStringer;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class YearCheckData {
