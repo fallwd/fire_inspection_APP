@@ -63,7 +63,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
     }
 
     @Override
-    public List getHistoryList(long companyId,long systemId) {
+    public List<HashMap> getHistoryList(long companyId,long systemId) {
         // checkTypeId companyInfoId CHECK_TYPE.PARENT_ID=%s AND
         QueryBuilder<ItemInfo> queryBuilder = daoSession.queryBuilder(ItemInfo.class).
                 where(new WhereCondition.StringCondition(
@@ -72,7 +72,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 where(CheckTypeDao.Properties.ParentId.eq(systemId));
 //        Log.i("getHistoryList:::",""+queryBuilder.toString());
         List<ItemInfo> dataList = queryBuilder.list();
-        ArrayList resultList = new ArrayList();
+        ArrayList<HashMap> resultList = new ArrayList();
         Log.i("getHistoryList:::","查询完成");
 
         for(int i=0;i<dataList.size();i++){
@@ -562,7 +562,66 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
     }
 
     @Override
-    public List<ItemInfo> getOutputItemData() {
-        return null;
+    public List<HashMap> getOutputItemData(long companyInfoId, Date checkDate) {
+        // Join checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
+        //                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+
+        HashMap systemMap;
+        ArrayList<HashMap> retList = new ArrayList();
+
+        // 获取system信息
+//        List<CheckType> systemList = this.getSystemNameData();
+        String systemName = "高压二氧化碳灭火系统";
+        // 获取对应id
+        QueryBuilder<CheckType> checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
+                where(CheckTypeDao.Properties.Name.eq(systemName));
+        long systemId = checkTypeQueryBuilder.list().get(0).getId();
+        QueryBuilder<ItemInfo> queryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate)
+                );
+        Join checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
+                        where(CheckTypeDao.Properties.ParentId.eq(systemId));
+        List<ItemInfo> dataList = queryBuilder.list();
+        systemMap = new HashMap();
+        systemMap.put(systemName,dataList);
+        retList.add(systemMap);
+
+        systemName = "七氟丙烷灭火系统";
+        checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
+                where(CheckTypeDao.Properties.Name.eq(systemName));
+        systemId = checkTypeQueryBuilder.list().get(0).getId();
+        queryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate)
+                );
+        checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
+                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+        dataList = queryBuilder.list();
+        systemMap = new HashMap();
+        systemMap.put(systemName,dataList);
+        retList.add(systemMap);
+
+        systemName = "灭火器";
+        checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
+                where(CheckTypeDao.Properties.Name.eq(systemName));
+        systemId = checkTypeQueryBuilder.list().get(0).getId();
+        queryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate)
+                );
+        checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
+                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+        dataList = queryBuilder.list();
+        systemMap = new HashMap();
+        systemMap.put(systemName,dataList);
+        retList.add(systemMap);
+
+
+
+        return retList;
     }
 }
