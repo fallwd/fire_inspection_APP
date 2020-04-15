@@ -3,13 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.hr.fire.inspection">
     <!-- 访问SD权限 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- 摄像头权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 摄像头权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 在SDCard读取数据的权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 往SDCard写入数据权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!--   从SDard读取数据权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 在SDCard中创建与删除文件权限  -->
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 摄像头权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!--&lt;!&ndash; 7.0图片共享 &ndash;&gt;-->
-
 
     <application
         android:name=".utils.GreenDaoHelper"
@@ -20,6 +26,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".adapter.FireReportItemAdapter"></activity>
+        <activity android:name=".activity.FireReportActivity" />
+
         <provider xmlns:tools="http://schemas.android.com/tools"
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.hr.fire.inspection.fileProvider"
@@ -42,7 +51,6 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -62,6 +70,33 @@
             android:name=".activity.NavigationActivity"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".activity.ChooseCompanyActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.CompanyOperationActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.CompanyInsertActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.OilFieldActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.OilOperationActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.OilInsertActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.PlatformActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.PlatformOperationActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.PlatformInsertActivity"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".activity.InspectionActivity"
             android:screenOrientation="landscape" />
         <activity
@@ -73,6 +108,7 @@
         <activity
             android:name=".activity.CarbonDioxideAcitivty"
             android:screenOrientation="landscape" />
+
         <activity
             android:name=".activity.CarBonGoodsWeightAcitivty"
             android:screenOrientation="landscape" />
@@ -83,4 +119,5 @@
             android:name=".activity.CarbondioxideRecordAcitivty"
             android:screenOrientation="landscape" />
     </application>
+
 </manifest>

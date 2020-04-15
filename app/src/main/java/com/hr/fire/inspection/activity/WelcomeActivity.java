@@ -33,6 +33,7 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
 //         初始化数据库,插入测试数据
+<<<<<<< HEAD
         // 清空数据库
         DBManager cleanObj = new DBManager(this);
         cleanObj.deleSQL();
@@ -93,6 +94,11 @@ public class WelcomeActivity extends AppCompatActivity {
 //        }
         ////////////////////////////////////////////////////////////////////////////////////////////
 
+=======
+//        BaseData baseData = new BaseData();
+//        baseData.initData();
+//        // 调用接口测试
+>>>>>>> a04a50a42e8f214c7104bc5a591b87ed0e1c9c80
 //        String companyName = "辽东作业公司";
 //        String oilfieldName = "SZ36-1";
 //        String platformName = "SZ36-1D";
@@ -299,19 +305,16 @@ public class WelcomeActivity extends AppCompatActivity {
 //        }
 
 
-
-
         Toast.makeText(WelcomeActivity.this,"系统将在2秒后为您自动跳转到首页",Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 // 执行在主线程
                 // 启动主页面
-                startActivity(new Intent(WelcomeActivity.this, NavigationActivity.class));
+                startActivity(new Intent(WelcomeActivity.this, ChooseCompanyActivity.class));
                 //关闭当前页面
                 finish();
             }
         },2000);
-
     }
 }

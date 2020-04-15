@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.gesture.GestureOverlayView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.FireReportActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/but1"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints,UselessParent">
+
+            <ImageButton
+                android:id="@+id/backHome"
+                android:layout_width="20dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="20dp"
+                android:background="@mipmap/left_icon"
+                android:scaleType="fitXY"
+                android:contentDescription="TODO" />
+
+            <TextView
+                android:id="@+id/account_pwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="@string/fire_report"
+                android:textColor="@color/title_green"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:paddingTop="10dp"
+            android:background="@drawable/border"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="MissingConstraints">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_alignParentStart="true"
+                    android:orientation="horizontal"
+                    tools:ignore="MissingConstraints">
+
+                    <!--请选择公司-->
+
+                    <Button
+                        android:layout_width="80dp"
+                        android:layout_height="30sp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/button_border"
+                        android:drawableRight="@mipmap/cmander">
+
+                    </Button>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="--"
+                        android:layout_marginLeft="10dp"
+                        android:layout_height="wrap_content" />
+                    <Button
+                        android:layout_width="80dp"
+                        android:layout_height="30sp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/button_border"
+                        android:drawableRight="@mipmap/cmander">
+
+                    </Button>
+
+                    <Spinner
+                        style="@style/spinner_style"
+                        android:id="@+id/spinner_bussy"
+                        android:entries="@array/spingarr"
+                        android:background="@drawable/spriner_style" >
+                    </Spinner>
+                    <!--请选择油田-->
+                    <Spinner
+                        style="@style/spinner_style"
+                        android:id="@+id/spinner_yt"
+                        android:entries="@array/spingarr1"
+                        android:background="@drawable/spriner_style" />
+                    <!--请选择平台-->
+                    <Spinner
+                        style="@style/spinner_style"
+                        android:id="@+id/spinner_pt"
+                        android:entries="@array/spingarr2"
+                        android:background="@drawable/spriner_style" />
+
+                    <!--请选择系统-->
+                    <Spinner
+                        style="@style/spinner_style"
+                        android:id="@+id/spinner_sys"
+                        android:entries="@array/spingarr3"
+                        android:background="@drawable/spriner_style" />
+                    <!--请选择检查人-->
+                    <Spinner
+                        style="@style/spinner_style"
+                        android:id="@+id/spinner_per"
+                        android:entries="@array/spingarr4"
+                        android:background="@drawable/spriner_style" />
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:translationX="-10dp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/listview_border_margin"
+                    android:text="@string/daoru" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:padding="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:orientation="vertical">
+                    <EditText
+                        android:background="@drawable/edit_report"
+                        android:layout_width="match_parent"
+                        android:paddingStart="10dp"
+                        android:drawableLeft="@mipmap/search"
+                        android:layout_height="30dp"
+                        android:hint="@string/PleaseInputText"
+                        android:textSize="16dp"
+                        android:autofillHints="search" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:orientation="vertical">
+
+                <ListView
+                    android:id="@+id/main_list2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    tools:ignore="MissingConstraints" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</android.gesture.GestureOverlayView>
