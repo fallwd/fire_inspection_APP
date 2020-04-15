@@ -18,6 +18,7 @@ import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.sqlHelpers.BaseData;
 import com.hr.fire.inspection.sqlHelpers.YearCheckData;
+import com.hr.fire.inspection.utils.DBManager;
 import com.hr.fire.inspection.utils.GreenDaoHelper;
 
 import java.text.ParseException;
@@ -30,8 +31,68 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-//        DaoSession daoSession = GreenDaoHelper.getDaoSession();
+
 //         初始化数据库,插入测试数据
+        // 清空数据库
+        DBManager cleanObj = new DBManager(this);
+        cleanObj.deleSQL();
+        // 初始化数据库
+        BaseData baseData = new BaseData();
+        baseData.initData();
+        baseData.insertTestData();
+        // 调用接口测试
+//        List<CompanyInfo> companyList = ServiceFactory.getCompanyInfoService().getAll();
+//        for(int i=0;i<companyList.size();i++){
+//            Log.i("companyList",companyList.get(i).toString());
+//        }
+//        List<CheckType> checkTypeList = ServiceFactory.getYearCheckService().getCheckTypeAll();
+//        for(int i=0;i<checkTypeList.size();i++){
+//            Log.i("checkTypeList",checkTypeList.get(i).toString());
+//        }
+
+//        List<YearCheck> yearList = ServiceFactory.getYearCheckService().getCheckDataAll();
+//        for(int i=0;i<yearList.size();i++){
+//            Log.i("yearList",yearList.get(i).toString());
+//        }
+//
+//        List<CheckType> checkTypeList = ServiceFactory.getYearCheckService().getSystemNameData();
+//        for(int i=0;i<checkTypeList.size();i++){
+//            Log.i("checkTypeList",checkTypeList.get(i).toString());
+//            long systemId = checkTypeList.get(i).getId();
+//            List<CheckType> checkTypeList2 = ServiceFactory.getYearCheckService().gettableNameData(systemId);
+//            for(int j=0;j<checkTypeList2.size();j++){
+//                Log.i("checkTypeList2",checkTypeList2.get(j).toString());
+//                long tableId = checkTypeList2.get(j).getId();
+////                Log.i("checkTypeList2",tableId+"");
+//                List<YearCheck> checkList = ServiceFactory.getYearCheckService().getCheckDataEasy(tableId);
+//                for(int y=0;y<checkList.size();y++){
+//                    Log.i("checkList",checkList.get(y).toString());
+//                }
+//            }
+//        }
+        /////////////////////////////////////////////////////////////////////////////////////////////
+//        // 测试查询接口
+//        // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
+//        long companyInfoId = 3;
+//        // checkTypeId 对应 药剂瓶 2
+//        long checkTypeId = 2;
+//        // number 区号 SD002
+//        String number = "SD001";
+//        // checkDate 检查日期
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//        Date checkDate = null;
+//        try {
+//            checkDate = format.parse("2019-08-03 10:10");
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//
+//        List<ItemInfo> dataList = ServiceFactory.getYearCheckService().getItemDataEasy(companyInfoId, checkTypeId, number, checkDate);
+//        for(int i=0;i<dataList.size();i++){
+//            Log.i("getItemDataEasy",dataList.get(i).toString());
+//        }
+        ////////////////////////////////////////////////////////////////////////////////////////////
+
 //        BaseData baseData = new BaseData();
 //        baseData.initData();
 //        // 调用接口测试
@@ -234,7 +295,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //        }
 
         // 测试历史数据接口
-//        List dataList = ServiceFactory.getYearCheckService().getHistoryList(4,1);
+//        List dataList = ServiceFactory.getYearCheckService().getHistoryList(3,1);
 //        for(int i=0;i<dataList.size();i++){
 //            Log.i("getHistoryList:::",""+dataList.get(i));
 //        }
@@ -246,8 +307,8 @@ public class WelcomeActivity extends AppCompatActivity {
             public void run() {
                 // 执行在主线程
                 // 启动主页面
-//                startActivity(new Intent(WelcomeActivity.this, ChooseCompanyActivity.class));
                 startActivity(new Intent(WelcomeActivity.this, NavigationActivity.class));
+
                 //关闭当前页面
                 finish();
             }

@@ -15,8 +15,27 @@
     <string name="is_qualified">是否合格</string>
     <string name="scene_photos">现场照片</string>
     <string name="hidden_danger">隐患描述</string>
+    <string name="fire_report">消防年检报告</string>
     <string name="yes">是</string>
     <string name="no">否</string>
     <string name="other"> --- </string>
+    <string name="daoru">导入</string>
+    <string name="PleaseInputText">请输入查询信息</string>
+    <string name="report_output">导出</string>
+    <string-array name="spingarr">
+        <item>请选择公司</item>
+    </string-array>
+    <string-array name="spingarr1">
+        <item>请选择油田</item>
+    </string-array>
+    <string-array name="spingarr2">
+        <item>请选择系统</item>
+    </string-array>
+    <string-array name="spingarr3">
+        <item>请选择平台</item>
+    </string-array>
+    <string-array name="spingarr4">
+        <item>请选择检查人</item>
+    </string-array>
 
 </resources>

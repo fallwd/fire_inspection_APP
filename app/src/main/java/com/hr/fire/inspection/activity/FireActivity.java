@@ -17,7 +17,6 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.deepoove.poi.XWPFTemplate;
 import com.hr.fire.inspection.R;
@@ -107,13 +106,11 @@ public class FireActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-//                Toast.makeText(getApplicationContext(), "敬请期待", Toast.LENGTH_LONG).show();
-                    try {
-                        initWordTem();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+                // 点击跳转
+                Intent intent = new Intent(FireActivity.this, FireReportActivity.class);
+                // 页面传值
+                startActivity(intent);
+            }
         });
 
         // 点击返回上一页
