@@ -83,4 +83,19 @@ public interface YearCheckService extends BaseService<Object>{
     long insertCheckResultData(YearCheckResult checkResultData, long itemId,long checkId,String companyName, String oilfieldName, String platformName, String systemName, String itemTableName, String checkTableName);
     long insertCheckResultDataEasy(YearCheckResult checkResultData, long itemId,long yearCheckId,long companyInfoId, long checkTypeId, String number, Date checkDate);
 
+    // 导出报告相关接口
+    /**
+     * 获取可导出结果列表
+     * @param
+     * @return
+     */
+    List getOutputList();
+
+    /**
+     * 获取导出结果数据
+     * @param
+     * @return
+     */
+    List<ItemInfo> getOutputItemData();
+
 }
