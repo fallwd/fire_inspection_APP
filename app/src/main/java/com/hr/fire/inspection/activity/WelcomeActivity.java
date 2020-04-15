@@ -296,7 +296,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //        }
 
         // 测试历史数据接口
-//        List dataList = ServiceFactory.getYearCheckService().getHistoryList(4,1);
+//        List dataList = ServiceFactory.getYearCheckService().getHistoryList(3,1);
 //        for(int i=0;i<dataList.size();i++){
 //            Log.i("getHistoryList:::",""+dataList.get(i));
 //        }
