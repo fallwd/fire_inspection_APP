@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:background="@drawable/layer_border_bottom">
+    <RelativeLayout
+        android:id="@+id/company_item_row2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="5dp"
+        android:paddingRight="3dp">
+        <TextView
+            android:id="@+id/company_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="辽东作业公司"
+            android:textColor="#000000"
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true">
+        </TextView>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true">
+            <ImageView
+                android:id="@+id/edit_btn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/edit_item"
+                android:layout_gravity="center"
+                android:layout_marginRight="30dp">
+            </ImageView>
+            <ImageView
+                android:id="@+id/del_btn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/remove_item"
+                android:layout_gravity="center">
+            </ImageView>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>
+    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="45dp"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:orientation="horizontal">-->
+    <!--&lt;!&ndash;RRUG如果这里布局还是不太美观，  自己在调整一下   图标自己换一下&ndash;&gt;-->
+    <!--<TextView-->
+    <!--android:id="@+id/tv_title"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="shujtiaodfs1" />-->
+    <!--<ImageView-->
+    <!--android:id="@+id/iv_1"-->
+    <!--android:layout_width="30dp"-->
+    <!--android:layout_height="30dp"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:background="@mipmap/logo_hy3x" />-->
+    <!--<ImageView-->
+    <!--android:id="@+id/iv_2"-->
+    <!--android:layout_width="30dp"-->
+    <!--android:layout_height="30dp"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_marginRight="50dp"-->
+    <!--android:background="@mipmap/logo_hy3x" />-->
+    <!--</RelativeLayout>-->

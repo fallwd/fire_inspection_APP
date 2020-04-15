@@ -19,7 +19,13 @@ public class NavigationActivity extends AppCompatActivity {
         LinearLayout btn1 = (LinearLayout) findViewById(R.id.Navigation_Btn1);
         btn1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+<<<<<<< HEAD
+                Intent intent = new Intent(NavigationActivity.this, PhotoUploadActivity.class);
+
+//                Intent intent = new Intent(NavigationActivity.this, FireActivity.class);
+=======
                 Intent intent = new Intent(NavigationActivity.this, FireActivity.class);
+>>>>>>> ba55a7c522be9163ffd8d30ea067dff5f3de2d82
                 startActivity(intent);
             }
         });
@@ -32,6 +38,8 @@ public class NavigationActivity extends AppCompatActivity {
             }
         });
         LinearLayout btn3 = (LinearLayout) findViewById(R.id.Navigation_Btn3);
+
+
         btn3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(NavigationActivity.this, MainActivity.class);

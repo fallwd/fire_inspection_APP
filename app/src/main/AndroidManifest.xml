@@ -70,6 +70,33 @@
             android:name=".activity.NavigationActivity"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".activity.ChooseCompanyActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.CompanyOperationActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.CompanyInsertActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.OilFieldActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.OilOperationActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.OilInsertActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.PlatformActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.PlatformOperationActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.PlatformInsertActivity"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".activity.InspectionActivity"
             android:screenOrientation="landscape" />
         <activity
@@ -81,6 +108,7 @@
         <activity
             android:name=".activity.CarbonDioxideAcitivty"
             android:screenOrientation="landscape" />
+
         <activity
             android:name=".activity.CarBonGoodsWeightAcitivty"
             android:screenOrientation="landscape" />
