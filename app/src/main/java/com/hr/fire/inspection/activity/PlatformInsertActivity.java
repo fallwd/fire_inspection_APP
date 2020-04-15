@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,8 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.service.ServiceFactory;
 
-public class PlatformInsertActivity  extends AppCompatActivity {
+public class PlatformInsertActivity extends AppCompatActivity {
     private String oil_name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +30,15 @@ public class PlatformInsertActivity  extends AppCompatActivity {
         // 获取btn元素
         Button cancel_btn = (Button) this.findViewById(R.id.cancel_btn);
         Button submit_btn = (Button) this.findViewById(R.id.submit_btn);
-
+        ImageView iv_finish = (ImageView) this.findViewById(R.id.iv_finish);
+        TextView tv_inspection_pro = (TextView) this.findViewById(R.id.tv_inspection_pro);
+        tv_inspection_pro.setText("请添加油田");
+        iv_finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         /*
          * @desc 按钮确认事件
          * */
@@ -40,14 +51,15 @@ public class PlatformInsertActivity  extends AppCompatActivity {
 
                 if (platformName.isEmpty()) {
                     Toast.makeText(PlatformInsertActivity.this, "请将表单信息填写完整", Toast.LENGTH_SHORT).show();
-                    finish();
+                    return;
                 } else {
                     long ret = ServiceFactory.getCompanyInfoService().addData(companyName, oil_name, platformName);
-                    if(ret==0){
+                    if (ret == 0) {
                         Toast.makeText(PlatformInsertActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(PlatformInsertActivity.this, PlatformActivity.class);
                         intent.putExtra("oil_name", oil_name);
                         startActivity(intent);
+                        finish();
                     } else {
                         Toast.makeText(PlatformInsertActivity.this, "添加失败", Toast.LENGTH_SHORT).show();
                     }
@@ -58,8 +70,6 @@ public class PlatformInsertActivity  extends AppCompatActivity {
 
     public void cancelInput(View Button) {
         Toast.makeText(PlatformInsertActivity.this, "您点击了取消按钮", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(PlatformInsertActivity.this,PlatformActivity.class);
-        intent.putExtra("oil_name", oil_name);
-        startActivity(intent);
+        finish();
     }
 }

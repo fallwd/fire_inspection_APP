@@ -115,7 +115,6 @@ public class WelcomeActivity extends AppCompatActivity {
 //        ServiceFactory.getYearCheckService().delete(itemInfo);
 
 
-
 //        String tableName = "药剂瓶检查表";
 //        List checkDataList = ServiceFactory.getYearCheckService().getCheckData(tableName);
 //        Log.i("getCheckData",checkDataList.get(0).toString());
@@ -298,12 +297,12 @@ public class WelcomeActivity extends AppCompatActivity {
 //        }
 
 //         测试历史数据接口
-        List<HashMap> dataList = ServiceFactory.getYearCheckService().getHistoryList(3,1);
-        for(int i=0;i<dataList.size();i++){
-            Log.i("getHistoryList:::",""+dataList.get(i));
-            HashMap has = dataList.get(i);
-            Log.i("getHistoryList:::",""+ has.get("ret"));
-        }
+//        List<HashMap> dataList = ServiceFactory.getYearCheckService().getHistoryList(3,1);
+//        for(int i=0;i<dataList.size();i++){
+//            Log.i("getHistoryList:::",""+dataList.get(i));
+//            HashMap has = dataList.get(i);
+//            Log.i("getHistoryList:::",""+ has.get("ret"));
+//        }
 
 //        // 测试导出数据接口
 //        // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
@@ -324,16 +323,17 @@ public class WelcomeActivity extends AppCompatActivity {
 //
 //        }
 
-        Toast.makeText(WelcomeActivity.this,"系统将在2秒后为您自动跳转到首页",Toast.LENGTH_SHORT).show();
+        Toast.makeText(WelcomeActivity.this, "系统将在2秒后为您自动跳转到首页", Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 // 执行在主线程
                 // 启动主页面
-                startActivity(new Intent(WelcomeActivity.this, CarbonDioxideAcitivty.class));
+                startActivity(new Intent(WelcomeActivity.this, NavigationActivity.class));
+
                 //关闭当前页面
                 finish();
             }
-        },2000);
+        }, 2000);
     }
 }

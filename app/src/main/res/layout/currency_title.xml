@@ -23,5 +23,6 @@
         android:layout_marginLeft="10dp"
         android:text="@string/home_annual_fire_inspection"
         android:textColor="@color/title_black"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:textStyle="bold" />
 </LinearLayout>

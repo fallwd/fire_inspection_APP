@@ -43,6 +43,8 @@
                     android:hint="请输入平台名称"
                     android:imeOptions="flagNoExtractUi"
                     android:textCursorDrawable="@drawable/edit_theme"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:textSize="12sp" />
             </LinearLayout>
 

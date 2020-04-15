@@ -40,6 +40,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:hint="请输入油田名称"
                     android:imeOptions="flagNoExtractUi"
                     android:textCursorDrawable="@drawable/edit_theme"
