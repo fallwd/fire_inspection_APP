@@ -6,14 +6,13 @@ import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
 import com.hr.fire.inspection.dao.DaoSession;
-import com.hr.fire.inspection.dao.ItemInfoDao;
 import com.hr.fire.inspection.dao.YearCheckDao;
 import com.hr.fire.inspection.dao.YearCheckResultDao;
 import com.hr.fire.inspection.dao.CheckTypeDao;
 
-import java.io.Serializable;
 import java.util.Date;
 import com.hr.fire.inspection.dao.CompanyInfoDao;
+import com.hr.fire.inspection.dao.ItemInfoDao;
 
 @Entity(
         nameInDb = "t_year_check_result"

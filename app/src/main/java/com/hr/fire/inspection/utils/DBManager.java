@@ -6,7 +6,7 @@ import com.hr.fire.inspection.dao.DaoMaster;
 
 import org.greenrobot.greendao.database.Database;
 public class DBManager {
-    private final static String dbName = "t_company_info";
+    private final static String dbName = "hy_fire_inspection";
     private static DBManager mInstance;
     private DaoMaster.OpenHelper openHelper;
     private Context context;

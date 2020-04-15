@@ -51,18 +51,20 @@ public class ItemInfoDao extends AbstractDao<ItemInfo, Long> {
         public final static Property AlarmFunction = new Property(18, String.class, "alarmFunction", false, "ALARM_FUNCTION");
         public final static Property Effectiveness = new Property(19, String.class, "effectiveness", false, "EFFECTIVENESS");
         public final static Property ResponseTime = new Property(20, String.class, "responseTime", false, "RESPONSE_TIME");
-        public final static Property Descrption = new Property(21, String.class, "descrption", false, "DESCRPTION");
+        public final static Property Description = new Property(21, String.class, "description", false, "DESCRIPTION");
         public final static Property SetAlarm25 = new Property(22, String.class, "setAlarm25", false, "SET_ALARM25");
         public final static Property SetAlarm50 = new Property(23, String.class, "setAlarm50", false, "SET_ALARM50");
         public final static Property TestAlarm25 = new Property(24, String.class, "testAlarm25", false, "TEST_ALARM25");
         public final static Property TestAlarm50 = new Property(25, String.class, "testAlarm50", false, "TEST_ALARM50");
         public final static Property ObserveDate = new Property(26, java.util.Date.class, "observeDate", false, "OBSERVE_DATE");
-        public final static Property IsPass = new Property(27, String.class, "isPass", false, "IS_PASS");
-        public final static Property LabelNo = new Property(28, String.class, "labelNo", false, "LABEL_NO");
-        public final static Property CodePath = new Property(29, String.class, "codePath", false, "CODE_PATH");
-        public final static Property SystemNumber = new Property(30, String.class, "SystemNumber", false, "SYSTEM_NUMBER");
-        public final static Property ProtectArea = new Property(31, String.class, "ProtectArea", false, "PROTECT_AREA");
-        public final static Property CheckDate = new Property(32, java.util.Date.class, "checkDate", false, "CHECK_DATE");
+        public final static Property TaskNumber = new Property(27, String.class, "taskNumber", false, "TASK_NUMBER");
+        public final static Property IsPass = new Property(28, String.class, "isPass", false, "IS_PASS");
+        public final static Property LabelNo = new Property(29, String.class, "labelNo", false, "LABEL_NO");
+        public final static Property ImageUrl = new Property(30, String.class, "imageUrl", false, "IMAGE_URL");
+        public final static Property CodePath = new Property(31, String.class, "codePath", false, "CODE_PATH");
+        public final static Property SystemNumber = new Property(32, String.class, "SystemNumber", false, "SYSTEM_NUMBER");
+        public final static Property ProtectArea = new Property(33, String.class, "ProtectArea", false, "PROTECT_AREA");
+        public final static Property CheckDate = new Property(34, java.util.Date.class, "checkDate", false, "CHECK_DATE");
     }
 
     private DaoSession daoSession;
@@ -102,18 +104,20 @@ public class ItemInfoDao extends AbstractDao<ItemInfo, Long> {
                 "\"ALARM_FUNCTION\" TEXT," + // 18: alarmFunction
                 "\"EFFECTIVENESS\" TEXT," + // 19: effectiveness
                 "\"RESPONSE_TIME\" TEXT," + // 20: responseTime
-                "\"DESCRPTION\" TEXT," + // 21: descrption
+                "\"DESCRIPTION\" TEXT," + // 21: description
                 "\"SET_ALARM25\" TEXT," + // 22: setAlarm25
                 "\"SET_ALARM50\" TEXT," + // 23: setAlarm50
                 "\"TEST_ALARM25\" TEXT," + // 24: testAlarm25
                 "\"TEST_ALARM50\" TEXT," + // 25: testAlarm50
                 "\"OBSERVE_DATE\" INTEGER," + // 26: observeDate
-                "\"IS_PASS\" TEXT," + // 27: isPass
-                "\"LABEL_NO\" TEXT," + // 28: labelNo
-                "\"CODE_PATH\" TEXT," + // 29: codePath
-                "\"SYSTEM_NUMBER\" TEXT," + // 30: SystemNumber
-                "\"PROTECT_AREA\" TEXT," + // 31: ProtectArea
-                "\"CHECK_DATE\" INTEGER);"); // 32: checkDate
+                "\"TASK_NUMBER\" TEXT," + // 27: taskNumber
+                "\"IS_PASS\" TEXT," + // 28: isPass
+                "\"LABEL_NO\" TEXT," + // 29: labelNo
+                "\"IMAGE_URL\" TEXT," + // 30: imageUrl
+                "\"CODE_PATH\" TEXT," + // 31: codePath
+                "\"SYSTEM_NUMBER\" TEXT," + // 32: SystemNumber
+                "\"PROTECT_AREA\" TEXT," + // 33: ProtectArea
+                "\"CHECK_DATE\" INTEGER);"); // 34: checkDate
     }
 
     /** Drops the underlying database table. */
@@ -231,9 +235,9 @@ public class ItemInfoDao extends AbstractDao<ItemInfo, Long> {
             stmt.bindString(21, responseTime);
         }
  
-        String descrption = entity.getDescrption();
-        if (descrption != null) {
-            stmt.bindString(22, descrption);
+        String description = entity.getDescription();
+        if (description != null) {
+            stmt.bindString(22, description);
         }
  
         String setAlarm25 = entity.getSetAlarm25();
@@ -261,34 +265,44 @@ public class ItemInfoDao extends AbstractDao<ItemInfo, Long> {
             stmt.bindLong(27, observeDate.getTime());
         }
  
+        String taskNumber = entity.getTaskNumber();
+        if (taskNumber != null) {
+            stmt.bindString(28, taskNumber);
+        }
+ 
         String isPass = entity.getIsPass();
         if (isPass != null) {
-            stmt.bindString(28, isPass);
+            stmt.bindString(29, isPass);
         }
  
         String labelNo = entity.getLabelNo();
         if (labelNo != null) {
-            stmt.bindString(29, labelNo);
+            stmt.bindString(30, labelNo);
+        }
+ 
+        String imageUrl = entity.getImageUrl();
+        if (imageUrl != null) {
+            stmt.bindString(31, imageUrl);
         }
  
         String codePath = entity.getCodePath();
         if (codePath != null) {
-            stmt.bindString(30, codePath);
+            stmt.bindString(32, codePath);
         }
  
         String SystemNumber = entity.getSystemNumber();
         if (SystemNumber != null) {
-            stmt.bindString(31, SystemNumber);
+            stmt.bindString(33, SystemNumber);
         }
  
         String ProtectArea = entity.getProtectArea();
         if (ProtectArea != null) {
-            stmt.bindString(32, ProtectArea);
+            stmt.bindString(34, ProtectArea);
         }
  
         java.util.Date checkDate = entity.getCheckDate();
         if (checkDate != null) {
-            stmt.bindLong(33, checkDate.getTime());
+            stmt.bindLong(35, checkDate.getTime());
         }
     }
 
@@ -401,9 +415,9 @@ public class ItemInfoDao extends AbstractDao<ItemInfo, Long> {
             stmt.bindString(21, responseTime);
         }
  
-        String descrption = entity.getDescrption();
-        if (descrption != null) {
-            stmt.bindString(22, descrption);
+        String description = entity.getDescription();
+        if (description != null) {
+            stmt.bindString(22, description);
         }
  
         String setAlarm25 = entity.getSetAlarm25();
@@ -431,34 +445,44 @@ public class ItemInfoDao extends AbstractDao<ItemInfo, Long> {
             stmt.bindLong(27, observeDate.getTime());
         }
  
+        String taskNumber = entity.getTaskNumber();
+        if (taskNumber != null) {
+            stmt.bindString(28, taskNumber);
+        }
+ 
         String isPass = entity.getIsPass();
         if (isPass != null) {
-            stmt.bindString(28, isPass);
+            stmt.bindString(29, isPass);
         }
  
         String labelNo = entity.getLabelNo();
         if (labelNo != null) {
-            stmt.bindString(29, labelNo);
+            stmt.bindString(30, labelNo);
+        }
+ 
+        String imageUrl = entity.getImageUrl();
+        if (imageUrl != null) {
+            stmt.bindString(31, imageUrl);
         }
  
         String codePath = entity.getCodePath();
         if (codePath != null) {
-            stmt.bindString(30, codePath);
+            stmt.bindString(32, codePath);
         }
  
         String SystemNumber = entity.getSystemNumber();
         if (SystemNumber != null) {
-            stmt.bindString(31, SystemNumber);
+            stmt.bindString(33, SystemNumber);
         }
  
         String ProtectArea = entity.getProtectArea();
         if (ProtectArea != null) {
-            stmt.bindString(32, ProtectArea);
+            stmt.bindString(34, ProtectArea);
         }
  
         java.util.Date checkDate = entity.getCheckDate();
         if (checkDate != null) {
-            stmt.bindLong(33, checkDate.getTime());
+            stmt.bindLong(35, checkDate.getTime());
         }
     }
 
@@ -497,18 +521,20 @@ public class ItemInfoDao extends AbstractDao<ItemInfo, Long> {
             cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // alarmFunction
             cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19), // effectiveness
             cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // responseTime
-            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // descrption
+            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // description
             cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // setAlarm25
             cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // setAlarm50
             cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // testAlarm25
             cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25), // testAlarm50
             cursor.isNull(offset + 26) ? null : new java.util.Date(cursor.getLong(offset + 26)), // observeDate
-            cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27), // isPass
-            cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28), // labelNo
-            cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29), // codePath
-            cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30), // SystemNumber
-            cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31), // ProtectArea
-            cursor.isNull(offset + 32) ? null : new java.util.Date(cursor.getLong(offset + 32)) // checkDate
+            cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27), // taskNumber
+            cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28), // isPass
+            cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29), // labelNo
+            cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30), // imageUrl
+            cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31), // codePath
+            cursor.isNull(offset + 32) ? null : cursor.getString(offset + 32), // SystemNumber
+            cursor.isNull(offset + 33) ? null : cursor.getString(offset + 33), // ProtectArea
+            cursor.isNull(offset + 34) ? null : new java.util.Date(cursor.getLong(offset + 34)) // checkDate
         );
         return entity;
     }
@@ -536,18 +562,20 @@ public class ItemInfoDao extends AbstractDao<ItemInfo, Long> {
         entity.setAlarmFunction(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
         entity.setEffectiveness(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
         entity.setResponseTime(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
-        entity.setDescrption(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
+        entity.setDescription(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
         entity.setSetAlarm25(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
         entity.setSetAlarm50(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
         entity.setTestAlarm25(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
         entity.setTestAlarm50(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
         entity.setObserveDate(cursor.isNull(offset + 26) ? null : new java.util.Date(cursor.getLong(offset + 26)));
-        entity.setIsPass(cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27));
-        entity.setLabelNo(cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28));
-        entity.setCodePath(cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29));
-        entity.setSystemNumber(cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30));
-        entity.setProtectArea(cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31));
-        entity.setCheckDate(cursor.isNull(offset + 32) ? null : new java.util.Date(cursor.getLong(offset + 32)));
+        entity.setTaskNumber(cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27));
+        entity.setIsPass(cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28));
+        entity.setLabelNo(cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29));
+        entity.setImageUrl(cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30));
+        entity.setCodePath(cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31));
+        entity.setSystemNumber(cursor.isNull(offset + 32) ? null : cursor.getString(offset + 32));
+        entity.setProtectArea(cursor.isNull(offset + 33) ? null : cursor.getString(offset + 33));
+        entity.setCheckDate(cursor.isNull(offset + 34) ? null : new java.util.Date(cursor.getLong(offset + 34)));
      }
     
     @Override
