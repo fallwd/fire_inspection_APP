@@ -33,7 +33,6 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
 //         初始化数据库,插入测试数据
-<<<<<<< HEAD
         // 清空数据库
         DBManager cleanObj = new DBManager(this);
         cleanObj.deleSQL();
@@ -94,11 +93,9 @@ public class WelcomeActivity extends AppCompatActivity {
 //        }
         ////////////////////////////////////////////////////////////////////////////////////////////
 
-=======
 //        BaseData baseData = new BaseData();
 //        baseData.initData();
 //        // 调用接口测试
->>>>>>> a04a50a42e8f214c7104bc5a591b87ed0e1c9c80
 //        String companyName = "辽东作业公司";
 //        String oilfieldName = "SZ36-1";
 //        String platformName = "SZ36-1D";
