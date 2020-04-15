@@ -47,6 +47,8 @@
                     android:background="@null"
                     android:hint="请输入公司名"
                     android:imeOptions="flagNoExtractUi"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:textCursorDrawable="@drawable/edit_theme"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -80,8 +82,6 @@
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
             android:background="@drawable/submit_btn"
-            android:maxLines="1"
-            android:singleLine="true"
             android:text="确认"
             android:textColor="#FFFFFF"
             android:textSize="12dp" />
