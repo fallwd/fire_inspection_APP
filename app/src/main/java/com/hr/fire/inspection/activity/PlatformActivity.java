@@ -47,8 +47,10 @@ public class PlatformActivity  extends AppCompatActivity implements View.OnClick
             CompanyInfo CompanyListItem = dataList.get(i);
             String companyName = CompanyListItem.getPlatformName();
             long id = CompanyListItem.getId();
-            list.add(companyName);
-            idlist.add(id);
+            if(companyName != null || companyName != ""){
+                list.add(companyName);
+                idlist.add(id);
+            }
         }
 
         ListView platform_list_item = findViewById(R.id.platform_list_item);
@@ -113,7 +115,9 @@ public class PlatformActivity  extends AppCompatActivity implements View.OnClick
                             for(int i=0; i<dataList.size();i++){
                                 CompanyInfo CompanyListItem = dataList.get(i);
                                 String companyName = CompanyListItem.getOilfieldName();
-                                list.add(companyName);
+                                if(companyName != null || companyName != ""){
+                                    list.add(companyName);
+                                }
                             }
 
                             ListView platform_list_item = findViewById(R.id.platform_list_item);
