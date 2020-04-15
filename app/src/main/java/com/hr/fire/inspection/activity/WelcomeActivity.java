@@ -52,7 +52,6 @@ public class WelcomeActivity extends AppCompatActivity {
 //        ServiceFactory.getYearCheckService().delete(itemInfo);
 
 
-
 //        String tableName = "药剂瓶检查表";
 //        List checkDataList = ServiceFactory.getYearCheckService().getCheckData(tableName);
 //        Log.i("getCheckData",checkDataList.get(0).toString());
@@ -241,16 +240,17 @@ public class WelcomeActivity extends AppCompatActivity {
 //        }
 
 
-        Toast.makeText(WelcomeActivity.this,"系统将在2秒后为您自动跳转到首页",Toast.LENGTH_SHORT).show();
+        Toast.makeText(WelcomeActivity.this, "系统将在2秒后为您自动跳转到首页", Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 // 执行在主线程
                 // 启动主页面
-                startActivity(new Intent(WelcomeActivity.this, ChooseCompanyActivity.class));
+//                startActivity(new Intent(WelcomeActivity.this, ChooseCompanyActivity.class));
+                startActivity(new Intent(WelcomeActivity.this, NavigationActivity.class));
                 //关闭当前页面
                 finish();
             }
-        },2000);
+        }, 2000);
     }
 }

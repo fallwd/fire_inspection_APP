@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,13 @@ public class CompanyOperationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_company_operation);
         // 获得输入框节点信息
         EditText companyNameText = (EditText) findViewById(R.id.company_name);
+        ImageView iv_finish = (ImageView) findViewById(R.id.iv_finish);
+        iv_finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         Bundle b = getIntent().getExtras();
         //获取Bundle的信息
         final String infocont = b.getString("company_name");
@@ -43,14 +51,13 @@ public class CompanyOperationActivity extends AppCompatActivity {
 
                 if (companyValue.isEmpty()) {
                     Toast.makeText(CompanyOperationActivity.this, "请将表单信息填写完整", Toast.LENGTH_SHORT).show();
-                    finish();
+                    return;
                 } else {
-                    long ret = ServiceFactory.getCompanyInfoService().rename(oldCompanyName,companyValue,type);
-                    if(ret==0){
+                    long ret = ServiceFactory.getCompanyInfoService().rename(oldCompanyName, companyValue, type);
+                    if (ret == 0) {
                         Toast.makeText(CompanyOperationActivity.this, "修改名称成功", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(CompanyOperationActivity.this, ChooseCompanyActivity.class);
-                        startActivity(intent);
-                    }else{
+                        finish();
+                    } else {
                         Toast.makeText(CompanyOperationActivity.this, "修改名称失败", Toast.LENGTH_SHORT).show();
                     }
 
@@ -67,7 +74,6 @@ public class CompanyOperationActivity extends AppCompatActivity {
 
     public void cancelInput(View Button) {
         Toast.makeText(CompanyOperationActivity.this, "您点击了取消按钮", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(CompanyOperationActivity.this, ChooseCompanyActivity.class);
-        startActivity(intent);
+        finish();
     }
 }
