@@ -21,6 +21,7 @@ public class DaoMaster extends AbstractDaoMaster {
 
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
+        CheckPersonDao.createTable(db, ifNotExists);
         CheckTypeDao.createTable(db, ifNotExists);
         CompanyInfoDao.createTable(db, ifNotExists);
         CompanyTypeDao.createTable(db, ifNotExists);
@@ -30,16 +31,11 @@ public class DaoMaster extends AbstractDaoMaster {
         StandardTypeDao.createTable(db, ifNotExists);
         YearCheckDao.createTable(db, ifNotExists);
         YearCheckResultDao.createTable(db, ifNotExists);
-<<<<<<< HEAD
-        CheckPersonDao.createTable(db, ifNotExists);
-        CompanyTypeDao.createTable(db, ifNotExists);
-        InspectionResultDao.createTable(db, ifNotExists);
-=======
->>>>>>> a04a50a42e8f214c7104bc5a591b87ed0e1c9c80
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
+        CheckPersonDao.dropTable(db, ifExists);
         CheckTypeDao.dropTable(db, ifExists);
         CompanyInfoDao.dropTable(db, ifExists);
         CompanyTypeDao.dropTable(db, ifExists);
@@ -49,12 +45,6 @@ public class DaoMaster extends AbstractDaoMaster {
         StandardTypeDao.dropTable(db, ifExists);
         YearCheckDao.dropTable(db, ifExists);
         YearCheckResultDao.dropTable(db, ifExists);
-<<<<<<< HEAD
-        CheckPersonDao.dropTable(db, ifExists);
-        CompanyTypeDao.dropTable(db, ifExists);
-        InspectionResultDao.dropTable(db, ifExists);
-=======
->>>>>>> a04a50a42e8f214c7104bc5a591b87ed0e1c9c80
     }
 
     /**
@@ -73,6 +63,7 @@ public class DaoMaster extends AbstractDaoMaster {
 
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
+        registerDaoClass(CheckPersonDao.class);
         registerDaoClass(CheckTypeDao.class);
         registerDaoClass(CompanyInfoDao.class);
         registerDaoClass(CompanyTypeDao.class);
@@ -82,12 +73,6 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(StandardTypeDao.class);
         registerDaoClass(YearCheckDao.class);
         registerDaoClass(YearCheckResultDao.class);
-<<<<<<< HEAD
-        registerDaoClass(CheckPersonDao.class);
-        registerDaoClass(CompanyTypeDao.class);
-        registerDaoClass(InspectionResultDao.class);
-=======
->>>>>>> a04a50a42e8f214c7104bc5a591b87ed0e1c9c80
     }
 
     public DaoSession newSession() {
