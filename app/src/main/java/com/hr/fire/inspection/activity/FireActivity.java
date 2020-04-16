@@ -82,6 +82,7 @@ public class FireActivity extends AppCompatActivity {
                 Long sys_id = systemNameData.get(position).getId();
                 String str_title = systemNameData.get(position).getName();
                 //跳转详情
+//<<<<<<< HEAD
 //                intent.setClass(FireActivity.this, CarbonDioxideAcitivty.class);
                 intent.setClass(FireActivity.this, SystemTagProtectionAreaActivity.class);
                 intent.putExtra("sys_id", sys_id);
@@ -90,6 +91,25 @@ public class FireActivity extends AppCompatActivity {
                 startActivity(intent);
                 //这个时候,需要关闭当前页面,并且关闭之前所有选择的页面
                 finish();
+//=======
+//                Bundle bundle = new Bundle();
+//                bundle.putString("id", String.valueOf(id));
+//                bundle.putString("context", str);
+//                bundle.putString("f_title", (String) F_title.getText());
+//                if(str == "高压二氧化碳灭火系统" || str == "七氟丙烷气体灭火系统" || str == "海水雨淋灭火系统" || str == "干粉灭火系统" || str == "泡沫灭火系统") {
+//                    // 执行跳转
+//                    Intent intent = new Intent(FireActivity.this, SystemTagProtectionAreaActivity.class);
+//                    // 页面传值
+//                    intent.putExtras(bundle);
+//                    startActivity(intent);
+//                } else {
+//                    // 执行跳转
+//                    Intent intent = new Intent(FireActivity.this, CarbondioxideRecordAcitivty.class);
+//                    // 页面传值
+//                    intent.putExtras(bundle);
+//                    startActivity(intent);
+//                }
+//>>>>>>> master
             }
         });
 

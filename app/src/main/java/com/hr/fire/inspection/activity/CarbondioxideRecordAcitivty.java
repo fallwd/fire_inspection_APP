@@ -105,6 +105,8 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 intent.putExtra("srt_Date", srt_Date); //记录的时间
                 intent.putExtra("platform_id", platform_id);    //平台ID
                 intent.putExtra("f_title", f_title); //系统名称
+
+//                Intent intent = new Intent(this, AutomaticFireAlarmAcitivty.class);
                 startActivity(intent);
                 break;
         }

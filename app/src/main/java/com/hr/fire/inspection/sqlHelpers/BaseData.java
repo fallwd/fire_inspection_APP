@@ -1136,9 +1136,9 @@ public class BaseData {
         Log.i("info","插入公司数据成功");
 
 
-        // 插入checkType 系统名 高压二氧化碳系统灭火系统
+        // 插入checkType 系统名 高压二氧化碳灭火系统
         CheckType checkType = new CheckType();
-        String systemName = "高压二氧化碳系统灭火系统";
+        String systemName = "高压二氧化碳灭火系统";
         int type = 1;
         long parentId = 0;
         checkType.setName(systemName);
@@ -1738,9 +1738,9 @@ public class BaseData {
         // 插入yearCheck
 
         // 获取typecheck id !
-        //  高压二氧化碳系统灭火系统
+        //  高压二氧化碳灭火系统
         QueryBuilder<CheckType> AQB = daoSession.queryBuilder(CheckType.class).
-                where(CheckTypeDao.Properties.Name.eq("高压二氧化碳系统灭火系统"));
+                where(CheckTypeDao.Properties.Name.eq("高压二氧化碳灭火系统"));
         long AId = AQB.list().get(0).getId();
         QueryBuilder<CheckType> BQB = daoSession.queryBuilder(CheckType.class).
                 where(
@@ -3546,7 +3546,7 @@ public class BaseData {
         // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
         companyInfoId = 3;
         // checkTypeId 对应 氮气瓶 4
-        checkTypeId = 2;
+        checkTypeId = 4;
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
@@ -3600,7 +3600,7 @@ public class BaseData {
         // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
         companyInfoId = 3;
         // checkTypeId 对应 氮气瓶 4
-        checkTypeId = 2;
+        checkTypeId = 4;
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
@@ -3650,8 +3650,181 @@ public class BaseData {
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
         ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ///////////////////////////////////////////////////////
+        // companyInfoId CompanyInfo{id=165, companyName='渤西作业公司', oilfieldName='BZ13-1', platformName='BZ13-1', isNecessary=1}
+        companyInfoId = 165;
+        // checkTypeId 对应 药剂瓶 2
+        checkTypeId = 2;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-10-03 10:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        itemObj = new ItemInfo();
+        no = "DQP0005";
+        volume = "9";
+        weight = "3";
+        goodsWeight = "8";
+        prodFactory = "红日药业";
+        format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        prodDate = null;
+        try {
+            prodDate = format2.parse("2018-08-03 09:08:07");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        observeDate = null;
+        try {
+            observeDate = format2.parse("2019-03-09 09:08:07");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        isPass = "是";
+        labelNo = "BQ0005";
+//        systemNumber = "SD001";
+        protectArea = "主配电间";
+        codePath = "/src/DQP0002.jpg";
+        itemObj.setNo(no);
+        itemObj.setVolume(volume);
+        itemObj.setWeight(weight);
+        itemObj.setGoodsWeight(goodsWeight);
+        itemObj.setProdFactory(prodFactory);
+        itemObj.setProdDate(prodDate);
+        itemObj.setObserveDate(observeDate);
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+//        itemObj.setSystemNumber(systemNumber);
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 药剂瓶 2
+        checkTypeId = 2;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setNo(no);
+        itemObj.setVolume(volume);
+        itemObj.setWeight(weight);
+        itemObj.setGoodsWeight(goodsWeight);
+        itemObj.setProdFactory(prodFactory);
+        itemObj.setProdDate(prodDate);
+        itemObj.setObserveDate(observeDate);
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+//        itemObj.setSystemNumber(systemNumber);
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 药剂瓶 2
+        checkTypeId = 4;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setNo(no);
+        itemObj.setVolume(volume);
+        itemObj.setWeight(weight);
+        itemObj.setGoodsWeight(goodsWeight);
+        itemObj.setProdFactory(prodFactory);
+        itemObj.setProdDate(prodDate);
+        itemObj.setObserveDate(observeDate);
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+//        itemObj.setSystemNumber(systemNumber);
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 药剂瓶 2
+        checkTypeId = 4;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-10-03 10:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setNo(no);
+        itemObj.setVolume(volume);
+        itemObj.setWeight(weight);
+        itemObj.setGoodsWeight(goodsWeight);
+        itemObj.setProdFactory(prodFactory);
+        itemObj.setProdDate(prodDate);
+        itemObj.setObserveDate(observeDate);
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+//        itemObj.setSystemNumber(systemNumber);
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 药剂瓶 2
+        checkTypeId = 4;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-10-03 10:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setNo(no);
+        itemObj.setVolume(volume);
+        itemObj.setWeight(weight);
+        itemObj.setGoodsWeight(goodsWeight);
+        itemObj.setProdFactory(prodFactory);
+        itemObj.setProdDate(prodDate);
+        itemObj.setObserveDate(observeDate);
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+//        itemObj.setSystemNumber(systemNumber);
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
 
     }
+    // ///////////////////////////////
+
 
 }
 

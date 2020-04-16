@@ -88,7 +88,7 @@ public class CarbonFragment1 extends Fragment {
         String tableName = "药剂瓶";
         String number = "SD002";
 //        itemDataList = ServiceFactory.getYearCheckService().getItemData(companyName, oilfieldName, platformName, systemName, tableName, number);
-        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId,);
+//        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId,);
         Log.d("dong", "数据查看:" + itemDataList.size());
         Log.d("dong", "数据查看===:" + itemDataList.get(0).toString());
     }

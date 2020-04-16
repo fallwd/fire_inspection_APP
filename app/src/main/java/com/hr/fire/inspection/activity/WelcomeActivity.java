@@ -24,7 +24,9 @@ import com.hr.fire.inspection.utils.GreenDaoHelper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class WelcomeActivity extends AppCompatActivity {
     @Override
@@ -73,16 +75,17 @@ public class WelcomeActivity extends AppCompatActivity {
         /////////////////////////////////////////////////////////////////////////////////////////////
 //        // 测试查询接口
 //        // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
-//        long companyInfoId = 3;
+//        long companyInfoId = 165;
 //        // checkTypeId 对应 药剂瓶 2
 //        long checkTypeId = 2;
 //        // number 区号 SD002
-//        String number = "SD001";
+//        String number = "";
 //        // checkDate 检查日期
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 //        Date checkDate = null;
 //        try {
-//            checkDate = format.parse("2019-08-03 10:10");
+////            checkDate = format.parse("2019-08-03 10:10");
+//            checkDate = format.parse("2019-07-03 09:10");
 //        } catch (ParseException e) {
 //            e.printStackTrace();
 //        }
@@ -294,12 +297,32 @@ public class WelcomeActivity extends AppCompatActivity {
 //            Log.i("gettableNameData",dataList.get(i).getId().toString());
 //        }
 
-        // 测试历史数据接口
-//        List dataList = ServiceFactory.getYearCheckService().getHistoryList(3,1);
+//         测试历史数据接口
+//        List<HashMap> dataList = ServiceFactory.getYearCheckService().getHistoryList(165,1);
 //        for(int i=0;i<dataList.size();i++){
 //            Log.i("getHistoryList:::",""+dataList.get(i));
+//            HashMap has = dataList.get(i);
+//            Log.i("getHistoryList:::",""+ has.get("ret"));
 //        }
 
+//        // 测试导出数据接口
+//        // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
+//        long companyInfoId = 3;
+//        // checkDate 检查日期
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//        Date checkDate = null;
+//        try {
+//            checkDate = format.parse("2019-08-03 10:10");
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        List<HashMap> retList = ServiceFactory.getYearCheckService().getOutputItemData(companyInfoId,checkDate);
+//        for(int i=0;i<retList.size();i++){
+//            Log.i("retList:::",""+retList.get(i));
+//            HashMap h = retList.get(i);
+//            List<ItemInfo> itemList = h.get("高压二氧化碳灭火系统");
+//
+//        }
 
         Toast.makeText(WelcomeActivity.this, "系统将在2秒后为您自动跳转到首页", Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
@@ -308,7 +331,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 // 执行在主线程
                 // 启动主页面
                 startActivity(new Intent(WelcomeActivity.this, NavigationActivity.class));
-
                 //关闭当前页面
                 finish();
             }
