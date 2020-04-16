@@ -21,6 +21,7 @@ import org.greenrobot.greendao.query.WhereCondition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements YearCheckService {
@@ -62,7 +63,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
     }
 
     @Override
-    public List getHistoryList(long companyId,long systemId) {
+    public List<HashMap> getHistoryList(long companyId,long systemId) {
         // checkTypeId companyInfoId CHECK_TYPE.PARENT_ID=%s AND
         QueryBuilder<ItemInfo> queryBuilder = daoSession.queryBuilder(ItemInfo.class).
                 where(new WhereCondition.StringCondition(
@@ -71,8 +72,9 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 where(CheckTypeDao.Properties.ParentId.eq(systemId));
 //        Log.i("getHistoryList:::",""+queryBuilder.toString());
         List<ItemInfo> dataList = queryBuilder.list();
-        ArrayList resultList = new ArrayList();
+        ArrayList<HashMap> resultList = new ArrayList();
         Log.i("getHistoryList:::","查询完成");
+
         for(int i=0;i<dataList.size();i++){
             ItemInfo ret = dataList.get(i);
             String systemName = ret.getCheckType().getParent().getName();
@@ -89,10 +91,16 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
             else {
                 checkDateStr = "noDate";
             }
-
             String comboData = companyName + "_" + oilfieldName + "_" + platformName + "_" + systemName + "_" + checkDateStr;
 //            Log.i("getHistoryList:::",comboData);
-            resultList.add(comboData);
+
+            HashMap obj = new HashMap();
+            obj.put("ret",comboData);
+            obj.put("companyInfoId",companyId);
+            obj.put("systemId",systemId);
+            obj.put("checkDate",checkDate);
+
+            resultList.add(obj);
         }
         return resultList;
     }
@@ -518,5 +526,102 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 
         Log.i("insertCheckResultData","插入检查结果数据完成------------------------------");
         return 0;
+    }
+
+    @Override
+    public List getOutputList() {
+        QueryBuilder<ItemInfo> queryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(new WhereCondition.StringCondition(
+                        String.format("l GROUP BY COMPANY_INFO_ID,CHECK_DATE")));
+        List<ItemInfo> dataList = queryBuilder.list();
+        ArrayList resultList = new ArrayList();
+        for(int i=0;i<dataList.size();i++){
+            ItemInfo ret = dataList.get(i);
+            String companyName = ret.getCompanyInfo().getCompanyName();
+            String oilfieldName = ret.getCompanyInfo().getOilfieldName();
+            String platformName = ret.getCompanyInfo().getPlatformName();
+            Date checkDate = ret.getCheckDate();
+//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmm");
+            String checkDateStr;
+            if(checkDate!=null){
+                checkDateStr = formatter.format(checkDate);
+                String comboData = companyName + "_" + oilfieldName + "_" + platformName + "_"  + checkDateStr;
+//            Log.i("getHistoryList:::",comboData);
+
+                HashMap obj = new HashMap();
+                obj.put("ret",comboData);
+                obj.put("companyInfoId",ret.getCompanyInfoId());
+                obj.put("checkDate",checkDate);
+
+                resultList.add(obj);
+            }
+
+        }
+        return resultList;
+    }
+
+    @Override
+    public List<HashMap> getOutputItemData(long companyInfoId, Date checkDate) {
+        // Join checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
+        //                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+
+        HashMap systemMap;
+        ArrayList<HashMap> retList = new ArrayList();
+
+        // 获取system信息
+//        List<CheckType> systemList = this.getSystemNameData();
+        String systemName = "高压二氧化碳灭火系统";
+        // 获取对应id
+        QueryBuilder<CheckType> checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
+                where(CheckTypeDao.Properties.Name.eq(systemName));
+        long systemId = checkTypeQueryBuilder.list().get(0).getId();
+        QueryBuilder<ItemInfo> queryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate)
+                );
+        Join checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
+                        where(CheckTypeDao.Properties.ParentId.eq(systemId));
+        List<ItemInfo> dataList = queryBuilder.list();
+        systemMap = new HashMap();
+        systemMap.put(systemName,dataList);
+        retList.add(systemMap);
+
+        systemName = "七氟丙烷灭火系统";
+        checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
+                where(CheckTypeDao.Properties.Name.eq(systemName));
+        systemId = checkTypeQueryBuilder.list().get(0).getId();
+        queryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate)
+                );
+        checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
+                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+        dataList = queryBuilder.list();
+        systemMap = new HashMap();
+        systemMap.put(systemName,dataList);
+        retList.add(systemMap);
+
+        systemName = "灭火器";
+        checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
+                where(CheckTypeDao.Properties.Name.eq(systemName));
+        systemId = checkTypeQueryBuilder.list().get(0).getId();
+        queryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate)
+                );
+        checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
+                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+        dataList = queryBuilder.list();
+        systemMap = new HashMap();
+        systemMap.put(systemName,dataList);
+        retList.add(systemMap);
+
+
+
+        return retList;
     }
 }

@@ -1136,9 +1136,9 @@ public class BaseData {
         Log.i("info","插入公司数据成功");
 
 
-        // 插入checkType 系统名 高压二氧化碳系统灭火系统
+        // 插入checkType 系统名 高压二氧化碳灭火系统
         CheckType checkType = new CheckType();
-        String systemName = "高压二氧化碳系统灭火系统";
+        String systemName = "高压二氧化碳灭火系统";
         int type = 1;
         long parentId = 0;
         checkType.setName(systemName);
@@ -1738,9 +1738,9 @@ public class BaseData {
         // 插入yearCheck
 
         // 获取typecheck id !
-        //  高压二氧化碳系统灭火系统
+        //  高压二氧化碳灭火系统
         QueryBuilder<CheckType> AQB = daoSession.queryBuilder(CheckType.class).
-                where(CheckTypeDao.Properties.Name.eq("高压二氧化碳系统灭火系统"));
+                where(CheckTypeDao.Properties.Name.eq("高压二氧化碳灭火系统"));
         long AId = AQB.list().get(0).getId();
         QueryBuilder<CheckType> BQB = daoSession.queryBuilder(CheckType.class).
                 where(

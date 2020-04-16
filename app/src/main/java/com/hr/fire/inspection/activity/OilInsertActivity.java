@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import com.hr.fire.inspection.service.ServiceFactory;
 
 public class OilInsertActivity extends AppCompatActivity {
     private String companyName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +28,15 @@ public class OilInsertActivity extends AppCompatActivity {
         // 获取btn元素
         Button cancel_btn = (Button) this.findViewById(R.id.cancel_btn);
         Button submit_btn = (Button) this.findViewById(R.id.submit_btn);
+        ImageView iv_finish = (ImageView) this.findViewById(R.id.iv_finish);
+        TextView tv_inspection_pro = (TextView) this.findViewById(R.id.tv_inspection_pro);
+        tv_inspection_pro.setText("请添加平台");
+        iv_finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         /*
          * @desc 按钮确认事件
@@ -42,16 +54,17 @@ public class OilInsertActivity extends AppCompatActivity {
 
                 if (oilValue.isEmpty()) {
                     Toast.makeText(OilInsertActivity.this, "请将表单信息填写完整", Toast.LENGTH_SHORT).show();
-                    finish();
+                    return;
                 } else {
 
                     long ret = ServiceFactory.getCompanyInfoService().addData(companyName, oilValue, type);
 
-                    if(ret==0){
+                    if (ret == 0) {
                         Toast.makeText(OilInsertActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(OilInsertActivity.this, OilFieldActivity.class);
                         intent.putExtra("company_name", companyName);
                         startActivity(intent);
+                        finish();
                     } else {
                         Toast.makeText(OilInsertActivity.this, "添加失败", Toast.LENGTH_SHORT).show();
                     }
@@ -62,8 +75,6 @@ public class OilInsertActivity extends AppCompatActivity {
 
     public void cancelInput(View Button) {
         Toast.makeText(OilInsertActivity.this, "您点击了取消按钮", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(OilInsertActivity.this,OilFieldActivity.class);
-        intent.putExtra("company_name", companyName);
-        startActivity(intent);
+        finish();
     }
 }
