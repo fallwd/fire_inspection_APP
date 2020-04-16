@@ -21,10 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.CarBon1Adapter;
+import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.service.impl.YearCheckServiceImpl;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,14 +40,15 @@ public class CarbonFragment1 extends Fragment {
     private CarBon1Adapter adapter;
     private List<ItemInfo> itemDataList = new ArrayList<>();
     private RecyclerView rc_list;
+    private IntentTransmit it;
 
-    public static CarbonFragment1 newInstance(String key, String value) {
+    public static CarbonFragment1 newInstance(String key, IntentTransmit value) {
         if (fragment1 == null) {
             fragment1 = new CarbonFragment1();
         }
         mKey = key;
         Bundle args = new Bundle();
-        args.putString(key, value);
+        args.putSerializable(key, value);
         fragment1.setArguments(args);
         return fragment1;
     }
@@ -54,7 +57,8 @@ public class CarbonFragment1 extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            String keyParameter = (String) getArguments().get(mKey);
+            it = (IntentTransmit) getArguments().getSerializable(mKey);
+            Log.e("dong", "f1传参====" + it.toString());
         }
 
     }
@@ -75,6 +79,7 @@ public class CarbonFragment1 extends Fragment {
     }
 
     private void initData() {
+        //历史中的companyInfoId  ,  systemId和在公司、平台那边传过来的都是一样的ID，使用哪一个都行
         // 调用接口测试
         String companyName = "辽东作业公司";
         String oilfieldName = "SZ36-1";
@@ -82,7 +87,8 @@ public class CarbonFragment1 extends Fragment {
         String systemName = "高压二氧化碳系统灭火系统";
         String tableName = "药剂瓶";
         String number = "SD002";
-        itemDataList = ServiceFactory.getYearCheckService().getItemData(companyName, oilfieldName, platformName, systemName, tableName, number);
+//        itemDataList = ServiceFactory.getYearCheckService().getItemData(companyName, oilfieldName, platformName, systemName, tableName, number);
+        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId,);
         Log.d("dong", "数据查看:" + itemDataList.size());
         Log.d("dong", "数据查看===:" + itemDataList.get(0).toString());
     }

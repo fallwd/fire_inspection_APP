@@ -2,11 +2,13 @@ package com.hr.fire.inspection.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,17 +18,39 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.GridRecordAdapter;
 import com.hr.fire.inspection.entity.Function;
+import com.hr.fire.inspection.service.ServiceFactory;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 //二氧化碳年检记录
 public class CarbondioxideRecordAcitivty extends AppCompatActivity implements View.OnClickListener {
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static int[] icon = {R.mipmap.file};
+    private long sys_id;
+    private long platform_id;
+    private String f_title;
+    private List<HashMap> historyList;
+    private int selected_tag = -1;  //用户选中的条目
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivty_carbondioxide_record);
+        Intent intent = getIntent();
+        //CarbonDioxideAcitivty
+        sys_id = intent.getLongExtra("sys_id", 0); //系统ID
+        platform_id = intent.getLongExtra("platform_id", 0);  //平台ID
+        f_title = intent.getStringExtra("f_title");  //传过来的系统名称
+//        List historyList = ServiceFactory.getYearCheckService().getHistoryList(platform_id, sys_id);
+        historyList = ServiceFactory.getYearCheckService().getHistoryList(3, 1);
+
         initView();
     }
 
@@ -39,16 +63,20 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         Button bt_next = findViewById(R.id.bt_next);
         iv_finish.setOnClickListener(this);
         bt_next.setOnClickListener(this);
-        hot.add(new Function("签到", 0, false));
-        hot.add(new Function("战友圈", 0, false));
-        hot.add(new Function("点名", 0, false));
-        hot.add(new Function("刷脸", 0, false));
-        hot.add(new Function("数据5", 0, false));
+        for (int i = 0; i < historyList.size(); i++) {
+            hot.add(new Function((String) historyList.get(i).get("ret"), 0, false));
+        }
 
         rc_list.setLayoutManager(new GridLayoutManager(this, 4));
-        GridRecordAdapter toolAdapter = new GridRecordAdapter(this, hot, 8);
+        GridRecordAdapter toolAdapter = new GridRecordAdapter(this, hot, historyList.size());
         rc_list.setAdapter(toolAdapter);
-
+        toolAdapter.setOnItemClickListener(new GridRecordAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int tag) {
+                //点击选中的记录
+                selected_tag = tag;
+            }
+        });
 
     }
 
@@ -59,7 +87,24 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 finish();
                 break;
             case R.id.bt_next:
+                if (selected_tag == -1) {
+                    Toast.makeText(this, "请选择检查记录", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                HashMap hashMap = historyList.get(selected_tag);
+                String ret = (String) hashMap.get("ret");
+                long companyInfoId = (long) hashMap.get("companyInfoId");
+                long systemId = (long) hashMap.get("systemId");
+                Date checkDate = (Date) hashMap.get("checkDate"); //时间
+                String srt_Date = this.format.format(checkDate);
+
                 Intent intent = new Intent(this, CarbonDioxideAcitivty.class);
+                intent.putExtra("ret", ret);  //记录的名字
+                intent.putExtra("companyInfoId", companyInfoId); //公司名称
+                intent.putExtra("systemId", systemId);    //系统ID
+                intent.putExtra("srt_Date", srt_Date); //记录的时间
+                intent.putExtra("platform_id", platform_id);    //平台ID
+                intent.putExtra("f_title", f_title); //系统名称
                 startActivity(intent);
                 break;
         }

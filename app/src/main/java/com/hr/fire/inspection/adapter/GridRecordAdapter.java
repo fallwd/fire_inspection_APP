@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,11 +17,11 @@ import com.hr.fire.inspection.entity.Function;
 
 import java.util.List;
 
-public class GridRecordAdapter extends RecyclerView.Adapter<GridRecordAdapter.MyViewHolder> implements View.OnClickListener {
+public class GridRecordAdapter extends RecyclerView.Adapter<GridRecordAdapter.MyViewHolder> {
     private Context context;
     private List<Function> data;
     private int calculateCount;
-    private boolean isHistory;
+
     private OnItemClickListener listener;
 
     public GridRecordAdapter(Context context, List<Function> data, int calculateCount) {
@@ -29,11 +30,6 @@ public class GridRecordAdapter extends RecyclerView.Adapter<GridRecordAdapter.My
         this.calculateCount = calculateCount;
     }
 
-
-    @Override
-    public void onClick(View v) {
-
-    }
 
     @NonNull
     @Override
@@ -44,19 +40,16 @@ public class GridRecordAdapter extends RecyclerView.Adapter<GridRecordAdapter.My
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GridRecordAdapter.MyViewHolder holder, int position) {
-        if (position > data.size() - 1) {
-            if (isHistory) {
-                holder.tvText.setText("历史记录");
-            } else {
-                holder.itemView.setVisibility(View.INVISIBLE);
+    public void onBindViewHolder(@NonNull GridRecordAdapter.MyViewHolder holder, final int position) {
+        holder.tvText.setText(data.get(position).getName());
+        holder.itemView.setTag(data.get(position));
+        holder.rl_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(position);
             }
-        } else {
-            holder.itemView.setVisibility(View.VISIBLE);
-            holder.tvText.setText(data.get(position).getName());
-            holder.itemView.setTag(data.get(position));
-            holder.itemView.setOnClickListener(this);
-        }
+        });
+
     }
 
     @Override
@@ -69,17 +62,19 @@ public class GridRecordAdapter extends RecyclerView.Adapter<GridRecordAdapter.My
     }
 
     public interface OnItemClickListener {
-        void onItemClick(Function tag);
+        void onItemClick(int tag);
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView tvText;
         private ImageView imgPic;
+        private RelativeLayout rl_view;
 
         public MyViewHolder(View view) {
             super(view);
             tvText = (TextView) view.findViewById(R.id.tv_text);
             imgPic = (ImageView) view.findViewById(R.id.img_pic);
+            rl_view = (RelativeLayout) view.findViewById(R.id.rl_view);
         }
     }
 }

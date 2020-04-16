@@ -16,7 +16,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.adapter.OilFieldAdapter;
 import com.hr.fire.inspection.adapter.PlatformAdapter;
 import com.hr.fire.inspection.entity.CompanyInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
@@ -37,12 +36,12 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_platform);
         Bundle b = getIntent().getExtras();
-
         // 获取Bundle的信息
         // 获得公司名称  油田名称
         oil_name = b.getString("oil_name");
         company_name = b.getString("company_name");
-
+        //后期需要使用接口回掉.关闭页面
+        finishImpl();
         ImageView insert_btn = (ImageView) this.findViewById(R.id.insert_btn);
         ImageView iv_finish = (ImageView) this.findViewById(R.id.iv_finish);
         TextView tv_inspection_pro = (TextView) this.findViewById(R.id.tv_inspection_pro);
@@ -74,13 +73,17 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
         PlatformAdapter platformAdapter = new PlatformAdapter(this, this);
         platformAdapter.setData(list);
         platform_list_item.setAdapter(platformAdapter);
-
+        final Intent intent = new Intent();
         // 监听点击事件
         platform_list_item.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 long current_id = idlist.get(position);
                 Toast.makeText(PlatformActivity.this, current_id + "当前行id 下一页面", Toast.LENGTH_SHORT).show();
+                intent.setClass(PlatformActivity.this, FireActivity.class);
+                intent.putExtra("Platform_ID", current_id);
+                startActivity(intent);
+
             }
         });
 
@@ -173,5 +176,9 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
                 edit_builder.show();
                 break;
         }
+    }
+
+    private void finishImpl() {
+
     }
 }
