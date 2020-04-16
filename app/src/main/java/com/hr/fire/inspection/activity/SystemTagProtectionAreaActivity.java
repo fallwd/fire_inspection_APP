@@ -18,6 +18,7 @@ public class SystemTagProtectionAreaActivity extends AppCompatActivity {
     private long sys_id;
     private long platform_id;
     private String f_title;
+    private EditText systemTagText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,30 +41,31 @@ public class SystemTagProtectionAreaActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String systemTagValue = "";
                 String protectAreaValue = "";
-                EditText systemTagText = (EditText) findViewById(R.id.system_tag);
+                systemTagText = (EditText) findViewById(R.id.system_tag);
                 EditText protectAreaText = (EditText) findViewById(R.id.protect_area);
                 systemTagText.clearFocus();
                 protectAreaText.clearFocus();
                 systemTagValue = systemTagText.getText().toString();
                 protectAreaValue = protectAreaText.getText().toString();
 
-                if (systemTagValue.isEmpty() && protectAreaValue.isEmpty()) {
+//                if (systemTagValue.isEmpty() && protectAreaValue.isEmpty()) {
                     Toast.makeText(SystemTagProtectionAreaActivity.this, "请将表单信息填写完整", Toast.LENGTH_SHORT).show();
 //                    Intent intent = new Intent(SystemTagProtectionAreaActivity.this, CarbonDioxideAcitivty.class);
                     Intent intent = new Intent();
                     intent.putExtra("sys_id", sys_id);
                     intent.putExtra("platform_id", platform_id);
                     intent.putExtra("f_title", f_title);
+                    intent.putExtra("sys_number", systemTagText.getText().toString());
                     intent.setClass(SystemTagProtectionAreaActivity.this, CarbondioxideRecordAcitivty.class);
                     startActivity(intent);
                     finish();
-                } else {
-                    /*写sql*/
-                    Intent intent = new Intent(SystemTagProtectionAreaActivity.this, MainActivity.class);
-                    // 跳转携带参数
-//                    intent.putExtra(EXTRA_MESSAGE, message)
-                    startActivity(intent);
-                }
+//                } else {
+//                    /*写sql*/
+//                    Intent intent = new Intent(SystemTagProtectionAreaActivity.this, MainActivity.class);
+//                    // 跳转携带参数
+////                    intent.putExtra(EXTRA_MESSAGE, message)
+//                    startActivity(intent);
+//                }
             }
         });
     }

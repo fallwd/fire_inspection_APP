@@ -36,6 +36,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
     private long sys_id;
     private long platform_id;
     private String f_title;
+    private String sys_number;
     private List<HashMap> historyList;
     private int selected_tag = -1;  //用户选中的条目
 
@@ -48,6 +49,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         sys_id = intent.getLongExtra("sys_id", 0); //系统ID
         platform_id = intent.getLongExtra("platform_id", 0);  //平台ID
         f_title = intent.getStringExtra("f_title");  //传过来的系统名称
+        sys_number = intent.getStringExtra("sys_number");  //系统位号
 //        List historyList = ServiceFactory.getYearCheckService().getHistoryList(platform_id, sys_id);
         historyList = ServiceFactory.getYearCheckService().getHistoryList(3, 1);
 
@@ -96,15 +98,17 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 long companyInfoId = (long) hashMap.get("companyInfoId");
                 long systemId = (long) hashMap.get("systemId");
                 Date checkDate = (Date) hashMap.get("checkDate"); //时间
+
                 String srt_Date = this.format.format(checkDate);
 
                 Intent intent = new Intent(this, CarbonDioxideAcitivty.class);
                 intent.putExtra("ret", ret);  //记录的名字
                 intent.putExtra("companyInfoId", companyInfoId); //公司名称
                 intent.putExtra("systemId", systemId);    //系统ID
-                intent.putExtra("srt_Date", srt_Date); //记录的时间
+                intent.putExtra("srt_Date", checkDate); //记录的时间
                 intent.putExtra("platform_id", platform_id);    //平台ID
                 intent.putExtra("f_title", f_title); //系统名称
+                intent.putExtra("sys_number", sys_number); //系统位号
 
 //                Intent intent = new Intent(this, AutomaticFireAlarmAcitivty.class);
                 startActivity(intent);

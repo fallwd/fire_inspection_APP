@@ -18,15 +18,18 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.constant.ConstantInspection;
+import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.fragment.CarbonFragment1;
 import com.hr.fire.inspection.fragment.CarbonFragment2;
 import com.hr.fire.inspection.fragment.CarbonFragment3;
 import com.hr.fire.inspection.fragment.CarbonFragment4;
 import com.hr.fire.inspection.fragment.CarbonFragment5;
+import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CarbonDioxideAcitivty extends AppCompatActivity {
@@ -45,6 +48,7 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
     private CarbonFragment4 carbonFragment4;
     private CarbonFragment5 carbonFragment5;
     private String f_title;
+    private String sys_number;  //系统位号
     private IntentTransmit it;
 
     @Override
@@ -62,13 +66,15 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
         long companyInfoId = intent.getLongExtra("companyInfoId", 0);  //公司ID
         long systemId = intent.getLongExtra("systemId", 0);   //系统Id
         long platform_id = intent.getLongExtra("platform_id", 0);   //系统Id
-        String srt_Date = intent.getStringExtra("srt_Date");  //传过来的时间
+        Date srt_Date = (Date) intent.getSerializableExtra("srt_Date");  //传过来的时间
         f_title = intent.getStringExtra("f_title"); //传过来的名称
+        sys_number = intent.getStringExtra("sys_number"); //传过来的名称
         it = new IntentTransmit();
         it.companyInfoId = companyInfoId;
         it.systemId = systemId;
         it.platform_id = platform_id;
         it.srt_Date = srt_Date;
+        it.number = sys_number;
     }
 
     public void initView() {
