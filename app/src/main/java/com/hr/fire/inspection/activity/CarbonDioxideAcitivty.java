@@ -1,6 +1,7 @@
 package com.hr.fire.inspection.activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.util.Log;
@@ -16,12 +17,15 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.constant.ConstantInspection;
+import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.fragment.CarbonFragment1;
 import com.hr.fire.inspection.fragment.CarbonFragment2;
 import com.hr.fire.inspection.fragment.CarbonFragment3;
 import com.hr.fire.inspection.fragment.CarbonFragment4;
 import com.hr.fire.inspection.fragment.CarbonFragment5;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,13 +44,31 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
     private CarbonFragment3 carbonFragment3;
     private CarbonFragment4 carbonFragment4;
     private CarbonFragment5 carbonFragment5;
+    private String f_title;
+    private IntentTransmit it;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivty_carbon_dioxide);
+        getIntentParameter();
         initView();
         initListner();
+    }
+
+    private void getIntentParameter() {
+        //历史中的companyInfoId  ,  systemId和再公司、平台那边传过来的都是一样的ID，使用哪一个都行
+        Intent intent = getIntent();
+        long companyInfoId = intent.getLongExtra("companyInfoId", 0);  //公司ID
+        long systemId = intent.getLongExtra("systemId", 0);   //系统Id
+        long platform_id = intent.getLongExtra("platform_id", 0);   //系统Id
+        String srt_Date = intent.getStringExtra("srt_Date");  //传过来的时间
+        f_title = intent.getStringExtra("f_title"); //传过来的名称
+        it = new IntentTransmit();
+        it.companyInfoId = companyInfoId;
+        it.systemId = systemId;
+        it.platform_id = platform_id;
+        it.srt_Date = srt_Date;
     }
 
     public void initView() {
@@ -54,8 +76,8 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
         iv_add_table = findViewById(R.id.iv_add_table);
         tvInspectionPro = findViewById(R.id.tv_inspection_pro);
         iv_save = findViewById(R.id.iv_save);
-        String text = "消防巡检维护专用工具";
-        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#E51C23", 0, 3);
+        String text = new StringBuilder().append("消防年检  >  ").append(f_title).toString();
+        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#E51C23", 8, text.length());
         tvInspectionPro.setText(showTextColor);
 
         mTabLayout = findViewById(R.id.tl_tabs);
@@ -65,7 +87,7 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
         titleList.add("保护区");
         titleList.add("管线管件");
         titleList.add("功能性试验");
-        carbonFragment1 = CarbonFragment1.newInstance("", "");
+        carbonFragment1 = CarbonFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
         carbonFragment2 = CarbonFragment2.newInstance("", "");
         carbonFragment3 = CarbonFragment3.newInstance("", "");
         carbonFragment4 = CarbonFragment4.newInstance("", "");
