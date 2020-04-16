@@ -75,16 +75,17 @@ public class WelcomeActivity extends AppCompatActivity {
         /////////////////////////////////////////////////////////////////////////////////////////////
 //        // 测试查询接口
 //        // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
-//        long companyInfoId = 3;
+//        long companyInfoId = 165;
 //        // checkTypeId 对应 药剂瓶 2
 //        long checkTypeId = 2;
 //        // number 区号 SD002
-//        String number = "SD001";
+//        String number = "";
 //        // checkDate 检查日期
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 //        Date checkDate = null;
 //        try {
-//            checkDate = format.parse("2019-08-03 10:10");
+////            checkDate = format.parse("2019-08-03 10:10");
+//            checkDate = format.parse("2019-07-03 09:10");
 //        } catch (ParseException e) {
 //            e.printStackTrace();
 //        }
@@ -297,7 +298,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //        }
 
 //         测试历史数据接口
-//        List<HashMap> dataList = ServiceFactory.getYearCheckService().getHistoryList(3,1);
+//        List<HashMap> dataList = ServiceFactory.getYearCheckService().getHistoryList(165,1);
 //        for(int i=0;i<dataList.size();i++){
 //            Log.i("getHistoryList:::",""+dataList.get(i));
 //            HashMap has = dataList.get(i);
