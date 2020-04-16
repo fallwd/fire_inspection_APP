@@ -20,25 +20,27 @@ import android.widget.Toast;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
+import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.utils.DisplayUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GoodsAdapter extends BaseAdapter {
 
-    private ArrayList<String> stringArrayList;
     private Context mContext;
     private HrPopup hrPopup;
+    private final List<YearCheck> dataEasy;
 
-    public GoodsAdapter(Activity rulesActivity) {
+    public GoodsAdapter(Activity rulesActivity, List<YearCheck> checkDataEasy) {
         mContext = rulesActivity;
+        dataEasy = checkDataEasy;
     }
 
     @Override
     public int getCount() {
-//        return stringArrayList.size();
-        return 5;
+        return dataEasy.size();
     }
 
     @Override
@@ -74,14 +76,14 @@ public class GoodsAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         holder.ll_item.setLayoutParams(layoutParams);
         holder.tv1.setText(new StringBuffer().append(position + 1));
-        holder.tv2.setText("瓶体外观检查");
-        holder.tv3.setText("所有存储容器应进行目视检查,看是否有破损生锈或安装的硬件松动的迹象");
-        holder.tv4.setText("储瓶无碰撞变形及其他机械性损伤,表面无锈蚀,保护图层完好,涂层颜色为红色");
-        holder.tv5.setText("中国船级社《船用消防系统检测机构服务指南》4.10.2");
+        YearCheck yearCheck = dataEasy.get(position);
+        holder.tv2.setText(yearCheck.getProject());
+        holder.tv3.setText(yearCheck.getContent());
+        holder.tv4.setText(yearCheck.getRequirement());
+        holder.tv5.setText(yearCheck.getStandard());
         holder.tv6.setText("是  ");
         //在左侧添加图片
         Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
@@ -89,7 +91,6 @@ public class GoodsAdapter extends BaseAdapter {
         holder.tv6.setCompoundDrawables(null, null, drawable, null);
         Drawable drawable1 = mContext.getResources().getDrawable(R.drawable.listview_border_margin);
         holder.tv6.setBackground(drawable1);
-
         holder.tv7.setVisibility(View.GONE);
         holder.rl7.setVisibility(View.VISIBLE);
         holder.tv8.setVisibility(View.GONE);
@@ -108,14 +109,10 @@ public class GoodsAdapter extends BaseAdapter {
                 mContext.startActivity(new Intent(mContext, PhotoUploadActivity.class));
             }
         });
-//        }
+
         return convertView;
     }
 
-
-    public void setData(ArrayList<String> mList) {
-        stringArrayList = mList;
-    }
 
     //ViewHolder 复用优化, 避免重复创建对象
     static class ViewHolder {
