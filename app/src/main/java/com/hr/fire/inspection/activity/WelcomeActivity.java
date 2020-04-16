@@ -84,8 +84,8 @@ public class WelcomeActivity extends AppCompatActivity {
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 //        Date checkDate = null;
 //        try {
-////            checkDate = format.parse("2019-08-03 10:10");
-//            checkDate = format.parse("2019-07-03 09:10");
+//            checkDate = format.parse("2019-08-03 10:10");
+////            checkDate = format.parse("2019-07-03 09:10");
 //        } catch (ParseException e) {
 //            e.printStackTrace();
 //        }
@@ -323,6 +323,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //            List<ItemInfo> itemList = h.get("高压二氧化碳灭火系统");
 //
 //        }
+
 
         Toast.makeText(WelcomeActivity.this, "系统将在2秒后为您自动跳转到首页", Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
