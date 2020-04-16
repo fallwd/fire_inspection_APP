@@ -48,24 +48,18 @@ public class SystemTagProtectionAreaActivity extends AppCompatActivity {
                 systemTagValue = systemTagText.getText().toString();
                 protectAreaValue = protectAreaText.getText().toString();
 
-//                if (systemTagValue.isEmpty() && protectAreaValue.isEmpty()) {
+                if (systemTagValue.isEmpty() && protectAreaValue.isEmpty()) {
                     Toast.makeText(SystemTagProtectionAreaActivity.this, "请将表单信息填写完整", Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(SystemTagProtectionAreaActivity.this, CarbonDioxideAcitivty.class);
-                    Intent intent = new Intent();
-                    intent.putExtra("sys_id", sys_id);
-                    intent.putExtra("platform_id", platform_id);
-                    intent.putExtra("f_title", f_title);
-                    intent.putExtra("sys_number", systemTagText.getText().toString());
-                    intent.setClass(SystemTagProtectionAreaActivity.this, CarbondioxideRecordAcitivty.class);
-                    startActivity(intent);
-                    finish();
-//                } else {
-//                    /*写sql*/
-//                    Intent intent = new Intent(SystemTagProtectionAreaActivity.this, MainActivity.class);
-//                    // 跳转携带参数
-////                    intent.putExtra(EXTRA_MESSAGE, message)
-//                    startActivity(intent);
-//                }
+                    return;
+                }
+                Intent intent = new Intent();
+                intent.putExtra("sys_id", sys_id);
+                intent.putExtra("platform_id", platform_id);
+                intent.putExtra("f_title", f_title);
+                intent.putExtra("sys_number", systemTagText.getText().toString());
+                intent.setClass(SystemTagProtectionAreaActivity.this, CarbondioxideRecordAcitivty.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
