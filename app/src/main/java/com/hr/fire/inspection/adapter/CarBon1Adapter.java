@@ -112,7 +112,6 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             notifyItemRemoved(position);
             //通知重新绑定某一范围内的的数据与界面
             notifyItemRangeChanged(position, mData.size() - position);//通知数据与界面重新绑定
-
         }
     }
 

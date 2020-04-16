@@ -2,6 +2,7 @@ package com.hr.fire.inspection.activity;
 
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.util.Log;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarbonDioxideAcitivty extends AppCompatActivity {
+    private static final String TAG = "CarbonDioxideAcitivty";
     private List<String> titleList = new ArrayList<String>();
     private List<Fragment> fragments = new ArrayList<Fragment>();
     private TabLayout mTabLayout;
@@ -87,6 +89,8 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
         titleList.add("保护区");
         titleList.add("管线管件");
         titleList.add("功能性试验");
+        Log.i(TAG, "1111111111111111111111122222222222222222222=" + it);
+
         carbonFragment1 = CarbonFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
         carbonFragment2 = CarbonFragment2.newInstance("", "");
         carbonFragment3 = CarbonFragment3.newInstance("", "");

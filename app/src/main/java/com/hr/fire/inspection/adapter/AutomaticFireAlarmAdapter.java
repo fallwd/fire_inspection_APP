@@ -31,7 +31,7 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
     public AutomaticFireAlarmAdapter(Context mContext, List<ItemInfo> mData) {
         this.mContext = mContext;
         this.mData = mData;
-//        Log.i(TAG, "3333333333333333mData=" + this.mData);
+        Log.i(TAG, "3333333333333333mData=" + this.mData);
     }
 
 

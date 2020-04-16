@@ -1,6 +1,7 @@
 package com.hr.fire.inspection.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.util.Log;
@@ -16,6 +17,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.constant.ConstantInspection;
+import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.fragment.AutomaticFireAlarm1;
 import com.hr.fire.inspection.fragment.AutomaticFireAlarm2;
 import com.hr.fire.inspection.fragment.AutomaticFireAlarm3;
@@ -25,13 +28,17 @@ import com.hr.fire.inspection.fragment.AutomaticFireAlarm6;
 import com.hr.fire.inspection.fragment.AutomaticFireAlarm7;
 import com.hr.fire.inspection.fragment.AutomaticFireAlarm8;
 import com.hr.fire.inspection.fragment.AutomaticFireAlarm9;
+import com.hr.fire.inspection.fragment.CarbonFragment1;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
+
+import org.apache.poi.util.NullLogger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressLint("Registered")
 public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
+    private static final String TAG = "AutomaticFireAlarmAcitivty";
     private List<String> titleList = new ArrayList<String>();
     private List<Fragment> fragments = new ArrayList<Fragment>();
     private TabLayout mTabLayout;
@@ -51,12 +58,34 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
     private AutomaticFireAlarm8 mAutomaticFireAlarm8;
     private AutomaticFireAlarm9 mAutomaticFireAlarm9;
 
+    private String f_title;
+    private IntentTransmit it;
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivty_carbon_dioxide);
+        getIntentParameter();
         initView();
         initListner();
+    }
+
+    private void getIntentParameter() {
+        //历史中的companyInfoId  ,  systemId和再公司、平台那边传过来的都是一样的ID，使用哪一个都行
+        Intent intent = getIntent();
+        long companyInfoId = intent.getLongExtra("companyInfoId", 0);  //公司ID
+        long systemId = intent.getLongExtra("systemId", 0);   //系统Id
+        long platform_id = intent.getLongExtra("platform_id", 0);   //系统Id
+        String srt_Date = intent.getStringExtra("srt_Date");  //传过来的时间
+        f_title = intent.getStringExtra("f_title"); //传过来的名称
+        it = new IntentTransmit();
+        it.companyInfoId = companyInfoId;
+        it.systemId = systemId;
+        it.platform_id = platform_id;
+        it.srt_Date = srt_Date;
+        Log.i(TAG, "火灾系统传入的参数=" + it);
     }
 
     public void initView() {
@@ -80,7 +109,11 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
         titleList.add("CO探测器");
         titleList.add("火灾报警控制器");
 
-        mAutomaticFireAlarm1 = AutomaticFireAlarm1.newInstance("", "");
+
+//        Log.i(TAG, "火灾系统传入的参数=" + it);
+
+
+        mAutomaticFireAlarm1 = AutomaticFireAlarm1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, "");
         mAutomaticFireAlarm2 = AutomaticFireAlarm2.newInstance("", "");
         mAutomaticFireAlarm3 = AutomaticFireAlarm3.newInstance("", "");
         mAutomaticFireAlarm4 = AutomaticFireAlarm4.newInstance("", "");
@@ -231,6 +264,15 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mAutomaticFireAlarm1 = null;
+        mAutomaticFireAlarm2 = null;
+        mAutomaticFireAlarm3 = null;
+        mAutomaticFireAlarm4 = null;
+        mAutomaticFireAlarm5 = null;
+        mAutomaticFireAlarm6 = null;
+        mAutomaticFireAlarm7 = null;
+        mAutomaticFireAlarm8 = null;
+        mAutomaticFireAlarm9 = null;
         finish();
     }
 }
