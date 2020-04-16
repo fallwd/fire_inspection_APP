@@ -67,9 +67,11 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         // checkTypeId companyInfoId CHECK_TYPE.PARENT_ID=%s AND
         QueryBuilder<ItemInfo> queryBuilder = daoSession.queryBuilder(ItemInfo.class).
                 where(new WhereCondition.StringCondition(
+//                        String.format("COMPANY_INFO_ID=%s GROUP BY CHECK_DATE", companyId)));
                         String.format("COMPANY_INFO_ID=%s GROUP BY CHECK_DATE", companyId)));
-        Join checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
-                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+//        Join checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
+//                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+
 //        Log.i("getHistoryList:::",""+queryBuilder.toString());
         List<ItemInfo> dataList = queryBuilder.list();
         ArrayList<HashMap> resultList = new ArrayList();
@@ -77,6 +79,8 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 
         for(int i=0;i<dataList.size();i++){
             ItemInfo ret = dataList.get(i);
+            Log.i("getHistoryList:::",ret.toString());
+            long DBsystemId = ret.getCheckType().getParent().getId();
             String systemName = ret.getCheckType().getParent().getName();
             String companyName = ret.getCompanyInfo().getCompanyName();
             String oilfieldName = ret.getCompanyInfo().getOilfieldName();
@@ -93,14 +97,15 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
             }
             String comboData = companyName + "_" + oilfieldName + "_" + platformName + "_" + systemName + "_" + checkDateStr;
 //            Log.i("getHistoryList:::",comboData);
+            if(systemId==DBsystemId){
+                HashMap obj = new HashMap();
+                obj.put("ret",comboData);
+                obj.put("companyInfoId",companyId);
+                obj.put("systemId",systemId);
+                obj.put("checkDate",checkDate);
+                resultList.add(obj);
+            }
 
-            HashMap obj = new HashMap();
-            obj.put("ret",comboData);
-            obj.put("companyInfoId",companyId);
-            obj.put("systemId",systemId);
-            obj.put("checkDate",checkDate);
-
-            resultList.add(obj);
         }
         return resultList;
     }
@@ -164,43 +169,25 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 
     @Override
     public List<ItemInfo> getItemDataEasy(long companyInfoId, long checkTypeId, String number, Date checkDate) {
+        QueryBuilder<ItemInfo> queryBuilder;
+        if(number!=null && number!=""){
+            queryBuilder = daoSession.queryBuilder(ItemInfo.class).where(
+                    ItemInfoDao.Properties.SystemNumber.eq(number),
+                    ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+                    ItemInfoDao.Properties.CheckTypeId.eq(checkTypeId),
+                    ItemInfoDao.Properties.CheckDate.eq(checkDate)
+            );
+        }
+        else {
+            queryBuilder = daoSession.queryBuilder(ItemInfo.class).where(
+                    ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+                    ItemInfoDao.Properties.CheckTypeId.eq(checkTypeId),
+                    ItemInfoDao.Properties.CheckDate.eq(checkDate)
+            );
+        }
 
-        // 根据公司名，油田名，平台名,联表查询
-        // 旧
-//        QueryBuilder<ItemInfo> queryBuilder;
-//        if(number != null && number!=""){
-//            queryBuilder = daoSession.queryBuilder(ItemInfo.class).
-//                    where(ItemInfoDao.Properties.SystemNumber.eq(number));
-//        }
-//        else {
-//            queryBuilder = daoSession.queryBuilder(ItemInfo.class);
-//        }
 
-//        Join checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class)
-//                .where(CheckTypeDao.Properties.Name.eq(tableName));
-//        Join checkTypeParentJoin = queryBuilder.join(checkTypeJoin, CheckTypeDao.Properties.ParentId, CheckType.class,CheckTypeDao.Properties.Id)
-//                .where(CheckTypeDao.Properties.Name.eq(systemName));
-//        Join companyJoin = queryBuilder.join(ItemInfoDao.Properties.CompanyInfoId, CompanyInfo.class)
-//                .where(
-//                        CompanyInfoDao.Properties.CompanyName.eq(companyName),
-//                        CompanyInfoDao.Properties.OilfieldName.eq(oilfieldName),
-//                        CompanyInfoDao.Properties.PlatformName.eq(platformName)
-//                );
-        // 新
-        QueryBuilder<ItemInfo> queryBuilder = daoSession.queryBuilder(ItemInfo.class).where(
-                ItemInfoDao.Properties.SystemNumber.eq(number),
-                ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
-                ItemInfoDao.Properties.CheckTypeId.eq(checkTypeId),
-                ItemInfoDao.Properties.CheckDate.eq(checkDate)
-        );
 
-//                if(number != null && number!=""){
-//            queryBuilder = daoSession.queryBuilder(ItemInfo.class).
-//                    where(ItemInfoDao.Properties.SystemNumber.eq(number));
-//        }
-//        else {
-//            queryBuilder = daoSession.queryBuilder(ItemInfo.class);
-//        }
 
         List<ItemInfo> dataList = queryBuilder.list();
 //        List<ItemInfo> dataList =  queryBuilder.build().list();
@@ -296,31 +283,22 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 
         }
         else {
+            if(number != null && number!=""){
+                queryBuilder = daoSession.queryBuilder(YearCheckResult.class).where(
+                        YearCheckResultDao.Properties.SystemNumber.eq(number),
+                        YearCheckResultDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        YearCheckResultDao.Properties.CheckTypeId.eq(checkTypeId),
+                        YearCheckResultDao.Properties.CheckDate.eq(checkDate)
+                );
+            }
+            else {
+                queryBuilder = daoSession.queryBuilder(YearCheckResult.class).where(
+                        YearCheckResultDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        YearCheckResultDao.Properties.CheckTypeId.eq(checkTypeId),
+                        YearCheckResultDao.Properties.CheckDate.eq(checkDate)
+                );
+            }
 
-//            if(number != null && number!=""){
-//                queryBuilder = daoSession.queryBuilder(YearCheckResult.class).
-//                        where(YearCheckResultDao.Properties.SystemNumber.eq(number));
-//            }
-//            else {
-//                queryBuilder = daoSession.queryBuilder(YearCheckResult.class);
-//            }
-//
-//            Join checkTypeJoin = queryBuilder.join(YearCheckResultDao.Properties.CheckTypeId, CheckType.class)
-//                    .where(CheckTypeDao.Properties.Name.eq(tableName));
-//            Join checkTypeParentJoin = queryBuilder.join(checkTypeJoin, CheckTypeDao.Properties.ParentId, CheckType.class,CheckTypeDao.Properties.Id)
-//                    .where(CheckTypeDao.Properties.Name.eq(systemName));
-//            Join companyJoin = queryBuilder.join(YearCheckResultDao.Properties.CompanyInfoId, CompanyInfo.class)
-//                    .where(
-//                            CompanyInfoDao.Properties.CompanyName.eq(companyName),
-//                            CompanyInfoDao.Properties.OilfieldName.eq(oilfieldName),
-//                            CompanyInfoDao.Properties.PlatformName.eq(platformName)
-//                    );
-            queryBuilder = daoSession.queryBuilder(YearCheckResult.class).where(
-                    YearCheckResultDao.Properties.SystemNumber.eq(number),
-                    YearCheckResultDao.Properties.CompanyInfoId.eq(companyInfoId),
-                    YearCheckResultDao.Properties.CheckTypeId.eq(checkTypeId),
-                    YearCheckResultDao.Properties.CheckDate.eq(checkDate)
-            );
             dataList = queryBuilder.list();
             Log.i("info", "查询完成02-------------------------------------------");
             for (int i = 0; i < dataList.size(); i++) {
@@ -347,9 +325,6 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 
     @Override
     public List<YearCheck> getCheckDataEasy(long checkTypeId) {
-//        QueryBuilder<YearCheck> yearCheckQB = daoSession.queryBuilder(YearCheck.class);
-//        Join yearCheckJoin = yearCheckQB.join(YearCheckDao.Properties.CheckTypeId, CheckType.class).
-//                where(CheckTypeDao.Properties.Name.eq(tableName));
 
         QueryBuilder<YearCheck> yearCheckQB = daoSession.queryBuilder(YearCheck.class).
                 where(YearCheckDao.Properties.CheckTypeId.eq(checkTypeId));
@@ -389,7 +364,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 //        itemData.setCheckDate(checkDate);
         daoSession.insert(itemData);
 
-        Log.i("insertItemData", "插入设备信息数据完成-------------------------------------------");
+//        Log.i("insertItemData", "插入设备信息数据完成-------------------------------------------");
 
         return 0;
     }
@@ -398,34 +373,13 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 //    public long insertItemData(ItemInfo itemData, String companyName, String oilfieldName, String platformName, String systemName, String tableName, String number) {
     public long insertItemDataEasy(ItemInfo itemData, long companyInfoId,  long checkTypeId, String number, Date checkDate) {
 
-        // 先查询到companyinfo和checktype的对象
-//        QueryBuilder<CompanyInfo> companyInfoQB = daoSession.queryBuilder(CompanyInfo.class).
-//                where(
-//                        CompanyInfoDao.Properties.CompanyName.eq(companyName),
-//                        CompanyInfoDao.Properties.OilfieldName.eq(oilfieldName),
-//                        CompanyInfoDao.Properties.PlatformName.eq(platformName)
-//                );
-//        CompanyInfo companyInfoObj = companyInfoQB.list().get(0);
-//        QueryBuilder<CheckType> checkTypeQB = daoSession.queryBuilder(CheckType.class).
-//                where(
-//                        CheckTypeDao.Properties.Name.eq(tableName)
-//                );
-//        Join checkTypeJoin = checkTypeQB.join(CheckTypeDao.Properties.ParentId, CheckType.class).
-//                where(
-//                        CheckTypeDao.Properties.Name.eq(systemName)
-//                );
-//        CheckType checkTypeObj = checkTypeQB.list().get(0);
-//
-//        itemData.setCompanyInfoId(companyInfoObj.getId());
-//        itemData.setCheckTypeId(checkTypeObj.getId());
-
         itemData.setCompanyInfoId(companyInfoId);
         itemData.setCheckTypeId(checkTypeId);
         itemData.setSystemNumber(number);
         itemData.setCheckDate(checkDate);
         daoSession.insert(itemData);
 
-        Log.i("insertItemData", "插入设备信息数据完成-------------------------------------------");
+//        Log.i("insertItemData", "插入设备信息数据完成-------------------------------------------");
 
         return 0;
     }
@@ -506,7 +460,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 //        checkResultData.setCompanyInfoId(companyInfoId);
 //        checkResultData.setCheckTypeId(checkTypeId);
 
-        Log.i("insertCheckResultData","插入检查结果数据完成------------------------------");
+//        Log.i("insertCheckResultData","插入检查结果数据完成------------------------------");
         return 0;
     }
 
@@ -524,7 +478,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         checkResultData.setCheckTypeId(checkTypeId);
         daoSession.insert(checkResultData);
 
-        Log.i("insertCheckResultData","插入检查结果数据完成------------------------------");
+//        Log.i("insertCheckResultData","插入检查结果数据完成------------------------------");
         return 0;
     }
 
@@ -585,7 +539,10 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                         where(CheckTypeDao.Properties.ParentId.eq(systemId));
         List<ItemInfo> dataList = queryBuilder.list();
         systemMap = new HashMap();
-        systemMap.put(systemName,dataList);
+        systemMap.put("systemName",systemName);
+        systemMap.put("data",dataList);
+        systemMap.put("count",dataList.size());
+
         retList.add(systemMap);
 
         systemName = "七氟丙烷灭火系统";
@@ -619,8 +576,6 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         systemMap = new HashMap();
         systemMap.put(systemName,dataList);
         retList.add(systemMap);
-
-
 
         return retList;
     }
