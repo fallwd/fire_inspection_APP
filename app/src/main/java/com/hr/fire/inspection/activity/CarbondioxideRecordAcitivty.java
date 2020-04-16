@@ -51,7 +51,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         f_title = intent.getStringExtra("f_title");  //传过来的系统名称
         sys_number = intent.getStringExtra("sys_number");  //系统位号
 //        List historyList = ServiceFactory.getYearCheckService().getHistoryList(platform_id, sys_id);
-        historyList = ServiceFactory.getYearCheckService().getHistoryList(3, 1);
+        historyList = ServiceFactory.getYearCheckService().getHistoryList(platform_id, sys_id);
 
         initView();
     }
