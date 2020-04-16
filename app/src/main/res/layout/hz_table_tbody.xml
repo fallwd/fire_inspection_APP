@@ -39,12 +39,12 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="瓶号11111"
+                android:text="瓶号"
                 android:textSize="12sp" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="28dp"
+            android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -56,12 +56,12 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="9.1"
+                android:text="9.1222222"
                 android:textSize="12sp" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="32dp"
+            android:layout_width="22dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -78,7 +78,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="44dp"
+            android:layout_width="22dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -95,7 +95,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="40dp"
+            android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -112,7 +112,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -129,7 +129,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="60dp"
+            android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -141,13 +141,13 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="水压试验日期"
+                android:text="是"
                 android:textSize="12sp" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rl_9"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -163,7 +163,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="30dp"
+            android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -172,14 +172,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="空"
+                android:text="少时诵诗书所所所所所所所所所所"
                 android:textSize="12sp" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rl_11"
             android:layout_width="24dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
 
             <ImageView
                 android:layout_width="20dp"

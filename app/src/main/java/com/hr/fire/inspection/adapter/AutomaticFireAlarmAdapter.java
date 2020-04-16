@@ -2,6 +2,7 @@ package com.hr.fire.inspection.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,17 +21,17 @@ import com.hr.fire.inspection.service.ServiceFactory;
 
 import java.util.List;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<ItemInfo> mData;
 
 
-    public AutomaticFireAlarmAdapter() {
-    }
-
     public AutomaticFireAlarmAdapter(Context mContext, List<ItemInfo> mData) {
         this.mContext = mContext;
         this.mData = mData;
+//        Log.i(TAG, "3333333333333333mData=" + this.mData);
     }
 
 
@@ -50,7 +51,7 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
         if (mData != null && mData.size() != 0) {
             ItemInfo info = mData.get(position);
             vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
-            vh.et_2.setText(new StringBuffer().append("3333333300").append(position + 1));
+            vh.et_2.setText(new StringBuffer().append("").append(position + 1));
             vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
             vh.et_4.setText(new StringBuffer().append(info.getWeight()).append(""));
             vh.et_5.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));

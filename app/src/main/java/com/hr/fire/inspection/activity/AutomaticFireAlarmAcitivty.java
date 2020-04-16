@@ -56,7 +56,7 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivty_carbon_dioxide);
         initView();
-//        initListner();
+        initListner();
     }
 
     public void initView() {
