@@ -546,7 +546,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         systemMap.put("count",dataList.size());
 
         retList.add(systemMap);
-        
+
         return retList;
     }
 }

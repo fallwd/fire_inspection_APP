@@ -298,12 +298,12 @@ public class WelcomeActivity extends AppCompatActivity {
 //        }
 
 //         测试历史数据接口
-        List<HashMap> dataList = ServiceFactory.getYearCheckService().getHistoryList(165,1);
-        for(int i=0;i<dataList.size();i++){
-            Log.i("getHistoryList:::",""+dataList.get(i));
-            HashMap has = dataList.get(i);
-            Log.i("getHistoryList:::",""+ has.get("ret"));
-        }
+//        List<HashMap> dataList = ServiceFactory.getYearCheckService().getHistoryList(165,1);
+//        for(int i=0;i<dataList.size();i++){
+//            Log.i("getHistoryList:::",""+dataList.get(i));
+//            HashMap has = dataList.get(i);
+//            Log.i("getHistoryList:::",""+ has.get("ret"));
+//        }
 
 //        // 测试导出数据接口
 //        // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
