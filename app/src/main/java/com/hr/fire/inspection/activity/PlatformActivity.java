@@ -63,6 +63,8 @@ public class PlatformActivity  extends AppCompatActivity implements View.OnClick
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 long current_id = idlist.get(position);
                 Toast.makeText(PlatformActivity.this,current_id+"当前行id 下一页面" ,Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(PlatformActivity.this, FireActivity.class);
+                startActivity(intent);
             }
         });
 

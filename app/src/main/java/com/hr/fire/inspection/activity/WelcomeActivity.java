@@ -308,7 +308,7 @@ public class WelcomeActivity extends AppCompatActivity {
             public void run() {
                 // 执行在主线程
                 // 启动主页面
-                startActivity(new Intent(WelcomeActivity.this, AutomaticFireAlarmAcitivty.class));
+                startActivity(new Intent(WelcomeActivity.this, NavigationActivity.class));
                 //关闭当前页面
                 finish();
             }

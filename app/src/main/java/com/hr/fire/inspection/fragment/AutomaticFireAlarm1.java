@@ -95,64 +95,64 @@ public class AutomaticFireAlarm1 extends Fragment {
             Log.i(TAG, "11111111111111111111111getItemDataEasy=" + dataList.get(i).toString());
 
 
-            ItemInfo{
-                id=1,
-                checkTypeId=2,
-                checkType=CheckType{
-                    id=2,
-                    name='药剂瓶',
-                    type=1,
-                    parentId=1,
-                    parent=CheckType{
-                        id=1,
-                        name='高压二氧化碳系统灭火系统',
-                        type=1,
-                        parentId=0,
-                        parent=null
-                    }
-                 },
-                companyInfoId=3,
-                companyInfo=CompanyInfo{
-                    id=3,
-                    companyName='辽东作业公司',
-                    oilfieldName='SZ36-1',
-                    platformName='SZ36-1A',
-                    isNecessary=1
-                },
-                typeNo='null',
-                no='YJP0001',
-                volume='9',
-                weight='3',
-                goodsWeight='8',
-                pressure='null',
-                prodFactory='红日药业',
-                prodDate=Fri Aug 03 09:08:07 GMT+00:00 2018,
-                typeConformity='null',
-                positionConformity='null',
-                appearance='null',
-                check='null',
-                slience='null',
-                reset='null',
-                powerAlarmFunction='null',
-                alarmFunction='null',
-                effectiveness='null',
-                responseTime='null',
-                description='null',
-                setAlarm25='null',
-                setAlarm50='null',
-                testAlarm25='null',
-                testAlarm50='null',
-                observeDate=Sat Mar 09 09:08:07 GMT+00:00 2019,
-                taskNumber='null',
-                isPass='是',
-                labelNo='BQ0001',
-                imageUrl='null',
-                codePath='/src/YJP0001.jpg',
-                SystemNumber='SD001',
-                ProtectArea='主配电间',
-                checkDate=Sat Aug 03 10:10:00 GMT+00:00 2019,
-                checkResultList=[]
-            }
+//            ItemInfo{
+//                id=1,
+//                checkTypeId=2,
+//                checkType=CheckType{
+//                    id=2,
+//                    name='药剂瓶',
+//                    type=1,
+//                    parentId=1,
+//                    parent=CheckType{
+//                        id=1,
+//                        name='高压二氧化碳系统灭火系统',
+//                        type=1,
+//                        parentId=0,
+//                        parent=null
+//                    }
+//                 },
+//                companyInfoId=3,
+//                companyInfo=CompanyInfo{
+//                    id=3,
+//                    companyName='辽东作业公司',
+//                    oilfieldName='SZ36-1',
+//                    platformName='SZ36-1A',
+//                    isNecessary=1
+//                },
+//                typeNo='null',
+//                no='YJP0001',
+//                volume='9',
+//                weight='3',
+//                goodsWeight='8',
+//                pressure='null',
+//                prodFactory='红日药业',
+//                prodDate=Fri Aug 03 09:08:07 GMT+00:00 2018,
+//                typeConformity='null',
+//                positionConformity='null',
+//                appearance='null',
+//                check='null',
+//                slience='null',
+//                reset='null',
+//                powerAlarmFunction='null',
+//                alarmFunction='null',
+//                effectiveness='null',
+//                responseTime='null',
+//                description='null',
+//                setAlarm25='null',
+//                setAlarm50='null',
+//                testAlarm25='null',
+//                testAlarm50='null',
+//                observeDate=Sat Mar 09 09:08:07 GMT+00:00 2019,
+//                taskNumber='null',
+//                isPass='是',
+//                labelNo='BQ0001',
+//                imageUrl='null',
+//                codePath='/src/YJP0001.jpg',
+//                SystemNumber='SD001',
+//                ProtectArea='主配电间',
+//                checkDate=Sat Aug 03 10:10:00 GMT+00:00 2019,
+//                checkResultList=[]
+//            }
         }
 
 

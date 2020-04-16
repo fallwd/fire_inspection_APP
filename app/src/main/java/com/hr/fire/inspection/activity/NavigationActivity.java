@@ -20,8 +20,8 @@ public class NavigationActivity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 //                Intent intent = new Intent(NavigationActivity.this, PhotoUploadActivity.class);
-//                Intent intent = new Intent(NavigationActivity.this, ChooseCompanyActivity.class);
-                Intent intent = new Intent(NavigationActivity.this, FireActivity.class);
+                Intent intent = new Intent(NavigationActivity.this, ChooseCompanyActivity.class);
+//                Intent intent = new Intent(NavigationActivity.this, FireActivity.class);
                 startActivity(intent);
             }
         });
