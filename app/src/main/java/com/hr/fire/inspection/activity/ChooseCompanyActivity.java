@@ -29,22 +29,41 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     private ArrayList<String> list;
     List<CompanyInfo> dataList;
+    private ImageView insert_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_company);
-        ImageView insert_btn = (ImageView) this.findViewById(R.id.insert_btn);
+        insert_btn = (ImageView) this.findViewById(R.id.insert_btn);
+        ImageView iv_finish = (ImageView) this.findViewById(R.id.iv_finish);
+        iv_finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        initData();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initData();
+    }
+
+    private void initData() {
         dataList = ServiceFactory.getCompanyInfoService().getCompanyList();
         list = new ArrayList<>();
 
-        for(int i=0; i<dataList.size();i++){
+        for (int i = 0; i < dataList.size(); i++) {
             CompanyInfo CompanyListItem = dataList.get(i);
             String companyName = CompanyListItem.getCompanyName();
             list.add(companyName);
         }
         // 渲染条目
         ListView company_list_item = findViewById(R.id.company_list_item);
-        CompanyAdapter companyAdapter = new CompanyAdapter(this,this);
+        CompanyAdapter companyAdapter = new CompanyAdapter(this, this);
         companyAdapter.setData(list);
         company_list_item.setAdapter(companyAdapter);
 
@@ -54,7 +73,7 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 final AlertDialog.Builder continue_builder = new AlertDialog.Builder(ChooseCompanyActivity.this);
-                continue_builder.setTitle( "是否选择该公司?");
+                continue_builder.setTitle("是否选择该公司?");
                 continue_builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -65,7 +84,7 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
                     public void onClick(DialogInterface dialog, int which) {
                         String str = list.get(position);
                         Intent intent = new Intent(ChooseCompanyActivity.this, OilFieldActivity.class);
-                        intent.putExtra("company_name",str);
+                        intent.putExtra("company_name", str);
                         startActivity(intent);
                     }
                 });
@@ -76,7 +95,7 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
         insert_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 AlertDialog.Builder insert_builder = new AlertDialog.Builder(ChooseCompanyActivity.this);
-                insert_builder.setTitle( "将要前往添加页面，确认离开?");
+                insert_builder.setTitle("将要前往添加页面，确认离开?");
                 insert_builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -93,6 +112,7 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
             }
         });
     }
+
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.del_btn:   //lv条目中 iv_del
@@ -100,7 +120,7 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
 
                 //点击删除按钮之后，给出dialog提示
                 AlertDialog.Builder builder = new AlertDialog.Builder(ChooseCompanyActivity.this);
-                builder.setTitle( "确认删除?");
+                builder.setTitle("确认删除?");
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -111,22 +131,22 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
                     public void onClick(DialogInterface dialog, int which) {
                         String companyValue = list.get(position);
                         String type = "company";
-                        long ret = ServiceFactory.getCompanyInfoService().deleteData(companyValue,type);
-                        if(ret==0){
+                        long ret = ServiceFactory.getCompanyInfoService().deleteData(companyValue, type);
+                        if (ret == 0) {
                             Toast.makeText(ChooseCompanyActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
                             dataList = ServiceFactory.getCompanyInfoService().getCompanyList();
                             list = new ArrayList<>();
 
-                            for(int i=0; i<dataList.size();i++){
+                            for (int i = 0; i < dataList.size(); i++) {
                                 CompanyInfo CompanyListItem = dataList.get(i);
                                 String companyName = CompanyListItem.getCompanyName();
                                 list.add(companyName);
                             }
                             ListView company_list_item = findViewById(R.id.company_list_item);
-                            CompanyAdapter companyAdapter = new CompanyAdapter( ChooseCompanyActivity.this,ChooseCompanyActivity.this);
+                            CompanyAdapter companyAdapter = new CompanyAdapter(ChooseCompanyActivity.this, ChooseCompanyActivity.this);
                             companyAdapter.setData(list);
                             company_list_item.setAdapter(companyAdapter);
-                        }else{
+                        } else {
                             Toast.makeText(ChooseCompanyActivity.this, "删除失败", Toast.LENGTH_SHORT).show();
                         }
                     }

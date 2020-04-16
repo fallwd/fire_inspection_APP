@@ -41,6 +41,8 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="请输入公司名"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:imeOptions="flagNoExtractUi"
                     android:textCursorDrawable="@drawable/edit_theme"
                     android:textSize="12sp" />

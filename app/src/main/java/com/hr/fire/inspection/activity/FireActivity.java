@@ -17,7 +17,6 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.deepoove.poi.XWPFTemplate;
 import com.hr.fire.inspection.R;
@@ -52,15 +51,16 @@ public class FireActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fire);
 
-        String str_con = "二氧化碳灭火系统";
-        String str_con2 = "灭火器";
-        String str_con3 = "火灾自动报警系统";
-        String str_con4 = "海水灭火系统";
+        String str_con = "高压二氧化碳灭火系统";
+        String str_con2 = "七氟丙烷气体灭火系统";
+        String str_con3 = "灭火器";
+        String str_con4 = "火灾自动报警系统";
         String str_con5 = "厨房湿粉灭火系统";
-        String str_con6 = "消防灭火系统";
-        String str_con7 = "干粉灭火系统";
-        String str_con8 = "七氟丙烷气体灭火系统";
+        String str_con6 = "海水雨淋灭火系统";
+        String str_con7 = "消防水灭火系统";
+        String str_con8 = "干粉灭火系统";
         String str_con9 = "泡沫灭火系统";
+        String str_con10 = "消防员装备";
 
 
         mList = new ArrayList<>();
@@ -73,6 +73,7 @@ public class FireActivity extends AppCompatActivity {
         mList.add(str_con7);
         mList.add(str_con8);
         mList.add(str_con9);
+        mList.add(str_con10);
 
         //列表
         ListView main_list = findViewById(R.id.main_list);
@@ -91,11 +92,19 @@ public class FireActivity extends AppCompatActivity {
                 bundle.putString("id", String.valueOf(id));
                 bundle.putString("context", str);
                 bundle.putString("f_title", (String) F_title.getText());
-                // 执行跳转
-                Intent intent = new Intent(FireActivity.this, SystemTagProtectionAreaActivity.class);
-                // 页面传值
-                intent.putExtras(bundle);
-                startActivity(intent);
+                if(str == "高压二氧化碳灭火系统" || str == "七氟丙烷气体灭火系统" || str == "海水雨淋灭火系统" || str == "干粉灭火系统" || str == "泡沫灭火系统") {
+                    // 执行跳转
+                    Intent intent = new Intent(FireActivity.this, SystemTagProtectionAreaActivity.class);
+                    // 页面传值
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                } else {
+                    // 执行跳转
+                    Intent intent = new Intent(FireActivity.this, CarbondioxideRecordAcitivty.class);
+                    // 页面传值
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -107,13 +116,11 @@ public class FireActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-//                Toast.makeText(getApplicationContext(), "敬请期待", Toast.LENGTH_LONG).show();
-                    try {
-                        initWordTem();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+                // 点击跳转
+                Intent intent = new Intent(FireActivity.this, FireReportActivity.class);
+                // 页面传值
+                startActivity(intent);
+            }
         });
 
         // 点击返回上一页

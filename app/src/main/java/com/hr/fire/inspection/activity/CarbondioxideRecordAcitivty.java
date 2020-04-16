@@ -59,7 +59,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 finish();
                 break;
             case R.id.bt_next:
-                Intent intent = new Intent(this, CarbonDioxideAcitivty.class);
+                Intent intent = new Intent(this, AutomaticFireAlarmAcitivty.class);
                 startActivity(intent);
                 break;
         }
