@@ -31,7 +31,6 @@ import java.util.List;
 
 //二氧化碳年检记录
 public class CarbondioxideRecordAcitivty extends AppCompatActivity implements View.OnClickListener {
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static int[] icon = {R.mipmap.file};
     private long sys_id;
     private long platform_id;
@@ -98,9 +97,6 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 long companyInfoId = (long) hashMap.get("companyInfoId");
                 long systemId = (long) hashMap.get("systemId");
                 Date checkDate = (Date) hashMap.get("checkDate"); //时间
-
-                String srt_Date = this.format.format(checkDate);
-
                 Intent intent = new Intent(this, CarbonDioxideAcitivty.class);
                 intent.putExtra("ret", ret);  //记录的名字
                 intent.putExtra("companyInfoId", companyInfoId); //公司名称
