@@ -331,7 +331,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 // 执行在主线程
                 // 启动主页面
                 startActivity(new Intent(WelcomeActivity.this, NavigationActivity.class));
-
                 //关闭当前页面
                 finish();
             }
