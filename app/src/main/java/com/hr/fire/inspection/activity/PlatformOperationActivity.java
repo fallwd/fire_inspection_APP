@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,13 +15,20 @@ import com.hr.fire.inspection.service.ServiceFactory;
 
 public class PlatformOperationActivity extends AppCompatActivity {
     private String oil_name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_platform_operation);
         // 获得输入框节点信息
         EditText platformNameText = (EditText) findViewById(R.id.platform_name);
-
+        ImageView iv_finish = (ImageView) findViewById(R.id.iv_finish);
+        iv_finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         Bundle b = getIntent().getExtras();
         //获取Bundle的信息  公司名称  和平台名称
         oil_name = b.getString("oil_name");
@@ -51,11 +59,9 @@ public class PlatformOperationActivity extends AppCompatActivity {
                     finish();
                 } else {
                     long ret = ServiceFactory.getCompanyInfoService().rename(platformName, platformNameValue, type);
-                    if(ret==0){
+                    if (ret == 0) {
                         Toast.makeText(PlatformOperationActivity.this, "修改名称成功", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(PlatformOperationActivity.this, PlatformActivity.class);
-                        intent.putExtra("oil_name", oil_name);
-                        startActivity(intent);
+                        finish();
                     } else {
                         Toast.makeText(PlatformOperationActivity.this, "修改名称失败", Toast.LENGTH_SHORT).show();
                     }
@@ -66,8 +72,6 @@ public class PlatformOperationActivity extends AppCompatActivity {
 
     public void cancelInput(View Button) {
         Toast.makeText(PlatformOperationActivity.this, "您点击了取消按钮", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(PlatformOperationActivity.this,PlatformActivity.class);
-        intent.putExtra("oil_name", oil_name);
-        startActivity(intent);
+        finish();
     }
 }

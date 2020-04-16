@@ -24,7 +24,9 @@ import com.hr.fire.inspection.utils.GreenDaoHelper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class WelcomeActivity extends AppCompatActivity {
     @Override
@@ -111,7 +113,6 @@ public class WelcomeActivity extends AppCompatActivity {
 //        // 删除接口测试
 //        ItemInfo itemInfo = itemDataList.get(0);
 //        ServiceFactory.getYearCheckService().delete(itemInfo);
-
 
 
 //        String tableName = "药剂瓶检查表";
@@ -295,14 +296,34 @@ public class WelcomeActivity extends AppCompatActivity {
 //            Log.i("gettableNameData",dataList.get(i).getId().toString());
 //        }
 
-        // 测试历史数据接口
-//        List dataList = ServiceFactory.getYearCheckService().getHistoryList(4,1);
+//         测试历史数据接口
+//        List<HashMap> dataList = ServiceFactory.getYearCheckService().getHistoryList(3,1);
 //        for(int i=0;i<dataList.size();i++){
 //            Log.i("getHistoryList:::",""+dataList.get(i));
+//            HashMap has = dataList.get(i);
+//            Log.i("getHistoryList:::",""+ has.get("ret"));
 //        }
 
+//        // 测试导出数据接口
+//        // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
+//        long companyInfoId = 3;
+//        // checkDate 检查日期
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//        Date checkDate = null;
+//        try {
+//            checkDate = format.parse("2019-08-03 10:10");
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        List<HashMap> retList = ServiceFactory.getYearCheckService().getOutputItemData(companyInfoId,checkDate);
+//        for(int i=0;i<retList.size();i++){
+//            Log.i("retList:::",""+retList.get(i));
+//            HashMap h = retList.get(i);
+//            List<ItemInfo> itemList = h.get("高压二氧化碳灭火系统");
+//
+//        }
 
-        Toast.makeText(WelcomeActivity.this,"系统将在2秒后为您自动跳转到首页",Toast.LENGTH_SHORT).show();
+        Toast.makeText(WelcomeActivity.this, "系统将在2秒后为您自动跳转到首页", Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -312,6 +333,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 //关闭当前页面
                 finish();
             }
-        },2000);
+        }, 2000);
     }
 }

@@ -118,6 +118,9 @@
         <activity
             android:name=".activity.CarbondioxideRecordAcitivty"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.AutomaticFireAlarmAcitivty"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

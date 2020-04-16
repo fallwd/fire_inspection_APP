@@ -7,6 +7,7 @@ import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public interface YearCheckService extends BaseService<Object>{
@@ -35,7 +36,7 @@ public interface YearCheckService extends BaseService<Object>{
      * @param
      * @return
      */
-    List getHistoryList(long companyId, long systemId);
+    List<HashMap> getHistoryList(long companyId, long systemId);
 
     /**
      * 获取设备信息表信息
@@ -82,5 +83,20 @@ public interface YearCheckService extends BaseService<Object>{
      */
     long insertCheckResultData(YearCheckResult checkResultData, long itemId,long checkId,String companyName, String oilfieldName, String platformName, String systemName, String itemTableName, String checkTableName);
     long insertCheckResultDataEasy(YearCheckResult checkResultData, long itemId,long yearCheckId,long companyInfoId, long checkTypeId, String number, Date checkDate);
+
+    // 导出报告相关接口
+    /**
+     * 获取可导出结果列表
+     * @param
+     * @return
+     */
+    List<HashMap> getOutputList();
+
+    /**
+     * 获取导出结果数据
+     * @param
+     * @return
+     */
+    List<HashMap> getOutputItemData(long companyInfoId, Date checkDate);
 
 }
