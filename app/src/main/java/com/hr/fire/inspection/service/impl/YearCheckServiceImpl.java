@@ -79,7 +79,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 
         for(int i=0;i<dataList.size();i++){
             ItemInfo ret = dataList.get(i);
-            Log.i("getHistoryList:::",ret.toString());
+//            Log.i("getHistoryList:::",ret.toString());
             long DBsystemId = ret.getCheckType().getParent().getId();
             String systemName = ret.getCheckType().getParent().getName();
             String companyName = ret.getCompanyInfo().getCompanyName();
@@ -538,43 +538,13 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         Join checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
                         where(CheckTypeDao.Properties.ParentId.eq(systemId));
         List<ItemInfo> dataList = queryBuilder.list();
+
+        // 获取区域和位号
         systemMap = new HashMap();
         systemMap.put("systemName",systemName);
         systemMap.put("data",dataList);
         systemMap.put("count",dataList.size());
 
-        retList.add(systemMap);
-
-        systemName = "七氟丙烷灭火系统";
-        checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
-                where(CheckTypeDao.Properties.Name.eq(systemName));
-        systemId = checkTypeQueryBuilder.list().get(0).getId();
-        queryBuilder = daoSession.queryBuilder(ItemInfo.class).
-                where(
-                        ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
-                        ItemInfoDao.Properties.CheckDate.eq(checkDate)
-                );
-        checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
-                where(CheckTypeDao.Properties.ParentId.eq(systemId));
-        dataList = queryBuilder.list();
-        systemMap = new HashMap();
-        systemMap.put(systemName,dataList);
-        retList.add(systemMap);
-
-        systemName = "灭火器";
-        checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
-                where(CheckTypeDao.Properties.Name.eq(systemName));
-        systemId = checkTypeQueryBuilder.list().get(0).getId();
-        queryBuilder = daoSession.queryBuilder(ItemInfo.class).
-                where(
-                        ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
-                        ItemInfoDao.Properties.CheckDate.eq(checkDate)
-                );
-        checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
-                where(CheckTypeDao.Properties.ParentId.eq(systemId));
-        dataList = queryBuilder.list();
-        systemMap = new HashMap();
-        systemMap.put(systemName,dataList);
         retList.add(systemMap);
 
         return retList;
