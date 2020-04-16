@@ -159,7 +159,6 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
                         carbonFragment1.saveData();
                     }
                 }
-
             }
         });
         iv_finish.setOnClickListener(new View.OnClickListener() {
