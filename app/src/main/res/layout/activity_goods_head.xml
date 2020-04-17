@@ -35,7 +35,7 @@
             android:layout_height="1dp"
             android:background="@color/white_view_line" />
 
-        <include layout="@layout/item_goods_form" />
+        <include layout="@layout/item_goods_check" />
 
         <ListView
             android:id="@+id/list"
