@@ -94,7 +94,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 finish();
                 break;
             case R.id.bt_next:
-                Intent intent = new Intent(this, AutomaticFireAlarmAcitivty.class);
+                Intent intent = new Intent(this, CarbonDioxideAcitivty.class);
                 if (selected_tag == -1) {
                     //selected_tag=-1时,表示用户没有选择任何记录,  新建一个巡检记录
                     intent.putExtra("srt_Date", new Date()); //记录的时间
