@@ -117,6 +117,7 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             mData.add(itemInfo);
             //添加动画
             notifyItemInserted(position);
+            Log.d("dong", "执行顺序adapter");
         }
     }
 
