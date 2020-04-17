@@ -89,6 +89,24 @@ public class CarbonFragment1 extends Fragment {
      * 3. 用gettableNameData返回的数据ID,  填充到getItemDataEasy第三个参数
      */
     private void initData() {
+        //历史中的companyInfoId  ,  systemId和在公司、平台那边传过来的都是一样的ID，使用哪一个都行
+        // 调用接口测试
+        String companyName = "辽东作业公司";
+        String oilfieldName = "SZ36-1";
+        String platformName = "SZ36-1B";
+        String systemName = "高压二氧化碳系统灭火系统";
+        String tableName = "药剂瓶";
+        String number = "SD002";
+//        itemDataList = ServiceFactory.getYearCheckService().getItemData(companyName, oilfieldName, platformName, systemName, tableName, number);
+//        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, );
+
+//        List<ItemInfo> getItemDataEasy(long companyInfoId, long checkTypeId, String number, Date checkDate);
+
+//        Log.d("dong", "数据查看:" + itemDataList.size());
+//        Log.d("dong", "数据查看===:" + itemDataList.get(0).toString());
+
+
+
         checkTypes = ServiceFactory.getYearCheckService().gettableNameData(it.systemId);
         if (checkTypes == null) {
             Toast.makeText(getActivity(), "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
@@ -96,7 +114,8 @@ public class CarbonFragment1 extends Fragment {
         //参数1:公司id, 参数2:检查表类型对应的id, 参数3:输入的系统位号，如果没有就填"",或者SD002,否则没数据   参数4:日期
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(0).getId(), it.number == null ? "" : it.number, it.srt_Date);
         HYLogUtil.getInstance().d("设备表信息,数据查看:" + itemDataList.size() + "  " + itemDataList.toString());
-        //一级表插入数据insertItemData
+        // 一级表插入数据insertItemData
+
     }
 
     private void initView() {
