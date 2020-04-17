@@ -56,7 +56,7 @@ public class CarbonFragment2 extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
 //            String keyParameter = (String) getArguments().get(mKey);
-           it = (IntentTransmit) getArguments().getSerializable(mKey);
+            it = (IntentTransmit) getArguments().getSerializable(mKey);
         }
     }
 
@@ -84,8 +84,7 @@ public class CarbonFragment2 extends Fragment {
         }
         //参数1:公司id, 参数2:检查表类型对应的id, 参数3:输入的系统位号，如果没有就填"",或者SD002,否则没数据   参数4:日期
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(1).getId(), it.number == null ? "" : it.number, it.srt_Date);
-        Log.d("dong", "数据查看:" + itemDataList.size());
-        Log.d("dong", "数据查看===:" + itemDataList.get(0).toString());
+        Log.d("dong", "数据查看:" + itemDataList.size() );
     }
 
     private void initView() {
