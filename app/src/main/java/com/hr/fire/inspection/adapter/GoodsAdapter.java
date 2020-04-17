@@ -6,25 +6,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.YearCheck;
-import com.hr.fire.inspection.utils.DisplayUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GoodsAdapter extends BaseAdapter {
@@ -58,7 +53,7 @@ public class GoodsAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_goos_check, parent, false);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_goods_check, parent, false);
             holder = new ViewHolder();
             holder.ll_item = (LinearLayout) convertView.findViewById(R.id.ll_item);
             holder.tv1 = (TextView) convertView.findViewById(R.id.tv1);
