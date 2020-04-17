@@ -47,8 +47,8 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 .inflate(R.layout.carbon_item1_input, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
-
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
