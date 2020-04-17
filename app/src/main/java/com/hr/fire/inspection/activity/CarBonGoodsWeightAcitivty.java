@@ -11,6 +11,9 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,14 +71,8 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
         //获取检查条目的数据,主要用于展示
         checkDataEasy = ServiceFactory.getYearCheckService().getCheckDataEasy(checkTypes.get(0).getId());
         //获取用户需要填写的数据
-        Log.e("dong", "系统位号==" + its.number);
         List<YearCheckResult> checkResultDataEasy = ServiceFactory.getYearCheckService().getCheckResultDataEasy(divice_id, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
-        if (checkResultDataEasy == null || checkResultDataEasy.size() == 0) {
-            List<YearCheck> checkDataEasy = ServiceFactory.getYearCheckService().getCheckDataEasy(check_id);
-            Log.e("dong", "checkDataEasy==" + checkDataEasy.toString());
-        }
-        HYLogUtil.getInstance().d(checkResultDataEasy.toString());
-        Log.e("dong", "系统位置" + checkResultDataEasy.toString());
+        Log.e("dong", "获取用户填写的检查结果数据 系统位置" + checkResultDataEasy.toString());
         //获取已有的检查结果的数据
         initView();
     }
@@ -90,13 +87,33 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
             }
         });
         Button submit_btn = findViewById(R.id.submit_btn);
-        ListView list = findViewById(R.id.list);
+        final ListView list = findViewById(R.id.list);
         GoodsAdapter goodsAdapter = new GoodsAdapter(this, checkDataEasy);
         list.setAdapter(goodsAdapter);
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ServiceFactory.getYearCheckService().insertCheckResultDataEasy();
+                int childCount = list.getChildCount();
+                for (int i = 0; i < childCount; i++) {
+                    LinearLayout childAt = (LinearLayout) list.getChildAt(i);
+                    TextView tv6 = childAt.findViewById(R.id.tv6);
+                    TextView tv7 = childAt.findViewById(R.id.tv7);
+                    ImageView iv7 = childAt.findViewById(R.id.iv7);
+                    EditText ev8 = childAt.findViewById(R.id.ev8);
+
+                    YearCheckResult ycr = new YearCheckResult();
+                    ycr.setIsPass(tv6.getText().toString() == null ? "用户未选择" : tv6.getText().toString());
+                    ycr.setImageUrl("暂无,,后期在调试");  //可以在iv7中获取
+                    ycr.setDescription(ev8.getText().toString() == null ? "" : ev8.getText().toString());
+                    ycr.setSystemNumber(its.number);
+                    ycr.setProtectArea(" "); // 保护位号
+                    ycr.setCheckDate(its.srt_Date);  //检查日期
+                    long l = ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, 0, its.companyInfoId, check_id, its.number, its.srt_Date);
+                    Log.d("dong", "onClick===" + tv6.getText().toString() + "   --  " + ev8.getText().toString() + "  " + l);
+                    if (l == 0) {
+                        Toast.makeText(CarBonGoodsWeightAcitivty.this, "检查表数据提交成功", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
     }
