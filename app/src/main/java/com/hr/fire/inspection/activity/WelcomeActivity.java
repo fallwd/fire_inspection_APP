@@ -307,6 +307,10 @@ public class WelcomeActivity extends AppCompatActivity {
 //        }
 
 //        // 测试导出数据接口
+
+//        List<HashMap> allList = ServiceFactory.getYearCheckService().getOutputList();
+//        Log.i("getOutputList",""+allList);
+//
 //        // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
 //        long companyInfoId = 3;
 //        // checkDate 检查日期
@@ -320,8 +324,6 @@ public class WelcomeActivity extends AppCompatActivity {
 //        List<HashMap> retList = ServiceFactory.getYearCheckService().getOutputItemData(companyInfoId,checkDate);
 //        for(int i=0;i<retList.size();i++){
 //            Log.i("retList:::",""+retList.get(i));
-//            HashMap h = retList.get(i);
-//            List<ItemInfo> itemList = h.get("高压二氧化碳灭火系统");
 //
 //        }
 
