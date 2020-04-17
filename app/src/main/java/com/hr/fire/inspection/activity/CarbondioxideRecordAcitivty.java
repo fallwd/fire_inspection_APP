@@ -97,7 +97,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 long companyInfoId = (long) hashMap.get("companyInfoId");
                 long systemId = (long) hashMap.get("systemId");
                 Date checkDate = (Date) hashMap.get("checkDate"); //时间
-                Intent intent = new Intent(this, CarbonDioxideAcitivty.class);
+                Intent intent = new Intent(this, HFCActivity.class);
                 intent.putExtra("ret", ret);  //记录的名字
                 intent.putExtra("companyInfoId", companyInfoId); //公司名称
                 intent.putExtra("systemId", systemId);    //系统ID
