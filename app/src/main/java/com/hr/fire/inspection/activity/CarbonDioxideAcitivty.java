@@ -2,6 +2,7 @@ package com.hr.fire.inspection.activity;
 
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.util.Log;
@@ -33,6 +34,7 @@ import java.util.Date;
 import java.util.List;
 
 public class CarbonDioxideAcitivty extends AppCompatActivity {
+    private static final String TAG = "CarbonDioxideAcitivty";
     private List<String> titleList = new ArrayList<String>();
     private List<Fragment> fragments = new ArrayList<Fragment>();
     private TabLayout mTabLayout;
@@ -90,14 +92,15 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
         mViewPager = findViewById(R.id.vp_content);
         titleList.add("药剂瓶");
         titleList.add("氮气瓶");
-        titleList.add("保护区");
         titleList.add("管线管件");
+        titleList.add("保护区");
         titleList.add("功能性试验");
+
         carbonFragment1 = CarbonFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
-        carbonFragment2 = CarbonFragment2.newInstance("", "");
-        carbonFragment3 = CarbonFragment3.newInstance("", "");
-        carbonFragment4 = CarbonFragment4.newInstance("", "");
-        carbonFragment5 = CarbonFragment5.newInstance("", "");
+        carbonFragment2 = CarbonFragment2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
+        carbonFragment3 = CarbonFragment3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
+        carbonFragment4 = CarbonFragment4.newInstance(ConstantInspection.YEARLY_ON_SITE_F4, it);
+        carbonFragment5 = CarbonFragment5.newInstance(ConstantInspection.YEARLY_ON_SITE_F5, it);
         fragments.add(carbonFragment1);
         fragments.add(carbonFragment2);
         fragments.add(carbonFragment3);
@@ -173,6 +176,10 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
                         carbonFragment1.addItemView();
                     } else if (fragment instanceof CarbonFragment2) {
                         carbonFragment2.addItemView();
+                    } else if(fragment instanceof  CarbonFragment3){
+                        carbonFragment3.addItemView();
+                    }else if(fragment instanceof  CarbonFragment4){
+                        carbonFragment4.addItemView();
                     }
                 }
 //                currentPager  拿到当前的页面
@@ -187,7 +194,6 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
                         carbonFragment1.upData();
                     }
                 }
-
             }
         });
         iv_finish.setOnClickListener(new View.OnClickListener() {

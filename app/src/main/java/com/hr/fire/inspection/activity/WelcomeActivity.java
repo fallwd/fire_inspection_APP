@@ -36,12 +36,12 @@ public class WelcomeActivity extends AppCompatActivity {
 
 //         初始化数据库,插入测试数据
         // 清空数据库
-        DBManager cleanObj = new DBManager(this);
-        cleanObj.deleSQL();
-        // 初始化数据库
-        BaseData baseData = new BaseData();
-        baseData.initData();
-        baseData.insertTestData();
+//        DBManager cleanObj = new DBManager(this);
+//        cleanObj.deleSQL();
+//        // 初始化数据库
+//        BaseData baseData = new BaseData();
+//        baseData.initData();
+//        baseData.insertTestData();
         // 调用接口测试
 //        List<CompanyInfo> companyList = ServiceFactory.getCompanyInfoService().getAll();
 //        for(int i=0;i<companyList.size();i++){
@@ -86,10 +86,11 @@ public class WelcomeActivity extends AppCompatActivity {
 //        try {
 ////            checkDate = format.parse("2019-08-03 10:10");
 //            checkDate = format.parse("2019-07-03 09:10");
+////            checkDate = format.parse("2019-07-03 09:10");
 //        } catch (ParseException e) {
 //            e.printStackTrace();
 //        }
-//
+//        Log.i("getItemDataEasy","" + checkDate);
 //        List<ItemInfo> dataList = ServiceFactory.getYearCheckService().getItemDataEasy(companyInfoId, checkTypeId, number, checkDate);
 //        for(int i=0;i<dataList.size();i++){
 //            Log.i("getItemDataEasy",dataList.get(i).toString());
@@ -306,6 +307,10 @@ public class WelcomeActivity extends AppCompatActivity {
 //        }
 
 //        // 测试导出数据接口
+
+//        List<HashMap> allList = ServiceFactory.getYearCheckService().getOutputList();
+//        Log.i("getOutputList",""+allList);
+//
 //        // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
 //        long companyInfoId = 3;
 //        // checkDate 检查日期
@@ -319,10 +324,9 @@ public class WelcomeActivity extends AppCompatActivity {
 //        List<HashMap> retList = ServiceFactory.getYearCheckService().getOutputItemData(companyInfoId,checkDate);
 //        for(int i=0;i<retList.size();i++){
 //            Log.i("retList:::",""+retList.get(i));
-//            HashMap h = retList.get(i);
-//            List<ItemInfo> itemList = h.get("高压二氧化碳灭火系统");
 //
 //        }
+
 
         Toast.makeText(WelcomeActivity.this, "系统将在2秒后为您自动跳转到首页", Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {

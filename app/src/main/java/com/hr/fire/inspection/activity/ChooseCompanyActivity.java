@@ -59,7 +59,9 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
         for (int i = 0; i < dataList.size(); i++) {
             CompanyInfo CompanyListItem = dataList.get(i);
             String companyName = CompanyListItem.getCompanyName();
-            list.add(companyName);
+            if(companyName != null && companyName != ""){
+                list.add(companyName);
+            }
         }
         // 渲染条目
         ListView company_list_item = findViewById(R.id.company_list_item);
@@ -140,7 +142,9 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
                             for (int i = 0; i < dataList.size(); i++) {
                                 CompanyInfo CompanyListItem = dataList.get(i);
                                 String companyName = CompanyListItem.getCompanyName();
-                                list.add(companyName);
+                                if(companyName != null && companyName != ""){
+                                    list.add(companyName);
+                                }
                             }
                             ListView company_list_item = findViewById(R.id.company_list_item);
                             CompanyAdapter companyAdapter = new CompanyAdapter(ChooseCompanyActivity.this, ChooseCompanyActivity.this);

@@ -68,7 +68,9 @@ public class OilFieldActivity extends AppCompatActivity implements View.OnClickL
         for (int i = 0; i < dataList.size(); i++) {
             CompanyInfo CompanyListItem = dataList.get(i);
             String companyName = CompanyListItem.getOilfieldName();
-            list.add(companyName);
+            if(companyName != null && companyName != ""){
+                list.add(companyName);
+            }
         }
 
         ListView oil_list_item = findViewById(R.id.oil_list_item);
@@ -152,7 +154,9 @@ public class OilFieldActivity extends AppCompatActivity implements View.OnClickL
                             for (int i = 0; i < dataList.size(); i++) {
                                 CompanyInfo CompanyListItem = dataList.get(i);
                                 String companyName = CompanyListItem.getOilfieldName();
-                                list.add(companyName);
+                                if(companyName != null && companyName != ""){
+                                    list.add(companyName);
+                                }
                             }
 
                             ListView oil_list_item = findViewById(R.id.oil_list_item);
