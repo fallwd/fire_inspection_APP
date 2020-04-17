@@ -84,12 +84,13 @@ public class WelcomeActivity extends AppCompatActivity {
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 //        Date checkDate = null;
 //        try {
-//            checkDate = format.parse("2019-08-03 10:10");
+////            checkDate = format.parse("2019-08-03 10:10");
+//            checkDate = format.parse("2019-07-03 09:10");
 ////            checkDate = format.parse("2019-07-03 09:10");
 //        } catch (ParseException e) {
 //            e.printStackTrace();
 //        }
-//
+//        Log.i("getItemDataEasy","" + checkDate);
 //        List<ItemInfo> dataList = ServiceFactory.getYearCheckService().getItemDataEasy(companyInfoId, checkTypeId, number, checkDate);
 //        for(int i=0;i<dataList.size();i++){
 //            Log.i("getItemDataEasy",dataList.get(i).toString());
