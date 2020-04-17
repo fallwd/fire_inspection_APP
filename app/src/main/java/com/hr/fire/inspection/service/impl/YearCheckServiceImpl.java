@@ -527,7 +527,6 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 
         HashMap systemMap;
         ArrayList<HashMap> retList = new ArrayList();
-
         // 获取system信息
 //        List<CheckType> systemList = this.getSystemNameData();
         String systemName = "高压二氧化碳灭火系统";
@@ -553,7 +552,6 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 where(
                         ItemInfoDao.Properties.CheckDate.eq(checkDate),
                         new WhereCondition.StringCondition(
-//                                String.format("COMPANY_INFO_ID=%s AND CHECK_DATE=datetime('%s') GROUP BY SYSTEM_NUMBER", companyInfoId,dateString))
                                 String.format("COMPANY_INFO_ID=%s GROUP BY SYSTEM_NUMBER", companyInfoId))
                 );
         List<ItemInfo> secondDataList = secondQueryBuilder.list();
@@ -573,7 +571,6 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
             }
         }
         systemMap.put("systemNumber",systemNumberCombo);
-
         secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
                 where(
                         ItemInfoDao.Properties.CheckDate.eq(checkDate),
@@ -597,34 +594,33 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
             }
         }
         systemMap.put("protectArea",protectAreaCombo);
-
         // 获取总容积
-//        Cursor cursor = daoSession.getDatabase().rawQuery("SELECT SUM(" + ItemInfoDao.Properties.GoodsWeight.columnName + ") FROM " + ItemInfoDao.TABLENAME + " INNER JOIN " + CheckTypeDao.TABLENAME + " ON ", new String []{});
-        String dateString = "2019-08-03 10:10:00";
         //Sat Aug 03 10:10:00 GMT+00:00 2019 Sat Aug 03 10:10:00 GMT+00:00 2019
         Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s AND CAST(%s.CHECK_DATE AS TEXT)='%s'",
                 ItemInfoDao.TABLENAME,
                 ItemInfoDao.Properties.GoodsWeight.columnName,
-//                ItemInfoDao.TABLENAME,
                 ItemInfoDao.TABLENAME,
                 CheckTypeDao.TABLENAME,
                 ItemInfoDao.TABLENAME,
-//                ItemInfoDao.Properties.CheckTypeId,
                 CheckTypeDao.TABLENAME,
-//                CheckTypeDao.Properties.Id,
                 CheckTypeDao.TABLENAME,
                 systemId,
                 ItemInfoDao.TABLENAME,
                 checkDate.getTime()
 //                dateString
         ), new String []{});
-
         cursor.moveToFirst();
 //        Log.i("tang","getOutputItemData:xxx:::" + cursor.getString());
         long result = cursor.getLong(0);
-        Log.i("tang","getOutputItemData:xxx:::" + result);
+//        Log.i("tang","getOutputItemData:xxx:::" + result);
         systemMap.put("weights",result);
         retList.add(systemMap);
+
+        //
+
+
+
+
         return retList;
 
     }
