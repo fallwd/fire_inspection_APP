@@ -560,7 +560,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         String systemNumberCombo = "";
         for(int i=0;i<secondDataList.size();i++){
             ItemInfo ret = secondDataList.get(i);
-            Log.i("tang","系统位号------" + ret);
+//            Log.i("tang","系统位号------" + ret);
             long DBsystemId = ret.getCheckType().getParent().getId();
             if(systemId==DBsystemId){
                 String systemNumber = ret.getSystemNumber();
@@ -584,7 +584,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         String protectAreaCombo = "";
         for(int i=0;i<secondDataList.size();i++){
             ItemInfo ret = secondDataList.get(i);
-            Log.i("tang","保护区域------" + ret);
+//            Log.i("tang","保护区域------" + ret);
             long DBsystemId = ret.getCheckType().getParent().getId();
             if(systemId==DBsystemId){
                 String protectArea = ret.getProtectArea();
@@ -599,17 +599,10 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         systemMap.put("protectArea",protectAreaCombo);
 
         // 获取总容积
-
-//        String colName = ItemInfoDao.Properties.GoodsWeight.columnName;
-//        String ItemInfoTable = ItemInfoDao.TABLENAME;
-//        String CheckTypeTable = CheckTypeDao.TABLENAME;
-
 //        Cursor cursor = daoSession.getDatabase().rawQuery("SELECT SUM(" + ItemInfoDao.Properties.GoodsWeight.columnName + ") FROM " + ItemInfoDao.TABLENAME + " INNER JOIN " + CheckTypeDao.TABLENAME + " ON ", new String []{});
         String dateString = "2019-08-03 10:10:00";
-        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s AND datetime(%s.CHECK_DATE)='%s'",
-//        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s",
-//        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s),datetime(%s.CHECK_DATE) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s",
-//        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s),strftime(%s,%s.CHECK_DATE) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s",
+        //Sat Aug 03 10:10:00 GMT+00:00 2019 Sat Aug 03 10:10:00 GMT+00:00 2019
+        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s AND CAST(%s.CHECK_DATE AS TEXT)='%s'",
                 ItemInfoDao.TABLENAME,
                 ItemInfoDao.Properties.GoodsWeight.columnName,
 //                ItemInfoDao.TABLENAME,
@@ -622,17 +615,14 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 CheckTypeDao.TABLENAME,
                 systemId,
                 ItemInfoDao.TABLENAME,
-                checkDate
+                checkDate.getTime()
 //                dateString
         ), new String []{});
+
         cursor.moveToFirst();
 //        Log.i("tang","getOutputItemData:xxx:::" + cursor.getString());
         long result = cursor.getLong(0);
-//        long result2 = cursor.getString(1);
-        long result2 = cursor.getLong(1);
         Log.i("tang","getOutputItemData:xxx:::" + result);
-        Log.i("tang","getOutputItemData:xxx:::" + result2);
-//        Log.i("tang","getOutputItemData:long Date:::");
         systemMap.put("weights",result);
         retList.add(systemMap);
         return retList;
