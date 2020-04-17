@@ -184,7 +184,6 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
                 if (fragments != null && fragments.size() != 0) {
                     Fragment fragment = fragments.get(currentPager);
                     if (fragment instanceof CarbonFragment1) {
-//                        carbonFragment1.saveData();
                         carbonFragment1.upData();
                     }
                 }

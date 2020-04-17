@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,10 +70,9 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
         }
         //获取检查条目的数据,主要用于展示
         checkDataEasy = ServiceFactory.getYearCheckService().getCheckDataEasy(checkTypes.get(0).getId());
-        Log.d("dong", "红款真难" + checkDataEasy.toString());
         //获取用户需要填写的数据
         List<YearCheckResult> checkResultDataEasy = ServiceFactory.getYearCheckService().getCheckResultDataEasy(divice_id, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
-        Log.e("dong", "系统位置" + checkResultDataEasy.toString());
+        Log.e("dong", "获取用户填写的检查结果数据 系统位置" + checkResultDataEasy.toString());
         //获取已有的检查结果的数据
         initView();
     }
@@ -95,7 +95,7 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
             public void onClick(View v) {
                 int childCount = list.getChildCount();
                 for (int i = 0; i < childCount; i++) {
-                    ListView childAt = (ListView) list.getChildAt(i);
+                    LinearLayout childAt = (LinearLayout) list.getChildAt(i);
                     TextView tv6 = childAt.findViewById(R.id.tv6);
                     TextView tv7 = childAt.findViewById(R.id.tv7);
                     ImageView iv7 = childAt.findViewById(R.id.iv7);
@@ -103,12 +103,16 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
 
                     YearCheckResult ycr = new YearCheckResult();
                     ycr.setIsPass(tv6.getText().toString() == null ? "用户未选择" : tv6.getText().toString());
-                    ycr.setImageUrl("暂无吧,,后期在调试");  //可以在iv7中获取
+                    ycr.setImageUrl("暂无,,后期在调试");  //可以在iv7中获取
                     ycr.setDescription(ev8.getText().toString() == null ? "" : ev8.getText().toString());
                     ycr.setSystemNumber(its.number);
                     ycr.setProtectArea(" "); // 保护位号
                     ycr.setCheckDate(its.srt_Date);  //检查日期
-                    ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, 0, its.companyInfoId, check_id, its.number, its.srt_Date);
+                    long l = ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, 0, its.companyInfoId, check_id, its.number, its.srt_Date);
+                    Log.d("dong", "onClick===" + tv6.getText().toString() + "   --  " + ev8.getText().toString() + "  " + l);
+                    if (l == 0) {
+                        Toast.makeText(CarBonGoodsWeightAcitivty.this, "检查表数据提交成功", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

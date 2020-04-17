@@ -62,7 +62,6 @@ public class CarbonFragment1 extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             it = (IntentTransmit) getArguments().getSerializable(mKey);
-            Log.e("dong", "f1传参====" + it.toString());
         }
 
     }
@@ -120,8 +119,13 @@ public class CarbonFragment1 extends Fragment {
         if (adapter != null) {
             adapter.addData(itemDataList.size());
             //点击"＋", 就像数据库中插入一条数据, 点"保存"就更新所有数据
-            Log.d("dong", "执行顺序addItemView" + itemDataList.size() + "  " + itemDataList.toString());
-            addData();
+            rc_list.post(new Runnable() {
+                @Override
+                public void run() {
+                    addData();
+                }
+            });
+
         }
     }
 
@@ -131,10 +135,10 @@ public class CarbonFragment1 extends Fragment {
     //点击"＋", 就像数据库中插入一条数据, 点"保存"就更新所有数据
     public void addData() {
         int childCount = rc_list.getChildCount();
+        Log.d("dong", "执行顺序addData == " + childCount);
         if (childCount == 0) {
             return;
         }
-        Log.d("dong", "执行顺序addData" + childCount);
         //这些数据需要从上层传参过来
         ItemInfo itemObj = new ItemInfo();
         LinearLayout childAt = (LinearLayout) rc_list.getChildAt(childCount - 1);
@@ -170,6 +174,7 @@ public class CarbonFragment1 extends Fragment {
 
     public void upData() {
         int itemCount = rc_list.getChildCount();
+        Log.d("dong", "upData==   " + itemCount);
         if (itemCount == 0) {
             return;
         }

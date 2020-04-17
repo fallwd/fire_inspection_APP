@@ -30,7 +30,6 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private Long checkid;  //检查表的Id
     private IntentTransmit intentTransmit;   //之前页面数据的传参,如系统号\公司id...
 
-
     public CarBon1Adapter() {
     }
 
@@ -119,6 +118,7 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             notifyItemInserted(position);
             Log.d("dong", "执行顺序adapter");
         }
+        notifyDataSetChanged();
     }
 
     //  删除数据
@@ -181,5 +181,4 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             rl_11 = (RelativeLayout) view.findViewById(R.id.rl_11);
         }
     }
-
 }
