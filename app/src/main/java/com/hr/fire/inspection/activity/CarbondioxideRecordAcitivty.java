@@ -49,17 +49,17 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         platform_id = intent.getLongExtra("platform_id", 0);  //平台ID
         f_title = intent.getStringExtra("f_title");  //传过来的系统名称
         sys_number = intent.getStringExtra("sys_number");  //系统位号
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         historyList = ServiceFactory.getYearCheckService().getHistoryList(platform_id, sys_id);
-
-//        Log.i("md", "intent1111： " + sys_id);
-//        Log.i("md", "intent2222： " + platform_id);
-
-
         initView();
     }
 
     private ArrayList hot = new ArrayList<>();
-
     private void initView() {
         if (historyList.size() == 0) {
             Toast.makeText(this, "没有历史年检记录,请点击\"下一步\"进行新建", Toast.LENGTH_SHORT).show();

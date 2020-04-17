@@ -163,10 +163,8 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (fragments != null && fragments.size() != 0) {
-                    Log.d("dong", "instanceof CarbonFragment1  onClick");
                     Fragment fragment = fragments.get(currentPager);
                     if (fragment instanceof CarbonFragment1) {
-                        Log.d("dong", "instanceof CarbonFragment1");
                         carbonFragment1.addItemView();
                     } else if (fragment instanceof CarbonFragment2) {
                         carbonFragment2.addItemView();

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.YearCheck;
+import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
@@ -26,11 +28,13 @@ public class GoodsAdapter extends BaseAdapter {
 
     private Context mContext;
     private HrPopup hrPopup;
-    private final List<YearCheck> dataEasy;
+    private final List<YearCheck> dataEasy;//检查的条目数据
+    private List<YearCheckResult> ycr;  //用户之前的填写记录
 
-    public GoodsAdapter(Activity rulesActivity, List<YearCheck> checkDataEasy) {
-        mContext = rulesActivity;
-        dataEasy = checkDataEasy;
+    public GoodsAdapter(Activity rulesActivity, List<YearCheck> checkDataEasy, List<YearCheckResult> yearCheckResults) {
+        this.mContext = rulesActivity;
+        this.dataEasy = checkDataEasy;
+        this.ycr = yearCheckResults;
     }
 
     @Override
@@ -66,6 +70,7 @@ public class GoodsAdapter extends BaseAdapter {
             holder.rl7 = (RelativeLayout) convertView.findViewById(R.id.rl7);
             holder.iv7 = (ImageView) convertView.findViewById(R.id.iv7);
             holder.tv8 = (TextView) convertView.findViewById(R.id.tv8);
+            holder.ev8 = (EditText) convertView.findViewById(R.id.ev8);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -78,7 +83,8 @@ public class GoodsAdapter extends BaseAdapter {
         holder.tv3.setText(yearCheck.getContent());
         holder.tv4.setText(yearCheck.getRequirement());
         holder.tv5.setText(yearCheck.getStandard());
-        holder.tv6.setText("是  ");
+        holder.tv6.setText(ycr.get(position).getIsPass());
+        holder.ev8.setText(ycr.get(position).getDescription());
         //在左侧添加图片
         Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
@@ -93,7 +99,6 @@ public class GoodsAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 showPopWind(finalHolder.tv6);
-
             }
         });
         holder.iv7.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +125,7 @@ public class GoodsAdapter extends BaseAdapter {
         RelativeLayout rl7;
         ImageView iv7;
         TextView tv8;
+        EditText ev8;
     }
 
     //显示对话框,用户选择是否异常的弹框

@@ -46,7 +46,6 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
         ImageView iv_finish = (ImageView) this.findViewById(R.id.iv_finish);
         TextView tv_inspection_pro = (TextView) this.findViewById(R.id.tv_inspection_pro);
         dataList = ServiceFactory.getCompanyInfoService().getPlatformList(oil_name);
-        Log.d("dong", "----hah --- " + dataList.toString());
         idlist = new ArrayList<>();
         list = new ArrayList<>();
         for (int i = 0; i < dataList.size(); i++) {
