@@ -68,8 +68,6 @@ public class GoodsAdapter extends BaseAdapter {
             holder.tv5 = (TextView) convertView.findViewById(R.id.tv5);
             holder.tv6 = (TextView) convertView.findViewById(R.id.tv6);
             holder.tv7 = (TextView) convertView.findViewById(R.id.tv7);
-            holder.iv7 = (ImageView) convertView.findViewById(R.id.iv7);
-            holder.rl7 = (RelativeLayout) convertView.findViewById(R.id.rl7);
             holder.tv8 = (TextView) convertView.findViewById(R.id.tv8);
             convertView.setTag(holder);
         } else {

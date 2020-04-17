@@ -19,18 +19,7 @@ public class NavigationActivity extends AppCompatActivity {
         LinearLayout btn1 = (LinearLayout) findViewById(R.id.Navigation_Btn1);
         btn1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-<<<<<<< HEAD
-//                Intent intent = new Intent(NavigationActivity.this, PhotoUploadActivity.class);
                 Intent intent = new Intent(NavigationActivity.this, ChooseCompanyActivity.class);
-=======
-
-
-//                Intent intent = new Intent(NavigationActivity.this, CarbonDioxideAcitivty.class);
-
-                Intent intent = new Intent(NavigationActivity.this, ChooseCompanyActivity.class);
-
-
->>>>>>> 53c0858147bdafad9682f901c565a1afae29f9f5
                 startActivity(intent);
             }
         });

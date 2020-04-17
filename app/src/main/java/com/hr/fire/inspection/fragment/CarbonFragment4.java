@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.CarBon4Adapter;
+import com.hr.fire.inspection.entity.CheckType;
+import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
@@ -31,17 +34,19 @@ public class CarbonFragment4 extends Fragment {
     private static CarbonFragment4 fragment4;
     private static String mKey;
     private CarBon4Adapter adapter;
+    private List<CheckType> checkTypes;
+    private IntentTransmit it;
     private List<YearCheckResult> DataList = new ArrayList<>();
     private List<YearCheck> itemDataList = new ArrayList<>();
     private RecyclerView rc_list;
 
-    public static CarbonFragment4 newInstance(String key, String value) {
+    public static CarbonFragment4 newInstance(String key, IntentTransmit value) {
         if (fragment4 == null) {
             fragment4 = new CarbonFragment4();
         }
         mKey = key;
         Bundle args = new Bundle();
-        args.putString(key, value);
+        args.putSerializable(key, value);
         fragment4.setArguments(args);
         return fragment4;
     }
@@ -50,7 +55,7 @@ public class CarbonFragment4 extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            String keyParameter = (String) getArguments().get(mKey);
+            it = (IntentTransmit) getArguments().getSerializable(mKey);
         }
     }
 
@@ -73,24 +78,35 @@ public class CarbonFragment4 extends Fragment {
     private void initData() {
 
         // 调用接口测试
-        long companyInfoId = 3;
-        long checkTypeId = 6;
-        String number = "SD002";
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Date checkDate = null;
+//        long companyInfoId = 3;
+//        long checkTypeId = 6;
+//        String number = "SD002";
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//        Date checkDate = null;
+//
+//        ItemInfo Obj =  new ItemInfo();
+//
+//        try {
+//            checkDate = format.parse("2019-08-03 10:10");
+////            checkDate = format.parse("2019-07-03 09:10");
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//
+//        List<YearCheckResult> DataList = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, companyInfoId,checkTypeId,number,checkDate);
+//        if(DataList.size()==0){
+//            itemDataList = ServiceFactory.getYearCheckService().getCheckDataEasy(7);
+//            Log.d("dong", "数据查看:" + itemDataList.size());
+//            Log.d("dong", "数据查看===:" + itemDataList.get(0).toString());
+//        }
 
-        ItemInfo Obj =  new ItemInfo();
-
-        try {
-            checkDate = format.parse("2019-08-03 10:10");
-//            checkDate = format.parse("2019-07-03 09:10");
-        } catch (ParseException e) {
-            e.printStackTrace();
+        checkTypes = ServiceFactory.getYearCheckService().gettableNameData(it.systemId);
+        if (checkTypes == null) {
+            Toast.makeText(getActivity(), "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
         }
-
-        List<YearCheckResult> DataList = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, companyInfoId,checkTypeId,number,checkDate);
+        List<YearCheckResult> DataList = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, it.companyInfoId, checkTypes.get(3).getId(), it.number == null ? "" : it.number, it.srt_Date);
         if(DataList.size()==0){
-            itemDataList = ServiceFactory.getYearCheckService().getCheckDataEasy(7);
+            itemDataList = ServiceFactory.getYearCheckService().getCheckDataEasy(checkTypes.get(3).getId());
             Log.d("dong", "数据查看:" + itemDataList.size());
             Log.d("dong", "数据查看===:" + itemDataList.get(0).toString());
         }
