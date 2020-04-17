@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.hr.fire.inspection.R;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 
 public class RulesActivity extends AppCompatActivity {
 
-    private ArrayList<String> mList;
+    private ArrayList<String> mList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +40,6 @@ public class RulesActivity extends AppCompatActivity {
         String str_con8 = "监管性机构规范性文件";
         String str_con9 = "其他";
 
-        mList = new ArrayList<>();
         mList.add(str_con);
         mList.add(str_con2);
         mList.add(str_con3);

@@ -7,17 +7,17 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.activity.RulesActivity;
+import com.hr.fire.inspection.activity.RuleContentActivity;
 
 import java.util.ArrayList;
 
-public class LawItemAdapter extends BaseAdapter {
+public class LawContentItemAdapter extends BaseAdapter {
 
     private ArrayList<String> stringArrayList;
-    private final RulesActivity mContext;
+    private final RuleContentActivity mContext;
 
-    public LawItemAdapter(RulesActivity rulesActivity) {
-        mContext = rulesActivity;
+    public LawContentItemAdapter(RuleContentActivity ruleContentActivity) {
+        mContext = ruleContentActivity;
     }
 
 
@@ -60,3 +60,4 @@ public class LawItemAdapter extends BaseAdapter {
     }
 
 }
+

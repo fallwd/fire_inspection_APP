@@ -16,7 +16,9 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
     <application
         android:name=".utils.GreenDaoHelper"
         android:allowBackup="true"
@@ -45,7 +47,7 @@
             android:name=".activity.PhotoUploadActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".activity.WelcomeActivity"
+            android:name=".activity.NavigationActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
