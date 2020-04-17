@@ -87,7 +87,7 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
         it = new IntentTransmit();
         it.companyInfoId = companyInfoId;
         it.systemId = systemId;
-        it.platform_id = platform_id;
+//        it.platform_id = platform_id;
         it.srt_Date = srt_Date;
         it.number = sys_number;
         Log.i(TAG, "火灾系统传入的参数=" + it);

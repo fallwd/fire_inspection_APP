@@ -51,7 +51,7 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.acitivty_goods_weight);
+        setContentView(R.layout.activity_goods_head);
         requestPerssionAtFirst();
         initData();
         //动态申请权限
