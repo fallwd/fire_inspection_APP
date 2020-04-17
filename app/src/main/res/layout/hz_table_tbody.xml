@@ -151,16 +151,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-            <!--<EditText-->
-                <!--android:id="@+id/tv_9"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_centerInParent="true"-->
-                <!--android:background="@null"-->
-                <!--android:singleLine="true"-->
-                <!--android:maxLines="1"-->
-                <!--android:text="隐患描述"-->
-                <!--android:textSize="12sp" />-->
             <ImageView
                 android:id="@+id/tv_9"
                 android:layout_width="wrap_content"

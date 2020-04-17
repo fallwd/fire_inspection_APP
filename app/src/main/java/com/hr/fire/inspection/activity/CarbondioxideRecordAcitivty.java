@@ -51,6 +51,10 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         sys_number = intent.getStringExtra("sys_number");  //系统位号
         historyList = ServiceFactory.getYearCheckService().getHistoryList(platform_id, sys_id);
 
+//        Log.i("md", "intent1111： " + sys_id);
+//        Log.i("md", "intent2222： " + platform_id);
+
+
         initView();
     }
 
@@ -90,7 +94,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 finish();
                 break;
             case R.id.bt_next:
-                Intent intent = new Intent(this, CarbonDioxideAcitivty.class);
+                Intent intent = new Intent(this, AutomaticFireAlarmAcitivty.class);
                 if (selected_tag == -1) {
                     //selected_tag=-1时,表示用户没有选择任何记录,  新建一个巡检记录
                     intent.putExtra("srt_Date", new Date()); //记录的时间
@@ -103,13 +107,6 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                     HashMap hashMap = historyList.get(selected_tag);
                     //拿到历史数据中的记录, 并修改历史记录
                     Date checkDate = (Date) hashMap.get("checkDate"); //时间
-<<<<<<< HEAD
-                    Intent intent = new Intent(this, AutomaticFireAlarmAcitivty.class);
-                    intent.putExtra("ret", ret);  //记录的名字
-                    intent.putExtra("companyInfoId", companyInfoId); //公司名称
-                    intent.putExtra("systemId", systemId);    //系统ID
-=======
->>>>>>> 4496d5845ce29cc7f2c4b1e2e92d17c8ab3a792b
                     intent.putExtra("srt_Date", checkDate); //记录的时间
                     intent.putExtra("systemId", sys_id);    //系统ID
                     intent.putExtra("platform_id", platform_id);    //公司ID

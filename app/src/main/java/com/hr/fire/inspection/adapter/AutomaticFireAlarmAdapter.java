@@ -70,8 +70,6 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
             vh.et_6.setText(new StringBuffer().append(info.getAppearance()).append(""));
             String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getProdDate());
             vh.et_7.setText(new StringBuffer().append(mProdDate).append(""));
-//            vh.et_8.setText(new StringBuffer().append(info.getIsPass()).append(""));
-//            vh.tv_9.setText(new StringBuffer().append(info.getImageUrl()).append(""));
             vh.tv_10.setText(new StringBuffer().append(info.getDescription()).append(""));
 
 
@@ -159,6 +157,7 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
         return mData.size();
     }
 
+
     //  添加数据
     public void addData(int position) {
 //      在list中添加数据，并通知条目加入一条
@@ -180,6 +179,7 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
             //添加动画
             notifyItemInserted(position);
         }
+//        notifyDataSetChanged();
     }
 
     //  删除数据
