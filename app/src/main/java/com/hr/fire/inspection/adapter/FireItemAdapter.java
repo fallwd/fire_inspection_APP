@@ -7,12 +7,14 @@ import android.widget.TextView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.FireActivity;
+import com.hr.fire.inspection.entity.CheckType;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FireItemAdapter extends BaseAdapter {
 
-    private ArrayList<String> stringArrayList;
+    private List<CheckType> stringArrayList;
     private final FireActivity mContext;
 
     public FireItemAdapter(FireActivity rulesActivity) {
@@ -46,11 +48,11 @@ public class FireItemAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.sayTextView.setText(stringArrayList.get(position));
+        holder.sayTextView.setText(stringArrayList.get(position).getName());
         return convertView;
     }
 
-    public void setData(ArrayList<String> mList) {
+    public void setData(List<CheckType> mList) {
         stringArrayList = mList;
     }
 

@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -21,6 +22,8 @@ import android.widget.TextView;
 import com.deepoove.poi.XWPFTemplate;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.FireItemAdapter;
+import com.hr.fire.inspection.entity.CheckType;
+import com.hr.fire.inspection.service.ServiceFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -35,10 +38,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//年检中: 设备列表
 public class FireActivity extends AppCompatActivity {
-
-    private ArrayList<String> mList;
-
+    private long platform_id;
+    private List<CheckType> systemNameData;
     private static final int PERMISSON_REQUESTCODE = 0;
     private static String[] needPermissions = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -50,61 +53,63 @@ public class FireActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fire);
-
-        String str_con = "高压二氧化碳灭火系统";
-        String str_con2 = "七氟丙烷气体灭火系统";
-        String str_con3 = "灭火器";
-        String str_con4 = "火灾自动报警系统";
-        String str_con5 = "厨房湿粉灭火系统";
-        String str_con6 = "海水雨淋灭火系统";
-        String str_con7 = "消防水灭火系统";
-        String str_con8 = "干粉灭火系统";
-        String str_con9 = "泡沫灭火系统";
-        String str_con10 = "消防员装备";
+        //上一个页面传入的平台ID
+        platform_id = (long) getIntent().getLongExtra("Platform_ID", 0);
+        initData();
+    }
 
 
-        mList = new ArrayList<>();
-        mList.add(str_con);
-        mList.add(str_con2);
-        mList.add(str_con3);
-        mList.add(str_con4);
-        mList.add(str_con5);
-        mList.add(str_con6);
-        mList.add(str_con7);
-        mList.add(str_con8);
-        mList.add(str_con9);
-        mList.add(str_con10);
 
+    private void initData() {
+        systemNameData = ServiceFactory.getYearCheckService().getSystemNameData();
+    }
+
+    Intent intent = new Intent();
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         //列表
         ListView main_list = findViewById(R.id.main_list);
         FireItemAdapter fireItemAdapter = new FireItemAdapter(this);
-        fireItemAdapter.setData(mList);
+        fireItemAdapter.setData(systemNameData);
         main_list.setAdapter(fireItemAdapter);
 
         //点击跳转详情页
         main_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String str = mList.get(position);
-                TextView F_title = findViewById(R.id.account_pwd);
+                Long sys_id = systemNameData.get(position).getId();
+                String str_title = systemNameData.get(position).getName();
                 //跳转详情
-                Bundle bundle = new Bundle();
-                bundle.putString("id", String.valueOf(id));
-                bundle.putString("context", str);
-                bundle.putString("f_title", (String) F_title.getText());
-                if(str == "高压二氧化碳灭火系统" || str == "七氟丙烷气体灭火系统" || str == "海水雨淋灭火系统" || str == "干粉灭火系统" || str == "泡沫灭火系统") {
-                    // 执行跳转
-                    Intent intent = new Intent(FireActivity.this, SystemTagProtectionAreaActivity.class);
-                    // 页面传值
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                } else {
-                    // 执行跳转
-                    Intent intent = new Intent(FireActivity.this, CarbondioxideRecordAcitivty.class);
-                    // 页面传值
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
+//<<<<<<< HEAD
+//                intent.setClass(FireActivity.this, CarbonDioxideAcitivty.class);
+                intent.setClass(FireActivity.this, SystemTagProtectionAreaActivity.class);
+                intent.putExtra("sys_id", sys_id);
+                intent.putExtra("platform_id", platform_id);
+                intent.putExtra("f_title", str_title);
+                startActivity(intent);
+                //这个时候,需要关闭当前页面,并且关闭之前所有选择的页面
+                finish();
+//=======
+//                Bundle bundle = new Bundle();
+//                bundle.putString("id", String.valueOf(id));
+//                bundle.putString("context", str);
+//                bundle.putString("f_title", (String) F_title.getText());
+//                if(str == "高压二氧化碳灭火系统" || str == "七氟丙烷气体灭火系统" || str == "海水雨淋灭火系统" || str == "干粉灭火系统" || str == "泡沫灭火系统") {
+//                    // 执行跳转
+//                    Intent intent = new Intent(FireActivity.this, SystemTagProtectionAreaActivity.class);
+//                    // 页面传值
+//                    intent.putExtras(bundle);
+//                    startActivity(intent);
+//                } else {
+//                    // 执行跳转
+//                    Intent intent = new Intent(FireActivity.this, CarbondioxideRecordAcitivty.class);
+//                    // 页面传值
+//                    intent.putExtras(bundle);
+//                    startActivity(intent);
+//                }
+//>>>>>>> master
             }
         });
 
@@ -169,26 +174,28 @@ public class FireActivity extends AppCompatActivity {
     /**
      * 获取手机时间  下次检验日期推迟一年减一天
      * return 年/月/日
-     * **/
+     **/
 
     private String netCheckTime() {
-            Calendar calendar = Calendar.getInstance();
-            Date date = new Date(System.currentTimeMillis());
-            calendar.setTime(date);
-            calendar.add(Calendar.YEAR, +1);
-            calendar.add(Calendar.DATE, -1);//减1天
-            date = calendar.getTime();
-            System.out.println(date);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日");
-            String sim = dateFormat.format(date);
-            Log.i("md", "推迟的时间为： "+sim);
-            return sim;
-    };
+        Calendar calendar = Calendar.getInstance();
+        Date date = new Date(System.currentTimeMillis());
+        calendar.setTime(date);
+        calendar.add(Calendar.YEAR, +1);
+        calendar.add(Calendar.DATE, -1);//减1天
+        date = calendar.getTime();
+        System.out.println(date);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日");
+        String sim = dateFormat.format(date);
+        Log.i("md", "推迟的时间为： " + sim);
+        return sim;
+    }
+
+    ;
 
 
     /**
      * 获取手机时间  年/月/日
-     * **/
+     **/
 
     private String getData() {
         Date date = new Date();
@@ -196,7 +203,9 @@ public class FireActivity extends AppCompatActivity {
         String sim = dateFormat.format(date);
 //        Log.i("md", "时间sim为： "+sim);
         return sim;
-    };
+    }
+
+    ;
 
 
     /**
