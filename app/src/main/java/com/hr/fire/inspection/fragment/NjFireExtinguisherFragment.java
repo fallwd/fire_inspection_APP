@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -24,25 +23,18 @@ import com.hr.fire.inspection.adapter.AutomaticFireAlarmAdapter;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
-import com.hr.fire.inspection.service.BaseService;
 import com.hr.fire.inspection.service.ServiceFactory;
-import com.hr.fire.inspection.service.impl.YearCheckServiceImpl;
 import com.hr.fire.inspection.utils.HYLogUtil;
 import com.hr.fire.inspection.utils.TimeUtil;
 
-
-import java.io.Serializable;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
-
-public class AutomaticFireAlarm1 extends Fragment {
+public class NjFireExtinguisherFragment extends Fragment {
     View rootView;
-    private static AutomaticFireAlarm1 fragment1;
+    private static NjFireExtinguisherFragment fragment1;
     private static String mKey;
     private AutomaticFireAlarmAdapter adapter;
     private List<ItemInfo> itemDataList = new ArrayList<>();
@@ -50,9 +42,9 @@ public class AutomaticFireAlarm1 extends Fragment {
     private IntentTransmit it;
     private List<CheckType> checkTypes;
 
-    public static AutomaticFireAlarm1 newInstance(String key, IntentTransmit value) {
+    public static NjFireExtinguisherFragment newInstance(String key, IntentTransmit value) {
         if (fragment1 == null) {
-            fragment1 = new AutomaticFireAlarm1();
+            fragment1 = new NjFireExtinguisherFragment();
         }
         mKey = key;
         Bundle args = new Bundle();
@@ -89,30 +81,6 @@ public class AutomaticFireAlarm1 extends Fragment {
     private void initData() {
         List<CheckType> arr = ServiceFactory.getYearCheckService().gettableNameData(1);
         long checkTypeId = arr.get(0).getId();
-
-
-//
-////         测试查询接口
-//        // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
-//        long companyInfoId = 3;
-//        // checkTypeId 对应 药剂瓶 2
-//        // number 区号 SD002
-//        String number = "SD001";
-//        // checkDate 检查日期
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-//        Date checkDate = null;
-//        try {
-//            checkDate = format.parse("2019-08-03 10:10");
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(companyInfoId, checkTypeId, number, checkDate);
-//        for(int i=0;i<itemDataList.size();i++){
-////            Log.i("getItemDataEasy",itemDataList.get(i).toString());
-//            Log.i(TAG, "11111111111111111111111getItemDataEasy=" + itemDataList.get(i).toString());
-//        }
-
 
 
         checkTypes = ServiceFactory.getYearCheckService().gettableNameData(it.systemId);
