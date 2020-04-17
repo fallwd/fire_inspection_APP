@@ -21,6 +21,7 @@ public class NavigationActivity extends AppCompatActivity {
             public void onClick(View v) {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 Intent intent = new Intent(NavigationActivity.this, FireActivity.class);
 =======
                 Intent intent = new Intent(NavigationActivity.this, CarbonDioxideAcitivty.class);
@@ -30,7 +31,12 @@ public class NavigationActivity extends AppCompatActivity {
                 Intent intent = new Intent(NavigationActivity.this, ChooseCompanyActivity.class);
 //                Intent intent = new Intent(NavigationActivity.this, FireActivity.class);
 >>>>>>> c4246f918c6ccddb17c0082b7587b3782066eeac
+=======
+
+                Intent intent = new Intent(NavigationActivity.this, CarbonDioxideAcitivty.class);
+>>>>>>> cy_dev
                 startActivity(intent);
+
             }
         });
         LinearLayout btn2 = (LinearLayout) findViewById(R.id.Navigation_Btn2);

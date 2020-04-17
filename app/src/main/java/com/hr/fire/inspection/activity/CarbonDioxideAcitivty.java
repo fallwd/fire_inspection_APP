@@ -173,6 +173,10 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
                         carbonFragment1.addItemView();
                     } else if (fragment instanceof CarbonFragment2) {
                         carbonFragment2.addItemView();
+                    } else if(fragment instanceof  CarbonFragment3){
+                        carbonFragment3.addItemView();
+                    }else if(fragment instanceof  CarbonFragment4){
+                        carbonFragment4.addItemView();
                     }
                 }
 //                currentPager  拿到当前的页面
