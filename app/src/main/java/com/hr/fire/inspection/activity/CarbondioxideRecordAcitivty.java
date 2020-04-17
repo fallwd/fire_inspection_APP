@@ -49,7 +49,6 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         platform_id = intent.getLongExtra("platform_id", 0);  //平台ID
         f_title = intent.getStringExtra("f_title");  //传过来的系统名称
         sys_number = intent.getStringExtra("sys_number");  //系统位号
-//        List historyList = ServiceFactory.getYearCheckService().getHistoryList(platform_id, sys_id);
         historyList = ServiceFactory.getYearCheckService().getHistoryList(platform_id, sys_id);
 
         initView();
@@ -58,6 +57,9 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
     private ArrayList hot = new ArrayList<>();
 
     private void initView() {
+        if (historyList.size() == 0) {
+            Toast.makeText(this, "没有历史年检记录,请点击\"下一步\"进行新建", Toast.LENGTH_SHORT).show();
+        }
         ImageView iv_finish = findViewById(R.id.iv_finish);
         TextView tv_inspection_pro = findViewById(R.id.tv_inspection_pro);
         RecyclerView rc_list = findViewById(R.id.rc_list);
@@ -88,10 +90,27 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 finish();
                 break;
             case R.id.bt_next:
+                Intent intent = new Intent(this, CarbonDioxideAcitivty.class);
                 if (selected_tag == -1) {
-                    Toast.makeText(this, "请选择检查记录", Toast.LENGTH_SHORT).show();
-                    return;
+                    //selected_tag=-1时,表示用户没有选择任何记录,  新建一个巡检记录
+                    intent.putExtra("srt_Date", new Date()); //记录的时间
+                    intent.putExtra("systemId", sys_id);    //系统ID
+                    intent.putExtra("platform_id", platform_id);    //公司ID
+                    intent.putExtra("f_title", f_title); //系统名称 :高压二氧化碳灭火系统
+                    intent.putExtra("sys_number", sys_number); //系统位号 ：SD002(用户自己填写的)
+                    startActivity(intent);
+                } else {
+                    HashMap hashMap = historyList.get(selected_tag);
+                    //拿到历史数据中的记录, 并修改历史记录
+                    Date checkDate = (Date) hashMap.get("checkDate"); //时间
+                    intent.putExtra("srt_Date", checkDate); //记录的时间
+                    intent.putExtra("systemId", sys_id);    //系统ID
+                    intent.putExtra("platform_id", platform_id);    //公司ID
+                    intent.putExtra("f_title", f_title); //系统名称 :高压二氧化碳灭火系统
+                    intent.putExtra("sys_number", sys_number); //系统位号 ：SD002(用户自己填写的)
+                    startActivity(intent);
                 }
+<<<<<<< HEAD
 
 
                 HashMap hashMap = historyList.get(selected_tag);
@@ -110,6 +129,8 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
 
 //                Intent intent = new Intent(this, AutomaticFireAlarmAcitivty.class);
                 startActivity(intent);
+=======
+>>>>>>> 4496d5845ce29cc7f2c4b1e2e92d17c8ab3a792b
                 break;
         }
     }

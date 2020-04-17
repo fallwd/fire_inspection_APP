@@ -46,13 +46,14 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
         ImageView iv_finish = (ImageView) this.findViewById(R.id.iv_finish);
         TextView tv_inspection_pro = (TextView) this.findViewById(R.id.tv_inspection_pro);
         dataList = ServiceFactory.getCompanyInfoService().getPlatformList(oil_name);
+        Log.d("dong", "----hah --- " + dataList.toString());
         idlist = new ArrayList<>();
         list = new ArrayList<>();
         for (int i = 0; i < dataList.size(); i++) {
             CompanyInfo CompanyListItem = dataList.get(i);
             String companyName = CompanyListItem.getPlatformName();
             long id = CompanyListItem.getId();
-            if(companyName != null && companyName != ""){
+            if (companyName != null && companyName != "") {
                 list.add(companyName);
                 idlist.add(id);
             }
@@ -136,7 +137,7 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
                             for (int i = 0; i < dataList.size(); i++) {
                                 CompanyInfo CompanyListItem = dataList.get(i);
                                 String companyName = CompanyListItem.getOilfieldName();
-                                if(companyName != null && companyName != ""){
+                                if (companyName != null && companyName != "") {
                                     list.add(companyName);
                                 }
                             }

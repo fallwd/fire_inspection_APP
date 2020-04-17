@@ -1,8 +1,6 @@
 package com.hr.fire.inspection.activity;
 
-
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.util.Log;
@@ -19,14 +17,12 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.constant.ConstantInspection;
-import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.fragment.CarbonFragment1;
 import com.hr.fire.inspection.fragment.CarbonFragment2;
 import com.hr.fire.inspection.fragment.CarbonFragment3;
 import com.hr.fire.inspection.fragment.CarbonFragment4;
 import com.hr.fire.inspection.fragment.CarbonFragment5;
-import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 
 import java.util.ArrayList;
@@ -65,16 +61,14 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
     private void getIntentParameter() {
         //历史中的companyInfoId  ,  systemId和再公司、平台那边传过来的都是一样的ID，使用哪一个都行
         Intent intent = getIntent();
-        long companyInfoId = intent.getLongExtra("companyInfoId", 0);  //公司ID
         long systemId = intent.getLongExtra("systemId", 0);   //系统Id
         long platform_id = intent.getLongExtra("platform_id", 0);   //系统Id
         Date srt_Date = (Date) intent.getSerializableExtra("srt_Date");  //传过来的时间
         f_title = intent.getStringExtra("f_title"); //传过来的名称
         sys_number = intent.getStringExtra("sys_number"); //传过来的名称
         it = new IntentTransmit();
-        it.companyInfoId = companyInfoId;
+        it.companyInfoId = platform_id;
         it.systemId = systemId;
-        it.platform_id = platform_id;
         it.srt_Date = srt_Date;
         it.number = sys_number;
     }
