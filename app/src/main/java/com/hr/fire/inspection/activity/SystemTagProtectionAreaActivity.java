@@ -48,10 +48,10 @@ public class SystemTagProtectionAreaActivity extends AppCompatActivity {
                 systemTagValue = systemTagText.getText().toString();
                 protectAreaValue = protectAreaText.getText().toString();
 
-                if (systemTagValue.isEmpty() && protectAreaValue.isEmpty()) {
-                    Toast.makeText(SystemTagProtectionAreaActivity.this, "请将表单信息填写完整", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+//                if (systemTagValue.isEmpty() && protectAreaValue.isEmpty()) {
+//                    Toast.makeText(SystemTagProtectionAreaActivity.this, "请将表单信息填写完整", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
                 Intent intent = new Intent();
                 intent.putExtra("sys_id", sys_id);
                 intent.putExtra("platform_id", platform_id);

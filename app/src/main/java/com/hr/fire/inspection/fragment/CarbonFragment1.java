@@ -106,13 +106,12 @@ public class CarbonFragment1 extends Fragment {
 //        Log.d("dong", "数据查看===:" + itemDataList.get(0).toString());
 
 
+
         checkTypes = ServiceFactory.getYearCheckService().gettableNameData(it.systemId);
-        /**
-         * 参数1:公司id, 参数2:检查表类型对应的id, 参数3:输入的系统位号，如果没有就填""  参数4:日期
-         */
         if (checkTypes == null) {
             Toast.makeText(getActivity(), "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
         }
+        //参数1:公司id, 参数2:检查表类型对应的id, 参数3:输入的系统位号，如果没有就填"",或者SD002,否则没数据   参数4:日期
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(0).getId(), it.number == null ? "" : it.number, it.srt_Date);
         HYLogUtil.getInstance().d("设备表信息,数据查看:" + itemDataList.size() + "  " + itemDataList.toString());
         // 一级表插入数据insertItemData
@@ -139,16 +138,57 @@ public class CarbonFragment1 extends Fragment {
     public void addItemView() {
         if (adapter != null) {
             adapter.addData(itemDataList.size());
+            //点击"＋", 就像数据库中插入一条数据, 点"保存"就更新所有数据
+            addData();
         }
     }
 
     @SuppressLint("SimpleDateFormat")
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public void saveData() {
+    //点击"＋", 就像数据库中插入一条数据, 点"保存"就更新所有数据
+    public void addData() {
         int childCount = rc_list.getChildCount();
-        Log.d("dong", "点击了保存数据的方法 " + childCount);
-        for (int i = 0; i < rc_list.getChildCount(); i++) {
+        //这些数据需要从上层传参过来
+        ItemInfo itemObj = new ItemInfo();
+        LinearLayout childAt = (LinearLayout) rc_list.getChildAt(childCount - 1);
+        TextView tv_1 = childAt.findViewById(R.id.tv_1);
+        EditText et_2 = childAt.findViewById(R.id.et_2);
+        EditText et_3 = childAt.findViewById(R.id.et_3);
+        EditText et_4 = childAt.findViewById(R.id.et_4);
+        EditText et_5 = childAt.findViewById(R.id.et_5);
+        EditText et_6 = childAt.findViewById(R.id.et_6);
+        EditText et_7 = childAt.findViewById(R.id.et_7);
+        EditText et_8 = childAt.findViewById(R.id.et_8);
+        TextView tv_9 = childAt.findViewById(R.id.tv_9);
+        itemObj.setNo(et_2.getText().toString());
+        itemObj.setVolume(et_3.getText().toString());
+        itemObj.setWeight(et_4.getText().toString());
+        itemObj.setGoodsWeight(et_5.getText().toString());
+        itemObj.setProdFactory(et_6.getText().toString());
+        Date date = TimeUtil.getInstance().hhmmssTodata(et_7.getText().toString());
+        Date date1 = TimeUtil.getInstance().hhmmssTodata(et_8.getText().toString());
+        itemObj.setProdDate(date);
+        itemObj.setObserveDate(date1);
+        itemObj.setCheckDate(new Date());
+        itemObj.setIsPass("是");
+        itemObj.setLabelNo("BQ0002");
+        itemObj.setSystemNumber("SD002");
+        itemObj.setProtectArea("主配电间");
+        itemObj.setCodePath("检查表图片路径:/src/YJP0002.jpg");
+        Log.d("dong", "一直遍历吗兄弟?" + date1 + "  " + et_5.getText().toString());
+//        }
+        long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj, it.companyInfoId, checkTypes.get(0).getId(), it.number, it.srt_Date);
+        if (l1 == 0) {
+            Toast.makeText(getContext(), "药剂瓶数据保存成功", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void upData() {
+        int itemCount = rc_list.getChildCount();
+        List<ItemInfo> list = new ArrayList();
+        for (int i = 0; i < itemCount; i++) {
+            ItemInfo itemObj = new ItemInfo();
             LinearLayout childAt = (LinearLayout) rc_list.getChildAt(i);
             TextView tv_1 = childAt.findViewById(R.id.tv_1);
             EditText et_2 = childAt.findViewById(R.id.et_2);
@@ -159,8 +199,6 @@ public class CarbonFragment1 extends Fragment {
             EditText et_7 = childAt.findViewById(R.id.et_7);
             EditText et_8 = childAt.findViewById(R.id.et_8);
             TextView tv_9 = childAt.findViewById(R.id.tv_9);
-            //这些数据需要从上层传参过来
-            ItemInfo itemObj = new ItemInfo();
             itemObj.setNo(et_2.getText().toString());
             itemObj.setVolume(et_3.getText().toString());
             itemObj.setWeight(et_4.getText().toString());
@@ -171,21 +209,15 @@ public class CarbonFragment1 extends Fragment {
             itemObj.setProdDate(date);
             itemObj.setObserveDate(date1);
             itemObj.setCheckDate(new Date());
-
             itemObj.setIsPass("是");
             itemObj.setLabelNo("BQ0002");
             itemObj.setSystemNumber("SD002");
             itemObj.setProtectArea("主配电间");
             itemObj.setCodePath("检查表图片路径:/src/YJP0002.jpg");
-            Log.d("dong-save", "保存数据传入的itemObj参数:" + itemObj.getNo() + "    " + itemObj.getVolume() + "     " + itemObj.getWeight() + "     " + itemObj.getGoodsWeight()
-                    + itemObj.getProdFactory() + "     " + itemObj.getProdDate() + "      " + itemObj.getObserveDate() + "      " + itemObj.getCheckDate());
-            Log.d("dong-save", "传入的ID参数+ " + " companyInfoId   " + it.companyInfoId + "  checkTypeId " + checkTypes.get(0).getId() + "   number " + it.number);
-            //像数据库中保存数据
-            long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj, it.companyInfoId, checkTypes.get(0).getId(),
-                    it.number, new Date());
-            Log.e("dong", "数据是否成功保存? " + l1);
+            list.add(itemObj);
         }
-        Toast.makeText(getContext(), "药剂瓶数据保存成功", Toast.LENGTH_SHORT).show();
+        Log.d("dong", "itemCount" + itemCount + "   " + rc_list.getChildCount() + "   list  + " + list.size());
+        ServiceFactory.getYearCheckService().update(list);
     }
 
     @Override
