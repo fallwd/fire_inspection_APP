@@ -308,24 +308,24 @@ public class WelcomeActivity extends AppCompatActivity {
 
 //        // 测试导出数据接口
 
-//        List<HashMap> allList = ServiceFactory.getYearCheckService().getOutputList();
-//        Log.i("getOutputList",""+allList);
+        List<HashMap> allList = ServiceFactory.getYearCheckService().getOutputList();
+        Log.i("getOutputList",""+allList);
 //
-//        // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
-//        long companyInfoId = 3;
-//        // checkDate 检查日期
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-//        Date checkDate = null;
-//        try {
-//            checkDate = format.parse("2019-08-03 10:10");
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        List<HashMap> retList = ServiceFactory.getYearCheckService().getOutputItemData(companyInfoId,checkDate);
-//        for(int i=0;i<retList.size();i++){
-//            Log.i("retList:::",""+retList.get(i));
-//
-//        }
+        // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
+        long companyInfoId = 3;
+        // checkDate 检查日期
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date checkDate = null;
+        try {
+            checkDate = format.parse("2019-08-03 10:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        List<HashMap> retList = ServiceFactory.getYearCheckService().getOutputItemData(companyInfoId,checkDate);
+        for(int i=0;i<retList.size();i++){
+            Log.i("retList:::",""+retList.get(i));
+
+        }
 
 
         Toast.makeText(WelcomeActivity.this, "系统将在2秒后为您自动跳转到首页", Toast.LENGTH_SHORT).show();

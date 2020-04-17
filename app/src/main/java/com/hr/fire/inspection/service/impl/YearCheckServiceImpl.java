@@ -607,11 +607,11 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 //        Cursor cursor = daoSession.getDatabase().rawQuery("SELECT SUM(" + ItemInfoDao.Properties.GoodsWeight.columnName + ") FROM " + ItemInfoDao.TABLENAME + " INNER JOIN " + CheckTypeDao.TABLENAME + " ON ", new String []{});
         String dateString = "2019-08-03 10:10";
 //        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s AND datetime(%s.CHECK_DATE)='%s'",
-        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s",
-//        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s),strftime('yyyy-MM-dd HH:mm',%s.CHECK_DATE) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s",
+//        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s",
+        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s),datetime(%s.CHECK_DATE) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s",
                 ItemInfoDao.TABLENAME,
                 ItemInfoDao.Properties.GoodsWeight.columnName,
-//                ItemInfoDao.TABLENAME,
+                ItemInfoDao.TABLENAME,
                 ItemInfoDao.TABLENAME,
                 CheckTypeDao.TABLENAME,
                 ItemInfoDao.TABLENAME,
@@ -624,10 +624,13 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 //                dateString
         ), new String []{});
         cursor.moveToFirst();
+//        Log.i("tang","getOutputItemData:xxx:::" + cursor.getString());
         long result = cursor.getLong(0);
-//        long result2 = cursor.getLong(1);
+//        long result2 = cursor.getString(1);
+        long result2 = cursor.getLong(1);
         Log.i("tang","getOutputItemData:xxx:::" + result);
-//        Log.i("tang","getOutputItemData:xxx:::" + result2);
+        Log.i("tang","getOutputItemData:xxx:::" + result2);
+//        Log.i("tang","getOutputItemData:long Date:::");
         systemMap.put("weights",result);
         retList.add(systemMap);
         return retList;
