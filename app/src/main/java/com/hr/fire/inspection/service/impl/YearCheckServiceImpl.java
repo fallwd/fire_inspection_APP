@@ -605,13 +605,14 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 //        String CheckTypeTable = CheckTypeDao.TABLENAME;
 
 //        Cursor cursor = daoSession.getDatabase().rawQuery("SELECT SUM(" + ItemInfoDao.Properties.GoodsWeight.columnName + ") FROM " + ItemInfoDao.TABLENAME + " INNER JOIN " + CheckTypeDao.TABLENAME + " ON ", new String []{});
-        String dateString = "2019-08-03 10:10";
-//        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s AND datetime(%s.CHECK_DATE)='%s'",
+        String dateString = "2019-08-03 10:10:00";
+        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s AND datetime(%s.CHECK_DATE)='%s'",
 //        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s",
-        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s),datetime(%s.CHECK_DATE) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s",
+//        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s),datetime(%s.CHECK_DATE) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s",
+//        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s),strftime(%s,%s.CHECK_DATE) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s",
                 ItemInfoDao.TABLENAME,
                 ItemInfoDao.Properties.GoodsWeight.columnName,
-                ItemInfoDao.TABLENAME,
+//                ItemInfoDao.TABLENAME,
                 ItemInfoDao.TABLENAME,
                 CheckTypeDao.TABLENAME,
                 ItemInfoDao.TABLENAME,
@@ -619,8 +620,9 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 CheckTypeDao.TABLENAME,
 //                CheckTypeDao.Properties.Id,
                 CheckTypeDao.TABLENAME,
-                systemId
-//                ItemInfoDao.TABLENAME,
+                systemId,
+                ItemInfoDao.TABLENAME,
+                checkDate
 //                dateString
         ), new String []{});
         cursor.moveToFirst();
