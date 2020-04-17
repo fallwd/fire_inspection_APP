@@ -54,7 +54,6 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
     private void initData() {
         dataList = ServiceFactory.getCompanyInfoService().getCompanyList();
         list = new ArrayList<>();
-        Log.d("dong", "dataList===" + dataList.toString());
         for (int i = 0; i < dataList.size(); i++) {
             CompanyInfo CompanyListItem = dataList.get(i);
             String companyName = CompanyListItem.getCompanyName();

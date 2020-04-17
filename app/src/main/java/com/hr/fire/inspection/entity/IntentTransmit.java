@@ -8,7 +8,6 @@ import java.util.Date;
  */
 public class IntentTransmit implements Serializable {
 
-    public long platform_id;  //平台id
     public long companyInfoId;  //公司ID
     public long systemId;  //系统ID
     public Date srt_Date;  //巡检时间
@@ -23,7 +22,6 @@ public class IntentTransmit implements Serializable {
     @Override
     public String toString() {
         return "IntentTransmit{" +
-                "platform_id=" + platform_id +
                 ", companyInfoId=" + companyInfoId +
                 ", systemId=" + systemId +
                 ", srt_Date='" + srt_Date + '\'' +
