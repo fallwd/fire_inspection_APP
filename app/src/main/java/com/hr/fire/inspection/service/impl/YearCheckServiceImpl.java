@@ -1,5 +1,6 @@
 package com.hr.fire.inspection.service.impl;
 
+import android.database.Cursor;
 import android.util.Log;
 
 import com.hr.fire.inspection.dao.CheckTypeDao;
@@ -483,9 +484,13 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 
     @Override
     public List getOutputList() {
+        /*
+        * new WhereCondition.StringCondition("1 GROUP BY COMPANY_NAME" )
+        * */
         QueryBuilder<ItemInfo> queryBuilder = daoSession.queryBuilder(ItemInfo.class).
                 where(new WhereCondition.StringCondition(
-                        String.format("l GROUP BY COMPANY_INFO_ID,CHECK_DATE")));
+//                        String.format("l GROUP BY COMPANY_INFO_ID,CHECK_DATE")));
+                        "1 GROUP BY COMPANY_INFO_ID,CHECK_DATE"));
         List<ItemInfo> dataList = queryBuilder.list();
         ArrayList resultList = new ArrayList();
         for(int i=0;i<dataList.size();i++){
@@ -537,15 +542,94 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         Join checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
                         where(CheckTypeDao.Properties.ParentId.eq(systemId));
         List<ItemInfo> dataList = queryBuilder.list();
-
-        // 获取区域和位号
         systemMap = new HashMap();
         systemMap.put("systemName",systemName);
         systemMap.put("data",dataList);
         systemMap.put("count",dataList.size());
+        // 获取区域和位号
+//        String dateString = "2019-08-03 10:10";
+        QueryBuilder<ItemInfo> secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+//                                String.format("COMPANY_INFO_ID=%s AND CHECK_DATE=datetime('%s') GROUP BY SYSTEM_NUMBER", companyInfoId,dateString))
+                                String.format("COMPANY_INFO_ID=%s GROUP BY SYSTEM_NUMBER", companyInfoId))
+                );
+        List<ItemInfo> secondDataList = secondQueryBuilder.list();
+        String systemNumberCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            ItemInfo ret = secondDataList.get(i);
+            Log.i("tang","系统位号------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String systemNumber = ret.getSystemNumber();
+                if(systemNumberCombo!=""){
+                    systemNumberCombo = systemNumberCombo + "、" + systemNumber;
+                }
+                else {
+                    systemNumberCombo = systemNumberCombo + systemNumber;
+                }
+            }
+        }
+        systemMap.put("systemNumber",systemNumberCombo);
 
+        secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY PROTECT_AREA", companyInfoId))
+                );
+        secondDataList = secondQueryBuilder.list();
+        String protectAreaCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            ItemInfo ret = secondDataList.get(i);
+            Log.i("tang","保护区域------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String protectArea = ret.getProtectArea();
+                if(protectAreaCombo!=""){
+                    protectAreaCombo = protectAreaCombo + "、" + protectArea;
+                }
+                else {
+                    protectAreaCombo = protectAreaCombo + protectArea;
+                }
+            }
+        }
+        systemMap.put("protectArea",protectAreaCombo);
+
+        // 获取总容积
+
+//        String colName = ItemInfoDao.Properties.GoodsWeight.columnName;
+//        String ItemInfoTable = ItemInfoDao.TABLENAME;
+//        String CheckTypeTable = CheckTypeDao.TABLENAME;
+
+//        Cursor cursor = daoSession.getDatabase().rawQuery("SELECT SUM(" + ItemInfoDao.Properties.GoodsWeight.columnName + ") FROM " + ItemInfoDao.TABLENAME + " INNER JOIN " + CheckTypeDao.TABLENAME + " ON ", new String []{});
+        String dateString = "2019-08-03 10:10";
+//        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s AND datetime(%s.CHECK_DATE)='%s'",
+        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s",
+//        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s),strftime('yyyy-MM-dd HH:mm',%s.CHECK_DATE) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s",
+                ItemInfoDao.TABLENAME,
+                ItemInfoDao.Properties.GoodsWeight.columnName,
+//                ItemInfoDao.TABLENAME,
+                ItemInfoDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                ItemInfoDao.TABLENAME,
+//                ItemInfoDao.Properties.CheckTypeId,
+                CheckTypeDao.TABLENAME,
+//                CheckTypeDao.Properties.Id,
+                CheckTypeDao.TABLENAME,
+                systemId
+//                ItemInfoDao.TABLENAME,
+//                dateString
+        ), new String []{});
+        cursor.moveToFirst();
+        long result = cursor.getLong(0);
+//        long result2 = cursor.getLong(1);
+        Log.i("tang","getOutputItemData:xxx:::" + result);
+//        Log.i("tang","getOutputItemData:xxx:::" + result2);
+        systemMap.put("weights",result);
         retList.add(systemMap);
-
         return retList;
+
     }
 }

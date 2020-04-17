@@ -62,7 +62,6 @@ public class CarbonFragment1 extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             it = (IntentTransmit) getArguments().getSerializable(mKey);
-            Log.e("dong", "f1传参====" + it.toString());
         }
     }
 
@@ -138,7 +137,13 @@ public class CarbonFragment1 extends Fragment {
         if (adapter != null) {
             adapter.addData(itemDataList.size());
             //点击"＋", 就像数据库中插入一条数据, 点"保存"就更新所有数据
-            addData();
+            rc_list.post(new Runnable() {
+                @Override
+                public void run() {
+                    addData();
+                }
+            });
+
         }
     }
 
@@ -148,6 +153,10 @@ public class CarbonFragment1 extends Fragment {
     //点击"＋", 就像数据库中插入一条数据, 点"保存"就更新所有数据
     public void addData() {
         int childCount = rc_list.getChildCount();
+        Log.d("dong", "执行顺序addData == " + childCount);
+        if (childCount == 0) {
+            return;
+        }
         //这些数据需要从上层传参过来
         ItemInfo itemObj = new ItemInfo();
         LinearLayout childAt = (LinearLayout) rc_list.getChildAt(childCount - 1);
@@ -175,8 +184,6 @@ public class CarbonFragment1 extends Fragment {
         itemObj.setSystemNumber("SD002");
         itemObj.setProtectArea("主配电间");
         itemObj.setCodePath("检查表图片路径:/src/YJP0002.jpg");
-        Log.d("dong", "一直遍历吗兄弟?" + date1 + "  " + et_5.getText().toString());
-//        }
         long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj, it.companyInfoId, checkTypes.get(0).getId(), it.number, it.srt_Date);
         if (l1 == 0) {
             Toast.makeText(getContext(), "药剂瓶数据保存成功", Toast.LENGTH_SHORT).show();
@@ -185,6 +192,10 @@ public class CarbonFragment1 extends Fragment {
 
     public void upData() {
         int itemCount = rc_list.getChildCount();
+        Log.d("dong", "upData==   " + itemCount);
+        if (itemCount == 0) {
+            return;
+        }
         List<ItemInfo> list = new ArrayList();
         for (int i = 0; i < itemCount; i++) {
             ItemInfo itemObj = new ItemInfo();
