@@ -71,7 +71,6 @@ public class GoodsAdapter extends BaseAdapter {
             holder.iv7 = (ImageView) convertView.findViewById(R.id.iv7);
             holder.rl7 = (RelativeLayout) convertView.findViewById(R.id.rl7);
             holder.tv8 = (TextView) convertView.findViewById(R.id.tv8);
-            holder.ev8 = (EditText) convertView.findViewById(R.id.ev8);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -94,7 +93,6 @@ public class GoodsAdapter extends BaseAdapter {
         holder.tv7.setVisibility(View.GONE);
         holder.rl7.setVisibility(View.VISIBLE);
         holder.tv8.setVisibility(View.GONE);
-        holder.ev8.setVisibility(View.VISIBLE);
         final ViewHolder finalHolder = holder;
         holder.tv6.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,7 +125,6 @@ public class GoodsAdapter extends BaseAdapter {
         RelativeLayout rl7;
         ImageView iv7;
         TextView tv8;
-        EditText ev8;
     }
 
     //显示对话框,用户选择是否异常的弹框
@@ -174,5 +171,4 @@ public class GoodsAdapter extends BaseAdapter {
             }
         });
     }
-
 }

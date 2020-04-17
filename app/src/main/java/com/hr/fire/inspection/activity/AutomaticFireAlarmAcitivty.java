@@ -1,6 +1,7 @@
 package com.hr.fire.inspection.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.util.Log;
@@ -16,6 +17,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.constant.ConstantInspection;
+import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.fragment.AutomaticFireAlarm1;
 import com.hr.fire.inspection.fragment.AutomaticFireAlarm2;
 import com.hr.fire.inspection.fragment.AutomaticFireAlarm3;
@@ -25,13 +28,18 @@ import com.hr.fire.inspection.fragment.AutomaticFireAlarm6;
 import com.hr.fire.inspection.fragment.AutomaticFireAlarm7;
 import com.hr.fire.inspection.fragment.AutomaticFireAlarm8;
 import com.hr.fire.inspection.fragment.AutomaticFireAlarm9;
+import com.hr.fire.inspection.fragment.CarbonFragment1;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 
+import org.apache.poi.util.NullLogger;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @SuppressLint("Registered")
 public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
+    private static final String TAG = "AutomaticFireAlarmAcitivty";
     private List<String> titleList = new ArrayList<String>();
     private List<Fragment> fragments = new ArrayList<Fragment>();
     private TabLayout mTabLayout;
@@ -51,20 +59,48 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
     private AutomaticFireAlarm8 mAutomaticFireAlarm8;
     private AutomaticFireAlarm9 mAutomaticFireAlarm9;
 
+    private String f_title;
+    private String sys_number;  //系统位号
+    private IntentTransmit it;
+
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivty_carbon_dioxide);
+        getIntentParameter();
         initView();
-//        initListner();
+        initListner();
     }
+
+    private void getIntentParameter() {
+        //历史中的companyInfoId  ,  systemId和再公司、平台那边传过来的都是一样的ID，使用哪一个都行
+        Intent intent = getIntent();
+        long companyInfoId = intent.getLongExtra("companyInfoId", 0);  //公司ID
+        long systemId = intent.getLongExtra("systemId", 0);   //系统Id
+        long platform_id = intent.getLongExtra("platform_id", 0);   //系统Id
+        Date srt_Date = (Date) intent.getSerializableExtra("srt_Date");  //传过来的时间
+        f_title = intent.getStringExtra("f_title"); //传过来的名称
+        sys_number = intent.getStringExtra("sys_number"); //传过来的名称
+        it = new IntentTransmit();
+        it.companyInfoId = companyInfoId;
+        it.systemId = systemId;
+        it.platform_id = platform_id;
+        it.srt_Date = srt_Date;
+        it.number = sys_number;
+        Log.i(TAG, "火灾系统传入的参数=" + it);
+    }
+
+
 
     public void initView() {
         iv_finish = findViewById(R.id.iv_finish);
         iv_add_table = findViewById(R.id.iv_add_table);
         tvInspectionPro = findViewById(R.id.tv_inspection_pro);
         iv_save = findViewById(R.id.iv_save);
-        String text = "消防巡检维护专用工具";
+        String text = new StringBuilder().append("消防年检  >  ").append(f_title).toString();
         SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#E51C23", 0, 3);
         tvInspectionPro.setText(showTextColor);
 
@@ -80,7 +116,11 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
         titleList.add("CO探测器");
         titleList.add("火灾报警控制器");
 
-        mAutomaticFireAlarm1 = AutomaticFireAlarm1.newInstance("", "");
+
+//        Log.i(TAG, "火灾系统传入的参数=" + it);
+
+
+        mAutomaticFireAlarm1 = AutomaticFireAlarm1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
         mAutomaticFireAlarm2 = AutomaticFireAlarm2.newInstance("", "");
         mAutomaticFireAlarm3 = AutomaticFireAlarm3.newInstance("", "");
         mAutomaticFireAlarm4 = AutomaticFireAlarm4.newInstance("", "");
@@ -198,28 +238,30 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
                 if (fragments != null && fragments.size() != 0) {
                     Fragment fragment = fragments.get(currentPager);
                     if (fragment instanceof AutomaticFireAlarm1) {
-                        mAutomaticFireAlarm1.saveData();
-                    } else if (fragment instanceof AutomaticFireAlarm2) {
-                        mAutomaticFireAlarm2.saveData();
-                    } else if (fragment instanceof AutomaticFireAlarm3) {
-                        mAutomaticFireAlarm3.saveData();
-                    } else if (fragment instanceof AutomaticFireAlarm4) {
-                        mAutomaticFireAlarm4.saveData();
-                    } else if (fragment instanceof AutomaticFireAlarm5) {
-                        mAutomaticFireAlarm5.saveData();
-                    } else if (fragment instanceof AutomaticFireAlarm6) {
-                        mAutomaticFireAlarm6.saveData();
-                    } else if (fragment instanceof AutomaticFireAlarm7) {
-                        mAutomaticFireAlarm7.saveData();
-                    } else if (fragment instanceof AutomaticFireAlarm8) {
-                        mAutomaticFireAlarm8.saveData();
-                    } else if (fragment instanceof AutomaticFireAlarm9) {
-                        mAutomaticFireAlarm9.saveData();
+                        mAutomaticFireAlarm1.upData();
                     }
+//                    else if (fragment instanceof AutomaticFireAlarm2) {
+//                        mAutomaticFireAlarm2.upData();
+//                    } else if (fragment instanceof AutomaticFireAlarm3) {
+//                        mAutomaticFireAlarm3.upData();
+//                    } else if (fragment instanceof AutomaticFireAlarm4) {
+//                        mAutomaticFireAlarm4.upData();
+//                    } else if (fragment instanceof AutomaticFireAlarm5) {
+//                        mAutomaticFireAlarm5.upData();
+//                    } else if (fragment instanceof AutomaticFireAlarm6) {
+//                        mAutomaticFireAlarm6.upData();
+//                    } else if (fragment instanceof AutomaticFireAlarm7) {
+//                        mAutomaticFireAlarm7.upData();
+//                    } else if (fragment instanceof AutomaticFireAlarm8) {
+//                        mAutomaticFireAlarm8.upData();
+//                    } else if (fragment instanceof AutomaticFireAlarm9) {
+//                        mAutomaticFireAlarm9.upData();
+//                    }
                 }
 
             }
         });
+
         iv_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -231,6 +273,15 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mAutomaticFireAlarm1 = null;
+        mAutomaticFireAlarm2 = null;
+        mAutomaticFireAlarm3 = null;
+        mAutomaticFireAlarm4 = null;
+        mAutomaticFireAlarm5 = null;
+        mAutomaticFireAlarm6 = null;
+        mAutomaticFireAlarm7 = null;
+        mAutomaticFireAlarm8 = null;
+        mAutomaticFireAlarm9 = null;
         finish();
     }
 }
