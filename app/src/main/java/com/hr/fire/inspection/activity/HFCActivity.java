@@ -16,6 +16,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.constant.ConstantInspection;
+import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.fragment.HFCFragment1;
 import com.hr.fire.inspection.fragment.HFCFragment2;
 import com.hr.fire.inspection.fragment.HFCFragment3;
@@ -38,6 +40,7 @@ public class HFCActivity extends AppCompatActivity {
     private HFCFragment1 mHFCFragment1;
     private HFCFragment2 mHFCFragment2;
     private HFCFragment3 mHFCFragment3;
+    private IntentTransmit it;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,7 +65,7 @@ public class HFCActivity extends AppCompatActivity {
         titleList.add("氮气驱动瓶信息采集");
         titleList.add("七氟丙烷钢瓶");
 
-        mHFCFragment1 = HFCFragment1.newInstance("", "");
+        mHFCFragment1 = HFCFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
         mHFCFragment2 = HFCFragment2.newInstance("", "");
         mHFCFragment3 = HFCFragment3.newInstance("", "");
 

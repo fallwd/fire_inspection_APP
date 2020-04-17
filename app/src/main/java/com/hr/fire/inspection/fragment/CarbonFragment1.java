@@ -90,12 +90,12 @@ public class CarbonFragment1 extends Fragment {
     private void initData() {
         //历史中的companyInfoId  ,  systemId和在公司、平台那边传过来的都是一样的ID，使用哪一个都行
         // 调用接口测试
-        String companyName = "辽东作业公司";
-        String oilfieldName = "SZ36-1";
-        String platformName = "SZ36-1B";
-        String systemName = "高压二氧化碳系统灭火系统";
-        String tableName = "药剂瓶";
-        String number = "SD002";
+//        String companyName = "辽东作业公司";
+//        String oilfieldName = "SZ36-1";
+//        String platformName = "SZ36-1B";
+//        String systemName = "高压二氧化碳系统灭火系统";
+//        String tableName = "药剂瓶";
+//        String number = "SD002";
 //        itemDataList = ServiceFactory.getYearCheckService().getItemData(companyName, oilfieldName, platformName, systemName, tableName, number);
 //        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, );
 

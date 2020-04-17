@@ -92,12 +92,14 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                     Toast.makeText(this, "请选择检查记录", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+
                 HashMap hashMap = historyList.get(selected_tag);
                 String ret = (String) hashMap.get("ret");
                 long companyInfoId = (long) hashMap.get("companyInfoId");
                 long systemId = (long) hashMap.get("systemId");
                 Date checkDate = (Date) hashMap.get("checkDate"); //时间
-                Intent intent = new Intent(this, HFCActivity.class);
+                Intent intent = new Intent(this, CarbonDioxideAcitivty.class);
                 intent.putExtra("ret", ret);  //记录的名字
                 intent.putExtra("companyInfoId", companyInfoId); //公司名称
                 intent.putExtra("systemId", systemId);    //系统ID
