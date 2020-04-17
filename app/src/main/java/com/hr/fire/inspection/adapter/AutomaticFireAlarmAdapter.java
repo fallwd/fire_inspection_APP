@@ -1,12 +1,16 @@
 package com.hr.fire.inspection.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,10 +20,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
+import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TimeUtil;
+import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.Date;
 import java.util.List;
@@ -31,7 +37,7 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
     private List<ItemInfo> mData;
     private Long checkid;  //检查表的Id
     private IntentTransmit intentTransmit;   //之前页面数据的传参,如系统号\公司id...
-
+    private HrPopup hrPopup; // 下拉框相关的引用
 
     public AutomaticFireAlarmAdapter(Context mContext, List<ItemInfo> mData) {
         this.mContext = mContext;
@@ -54,39 +60,96 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
         AutomaticFireAlarmAdapter.ViewHolder vh = (AutomaticFireAlarmAdapter.ViewHolder) holder;
         if (mData != null && mData.size() != 0) {
             ItemInfo info = mData.get(position);
+            Log.e("dong", "position----:" + position);
+            Log.e("dong", "info----:" + info);
             vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
             vh.et_2.setText(new StringBuffer().append("GYTCQ00").append(position + 1));
-            vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
-            vh.et_4.setText(new StringBuffer().append(info.getWeight()).append(""));
-            vh.et_5.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));
-            vh.et_6.setText(new StringBuffer().append(info.getProdFactory()).append(""));
+            vh.et_3.setText(new StringBuffer().append(info.getProdFactory()).append(""));
+            vh.et_4.setText(new StringBuffer().append(info.getTypeNo()).append(""));
+            vh.et_5.setText(new StringBuffer().append(info.getNo()).append(""));
+            vh.et_6.setText(new StringBuffer().append(info.getAppearance()).append(""));
             String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getProdDate());
-            String mCheckDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getCheckDate());
             vh.et_7.setText(new StringBuffer().append(mProdDate).append(""));
-            vh.et_8.setText(new StringBuffer().append(mCheckDate).append(""));
-            vh.tv_9.setText(new StringBuffer().append("药剂瓶").append(position + 1).append("号表"));
+//            vh.et_8.setText(new StringBuffer().append(info.getIsPass()).append(""));
+//            vh.tv_9.setText(new StringBuffer().append(info.getImageUrl()).append(""));
+            vh.tv_10.setText(new StringBuffer().append(info.getDescription()).append(""));
+
+
+//          下拉框
+            vh.et_8.setText("是  ");
+            //在左侧添加图片
+            Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+            vh.et_8.setCompoundDrawables(null, null, drawable, null);
+            Drawable drawable1 = mContext.getResources().getDrawable(R.drawable.listview_border_margin);
+            final ViewHolder finalHolder = vh;
+            vh.et_8.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showPopWind(finalHolder.et_8);
+                }
+            });
+            vh.et_8.setBackground(drawable1);
+//          照相机的图片  需要把对应的xml转换为textview
+            vh.tv_9.setVisibility(View.GONE);
+            vh.tv_9.setVisibility(View.VISIBLE);
+            vh.tv_9.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mContext.startActivity(new Intent(mContext, PhotoUploadActivity.class));
+                }
+            });
         }
-        vh.rl_9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkid == 0 || intentTransmit == null) {
-                    Toast.makeText(mContext, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Intent intent = new Intent(mContext, CarBonGoodsWeightAcitivty.class);
-                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_ID, checkid);
-                if (mData.get(position).getId() != 0) {
-                    intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE_ID, mData.get(position).getId());
-                }
-                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_SYS_DATA, intentTransmit);
-                Log.e("dong", "系统位号----:" + intentTransmit.number);
-                mContext.startActivity(intent);
-            }
-        });
+
         vh.rl_11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 removeData(position);
+            }
+        });
+    }
+
+    //显示对话框,用户选择是否异常的弹框
+    private void showPopWind(final TextView et_8) {
+        View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods, null);
+        if (hrPopup == null) {
+            hrPopup = new HrPopup((Activity) mContext);
+        }
+        RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
+        RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
+        RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
+        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setBackgroundDrawable(new BitmapDrawable());
+        hrPopup.setFocusable(true);
+        hrPopup.setOutsideTouchable(true);
+        hrPopup.setContentView(PopupRootView);
+        hrPopup.showAsDropDown(et_8);
+        rl_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                et_8.setText("是");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+        rl_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                et_8.setText("否");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+        rl_other.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                et_8.setText("---");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
             }
         });
     }
@@ -157,8 +220,8 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
         EditText et_5;
         EditText et_6;
         EditText et_7;
-        EditText et_8;
-        TextView tv_9;
+        TextView et_8;
+        ImageView tv_9;
         TextView tv_10;
         RelativeLayout rl_9;
         RelativeLayout rl_11;
@@ -172,8 +235,8 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
             et_5 = (EditText) view.findViewById(R.id.et_5);
             et_6 = (EditText) view.findViewById(R.id.et_6);
             et_7 = (EditText) view.findViewById(R.id.et_7);
-            et_8 = (EditText) view.findViewById(R.id.et_8);
-            tv_9 = (TextView) view.findViewById(R.id.tv_9);
+            et_8 = (TextView) view.findViewById(R.id.et_8);
+            tv_9 = (ImageView) view.findViewById(R.id.tv_9);
             tv_10 = (TextView) view.findViewById(R.id.tv_10);
             rl_9 = (RelativeLayout) view.findViewById(R.id.rl_9);
             rl_11 = (RelativeLayout) view.findViewById(R.id.rl_11);

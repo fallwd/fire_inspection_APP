@@ -64,7 +64,6 @@ public class CarbonFragment1 extends Fragment {
             it = (IntentTransmit) getArguments().getSerializable(mKey);
             Log.e("dong", "f1传参====" + it.toString());
         }
-
     }
 
     @Override

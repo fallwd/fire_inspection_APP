@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -167,8 +168,8 @@ public class AutomaticFireAlarm1 extends Fragment {
         EditText et_5 = childAt.findViewById(R.id.et_5);
         EditText et_6 = childAt.findViewById(R.id.et_6);
         EditText et_7 = childAt.findViewById(R.id.et_7);
-        EditText et_8 = childAt.findViewById(R.id.et_8);
-        TextView tv_9 = childAt.findViewById(R.id.tv_9);
+        TextView et_8 = childAt.findViewById(R.id.et_8);
+        ImageView tv_9 = childAt.findViewById(R.id.tv_9);
         itemObj.setNo(et_2.getText().toString());
         itemObj.setVolume(et_3.getText().toString());
         itemObj.setWeight(et_4.getText().toString());
@@ -186,7 +187,7 @@ public class AutomaticFireAlarm1 extends Fragment {
         itemObj.setCodePath("检查表图片路径:/src/YJP0002.jpg");
         Log.d("dong", "一直遍历吗兄弟?" + date1 + "  " + et_5.getText().toString());
 //        }
-        long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj, it.companyInfoId, checkTypes.get(0).getId(), it.number, it.srt_Date);
+        long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj, 201, 1, "HZ001", it.srt_Date);
         if (l1 == 0) {
             Toast.makeText(getContext(), "药剂瓶数据保存成功", Toast.LENGTH_SHORT).show();
         }

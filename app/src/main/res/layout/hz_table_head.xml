@@ -122,7 +122,6 @@
             android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -148,15 +147,16 @@
             android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:text="@string/hidden_danger"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="wrap_content"

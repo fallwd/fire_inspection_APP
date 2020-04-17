@@ -105,7 +105,6 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 obj.put("checkDate",checkDate);
                 resultList.add(obj);
             }
-
         }
         return resultList;
     }

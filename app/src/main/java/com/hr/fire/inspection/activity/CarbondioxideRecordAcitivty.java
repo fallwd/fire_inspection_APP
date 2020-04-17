@@ -1,6 +1,7 @@
 package com.hr.fire.inspection.activity;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +32,7 @@ import java.util.List;
 
 //二氧化碳年检记录
 public class CarbondioxideRecordAcitivty extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "CarbondioxideRecordAcitivty";
     public static int[] icon = {R.mipmap.file};
     private long sys_id;
     private long platform_id;
@@ -51,7 +53,6 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         sys_number = intent.getStringExtra("sys_number");  //系统位号
 //        List historyList = ServiceFactory.getYearCheckService().getHistoryList(platform_id, sys_id);
         historyList = ServiceFactory.getYearCheckService().getHistoryList(platform_id, sys_id);
-
         initView();
     }
 
@@ -105,7 +106,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 intent.putExtra("platform_id", platform_id);    //平台ID
                 intent.putExtra("f_title", f_title); //系统名称
                 intent.putExtra("sys_number", sys_number); //系统位号
-
+//                Log.i(TAG, "参数----------:" + intent);
 //                Intent intent = new Intent(this, AutomaticFireAlarmAcitivty.class);
                 startActivity(intent);
                 break;
