@@ -88,6 +88,7 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
                 ycr.setProtectArea(" "); // 保护位号
                 ycr.setCheckDate(its.srt_Date);  //检查日期
                 ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, item_id, checkDataEasy.get(i).getId(), its.companyInfoId, check_id, its.number, its.srt_Date);
+                yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(divice_id, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
             }
         }
         //获取已有的检查结果的数据
@@ -130,9 +131,9 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
                         yearCheckResult.setProtectArea(" "); // 保护位号
                         yearCheckResult.setCheckDate(its.srt_Date);  //检查日期
                         ServiceFactory.getYearCheckService().update(yearCheckResult);
-                        Toast.makeText(CarBonGoodsWeightAcitivty.this, "数据保存成功", Toast.LENGTH_SHORT).show();
-                        finish();
                     }
+                    Toast.makeText(CarBonGoodsWeightAcitivty.this, "数据保存成功", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
         });
