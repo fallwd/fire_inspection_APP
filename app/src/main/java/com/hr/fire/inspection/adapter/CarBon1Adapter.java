@@ -79,7 +79,6 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE_ID, mData.get(position).getId());
                 }
                 intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_SYS_DATA, intentTransmit);
-                Log.e("dong", "系统位号----:" + intentTransmit.number);
                 mContext.startActivity(intent);
             }
         });
@@ -116,9 +115,8 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             mData.add(itemInfo);
             //添加动画
             notifyItemInserted(position);
-            Log.d("dong", "执行顺序adapter");
         }
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
     }
 
     //  删除数据

@@ -1,8 +1,6 @@
 package com.hr.fire.inspection.activity;
 
-
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.util.Log;
@@ -19,14 +17,12 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.constant.ConstantInspection;
-import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.fragment.CarbonFragment1;
 import com.hr.fire.inspection.fragment.CarbonFragment2;
 import com.hr.fire.inspection.fragment.CarbonFragment3;
 import com.hr.fire.inspection.fragment.CarbonFragment4;
 import com.hr.fire.inspection.fragment.CarbonFragment5;
-import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 
 import java.util.ArrayList;

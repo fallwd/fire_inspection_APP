@@ -58,7 +58,7 @@ public class GoodsAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_goods_form, parent, false);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_goos_check, parent, false);
             holder = new ViewHolder();
             holder.ll_item = (LinearLayout) convertView.findViewById(R.id.ll_item);
             holder.tv1 = (TextView) convertView.findViewById(R.id.tv1);
@@ -68,6 +68,8 @@ public class GoodsAdapter extends BaseAdapter {
             holder.tv5 = (TextView) convertView.findViewById(R.id.tv5);
             holder.tv6 = (TextView) convertView.findViewById(R.id.tv6);
             holder.tv7 = (TextView) convertView.findViewById(R.id.tv7);
+            holder.rl7 = (RelativeLayout) convertView.findViewById(R.id.rl7);
+            holder.iv7 = (ImageView) convertView.findViewById(R.id.iv7);
             holder.tv8 = (TextView) convertView.findViewById(R.id.tv8);
             convertView.setTag(holder);
         } else {

@@ -26,7 +26,6 @@ import com.hr.fire.inspection.service.ServiceFactory;
 import static android.widget.Toast.*;
 
 public class ChooseCompanyActivity extends AppCompatActivity implements View.OnClickListener {
-    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     private ArrayList<String> list;
     List<CompanyInfo> dataList;
     private ImageView insert_btn;
@@ -55,11 +54,11 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
     private void initData() {
         dataList = ServiceFactory.getCompanyInfoService().getCompanyList();
         list = new ArrayList<>();
-
+        Log.d("dong", "dataList===" + dataList.toString());
         for (int i = 0; i < dataList.size(); i++) {
             CompanyInfo CompanyListItem = dataList.get(i);
             String companyName = CompanyListItem.getCompanyName();
-            if(companyName != null && companyName != ""){
+            if (companyName != null && companyName != "") {
                 list.add(companyName);
             }
         }
@@ -142,7 +141,7 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
                             for (int i = 0; i < dataList.size(); i++) {
                                 CompanyInfo CompanyListItem = dataList.get(i);
                                 String companyName = CompanyListItem.getCompanyName();
-                                if(companyName != null && companyName != ""){
+                                if (companyName != null && companyName != "") {
                                     list.add(companyName);
                                 }
                             }
