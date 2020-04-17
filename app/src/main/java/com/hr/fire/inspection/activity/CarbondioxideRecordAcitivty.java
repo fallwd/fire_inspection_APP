@@ -57,6 +57,9 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
     private ArrayList hot = new ArrayList<>();
 
     private void initView() {
+        if (historyList.size() == 0) {
+            Toast.makeText(this, "没有历史年检记录,请点击\"下一步\"进行新建", Toast.LENGTH_SHORT).show();
+        }
         ImageView iv_finish = findViewById(R.id.iv_finish);
         TextView tv_inspection_pro = findViewById(R.id.tv_inspection_pro);
         RecyclerView rc_list = findViewById(R.id.rc_list);
@@ -87,24 +90,24 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 finish();
                 break;
             case R.id.bt_next:
+                Intent intent = new Intent(this, CarbonDioxideAcitivty.class);
                 if (selected_tag == -1) {
-
+                    //selected_tag=-1时,表示用户没有选择任何记录,  新建一个巡检记录
+                    intent.putExtra("srt_Date", new Date()); //记录的时间
+                    intent.putExtra("systemId", sys_id);    //系统ID
+                    intent.putExtra("platform_id", platform_id);    //公司ID
+                    intent.putExtra("f_title", f_title); //系统名称 :高压二氧化碳灭火系统
+                    intent.putExtra("sys_number", sys_number); //系统位号 ：SD002(用户自己填写的)
+                    startActivity(intent);
                 } else {
                     HashMap hashMap = historyList.get(selected_tag);
-                    String ret = (String) hashMap.get("ret");
-                    long companyInfoId = (long) hashMap.get("companyInfoId");
-                    long systemId = (long) hashMap.get("systemId");
+                    //拿到历史数据中的记录, 并修改历史记录
                     Date checkDate = (Date) hashMap.get("checkDate"); //时间
-                    Intent intent = new Intent(this, CarbonDioxideAcitivty.class);
-                    intent.putExtra("ret", ret);  //记录的名字
-                    intent.putExtra("companyInfoId", companyInfoId); //公司名称
-                    intent.putExtra("systemId", systemId);    //系统ID
                     intent.putExtra("srt_Date", checkDate); //记录的时间
-                    intent.putExtra("platform_id", platform_id);    //平台ID
-                    intent.putExtra("f_title", f_title); //系统名称
-                    intent.putExtra("sys_number", sys_number); //系统位号
-                    Log.d("dong", "数据对比:  sys_id  >  " + sys_id + "     " + systemId
-                            + "   公司id     " + companyInfoId + "      ----    " + f_title + "   " + sys_number  );
+                    intent.putExtra("systemId", sys_id);    //系统ID
+                    intent.putExtra("platform_id", platform_id);    //公司ID
+                    intent.putExtra("f_title", f_title); //系统名称 :高压二氧化碳灭火系统
+                    intent.putExtra("sys_number", sys_number); //系统位号 ：SD002(用户自己填写的)
                     startActivity(intent);
                 }
                 break;
