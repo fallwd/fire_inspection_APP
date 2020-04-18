@@ -2,21 +2,21 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="45dp"
-    android:background="@drawable/layer_border_bottom">
+    android:layout_height="45dp">
     <RelativeLayout
         android:id="@+id/company_item_row2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="5dp"
-        android:paddingRight="3dp">
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
         <TextView
             android:id="@+id/oil_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="辽东作业公司"
             android:textColor="#000000"
-            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textSize="14sp"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true">
         </TextView>

@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Button;
 import android.widget.TextView;
@@ -115,8 +116,8 @@ public class FireActivity extends AppCompatActivity {
         });
 
         // 点击返回上一页
-        ImageButton imageButton = (ImageButton) findViewById(R.id.backHome);
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        ImageView iv_finish = (ImageView) findViewById(R.id.iv_finish);
+        iv_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
