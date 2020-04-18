@@ -43,12 +43,14 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
     public static String CHECK_ID = "checklist_num";
     public static String CHECK_SYS_DATA = "check_sys_data";  //整个系统数据得对象
     public static String CHECK_DIVICE_ID = "check_divice_id"; //设备表得id
+    public static String CHECK_DIVICE = "check_divice"; //用来判断是哪个设备页面跳转进来的
     private List<YearCheck> checkDataEasy;
     private IntentTransmit its;
     private long check_id;
     private long divice_id;
     private Long item_id;
     private List<YearCheckResult> yearCheckResults;
+    private String title;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,6 +66,7 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
         check_id = intent.getLongExtra(CHECK_ID, 0);
         divice_id = intent.getLongExtra(CHECK_DIVICE_ID, 0);
         item_id = intent.getLongExtra("item_id", 0);
+        title = intent.getStringExtra(CHECK_DIVICE);
         //之前页面传过来的数据
         its = (IntentTransmit) intent.getSerializableExtra(CHECK_SYS_DATA); //系统数据对象
         //1.药剂瓶和氮气瓶这种设备表，需要再请求一次这个方法，获取检查表id，然后带到getCheckDataEasy就行了
@@ -75,10 +78,10 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
         checkDataEasy = ServiceFactory.getYearCheckService().getCheckDataEasy(checkTypes.get(0).getId());
         //3.获取用户需要填写的数据,如果没有数据,就需要插入的默认数据（流程4）。如果有数据就
         yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(divice_id, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
-        Log.e("dong", "获取用户填写的检查结果数据 系统位置" + yearCheckResults.size() + "  " + yearCheckResults.toString());
+//        Log.e("dong", "获取用户填写的检查结果数据 系统位置" + yearCheckResults.size() + "  " + yearCheckResults.toString());
         if (yearCheckResults == null || yearCheckResults.size() == 0) {
             for (int i = 0; i < checkDataEasy.size(); i++) {
-                Log.d("dong", "第一次加载数据 = ");
+//                Log.d("dong", "第一次加载数据 = ");
                 //3.进入系统就给用户默认插入两条数据, 用户点击保存时,就Updata数据库
                 YearCheckResult ycr = new YearCheckResult();
                 ycr.setIsPass(" -- ");
@@ -97,6 +100,7 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
 
     private void initView() {
         TextView tv_title = findViewById(R.id.tv_title);
+        tv_title.setText(title);
         Button cancel_btn = findViewById(R.id.cancel_btn);
         cancel_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +116,7 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int childCount = list.getChildCount();
-                Log.d("dong", "childCount==- " + childCount + "    数据条目 " + yearCheckResults.size());
+//                Log.d("dong", "childCount==- " + childCount + "    数据条目 " + yearCheckResults.size());
                 //两边的数据条数是一样的.
                 if (yearCheckResults.size() == childCount) {
                     for (int i = 0; i < childCount; i++) {

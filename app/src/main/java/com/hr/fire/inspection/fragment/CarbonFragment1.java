@@ -2,14 +2,12 @@ package com.hr.fire.inspection.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,13 +23,9 @@ import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
-import com.hr.fire.inspection.service.impl.YearCheckServiceImpl;
-import com.hr.fire.inspection.utils.HYLogUtil;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 
-import java.io.Serializable;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -160,44 +154,44 @@ public class CarbonFragment1 extends Fragment {
     @SuppressLint("SimpleDateFormat")
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    //点击"＋", 就像数据库中插入一条数据, 点"保存"就更新所有数据
-    public void addData() {
-        int childCount = rc_list.getChildCount();
-        if (childCount == 0) {
-            return;
-        }
-        //这些数据需要从上层传参过来
-        ItemInfo itemObj = new ItemInfo();
-        LinearLayout childAt = (LinearLayout) rc_list.getChildAt(childCount - 1);
-        TextView tv_1 = childAt.findViewById(R.id.tv_1);
-        EditText et_2 = childAt.findViewById(R.id.et_2);
-        EditText et_3 = childAt.findViewById(R.id.et_3);
-        EditText et_4 = childAt.findViewById(R.id.et_4);
-        EditText et_5 = childAt.findViewById(R.id.et_5);
-        EditText et_6 = childAt.findViewById(R.id.et_6);
-        EditText et_7 = childAt.findViewById(R.id.et_7);
-        EditText et_8 = childAt.findViewById(R.id.et_8);
-        TextView tv_9 = childAt.findViewById(R.id.tv_9);
-        itemObj.setNo(et_2.getText().toString());
-        itemObj.setVolume(et_3.getText().toString());
-        itemObj.setWeight(et_4.getText().toString());
-        itemObj.setGoodsWeight(et_5.getText().toString());
-        itemObj.setProdFactory(et_6.getText().toString());
-        Date date = TimeUtil.getInstance().hhmmssTodata(et_7.getText().toString());
-        Date date1 = TimeUtil.getInstance().hhmmssTodata(et_8.getText().toString());
-        itemObj.setProdDate(date);
-        itemObj.setObserveDate(date1);
-        itemObj.setCheckDate(new Date());
-//        itemObj.setIsPass("是");
-//        itemObj.setLabelNo("BQ0002");
-//        itemObj.setSystemNumber("SD002");
-//        itemObj.setProtectArea("主配电间");
-//        itemObj.setCodePath("检查表图片路径:/src/YJP0002.jpg");
-        long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
-        if (l1 == 0) {
-            Toast.makeText(getContext(), "药剂瓶数据添加成功", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    //点击"＋", 就像数据库中插入一条数据, 点"保存"就更新所有数据
+//    public void addData() {
+//        int childCount = rc_list.getChildCount();
+//        if (childCount == 0) {
+//            return;
+//        }
+//        //这些数据需要从上层传参过来
+//        ItemInfo itemObj = new ItemInfo();
+//        LinearLayout childAt = (LinearLayout) rc_list.getChildAt(childCount - 1);
+//        TextView tv_1 = childAt.findViewById(R.id.tv_1);
+//        EditText et_2 = childAt.findViewById(R.id.et_2);
+//        EditText et_3 = childAt.findViewById(R.id.et_3);
+//        EditText et_4 = childAt.findViewById(R.id.et_4);
+//        EditText et_5 = childAt.findViewById(R.id.et_5);
+//        EditText et_6 = childAt.findViewById(R.id.et_6);
+//        EditText et_7 = childAt.findViewById(R.id.et_7);
+//        EditText et_8 = childAt.findViewById(R.id.et_8);
+//        TextView tv_9 = childAt.findViewById(R.id.tv_9);
+//        itemObj.setNo(et_2.getText().toString());
+//        itemObj.setVolume(et_3.getText().toString());
+//        itemObj.setWeight(et_4.getText().toString());
+//        itemObj.setGoodsWeight(et_5.getText().toString());
+//        itemObj.setProdFactory(et_6.getText().toString());
+//        Date date = TimeUtil.getInstance().hhmmssTodata(et_7.getText().toString());
+//        Date date1 = TimeUtil.getInstance().hhmmssTodata(et_8.getText().toString());
+//        itemObj.setProdDate(date);
+//        itemObj.setObserveDate(date1);
+//        itemObj.setCheckDate(new Date());
+////        itemObj.setIsPass("是");
+////        itemObj.setLabelNo("BQ0002");
+////        itemObj.setSystemNumber("SD002");
+////        itemObj.setProtectArea("主配电间");
+////        itemObj.setCodePath("检查表图片路径:/src/YJP0002.jpg");
+//        long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
+//        if (l1 == 0) {
+//            Toast.makeText(getContext(), "药剂瓶数据添加成功", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
     public void upData() {
         int itemCount = rc_list.getChildCount();

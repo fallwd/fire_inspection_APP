@@ -168,9 +168,9 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
                         carbonFragment1.addItemView();
                     } else if (fragment instanceof CarbonFragment2) {
                         carbonFragment2.addItemView();
-                    } else if(fragment instanceof  CarbonFragment3){
+                    } else if (fragment instanceof CarbonFragment3) {
                         carbonFragment3.addItemView();
-                    }else if(fragment instanceof  CarbonFragment4){
+                    } else if (fragment instanceof CarbonFragment4) {
                         carbonFragment4.addItemView();
                     }
                 }
@@ -184,6 +184,8 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
                     Fragment fragment = fragments.get(currentPager);
                     if (fragment instanceof CarbonFragment1) {
                         carbonFragment1.upData();
+                    }else if (fragment instanceof CarbonFragment2){
+                        carbonFragment2.upData();
                     }
                 }
             }
