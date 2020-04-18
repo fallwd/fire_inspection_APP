@@ -2,6 +2,7 @@ package com.hr.fire.inspection.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
+import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.service.ServiceFactory;
@@ -49,14 +51,15 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         CarBon3Adapter.ViewHolder vh = (CarBon3Adapter.ViewHolder) holder;
         if (mData != null && mData.size() != 0) {
             YearCheck info = mData.get(position);
+
             vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
             vh.et_2.setText(new StringBuffer().append(info.getProject()).append(""));
             vh.et_3.setText(new StringBuffer().append(info.getContent()).append(""));
             vh.et_4.setText(new StringBuffer().append(info.getRequirement()).append(""));
             vh.et_5.setText(new StringBuffer().append(info.getStandard()).append(""));
             vh.et_6.setText(new StringBuffer().append("").append(""));
-            vh.et_7.setText(new StringBuffer().append("").append(""));
             vh.et_8.setText(new StringBuffer().append("").append(""));
+
         }
         vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
     }
@@ -87,7 +90,6 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
 
-
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_1;
         EditText et_2;
@@ -95,7 +97,6 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         EditText et_4;
         EditText et_5;
         EditText et_6;
-        EditText et_7;
         EditText et_8;
 
         ViewHolder(View view) {
@@ -106,7 +107,6 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             et_4 = (EditText) view.findViewById(R.id.et_4);
             et_5 = (EditText) view.findViewById(R.id.et_5);
             et_6 = (EditText) view.findViewById(R.id.et_6);
-            et_7 = (EditText) view.findViewById(R.id.et_7);
             et_8 = (EditText) view.findViewById(R.id.et_8);
         }
     }

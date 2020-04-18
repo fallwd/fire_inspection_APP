@@ -48,7 +48,6 @@ public class CarBon5Adapter  extends RecyclerView.Adapter<RecyclerView.ViewHolde
             vh.et_4.setText(new StringBuffer().append(info.getRequirement()).append(""));
             vh.et_5.setText(new StringBuffer().append(info.getStandard()).append(""));
             vh.et_6.setText(new StringBuffer().append("").append(""));
-            vh.et_7.setText(new StringBuffer().append("").append(""));
             vh.et_8.setText(new StringBuffer().append("").append(""));
         }
         vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
@@ -87,7 +86,6 @@ public class CarBon5Adapter  extends RecyclerView.Adapter<RecyclerView.ViewHolde
         EditText et_4;
         EditText et_5;
         EditText et_6;
-        EditText et_7;
         EditText et_8;
 
         ViewHolder(View view) {
@@ -98,7 +96,6 @@ public class CarBon5Adapter  extends RecyclerView.Adapter<RecyclerView.ViewHolde
             et_4 = (EditText) view.findViewById(R.id.et_4);
             et_5 = (EditText) view.findViewById(R.id.et_5);
             et_6 = (EditText) view.findViewById(R.id.et_6);
-            et_7 = (EditText) view.findViewById(R.id.et_7);
             et_8 = (EditText) view.findViewById(R.id.et_8);
         }
     }

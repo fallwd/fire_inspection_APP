@@ -84,10 +84,14 @@ public class HFCActivity extends AppCompatActivity {
         titleList.add("七氟丙烷钢瓶信息采集");
         titleList.add("氮气驱动瓶信息采集");
         titleList.add("七氟丙烷钢瓶");
+        titleList.add("氮气驱动瓶");
+        titleList.add("管线管件");
+        titleList.add("保护区");
+        titleList.add("功能性实验");
 
         mHFCFragment1 = HFCFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
         mHFCFragment2 = HFCFragment2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
-        mHFCFragment3 = HFCFragment3.newInstance("", "");
+        mHFCFragment3 = HFCFragment3.newInstance("","");
 
         fragments.add(mHFCFragment1);
         fragments.add(mHFCFragment2);

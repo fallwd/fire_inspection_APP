@@ -98,7 +98,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 finish();
                 break;
             case R.id.bt_next:
-                Intent intent = new Intent(this, HFCActivity.class);
+                Intent intent = new Intent(this, CarbonDioxideAcitivty.class);
                 if (selected_tag == -1) {
                     Date curDateHHmm = TimeUtil.getCurDateHHmm();
                     //selected_tag=-1时,表示用户没有选择任何记录,  新建一个巡检记录,新建记录是根据date来判断的.

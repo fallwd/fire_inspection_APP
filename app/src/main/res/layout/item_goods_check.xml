@@ -136,4 +136,5 @@
         android:textColor="@color/title_black"
         android:textSize="12sp"
         android:visibility="visible" />
+
 </LinearLayout>
