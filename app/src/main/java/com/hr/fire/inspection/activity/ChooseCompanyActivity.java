@@ -72,24 +72,10 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
         company_list_item.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                final AlertDialog.Builder continue_builder = new AlertDialog.Builder(ChooseCompanyActivity.this);
-                continue_builder.setTitle("是否选择该公司?");
-                continue_builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                continue_builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
                         String str = list.get(position);
                         Intent intent = new Intent(ChooseCompanyActivity.this, OilFieldActivity.class);
                         intent.putExtra("company_name", str);
                         startActivity(intent);
-                    }
-                });
-                continue_builder.show();
-
             }
         });
         insert_btn.setOnClickListener(new View.OnClickListener() {

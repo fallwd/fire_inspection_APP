@@ -68,7 +68,7 @@ public class OilFieldActivity extends AppCompatActivity implements View.OnClickL
         for (int i = 0; i < dataList.size(); i++) {
             CompanyInfo CompanyListItem = dataList.get(i);
             String companyName = CompanyListItem.getOilfieldName();
-            if(companyName != null && companyName != ""){
+            if (companyName != null && companyName != "") {
                 list.add(companyName);
             }
         }
@@ -82,25 +82,12 @@ public class OilFieldActivity extends AppCompatActivity implements View.OnClickL
         oil_list_item.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                final AlertDialog.Builder continue_builder = new AlertDialog.Builder(OilFieldActivity.this);
-                continue_builder.setTitle("是否选择该油田?");
-                continue_builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                continue_builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String oil_name = list.get(position);
-                        Intent intent = new Intent(OilFieldActivity.this, PlatformActivity.class);
-                        // 跳转时传入下一页面 公司名称 油田名称
-                        intent.putExtra("company_name", infocontcompanyName);
-                        intent.putExtra("oil_name", oil_name);
-                        startActivity(intent);
-                    }
-                });
-                continue_builder.show();
+                String oil_name = list.get(position);
+                Intent intent = new Intent(OilFieldActivity.this, PlatformActivity.class);
+                // 跳转时传入下一页面 公司名称 油田名称
+                intent.putExtra("company_name", infocontcompanyName);
+                intent.putExtra("oil_name", oil_name);
+                startActivity(intent);
             }
         });
         insert_btn.setOnClickListener(new View.OnClickListener() {
@@ -154,7 +141,7 @@ public class OilFieldActivity extends AppCompatActivity implements View.OnClickL
                             for (int i = 0; i < dataList.size(); i++) {
                                 CompanyInfo CompanyListItem = dataList.get(i);
                                 String companyName = CompanyListItem.getOilfieldName();
-                                if(companyName != null && companyName != ""){
+                                if (companyName != null && companyName != "") {
                                     list.add(companyName);
                                 }
                             }
