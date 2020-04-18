@@ -36,12 +36,12 @@ public class WelcomeActivity extends AppCompatActivity {
 
 //         初始化数据库,插入测试数据
         // 清空数据库
-//        DBManager cleanObj = new DBManager(this);
-//        cleanObj.deleSQL();
-//        // 初始化数据库
-//        BaseData baseData = new BaseData();
-//        baseData.initData();
-//        baseData.insertTestData();
+        DBManager cleanObj = new DBManager(this);
+        cleanObj.deleSQL();
+        // 初始化数据库
+        BaseData baseData = new BaseData();
+        baseData.initData();
+        baseData.insertTestData();
         // 调用接口测试
 //        List<CompanyInfo> companyList = ServiceFactory.getCompanyInfoService().getAll();
 //        for(int i=0;i<companyList.size();i++){
@@ -310,8 +310,8 @@ public class WelcomeActivity extends AppCompatActivity {
 
 //        List<HashMap> allList = ServiceFactory.getYearCheckService().getOutputList();
 //        Log.i("getOutputList",""+allList);
-//
-//        // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
+////
+        // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
 //        long companyInfoId = 3;
 //        // checkDate 检查日期
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");

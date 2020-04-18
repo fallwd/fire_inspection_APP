@@ -28,6 +28,7 @@ import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.service.impl.YearCheckServiceImpl;
 import com.hr.fire.inspection.utils.HYLogUtil;
 import com.hr.fire.inspection.utils.TimeUtil;
+import com.hr.fire.inspection.utils.ToastUtil;
 
 import java.io.Serializable;
 import java.text.ParseException;
@@ -89,6 +90,7 @@ public class CarbonFragment1 extends Fragment {
      */
     private void initData() {
         //历史中的companyInfoId  ,  systemId和在公司、平台那边传过来的都是一样的ID，使用哪一个都行
+<<<<<<< HEAD
         // 调用接口测试
 //        String companyName = "辽东作业公司";
 //        String oilfieldName = "SZ36-1";
@@ -105,15 +107,15 @@ public class CarbonFragment1 extends Fragment {
 //        Log.d("dong", "数据查看===:" + itemDataList.get(0).toString());
 
 
+=======
+>>>>>>> c3003a03caa3f4616d4e61686cdf45d35e11e9fb
         checkTypes = ServiceFactory.getYearCheckService().gettableNameData(its.systemId);
         if (checkTypes == null) {
             Toast.makeText(getActivity(), "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
         }
         //参数1:公司id, 参数2:检查表类型对应的id, 参数3:输入的系统位号，如果没有就填"",或者SD002,否则没数据   参数4:日期
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(0).getId(), its.number == null ? "" : its.number, its.srt_Date);
-        HYLogUtil.getInstance().d("设备表信息,数据查看:" + itemDataList.size() + "  " + itemDataList.toString());
-        // 一级表插入数据insertItemData
-
+        Log.d("dong","itemDataList== " +itemDataList.toString());
     }
 
     private void initView() {
@@ -184,7 +186,7 @@ public class CarbonFragment1 extends Fragment {
 //        itemObj.setCodePath("检查表图片路径:/src/YJP0002.jpg");
         long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
         if (l1 == 0) {
-            Toast.makeText(getContext(), "药剂瓶数据保存成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "药剂瓶数据添加成功", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -230,6 +232,7 @@ public class CarbonFragment1 extends Fragment {
 //            list.add(itemObj);
             ServiceFactory.getYearCheckService().update(itemObj);
         }
+        Toast.makeText(getContext(), "\"药剂瓶\"数据保存成功", Toast.LENGTH_SHORT).show();
     }
 
     @Override
