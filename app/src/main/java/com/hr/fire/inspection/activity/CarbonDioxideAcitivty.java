@@ -1,8 +1,6 @@
 package com.hr.fire.inspection.activity;
 
-
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.util.Log;
@@ -19,14 +17,12 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.constant.ConstantInspection;
-import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.fragment.CarbonFragment1;
 import com.hr.fire.inspection.fragment.CarbonFragment2;
 import com.hr.fire.inspection.fragment.CarbonFragment3;
 import com.hr.fire.inspection.fragment.CarbonFragment4;
 import com.hr.fire.inspection.fragment.CarbonFragment5;
-import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 
 import java.util.ArrayList;
@@ -65,16 +61,14 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
     private void getIntentParameter() {
         //历史中的companyInfoId  ,  systemId和再公司、平台那边传过来的都是一样的ID，使用哪一个都行
         Intent intent = getIntent();
-        long companyInfoId = intent.getLongExtra("companyInfoId", 0);  //公司ID
         long systemId = intent.getLongExtra("systemId", 0);   //系统Id
         long platform_id = intent.getLongExtra("platform_id", 0);   //系统Id
         Date srt_Date = (Date) intent.getSerializableExtra("srt_Date");  //传过来的时间
         f_title = intent.getStringExtra("f_title"); //传过来的名称
         sys_number = intent.getStringExtra("sys_number"); //传过来的名称
         it = new IntentTransmit();
-        it.companyInfoId = companyInfoId;
+        it.companyInfoId = platform_id;
         it.systemId = systemId;
-        it.platform_id = platform_id;
         it.srt_Date = srt_Date;
         it.number = sys_number;
     }
@@ -92,16 +86,15 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
         mViewPager = findViewById(R.id.vp_content);
         titleList.add("药剂瓶");
         titleList.add("氮气瓶");
-        titleList.add("保护区");
         titleList.add("管线管件");
+        titleList.add("保护区");
         titleList.add("功能性试验");
-        Log.i(TAG, "1111111111111111111111122222222222222222222=" + it);
 
         carbonFragment1 = CarbonFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
-        carbonFragment2 = CarbonFragment2.newInstance("", "");
-        carbonFragment3 = CarbonFragment3.newInstance("", "");
-        carbonFragment4 = CarbonFragment4.newInstance("", "");
-        carbonFragment5 = CarbonFragment5.newInstance("", "");
+        carbonFragment2 = CarbonFragment2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
+        carbonFragment3 = CarbonFragment3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
+        carbonFragment4 = CarbonFragment4.newInstance(ConstantInspection.YEARLY_ON_SITE_F4, it);
+        carbonFragment5 = CarbonFragment5.newInstance(ConstantInspection.YEARLY_ON_SITE_F5, it);
         fragments.add(carbonFragment1);
         fragments.add(carbonFragment2);
         fragments.add(carbonFragment3);
@@ -170,10 +163,8 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (fragments != null && fragments.size() != 0) {
-                    Log.d("dong", "instanceof CarbonFragment1  onClick");
                     Fragment fragment = fragments.get(currentPager);
                     if (fragment instanceof CarbonFragment1) {
-                        Log.d("dong", "instanceof CarbonFragment1");
                         carbonFragment1.addItemView();
                     } else if (fragment instanceof CarbonFragment2) {
                         carbonFragment2.addItemView();
@@ -192,7 +183,6 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
                 if (fragments != null && fragments.size() != 0) {
                     Fragment fragment = fragments.get(currentPager);
                     if (fragment instanceof CarbonFragment1) {
-//                        carbonFragment1.saveData();
                         carbonFragment1.upData();
                     }
                 }

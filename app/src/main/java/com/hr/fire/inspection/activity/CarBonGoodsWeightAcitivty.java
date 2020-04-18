@@ -11,6 +11,9 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,11 +47,13 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
     private IntentTransmit its;
     private long check_id;
     private long divice_id;
+    private Long item_id;
+    private List<YearCheckResult> yearCheckResults;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.acitivty_goods_weight);
+        setContentView(R.layout.activity_goods_head);
         requestPerssionAtFirst();
         initData();
         //动态申请权限
@@ -58,24 +63,34 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
         Intent intent = getIntent();
         check_id = intent.getLongExtra(CHECK_ID, 0);
         divice_id = intent.getLongExtra(CHECK_DIVICE_ID, 0);
+        item_id = intent.getLongExtra("item_id", 0);
         //之前页面传过来的数据
         its = (IntentTransmit) intent.getSerializableExtra(CHECK_SYS_DATA); //系统数据对象
-        //药剂瓶和氮气瓶这种设备表，需要再请求一次这个方法，获取检查表id，然后带到getCheckDataEasy就行了
+        //1.药剂瓶和氮气瓶这种设备表，需要再请求一次这个方法，获取检查表id，然后带到getCheckDataEasy就行了
         List<CheckType> checkTypes = ServiceFactory.getYearCheckService().gettableNameData(check_id);
         if (checkTypes == null) {
             return;
         }
-        //获取检查条目的数据,主要用于展示
+        //2.获取检查条目的数据,主要用于展示
         checkDataEasy = ServiceFactory.getYearCheckService().getCheckDataEasy(checkTypes.get(0).getId());
-        //获取用户需要填写的数据
-        Log.e("dong", "系统位号==" + its.number);
-        List<YearCheckResult> checkResultDataEasy = ServiceFactory.getYearCheckService().getCheckResultDataEasy(divice_id, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
-        if (checkResultDataEasy == null || checkResultDataEasy.size() == 0) {
-            List<YearCheck> checkDataEasy = ServiceFactory.getYearCheckService().getCheckDataEasy(check_id);
-            Log.e("dong", "checkDataEasy==" + checkDataEasy.toString());
+        //3.获取用户需要填写的数据,如果没有数据,就需要插入的默认数据（流程4）。如果有数据就
+        yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(divice_id, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
+        Log.e("dong", "获取用户填写的检查结果数据 系统位置" + yearCheckResults.size() + "  " + yearCheckResults.toString());
+        if (yearCheckResults == null || yearCheckResults.size() == 0) {
+            for (int i = 0; i < checkDataEasy.size(); i++) {
+                Log.d("dong", "第一次加载数据 = ");
+                //3.进入系统就给用户默认插入两条数据, 用户点击保存时,就Updata数据库
+                YearCheckResult ycr = new YearCheckResult();
+                ycr.setIsPass(" -- ");
+                ycr.setImageUrl("暂无");  //可以在iv7中获取
+                ycr.setDescription("无描述");
+                ycr.setSystemNumber(its.number);
+                ycr.setProtectArea(" "); // 保护位号
+                ycr.setCheckDate(its.srt_Date);  //检查日期
+                ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, item_id, checkDataEasy.get(i).getId(), its.companyInfoId, check_id, its.number, its.srt_Date);
+                yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(divice_id, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
+            }
         }
-        HYLogUtil.getInstance().d(checkResultDataEasy.toString());
-        Log.e("dong", "系统位置" + checkResultDataEasy.toString());
         //获取已有的检查结果的数据
         initView();
     }
@@ -90,16 +105,40 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
             }
         });
         Button submit_btn = findViewById(R.id.submit_btn);
-        ListView list = findViewById(R.id.list);
-        GoodsAdapter goodsAdapter = new GoodsAdapter(this, checkDataEasy);
+        final ListView list = findViewById(R.id.list);
+        GoodsAdapter goodsAdapter = new GoodsAdapter(this, checkDataEasy, yearCheckResults);
         list.setAdapter(goodsAdapter);
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ServiceFactory.getYearCheckService().insertCheckResultDataEasy();
+                int childCount = list.getChildCount();
+                Log.d("dong", "childCount==- " + childCount + "    数据条目 " + yearCheckResults.size());
+                //两边的数据条数是一样的.
+                if (yearCheckResults.size() == childCount) {
+                    for (int i = 0; i < childCount; i++) {
+                        LinearLayout childAt = (LinearLayout) list.getChildAt(i);
+                        TextView tv6 = childAt.findViewById(R.id.tv6);
+                        //图片参数
+                        TextView tv7 = childAt.findViewById(R.id.tv7);
+                        ImageView iv7 = childAt.findViewById(R.id.iv7);
+                        EditText ev8 = childAt.findViewById(R.id.ev8);
+
+                        YearCheckResult yearCheckResult = yearCheckResults.get(i);
+                        yearCheckResult.setIsPass(tv6.getText().toString().isEmpty() ? " -- " : tv6.getText().toString());
+                        yearCheckResult.setImageUrl("暂无图片链接");  //可以在iv7中获取
+                        yearCheckResult.setDescription(ev8.getText().toString().isEmpty() ? "无隐患描述" : ev8.getText().toString());
+                        yearCheckResult.setSystemNumber(its.number);
+                        yearCheckResult.setProtectArea(" "); // 保护位号
+                        yearCheckResult.setCheckDate(its.srt_Date);  //检查日期
+                        ServiceFactory.getYearCheckService().update(yearCheckResult);
+                    }
+                    Toast.makeText(CarBonGoodsWeightAcitivty.this, "数据保存成功", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
         });
     }
+
 
     private static final String[] permissions = {Manifest.permission.CAMERA};
 

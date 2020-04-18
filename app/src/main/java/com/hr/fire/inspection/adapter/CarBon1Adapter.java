@@ -30,7 +30,6 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private Long checkid;  //检查表的Id
     private IntentTransmit intentTransmit;   //之前页面数据的传参,如系统号\公司id...
 
-
     public CarBon1Adapter() {
     }
 
@@ -76,11 +75,12 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 }
                 Intent intent = new Intent(mContext, CarBonGoodsWeightAcitivty.class);
                 intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_ID, checkid);
+                intent.putExtra("item_id", mData.get(position).getId());
+
                 if (mData.get(position).getId() != 0) {
                     intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE_ID, mData.get(position).getId());
                 }
                 intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_SYS_DATA, intentTransmit);
-                Log.e("dong", "系统位号----:" + intentTransmit.number);
                 mContext.startActivity(intent);
             }
         });
@@ -118,6 +118,7 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             //添加动画
             notifyItemInserted(position);
         }
+//        notifyDataSetChanged();
     }
 
     //  删除数据
@@ -179,5 +180,4 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             rl_11 = (RelativeLayout) view.findViewById(R.id.rl_11);
         }
     }
-
 }

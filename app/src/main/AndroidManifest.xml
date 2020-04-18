@@ -3,21 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.hr.fire.inspection">
     <!-- 访问SD权限 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 摄像头权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 在SDCard读取数据的权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 往SDCard写入数据权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!--   从SDard读取数据权限 -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 在SDCard中创建与删除文件权限  -->
     <uses-permission
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 摄像头权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
+=======
+>>>>>>> 4ba3c238bdc4864df692b17804f2d7c04bef016e
 
     <application
         android:name=".utils.GreenDaoHelper"
@@ -28,10 +29,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+<<<<<<< HEAD
         <activity android:name=".adapter.FireReportItemAdapter"></activity>
         <activity
             android:name=".activity.FireReportActivity"
             android:screenOrientation="landscape" />
+=======
+        <activity android:name=".adapter.FireReportItemAdapter" />
+        <activity android:name=".activity.FireReportActivity" />
+>>>>>>> 4ba3c238bdc4864df692b17804f2d7c04bef016e
 
         <provider xmlns:tools="http://schemas.android.com/tools"
             android:name="androidx.core.content.FileProvider"
