@@ -102,8 +102,8 @@ public class CarbonFragment2 extends Fragment {
     //动态添加条目
     public void addItemView() {
         if (adapter != null && itemDataList != null) {
-            adapter.addData(itemDataList.size());
-            addData();
+//            adapter.addData(itemDataList.size());
+//            addData();
         }
     }
 

@@ -97,7 +97,7 @@ public class CarbonFragment1 extends Fragment {
         }
         //参数1:公司id, 参数2:检查表类型对应的id, 参数3:输入的系统位号，如果没有就填"",或者SD002,否则没数据   参数4:日期
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(0).getId(), its.number == null ? "" : its.number, its.srt_Date);
-        Log.d("dong","itemDataList== " +itemDataList.toString());
+        Log.d("dong", "itemDataList默认服务器数据== " + itemDataList.toString());
     }
 
     private void initView() {
@@ -119,14 +119,43 @@ public class CarbonFragment1 extends Fragment {
     //动态添加条目
     public void addItemView() {
         if (adapter != null) {
-            adapter.addData(itemDataList.size());
-            //点击"＋", 就像数据库中插入一条数据, 点"保存"就更新所有数据
-            rc_list.post(new Runnable() {
-                @Override
-                public void run() {
-                    addData();
-                }
-            });
+            ItemInfo itemInfo = new ItemInfo();
+            if (itemDataList != null && itemDataList.size() != 0) {
+                //点击新增,有数据,就拿到最后一条数据新增,创建一个新的对象
+                ItemInfo item = itemDataList.get(itemDataList.size() - 1);
+                //如果直接新增会导致后台id冲重复\冲突
+                itemInfo.setVolume(item.getVolume());
+                itemInfo.setWeight(item.getWeight());
+                itemInfo.setGoodsWeight(item.getGoodsWeight());
+                itemInfo.setProdFactory(item.getProdFactory());
+                itemInfo.setProdDate(item.getProdDate());
+                itemInfo.setCheckDate(item.getCheckDate());
+            } else {
+                //点击新增,如果没有数据,就造一条默认数据
+                itemInfo.setVolume("9");
+                itemInfo.setWeight("3");
+                itemInfo.setGoodsWeight("50");
+                itemInfo.setProdFactory("未知");
+                Date date = new Date();
+                itemInfo.setProdDate(date);
+                itemInfo.setCheckDate(date);
+            }
+            long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
+            //表示数据插入成功,再次查询,拿到最新的数据
+            if (l1 == 0) {
+                itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(0).getId(), its.number == null ? "" : its.number, its.srt_Date);
+                adapter.setNewData(itemDataList);
+            } else {
+                ToastUtil.show(getActivity(), "未知错误,新增失败", Toast.LENGTH_SHORT);
+            }
+//            adapter.addData(itemDataList.size());
+//            //点击"＋", 就像数据库中插入一条数据, 点"保存"就更新所有数据
+//            rc_list.post(new Runnable() {
+//                @Override
+//                public void run() {
+//                    addData();
+//                }
+//            });
         }
     }
 

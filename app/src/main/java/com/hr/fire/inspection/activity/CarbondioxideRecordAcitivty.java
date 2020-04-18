@@ -20,10 +20,12 @@ import com.hr.fire.inspection.adapter.GridRecordAdapter;
 import com.hr.fire.inspection.adapter.HFC1Adapter;
 import com.hr.fire.inspection.entity.Function;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.TimeUtil;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -61,6 +63,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
     }
 
     private ArrayList hot = new ArrayList<>();
+
     private void initView() {
         if (historyList.size() == 0) {
             Toast.makeText(this, "没有历史年检记录,请点击\"下一步\"进行新建", Toast.LENGTH_SHORT).show();
@@ -97,8 +100,9 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
             case R.id.bt_next:
                 Intent intent = new Intent(this, HFCActivity.class);
                 if (selected_tag == -1) {
-                    //selected_tag=-1时,表示用户没有选择任何记录,  新建一个巡检记录
-                    intent.putExtra("srt_Date", new Date()); //记录的时间
+                    Date curDateHHmm = TimeUtil.getCurDateHHmm();
+                    //selected_tag=-1时,表示用户没有选择任何记录,  新建一个巡检记录,新建记录是根据date来判断的.
+                    intent.putExtra("srt_Date", curDateHHmm); //记录的时间
                     intent.putExtra("systemId", sys_id);    //系统ID
                     intent.putExtra("platform_id", platform_id);    //公司ID
                     intent.putExtra("f_title", f_title); //系统名称 :高压二氧化碳灭火系统

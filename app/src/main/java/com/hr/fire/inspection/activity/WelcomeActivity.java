@@ -35,6 +35,7 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
 //         初始化数据库,插入测试数据
+<<<<<<< HEAD
         // 清空数据库
 //        DBManager cleanObj = new DBManager(this);
 //        cleanObj.deleSQL();
@@ -42,6 +43,15 @@ public class WelcomeActivity extends AppCompatActivity {
 //        BaseData baseData = new BaseData();
 //        baseData.initData();
 //        baseData.insertTestData();
+=======
+//         清空数据库
+        DBManager cleanObj = new DBManager(this);
+        cleanObj.deleSQL();
+        // 初始化数据库
+        BaseData baseData = new BaseData();
+        baseData.initData();
+        baseData.insertTestData();
+>>>>>>> d1d293fee253e51d42b821805acfea9049b5d323
         // 调用接口测试
 //        List<CompanyInfo> companyList = ServiceFactory.getCompanyInfoService().getAll();
 //        for(int i=0;i<companyList.size();i++){
