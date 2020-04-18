@@ -311,7 +311,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //        List<HashMap> allList = ServiceFactory.getYearCheckService().getOutputList();
 //        Log.i("getOutputList",""+allList);
 ////
-//        // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
+        // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
 //        long companyInfoId = 3;
 //        // checkDate 检查日期
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");

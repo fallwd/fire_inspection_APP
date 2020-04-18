@@ -616,10 +616,669 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         systemMap.put("weights",result);
         retList.add(systemMap);
 
-        //
+        // 22222222
+        systemName = "七氟丙烷灭火系统";
+        // 获取对应id
+        checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
+                where(CheckTypeDao.Properties.Name.eq(systemName));
+        systemId = checkTypeQueryBuilder.list().get(0).getId();
+        queryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate)
+                );
+        checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
+                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+        dataList = queryBuilder.list();
+        systemMap = new HashMap();
+        systemMap.put("systemName",systemName);
+        systemMap.put("data",dataList);
+        systemMap.put("count",dataList.size());
+        // 获取区域和位号
+        secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY SYSTEM_NUMBER", companyInfoId))
+                );
+        secondDataList = secondQueryBuilder.list();
+        systemNumberCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            ItemInfo ret = secondDataList.get(i);
+//            Log.i("tang","系统位号------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String systemNumber = ret.getSystemNumber();
+                if(systemNumberCombo!=""){
+                    systemNumberCombo = systemNumberCombo + "、" + systemNumber;
+                }
+                else {
+                    systemNumberCombo = systemNumberCombo + systemNumber;
+                }
+            }
+        }
+        systemMap.put("systemNumber",systemNumberCombo);
+        secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY PROTECT_AREA", companyInfoId))
+                );
+        secondDataList = secondQueryBuilder.list();
+        protectAreaCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            ItemInfo ret = secondDataList.get(i);
+//            Log.i("tang","保护区域------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String protectArea = ret.getProtectArea();
+                if(protectAreaCombo!=""){
+                    protectAreaCombo = protectAreaCombo + "、" + protectArea;
+                }
+                else {
+                    protectAreaCombo = protectAreaCombo + protectArea;
+                }
+            }
+        }
+        systemMap.put("protectArea",protectAreaCombo);
+        // 获取总容积
+        cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s AND CAST(%s.CHECK_DATE AS TEXT)='%s'",
+                ItemInfoDao.TABLENAME,
+                ItemInfoDao.Properties.GoodsWeight.columnName,
+                ItemInfoDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                ItemInfoDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                systemId,
+                ItemInfoDao.TABLENAME,
+                checkDate.getTime()
+        ), new String []{});
+        cursor.moveToFirst();
+        result = cursor.getLong(0);
+        systemMap.put("weights",result);
+        retList.add(systemMap);
 
+        // 3333333333333333
+        systemName = "灭火器";
+        // 获取对应id
+        checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
+                where(CheckTypeDao.Properties.Name.eq(systemName));
+        systemId = checkTypeQueryBuilder.list().get(0).getId();
+        queryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate)
+                );
+        checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
+                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+        dataList = queryBuilder.list();
+        systemMap = new HashMap();
+        systemMap.put("systemName",systemName);
+        systemMap.put("data",dataList);
+        systemMap.put("count",dataList.size());
+        // 获取区域和位号
+        secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY SYSTEM_NUMBER", companyInfoId))
+                );
+        secondDataList = secondQueryBuilder.list();
+        systemNumberCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            ItemInfo ret = secondDataList.get(i);
+//            Log.i("tang","系统位号------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String systemNumber = ret.getSystemNumber();
+                if(systemNumberCombo!=""){
+                    systemNumberCombo = systemNumberCombo + "、" + systemNumber;
+                }
+                else {
+                    systemNumberCombo = systemNumberCombo + systemNumber;
+                }
+            }
+        }
+        systemMap.put("systemNumber",systemNumberCombo);
+        secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY PROTECT_AREA", companyInfoId))
+                );
+        secondDataList = secondQueryBuilder.list();
+        protectAreaCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            ItemInfo ret = secondDataList.get(i);
+//            Log.i("tang","保护区域------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String protectArea = ret.getProtectArea();
+                if(protectAreaCombo!=""){
+                    protectAreaCombo = protectAreaCombo + "、" + protectArea;
+                }
+                else {
+                    protectAreaCombo = protectAreaCombo + protectArea;
+                }
+            }
+        }
+        systemMap.put("protectArea",protectAreaCombo);
+        // 获取总容积
+        cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s AND CAST(%s.CHECK_DATE AS TEXT)='%s'",
+                ItemInfoDao.TABLENAME,
+                ItemInfoDao.Properties.GoodsWeight.columnName,
+                ItemInfoDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                ItemInfoDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                systemId,
+                ItemInfoDao.TABLENAME,
+                checkDate.getTime()
+        ), new String []{});
+        cursor.moveToFirst();
+        result = cursor.getLong(0);
+        systemMap.put("weights",result);
+        retList.add(systemMap);
 
+        //// 4444444444444444444444444444
+        systemName = "火灾自动报警系统";
+        // 获取对应id
+        checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
+                where(CheckTypeDao.Properties.Name.eq(systemName));
+        systemId = checkTypeQueryBuilder.list().get(0).getId();
+        queryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate)
+                );
+        checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
+                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+        dataList = queryBuilder.list();
+        systemMap = new HashMap();
+        systemMap.put("systemName",systemName);
+        systemMap.put("data",dataList);
+        systemMap.put("count",dataList.size());
+        // 获取区域和位号
+        secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY SYSTEM_NUMBER", companyInfoId))
+                );
+        secondDataList = secondQueryBuilder.list();
+        systemNumberCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            ItemInfo ret = secondDataList.get(i);
+//            Log.i("tang","系统位号------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String systemNumber = ret.getSystemNumber();
+                if(systemNumberCombo!=""){
+                    systemNumberCombo = systemNumberCombo + "、" + systemNumber;
+                }
+                else {
+                    systemNumberCombo = systemNumberCombo + systemNumber;
+                }
+            }
+        }
+        systemMap.put("systemNumber",systemNumberCombo);
+        secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY PROTECT_AREA", companyInfoId))
+                );
+        secondDataList = secondQueryBuilder.list();
+        protectAreaCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            ItemInfo ret = secondDataList.get(i);
+//            Log.i("tang","保护区域------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String protectArea = ret.getProtectArea();
+                if(protectAreaCombo!=""){
+                    protectAreaCombo = protectAreaCombo + "、" + protectArea;
+                }
+                else {
+                    protectAreaCombo = protectAreaCombo + protectArea;
+                }
+            }
+        }
+        systemMap.put("protectArea",protectAreaCombo);
+        // 获取总容积
+        cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s AND CAST(%s.CHECK_DATE AS TEXT)='%s'",
+                ItemInfoDao.TABLENAME,
+                ItemInfoDao.Properties.GoodsWeight.columnName,
+                ItemInfoDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                ItemInfoDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                systemId,
+                ItemInfoDao.TABLENAME,
+                checkDate.getTime()
+        ), new String []{});
+        cursor.moveToFirst();
+        result = cursor.getLong(0);
+        systemMap.put("weights",result);
+        retList.add(systemMap);
 
+        // 5555555555555555555555555
+        systemName = "厨房设备灭火装置";
+        // 获取对应id
+        checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
+                where(CheckTypeDao.Properties.Name.eq(systemName));
+        systemId = checkTypeQueryBuilder.list().get(0).getId();
+        queryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate)
+                );
+        checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
+                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+        dataList = queryBuilder.list();
+        systemMap = new HashMap();
+        systemMap.put("systemName",systemName);
+        systemMap.put("data",dataList);
+        systemMap.put("count",dataList.size());
+        // 获取区域和位号
+        secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY SYSTEM_NUMBER", companyInfoId))
+                );
+        secondDataList = secondQueryBuilder.list();
+        systemNumberCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            ItemInfo ret = secondDataList.get(i);
+//            Log.i("tang","系统位号------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String systemNumber = ret.getSystemNumber();
+                if(systemNumberCombo!=""){
+                    systemNumberCombo = systemNumberCombo + "、" + systemNumber;
+                }
+                else {
+                    systemNumberCombo = systemNumberCombo + systemNumber;
+                }
+            }
+        }
+        systemMap.put("systemNumber",systemNumberCombo);
+        secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY PROTECT_AREA", companyInfoId))
+                );
+        secondDataList = secondQueryBuilder.list();
+        protectAreaCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            ItemInfo ret = secondDataList.get(i);
+//            Log.i("tang","保护区域------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String protectArea = ret.getProtectArea();
+                if(protectAreaCombo!=""){
+                    protectAreaCombo = protectAreaCombo + "、" + protectArea;
+                }
+                else {
+                    protectAreaCombo = protectAreaCombo + protectArea;
+                }
+            }
+        }
+        systemMap.put("protectArea",protectAreaCombo);
+        // 获取总容积
+        cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s AND CAST(%s.CHECK_DATE AS TEXT)='%s'",
+                ItemInfoDao.TABLENAME,
+                ItemInfoDao.Properties.GoodsWeight.columnName,
+                ItemInfoDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                ItemInfoDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                systemId,
+                ItemInfoDao.TABLENAME,
+                checkDate.getTime()
+        ), new String []{});
+        cursor.moveToFirst();
+        result = cursor.getLong(0);
+        systemMap.put("weights",result);
+        retList.add(systemMap);
+
+        /// 6666666666666666666666
+        systemName = "海水雨淋灭火系统";
+        // 获取对应id
+        checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
+                where(CheckTypeDao.Properties.Name.eq(systemName));
+        systemId = checkTypeQueryBuilder.list().get(0).getId();
+        queryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate)
+                );
+        checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
+                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+        dataList = queryBuilder.list();
+        systemMap = new HashMap();
+        systemMap.put("systemName",systemName);
+        systemMap.put("data",dataList);
+        systemMap.put("count",dataList.size());
+        // 获取区域和位号
+        secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY SYSTEM_NUMBER", companyInfoId))
+                );
+        secondDataList = secondQueryBuilder.list();
+        systemNumberCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            ItemInfo ret = secondDataList.get(i);
+//            Log.i("tang","系统位号------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String systemNumber = ret.getSystemNumber();
+                if(systemNumberCombo!=""){
+                    systemNumberCombo = systemNumberCombo + "、" + systemNumber;
+                }
+                else {
+                    systemNumberCombo = systemNumberCombo + systemNumber;
+                }
+            }
+        }
+        systemMap.put("systemNumber",systemNumberCombo);
+        secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY PROTECT_AREA", companyInfoId))
+                );
+        secondDataList = secondQueryBuilder.list();
+        protectAreaCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            ItemInfo ret = secondDataList.get(i);
+//            Log.i("tang","保护区域------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String protectArea = ret.getProtectArea();
+                if(protectAreaCombo!=""){
+                    protectAreaCombo = protectAreaCombo + "、" + protectArea;
+                }
+                else {
+                    protectAreaCombo = protectAreaCombo + protectArea;
+                }
+            }
+        }
+        systemMap.put("protectArea",protectAreaCombo);
+        // 获取总容积
+        cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s AND CAST(%s.CHECK_DATE AS TEXT)='%s'",
+                ItemInfoDao.TABLENAME,
+                ItemInfoDao.Properties.GoodsWeight.columnName,
+                ItemInfoDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                ItemInfoDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                systemId,
+                ItemInfoDao.TABLENAME,
+                checkDate.getTime()
+        ), new String []{});
+        cursor.moveToFirst();
+        result = cursor.getLong(0);
+        systemMap.put("weights",result);
+        retList.add(systemMap);
+
+        // 7777777777777777777777777777
+        systemName = "消防水灭火系统";
+        // 获取对应id
+        checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
+                where(CheckTypeDao.Properties.Name.eq(systemName));
+        systemId = checkTypeQueryBuilder.list().get(0).getId();
+        queryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate)
+                );
+        checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
+                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+        dataList = queryBuilder.list();
+        systemMap = new HashMap();
+        systemMap.put("systemName",systemName);
+        systemMap.put("data",dataList);
+        systemMap.put("count",dataList.size());
+        // 获取区域和位号
+        secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY SYSTEM_NUMBER", companyInfoId))
+                );
+        secondDataList = secondQueryBuilder.list();
+        systemNumberCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            ItemInfo ret = secondDataList.get(i);
+//            Log.i("tang","系统位号------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String systemNumber = ret.getSystemNumber();
+                if(systemNumberCombo!=""){
+                    systemNumberCombo = systemNumberCombo + "、" + systemNumber;
+                }
+                else {
+                    systemNumberCombo = systemNumberCombo + systemNumber;
+                }
+            }
+        }
+        systemMap.put("systemNumber",systemNumberCombo);
+        secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY PROTECT_AREA", companyInfoId))
+                );
+        secondDataList = secondQueryBuilder.list();
+        protectAreaCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            ItemInfo ret = secondDataList.get(i);
+//            Log.i("tang","保护区域------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String protectArea = ret.getProtectArea();
+                if(protectAreaCombo!=""){
+                    protectAreaCombo = protectAreaCombo + "、" + protectArea;
+                }
+                else {
+                    protectAreaCombo = protectAreaCombo + protectArea;
+                }
+            }
+        }
+        systemMap.put("protectArea",protectAreaCombo);
+        // 获取总容积
+        cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s AND CAST(%s.CHECK_DATE AS TEXT)='%s'",
+                ItemInfoDao.TABLENAME,
+                ItemInfoDao.Properties.GoodsWeight.columnName,
+                ItemInfoDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                ItemInfoDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                systemId,
+                ItemInfoDao.TABLENAME,
+                checkDate.getTime()
+        ), new String []{});
+        cursor.moveToFirst();
+        result = cursor.getLong(0);
+        systemMap.put("weights",result);
+        retList.add(systemMap);
+
+        // 8888888888888888888
+        systemName = "固定式干粉灭火系统";
+        // 获取对应id
+        checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
+                where(CheckTypeDao.Properties.Name.eq(systemName));
+        systemId = checkTypeQueryBuilder.list().get(0).getId();
+        queryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate)
+                );
+        checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
+                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+        dataList = queryBuilder.list();
+        systemMap = new HashMap();
+        systemMap.put("systemName",systemName);
+        systemMap.put("data",dataList);
+        systemMap.put("count",dataList.size());
+        // 获取区域和位号
+        secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY SYSTEM_NUMBER", companyInfoId))
+                );
+        secondDataList = secondQueryBuilder.list();
+        systemNumberCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            ItemInfo ret = secondDataList.get(i);
+//            Log.i("tang","系统位号------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String systemNumber = ret.getSystemNumber();
+                if(systemNumberCombo!=""){
+                    systemNumberCombo = systemNumberCombo + "、" + systemNumber;
+                }
+                else {
+                    systemNumberCombo = systemNumberCombo + systemNumber;
+                }
+            }
+        }
+        systemMap.put("systemNumber",systemNumberCombo);
+        secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY PROTECT_AREA", companyInfoId))
+                );
+        secondDataList = secondQueryBuilder.list();
+        protectAreaCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            ItemInfo ret = secondDataList.get(i);
+//            Log.i("tang","保护区域------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String protectArea = ret.getProtectArea();
+                if(protectAreaCombo!=""){
+                    protectAreaCombo = protectAreaCombo + "、" + protectArea;
+                }
+                else {
+                    protectAreaCombo = protectAreaCombo + protectArea;
+                }
+            }
+        }
+        systemMap.put("protectArea",protectAreaCombo);
+        // 获取总容积
+        cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s AND CAST(%s.CHECK_DATE AS TEXT)='%s'",
+                ItemInfoDao.TABLENAME,
+                ItemInfoDao.Properties.GoodsWeight.columnName,
+                ItemInfoDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                ItemInfoDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                systemId,
+                ItemInfoDao.TABLENAME,
+                checkDate.getTime()
+        ), new String []{});
+        cursor.moveToFirst();
+        result = cursor.getLong(0);
+        systemMap.put("weights",result);
+        retList.add(systemMap);
+
+        // 99999999999999999999999999999
+        systemName = "消防员装备";
+        // 获取对应id
+        checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
+                where(CheckTypeDao.Properties.Name.eq(systemName));
+        systemId = checkTypeQueryBuilder.list().get(0).getId();
+        queryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate)
+                );
+        checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
+                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+        dataList = queryBuilder.list();
+        systemMap = new HashMap();
+        systemMap.put("systemName",systemName);
+        systemMap.put("data",dataList);
+        systemMap.put("count",dataList.size());
+        // 获取区域和位号
+        secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY SYSTEM_NUMBER", companyInfoId))
+                );
+        secondDataList = secondQueryBuilder.list();
+        systemNumberCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            ItemInfo ret = secondDataList.get(i);
+//            Log.i("tang","系统位号------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String systemNumber = ret.getSystemNumber();
+                if(systemNumberCombo!=""){
+                    systemNumberCombo = systemNumberCombo + "、" + systemNumber;
+                }
+                else {
+                    systemNumberCombo = systemNumberCombo + systemNumber;
+                }
+            }
+        }
+        systemMap.put("systemNumber",systemNumberCombo);
+        secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY PROTECT_AREA", companyInfoId))
+                );
+        secondDataList = secondQueryBuilder.list();
+        protectAreaCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            ItemInfo ret = secondDataList.get(i);
+//            Log.i("tang","保护区域------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String protectArea = ret.getProtectArea();
+                if(protectAreaCombo!=""){
+                    protectAreaCombo = protectAreaCombo + "、" + protectArea;
+                }
+                else {
+                    protectAreaCombo = protectAreaCombo + protectArea;
+                }
+            }
+        }
+        systemMap.put("protectArea",protectAreaCombo);
+        // 获取总容积
+        cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s AND CAST(%s.CHECK_DATE AS TEXT)='%s'",
+                ItemInfoDao.TABLENAME,
+                ItemInfoDao.Properties.GoodsWeight.columnName,
+                ItemInfoDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                ItemInfoDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                CheckTypeDao.TABLENAME,
+                systemId,
+                ItemInfoDao.TABLENAME,
+                checkDate.getTime()
+        ), new String []{});
+        cursor.moveToFirst();
+        result = cursor.getLong(0);
+        systemMap.put("weights",result);
+        retList.add(systemMap);
 
         return retList;
 
