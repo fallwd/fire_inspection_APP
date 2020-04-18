@@ -114,7 +114,6 @@ public class CarbonFragment3 extends Fragment {
         List<YearCheckResult> DataList = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, it.companyInfoId, checkTypes.get(2).getId(), it.number == null ? "" : it.number, it.srt_Date);
         if(DataList.size()==0){
            itemDataList = ServiceFactory.getYearCheckService().getCheckDataEasy(checkTypes.get(2).getId());
-            Log.d("dong", "数据查看:" + itemDataList.size());
         }
 
     }
