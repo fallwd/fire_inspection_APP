@@ -34,11 +34,11 @@ public class CarbonFragment4 extends Fragment {
     private static CarbonFragment4 fragment4;
     private static String mKey;
     private CarBon4Adapter adapter;
-    private List<CheckType> checkTypes;
-    private IntentTransmit it;
-    private List<YearCheckResult> DataList = new ArrayList<>();
-    private List<YearCheck> itemDataList = new ArrayList<>();
+    private IntentTransmit its;
+
     private RecyclerView rc_list;
+    private List<YearCheck> checkDataEasy;
+    private List<YearCheckResult> yearCheckResults;
 
     public static CarbonFragment4 newInstance(String key, IntentTransmit value) {
         if (fragment4 == null) {
@@ -55,7 +55,7 @@ public class CarbonFragment4 extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            it = (IntentTransmit) getArguments().getSerializable(mKey);
+            its = (IntentTransmit) getArguments().getSerializable(mKey);
         }
     }
 
@@ -76,38 +76,26 @@ public class CarbonFragment4 extends Fragment {
     }
 
     private void initData() {
+        checkDataEasy = ServiceFactory.getYearCheckService().getCheckDataEasy(its.systemId);
 
-        // 调用接口测试
-//        long companyInfoId = 3;
-//        long checkTypeId = 6;
-//        String number = "SD002";
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-//        Date checkDate = null;
-//
-//        ItemInfo Obj =  new ItemInfo();
-//
-//        try {
-//            checkDate = format.parse("2019-08-03 10:10");
-////            checkDate = format.parse("2019-07-03 09:10");
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//        List<YearCheckResult> DataList = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, companyInfoId,checkTypeId,number,checkDate);
-//        if(DataList.size()==0){
-//            itemDataList = ServiceFactory.getYearCheckService().getCheckDataEasy(7);
-//            Log.d("dong", "数据查看:" + itemDataList.size());
-//            Log.d("dong", "数据查看===:" + itemDataList.get(0).toString());
-//        }
-
-        checkTypes = ServiceFactory.getYearCheckService().gettableNameData(it.systemId);
-        if (checkTypes == null) {
-            Toast.makeText(getActivity(), "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
+        //3.获取用户需要填写的数据,如果没有数据,就需要插入的默认数据（流程4）。如果有数据就
+//        yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
+        if (yearCheckResults == null || yearCheckResults.size() == 0) {
+            for (int i = 0; i < checkDataEasy.size(); i++) {
+//                Log.d("dong", "第一次加载数据 = ");
+                //3.进入系统就给用户默认插入两条数据, 用户点击保存时,就Updata数据库
+                YearCheckResult ycr = new YearCheckResult();
+                ycr.setIsPass(" -- ");
+                ycr.setImageUrl("暂无");  //可以在iv7中获取
+                ycr.setDescription("无描述");
+                ycr.setSystemNumber(its.number);
+                ycr.setProtectArea(" "); // 保护位号
+                ycr.setCheckDate(its.srt_Date);  //检查日期
+//                ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, checkDataEasy.get(i).getId(), its.companyInfoId, check_id, its.number, its.srt_Date);
+//                yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
+            }
         }
-        List<YearCheckResult> DataList = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, it.companyInfoId, checkTypes.get(3).getId(), it.number == null ? "" : it.number, it.srt_Date);
-        if(DataList.size()==0){
-            itemDataList = ServiceFactory.getYearCheckService().getCheckDataEasy(checkTypes.get(3).getId());
-        }
+        initView();
     }
 
     private void initView() {
@@ -115,17 +103,10 @@ public class CarbonFragment4 extends Fragment {
         rc_list = rootView.findViewById(R.id.rc_list4);
         @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rc_list.setLayoutManager(layoutManager);
-        adapter = new CarBon4Adapter(getActivity(), itemDataList);
+//        adapter = new CarBon4Adapter(getActivity(), itemDataList);
         rc_list.setAdapter(adapter);
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
-    }
-
-    //动态添加条目
-    public void addItemView() {
-        if (adapter != null && itemDataList != null) {
-            adapter.addData(itemDataList.size());
-        }
     }
 
 
@@ -135,13 +116,6 @@ public class CarbonFragment4 extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.d("dong", "onDestroyView: ");
-//        boolean mIsFirstLoad = true;
-//        boolean mIsPrepare = false;
-//        boolean mIsVisible = false;
-//        if (rootView != null) {
-//            ((ViewGroup) rootView.getParent()).removeView(rootView);
-//        }
     }
 
 }

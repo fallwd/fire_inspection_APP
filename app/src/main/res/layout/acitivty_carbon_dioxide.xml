@@ -47,15 +47,17 @@
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_marginTop="5dp"
+            android:layout_marginRight="50dp"
             android:background="@mipmap/add_item" />
+
         <TextView
             android:id="@+id/iv_save"
-            android:layout_width="30dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="50dp"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
-           android:text="保存" />
+            android:layout_marginTop="6dp"
+            android:background="@drawable/listview_border_margin"
+            android:text="保存" />
 
     </RelativeLayout>
 

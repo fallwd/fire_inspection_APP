@@ -79,13 +79,11 @@ public class CarbonFragment2 extends Fragment {
     private void initData() {
         //历史中的companyInfoId  ,  systemId和在公司、平台那边传过来的都是一样的ID，使用哪一个都行
         checkTypes = ServiceFactory.getYearCheckService().gettableNameData(its.systemId);
-        Log.d("dong", "2121== " + checkTypes.toString());
         if (checkTypes == null) {
             Toast.makeText(getActivity(), "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
         }
         //参数1:公司id, 参数2:检查表类型对应的id, 参数3:输入的系统位号，如果没有就填"",或者SD002,否则没数据   参数4:日期
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(1).getId(), its.number == null ? "" : its.number, its.srt_Date);
-        Log.d("dong", "itemDataList默认服务器数据== " + itemDataList.toString());
     }
 
     private void initView() {
@@ -148,7 +146,7 @@ public class CarbonFragment2 extends Fragment {
         int itemCount = rc_list2.getChildCount();
         //通知数据库刷新数据， 才能在调用Update();
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(1).getId(), its.number == null ? "" : its.number, its.srt_Date);
-        Log.d("dong", "upData==   " + itemCount + "   新的数据条数   " + itemDataList.size());
+//        Log.d("dong", "upData==   " + itemCount + "   新的数据条数   " + itemDataList.size());
         if (itemCount == 0 || itemDataList.size() == 0 || itemDataList.size() != itemCount) {
             Toast.makeText(getActivity(), "暂无数据保存", Toast.LENGTH_SHORT).show();
             return;

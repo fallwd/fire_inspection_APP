@@ -95,26 +95,44 @@ public class CarbonFragment5 extends Fragment {
         rc_list.setItemAnimator(new DefaultItemAnimator());
     }
 
-    //动态添加条目
-    public void addItemView() {
-        if (adapter != null && itemDataList != null) {
-            adapter.addData(itemDataList.size());
-        }
+
+    public void upData() {
+//        int itemCount = rc_list2.getChildCount();
+//        //通知数据库刷新数据， 才能在调用Update();
+//        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(1).getId(), its.number == null ? "" : its.number, its.srt_Date);
+//
+//        for (int i = 0; i < itemCount; i++) {
+//            LinearLayout childAt = (LinearLayout) rc_list3.getChildAt(i);
+//            TextView tv_1 = childAt.findViewById(R.id.tv_1);
+//            EditText et_2 = childAt.findViewById(R.id.et_2);
+//            EditText et_3 = childAt.findViewById(R.id.et_3);
+//            EditText et_4 = childAt.findViewById(R.id.et_4);
+//            EditText et_5 = childAt.findViewById(R.id.et_5);
+//            EditText et_6 = childAt.findViewById(R.id.et_6);
+//            EditText et_7 = childAt.findViewById(R.id.et_7);
+//            EditText et_8 = childAt.findViewById(R.id.et_8);
+//            TextView tv_9 = childAt.findViewById(R.id.tv_9);
+//
+//            ItemInfo itemObj = itemDataList.get(i);
+//            itemObj.setNo(et_2.getText().toString());
+//            itemObj.setVolume(et_3.getText().toString());
+//            itemObj.setWeight(et_4.getText().toString());
+////            itemObj.setGoodsWeight(et_5.getText().toString());
+//            itemObj.setPressure(et_5.getText().toString());
+//            itemObj.setProdFactory(et_6.getText().toString());
+//            Date date = TimeUtil.getInstance().hhmmssTodata(et_7.getText().toString());
+//            Date date1 = TimeUtil.getInstance().hhmmssTodata(et_8.getText().toString());
+//            itemObj.setProdDate(date);
+//            itemObj.setObserveDate(date1);
+//            ServiceFactory.getYearCheckService().update(itemObj);
+//        }
+        Toast.makeText(getContext(), "\"管线管件\"数据保存成功", Toast.LENGTH_SHORT).show();
     }
-
-
 
 
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.d("dong", "onDestroyView: ");
-//        boolean mIsFirstLoad = true;
-//        boolean mIsPrepare = false;
-//        boolean mIsVisible = false;
-//        if (rootView != null) {
-//            ((ViewGroup) rootView.getParent()).removeView(rootView);
-//        }
     }
 }
