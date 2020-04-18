@@ -24,16 +24,16 @@ import com.hr.fire.inspection.utils.TimeUtil;
 import java.util.Date;
 import java.util.List;
 
-public class HFC1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class HFC2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<ItemInfo> mData;
     private Long checkid;  //检查表的Id
     private IntentTransmit intentTransmit;   //之前页面数据的传参,如系统号\公司id...
 
-    public HFC1Adapter() {
+    public HFC2Adapter() {
     }
 
-    public HFC1Adapter(Context mContext, List<ItemInfo> mData) {
+    public HFC2Adapter(Context mContext, List<ItemInfo> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
@@ -43,21 +43,21 @@ public class HFC1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_hfc_form_input, parent, false);
-        HFC1Adapter.ViewHolder holder = new HFC1Adapter.ViewHolder(view);
+                .inflate(R.layout.item_hfc2_form_input, parent, false);
+        HFC2Adapter.ViewHolder holder = new HFC2Adapter.ViewHolder(view);
         return holder;
     }
 
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-        HFC1Adapter.ViewHolder vh = (HFC1Adapter.ViewHolder) holder;
+        HFC2Adapter.ViewHolder vh = (HFC2Adapter.ViewHolder) holder;
         if (mData != null && mData.size() != 0) {
             ItemInfo info = mData.get(position);
             vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
             vh.et_2.setText(new StringBuffer().append("").append(position + 1));
             vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
-            vh.et_4.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));
+            vh.et_4.setText(new StringBuffer().append(info.getWeight()).append(""));
             vh.et_5.setText(new StringBuffer().append(info.getPressure()).append(""));
             vh.et_6.setText(new StringBuffer().append(info.getProdFactory()).append(""));
 
@@ -117,10 +117,6 @@ public class HFC1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             Date date = new Date();
             itemInfo.setProdDate(date);
             itemInfo.setCheckDate(date);
-
-
-
-
 
             mData.add(itemInfo);
             //添加动画

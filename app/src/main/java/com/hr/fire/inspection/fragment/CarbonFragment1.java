@@ -90,25 +90,7 @@ public class CarbonFragment1 extends Fragment {
      */
     private void initData() {
         //历史中的companyInfoId  ,  systemId和在公司、平台那边传过来的都是一样的ID，使用哪一个都行
-<<<<<<< HEAD
-        // 调用接口测试
-//        String companyName = "辽东作业公司";
-//        String oilfieldName = "SZ36-1";
-//        String platformName = "SZ36-1B";
-//        String systemName = "高压二氧化碳系统灭火系统";
-//        String tableName = "药剂瓶";
-//        String number = "SD002";
-//        itemDataList = ServiceFactory.getYearCheckService().getItemData(companyName, oilfieldName, platformName, systemName, tableName, number);
-//        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, );
 
-//        List<ItemInfo> getItemDataEasy(long companyInfoId, long checkTypeId, String number, Date checkDate);
-
-//        Log.d("dong", "数据查看:" + itemDataList.size());
-//        Log.d("dong", "数据查看===:" + itemDataList.get(0).toString());
-
-
-=======
->>>>>>> c3003a03caa3f4616d4e61686cdf45d35e11e9fb
         checkTypes = ServiceFactory.getYearCheckService().gettableNameData(its.systemId);
         if (checkTypes == null) {
             Toast.makeText(getActivity(), "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
