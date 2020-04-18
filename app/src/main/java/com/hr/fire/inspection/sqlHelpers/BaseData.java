@@ -9,6 +9,7 @@ import com.hr.fire.inspection.dao.DaoSession;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.CompanyInfo;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.entity.StandardType;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.ServiceFactory;
@@ -3140,296 +3141,268 @@ public class BaseData {
         yearCheck1.setCheckType(checkTypeQB.list().get(0));
         daoSession.insert(yearCheck1);
 
-
-
-
-
         Log.i("info","插入yearcheck成功");
 
-        // 插入ItemInfo 需要companyinfo和checktype两种数据
+        // 插入巡检相关数据
+        // 巡检系统
+        checkType = new CheckType();
+        systemName = "灭火器";
+        type = 2;
+        parentId = 0;
+        checkType.setName(systemName);
+        checkType.setType(type);
+        checkType.setParentId(parentId);
+        daoSession.insert(checkType);
+        // 设备名
+        checkType2 = new CheckType();
+        tableName2 = "灭火器";
+        type = 2;
+        checkType2.setName(tableName2);
+        checkType2.setType(type);
+        checkType2.setParent(checkType);
+        daoSession.insert(checkType2);
 
-//        QueryBuilder<CompanyInfo> companyInfoQB = daoSession.queryBuilder(CompanyInfo.class).
-//                where(
-//                        CompanyInfoDao.Properties.CompanyName.eq("辽东作业公司"),
-//                        CompanyInfoDao.Properties.OilfieldName.eq("SZ36-1"),
-//                        CompanyInfoDao.Properties.PlatformName.eq("SZ36-1B")
-//                );
-//        checkTypeQB = daoSession.queryBuilder(CheckType.class).
-//                where(
-//                        CheckTypeDao.Properties.Name.eq("药剂瓶")
-//                );
-//
-//        ItemInfo itemInfo = new ItemInfo();
-//
-//        String no = "YJP0001";
-//        String volume = "9";
-//        String weight = "3";
-//        String goodsWeight = "8";
-//        String prodFactory = "红日药业";
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        Date prodDate = null;
-//        try {
-//            prodDate = format.parse("2018-08-03");
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        Date observeDate = null;
-//        try {
-//            observeDate = format.parse("2019-03-09");
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        Date checkDate = null;
-//        try {
-//            checkDate = format.parse("2020-04-09");
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//        String isPass = "是";
-//        String labelNo = "BQ0001";
-//        String systemNumber = "SD001";
-//        String protectArea = "主配电间";
-//        String codePath = "/src/YJP0001.jpg";
-//        itemInfo.setNo(no);
-//        itemInfo.setVolume(volume);
-//        itemInfo.setWeight(weight);
-//        itemInfo.setGoodsWeight(goodsWeight);
-//        itemInfo.setProdFactory(prodFactory);
-//        itemInfo.setProdDate(prodDate);
-//        itemInfo.setObserveDate(observeDate);
-//        itemInfo.setCheckDate(checkDate);
-//        itemInfo.setIsPass(isPass);
-//        itemInfo.setLabelNo(labelNo);
-//        itemInfo.setLabelNo(labelNo);
-//        itemInfo.setSystemNumber(systemNumber);
-//        itemInfo.setProtectArea(protectArea);
-//        itemInfo.setCodePath(codePath);
-//        itemInfo.setCheckType(checkTypeQB.list().get(0));
-//        itemInfo.setCompanyInfo(companyInfoQB.list().get(0));
-//        daoSession.insert(itemInfo);
-//
-//
-//        companyInfoQB = daoSession.queryBuilder(CompanyInfo.class).
-//                where(
-//                        CompanyInfoDao.Properties.CompanyName.eq("辽东作业公司"),
-//                        CompanyInfoDao.Properties.OilfieldName.eq("SZ36-1"),
-//                        CompanyInfoDao.Properties.PlatformName.eq("SZ36-1B")
-//                );
-//        checkTypeQB = daoSession.queryBuilder(CheckType.class).
-//                where(
-//                        CheckTypeDao.Properties.Name.eq("药剂瓶")
-//                );
-//
-//        itemInfo = new ItemInfo();
-//        no = "YJP0002";
-//        volume = "9";
-//        weight = "3";
-//        goodsWeight = "8";
-//        prodFactory = "红日药业";
-//        format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        prodDate = null;
-//        try {
-//            prodDate = format.parse("2018-08-03");
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        observeDate = null;
-//        try {
-//            observeDate = format.parse("2020-04-09");
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        checkDate = null;
-//        try {
-//            checkDate = format.parse("2020-04-09");
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        isPass = "否";
-//        labelNo = "BQ0002";
-//        systemNumber = "SD002";
-//        protectArea = "主配电间";
-//        codePath = "/src/YJP0002.jpg";
-//        itemInfo.setNo(no);
-//        itemInfo.setVolume(volume);
-//        itemInfo.setWeight(weight);
-//        itemInfo.setGoodsWeight(goodsWeight);
-//        itemInfo.setProdFactory(prodFactory);
-//        itemInfo.setProdDate(prodDate);
-//        itemInfo.setObserveDate(observeDate);
-//        itemInfo.setCheckDate(checkDate);
-//        itemInfo.setIsPass(isPass);
-//        itemInfo.setLabelNo(labelNo);
-//        itemInfo.setLabelNo(labelNo);
-//        itemInfo.setSystemNumber(systemNumber);
-//        itemInfo.setProtectArea(protectArea);
-//        itemInfo.setCodePath(codePath);
-//        itemInfo.setCheckType(checkTypeQB.list().get(0));
-//        itemInfo.setCompanyInfo(companyInfoQB.list().get(0));
-//        daoSession.insert(itemInfo);
-//
-//        companyInfoQB = daoSession.queryBuilder(CompanyInfo.class).
-//                where(
-//                        CompanyInfoDao.Properties.CompanyName.eq("辽东作业公司"),
-//                        CompanyInfoDao.Properties.OilfieldName.eq("SZ36-1"),
-//                        CompanyInfoDao.Properties.PlatformName.eq("SZ36-1B")
-//                );
-//        checkTypeQB = daoSession.queryBuilder(CheckType.class).
-//                where(
-//                        CheckTypeDao.Properties.Name.eq("氮气瓶")
-//                );
-//
-//        itemInfo = new ItemInfo();
-//        no = "DQP0001";
-//        volume = "9";
-//        weight = "3";
-//        goodsWeight = "8";
-//        prodFactory = "红日药业";
-//        format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        prodDate = null;
-//        try {
-//            prodDate = format.parse("2018-08-03");
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        observeDate = null;
-//        try {
-//            observeDate = format.parse("2020-04-09");
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        checkDate = null;
-//        try {
-//            checkDate = format.parse("2020-04-09");
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        isPass = "是";
-//        labelNo = "BQ0001";
-//        systemNumber = "SD002";
-//        protectArea = "主配电间";
-//        codePath = "/src/DQP0001.jpg";
-//        itemInfo.setNo(no);
-//        itemInfo.setVolume(volume);
-//        itemInfo.setWeight(weight);
-//        itemInfo.setGoodsWeight(goodsWeight);
-//        itemInfo.setProdFactory(prodFactory);
-//        itemInfo.setProdDate(prodDate);
-//        itemInfo.setObserveDate(observeDate);
-//        itemInfo.setCheckDate(checkDate);
-//        itemInfo.setIsPass(isPass);
-//        itemInfo.setLabelNo(labelNo);
-//        itemInfo.setLabelNo(labelNo);
-//        itemInfo.setSystemNumber(systemNumber);
-//        itemInfo.setProtectArea(protectArea);
-//        itemInfo.setCodePath(codePath);
-//        itemInfo.setCheckType(checkTypeQB.list().get(0));
-//        itemInfo.setCompanyInfo(companyInfoQB.list().get(0));
-//        daoSession.insert(itemInfo);
-//
-//        companyInfoQB = daoSession.queryBuilder(CompanyInfo.class).
-//                where(
-//                        CompanyInfoDao.Properties.CompanyName.eq("辽东作业公司"),
-//                        CompanyInfoDao.Properties.OilfieldName.eq("SZ36-1"),
-//                        CompanyInfoDao.Properties.PlatformName.eq("SZ36-1B")
-//                );
-//        checkTypeQB = daoSession.queryBuilder(CheckType.class).
-//                where(
-//                        CheckTypeDao.Properties.Name.eq("氮气瓶")
-//                );
-//
-//        itemInfo = new ItemInfo();
-//        no = "DQP0002";
-//        volume = "9";
-//        weight = "3";
-//        goodsWeight = "8";
-//        prodFactory = "红日药业";
-//        format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        prodDate = null;
-//        try {
-//            prodDate = format.parse("2018-08-03");
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        observeDate = null;
-//        try {
-//            observeDate = format.parse("2020-04-09");
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        checkDate = null;
-//        try {
-//            checkDate = format.parse("2020-04-09");
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        isPass = "是";
-//        labelNo = "BQ0002";
-//        systemNumber = "SD002";
-//        protectArea = "主配电间";
-//        codePath = "/src/DQP0002.jpg";
-//        itemInfo.setNo(no);
-//        itemInfo.setVolume(volume);
-//        itemInfo.setWeight(weight);
-//        itemInfo.setGoodsWeight(goodsWeight);
-//        itemInfo.setProdFactory(prodFactory);
-//        itemInfo.setProdDate(prodDate);
-//        itemInfo.setObserveDate(observeDate);
-//        itemInfo.setCheckDate(checkDate);
-//        itemInfo.setIsPass(isPass);
-//        itemInfo.setLabelNo(labelNo);
-//        itemInfo.setLabelNo(labelNo);
-//        itemInfo.setSystemNumber(systemNumber);
-//        itemInfo.setProtectArea(protectArea);
-//        itemInfo.setCodePath(codePath);
-//        itemInfo.setCheckType(checkTypeQB.list().get(0));
-//        itemInfo.setCompanyInfo(companyInfoQB.list().get(0));
-//        daoSession.insert(itemInfo);
-//
-//
-//        Log.i("info","插入iteminfo成功");
+        checkType = new CheckType();
+        systemName = "气体灭火系统";
+        type = 2;
+        parentId = 0;
+        checkType.setName(systemName);
+        checkType.setType(type);
+        checkType.setParentId(parentId);
+        daoSession.insert(checkType);
+        // 设备名
+        checkType2 = new CheckType();
+        tableName2 = "气体灭火系统";
+        type = 2;
+        checkType2.setName(tableName2);
+        checkType2.setType(type);
+        checkType2.setParent(checkType);
+        daoSession.insert(checkType2);
+
+        checkType = new CheckType();
+        systemName = "防火风闸";
+        type = 2;
+        parentId = 0;
+        checkType.setName(systemName);
+        checkType.setType(type);
+        checkType.setParentId(parentId);
+        daoSession.insert(checkType);
+        // 设备名
+        checkType2 = new CheckType();
+        tableName2 = "防火风闸";
+        type = 2;
+        checkType2.setName(tableName2);
+        checkType2.setType(type);
+        checkType2.setParent(checkType);
+        daoSession.insert(checkType2);
+
+        checkType = new CheckType();
+        systemName = "雨淋阀";
+        type = 2;
+        parentId = 0;
+        checkType.setName(systemName);
+        checkType.setType(type);
+        checkType.setParentId(parentId);
+        daoSession.insert(checkType);
+        // 设备名
+        checkType2 = new CheckType();
+        tableName2 = "海水雨淋灭火系统";
+        type = 2;
+        checkType2.setName(tableName2);
+        checkType2.setType(type);
+        checkType2.setParent(checkType);
+        daoSession.insert(checkType2);
+
+        checkType = new CheckType();
+        systemName = "消防软管站";
+        type = 2;
+        parentId = 0;
+        checkType.setName(systemName);
+        checkType.setType(type);
+        checkType.setParentId(parentId);
+        daoSession.insert(checkType);
+        // 设备名
+        checkType2 = new CheckType();
+        tableName2 = "消防软管站";
+        type = 2;
+        checkType2.setName(tableName2);
+        checkType2.setType(type);
+        checkType2.setParent(checkType);
+        daoSession.insert(checkType2);
+
+        checkType = new CheckType();
+        systemName = "消防水龙带";
+        type = 2;
+        parentId = 0;
+        checkType.setName(systemName);
+        checkType.setType(type);
+        checkType.setParentId(parentId);
+        daoSession.insert(checkType);
+        // 设备名
+        checkType2 = new CheckType();
+        tableName2 = "消防水龙带";
+        type = 2;
+        checkType2.setName(tableName2);
+        checkType2.setType(type);
+        checkType2.setParent(checkType);
+        daoSession.insert(checkType2);
+
+        checkType = new CheckType();
+        systemName = "火气探头及火灾盘";
+        type = 2;
+        parentId = 0;
+        checkType.setName(systemName);
+        checkType.setType(type);
+        checkType.setParentId(parentId);
+        daoSession.insert(checkType);
+        // 设备名
+        checkType2 = new CheckType();
+        tableName2 = "火气探头检查表";
+        type = 2;
+        checkType2.setName(tableName2);
+        checkType2.setType(type);
+        checkType2.setParent(checkType);
+        daoSession.insert(checkType2);
+        checkType2 = new CheckType();
+        tableName2 = "火气监控系统检查表";
+        type = 2;
+        checkType2.setName(tableName2);
+        checkType2.setType(type);
+        checkType2.setParent(checkType);
+        daoSession.insert(checkType2);
+
+        checkType = new CheckType();
+        systemName = "厨房湿粉灭火系统";
+        type = 2;
+        parentId = 0;
+        checkType.setName(systemName);
+        checkType.setType(type);
+        checkType.setParentId(parentId);
+        daoSession.insert(checkType);
+        // 设备名
+        checkType2 = new CheckType();
+        tableName2 = "厨房湿粉灭火系统系统检查表";
+        type = 2;
+        checkType2.setName(tableName2);
+        checkType2.setType(type);
+        checkType2.setParent(checkType);
+        daoSession.insert(checkType2);
+
+        checkType = new CheckType();
+        systemName = "泡沫灭火系统";
+        type = 2;
+        parentId = 0;
+        checkType.setName(systemName);
+        checkType.setType(type);
+        checkType.setParentId(parentId);
+        daoSession.insert(checkType);
+        // 设备名
+        checkType2 = new CheckType();
+        tableName2 = "泡沫灭火系统检查表";
+        type = 2;
+        checkType2.setName(tableName2);
+        checkType2.setType(type);
+        checkType2.setParent(checkType);
+        daoSession.insert(checkType2);
+
+        checkType = new CheckType();
+        systemName = "消防泵";
+        type = 2;
+        parentId = 0;
+        checkType.setName(systemName);
+        checkType.setType(type);
+        checkType.setParentId(parentId);
+        daoSession.insert(checkType);
+        // 设备名
+        checkType2 = new CheckType();
+        tableName2 = "消防泵检查表";
+        type = 2;
+        checkType2.setName(tableName2);
+        checkType2.setType(type);
+        checkType2.setParent(checkType);
+        daoSession.insert(checkType2);
+
+        checkType = new CheckType();
+        systemName = "消防员装备箱";
+        type = 2;
+        parentId = 0;
+        checkType.setName(systemName);
+        checkType.setType(type);
+        checkType.setParentId(parentId);
+        daoSession.insert(checkType);
+        // 设备名
+        checkType2 = new CheckType();
+        tableName2 = "消防员装备箱";
+        type = 2;
+        checkType2.setName(tableName2);
+        checkType2.setType(type);
+        checkType2.setParent(checkType);
+        daoSession.insert(checkType2);
+
+        checkType = new CheckType();
+        systemName = "消防水炮";
+        type = 2;
+        parentId = 0;
+        checkType.setName(systemName);
+        checkType.setType(type);
+        checkType.setParentId(parentId);
+        daoSession.insert(checkType);
+        // 设备名
+        checkType2 = new CheckType();
+        tableName2 = "消防水炮";
+        type = 2;
+        checkType2.setName(tableName2);
+        checkType2.setType(type);
+        checkType2.setParent(checkType);
+        daoSession.insert(checkType2);
+
+        // 法律法规分类
+        StandardType standardType = new StandardType();
+        String standardName = "行业标准";
+        standardType.setName(standardName);
+        daoSession.insert(standardType);
+
+        standardType = new StandardType();
+        standardName = "国家法律";
+        standardType.setName(standardName);
+        daoSession.insert(standardType);
+
+        standardType = new StandardType();
+        standardName = "国际标准";
+        standardType.setName(standardName);
+        daoSession.insert(standardType);
+
+        standardType = new StandardType();
+        standardName = "行政规范";
+        standardType.setName(standardName);
+        daoSession.insert(standardType);
+
+        standardType = new StandardType();
+        standardName = "行业规章";
+        standardType.setName(standardName);
+        daoSession.insert(standardType);
+
+        standardType = new StandardType();
+        standardName = "国家标注";
+        standardType.setName(standardName);
+        daoSession.insert(standardType);
+
+        standardType = new StandardType();
+        standardName = "良好作业实践及指导性文件";
+        standardType.setName(standardName);
+        daoSession.insert(standardType);
+
+        standardType = new StandardType();
+        standardName = "监督性机构规范性文件";
+        standardType.setName(standardName);
+        daoSession.insert(standardType);
+
+        standardType = new StandardType();
+        standardName = "其他";
+        standardType.setName(standardName);
+        daoSession.insert(standardType);
 
 
-//        // 插入yearCheckResult
-//
-//        // 获取系统名对应的id
-//        CheckType checkType3 = new CheckType();
-////        String systemName = "二氧化碳灭火系统";
-//        String tableName3 = "药剂瓶检查表";
-//        int type3 = 1;
-//        checkType3.setName(tableName);
-//        checkType3.setType(type3);
-//        checkType3.setParent(checkType2);
-//        daoSession.insert(checkType3);
-//        Log.i("info","插入checktype成功");
-//
-//
-//        YearCheckResult yearCheckResult1 = new YearCheckResult();
-//        String isPass1 = "是";
-//        String imageUrl1 = "imgs/xxx";
-//        String description1 = "xxxxxxxxxxxxxxxxxxx";
-//        yearCheckResult1.setIsPass(isPass1);
-//        yearCheckResult1.setImageUrl(imageUrl1);
-//        yearCheckResult1.setDescription(description1);
-//        yearCheckResult1.setYearCheck(yearCheck1);
-//        yearCheckResult1.setItemInfo(itemInfo);
-//        itemInfo.setCheckType(checkType3);
-//        itemInfo.setCompanyInfo(companyInfo);
-//        daoSession.insert(yearCheckResult1);
-//        YearCheckResult yearCheckResult2 = new YearCheckResult();
-//        String isPass2 = "是";
-//        String imageUrl2 = "imgs/xxx";
-//        String description2 = "xxxxxxxxxxxxxxxxxxx";
-//        yearCheckResult2.setIsPass(isPass2);
-//        yearCheckResult2.setImageUrl(imageUrl2);
-//        yearCheckResult2.setDescription(description2);
-//        yearCheckResult2.setYearCheck(yearCheck2);
-//        yearCheckResult2.setItemInfo(itemInfo);
-//        itemInfo.setCheckType(checkType3);
-//        itemInfo.setCompanyInfo(companyInfo);
-//        daoSession.insert(yearCheckResult2);
-//        Log.i("info","插入yearcheckresult成功");
 
     }
     public void insertTestData() {

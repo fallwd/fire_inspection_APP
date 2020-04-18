@@ -26,13 +26,15 @@ public class ItemInfo   {
     private Long checkTypeId;
 
     @ToOne(joinProperty = "checkTypeId")
-    private CheckType checkType; //设备类型
+    private CheckType checkType; //检查类型
 
     private Long companyInfoId;
     @ToOne(joinProperty = "companyInfoId")
     private CompanyInfo companyInfo;//公司选择信息
 
     private String typeNo;//型号
+
+//    private String deviceType;//设备型号
 
     private String no; //编号
 
