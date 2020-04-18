@@ -28,7 +28,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="30dp"
+            android:layout_width="25dp"
             android:layout_height="wrap_content">
 
             <EditText
@@ -39,12 +39,12 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="瓶号"
+                android:text="设备类型"
                 android:textSize="12sp" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="35dp"
+            android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -56,12 +56,12 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="9.1222222"
+                android:text="生产厂家"
                 android:textSize="12sp" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="22dp"
+            android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -73,12 +73,12 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="3"
+                android:text="型号"
                 android:textSize="12sp" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="22dp"
+            android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -90,7 +90,7 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="50"
+                android:text="编号"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -107,12 +107,12 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="生产厂家"
+                android:text="外观是否良好"
                 android:textSize="12sp" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="35dp"
+            android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -124,7 +124,75 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="生产时间"
+                android:text="设定高报值/25%LEL"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <EditText
+                android:id="@+id/et_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:text="设定高高报值/50%LEL"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <EditText
+                android:id="@+id/et_9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:text="测试高报值/25%LEL"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <EditText
+                android:id="@+id/et_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:text="测试高高报值/50%LEL"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <EditText
+                android:id="@+id/et_11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:text="响应时间"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -134,25 +202,25 @@
             android:layout_gravity="center">
 
             <TextView
-                android:id="@+id/et_8"
+                android:id="@+id/et_12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="是"
+                android:text="是否合格"
                 android:textSize="12sp" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rl_9"
-            android:layout_width="35dp"
+            android:id="@+id/rl"
+            android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
             <ImageView
-                android:id="@+id/tv_9"
+                android:id="@+id/et_13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@mipmap/scene_photos_icon"
@@ -165,7 +233,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
             <EditText
-                android:id="@+id/tv_10"
+                android:id="@+id/et_14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -177,7 +245,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rl_11"
+            android:id="@+id/et_15"
             android:layout_width="24dp"
             android:layout_height="match_parent"
             android:layout_gravity="center">
@@ -190,5 +258,4 @@
                 android:textSize="12sp" />
         </RelativeLayout>
     </TableRow>
-
 </TableLayout>

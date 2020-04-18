@@ -160,15 +160,13 @@ public class AutomaticFireAlarm1 extends Fragment {
 
         itemObj.setNo(et_2.getText().toString());
         itemObj.setVolume(et_3.getText().toString());
-        itemObj.setWeight(et_4.getText().toString());
-        itemObj.setGoodsWeight(et_5.getText().toString());
-        itemObj.setProdFactory(et_6.getText().toString());
+        itemObj.setTypeNo(et_4.getText().toString());
+        itemObj.setNo(et_5.getText().toString());
+        itemObj.setAppearance(et_6.getText().toString());
         Date date = TimeUtil.getInstance().hhmmssTodata(et_7.getText().toString());
         itemObj.setProdDate(date);
-        itemObj.setWeight(et_8.getText().toString());
-//            itemObj.setWeight(tv_9.getText().toString());
-        itemObj.setVolume(tv_10.getText().toString());
-        itemObj.setProdDate(date);
+        itemObj.setIsPass(et_8.getText().toString());
+        itemObj.setDescription(tv_10.getText().toString());
         itemObj.setCheckDate(new Date());
 
         long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj, it.companyInfoId, checkTypes.get(0).getId(), it.number, it.srt_Date);
@@ -206,30 +204,15 @@ public class AutomaticFireAlarm1 extends Fragment {
             ItemInfo itemObj = itemDataList.get(i);
             itemObj.setNo(et_2.getText().toString());
             itemObj.setVolume(et_3.getText().toString());
-            itemObj.setWeight(et_4.getText().toString());
-            itemObj.setGoodsWeight(et_5.getText().toString());
-            itemObj.setProdFactory(et_6.getText().toString());
+            itemObj.setTypeNo(et_4.getText().toString());
+            itemObj.setNo(et_5.getText().toString());
+            itemObj.setAppearance(et_6.getText().toString());
             Date date = TimeUtil.getInstance().hhmmssTodata(et_7.getText().toString());
             itemObj.setProdDate(date);
-            itemObj.setWeight(et_8.getText().toString());
-//            itemObj.setWeight(tv_9.getText().toString());
-            itemObj.setVolume(tv_10.getText().toString());
-
-
-
-
+            itemObj.setIsPass(et_8.getText().toString());
+            itemObj.setDescription(tv_10.getText().toString());
+            itemObj.setCheckDate(new Date());
 //            序号  tv_1  瓶号 et_2     生产厂家et_6  生产时间et_7  合格et_8  拍照rl_9  隐患描述tv_10
-
-
-            //默认日期参数影响查询结果， 所以不能修改该参数
-//            itemObj.setCheckDate(new Date());
-            //这是里层检查表数据,当前页面没有这个数据,可以不传。
-//            itemObj.setIsPass("是");
-//            itemObj.setLabelNo("BQ0002");
-//            itemObj.setSystemNumber("SD002");
-//            itemObj.setProtectArea("主配电间");
-//            itemObj.setCodePath("检查表图片路径:/src/YJP0002.jpg");
-//            list.add(itemObj);
             Log.d("dong", "itemObj222222保存==   "+itemObj);
             ServiceFactory.getYearCheckService().update(itemObj);
             Toast.makeText(getActivity(), "感烟探测器,保存成功", Toast.LENGTH_SHORT).show();

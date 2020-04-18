@@ -143,10 +143,10 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
 
 
         mAutomaticFireAlarm1 = AutomaticFireAlarm1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
-        mAutomaticFireAlarm2 = AutomaticFireAlarm2.newInstance("", "");
-        mAutomaticFireAlarm3 = AutomaticFireAlarm3.newInstance("", "");
-        mAutomaticFireAlarm4 = AutomaticFireAlarm4.newInstance("", "");
-        mAutomaticFireAlarm5 = AutomaticFireAlarm5.newInstance("", "");
+        mAutomaticFireAlarm2 = AutomaticFireAlarm2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
+        mAutomaticFireAlarm3 = AutomaticFireAlarm3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
+        mAutomaticFireAlarm4 = AutomaticFireAlarm4.newInstance(ConstantInspection.YEARLY_ON_SITE_F4, it);
+        mAutomaticFireAlarm5 = AutomaticFireAlarm5.newInstance(ConstantInspection.YEARLY_ON_SITE_F5, it);
         mAutomaticFireAlarm6 = AutomaticFireAlarm6.newInstance("", "");
         mAutomaticFireAlarm7 = AutomaticFireAlarm7.newInstance("", "");
         mAutomaticFireAlarm8 = AutomaticFireAlarm8.newInstance("", "");
@@ -261,16 +261,16 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
                     Fragment fragment = fragments.get(currentPager);
                     if (fragment instanceof AutomaticFireAlarm1) {
                         mAutomaticFireAlarm1.upData();
+                    }else if (fragment instanceof AutomaticFireAlarm2) {
+                        mAutomaticFireAlarm2.upData();
+                    }else if (fragment instanceof AutomaticFireAlarm3) {
+                        mAutomaticFireAlarm3.upData();
+                    } else if (fragment instanceof AutomaticFireAlarm4) {
+                        mAutomaticFireAlarm4.upData();
+                    } else if (fragment instanceof AutomaticFireAlarm5) {
+                        mAutomaticFireAlarm5.upData();
                     }
-//                    else if (fragment instanceof AutomaticFireAlarm2) {
-//                        mAutomaticFireAlarm2.upData();
-//                    } else if (fragment instanceof AutomaticFireAlarm3) {
-//                        mAutomaticFireAlarm3.upData();
-//                    } else if (fragment instanceof AutomaticFireAlarm4) {
-//                        mAutomaticFireAlarm4.upData();
-//                    } else if (fragment instanceof AutomaticFireAlarm5) {
-//                        mAutomaticFireAlarm5.upData();
-//                    } else if (fragment instanceof AutomaticFireAlarm6) {
+//                    else if (fragment instanceof AutomaticFireAlarm6) {
 //                        mAutomaticFireAlarm6.upData();
 //                    } else if (fragment instanceof AutomaticFireAlarm7) {
 //                        mAutomaticFireAlarm7.upData();
