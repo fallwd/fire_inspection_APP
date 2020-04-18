@@ -95,6 +95,12 @@ public interface YearCheckService extends BaseService<Object>{
     /**
      * 获取导出结果数据
      * @param
+     * systemName是系统名字
+     * count是检查条数
+     * systemNumber是系统位号
+     * protectArea是保护区域
+     * weights是药剂重量
+     * data是设备检查数据，是一个List，里面每一条都是一个ItemInfo对象，这个对象包含了这条数据的所有信息
      * @return
      */
     List<HashMap> getOutputItemData(long companyInfoId, Date checkDate);

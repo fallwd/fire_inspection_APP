@@ -187,21 +187,18 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
             );
         }
 
-
-
-
         List<ItemInfo> dataList = queryBuilder.list();
 //        List<ItemInfo> dataList =  queryBuilder.build().list();
-        Log.i("info","查询完成01-------------------------------------------");
-        for(int i = 0; i < dataList.size(); i++){
-            ItemInfo result = dataList.get(i);
-            Log.i("result", result.toString());
-            Log.i("result", result.getCompanyInfo().toString());
-            Log.i("result", result.getCheckType().toString());
-            Log.i("result", result.getCheckResultList().toString());
-            Log.i("result:getCheckDate", ""+ result.getCheckDate());
-        }
-        Log.i("info","查询完成01-------------------------------------------");
+//        Log.i("info","查询完成01-------------------------------------------");
+//        for(int i = 0; i < dataList.size(); i++){
+//            ItemInfo result = dataList.get(i);
+//            Log.i("result", result.toString());
+//            Log.i("result", result.getCompanyInfo().toString());
+//            Log.i("result", result.getCheckType().toString());
+//            Log.i("result", result.getCheckResultList().toString());
+//            Log.i("result:getCheckDate", ""+ result.getCheckDate());
+//        }
+//        Log.i("info","查询完成01-------------------------------------------");
 
         return dataList;
     }
@@ -274,14 +271,13 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                     where(ItemInfoDao.Properties.Id.eq(itemId));
 
             dataList = queryBuilder.list();
-            Log.i("info", "查询完成02-------------------------------------------");
-            for (int i = 0; i < dataList.size(); i++) {
-                YearCheckResult result = dataList.get(i);
-                Log.i("result", result.toString());
-                Log.i("result", result.getYearCheck().toString());
-            }
-            Log.i("info", "查询完成02-------------------------------------------");
-
+//            Log.i("info", "查询完成02-------------------------------------------");
+//            for (int i = 0; i < dataList.size(); i++) {
+//                YearCheckResult result = dataList.get(i);
+//                Log.i("result", result.toString());
+//                Log.i("result", result.getYearCheck().toString());
+//            }
+//            Log.i("info", "查询完成02-------------------------------------------");
         }
         else {
             if(number != null && number!=""){
@@ -299,15 +295,14 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                         YearCheckResultDao.Properties.CheckDate.eq(checkDate)
                 );
             }
-
             dataList = queryBuilder.list();
-            Log.i("info", "查询完成02-------------------------------------------");
-            for (int i = 0; i < dataList.size(); i++) {
-                YearCheckResult result = dataList.get(i);
-                Log.i("result", result.toString());
-                Log.i("result", result.getYearCheck().toString());
-            }
-            Log.i("info", "查询完成02-------------------------------------------");
+//            Log.i("info", "查询完成02-------------------------------------------");
+//            for (int i = 0; i < dataList.size(); i++) {
+//                YearCheckResult result = dataList.get(i);
+//                Log.i("result", result.toString());
+//                Log.i("result", result.getYearCheck().toString());
+//            }
+//            Log.i("info", "查询完成02-------------------------------------------");
         }
         return dataList;
     }
@@ -484,7 +479,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
     }
 
     @Override
-    public List getOutputList() {
+    public List<HashMap> getOutputList() {
         /*
         * new WhereCondition.StringCondition("1 GROUP BY COMPANY_NAME" )
         * */
