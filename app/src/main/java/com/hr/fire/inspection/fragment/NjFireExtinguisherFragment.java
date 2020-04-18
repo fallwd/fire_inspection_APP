@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -24,25 +23,18 @@ import com.hr.fire.inspection.adapter.AutomaticFireAlarmAdapter;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
-import com.hr.fire.inspection.service.BaseService;
 import com.hr.fire.inspection.service.ServiceFactory;
-import com.hr.fire.inspection.service.impl.YearCheckServiceImpl;
 import com.hr.fire.inspection.utils.HYLogUtil;
 import com.hr.fire.inspection.utils.TimeUtil;
 
-
-import java.io.Serializable;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
-
-public class AutomaticFireAlarm3 extends Fragment {
+public class NjFireExtinguisherFragment extends Fragment {
     View rootView;
-    private static AutomaticFireAlarm3 fragment1;
+    private static NjFireExtinguisherFragment fragment1;
     private static String mKey;
     private AutomaticFireAlarmAdapter adapter;
     private List<ItemInfo> itemDataList = new ArrayList<>();
@@ -50,9 +42,9 @@ public class AutomaticFireAlarm3 extends Fragment {
     private IntentTransmit it;
     private List<CheckType> checkTypes;
 
-    public static AutomaticFireAlarm3 newInstance(String key, IntentTransmit value) {
+    public static NjFireExtinguisherFragment newInstance(String key, IntentTransmit value) {
         if (fragment1 == null) {
-            fragment1 = new AutomaticFireAlarm3();
+            fragment1 = new NjFireExtinguisherFragment();
         }
         mKey = key;
         Bundle args = new Bundle();
@@ -125,15 +117,9 @@ public class AutomaticFireAlarm3 extends Fragment {
         if (adapter != null) {
             adapter.addData(itemDataList.size());
             //点击"＋", 就像数据库中插入一条数据, 点"保存"就更新所有数据
-            hz_table_tbody_id.post(new Runnable() {
-                @Override
-                public void run() {
-                    addData();
-                }
-            });
+            addData();
         }
     }
-
 
     @SuppressLint("SimpleDateFormat")
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -155,21 +141,24 @@ public class AutomaticFireAlarm3 extends Fragment {
         EditText et_7 = childAt.findViewById(R.id.et_7);
         TextView et_8 = childAt.findViewById(R.id.et_8);
         ImageView tv_9 = childAt.findViewById(R.id.tv_9);
-        EditText tv_10 = childAt.findViewById(R.id.tv_10);
-
-
         itemObj.setNo(et_2.getText().toString());
         itemObj.setVolume(et_3.getText().toString());
-        itemObj.setTypeNo(et_4.getText().toString());
-        itemObj.setNo(et_5.getText().toString());
-        itemObj.setAppearance(et_6.getText().toString());
+        itemObj.setWeight(et_4.getText().toString());
+        itemObj.setGoodsWeight(et_5.getText().toString());
+        itemObj.setProdFactory(et_6.getText().toString());
         Date date = TimeUtil.getInstance().hhmmssTodata(et_7.getText().toString());
+        Date date1 = TimeUtil.getInstance().hhmmssTodata(et_8.getText().toString());
         itemObj.setProdDate(date);
-        itemObj.setIsPass(et_8.getText().toString());
-        itemObj.setDescription(tv_10.getText().toString());
+        itemObj.setObserveDate(date1);
         itemObj.setCheckDate(new Date());
-
-        long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj, it.companyInfoId, checkTypes.get(0).getId(), it.number, it.srt_Date);
+        itemObj.setIsPass("是");
+        itemObj.setLabelNo("BQ0002");
+        itemObj.setSystemNumber("SD002");
+        itemObj.setProtectArea("主配电间");
+        itemObj.setCodePath("检查表图片路径:/src/YJP0002.jpg");
+        Log.d("dong", "一直遍历吗兄弟?" + date1 + "  " + et_5.getText().toString());
+//        }
+        long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj, 201, 1, "HZ001", it.srt_Date);
         if (l1 == 0) {
             Toast.makeText(getContext(), "药剂瓶数据保存成功", Toast.LENGTH_SHORT).show();
         }
@@ -177,18 +166,9 @@ public class AutomaticFireAlarm3 extends Fragment {
 
     public void upData() {
         int itemCount = hz_table_tbody_id.getChildCount();
-        //通知数据库刷新数据， 才能在调用Update();
-        Log.d("dong", "it.companyInfoId111==   " + it.companyInfoId + "   checkTypes.get(0).getId()   " + checkTypes.get(0).getId()+ "ITTTTTTTTTT" + it);
-
-
-        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(0).getId(), it.number == null ? "" : it.number, it.srt_Date);
-
-        Log.d("dong", "upData==   " + itemCount + "   新的数据条数   " + itemDataList.size());
-        if (itemCount == 0 || itemDataList.size() == 0 || itemDataList.size() != itemCount) {
-            Toast.makeText(getActivity(), "暂无数据保存", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        List<ItemInfo> list = new ArrayList();
         for (int i = 0; i < itemCount; i++) {
+            ItemInfo itemObj = new ItemInfo();
             LinearLayout childAt = (LinearLayout) hz_table_tbody_id.getChildAt(i);
             TextView tv_1 = childAt.findViewById(R.id.tv_1);
             EditText et_2 = childAt.findViewById(R.id.et_2);
@@ -197,28 +177,29 @@ public class AutomaticFireAlarm3 extends Fragment {
             EditText et_5 = childAt.findViewById(R.id.et_5);
             EditText et_6 = childAt.findViewById(R.id.et_6);
             EditText et_7 = childAt.findViewById(R.id.et_7);
-            TextView et_8 = childAt.findViewById(R.id.et_8);
-            ImageView tv_9 = childAt.findViewById(R.id.tv_9);
-            EditText tv_10 = childAt.findViewById(R.id.tv_10);
-
-            ItemInfo itemObj = itemDataList.get(i);
+            EditText et_8 = childAt.findViewById(R.id.et_8);
+            TextView tv_9 = childAt.findViewById(R.id.tv_9);
             itemObj.setNo(et_2.getText().toString());
             itemObj.setVolume(et_3.getText().toString());
-            itemObj.setTypeNo(et_4.getText().toString());
-            itemObj.setNo(et_5.getText().toString());
-            itemObj.setAppearance(et_6.getText().toString());
+            itemObj.setWeight(et_4.getText().toString());
+            itemObj.setGoodsWeight(et_5.getText().toString());
+            itemObj.setProdFactory(et_6.getText().toString());
             Date date = TimeUtil.getInstance().hhmmssTodata(et_7.getText().toString());
+            Date date1 = TimeUtil.getInstance().hhmmssTodata(et_8.getText().toString());
             itemObj.setProdDate(date);
-            itemObj.setIsPass(et_8.getText().toString());
-            itemObj.setDescription(tv_10.getText().toString());
+            itemObj.setObserveDate(date1);
             itemObj.setCheckDate(new Date());
-//            序号  tv_1  瓶号 et_2     生产厂家et_6  生产时间et_7  合格et_8  拍照rl_9  隐患描述tv_10
-            Log.d("dong", "itemObj222222保存==   "+itemObj);
-            ServiceFactory.getYearCheckService().update(itemObj);
-            Toast.makeText(getActivity(), "感烟探测器,保存成功", Toast.LENGTH_SHORT).show();
+            itemObj.setIsPass("是");
+            itemObj.setLabelNo("BQ0002");
+            itemObj.setSystemNumber("SD002");
+            itemObj.setProtectArea("主配电间");
+            itemObj.setCodePath("检查表图片路径:/src/YJP0002.jpg");
+            list.add(itemObj);
         }
+        Log.d("dong", "itemCount" + itemCount + "   " + hz_table_tbody_id.getChildCount() + "   list  + " + list.size());
+//        Log.i(t)
+        ServiceFactory.getYearCheckService().update(list);
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
