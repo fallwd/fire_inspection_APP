@@ -35,7 +35,7 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
 //         初始化数据库,插入测试数据
-        // 清空数据库
+//         清空数据库
         DBManager cleanObj = new DBManager(this);
         cleanObj.deleSQL();
         // 初始化数据库

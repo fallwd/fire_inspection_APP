@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Button;
 import android.widget.TextView;
@@ -59,9 +60,9 @@ public class FireActivity extends AppCompatActivity {
     }
 
 
-
     private void initData() {
         systemNameData = ServiceFactory.getYearCheckService().getSystemNameData();
+        Log.d("dong", "s==== " + systemNameData.size() + "   " + systemNameData.toString());
     }
 
     Intent intent = new Intent();
@@ -80,36 +81,23 @@ public class FireActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Long sys_id = systemNameData.get(position).getId();
-                String str_title = systemNameData.get(position).getName();
+                String f_title = systemNameData.get(position).getName();
                 //跳转详情
-//<<<<<<< HEAD
-//                intent.setClass(FireActivity.this, CarbonDioxideAcitivty.class);
-                intent.setClass(FireActivity.this, SystemTagProtectionAreaActivity.class);
+                if (f_title.equals("高压二氧化碳灭火系统") || f_title.equals("七氟丙烷气体灭火系统")
+                        || f_title.equals("海水雨淋灭火系统") || f_title.equals("干粉灭火系统")
+                        || f_title.equals("泡沫灭火系统")) {
+                    intent.setClass(FireActivity.this, SystemTagProtectionAreaActivity.class);
+                } else {
+                    intent.putExtra("sys_number", ""); //改页面是没有这个参数的
+                    intent.setClass(FireActivity.this, CarbondioxideRecordAcitivty.class);
+
+                }
                 intent.putExtra("sys_id", sys_id);
                 intent.putExtra("platform_id", platform_id);
-                intent.putExtra("f_title", str_title);
+                intent.putExtra("f_title", f_title);
                 startActivity(intent);
                 //这个时候,需要关闭当前页面,并且关闭之前所有选择的页面
                 finish();
-//=======
-//                Bundle bundle = new Bundle();
-//                bundle.putString("id", String.valueOf(id));
-//                bundle.putString("context", str);
-//                bundle.putString("f_title", (String) F_title.getText());
-//                if(str == "高压二氧化碳灭火系统" || str == "七氟丙烷气体灭火系统" || str == "海水雨淋灭火系统" || str == "干粉灭火系统" || str == "泡沫灭火系统") {
-//                    // 执行跳转
-//                    Intent intent = new Intent(FireActivity.this, SystemTagProtectionAreaActivity.class);
-//                    // 页面传值
-//                    intent.putExtras(bundle);
-//                    startActivity(intent);
-//                } else {
-//                    // 执行跳转
-//                    Intent intent = new Intent(FireActivity.this, CarbondioxideRecordAcitivty.class);
-//                    // 页面传值
-//                    intent.putExtras(bundle);
-//                    startActivity(intent);
-//                }
-//>>>>>>> master
             }
         });
 
@@ -129,8 +117,8 @@ public class FireActivity extends AppCompatActivity {
         });
 
         // 点击返回上一页
-        ImageButton imageButton = (ImageButton) findViewById(R.id.backHome);
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        ImageView iv_finish = (ImageView) findViewById(R.id.iv_finish);
+        iv_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
