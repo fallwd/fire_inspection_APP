@@ -8,6 +8,7 @@ import com.hr.fire.inspection.adapter.LawContentItemAdapter;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 public class RuleContentActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter;
@@ -63,8 +65,32 @@ public class RuleContentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-            }
-        });
+//            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3){
+//                    // TODO Auto-generated method stub
+//                    Toast.makeText(RuleContentActivity.this,
+//                            "Filepath::::" + wordlist2[arg2], Toast.LENGTH_LONG).show();
+//                    File stringtofile = new File(wordlist2[arg2]);
+//                    PackageManager packageManager = getPackageManager();
+//                    Intent testIntent = new Intent(Intent.ACTION_VIEW);
+//                    testIntent.setType("application/msword");
+//                    List list = packageManager.queryIntentActivities(testIntent,
+//                            PackageManager.MATCH_DEFAULT_ONLY);
+//
+//                    if (stringtofile.isFile()) {
+//                        Intent intent = new Intent("android.intent.action.VIEW");
+//                        intent.addCategory("android.intent.category.DEFAULT");
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        intent.setAction(Intent.ACTION_VIEW);
+//
+////                    Uri uri = Uri.fromFile(stringtofile.getAbsoluteFile());
+//                        Uri uri = FileProvider.getUriForFile(RuleContentActivity.this, getApplication().getApplicationContext().getPackageName() + ".fileProvider", stringtofile);
+//                        intent.setDataAndType(uri, "application/pdf");
+//
+//                        startActivity(intent);
+//                    }
+//                }
+//            }
+//        });
 //        list = findViewById(R.id.list);
 //        wordfile = getSDCardPath().listFiles();
 //        // 获取sdcard里面pdf文件信息
@@ -101,9 +127,10 @@ public class RuleContentActivity extends AppCompatActivity {
 //                    Uri uri = FileProvider.getUriForFile(RuleContentActivity.this, getApplication().getApplicationContext().getPackageName() + ".fileProvider", stringtofile);
 //                    onpenPDF(uri);
 //                }
-//            }
-//        });
-    }
+            }
+        });
+    }}
+
 
 
 //    private void onpenPDF(Uri pdfUrl) {
@@ -156,4 +183,3 @@ public class RuleContentActivity extends AppCompatActivity {
 //            }
 //            return sdcardDir;
 //        }
-}

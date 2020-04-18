@@ -1,4 +1,5 @@
 package com.hr.fire.inspection.adapter;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,12 +8,14 @@ import android.widget.TextView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.RoutingInspectionActivity;
+import com.hr.fire.inspection.entity.CheckType;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RoutingInspectionAdapter extends BaseAdapter {
 
-    private ArrayList<String> stringArrayList;
+    private List<CheckType> stringArrayList;
     private final RoutingInspectionActivity mContext;
 
     public RoutingInspectionAdapter(RoutingInspectionActivity rulesActivity) {
@@ -46,11 +49,11 @@ public class RoutingInspectionAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.sayTextView.setText(stringArrayList.get(position));
+        holder.sayTextView.setText(stringArrayList.get(position).getName());
         return convertView;
     }
 
-    public void setData(ArrayList<String> mList) {
+    public void setData(List<CheckType> mList) {
         stringArrayList = mList;
     }
 

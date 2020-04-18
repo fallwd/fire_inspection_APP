@@ -1,4 +1,3 @@
-/* 系统位号  保护区域*/
 
 package com.hr.fire.inspection.activity;
 
@@ -13,18 +12,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.hr.fire.inspection.R;
 
+/* 系统位号  保护区域*/
 public class SystemTagProtectionAreaActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+    private long sys_id;
+    private long platform_id;
+    private String f_title;
+    private EditText systemTagText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_tag);
+        Intent intent = getIntent();
+        //CarbonDioxideAcitivty
+        sys_id = intent.getLongExtra("sys_id", 0); //系统ID
+        platform_id = intent.getLongExtra("platform_id", 0);  //平台ID
+        f_title = intent.getStringExtra("f_title");  //传过来的系统名称
 
-        Bundle b = getIntent().getExtras();
-        //获取Bundle的信息
-        String infocont = b.getString("context");
-        String f_title = b.getString("f_title");
         // 获取btn元素
         Button cancel_btn = (Button) this.findViewById(R.id.cancel_btn);
         Button submit_btn = (Button) this.findViewById(R.id.submit_btn);
@@ -36,34 +41,30 @@ public class SystemTagProtectionAreaActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String systemTagValue = "";
                 String protectAreaValue = "";
-                EditText systemTagText = (EditText) findViewById(R.id.system_tag);
+                systemTagText = (EditText) findViewById(R.id.system_tag);
                 EditText protectAreaText = (EditText) findViewById(R.id.protect_area);
                 systemTagText.clearFocus();
                 protectAreaText.clearFocus();
                 systemTagValue = systemTagText.getText().toString();
                 protectAreaValue = protectAreaText.getText().toString();
 
-                if (systemTagValue.isEmpty() && protectAreaValue.isEmpty()) {
-                    Toast.makeText(SystemTagProtectionAreaActivity.this, "请将表单信息填写完整", Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(SystemTagProtectionAreaActivity.this, CarbonDioxideAcitivty.class);
-                    Intent intent = new Intent(SystemTagProtectionAreaActivity.this, CarbondioxideRecordAcitivty.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    /*写sql*/
-                    Intent intent = new Intent(SystemTagProtectionAreaActivity.this, MainActivity.class);
-                    // 跳转携带参数
-//                    intent.putExtra(EXTRA_MESSAGE, message)
-                    startActivity(intent);
-                }
+//                if (systemTagValue.isEmpty() && protectAreaValue.isEmpty()) {
+//                    Toast.makeText(SystemTagProtectionAreaActivity.this, "请将表单信息填写完整", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+                Intent intent = new Intent();
+                intent.putExtra("sys_id", sys_id);
+                intent.putExtra("platform_id", platform_id);
+                intent.putExtra("f_title", f_title);
+                intent.putExtra("sys_number", systemTagText.getText().toString());
+                intent.setClass(SystemTagProtectionAreaActivity.this, CarbondioxideRecordAcitivty.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
 
     public void cancelInput(View Button) {
-        Toast.makeText(SystemTagProtectionAreaActivity.this, "您点击了取消按钮", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(SystemTagProtectionAreaActivity.this, NavigationActivity.class);
-//        intent.putExtra(EXTRA_MESSAGE, "我还是曾经那个少年 没有一丝丝改变");
-        startActivity(intent);
+        finish();
     }
 }

@@ -3,73 +3,95 @@ package com.hr.fire.inspection.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.adapter.OilFieldAdapter;
 import com.hr.fire.inspection.adapter.PlatformAdapter;
 import com.hr.fire.inspection.entity.CompanyInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.TextSpannableUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlatformActivity  extends AppCompatActivity implements View.OnClickListener{
+public class PlatformActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<String> list;
     private ArrayList<Long> idlist;
     private List<CompanyInfo> dataList;
     private String oil_name;
     private String company_name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_platform);
         Bundle b = getIntent().getExtras();
-
         // 获取Bundle的信息
         // 获得公司名称  油田名称
         oil_name = b.getString("oil_name");
         company_name = b.getString("company_name");
-
+        //后期需要使用接口回掉.关闭页面
+        finishImpl();
         ImageView insert_btn = (ImageView) this.findViewById(R.id.insert_btn);
+        ImageView iv_finish = (ImageView) this.findViewById(R.id.iv_finish);
+        TextView tv_inspection_pro = (TextView) this.findViewById(R.id.tv_inspection_pro);
         dataList = ServiceFactory.getCompanyInfoService().getPlatformList(oil_name);
         idlist = new ArrayList<>();
         list = new ArrayList<>();
-        for(int i=0; i<dataList.size();i++){
+        for (int i = 0; i < dataList.size(); i++) {
             CompanyInfo CompanyListItem = dataList.get(i);
             String companyName = CompanyListItem.getPlatformName();
             long id = CompanyListItem.getId();
-            list.add(companyName);
-            idlist.add(id);
+            if(companyName != null && companyName != ""){
+                list.add(companyName);
+                idlist.add(id);
+            }
+        }
+        iv_finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        if (company_name != null && oil_name != null) {
+            String srt = new StringBuffer().append("检查所属  >  ").append(company_name).
+                    append("  >  ").append(oil_name).append("  >  ").append("请选择平台").toString();
+            SpannableString textColor = TextSpannableUtil.showTextColor(srt, "#00A779", srt.length() - 5, srt.length());
+            tv_inspection_pro.setText(textColor);
         }
 
         ListView platform_list_item = findViewById(R.id.platform_list_item);
 
-        PlatformAdapter platformAdapter = new PlatformAdapter(this,this);
+        PlatformAdapter platformAdapter = new PlatformAdapter(this, this);
         platformAdapter.setData(list);
         platform_list_item.setAdapter(platformAdapter);
-
+        final Intent intent = new Intent();
         // 监听点击事件
         platform_list_item.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 long current_id = idlist.get(position);
-                Toast.makeText(PlatformActivity.this,current_id+"当前行id 下一页面" ,Toast.LENGTH_SHORT).show();
+                intent.setClass(PlatformActivity.this, FireActivity.class);
+                intent.putExtra("Platform_ID", current_id);
+                startActivity(intent);
+
             }
         });
 
         insert_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 AlertDialog.Builder insert_builder = new AlertDialog.Builder(PlatformActivity.this);
-                insert_builder.setTitle( "将要前往添加页面，确认离开?");
+                insert_builder.setTitle("将要前往添加页面，确认离开?");
                 insert_builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -88,6 +110,7 @@ public class PlatformActivity  extends AppCompatActivity implements View.OnClick
             }
         });
     }
+
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.del_btn:   //lv条目中 iv_del
@@ -105,23 +128,25 @@ public class PlatformActivity  extends AppCompatActivity implements View.OnClick
                     public void onClick(DialogInterface dialog, int which) {
                         String oilValue = list.get(position);
                         String type = "platform";
-                        long ret = ServiceFactory.getCompanyInfoService().deleteData(oilValue,type);
-                        if(ret==0){
+                        long ret = ServiceFactory.getCompanyInfoService().deleteData(oilValue, type);
+                        if (ret == 0) {
                             Toast.makeText(PlatformActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
                             dataList = ServiceFactory.getCompanyInfoService().getPlatformList(oil_name);
                             list = new ArrayList<>();
-                            for(int i=0; i<dataList.size();i++){
+                            for (int i = 0; i < dataList.size(); i++) {
                                 CompanyInfo CompanyListItem = dataList.get(i);
                                 String companyName = CompanyListItem.getOilfieldName();
-                                list.add(companyName);
+                                if(companyName != null && companyName != ""){
+                                    list.add(companyName);
+                                }
                             }
 
                             ListView platform_list_item = findViewById(R.id.platform_list_item);
-                            PlatformAdapter platformAdapter = new PlatformAdapter(PlatformActivity.this,PlatformActivity.this);
+                            PlatformAdapter platformAdapter = new PlatformAdapter(PlatformActivity.this, PlatformActivity.this);
                             platformAdapter.setData(list);
                             platform_list_item.setAdapter(platformAdapter);
 
-                        }else{
+                        } else {
                             Toast.makeText(PlatformActivity.this, "删除失败", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -147,12 +172,16 @@ public class PlatformActivity  extends AppCompatActivity implements View.OnClick
                         // 跳转携带参数
                         intent.putExtra("platform_name", NameItem);
                         intent.putExtra("company_name", company_name);
-                        intent.putExtra("oil_name", oil_name );
+                        intent.putExtra("oil_name", oil_name);
                         startActivity(intent);
                     }
                 });
                 edit_builder.show();
                 break;
         }
+    }
+
+    private void finishImpl() {
+
     }
 }
