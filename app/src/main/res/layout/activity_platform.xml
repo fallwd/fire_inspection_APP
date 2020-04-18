@@ -1,52 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.PlatformActivity">
+
     <include layout="@layout/currency_title" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="20dp"
-        android:background="@drawable/listview_border"
+        android:background="@drawable/listview_border_nomargin"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:background="@drawable/layer_border_bottom">
+            android:orientation="vertical">
+
 
             <RelativeLayout
                 android:id="@+id/select_platform_row"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="44dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
                     android:text="请选择平台"
-                    android:textColor="#00A779"
-                    android:textSize="16dp">
-                </TextView>
+                    android:textColor="@color/title_green"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
                 <ImageView
                     android:id="@+id/insert_btn"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@mipmap/insert">
-                </ImageView>
+                    android:layout_marginRight="16dp"
+                    android:src="@mipmap/insert"/>
             </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white_view_line" />
         </LinearLayout>
+
         <ListView
             android:id="@+id/platform_list_item"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </LinearLayout>

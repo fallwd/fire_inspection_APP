@@ -64,7 +64,6 @@ public class CarbonFragment1 extends Fragment {
         if (getArguments() != null) {
             its = (IntentTransmit) getArguments().getSerializable(mKey);
         }
-
     }
 
     @Override
