@@ -155,7 +155,7 @@ public class HFCFragment2 extends Fragment {
 
     public void saveData() {
         int itemCount = rc_list.getChildCount();
-        Log.i(itemCount+"=============","11111111111111111111");   
+        Log.i(itemCount+"=============","11111111111111111111");
 
         //通知数据库刷新数据， 才能在调用Update();
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(1).getId(), it.number == null ? "" : it.number, it.srt_Date);
