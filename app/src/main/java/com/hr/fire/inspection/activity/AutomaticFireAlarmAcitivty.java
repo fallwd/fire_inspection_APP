@@ -31,7 +31,7 @@ import com.hr.fire.inspection.fragment.AutomaticFireAlarm9;
 import com.hr.fire.inspection.fragment.CarbonFragment1;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 
-import org.apache.poi.util.NullLogger;
+//import org.apache.poi.util.NullLogger;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -62,8 +62,6 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
     private String f_title;
     private String sys_number;  //系统位号
     private IntentTransmit it;
-
-
 
 
     @Override

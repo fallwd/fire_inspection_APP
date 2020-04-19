@@ -82,30 +82,6 @@ public class CarbonFragment3 extends Fragment {
     }
 
     private void initData() {
-//        // 调用接口测试
-//        long companyInfoId = 3;
-//        long checkTypeId = 7;
-//        String number = "SD002";
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-//        Date checkDate = null;
-//
-//        ItemInfo Obj =  new ItemInfo();
-//
-//
-//        try {
-//            checkDate = format.parse("2019-08-03 10:10");
-////            checkDate = format.parse("2019-07-03 09:10");
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//        List<YearCheckResult> DataList = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, companyInfoId,checkTypeId,number,checkDate);
-//        if(DataList.size()==0){
-//           itemDataList = ServiceFactory.getYearCheckService().getCheckDataEasy(7);
-//            Log.d("dong", "数据查看:" + itemDataList.size());
-//            Log.d("dong", "数据查看===:" + itemDataList.get(0).toString());
-//        }
-
         // 调用接口测试
         checkTypes = ServiceFactory.getYearCheckService().gettableNameData(it.systemId);
         if (checkTypes == null) {
@@ -138,8 +114,6 @@ public class CarbonFragment3 extends Fragment {
 
 
 
-
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -151,5 +125,4 @@ public class CarbonFragment3 extends Fragment {
 //            ((ViewGroup) rootView.getParent()).removeView(rootView);
 //        }
     }
-
 }

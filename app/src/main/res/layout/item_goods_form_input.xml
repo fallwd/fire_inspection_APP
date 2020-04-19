@@ -120,15 +120,12 @@
 
         <RelativeLayout
             android:id="@+id/rl7"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="2dp"
-            android:layout_weight="1.5"
-            android:gravity="center"
-            android:visibility="gone">
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
 
             <ImageView
-                android:id="@+id/iv7"
+                android:id="@+id/iv_7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@mipmap/scene_photos_icon"

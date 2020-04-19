@@ -149,6 +149,7 @@ public class HFC1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+
     /**
      * @param id
      * @param it

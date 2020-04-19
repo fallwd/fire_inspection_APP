@@ -155,13 +155,19 @@ public class HFCFragment2 extends Fragment {
 
     public void saveData() {
         int itemCount = rc_list.getChildCount();
+        Log.i(itemCount+"=============","11111111111111111111");   
+
         //通知数据库刷新数据， 才能在调用Update();
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(1).getId(), it.number == null ? "" : it.number, it.srt_Date);
+
+        Log.i(itemDataList.size()+"=============","11111111111111111111");
         Log.d("dong", "upData==   " + itemCount + "   新的数据条数   " + itemDataList.size());
         if (itemCount == 0 || itemDataList.size() == 0 || itemDataList.size() != itemCount) {
             Toast.makeText(getActivity(), "暂无数据保存", Toast.LENGTH_SHORT).show();
             return;
         }
+
+
         for (int i = 0; i < itemCount; i++) {
             LinearLayout childAt = (LinearLayout) rc_list.getChildAt(i);
             TextView tv_1 = childAt.findViewById(R.id.tv_1);
