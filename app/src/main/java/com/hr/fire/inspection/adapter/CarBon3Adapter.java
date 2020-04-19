@@ -11,6 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+<<<<<<< HEAD
+=======
+import android.widget.LinearLayout;
+>>>>>>> c7c6ea5001ed1c26c21778236285b03bd6ea443d
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,8 +37,6 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private List<YearCheck> mData;
     private HrPopup hrPopup; // 下拉框相关的引用
 
-    public CarBon3Adapter() {
-    }
 
     public CarBon3Adapter(Context mContext, List<YearCheck> mData) {
         this.mContext = mContext;
@@ -53,8 +55,9 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-        CarBon3Adapter.ViewHolder vh = (CarBon3Adapter.ViewHolder) holder;
+        final ViewHolder vh = (ViewHolder) holder;
         if (mData != null && mData.size() != 0) {
+<<<<<<< HEAD
             YearCheck info = mData.get(position);
 
             vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
@@ -64,10 +67,24 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             vh.et_5.setText(new StringBuffer().append(info.getStandard()).append(""));
             vh.et_8.setText(new StringBuffer().append("").append(""));
             vh.et_6.setText(new StringBuffer().append("---").append(""));
+=======
+            YearCheck yearCheck = mData.get(position);
+            ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            vh.ll_item.setLayoutParams(layoutParams);
+            vh.tv1.setText(new StringBuffer().append(position + 1));
+
+            vh.tv2.setText(yearCheck.getProject());
+            vh.tv3.setText(yearCheck.getContent());
+            vh.tv4.setText(yearCheck.getRequirement());
+            vh.tv5.setText(yearCheck.getStandard());
+//            vh.tv6.setText(ycr.get(position).getIsPass());
+//            vh.ev8.setText(ycr.get(position).getDescription());
+>>>>>>> c7c6ea5001ed1c26c21778236285b03bd6ea443d
 
             //在左侧添加图片
             Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
             drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+<<<<<<< HEAD
             vh.et_6.setCompoundDrawables(null, null, drawable, null);
             Drawable drawable1 = mContext.getResources().getDrawable(R.drawable.listview_border_margin);
             final CarBon3Adapter.ViewHolder finalHolder = vh;
@@ -82,6 +99,24 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             vh.iv_7.setVisibility(View.GONE);
             vh.iv_7.setVisibility(View.VISIBLE);
             vh.iv_7.setOnClickListener(new View.OnClickListener() {
+=======
+            vh.tv6.setCompoundDrawables(null, null, drawable, null);
+            Drawable drawable1 = mContext.getResources().getDrawable(R.drawable.listview_border_margin);
+            vh.tv6.setBackground(drawable1);
+
+            vh.tv7.setVisibility(View.GONE);
+            vh.rl7.setVisibility(View.VISIBLE);
+            vh.tv8.setVisibility(View.GONE);
+            vh.ev8.setVisibility(View.VISIBLE);
+
+            vh.tv6.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showPopWind(vh.tv6);
+                }
+            });
+            vh.iv7.setOnClickListener(new View.OnClickListener() {
+>>>>>>> c7c6ea5001ed1c26c21778236285b03bd6ea443d
                 @Override
                 public void onClick(View v) {
                     mContext.startActivity(new Intent(mContext, PhotoUploadActivity.class));
@@ -89,7 +124,7 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             });
 
         }
-        vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
+
     }
 
     private void showPopWind(final TextView et_8) {
@@ -139,28 +174,10 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemCount() {
-//        if (mData.size() < 1) {
-//            //当数据为空时,也需要返回两条列表给用户
-//            return 1;
-//        } else {
-            return mData.size();  //可能事是因为没有数据
-        //1.mData这个集合数据是动态获取的， 如果安卓  mData.size(), 现在这个应该是没有数据的，我默认写了5条
-        //2. 目前样式没有对齐， 后面样式我来统一调整吧
-//            return 15;  //写多少就是多少条数据
-//        }
+        return mData.size();
     }
 
-    //  添加数据
-    public void addData(int position) {
-//      在list中添加数据，并通知条目加入一条
-        if (mData != null && mData.size() != 0) {
-            //添加最后一条数据
-            mData.add(mData.get(mData.size() - 1));
-            //添加动画
-            notifyItemInserted(position);
-        }
-    }
-
+<<<<<<< HEAD
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_1;
@@ -183,6 +200,83 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             iv_7 = (ImageView) view.findViewById(R.id.iv_7);
             et_8 = (EditText) view.findViewById(R.id.et_8);
 
+=======
+    class ViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout ll_item;
+        TextView tv1;
+        TextView tv2;
+        TextView tv3;
+        TextView tv4;
+        TextView tv5;
+        TextView tv6;
+        TextView tv7;
+        RelativeLayout rl7;
+        ImageView iv7;
+        TextView tv8;
+        EditText ev8;
+
+        ViewHolder(View view) {
+            super(view);
+            ll_item = (LinearLayout) view.findViewById(R.id.ll_item);
+            tv1 = (TextView) view.findViewById(R.id.tv1);
+            tv2 = (TextView) view.findViewById(R.id.tv2);
+            tv3 = (TextView) view.findViewById(R.id.tv3);
+            tv4 = (TextView) view.findViewById(R.id.tv4);
+            tv5 = (TextView) view.findViewById(R.id.tv5);
+            tv6 = (TextView) view.findViewById(R.id.tv6);
+            tv7 = (TextView) view.findViewById(R.id.tv7);
+            rl7 = (RelativeLayout) view.findViewById(R.id.rl7);
+            iv7 = (ImageView) view.findViewById(R.id.iv7);
+            tv8 = (TextView) view.findViewById(R.id.tv8);
+            ev8 = (EditText) view.findViewById(R.id.ev8);
+>>>>>>> c7c6ea5001ed1c26c21778236285b03bd6ea443d
         }
     }
+
+    private HrPopup hrPopup;
+
+    private void showPopWind(final TextView tv6) {
+        View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods, null);
+        if (hrPopup == null) {
+            hrPopup = new HrPopup((Activity) mContext);
+        }
+        RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
+        RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
+        RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
+        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setBackgroundDrawable(new BitmapDrawable());
+        hrPopup.setFocusable(true);
+        hrPopup.setOutsideTouchable(true);
+        hrPopup.setContentView(PopupRootView);
+        hrPopup.showAsDropDown(tv6);
+        rl_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv6.setText("是");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+        rl_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv6.setText("否");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+        rl_other.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv6.setText("---");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+    }
+
 }
