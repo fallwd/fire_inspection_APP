@@ -41,7 +41,6 @@ public class AutomaticFireAlarmAdapter2 extends RecyclerView.Adapter<RecyclerVie
     public AutomaticFireAlarmAdapter2(Context mContext, List<ItemInfo> mData) {
         this.mContext = mContext;
         this.mData = mData;
-        Log.i(TAG, "3333333333333333mData=" + this.mData);
     }
 
 
@@ -86,28 +85,41 @@ public class AutomaticFireAlarmAdapter2 extends RecyclerView.Adapter<RecyclerVie
             Log.e("dong", "position----:" + position);
             Log.e("dong", "info----:" + info);
             vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
-            vh.et_2.setText(new StringBuffer().append("可燃气体0").append(position + 1));
+//            vh.et_2.setText(new StringBuffer().append(info.getDeviceType()).append(""));
             vh.et_3.setText(new StringBuffer().append(info.getProdFactory()).append(""));
             vh.et_4.setText(new StringBuffer().append(info.getTypeNo()).append(""));
             vh.et_5.setText(new StringBuffer().append(info.getNo()).append(""));
+
+//          下拉框
             vh.et_6.setText(new StringBuffer().append(info.getAppearance()).append(""));
+            //在左侧添加图片
+            Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+            vh.et_6.setCompoundDrawables(null, null, drawable, null);
+            Drawable drawable1 = mContext.getResources().getDrawable(R.drawable.listview_border_margin);
+            final ViewHolder finalHolder = vh;
+            vh.et_6.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showPopWind6(finalHolder.et_6);
+                }
+            });
+            vh.et_6.setBackground(drawable1);
+
             vh.et_7.setText(new StringBuffer().append(info.getSetAlarm25()).append(""));
             vh.et_8.setText(new StringBuffer().append(info.getSetAlarm50()).append(""));
             vh.et_9.setText(new StringBuffer().append(info.getTestAlarm25()).append(""));
             vh.et_10.setText(new StringBuffer().append(info.getTestAlarm50()).append(""));
             vh.et_11.setText(new StringBuffer().append(info.getResponseTime()).append(""));
+
 //          下拉框
             vh.et_12.setText(new StringBuffer().append(info.getIsPass()).append(""));
-            //在左侧添加图片
-            Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
             drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
             vh.et_12.setCompoundDrawables(null, null, drawable, null);
-            Drawable drawable1 = mContext.getResources().getDrawable(R.drawable.listview_border_margin);
-            final ViewHolder finalHolder = vh;
             vh.et_12.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showPopWind(finalHolder.et_12);
+                    showPopWind12(finalHolder.et_12);
                 }
             });
             vh.et_12.setBackground(drawable1);
@@ -130,9 +142,53 @@ public class AutomaticFireAlarmAdapter2 extends RecyclerView.Adapter<RecyclerVie
             }
         });
     }
+    //显示对话框,用户选择是否异常的弹框
+    private void showPopWind6(final TextView et_6) {
+        View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods, null);
+        if (hrPopup == null) {
+            hrPopup = new HrPopup((Activity) mContext);
+        }
+        RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
+        RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
+        RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
+        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setBackgroundDrawable(new BitmapDrawable());
+        hrPopup.setFocusable(true);
+        hrPopup.setOutsideTouchable(true);
+        hrPopup.setContentView(PopupRootView);
+        hrPopup.showAsDropDown(et_6);
+        rl_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                et_6.setText("是");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+        rl_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                et_6.setText("否");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+        rl_other.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                et_6.setText("---");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+    }
 
     //显示对话框,用户选择是否异常的弹框
-    private void showPopWind(final TextView et_12) {
+    private void showPopWind12(final TextView et_12) {
         View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods, null);
         if (hrPopup == null) {
             hrPopup = new HrPopup((Activity) mContext);
@@ -192,16 +248,19 @@ public class AutomaticFireAlarmAdapter2 extends RecyclerView.Adapter<RecyclerVie
             notifyItemInserted(position);
         } else {
             ItemInfo itemInfo = new ItemInfo();
-            itemInfo.setVolume("请添加");
-            itemInfo.setWeight("请添加");
-            itemInfo.setGoodsWeight("请添加");
+//            itemInfo.setDeviceType("请添加");
             itemInfo.setProdFactory("请添加");
-            Date date = new Date();
-            itemInfo.setProdDate(date);
-            itemInfo.setCheckDate(date);
+            itemInfo.setTypeNo("请添加");
+            itemInfo.setNo("请添加");
+            itemInfo.setAppearance("请添加");
+            itemInfo.setSetAlarm25("请添加");
+            itemInfo.setSetAlarm50("请添加");
+            itemInfo.setTestAlarm25("请添加");
+            itemInfo.setTestAlarm50("请添加");
+            itemInfo.setResponseTime("请添加");
+            itemInfo.setIsPass("请添加");
+            itemInfo.setDescription("请添加");
             mData.add(itemInfo);
-            //添加动画
-            notifyItemInserted(position);
         }
 //        notifyDataSetChanged();
     }
@@ -235,14 +294,17 @@ public class AutomaticFireAlarmAdapter2 extends RecyclerView.Adapter<RecyclerVie
         intentTransmit = it;
     }
 
-
+    public void setNewData(List<ItemInfo> itemDataList) {
+        this.mData = itemDataList;
+        notifyDataSetChanged();
+    }
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_1;
         EditText et_2;
         EditText et_3;
         EditText et_4;
         EditText et_5;
-        EditText et_6;
+        TextView et_6;
         EditText et_7;
         EditText et_8;
         EditText et_9;
@@ -261,7 +323,7 @@ public class AutomaticFireAlarmAdapter2 extends RecyclerView.Adapter<RecyclerVie
             et_3 = (EditText) view.findViewById(R.id.et_3);
             et_4 = (EditText) view.findViewById(R.id.et_4);
             et_5 = (EditText) view.findViewById(R.id.et_5);
-            et_6 = (EditText) view.findViewById(R.id.et_6);
+            et_6 = (TextView) view.findViewById(R.id.et_6);
             et_7 = (EditText) view.findViewById(R.id.et_7);
             et_8 = (EditText) view.findViewById(R.id.et_8);
             et_9 = (EditText) view.findViewById(R.id.et_9);
