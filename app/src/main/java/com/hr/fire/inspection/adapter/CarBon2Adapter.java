@@ -15,13 +15,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
+import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.TimeUtil;
 
+import java.util.Date;
 import java.util.List;
 
 public class CarBon2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<ItemInfo> mData;
+    private Long checkid;  //检查表的Id
+    private IntentTransmit intentTransmit;   //之前页面数据的传参,如系统号\公司id...
 
     public CarBon2Adapter() {
     }
@@ -39,26 +45,43 @@ public class CarBon2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 .inflate(R.layout.carbon_item1_input, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
-
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         ViewHolder vh = (ViewHolder) holder;
-        ItemInfo info = mData.get(position);
-        vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
-        vh.et_2.setText(new StringBuffer().append("DQP00").append(position + 1));
-        vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
-        vh.et_4.setText(new StringBuffer().append(info.getWeight()).append(""));
-        vh.et_5.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));
-        vh.et_6.setText(new StringBuffer().append(info.getProdFactory()).append(""));
-        vh.et_7.setText(new StringBuffer().append(info.getProdDate()).append(""));
-        vh.et_8.setText(new StringBuffer().append(info.getCheckDate()).append(""));
-        vh.tv_9.setText(new StringBuffer().append("氮气瓶").append(position + 1).append("号表"));
+        if (mData != null && mData.size() != 0) {
+            ItemInfo info = mData.get(position);
+            vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
+            vh.et_2.setText(new StringBuffer().append("DQP00").append(position + 1));
+            vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
+            vh.et_4.setText(new StringBuffer().append(info.getWeight()).append(""));
+//            vh.et_5.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));//pressure
+            vh.et_5.setText(new StringBuffer().append(info.getPressure()).append(""));//pressure
+            vh.et_6.setText(new StringBuffer().append(info.getProdFactory()).append(""));
+            String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getProdDate());
+            String mCheckDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getCheckDate());
+            vh.et_7.setText(new StringBuffer().append(mProdDate).append(""));
+            vh.et_8.setText(new StringBuffer().append(mCheckDate).append(""));
+            vh.tv_9.setText(new StringBuffer().append("药剂瓶").append(position + 1).append("号表"));
+        }
         vh.rl_9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (checkid == 0 || intentTransmit == null) {
+                    Toast.makeText(mContext, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent intent = new Intent(mContext, CarBonGoodsWeightAcitivty.class);
+                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_ID, checkid);
+                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE, "氮气瓶  >  检查表");
+                intent.putExtra("item_id", mData.get(position).getId());
+
+                if (mData.get(position).getId() != 0) {
+                    intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE_ID, mData.get(position).getId());
+                }
+                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_SYS_DATA, intentTransmit);
                 mContext.startActivity(intent);
             }
         });
@@ -68,29 +91,13 @@ public class CarBon2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 removeData(position);
             }
         });
-
     }
 
     @Override
     public int getItemCount() {
-        if (mData.size() < 1) {
-            //当数据为空时,也需要返回两条列表给用户
-            return 1;
-        } else {
-            return mData.size();
-        }
+        return mData.size();
     }
 
-    //  添加数据
-    public void addData(int position) {
-//      在list中添加数据，并通知条目加入一条
-        if (mData != null && mData.size() != 0) {
-            //添加最后一条数据
-            mData.add(mData.get(mData.size() - 1));
-            //添加动画
-            notifyItemInserted(position);
-        }
-    }
 
     //  删除数据
     public void removeData(int position) {
@@ -99,13 +106,32 @@ public class CarBon2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             return;
         }
         if (mData != null && mData.size() != 0 && mData.size() > 1) {
+            //1.删除数据库数据,
+            ItemInfo itemInfo = mData.get(position);
+            ServiceFactory.getYearCheckService().delete(itemInfo);
+            //2.刷新列表数据,  理论上应该是数据库删除成功后,有一个返回值,在进行刷新
             mData.remove(position);
             //删除动画
             notifyItemRemoved(position);
-            notifyDataSetChanged();
+            //通知重新绑定某一范围内的的数据与界面
+            notifyItemRangeChanged(position, mData.size() - position);//通知数据与界面重新绑定
         }
-
     }
+
+    /**
+     * @param id
+     * @param it
+     */
+    public void setCheckId(Long id, IntentTransmit it) {
+        checkid = id;
+        intentTransmit = it;
+    }
+
+    public void setNewData(List<ItemInfo> itemDataList) {
+        this.mData = itemDataList;
+        notifyDataSetChanged();
+    }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_1;

@@ -62,6 +62,7 @@ public class FireActivity extends AppCompatActivity {
 
     private void initData() {
         systemNameData = ServiceFactory.getYearCheckService().getSystemNameData();
+//        Log.d("dong", "s==== " + systemNameData.size() + "   " + systemNameData.toString());
     }
 
     Intent intent = new Intent();
