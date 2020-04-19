@@ -95,6 +95,7 @@ public class FireActivity extends AppCompatActivity {
                 intent.putExtra("sys_id", sys_id);
                 intent.putExtra("platform_id", platform_id);
                 intent.putExtra("f_title", f_title);
+                Log.d("dong", "sys_id-----" + sys_id+ "platform_id-------"+platform_id+ "f_title--------"+f_title);
                 startActivity(intent);
                 //这个时候,需要关闭当前页面,并且关闭之前所有选择的页面
                 finish();
