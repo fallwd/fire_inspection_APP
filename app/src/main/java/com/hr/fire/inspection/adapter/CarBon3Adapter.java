@@ -136,7 +136,6 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             iv7 = (ImageView) view.findViewById(R.id.iv7);
             tv8 = (TextView) view.findViewById(R.id.tv8);
             ev8 = (EditText) view.findViewById(R.id.ev8);
-            vw = (View) view.findViewById(R.id.vw);
         }
     }
 
