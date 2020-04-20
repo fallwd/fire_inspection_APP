@@ -69,6 +69,7 @@ public class RulesActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         // 点击返回上一页
         TextView textView = (TextView) findViewById(R.id.tv_inspection_pro);
         textView.setOnClickListener(new View.OnClickListener() {

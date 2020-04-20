@@ -1,14 +1,7 @@
 package com.hr.fire.inspection.activity;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Parcelable;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,25 +14,39 @@ import android.widget.Toast;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.FireReportItemAdapter;
-import com.hr.fire.inspection.entity.CheckType;
-import com.hr.fire.inspection.entity.SystemList;
+import com.hr.fire.inspection.entity.CompanyInfo;
+import com.hr.fire.inspection.service.ServiceFactory;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class FireReportActivity extends AppCompatActivity {
-    private String[] pose_list = null;  //接收方数组
-    private ArrayList<SystemList> mList;
-
+    private List<HashMap> mapList; // 获取报告列表
+    private FireReportItemAdapter fireReportItemAdapter;
+    private List<CompanyInfo> bussy_dataList; // 获取公司列表
+    private ArrayList<String> bussy_list;
+    private List<CompanyInfo> yt_dataList; // 获取公司列表
+    private ArrayList<String> yt_list;
+    private String company_name;
+    private String oil_name;
+    private String Platform_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fire_report);
-        checkPermissions();
+
+        // 获取Bundle的信息
+        // 获得公司名称  油田名称
+        Bundle b = getIntent().getExtras();
+        oil_name = b.getString("oil_name");
+        company_name = b.getString("company_name");
+        Platform_name = b.getString("Platform_name");
+        initData(); // 初始化接口数据
+
         // 点击返回上一页
         ImageButton imageButton = (ImageButton) findViewById(R.id.backHome);
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -49,56 +56,120 @@ public class FireReportActivity extends AppCompatActivity {
             }
         });
 
-        // 设置起止事件
+        // 设置起止时间
         Button start_time = (Button) findViewById(R.id.start_time);
         Button end_time = (Button) findViewById(R.id.end_time);
         start_time.setText(getData());
         end_time.setText(netCheckTime());
         final Spinner spinner_buss = (Spinner) findViewById(R.id.spinner_bussy);
-        Spinner spinner_yt = (Spinner) findViewById(R.id.spinner_yt);
+        final Spinner spinner_yt = (Spinner) findViewById(R.id.spinner_yt);
         Spinner spinner_sys = (Spinner) findViewById(R.id.spinner_sys);
         Spinner spinner_pt = (Spinner) findViewById(R.id.spinner_pt);
         Spinner spinner_per = (Spinner) findViewById(R.id.spinner_per);
 
-//        Serializable bundleObject = getIntent().getBundleExtra("list").getSerializable("list");
-        mList = (ArrayList<SystemList>) getIntent().getSerializableExtra("list");
-//        Log.d("key22222222", String.valueOf(mList));
+
         //数据
-        ArrayList<String> data_list = new ArrayList<>();
-        data_list.add("北京");
-        data_list.add("上海");
-        data_list.add("广州");
-        data_list.add("深圳");
+        ArrayList<String>
+                data_list1 = new ArrayList<>(),
+                data_list2 = new ArrayList<>(),
+                data_list3 = new ArrayList<>(),
+                data_list4 = new ArrayList<>(),
+                data_list5 = new ArrayList<>();
+
+//        data_list3.add(oil_name);
+//        data_list4.add("深圳");
+//        data_list5.add("深圳");
 
         // 初始化下拉框，并监听事件
-        InitSetSpinner(spinner_buss, data_list);
-        InitSetSpinner(spinner_yt, data_list);
-        InitSetSpinner(spinner_sys, data_list);
-        InitSetSpinner(spinner_pt, data_list);
-        InitSetSpinner(spinner_per, data_list);
+        InitSetSpinner(spinner_buss,bussy_list);
+
+        InitSetSpinner(spinner_sys, data_list3);
+        InitSetSpinner(spinner_pt, data_list4);
+        InitSetSpinner(spinner_per, data_list5);
 
 
+        // 点击油田下拉框 获取公司选中的参数
+//        spinner_yt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                //
+//                InitSetSpinner(spinner_yt, yt_list);
+//                String str = spinner_buss.getSelectedItem().toString();
+//                Toast.makeText(FireReportActivity.this, str, Toast.LENGTH_SHORT).show();
+//                init_yt_Data(str);
+//            }
+//        });
+    }
+
+    private void initData() {
+        //获取报告列表
+        mapList = ServiceFactory.getYearCheckService().getOutputList();
+        Log.d("key", String.valueOf(mapList));
+
+        // 获取公司列表
+        bussy_dataList = ServiceFactory.getCompanyInfoService().getCompanyList();
+        bussy_list = new ArrayList<>();
+        for (int i = 0; i < bussy_dataList.size(); i++) {
+            CompanyInfo CompanyListItem = bussy_dataList.get(i);
+            String companyName = CompanyListItem.getCompanyName();
+            if (companyName != null && companyName != "") {
+                bussy_list.add(companyName);
+            }
+        }
+    }
+
+    private void init_yt_Data(String infocontcompanyName) {
+        // 请选择油田  ->>> 传入公司参数 infocontcompanyName
+        yt_dataList = ServiceFactory.getCompanyInfoService().getOilfieldList(infocontcompanyName);
+        yt_list = new ArrayList<>();
+
+        for (int i = 0; i < yt_dataList.size(); i++) {
+            CompanyInfo CompanyListItem = yt_dataList.get(i);
+            String companyName = CompanyListItem.getOilfieldName();
+            if(companyName != null && companyName != ""){
+                yt_list.add(companyName);
+            }
+        }
+    }
+    //
+    private ArrayList<String> initgetList(List datalist, String str){
+        ArrayList<String> list;
+        list = new ArrayList<>();
+
+        for (int i = 0; i < datalist.size(); i++) {
+            CompanyInfo ListItem = (CompanyInfo) datalist.get(i);
+            String name = ListItem.getOilfieldName();
+            if(name != null && name != ""){
+                list.add(name);
+            }
+        }
+        return list;
+    };
+    protected void onStart() {
+        super.onStart();
         //设置样式
-        FireReportItemAdapter fireReportItemAdapter = new FireReportItemAdapter(this);
-        fireReportItemAdapter.setData(mList);
+        fireReportItemAdapter = new FireReportItemAdapter(this);
+        fireReportItemAdapter.get_oil_name(oil_name);
+        fireReportItemAdapter.get_Platform_name(Platform_name);
+        fireReportItemAdapter.get_company_name(company_name);
+        fireReportItemAdapter.setData(mapList);
         //加载适配器
-        ListView main_list2 = (ListView) findViewById(R.id.main_list2);
+        ListView main_list2 = findViewById(R.id.main_list2);
         main_list2.setAdapter(fireReportItemAdapter);
         main_list2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final Long id1 = mList.get(position).getId();
-                final String itemCon = mList.get(position).getName();
-                Toast.makeText(FireReportActivity.this, "当前id为：" + id1, Toast.LENGTH_SHORT).show();
+//                final Long id1 = mList.get(position).getId();
+//                Toast.makeText(FireReportActivity.this, "当前id为：" + id1, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    /**
-     * 获取手机时间  下次检验日期推迟一年减一天
-     * return 年/月/日
-     **/
-
+        /**
+         * 获取手机时间  下次检验日期推迟一年减一天
+         * return 年/月/日
+         **/
+    
     private String netCheckTime() {
         Calendar calendar = Calendar.getInstance();
         Date date = new Date(System.currentTimeMillis());
@@ -145,81 +216,16 @@ public class FireReportActivity extends AppCompatActivity {
              */
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("dong", String.valueOf(id));
                 String data = (String) spinner.getItemAtPosition(position);//从spinner中获取被选择的数据
-//                Toast.makeText(FireReportActivity.this, data, Toast.LENGTH_SHORT).show();
+                fireReportItemAdapter.setSelectedData(data);
+                Toast.makeText(FireReportActivity.this, data, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                Log.d("dong","===onNothingSelected");
             }
         });
     }
-
-
-    private boolean isNeedCheck = true;
-    private static String[] needPermissions = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE};
-
-    private static final int PERMISSON_REQUESTCODE = 0;
-
-    /**
-     * 检查权限
-     */
-    private void checkPermissions(String... permissions) {
-        List<String> needRequestPermissonList = findDeniedPermissions(permissions);
-        if (null != needRequestPermissonList
-                && needRequestPermissonList.size() > 0) {
-            ActivityCompat.requestPermissions(this,
-                    needRequestPermissonList.toArray(
-                            new String[needRequestPermissonList.size()]),
-                    PERMISSON_REQUESTCODE);
-        }
-    }
-
-    /**
-     * 获取权限集中需要申请权限的列表
-     *
-     * @param permissions
-     * @return
-     * @since 2.5.0
-     */
-    private List<String> findDeniedPermissions(String[] permissions) {
-        List<String> needRequestPermissonList = new ArrayList<String>();
-        for (String perm : permissions) {
-            if (ContextCompat.checkSelfPermission(this,
-                    perm) != PackageManager.PERMISSION_GRANTED
-                    || ActivityCompat.shouldShowRequestPermissionRationale(
-                    this, perm)) {
-                needRequestPermissonList.add(perm);
-            }
-        }
-        return needRequestPermissonList;
-    }
-
-    /**
-     * 检测是否有的权限都已经授权
-     *
-     * @param grantResults
-     */
-    private boolean verifyPermissions(int[] grantResults) {
-        for (int result : grantResults) {
-            if (result != PackageManager.PERMISSION_GRANTED) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] paramArrayOfInt) {
-        if (requestCode == PERMISSON_REQUESTCODE) {
-            if (!verifyPermissions(paramArrayOfInt)) {
-//                showMissingPermissionDialog();
-                isNeedCheck = false;
-            }
-        }
-    }
-
 }

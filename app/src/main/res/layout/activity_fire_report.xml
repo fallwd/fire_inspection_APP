@@ -86,15 +86,15 @@
                         android:layout_marginLeft="10dp"
                         android:background="@drawable/button_border"
                         android:drawableRight="@mipmap/cmander"
-                        android:textSize="12dp">
+                        android:textSize="12sp">
 
                     </Button>
-
+                    <!--请选择公司-->
                     <Spinner
                         android:id="@+id/spinner_bussy"
                         style="@style/spinner_style"
                         android:background="@drawable/spriner_style"
-                        android:entries="@array/spingarr"></Spinner>
+                        android:entries="@array/spingarr" />
                     <!--请选择油田-->
                     <Spinner
                         android:id="@+id/spinner_yt"
