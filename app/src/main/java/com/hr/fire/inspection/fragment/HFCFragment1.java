@@ -126,7 +126,7 @@ public class HFCFragment1 extends Fragment {
         itemObj.setTaskNumber(et_9.getText().toString());
         itemObj.setProdDate(date);
         itemObj.setObserveDate(date1);
-        itemObj.setCheckDate(new Date());
+//        itemObj.setCheckDate(new Date());
         itemObj.setIsPass("是");
         itemObj.setLabelNo("BQ0002");
 
@@ -187,7 +187,7 @@ public class HFCFragment1 extends Fragment {
             itemObj.setTaskNumber(et_9.getText().toString());
             itemObj.setProdDate(date);
             itemObj.setObserveDate(date1);
-            itemObj.setCheckDate(new Date());
+//            itemObj.setCheckDate(new Date());
             itemObj.setIsPass("是");
             itemObj.setLabelNo("BQ0002");
             ServiceFactory.getYearCheckService().update(itemObj);

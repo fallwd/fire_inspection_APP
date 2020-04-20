@@ -34,12 +34,6 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-<<<<<<< HEAD
-
-=======
-//         初始化数据库,插入测试数据
->>>>>>> c7c6ea5001ed1c26c21778236285b03bd6ea443d
-
 //         清空数据库
 //        DBManager cleanObj = new DBManager(this);
 //        cleanObj.deleSQL();

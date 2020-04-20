@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,27 +13,23 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
-import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.YearCheck;
-import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
 
-public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class HFC4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<YearCheck> mData;
 
 
-    public CarBon3Adapter(Context mContext, List<YearCheck> mData) {
+    public HFC4Adapter(Context mContext, List<YearCheck> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
@@ -43,15 +38,14 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.carbon_item3_input, parent, false);
-        CarBon3Adapter.ViewHolder holder = new CarBon3Adapter.ViewHolder(view);
+                .inflate(R.layout.item_hfc3_form_input, parent, false);
+        HFC4Adapter.ViewHolder holder = new HFC4Adapter.ViewHolder(view);
         return holder;
 
     }
-
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-        final ViewHolder vh = (ViewHolder) holder;
+        final HFC4Adapter.ViewHolder vh = (HFC4Adapter.ViewHolder) holder;
         if (mData != null && mData.size() != 0) {
             YearCheck yearCheck = mData.get(position);
             ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -62,8 +56,7 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             vh.tv3.setText(yearCheck.getContent());
             vh.tv4.setText(yearCheck.getRequirement());
             vh.tv5.setText(yearCheck.getStandard());
-//            vh.tv6.setText(ycr.get(position).getIsPass());
-//            vh.ev8.setText(ycr.get(position).getDescription());
+
 
             //在左侧添加图片
             Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
@@ -176,5 +169,4 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             }
         });
     }
-
 }

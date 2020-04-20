@@ -98,16 +98,12 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 finish();
                 break;
             case R.id.bt_next:
-<<<<<<< HEAD
-                Intent intent = new Intent(this, HFCActivity.class);
-=======
                 //不同的系统,匹配不同的跳转页面
                 Intent intent = regularIntent();
                 intent.putExtra("systemId", sys_id);    //系统ID
                 intent.putExtra("platform_id", platform_id);    //公司ID
                 intent.putExtra("f_title", f_title); //系统名称 :高压二氧化碳灭火系统
                 intent.putExtra("sys_number", sys_number); //系统位号 ：SD002(用户自己填写的)
->>>>>>> c7c6ea5001ed1c26c21778236285b03bd6ea443d
                 if (selected_tag == -1) {
                     Date curDateHHmm = TimeUtil.getCurDateHHmm();
                     //selected_tag=-1时,表示用户没有选择任何记录,  新建一个巡检记录,新建记录是根据date来判断的.

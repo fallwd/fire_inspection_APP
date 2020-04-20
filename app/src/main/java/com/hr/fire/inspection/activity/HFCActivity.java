@@ -22,6 +22,8 @@ import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.fragment.HFCFragment1;
 import com.hr.fire.inspection.fragment.HFCFragment2;
 import com.hr.fire.inspection.fragment.HFCFragment3;
+import com.hr.fire.inspection.fragment.HFCFragment4;
+import com.hr.fire.inspection.fragment.HFCFragment5;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 
 import java.util.ArrayList;
@@ -42,6 +44,8 @@ public class HFCActivity extends AppCompatActivity {
     private HFCFragment1 mHFCFragment1;
     private HFCFragment2 mHFCFragment2;
     private HFCFragment3 mHFCFragment3;
+    private HFCFragment4 mHFCFragment4;
+    private HFCFragment5 mHFCFragment5;
     private String f_title;
     private String sys_number;  //系统位号
     private IntentTransmit it;
@@ -83,19 +87,21 @@ public class HFCActivity extends AppCompatActivity {
         mViewPager = findViewById(R.id.vp_content);
         titleList.add("七氟丙烷钢瓶信息采集");
         titleList.add("氮气驱动瓶信息采集");
-        titleList.add("七氟丙烷钢瓶");
-        titleList.add("氮气驱动瓶");
         titleList.add("管线管件");
         titleList.add("保护区");
         titleList.add("功能性实验");
 
         mHFCFragment1 = HFCFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
         mHFCFragment2 = HFCFragment2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
-        mHFCFragment3 = HFCFragment3.newInstance("","");
+        mHFCFragment3 = HFCFragment3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
+        mHFCFragment4 = HFCFragment4.newInstance(ConstantInspection.YEARLY_ON_SITE_F4, it);
+        mHFCFragment5 = HFCFragment5.newInstance(ConstantInspection.YEARLY_ON_SITE_F5, it);
 
         fragments.add(mHFCFragment1);
         fragments.add(mHFCFragment2);
         fragments.add(mHFCFragment3);
+        fragments.add(mHFCFragment4);
+        fragments.add(mHFCFragment5);
 
         //设置缓存的页面数据
         mViewPager.setOffscreenPageLimit(fragments.size());
@@ -168,7 +174,7 @@ public class HFCActivity extends AppCompatActivity {
                     }else if (fragment instanceof HFCFragment2){
                         mHFCFragment2.addItemView();
                     }else if (fragment instanceof HFCFragment3){
-                        mHFCFragment3.addItemView();
+//                        mHFCFragment3.addItemView();
                     }
                 }
 //                currentPager  拿到当前的页面
@@ -186,7 +192,12 @@ public class HFCActivity extends AppCompatActivity {
                         mHFCFragment2.saveData();
                     } else if (fragment instanceof HFCFragment3) {
                         mHFCFragment3.saveData();
+                    } else if (fragment instanceof HFCFragment4) {
+                        mHFCFragment4.saveData();
+                    }else if (fragment instanceof HFCFragment4) {
+                        mHFCFragment5.saveData();
                     }
+
                 }
             }
         });

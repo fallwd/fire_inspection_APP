@@ -1,7 +1,10 @@
 package com.hr.fire.inspection.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +23,7 @@ import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TimeUtil;
+import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.Date;
 import java.util.List;
@@ -51,7 +55,7 @@ public class HFC2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-        HFC2Adapter.ViewHolder vh = (HFC2Adapter.ViewHolder) holder;
+        final HFC2Adapter.ViewHolder vh = (HFC2Adapter.ViewHolder) holder;
         if (mData != null && mData.size() != 0) {
             ItemInfo info = mData.get(position);
             vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
@@ -67,29 +71,83 @@ public class HFC2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.et_8.setText(new StringBuffer().append(mCheckDate).append(""));
             vh.et_9.setText(new StringBuffer().append("").append(""));
             vh.et_10.setText(new StringBuffer().append("").append(""));
-            vh.tv_9.setText(new StringBuffer().append("七氟丙烷钢瓶信息采集瓶").append(position + 1).append("号表"));
+            vh.tv_9.setText(new StringBuffer().append("氮气驱动瓶信息采集瓶").append(position + 1).append("号表"));
+
+            //在左侧添加图片
+            Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+            vh.tv_10.setCompoundDrawables(null, null, drawable, null);
+            Drawable drawable1 = mContext.getResources().getDrawable(R.drawable.listview_border_margin);
+            vh.tv_10.setBackground(drawable1);
+
+            vh.tv_10.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showPopWind(vh.tv_10);
+                }
+            });
+
+            vh.rl_9.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (checkid == 0 || intentTransmit == null) {
+                        Toast.makeText(mContext, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    Intent intent = new Intent(mContext, CarBonGoodsWeightAcitivty.class);
+                    intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_ID, checkid);
+                    if (mData.get(position).getId() != 0) {
+                        intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE_ID, mData.get(position).getId());
+                    }
+                    intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_SYS_DATA, intentTransmit);
+                    Log.e("dong", "系统位号----:" + intentTransmit.number);
+                    mContext.startActivity(intent);
+                }
+            });
         }
-        vh.rl_9.setOnClickListener(new View.OnClickListener() {
+    }
+    private HrPopup hrPopup;
+
+    private void showPopWind(final TextView tv6) {
+        View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods, null);
+        if (hrPopup == null) {
+            hrPopup = new HrPopup((Activity) mContext);
+        }
+        RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
+        RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
+        RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
+        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setBackgroundDrawable(new BitmapDrawable());
+        hrPopup.setFocusable(true);
+        hrPopup.setOutsideTouchable(true);
+        hrPopup.setContentView(PopupRootView);
+        hrPopup.showAsDropDown(tv6);
+        rl_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkid == 0 || intentTransmit == null) {
-                    Toast.makeText(mContext, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
-                    return;
+                tv6.setText("是");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
                 }
-                Intent intent = new Intent(mContext, CarBonGoodsWeightAcitivty.class);
-                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_ID, checkid);
-                if (mData.get(position).getId() != 0) {
-                    intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE_ID, mData.get(position).getId());
-                }
-                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_SYS_DATA, intentTransmit);
-                Log.e("dong", "系统位号----:" + intentTransmit.number);
-                mContext.startActivity(intent);
             }
         });
-        vh.rl_11.setOnClickListener(new View.OnClickListener() {
+        rl_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                removeData(position);
+                tv6.setText("否");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+        rl_other.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv6.setText("---");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
             }
         });
     }
@@ -153,7 +211,6 @@ public class HFC2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         checkid = id;
         intentTransmit = it;
     }
-
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_1;

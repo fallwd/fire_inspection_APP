@@ -83,16 +83,6 @@ public class CarbonFragment3 extends Fragment {
     }
 
     private void initData() {
-<<<<<<< HEAD
-        // 调用接口测试
-        checkTypes = ServiceFactory.getYearCheckService().gettableNameData(it.systemId);
-        if (checkTypes == null) {
-            Toast.makeText(getActivity(), "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
-        }
-        List<YearCheckResult> DataList = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, it.companyInfoId, checkTypes.get(2).getId(), it.number == null ? "" : it.number, it.srt_Date);
-        if(DataList.size()==0){
-           itemDataList = ServiceFactory.getYearCheckService().getCheckDataEasy(checkTypes.get(2).getId());
-=======
         List<CheckType> checkTypes = ServiceFactory.getYearCheckService().gettableNameData(its.systemId);
         checkDataEasy = ServiceFactory.getYearCheckService().getCheckDataEasy(checkTypes.get(2).getId());
         //3.获取用户需要填写的数据,如果没有数据,就需要插入的默认数据（流程4）。如果有数据就
@@ -111,7 +101,6 @@ public class CarbonFragment3 extends Fragment {
                 ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, checkDataEasy.get(i).getId(), its.companyInfoId, checkTypes.get(2).getId(), its.number, its.srt_Date);
                 yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(2).getId(), its.number, its.srt_Date);
             }
->>>>>>> c7c6ea5001ed1c26c21778236285b03bd6ea443d
         }
         initView();
     }
@@ -154,10 +143,6 @@ public class CarbonFragment3 extends Fragment {
     }
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> c7c6ea5001ed1c26c21778236285b03bd6ea443d
     @Override
     public void onDestroyView() {
         super.onDestroyView();
