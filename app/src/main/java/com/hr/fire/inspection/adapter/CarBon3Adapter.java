@@ -24,19 +24,22 @@ import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.YearCheck;
+import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
 
 public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private List<YearCheckResult> ycr;
     private Context mContext;
     private List<YearCheck> mData;
 
 
-    public CarBon3Adapter(Context mContext, List<YearCheck> mData) {
+    public CarBon3Adapter(Context mContext, List<YearCheck> mData, List<YearCheckResult> yearCheckResults) {
         this.mContext = mContext;
         this.mData = mData;
+        this.ycr = yearCheckResults;
     }
 
     @NonNull
@@ -62,8 +65,9 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             vh.tv3.setText(yearCheck.getContent());
             vh.tv4.setText(yearCheck.getRequirement());
             vh.tv5.setText(yearCheck.getStandard());
-//            vh.tv6.setText(ycr.get(position).getIsPass());
-//            vh.ev8.setText(ycr.get(position).getDescription());
+
+            vh.tv6.setText(ycr.get(position).getIsPass());
+            vh.ev8.setText(ycr.get(position).getDescription());
 
             //在左侧添加图片
             Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
@@ -80,6 +84,9 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             vh.tv6.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Log.d("dong","点击的状post== " + position);
+
+                    //如果点击的是最后一个条目, 那么控件的高度需要增加  否则弹框会被挡住
                     showPopWind(vh.tv6);
                 }
             });
@@ -113,6 +120,7 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         ImageView iv7;
         TextView tv8;
         EditText ev8;
+        View vw;
 
         ViewHolder(View view) {
             super(view);
@@ -128,6 +136,7 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             iv7 = (ImageView) view.findViewById(R.id.iv7);
             tv8 = (TextView) view.findViewById(R.id.tv8);
             ev8 = (EditText) view.findViewById(R.id.ev8);
+            vw = (View) view.findViewById(R.id.vw);
         }
     }
 
@@ -148,6 +157,7 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         hrPopup.setOutsideTouchable(true);
         hrPopup.setContentView(PopupRootView);
         hrPopup.showAsDropDown(tv6);
+
         rl_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
