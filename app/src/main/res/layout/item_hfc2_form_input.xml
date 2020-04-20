@@ -212,7 +212,7 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="工作代号"
+                android:text="标签"
                 android:textSize="12sp" />
         </RelativeLayout>
 

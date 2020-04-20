@@ -76,7 +76,7 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
                 Intent intent = new Intent(mContext, CarBonGoodsWeightAcitivty.class);
                 intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_ID, checkid);
-                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE, "七氟丙烷钢瓶 >  检查表");
+                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE, "药剂瓶 >  检查表");
                 intent.putExtra("item_id", mData.get(position).getId());
 
                 if (mData.get(position).getId() != 0) {

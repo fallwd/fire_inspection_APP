@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="40dp"
@@ -18,7 +19,6 @@
             android:layout_width="16dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-
             <TextView
                 android:id="@+id/tv_1"
                 android:layout_width="wrap_content"
@@ -28,10 +28,10 @@
                 android:textSize="12sp" />
         </RelativeLayout>
 
+
         <RelativeLayout
             android:layout_width="30dp"
             android:layout_height="wrap_content">
-
             <EditText
                 android:id="@+id/et_2"
                 android:layout_width="wrap_content"
@@ -44,11 +44,11 @@
                 android:textSize="12sp" />
         </RelativeLayout>
 
+
         <RelativeLayout
             android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-
             <EditText
                 android:id="@+id/et_3"
                 android:layout_width="wrap_content"
@@ -65,7 +65,6 @@
             android:layout_width="32dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-
             <EditText
                 android:id="@+id/et_4"
                 android:layout_width="wrap_content"
@@ -82,7 +81,6 @@
             android:layout_width="44dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-
             <EditText
                 android:id="@+id/et_5"
                 android:layout_width="wrap_content"
@@ -95,11 +93,11 @@
                 android:textSize="12sp" />
         </RelativeLayout>
 
+
         <RelativeLayout
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-
             <EditText
                 android:id="@+id/et_6"
                 android:layout_width="wrap_content"
@@ -116,7 +114,6 @@
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-
             <EditText
                 android:id="@+id/et_7"
                 android:layout_width="wrap_content"
@@ -133,7 +130,6 @@
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-
             <EditText
                 android:id="@+id/et_8"
                 android:layout_width="wrap_content"
@@ -146,12 +142,10 @@
                 android:textSize="12sp" />
         </RelativeLayout>
 
-
         <RelativeLayout
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-
             <EditText
                 android:id="@+id/et_9"
                 android:layout_width="wrap_content"
@@ -169,7 +163,6 @@
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-
             <TextView
                 android:id="@+id/tv_9"
                 android:layout_width="wrap_content"
@@ -180,20 +173,6 @@
                 android:text="检查表"
                 android:textSize="10sp" />
         </RelativeLayout>
-
-        <!--<RelativeLayout-->
-            <!--android:layout_width="30dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center">-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/tv_10"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_centerInParent="true"-->
-                <!--android:text=""-->
-                <!--android:textSize="12sp" />-->
-        <!--</RelativeLayout>-->
 
 
         <RelativeLayout
@@ -214,11 +193,11 @@
                 tools:ignore="SmallSp" />
         </RelativeLayout>
 
+
         <RelativeLayout
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-
             <EditText
                 android:id="@+id/et_10"
                 android:layout_width="wrap_content"
@@ -227,7 +206,7 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="工作代号"
+                android:text="标签"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -236,7 +215,6 @@
             android:id="@+id/rl_11"
             android:layout_width="24dp"
             android:layout_height="match_parent">
-
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
@@ -244,5 +222,6 @@
                 android:background="@mipmap/remove_item"
                 android:textSize="12sp" />
         </RelativeLayout>
+
     </TableRow>
 </TableLayout>

@@ -102,7 +102,6 @@
         <activity
             android:name=".activity.CarbonDioxideAcitivty"
             android:screenOrientation="landscape" />
-
         <activity
             android:name=".activity.CarBonGoodsWeightAcitivty"
             android:screenOrientation="landscape" />
@@ -115,6 +114,8 @@
         <activity
             android:name=".activity.AutomaticFireAlarmAcitivty"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.SeawaterSystemActivity"
+            android:screenOrientation="landscape" />
     </application>
-
 </manifest>
