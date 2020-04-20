@@ -29,6 +29,7 @@ import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.service.impl.YearCheckServiceImpl;
 import com.hr.fire.inspection.utils.HYLogUtil;
 import com.hr.fire.inspection.utils.TimeUtil;
+import com.hr.fire.inspection.utils.ToastUtil;
 
 
 import java.io.Serializable;
@@ -87,7 +88,7 @@ public class AutomaticFireAlarm1 extends Fragment {
     }
 
     private void initData() {
-        List<CheckType> arr = ServiceFactory.getYearCheckService().gettableNameData(1);
+        List<CheckType> arr = ServiceFactory.getYearCheckService().gettableNameData(it.systemId);
         long checkTypeId = arr.get(0).getId();
 
 
@@ -123,14 +124,38 @@ public class AutomaticFireAlarm1 extends Fragment {
     //动态添加条目
     public void addItemView() {
         if (adapter != null) {
-            adapter.addData(itemDataList.size());
-            //点击"＋", 就像数据库中插入一条数据, 点"保存"就更新所有数据
-            hz_table_tbody_id.post(new Runnable() {
-                @Override
-                public void run() {
-                    addData();
-                }
-            });
+            ItemInfo itemInfo = new ItemInfo();
+            if (itemDataList != null && itemDataList.size() != 0) {
+                //点击新增,有数据,就拿到最后一条数据新增,创建一个新的对象
+                ItemInfo item = itemDataList.get(itemDataList.size() - 1);
+                //如果直接新增会导致后台id冲重复\冲突
+                itemInfo.setNo(item.getNo());
+//                itemInfo.setDeviceType(item.getDeviceType());
+                itemInfo.setTypeNo(item.getTypeNo());
+                itemInfo.setAppearance(item.getAppearance());
+                itemInfo.setResponseTime(item.getResponseTime());
+                itemInfo.setIsPass(item.getIsPass());
+                itemInfo.setDescription(item.getDescription());
+                itemInfo.setProdFactory(item.getProdFactory());
+            } else {
+                //点击新增,如果没有数据,就造一条默认数据
+                itemInfo.setNo("请编辑");
+//                itemInfo.setDeviceType("请编辑");
+                itemInfo.setTypeNo("请编辑");
+                itemInfo.setResponseTime("请编辑");
+                itemInfo.setIsPass("请编辑");
+                itemInfo.setDescription("请编辑");
+                itemInfo.setProdFactory("请编辑");
+                itemInfo.setAppearance("请编辑");
+            }
+            long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, it.companyInfoId, checkTypes.get(0).getId(), it.number, it.srt_Date);
+            //表示数据插入成功,再次查询,拿到最新的数据
+            if (l1 == 0) {
+                itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(0).getId(), it.number == null ? "" : it.number, it.srt_Date);
+                adapter.setNewData(itemDataList);
+            } else {
+                ToastUtil.show(getActivity(), "未知错误,新增失败", Toast.LENGTH_SHORT);
+            }
         }
     }
 
@@ -158,20 +183,19 @@ public class AutomaticFireAlarm1 extends Fragment {
         EditText tv_10 = childAt.findViewById(R.id.tv_10);
 
 
-        itemObj.setNo(et_2.getText().toString());
-        itemObj.setVolume(et_3.getText().toString());
+//        itemObj.setDeviceType(et_2.getText().toString());
+        itemObj.setProdFactory(et_3.getText().toString());
         itemObj.setTypeNo(et_4.getText().toString());
         itemObj.setNo(et_5.getText().toString());
         itemObj.setAppearance(et_6.getText().toString());
-        Date date = TimeUtil.getInstance().hhmmssTodata(et_7.getText().toString());
-        itemObj.setProdDate(date);
+        itemObj.setResponseTime(et_7.getText().toString());
         itemObj.setIsPass(et_8.getText().toString());
         itemObj.setDescription(tv_10.getText().toString());
         itemObj.setCheckDate(new Date());
 
         long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj, it.companyInfoId, checkTypes.get(0).getId(), it.number, it.srt_Date);
         if (l1 == 0) {
-            Toast.makeText(getContext(), "药剂瓶数据保存成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "数据保存成功", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -202,20 +226,20 @@ public class AutomaticFireAlarm1 extends Fragment {
             EditText tv_10 = childAt.findViewById(R.id.tv_10);
 
             ItemInfo itemObj = itemDataList.get(i);
-            itemObj.setNo(et_2.getText().toString());
-            itemObj.setVolume(et_3.getText().toString());
+//            itemObj.setDeviceType(et_2.getText().toString());
+            itemObj.setProdFactory(et_3.getText().toString());
             itemObj.setTypeNo(et_4.getText().toString());
             itemObj.setNo(et_5.getText().toString());
             itemObj.setAppearance(et_6.getText().toString());
-            Date date = TimeUtil.getInstance().hhmmssTodata(et_7.getText().toString());
-            itemObj.setProdDate(date);
+            itemObj.setResponseTime(et_7.getText().toString());
             itemObj.setIsPass(et_8.getText().toString());
             itemObj.setDescription(tv_10.getText().toString());
-            itemObj.setCheckDate(new Date());
+
+//            itemObj.setCheckDate(new Date());
 //            序号  tv_1  瓶号 et_2     生产厂家et_6  生产时间et_7  合格et_8  拍照rl_9  隐患描述tv_10
             Log.d("dong", "itemObj222222保存==   "+itemObj);
             ServiceFactory.getYearCheckService().update(itemObj);
-            Toast.makeText(getActivity(), "感烟探测器,保存成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "数据保存成功", Toast.LENGTH_SHORT).show();
         }
     }
 
