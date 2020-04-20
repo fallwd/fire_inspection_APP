@@ -170,7 +170,8 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
     @Override
     public List<ItemInfo> getItemDataEasy(long companyInfoId, long checkTypeId, String number, Date checkDate) {
         QueryBuilder<ItemInfo> queryBuilder;
-        if(number!=null && number!=""){
+//        if(number!=null && number!=""){
+        if(number!=null){
             queryBuilder = daoSession.queryBuilder(ItemInfo.class).where(
                     ItemInfoDao.Properties.SystemNumber.eq(number),
                     ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
@@ -279,7 +280,8 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 //            Log.i("info", "查询完成02-------------------------------------------");
         }
         else {
-            if(number != null && number!=""){
+//            if(number != null && number!=""){
+            if(number != null){
                 queryBuilder = daoSession.queryBuilder(YearCheckResult.class).where(
                         YearCheckResultDao.Properties.SystemNumber.eq(number),
                         YearCheckResultDao.Properties.CompanyInfoId.eq(companyInfoId),
@@ -517,7 +519,10 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
     public HashMap getResultBySystem(long companyInfoId, Date checkDate, String systemName, String tableName) {
         HashMap systemMap;
         QueryBuilder<CheckType> checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
-                where(CheckTypeDao.Properties.Name.eq(systemName));
+                where(
+                        CheckTypeDao.Properties.Name.eq(systemName),
+                        CheckTypeDao.Properties.Type.eq(1)
+                );
         long systemId = checkTypeQueryBuilder.list().get(0).getId();
         // 获取表id
         QueryBuilder<CheckType> tableQueryBuilder = daoSession.queryBuilder(CheckType.class).
