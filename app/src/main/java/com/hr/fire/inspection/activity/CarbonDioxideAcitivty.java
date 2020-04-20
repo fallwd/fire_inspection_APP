@@ -113,6 +113,11 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
             @Override
             public void onPageSelected(int i) {
                 currentPager = i;
+                if (i == 2 || i == 3 || i == 4) {
+                    iv_add_table.setVisibility(View.GONE);
+                } else {
+                    iv_add_table.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
@@ -168,13 +173,9 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
                         carbonFragment1.addItemView();
                     } else if (fragment instanceof CarbonFragment2) {
                         carbonFragment2.addItemView();
-                    } else if(fragment instanceof  CarbonFragment3){
-                        carbonFragment3.addItemView();
-                    }else if(fragment instanceof  CarbonFragment4){
-                        carbonFragment4.addItemView();
                     }
                 }
-//                currentPager  拿到当前的页面
+
             }
         });
         iv_save.setOnClickListener(new View.OnClickListener() {
@@ -184,6 +185,14 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
                     Fragment fragment = fragments.get(currentPager);
                     if (fragment instanceof CarbonFragment1) {
                         carbonFragment1.upData();
+                    } else if (fragment instanceof CarbonFragment2) {
+                        carbonFragment2.upData();
+                    } else if (fragment instanceof CarbonFragment3) {
+                        carbonFragment3.upData();
+                    } else if (fragment instanceof CarbonFragment4) {
+//                        carbonFragment4.upData();
+                    } else if (fragment instanceof CarbonFragment5) {
+                        carbonFragment5.upData();
                     }
                 }
             }

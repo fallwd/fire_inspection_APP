@@ -4,14 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--<include layout="@layout/item_goods_form" />-->
-    <include layout="@layout/item_goods_check" />
+    <include layout="@layout/hz_table_head4" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rc_list3"
+        android:id="@+id/hz_table_tbody_id2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white" />
-
-
 </LinearLayout>
