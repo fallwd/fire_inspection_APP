@@ -34,16 +34,13 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-//         初始化数据库,插入测试数据
-
 //         清空数据库
-//        DBManager cleanObj = new DBManager(this);
-//        cleanObj.deleSQL();
-//        // 初始化数据库
-//        BaseData baseData = new BaseData();
-//        baseData.initData();
-//        baseData.insertTestData();
-
+        DBManager cleanObj = new DBManager(this);
+        cleanObj.deleSQL();
+        // 初始化数据库
+        BaseData baseData = new BaseData();
+        baseData.initData();
+        baseData.insertTestData();
         // 调用接口测试
 //        List<CompanyInfo> companyList = ServiceFactory.getCompanyInfoService().getAll();
 //        for(int i=0;i<companyList.size();i++){
@@ -185,7 +182,6 @@ public class WelcomeActivity extends AppCompatActivity {
 //            Log.i("retList:::",""+retList.get(i));
 //
 //        }
-
 
         Toast.makeText(WelcomeActivity.this, "系统将在2秒后为您自动跳转到首页", Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {

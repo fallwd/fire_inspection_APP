@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.GridRecordAdapter;
+import com.hr.fire.inspection.adapter.HFC1Adapter;
 import com.hr.fire.inspection.entity.Function;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TimeUtil;
@@ -52,6 +53,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         platform_id = intent.getLongExtra("platform_id", 0);  //平台ID
         f_title = intent.getStringExtra("f_title");  //传过来的系统名称
         sys_number = intent.getStringExtra("sys_number");  //系统位号
+        Log.d("dong", "sys_id==========" + sys_id+ "platform_id========"+platform_id+ "f_title==========="+f_title);
 
     }
 
@@ -77,7 +79,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         for (int i = 0; i < historyList.size(); i++) {
             hot.add(new Function((String) historyList.get(i).get("ret"), 0, false));
         }
-
+        
         rc_list.setLayoutManager(new GridLayoutManager(this, 4));
         GridRecordAdapter toolAdapter = new GridRecordAdapter(this, hot, historyList.size());
         rc_list.setAdapter(toolAdapter);
@@ -88,7 +90,6 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 selected_tag = tag;
             }
         });
-
     }
 
     @Override

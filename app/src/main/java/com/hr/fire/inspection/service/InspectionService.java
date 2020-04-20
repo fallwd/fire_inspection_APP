@@ -35,14 +35,16 @@ public interface InspectionService {
      * @param
      * @return
      */
-    List<InspectionResult> getInspectionData(long companyInfoId, long checkTypeId, Date checkDate);
+//    List<InspectionResult> getInspectionData(long companyInfoId, long checkTypeId, Date checkDate);
+    List<InspectionResult> getInspectionData(long companyInfoId, long systemId, Date checkDate);
 
     /**
      * 插入一条巡检信息
      * @param   inspectionData InspectionResult，属性对应输入内容即可
      * @return
      */
-    long insertInspectionData(InspectionResult inspectionData, long companyInfoId,  long checkTypeId, Date checkDate);
+//    long insertInspectionData(InspectionResult inspectionData, long companyInfoId,  long checkTypeId, Date checkDate);
+    long insertInspectionData(InspectionResult inspectionData, long companyInfoId,  long systemId, Date checkDate);
 
     // 导出报告相关接口
     /**
@@ -57,7 +59,7 @@ public interface InspectionService {
      * @param
      * @return
      */
-    List<HashMap> getOutputItemData(long companyInfoId, String checkPerson,Date checkDate);
+    List<HashMap> getOutputItemData(long companyInfoId, long systemId, String checkPerson,Date checkDate);
 
 
 }

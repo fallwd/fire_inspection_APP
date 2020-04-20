@@ -194,4 +194,5 @@ public void __setDaoSession(DaoSession daoSession) {
                 ", standard='" + standard + '\'' +
                 '}';
     }
+
 }

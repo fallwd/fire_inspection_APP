@@ -34,15 +34,19 @@ public class ItemInfo   {
 
     private String typeNo;//型号
 
-//    private String deviceType;//设备型号
+    private String deviceType;//设备型号
 
-    private String no; //编号
+    private String agentsType;//介质类型
+
+    private Date fillingDate;//灌装日期
+
+    private String no; //编号 瓶号
 
     private String volume; //容积
 
     private String weight; //瓶重
 
-    private String goodsWeight;//物品重量
+    private String goodsWeight;//物品重量 药剂重量
 
     private String pressure;//压力
 
@@ -109,22 +113,24 @@ private transient DaoSession daoSession;
 @Generated(hash = 547138643)
 private transient ItemInfoDao myDao;
 
-@Generated(hash = 1061526940)
+@Generated(hash = 48858648)
 public ItemInfo(Long id, Long checkTypeId, Long companyInfoId, String typeNo,
-        String no, String volume, String weight, String goodsWeight,
-        String pressure, String prodFactory, Date prodDate,
-        String typeConformity, String positionConformity, String appearance,
-        String check, String slience, String reset, String powerAlarmFunction,
-        String alarmFunction, String effectiveness, String responseTime,
-        String description, String setAlarm25, String setAlarm50,
-        String testAlarm25, String testAlarm50, Date observeDate,
-        String taskNumber, String isPass, String labelNo, String imageUrl,
-        String codePath, String SystemNumber, String ProtectArea,
-        Date checkDate) {
+        String deviceType, String agentsType, Date fillingDate, String no, String volume,
+        String weight, String goodsWeight, String pressure, String prodFactory,
+        Date prodDate, String typeConformity, String positionConformity,
+        String appearance, String check, String slience, String reset,
+        String powerAlarmFunction, String alarmFunction, String effectiveness,
+        String responseTime, String description, String setAlarm25, String setAlarm50,
+        String testAlarm25, String testAlarm50, Date observeDate, String taskNumber,
+        String isPass, String labelNo, String imageUrl, String codePath,
+        String SystemNumber, String ProtectArea, Date checkDate) {
     this.id = id;
     this.checkTypeId = checkTypeId;
     this.companyInfoId = companyInfoId;
     this.typeNo = typeNo;
+    this.deviceType = deviceType;
+    this.agentsType = agentsType;
+    this.fillingDate = fillingDate;
     this.no = no;
     this.volume = volume;
     this.weight = weight;
@@ -589,6 +595,9 @@ public void __setDaoSession(DaoSession daoSession) {
                 ", companyInfoId=" + companyInfoId +
                 ", companyInfo=" + companyInfo +
                 ", typeNo='" + typeNo + '\'' +
+                ", deviceType='" + deviceType + '\'' +
+                ", agentsType='" + agentsType + '\'' +
+                ", fillingDate=" + fillingDate +
                 ", no='" + no + '\'' +
                 ", volume='" + volume + '\'' +
                 ", weight='" + weight + '\'' +
@@ -623,4 +632,29 @@ public void __setDaoSession(DaoSession daoSession) {
                 ", checkResultList=" + checkResultList +
                 '}';
     }
+
+    public String getDeviceType() {
+        return this.deviceType;
+    }
+
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
+    }
+
+    public String getAgentsType() {
+        return this.agentsType;
+    }
+
+    public void setAgentsType(String agentsType) {
+        this.agentsType = agentsType;
+    }
+
+    public Date getFillingDate() {
+        return this.fillingDate;
+    }
+
+    public void setFillingDate(Date fillingDate) {
+        this.fillingDate = fillingDate;
+    }
+
 }

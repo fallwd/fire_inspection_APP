@@ -31,7 +31,7 @@ import com.hr.fire.inspection.fragment.AutomaticFireAlarm9;
 import com.hr.fire.inspection.fragment.CarbonFragment1;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 
-import org.apache.poi.util.NullLogger;
+//import org.apache.poi.util.NullLogger;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -64,8 +64,6 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
     private IntentTransmit it;
 
 
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,27 +90,7 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
 //        it.platform_id = platform_id;
         it.srt_Date = srt_Date;
         it.number = sys_number;
-
-//        f_title = "火灾自动报警系统"; //传过来的名称
-//        sys_number = "HZ001"; //传过来的名称
-//        it = new IntentTransmit();
-//        it.companyInfoId = 165;
-//        it.systemId = 1;
-//        it.platform_id = 201;
-//        it.srt_Date = srt_Date;
-//        it.number = "HZ001";
-//        Log.i(TAG, "火灾系统传入的参数=" + it);
-
-
-
-//        checkDate=Wed Jul 03 09:10:00 GMT+00:00 2019, systemId=1, companyInfoId=165, ret=渤西作业公司_BZ13-1_BZ13-1_高压二氧化碳灭火系统_201907030910}, {checkDate=Thu Oct 03 10:10:00 GMT+00:00 2019, systemId=1, companyInfoId=165, ret=渤西作业公司_BZ13-1_BZ13-1_高压二氧化碳灭火系统_201910031010}
-
-
-//        Log.i(TAG, "参数----------:" + sys_id);  19
-//        Log.i(TAG, "参数----------:" + platform_id);  201
-//        Log.i(TAG, "参数----------:" + f_title);  火灾自动报警系统
-//        Log.i(TAG, "参数----------:" + sys_number);  HZ001
-//        Log.i(TAG, "参数----------:" + historyList);   []
+        Log.d("dong", "sys_id-----" + systemId+ "platform_id-------"+platform_id+ "f_title--------"+f_title + "IT111111"+ it);
     }
 
 
@@ -141,16 +119,15 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
 
 //        Log.i(TAG, "火灾系统传入的参数=" + it);
 
-
         mAutomaticFireAlarm1 = AutomaticFireAlarm1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
         mAutomaticFireAlarm2 = AutomaticFireAlarm2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
         mAutomaticFireAlarm3 = AutomaticFireAlarm3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
         mAutomaticFireAlarm4 = AutomaticFireAlarm4.newInstance(ConstantInspection.YEARLY_ON_SITE_F4, it);
         mAutomaticFireAlarm5 = AutomaticFireAlarm5.newInstance(ConstantInspection.YEARLY_ON_SITE_F5, it);
-        mAutomaticFireAlarm6 = AutomaticFireAlarm6.newInstance("", "");
-        mAutomaticFireAlarm7 = AutomaticFireAlarm7.newInstance("", "");
-        mAutomaticFireAlarm8 = AutomaticFireAlarm8.newInstance("", "");
-        mAutomaticFireAlarm9 = AutomaticFireAlarm9.newInstance("", "");
+        mAutomaticFireAlarm6 = AutomaticFireAlarm6.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
+        mAutomaticFireAlarm7 = AutomaticFireAlarm7.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
+        mAutomaticFireAlarm8 = AutomaticFireAlarm8.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
+        mAutomaticFireAlarm9 = AutomaticFireAlarm9.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
 
 
         fragments.add(mAutomaticFireAlarm1);
@@ -269,16 +246,15 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
                         mAutomaticFireAlarm4.upData();
                     } else if (fragment instanceof AutomaticFireAlarm5) {
                         mAutomaticFireAlarm5.upData();
+                    }else if (fragment instanceof AutomaticFireAlarm6) {
+                        mAutomaticFireAlarm6.upData();
+                    }else if (fragment instanceof AutomaticFireAlarm7) {
+                        mAutomaticFireAlarm7.upData();
+                    } else if (fragment instanceof AutomaticFireAlarm8) {
+                        mAutomaticFireAlarm8.upData();
+                    } else if (fragment instanceof AutomaticFireAlarm9) {
+                        mAutomaticFireAlarm9.upData();
                     }
-//                    else if (fragment instanceof AutomaticFireAlarm6) {
-//                        mAutomaticFireAlarm6.upData();
-//                    } else if (fragment instanceof AutomaticFireAlarm7) {
-//                        mAutomaticFireAlarm7.upData();
-//                    } else if (fragment instanceof AutomaticFireAlarm8) {
-//                        mAutomaticFireAlarm8.upData();
-//                    } else if (fragment instanceof AutomaticFireAlarm9) {
-//                        mAutomaticFireAlarm9.upData();
-//                    }
                 }
 
             }
