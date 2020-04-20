@@ -36,6 +36,10 @@ public class ItemInfo   {
 
 //    private String deviceType;//设备型号
 
+//    private String agentsType;//介质类型
+//
+//    private Date fillingDate;//灌装日期
+
     private String no; //编号
 
     private String volume; //容积
@@ -110,17 +114,15 @@ private transient DaoSession daoSession;
 private transient ItemInfoDao myDao;
 
 @Generated(hash = 1061526940)
-public ItemInfo(Long id, Long checkTypeId, Long companyInfoId, String typeNo,
-        String no, String volume, String weight, String goodsWeight,
-        String pressure, String prodFactory, Date prodDate,
-        String typeConformity, String positionConformity, String appearance,
-        String check, String slience, String reset, String powerAlarmFunction,
-        String alarmFunction, String effectiveness, String responseTime,
-        String description, String setAlarm25, String setAlarm50,
-        String testAlarm25, String testAlarm50, Date observeDate,
+public ItemInfo(Long id, Long checkTypeId, Long companyInfoId, String typeNo, String no,
+        String volume, String weight, String goodsWeight, String pressure,
+        String prodFactory, Date prodDate, String typeConformity,
+        String positionConformity, String appearance, String check, String slience,
+        String reset, String powerAlarmFunction, String alarmFunction,
+        String effectiveness, String responseTime, String description, String setAlarm25,
+        String setAlarm50, String testAlarm25, String testAlarm50, Date observeDate,
         String taskNumber, String isPass, String labelNo, String imageUrl,
-        String codePath, String SystemNumber, String ProtectArea,
-        Date checkDate) {
+        String codePath, String SystemNumber, String ProtectArea, Date checkDate) {
     this.id = id;
     this.checkTypeId = checkTypeId;
     this.companyInfoId = companyInfoId;
@@ -623,4 +625,5 @@ public void __setDaoSession(DaoSession daoSession) {
                 ", checkResultList=" + checkResultList +
                 '}';
     }
+
 }
