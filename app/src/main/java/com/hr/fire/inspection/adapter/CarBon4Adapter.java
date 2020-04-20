@@ -105,5 +105,3 @@ public class CarBon4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 }
-
-

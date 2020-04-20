@@ -83,6 +83,7 @@ public class CarbonFragment1 extends Fragment {
      */
     private void initData() {
         //历史中的companyInfoId  ,  systemId和在公司、平台那边传过来的都是一样的ID，使用哪一个都行
+
         checkTypes = ServiceFactory.getYearCheckService().gettableNameData(its.systemId);
         if (checkTypes == null) {
             Toast.makeText(getActivity(), "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
