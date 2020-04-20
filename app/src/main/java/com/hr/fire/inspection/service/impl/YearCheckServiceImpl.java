@@ -555,7 +555,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 where(
                         ItemInfoDao.Properties.CheckDate.eq(checkDate),
                         new WhereCondition.StringCondition(
-                                String.format("COMPANY_INFO_ID=%s GROUP BY SYSTEM_NUMBER", companyInfoId))
+                                String.format("COMPANY_INFO_ID=%s AND CHECK_TYPE_ID=%s GROUP BY SYSTEM_NUMBER", companyInfoId,checkTypeId))
                 );
         List<ItemInfo> secondDataList = secondQueryBuilder.list();
         String systemNumberCombo = "";
@@ -578,7 +578,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 where(
                         ItemInfoDao.Properties.CheckDate.eq(checkDate),
                         new WhereCondition.StringCondition(
-                                String.format("COMPANY_INFO_ID=%s GROUP BY PROTECT_AREA", companyInfoId))
+                                String.format("COMPANY_INFO_ID=%s AND CHECK_TYPE_ID=%s GROUP BY PROTECT_AREA", companyInfoId,checkTypeId))
                 );
         secondDataList = secondQueryBuilder.list();
         String protectAreaCombo = "";
@@ -689,10 +689,76 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         retList.add(systemMap);
 
         // 专门处理
-//        systemName = "海水雨淋灭火系统";
-//        tableName = "驱动瓶";
-//        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
-//        retList.add(systemMap);
+        systemName = "海水雨淋灭火系统";
+        tableName = "";
+        //        // 获取对应id
+        QueryBuilder<CheckType> checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
+                where(CheckTypeDao.Properties.Name.eq(systemName));
+        long systemId = checkTypeQueryBuilder.list().get(0).getId();
+
+        QueryBuilder<YearCheckResult> queryBuilder = daoSession.queryBuilder(YearCheckResult.class).
+                where(
+                        YearCheckResultDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        YearCheckResultDao.Properties.CheckDate.eq(checkDate)
+                );
+        Join checkTypeJoin = queryBuilder.join(YearCheckResultDao.Properties.CheckTypeId, CheckType.class).
+                        where(CheckTypeDao.Properties.ParentId.eq(systemId));
+        List<YearCheckResult> dataList = queryBuilder.list();
+        systemMap = new HashMap();
+        systemMap.put("systemName",systemName);
+        systemMap.put("tableName",tableName);
+        systemMap.put("data",dataList);
+        systemMap.put("count",dataList.size());
+        systemMap.put("weight","0");
+        // 获取区域和位号
+//        String dateString = "2019-08-03 10:10";
+        QueryBuilder<YearCheckResult> secondQueryBuilder = daoSession.queryBuilder(YearCheckResult.class).
+                where(
+                        YearCheckResultDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY SYSTEM_NUMBER", companyInfoId))
+                );
+        List<YearCheckResult> secondDataList = secondQueryBuilder.list();
+        String systemNumberCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            YearCheckResult ret = secondDataList.get(i);
+//            Log.i("tang","系统位号------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String systemNumber = ret.getSystemNumber();
+                if(systemNumberCombo!=""){
+                    systemNumberCombo = systemNumberCombo + "、" + systemNumber;
+                }
+                else {
+                    systemNumberCombo = systemNumberCombo + systemNumber;
+                }
+            }
+        }
+        systemMap.put("systemNumber",systemNumberCombo);
+        secondQueryBuilder = daoSession.queryBuilder(YearCheckResult.class).
+                where(
+                        YearCheckResultDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY PROTECT_AREA", companyInfoId))
+                );
+        secondDataList = secondQueryBuilder.list();
+        String protectAreaCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            YearCheckResult ret = secondDataList.get(i);
+//            Log.i("tang","保护区域------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String protectArea = ret.getProtectArea();
+                if(protectAreaCombo!=""){
+                    protectAreaCombo = protectAreaCombo + "、" + protectArea;
+                }
+                else {
+                    protectAreaCombo = protectAreaCombo + protectArea;
+                }
+            }
+        }
+        systemMap.put("protectArea",protectAreaCombo);
+        retList.add(systemMap);
 
         systemName = "消防水灭火系统";
         tableName = "消防软管";
@@ -723,8 +789,83 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         tableName = "EEBD气瓶";
         systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
         retList.add(systemMap);
-        
+
+        // 泡沫灭火系统
+        systemName = "泡沫灭火系统";
+        tableName = "";
+        //        // 获取对应id
+        checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
+                where(CheckTypeDao.Properties.Name.eq(systemName));
+        systemId = checkTypeQueryBuilder.list().get(0).getId();
+        queryBuilder = daoSession.queryBuilder(YearCheckResult.class).
+                where(
+                        YearCheckResultDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        YearCheckResultDao.Properties.CheckDate.eq(checkDate)
+                );
+        checkTypeJoin = queryBuilder.join(YearCheckResultDao.Properties.CheckTypeId, CheckType.class).
+                        where(CheckTypeDao.Properties.ParentId.eq(systemId));
+        dataList = queryBuilder.list();
+        systemMap = new HashMap();
+        systemMap.put("systemName",systemName);
+        systemMap.put("tableName",tableName);
+        systemMap.put("data",dataList);
+        systemMap.put("count",dataList.size());
+        systemMap.put("weight","0");
+        // 获取区域和位号
+//        String dateString = "2019-08-03 10:10";
+        secondQueryBuilder = daoSession.queryBuilder(YearCheckResult.class).
+                where(
+                        YearCheckResultDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY SYSTEM_NUMBER", companyInfoId))
+                );
+        secondDataList = secondQueryBuilder.list();
+        systemNumberCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            YearCheckResult ret = secondDataList.get(i);
+//            Log.i("tang","系统位号------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String systemNumber = ret.getSystemNumber();
+                if(systemNumberCombo!=""){
+                    systemNumberCombo = systemNumberCombo + "、" + systemNumber;
+                }
+                else {
+                    systemNumberCombo = systemNumberCombo + systemNumber;
+                }
+            }
+        }
+        systemMap.put("systemNumber",systemNumberCombo);
+        secondQueryBuilder = daoSession.queryBuilder(YearCheckResult.class).
+                where(
+                        YearCheckResultDao.Properties.CheckDate.eq(checkDate),
+                        new WhereCondition.StringCondition(
+                                String.format("COMPANY_INFO_ID=%s GROUP BY PROTECT_AREA", companyInfoId))
+                );
+        secondDataList = secondQueryBuilder.list();
+        protectAreaCombo = "";
+        for(int i=0;i<secondDataList.size();i++){
+            YearCheckResult ret = secondDataList.get(i);
+//            Log.i("tang","保护区域------" + ret);
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            if(systemId==DBsystemId){
+                String protectArea = ret.getProtectArea();
+                if(protectAreaCombo!=""){
+                    protectAreaCombo = protectAreaCombo + "、" + protectArea;
+                }
+                else {
+                    protectAreaCombo = protectAreaCombo + protectArea;
+                }
+            }
+        }
+        systemMap.put("protectArea",protectAreaCombo);
+        retList.add(systemMap);
         return retList;
+
+
+
+
+
         // 暂时弃用----------------------------------------------------------------
 //        HashMap systemMap;
 //        ArrayList<HashMap> retList = new ArrayList();
