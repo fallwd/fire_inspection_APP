@@ -22,7 +22,8 @@ public class CompanyInfoServiceImpl extends BaseServiceImpl<CompanyInfo> impleme
     @Override
     public List getCompanyList() {
         QueryBuilder<CompanyInfo> queryBuilder = daoSession.queryBuilder(CompanyInfo.class).
-                where(new WhereCondition.StringCondition("1 GROUP BY COMPANY_NAME" ));
+                where(new WhereCondition.StringCondition("1 GROUP BY COMPANY_NAME" )).
+                orderAsc(CompanyInfoDao.Properties.Id);
 
         List<CompanyInfo> dataList = queryBuilder.list();
 //        for(int i=0;i<dataList.size();i++){
@@ -37,7 +38,8 @@ public class CompanyInfoServiceImpl extends BaseServiceImpl<CompanyInfo> impleme
     public List<CompanyInfo> getOilfieldList(String companyName) {
         QueryBuilder<CompanyInfo> queryBuilder = daoSession.queryBuilder(CompanyInfo.class).
                 where(new WhereCondition.StringCondition(
-                        String.format("COMPANY_NAME='%s' GROUP BY OILFIELD_NAME", companyName)));
+                        String.format("COMPANY_NAME='%s' GROUP BY OILFIELD_NAME", companyName))).
+                orderAsc(CompanyInfoDao.Properties.Id);
 //                        CompanyInfoDao.Properties.CompanyName.eq(companyName).toString() + "GROUP BY OILFIELD_NAME"));
         List<CompanyInfo> dataList = queryBuilder.list();
 //        for(int i=0;i<dataList.size();i++){
@@ -51,7 +53,8 @@ public class CompanyInfoServiceImpl extends BaseServiceImpl<CompanyInfo> impleme
     @Override
     public List<CompanyInfo> getPlatformList(String oilfieldName) {
         QueryBuilder<CompanyInfo> queryBuilder = daoSession.queryBuilder(CompanyInfo.class).
-                where(CompanyInfoDao.Properties.OilfieldName.eq(oilfieldName));
+                where(CompanyInfoDao.Properties.OilfieldName.eq(oilfieldName)).
+                orderAsc(CompanyInfoDao.Properties.Id);
         List<CompanyInfo> dataList = queryBuilder.list();
 //        for(int i=0;i<dataList.size();i++){
 //            CompanyInfo result = dataList.get(i);
