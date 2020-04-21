@@ -170,21 +170,21 @@ public class WelcomeActivity extends AppCompatActivity {
 //        Log.i("getOutputList",""+allList);
 ////
         // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
-        long companyInfoId = 165;
-        // checkDate 检查日期
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Date checkDate = null;
-        try {
-//            checkDate = format.parse("2019-08-03 10:10");
-            checkDate = format.parse("2019-07-03 09:10");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        List<HashMap> retList = ServiceFactory.getYearCheckService().getOutputItemData(companyInfoId,checkDate);
-        for(int i=0;i<retList.size();i++){
-            Log.i("retList:::",""+retList.get(i));
-
-        }
+//        long companyInfoId = 165;
+//        // checkDate 检查日期
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//        Date checkDate = null;
+//        try {
+////            checkDate = format.parse("2019-08-03 10:10");
+//            checkDate = format.parse("2019-07-03 09:10");
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        List<HashMap> retList = ServiceFactory.getYearCheckService().getOutputItemData(companyInfoId,checkDate);
+//        for(int i=0;i<retList.size();i++){
+//            Log.i("retList:::",""+retList.get(i));
+//
+//        }
 
         // 测试隐患库接口
 //        String year = "2019";
