@@ -95,6 +95,10 @@ public class HFCFragment2 extends Fragment {
         rc_list.setAdapter(adapter);
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
+
+        if (checkTypes != null) {
+            adapter.setCheckId(checkTypes.get(1).getId(), it);
+        }
     }
 
     public void addData() {

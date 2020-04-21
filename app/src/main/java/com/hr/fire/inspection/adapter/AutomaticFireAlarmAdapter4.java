@@ -501,7 +501,7 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
         TextView et_8;
         TextView et_9;
         TextView et_10;
-        EditText et_11;
+        TextView et_11;
         TextView et_12;
         ImageView et_13;
         ImageView et_14;
@@ -520,7 +520,7 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
             et_8 = (TextView) view.findViewById(R.id.et_8);
             et_9 = (TextView) view.findViewById(R.id.et_9);
             et_10 = (TextView) view.findViewById(R.id.et_10);
-            et_11 = (EditText) view.findViewById(R.id.et_11);
+            et_11 = (TextView) view.findViewById(R.id.et_11);
             et_12 = (TextView) view.findViewById(R.id.et_12);
             et_13 = (ImageView) view.findViewById(R.id.et_13);
             et_14 = (ImageView) view.findViewById(R.id.et_14);
