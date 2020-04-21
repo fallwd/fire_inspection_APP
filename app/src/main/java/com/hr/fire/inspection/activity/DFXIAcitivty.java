@@ -19,21 +19,26 @@ import com.google.android.material.tabs.TabLayout;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.IntentTransmit;
-import com.hr.fire.inspection.fragment.NjFireFightingWaterFragment1;
-import com.hr.fire.inspection.fragment.NjFireFightingWaterFragment2;
-import com.hr.fire.inspection.fragment.NjFireFightingWaterFragment3;
-import com.hr.fire.inspection.fragment.NjFireFightingWaterFragment4;
+import com.hr.fire.inspection.fragment.DFXIFragment1;
+import com.hr.fire.inspection.fragment.DFXIFragment2;
+import com.hr.fire.inspection.fragment.DFXIFragment3;
+import com.hr.fire.inspection.fragment.DFXIFragment4;
+import com.hr.fire.inspection.fragment.DFXIFragment5;
+import com.hr.fire.inspection.fragment.DFXIFragment6;
+import com.hr.fire.inspection.fragment.DFXIFragment7;
+import com.hr.fire.inspection.fragment.DFXIFragment8;
+import com.hr.fire.inspection.fragment.DFXIFragment9;
+import com.hr.fire.inspection.fragment.DFXIFragment10;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-//import com.hr.fire.inspection.fragment.AutomaticFireAlarm3;
-//import com.hr.fire.inspection.fragment.AutomaticFireAlarm4;
+//import org.apache.poi.util.NullLogger;
 
 @SuppressLint("Registered")
-public class NjFireFightingWaterAcitivty extends AppCompatActivity {
+public class DFXIAcitivty extends AppCompatActivity {
     private static final String TAG = "AutomaticFireAlarmAcitivty";
     private List<String> titleList = new ArrayList<String>();
     private List<Fragment> fragments = new ArrayList<Fragment>();
@@ -44,17 +49,20 @@ public class NjFireFightingWaterAcitivty extends AppCompatActivity {
     private ImageView iv_add_table;
     private TextView tvInspectionPro;
     private int currentPager;
-    private NjFireFightingWaterFragment1 mNjFireFightingWaterFragment1;
-    private NjFireFightingWaterFragment2 mNjFireFightingWaterFragment2;
-    private NjFireFightingWaterFragment3 mNjFireFightingWaterFragment3;
-    private NjFireFightingWaterFragment4 mNjFireFightingWaterFragment4;
-
+    private DFXIFragment1 mDFXIFragment1;
+    private DFXIFragment2 mDFXIFragment2;
+    private DFXIFragment3 mDFXIFragment3;
+    private DFXIFragment4 mDFXIFragment4;
+    private DFXIFragment5 mDFXIFragment5;
+    private DFXIFragment6 mDFXIFragment6;
+    private DFXIFragment7 mDFXIFragment7;
+    private DFXIFragment8 mDFXIFragment8;
+    private DFXIFragment9 mDFXIFragment9;
+    private DFXIFragment10 mDFXIFragment10;
 
     private String f_title;
     private String sys_number;  //系统位号
     private IntentTransmit it;
-
-
 
 
     @Override
@@ -99,24 +107,40 @@ public class NjFireFightingWaterAcitivty extends AppCompatActivity {
 
         mTabLayout = findViewById(R.id.tl_tabs);
         mViewPager = findViewById(R.id.vp_content);
-        titleList.add("消防软管");
-        titleList.add("消防炮");
-        titleList.add("其他部件");
-        titleList.add("功能性试验");
+        titleList.add("SCBA气瓶");
+        titleList.add("EEBD气瓶");
+        titleList.add("手电");
+        titleList.add("防火服");
+        titleList.add("消防员战斗服");
+        titleList.add("备用气瓶");
+        titleList.add("消防靴");
+        titleList.add("头盔");
+        titleList.add("太平斧");
+        titleList.add("其他");
 
 
-        mNjFireFightingWaterFragment1 = NjFireFightingWaterFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
-        mNjFireFightingWaterFragment2 = NjFireFightingWaterFragment2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
-        mNjFireFightingWaterFragment3 = NjFireFightingWaterFragment3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
-        mNjFireFightingWaterFragment4 = NjFireFightingWaterFragment4.newInstance(ConstantInspection.YEARLY_ON_SITE_F4, it);
+        mDFXIFragment1 = DFXIFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
+        mDFXIFragment2 = DFXIFragment2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
+        mDFXIFragment3 = DFXIFragment3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
+        mDFXIFragment4 = DFXIFragment4.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
+        mDFXIFragment5 = DFXIFragment5.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
+        mDFXIFragment6 = DFXIFragment6.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
+        mDFXIFragment7 = DFXIFragment7.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
+        mDFXIFragment8 = DFXIFragment8.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
+        mDFXIFragment9 = DFXIFragment9.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
+        mDFXIFragment10 = DFXIFragment10.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
 
 
-
-        fragments.add(mNjFireFightingWaterFragment1);
-        fragments.add(mNjFireFightingWaterFragment2);
-        fragments.add(mNjFireFightingWaterFragment3);
-        fragments.add(mNjFireFightingWaterFragment4);
-
+        fragments.add(mDFXIFragment1);
+        fragments.add(mDFXIFragment2);
+        fragments.add(mDFXIFragment3);
+        fragments.add(mDFXIFragment4);
+        fragments.add(mDFXIFragment5);
+        fragments.add(mDFXIFragment6);
+        fragments.add(mDFXIFragment7);
+        fragments.add(mDFXIFragment8);
+        fragments.add(mDFXIFragment9);
+        fragments.add(mDFXIFragment10);
 
 
         //设置缓存的页面数据
@@ -184,12 +208,13 @@ public class NjFireFightingWaterAcitivty extends AppCompatActivity {
                 if (fragments != null && fragments.size() != 0) {
                     Log.d("dong", "instanceof CarbonFragment1  onClick");
                     Fragment fragment = fragments.get(currentPager);
-                    if (fragment instanceof NjFireFightingWaterFragment1) {
+                    if (fragment instanceof DFXIFragment1) {
                         Log.d("dong", "instanceof CarbonFragment1");
-                        mNjFireFightingWaterFragment1.addItemView();
-                    } else if (fragment instanceof NjFireFightingWaterFragment2){
-                        mNjFireFightingWaterFragment2.addItemView();
+                        mDFXIFragment1.addItemView();
+                    } else if (fragment instanceof DFXIFragment2){
+                        mDFXIFragment2.addItemView();
                     }
+
                 }
 //                currentPager  拿到当前的页面
             }
@@ -200,14 +225,26 @@ public class NjFireFightingWaterAcitivty extends AppCompatActivity {
             public void onClick(View v) {
                 if (fragments != null && fragments.size() != 0) {
                     Fragment fragment = fragments.get(currentPager);
-                    if (fragment instanceof NjFireFightingWaterFragment1) {
-                        mNjFireFightingWaterFragment1.upData();
-                    } else if (fragment instanceof NjFireFightingWaterFragment2) {
-                        mNjFireFightingWaterFragment2.upData();
-                    } else if (fragment instanceof NjFireFightingWaterFragment3) {
-                        mNjFireFightingWaterFragment3.upData();
-                    } else if (fragment instanceof NjFireFightingWaterFragment4) {
-                        mNjFireFightingWaterFragment4.upData();
+                    if (fragment instanceof DFXIFragment1) {
+                        mDFXIFragment1.upData();
+                    }else if (fragment instanceof DFXIFragment2) {
+                        mDFXIFragment2.upData();
+                    }else if (fragment instanceof DFXIFragment3) {
+                        mDFXIFragment3.upData();
+                    } else if (fragment instanceof DFXIFragment4) {
+                        mDFXIFragment4.upData();
+                    } else if (fragment instanceof DFXIFragment5) {
+                        mDFXIFragment5.upData();
+                    }else if (fragment instanceof DFXIFragment6) {
+                        mDFXIFragment6.upData();
+                    }else if (fragment instanceof DFXIFragment7) {
+                        mDFXIFragment7.upData();
+                    } else if (fragment instanceof DFXIFragment8) {
+                        mDFXIFragment8.upData();
+                    } else if (fragment instanceof DFXIFragment9) {
+                        mDFXIFragment9.upData();
+                    } else if (fragment instanceof DFXIFragment10) {
+                        mDFXIFragment10.upData();
                     }
                 }
 
@@ -225,11 +262,16 @@ public class NjFireFightingWaterAcitivty extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mNjFireFightingWaterFragment1 = null;
-        mNjFireFightingWaterFragment2 = null;
-        mNjFireFightingWaterFragment3 = null;
-        mNjFireFightingWaterFragment4 = null;
-
+        mDFXIFragment1 = null;
+        mDFXIFragment2 = null;
+        mDFXIFragment3 = null;
+        mDFXIFragment4 = null;
+        mDFXIFragment5 = null;
+        mDFXIFragment6 = null;
+        mDFXIFragment7 = null;
+        mDFXIFragment8 = null;
+        mDFXIFragment9 = null;
+        mDFXIFragment10 = null;
         finish();
     }
 }

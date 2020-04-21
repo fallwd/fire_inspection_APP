@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="35dp"
     android:background="#ffffff"
     android:gravity="center_vertical"
     android:stretchColumns="*">
@@ -19,45 +19,26 @@
             android:layout_gravity="center">
 
             <TextView
-                android:id="@+id/et_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="序号"
-                android:textSize="12sp" />
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </RelativeLayout>
-
         <RelativeLayout
             android:layout_width="25dp"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/et_2"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:text="介质类型"
-                android:textSize="12sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="25dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <EditText
-                android:id="@+id/et_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
                 android:text="瓶号"
-                android:textSize="12sp" />
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -65,16 +46,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-            <EditText
-                android:id="@+id/et_4"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
                 android:text="容积/L"
-                android:textSize="12sp" />
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -82,16 +61,30 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-            <EditText
-                android:id="@+id/et_5"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
                 android:text="瓶重/kg"
-                android:textSize="12sp" />
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+4
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="0dp"
+                android:text="压力/MPa"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -99,104 +92,79 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-            <EditText
-                android:id="@+id/et_6"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:text="药剂重/kg"
-                android:textSize="12sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="25dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <EditText
-                android:id="@+id/et_7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
                 android:text="生产厂家"
-                android:textSize="12sp" />
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-            <EditText
-                android:id="@+id/et_8"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
                 android:text="生产日期"
-                android:textSize="12sp" />
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="水压试验日期"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-            <EditText
-                android:id="@+id/et_9"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:text="灌装日期"
-                android:textSize="12sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="25dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <EditText
-                android:id="@+id/et_10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
                 android:text="工作代号"
-                android:textSize="12sp" />
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </RelativeLayout>
-
         <RelativeLayout
-            android:id="@+id/rl_100"
             android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-
             <TextView
-                android:id="@+id/et_11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:paddingRight="5dp"
-                android:paddingLeft="5dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:background="@drawable/tab_background_selected"
-                android:maxLines="1"
                 android:text="检查表"
-                android:textSize="10sp"
-                android:textColor="#fff"/>
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="是否合格"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="25dp"
@@ -204,62 +172,41 @@
             android:layout_gravity="center">
 
             <TextView
-                android:id="@+id/et_12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:text="是否合格"
-                android:textSize="12sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="25dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <EditText
-                android:id="@+id/et_13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
                 android:text="标签号"
-                android:textSize="12sp" />
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </RelativeLayout>
-
         <RelativeLayout
-            android:id="@+id/rl_9"
             android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-
-            <ImageView
-                android:id="@+id/et_14"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@mipmap/scene_photos_icon"
-                android:gravity="center"
-                android:textSize="12sp" />
+                android:layout_centerInParent="true"
+                android:text="二维码"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/et_15"
-            android:layout_width="25dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center">
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="6dp"
-                android:background="@mipmap/remove_item"
-                android:textSize="12sp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="操作"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </RelativeLayout>
     </TableRow>
+
 
 </TableLayout>

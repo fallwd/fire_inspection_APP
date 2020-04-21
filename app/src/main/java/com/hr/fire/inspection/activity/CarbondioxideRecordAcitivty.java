@@ -153,7 +153,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
 //                intent.setClass(this, CarbonDioxideAcitivty.class);
                 break;
             case 59:  //消防员装备
-//                intent.setClass(this, CarbonDioxideAcitivty.class);
+                intent.setClass(this, DFXIAcitivty.class);
                 break;
 
         }

@@ -124,6 +124,9 @@
         <activity
             android:name=".activity.NjFireFightingWaterAcitivty"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.DFXIAcitivty"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

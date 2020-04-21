@@ -39,7 +39,7 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="介质类型"
+                android:text="瓶号"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -56,7 +56,7 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="瓶号"
+                android:text="容积/L"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -73,7 +73,7 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="容积/L"
+                android:text="瓶重/kg"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -90,9 +90,10 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="瓶重/kg"
+                android:text="压力/MPa"
                 android:textSize="12sp" />
         </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="25dp"
@@ -107,12 +108,12 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="药剂重/kg"
+                android:text="生产厂家"
                 android:textSize="12sp" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="25dp"
+            android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -124,25 +125,27 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="生产厂家"
+                android:text="生产日期"
                 android:textSize="12sp" />
         </RelativeLayout>
+
         <RelativeLayout
-            android:layout_width="25dp"
+            android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
             <EditText
                 android:id="@+id/et_8"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="生产日期"
+                android:text="水压试验日期"
                 android:textSize="12sp" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="25dp"
             android:layout_height="wrap_content"
@@ -156,35 +159,17 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="灌装日期"
-                android:textSize="12sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="25dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <EditText
-                android:id="@+id/et_10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
                 android:text="工作代号"
                 android:textSize="12sp" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rl_100"
             android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
             <TextView
-                android:id="@+id/et_11"
+                android:id="@+id/et_10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -204,8 +189,8 @@
             android:layout_gravity="center">
 
             <TextView
-                android:id="@+id/et_12"
-                android:layout_width="wrap_content"
+                android:id="@+id/et_11"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@null"
@@ -221,7 +206,7 @@
             android:layout_gravity="center">
 
             <EditText
-                android:id="@+id/et_13"
+                android:id="@+id/et_12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -233,23 +218,8 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rl_9"
-            android:layout_width="25dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <ImageView
-                android:id="@+id/et_14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/scene_photos_icon"
-                android:gravity="center"
-                android:textSize="12sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/et_15"
-            android:layout_width="25dp"
+            android:id="@+id/et_14"
+            android:layout_width="24dp"
             android:layout_height="match_parent"
             android:layout_gravity="center">
 
