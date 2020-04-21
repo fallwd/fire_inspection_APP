@@ -739,8 +739,8 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         systemMap = new HashMap();
         systemMap.put("systemName",systemName);
         systemMap.put("tableName",tableName);
-        systemMap.put("data",dataList);
-        systemMap.put("count",dataList.size());
+        systemMap.put("data",new ArrayList());
+        systemMap.put("count",0);
         systemMap.put("weight","0");
         // 获取区域和位号
 //        String dateString = "2019-08-03 10:10";
@@ -840,8 +840,8 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         systemMap = new HashMap();
         systemMap.put("systemName",systemName);
         systemMap.put("tableName",tableName);
-        systemMap.put("data",dataList);
-        systemMap.put("count",dataList.size());
+        systemMap.put("data",new ArrayList());
+        systemMap.put("count",0);
         systemMap.put("weight","0");
         // 获取区域和位号
 //        String dateString = "2019-08-03 10:10";

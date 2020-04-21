@@ -3,13 +3,22 @@ package com.hr.fire.inspection.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.entity.CompanyInfo;
+import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.sqlHelpers.BaseData;
 import com.hr.fire.inspection.utils.DBManager;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 public class WelcomeActivity extends AppCompatActivity {
     @Override
@@ -161,21 +170,41 @@ public class WelcomeActivity extends AppCompatActivity {
 //        Log.i("getOutputList",""+allList);
 ////
         // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
-//        long companyInfoId = 165;
-//        // checkDate 检查日期
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-//        Date checkDate = null;
-//        try {
-////            checkDate = format.parse("2019-08-03 10:10");
-//            checkDate = format.parse("2019-07-03 09:10");
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        List<HashMap> retList = ServiceFactory.getYearCheckService().getOutputItemData(companyInfoId,checkDate);
-//        for(int i=0;i<retList.size();i++){
-//            Log.i("retList:::",""+retList.get(i));
+        long companyInfoId = 165;
+        // checkDate 检查日期
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date checkDate = null;
+        try {
+//            checkDate = format.parse("2019-08-03 10:10");
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        List<HashMap> retList = ServiceFactory.getYearCheckService().getOutputItemData(companyInfoId,checkDate);
+        for(int i=0;i<retList.size();i++){
+            Log.i("retList:::",""+retList.get(i));
+
+        }
+
+        // 测试隐患库接口
+//        String year = "2019";
+//        List<HashMap> retData1 = ServiceFactory.getAnalysisService().getCompanyCountByYearCheck(year);
+//        for(int i=0;i<retData1.size();i++){
+//            Log.i("retList:::","getCompanyCountByYearCheck:::"+retData1.get(i));
 //
 //        }
+//        List<HashMap> retData2 = ServiceFactory.getAnalysisService().getOilfieldCountByYearCheck(year);
+//        for(int i=0;i<retData2.size();i++){
+//            Log.i("retList:::","getOilfieldCountByYearCheck:::"+retData2.get(i));
+//
+//        }
+//        List<HashMap> retData3 = ServiceFactory.getAnalysisService().getPlatformCountByYearCheck(year);
+//        for(int i=0;i<retData3.size();i++){
+//            Log.i("retList:::","getPlatformCountByYearCheck:::"+retData3.get(i));
+//
+//        }
+
+
 
         Toast.makeText(WelcomeActivity.this, "系统将在2秒后为您自动跳转到首页", Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
