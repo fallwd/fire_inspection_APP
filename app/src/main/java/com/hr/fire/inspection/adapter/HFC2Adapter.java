@@ -70,7 +70,7 @@ public class HFC2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.et_7.setText(new StringBuffer().append(mProdDate).append(""));
             vh.et_8.setText(new StringBuffer().append(mCheckDate).append(""));
             vh.et_9.setText(new StringBuffer().append("").append(""));
-            vh.et_10.setText(new StringBuffer().append("").append(""));
+            vh.et_10.setText(new StringBuffer().append("").append(position + 1));
             vh.tv_9.setText(new StringBuffer().append("氮气驱动瓶信息采集瓶").append(position + 1).append("号表"));
 
             //在左侧添加图片
@@ -87,7 +87,7 @@ public class HFC2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
             });
 
-            vh.rl_9.setOnClickListener(new View.OnClickListener() {
+            vh.tv_9.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (checkid == 0 || intentTransmit == null) {
@@ -96,16 +96,19 @@ public class HFC2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     }
                     Intent intent = new Intent(mContext, CarBonGoodsWeightAcitivty.class);
                     intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_ID, checkid);
+                    intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE, "  氮气驱动瓶>  检查表");
+                    intent.putExtra("item_id", mData.get(position).getId());
+
                     if (mData.get(position).getId() != 0) {
                         intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE_ID, mData.get(position).getId());
                     }
                     intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_SYS_DATA, intentTransmit);
-                    Log.e("dong", "系统位号----:" + intentTransmit.number);
                     mContext.startActivity(intent);
                 }
             });
         }
     }
+
     private HrPopup hrPopup;
 
     private void showPopWind(final TextView tv6) {

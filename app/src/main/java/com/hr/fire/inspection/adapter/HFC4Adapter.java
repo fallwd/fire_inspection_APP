@@ -20,18 +20,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.YearCheck;
+import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
 
 public class HFC4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private List<YearCheckResult> ycr;
     private Context mContext;
     private List<YearCheck> mData;
 
 
-    public HFC4Adapter(Context mContext, List<YearCheck> mData) {
+    public HFC4Adapter(Context mContext, List<YearCheck> mData, List<YearCheckResult> yearCheckResults) {
         this.mContext = mContext;
         this.mData = mData;
+        this.ycr = yearCheckResults;
     }
 
     @NonNull
@@ -43,6 +46,7 @@ public class HFC4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return holder;
 
     }
+
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         final HFC4Adapter.ViewHolder vh = (HFC4Adapter.ViewHolder) holder;
@@ -57,6 +61,8 @@ public class HFC4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.tv4.setText(yearCheck.getRequirement());
             vh.tv5.setText(yearCheck.getStandard());
 
+            vh.tv6.setText(ycr.get(position).getIsPass());
+            vh.ev8.setText(ycr.get(position).getDescription());
 
             //在左侧添加图片
             Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
@@ -73,6 +79,9 @@ public class HFC4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.tv6.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+//                    Log.d("dong","点击的状post== " + position);
+
+                    //如果点击的是最后一个条目, 那么控件的高度需要增加  否则弹框会被挡住
                     showPopWind(vh.tv6);
                 }
             });
@@ -82,11 +91,8 @@ public class HFC4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     mContext.startActivity(new Intent(mContext, PhotoUploadActivity.class));
                 }
             });
-
         }
-
     }
-
 
     @Override
     public int getItemCount() {
@@ -106,6 +112,7 @@ public class HFC4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ImageView iv7;
         TextView tv8;
         EditText ev8;
+        View vw;
 
         ViewHolder(View view) {
             super(view);
@@ -141,6 +148,7 @@ public class HFC4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         hrPopup.setOutsideTouchable(true);
         hrPopup.setContentView(PopupRootView);
         hrPopup.showAsDropDown(tv6);
+
         rl_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

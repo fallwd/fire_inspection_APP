@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="35dp"
     android:background="#ffffff"
     android:gravity="center_vertical"
     android:stretchColumns="*">
-
 
     <TableRow
         android:layout_width="match_parent"
@@ -29,6 +29,7 @@
                 android:textStyle="bold" />
         </RelativeLayout>
 
+
         <RelativeLayout
             android:layout_width="30dp"
             android:layout_height="wrap_content">
@@ -42,6 +43,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="28dp"
@@ -58,6 +60,7 @@
                 android:textStyle="bold" />
         </RelativeLayout>
 
+
         <RelativeLayout
             android:layout_width="45dp"
             android:layout_height="wrap_content"
@@ -72,6 +75,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="44dp"
@@ -89,6 +93,7 @@
                 android:textStyle="bold" />
         </RelativeLayout>
 
+
         <RelativeLayout
             android:layout_width="40dp"
             android:layout_height="wrap_content"
@@ -103,6 +108,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="40dp"
@@ -119,6 +125,7 @@
                 android:textStyle="bold" />
         </RelativeLayout>
 
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -133,6 +140,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -149,6 +157,7 @@
                 android:textStyle="bold" />
         </RelativeLayout>
 
+
         <RelativeLayout
             android:layout_width="40dp"
             android:layout_height="wrap_content">
@@ -163,10 +172,10 @@
                 android:textStyle="bold" />
         </RelativeLayout>
 
+
         <RelativeLayout
             android:layout_width="60dp"
             android:layout_height="wrap_content">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -176,10 +185,10 @@
                 android:textStyle="bold" />
         </RelativeLayout>
 
+
         <RelativeLayout
             android:layout_width="32dp"
             android:layout_height="wrap_content">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -192,7 +201,6 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -201,6 +209,6 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
-    </TableRow>
 
+    </TableRow>
 </TableLayout>

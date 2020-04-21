@@ -116,6 +116,11 @@ public class HFCActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int i) {
                 currentPager = i;
+                if (i == 2 || i == 3 || i == 4) {
+                    iv_add_table.setVisibility(View.GONE);
+                } else {
+                    iv_add_table.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override

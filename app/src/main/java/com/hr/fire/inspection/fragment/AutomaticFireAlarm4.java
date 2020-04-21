@@ -130,7 +130,7 @@ public class AutomaticFireAlarm4 extends Fragment {
                 ItemInfo item = itemDataList.get(itemDataList.size() - 1);
                 //如果直接新增会导致后台id冲重复\冲突
                 itemInfo.setNo(item.getNo());
-//                itemInfo.setDeviceType(item.getDeviceType());
+                itemInfo.setDeviceType(item.getDeviceType());
                 itemInfo.setTypeNo(item.getTypeNo());
                 itemInfo.setAppearance(item.getAppearance());
                 itemInfo.setResponseTime(item.getResponseTime());
@@ -140,7 +140,7 @@ public class AutomaticFireAlarm4 extends Fragment {
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
                 itemInfo.setNo("请编辑");
-//                itemInfo.setDeviceType("请编辑");
+                itemInfo.setDeviceType("请编辑");
                 itemInfo.setTypeNo("请编辑");
                 itemInfo.setResponseTime("请编辑");
                 itemInfo.setIsPass("请编辑");
@@ -182,7 +182,7 @@ public class AutomaticFireAlarm4 extends Fragment {
         ImageView tv_9 = childAt.findViewById(R.id.tv_9);
         EditText tv_10 = childAt.findViewById(R.id.tv_10);
 
-        //        itemObj.setDeviceType(et_2.getText().toString());
+        itemObj.setDeviceType(et_2.getText().toString());
         itemObj.setProdFactory(et_3.getText().toString());
         itemObj.setTypeNo(et_4.getText().toString());
         itemObj.setNo(et_5.getText().toString());
@@ -225,7 +225,7 @@ public class AutomaticFireAlarm4 extends Fragment {
             EditText tv_10 = childAt.findViewById(R.id.tv_10);
 
             ItemInfo itemObj = itemDataList.get(i);
-//            itemObj.setDeviceType(et_2.getText().toString());
+            itemObj.setDeviceType(et_2.getText().toString());
             itemObj.setProdFactory(et_3.getText().toString());
             itemObj.setTypeNo(et_4.getText().toString());
             itemObj.setNo(et_5.getText().toString());

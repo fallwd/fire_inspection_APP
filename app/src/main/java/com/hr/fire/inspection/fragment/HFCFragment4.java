@@ -29,32 +29,33 @@ import java.util.List;
 
 public class HFCFragment4 extends Fragment {
     View rootView;
-    private static HFCFragment4 fragment1;
+    private static HFCFragment4 fragment3;
     private static String mKey;
-    private HFC4Adapter adapter;
     private IntentTransmit its;
+    private HFC4Adapter adapter;
     private RecyclerView rc_list;
     private List<YearCheck> checkDataEasy;
     private List<YearCheckResult> yearCheckResults;
 
-    public static HFCFragment4 newInstance(String key,IntentTransmit value) {
-        if (fragment1 == null) {
-            fragment1 = new HFCFragment4();
+    public static HFCFragment4 newInstance(String key, IntentTransmit value) {
+        if (fragment3 == null) {
+            fragment3 = new HFCFragment4();
         }
         mKey = key;
         Bundle args = new Bundle();
         args.putSerializable(key, value);
-        fragment1.setArguments(args);
-        return fragment1;
+        fragment3.setArguments(args);
+        return fragment3;
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             its = (IntentTransmit) getArguments().getSerializable(mKey);
         }
-
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,13 +69,15 @@ public class HFCFragment4 extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initData();
-        initView();
+
     }
 
     private void initData() {
+        //根据二氧化碳系统的ID,拿到二氧化碳下面的检查表数据
         List<CheckType> checkTypes = ServiceFactory.getYearCheckService().gettableNameData(its.systemId);
+        //在二氧化碳的子表数据中,拿到管线管件对应的id, 通过id去查询管线管件需要检查的内容
         checkDataEasy = ServiceFactory.getYearCheckService().getCheckDataEasy(checkTypes.get(3).getId());
-        //3.获取用户需要填写的数据,如果没有数据,就需要插入的默认数据（流程4）。如果有数据就
+        //获取用户需要填写的数据,如果没有数据,就需要插入的默认数据（流程4）。如果有数据就
         yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(3).getId(), its.number, its.srt_Date);
         if (yearCheckResults == null || yearCheckResults.size() == 0) {
             for (int i = 0; i < checkDataEasy.size(); i++) {
@@ -87,7 +90,8 @@ public class HFCFragment4 extends Fragment {
                 ycr.setSystemNumber(its.number);
                 ycr.setProtectArea(" "); // 保护位号
                 ycr.setCheckDate(its.srt_Date);  //检查日期
-                ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, checkDataEasy.get(i).getId(), its.companyInfoId, checkTypes.get(3).getId(), its.number, its.srt_Date);
+                ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, checkDataEasy.get(i).getId(), its.companyInfoId,
+                        checkTypes.get(3).getId(), its.number, its.srt_Date);
                 yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(3).getId(), its.number, its.srt_Date);
             }
         }
@@ -99,7 +103,7 @@ public class HFCFragment4 extends Fragment {
         rc_list = rootView.findViewById(R.id.rc_list3);
         @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rc_list.setLayoutManager(layoutManager);
-        adapter = new HFC4Adapter(getActivity(), checkDataEasy);
+        adapter = new HFC4Adapter(getActivity(), checkDataEasy, yearCheckResults);
         rc_list.setAdapter(adapter);
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
@@ -129,5 +133,11 @@ public class HFCFragment4 extends Fragment {
             }
         }
         Toast.makeText(getContext(), "\"保护区\"数据保存成功", Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 }

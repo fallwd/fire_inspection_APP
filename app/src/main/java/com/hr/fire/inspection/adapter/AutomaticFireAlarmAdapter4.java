@@ -56,7 +56,7 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
             ItemInfo info = mData.get(position);
 
             vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
-//            vh.et_2.setText(new StringBuffer().append(info.getDeviceType()).append(""));
+            vh.et_2.setText(new StringBuffer().append(info.getDeviceType()).append(""));
             vh.et_3.setText(new StringBuffer().append(info.getProdFactory()).append(""));
             vh.et_4.setText(new StringBuffer().append(info.getTypeNo()).append(""));
             vh.et_5.setText(new StringBuffer().append(info.getNo()).append(""));
@@ -342,7 +342,7 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
 
     //显示对话框,用户选择是否异常的弹框
     private void showPopWind11(final TextView et_11) {
-        View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods, null);
+        View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.is_it_normal, null);
         if (hrPopup == null) {
             hrPopup = new HrPopup((Activity) mContext);
         }
@@ -439,7 +439,7 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
         } else {
             ItemInfo itemInfo = new ItemInfo();
             itemInfo.setNo("请添加");
-//          itemInfo.setDeviceType("请添加");
+            itemInfo.setDeviceType("请添加");
             itemInfo.setProdFactory("请添加");
             itemInfo.setTypeNo("请添加");
             itemInfo.setPositionConformity("请添加");
@@ -501,7 +501,7 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
         TextView et_8;
         TextView et_9;
         TextView et_10;
-        EditText et_11;
+        TextView et_11;
         TextView et_12;
         ImageView et_13;
         ImageView et_14;
@@ -520,7 +520,7 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
             et_8 = (TextView) view.findViewById(R.id.et_8);
             et_9 = (TextView) view.findViewById(R.id.et_9);
             et_10 = (TextView) view.findViewById(R.id.et_10);
-            et_11 = (EditText) view.findViewById(R.id.et_11);
+            et_11 = (TextView) view.findViewById(R.id.et_11);
             et_12 = (TextView) view.findViewById(R.id.et_12);
             et_13 = (ImageView) view.findViewById(R.id.et_13);
             et_14 = (ImageView) view.findViewById(R.id.et_14);
