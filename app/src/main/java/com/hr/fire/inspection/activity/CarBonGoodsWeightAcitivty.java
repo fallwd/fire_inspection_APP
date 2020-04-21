@@ -1,6 +1,7 @@
 package com.hr.fire.inspection.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -23,9 +24,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.GoodsAdapter;
+import com.hr.fire.inspection.adapter.GoodsRecycAdapter;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.YearCheck;
@@ -109,18 +114,28 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
             }
         });
         Button submit_btn = findViewById(R.id.submit_btn);
-        final ListView list = findViewById(R.id.list);
-        GoodsAdapter goodsAdapter = new GoodsAdapter(this, checkDataEasy, yearCheckResults);
-        list.setAdapter(goodsAdapter);
+
+        final RecyclerView listRrcycler = findViewById(R.id.list);
+        @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        listRrcycler.setLayoutManager(layoutManager);
+        GoodsRecycAdapter goodsAdapter = new GoodsRecycAdapter(this, checkDataEasy, yearCheckResults);
+        listRrcycler.setAdapter(goodsAdapter);
+        listRrcycler.setItemAnimator(new DefaultItemAnimator());
+        goodsAdapter.setmYCCamera(new GoodsRecycAdapter.YCCamera() {
+            @Override
+            public void startCamera() {
+                startActivity(new Intent(CarBonGoodsWeightAcitivty.this, PhotoUploadActivity.class));
+            }
+        });
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int childCount = list.getChildCount();
+                int childCount = listRrcycler.getChildCount();
 //                Log.d("dong", "childCount==- " + childCount + "    数据条目 " + yearCheckResults.size());
                 //两边的数据条数是一样的.
                 if (yearCheckResults.size() == childCount) {
                     for (int i = 0; i < childCount; i++) {
-                        LinearLayout childAt = (LinearLayout) list.getChildAt(i);
+                        LinearLayout childAt = (LinearLayout) listRrcycler.getChildAt(i);
                         TextView tv6 = childAt.findViewById(R.id.tv6);
                         //图片参数
                         TextView tv7 = childAt.findViewById(R.id.tv7);
