@@ -73,16 +73,19 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     Toast.makeText(mContext, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 Intent intent = new Intent(mContext, CarBonGoodsWeightAcitivty.class);
                 intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_ID, checkid);
-                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE, "药剂瓶  >  检查表");
+                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE, "药剂瓶 >  检查表");
                 intent.putExtra("item_id", mData.get(position).getId());
 
                 if (mData.get(position).getId() != 0) {
                     intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE_ID, mData.get(position).getId());
                 }
                 intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_SYS_DATA, intentTransmit);
+
                 mContext.startActivity(intent);
+
             }
         });
         vh.rl_11.setOnClickListener(new View.OnClickListener() {

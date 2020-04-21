@@ -190,7 +190,7 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
                     } else if (fragment instanceof CarbonFragment3) {
                         carbonFragment3.upData();
                     } else if (fragment instanceof CarbonFragment4) {
-//                        carbonFragment4.upData();
+                        carbonFragment4.upData();
                     } else if (fragment instanceof CarbonFragment5) {
                         carbonFragment5.upData();
                     }

@@ -1,29 +1,17 @@
 package com.hr.fire.inspection.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.LawContentItemAdapter;
-
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Environment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 public class RuleContentActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter;

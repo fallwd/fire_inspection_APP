@@ -92,83 +92,78 @@ public class FireReportItemAdapter extends BaseAdapter {
         }
         holder.sayTextView.setText(stringArrayList.get(position));
         // 点击导出按钮 生成报告
-        holder.viewBtn.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onClick(View v) {
-                Log.d("dong", "拿到了数据==  " + sele);
+        holder.viewBtn.setOnClickListener(v -> {
+            Log.d("dong", "拿到了数据==  " + sele);
 
-                // 获取后台参数
+            // 获取后台参数
 
-                final List<HashMap> getallmessage = ServiceFactory.getYearCheckService().getOutputItemData(companyInfoId.get(position), checkDate.get(position));
+            final List<HashMap> getallmessage = ServiceFactory.getYearCheckService().getOutputItemData(companyInfoId.get(position), checkDate.get(position));
 
-                // 获取第一个系统
-                Log.d("getallmessage", String.valueOf(getallmessage.get(0)));
-                // 获取ItemInfo对象
-                final List<ItemInfo> date = (List) getallmessage.get(0).get("data");
-//                assert date != null;
-//                Log.d("getallmessage", String.valueOf(date.get(0)));
-                ItemInfo itemObj = date.get(0);
-                // 获取时间
-                final Date checkDate = itemObj.getCheckDate();
-//                Log.d("getallmessage", checkDate+"");
+            // 获取第一个系统
+            Log.d("getallmessage", String.valueOf(getallmessage.get(0)));
+            // 获取ItemInfo对象
+            final List<ItemInfo> date = (List) getallmessage.get(0).get("data");
+                assert date != null;
+                Log.d("getallmessage", String.valueOf(date.get(0)));
+            ItemInfo itemObj = date.get(0);
+            // 获取时间
+            final Date checkDate = itemObj.getCheckDate();
+                Log.d("getallmessage", checkDate+"");
 
-                final List<ItemInfo> co2_arr = new ArrayList<>();
-                // 循环遍历数据库返回值 分配每个系统的参数 插入到每个系统的表中
-                for (int i = 0; i < getallmessage.size() ; i++) {
-                    String systemName = (String) getallmessage.get(i).get("systemName"); // 获取每个表的名称
-                    final List getItemInfo = (List) getallmessage.get(i).get("data");
-                    assert getItemInfo != null;
-                    for (int j = 0; j < getItemInfo.size() ; j++) {
-                        ItemInfo itemObj1 = date.get(j);
-                        assert systemName != null;
-                        if ("高压二氧化碳灭火系统".equals(systemName)) {
-                            co2_arr.add(itemObj1);
-                        }
+            final List<ItemInfo> co2_arr = new ArrayList<>();
+            // 循环遍历数据库返回值 分配每个系统的参数 插入到每个系统的表中
+            for (int i = 0; i < getallmessage.size() ; i++) {
+                String systemName = (String) getallmessage.get(i).get("systemName"); // 获取每个表的名称
+                final List getItemInfo = (List) getallmessage.get(i).get("data");
+                assert getItemInfo != null;
+                for (int j = 0; j < getItemInfo.size() ; j++) {
+                    assert systemName != null;
+                    ItemInfo itemObj1 = (ItemInfo) getItemInfo.get(j);
+                    if ("高压二氧化碳灭火系统".equals(systemName)) {
+                        co2_arr.add(itemObj1);
                     }
                 }
+            }
 
-                Style headTextStyle = new Style();
-                headTextStyle.setFontFamily("Hei");
-                headTextStyle.setFontSize(9);
-                headTextStyle.setColor("000000");
-
-
-                List RowArr=new ArrayList();
-                    for (int i = 0; i < co2_arr.size() ; i++) {
-                        ItemInfo itemObj_cell = co2_arr.get(i);
-                        RowRenderData RowCell = RowRenderData.build(
-                                new TextRenderData(itemObj_cell.getLabelNo(),headTextStyle),
-                                new TextRenderData(itemObj_cell.getNo(),headTextStyle),
-                                new TextRenderData(itemObj_cell.getWeight(),headTextStyle),
-                                new TextRenderData(itemObj_cell.getGoodsWeight(),headTextStyle),
-                                new TextRenderData(itemObj_cell.getVolume(),headTextStyle),
-                                new TextRenderData(itemObj_cell.getProdFactory(),headTextStyle),
-                                new TextRenderData(getDate(itemObj_cell.getProdDate()),headTextStyle),
-                                new TextRenderData(itemObj_cell.getTaskNumber(),headTextStyle),
-                                new TextRenderData(itemObj_cell.getIsPass(),headTextStyle)
-                        );
-                        RowArr.add(RowCell);
-                    }
+            Style headTextStyle = new Style();
+            headTextStyle.setFontFamily("Hei");
+            headTextStyle.setFontSize(9);
+            headTextStyle.setColor("000000");
+            List RowArr=new ArrayList();
+                for (int i = 0; i < co2_arr.size() ; i++) {
+                    ItemInfo itemObj_cell = co2_arr.get(i);
+                    RowRenderData RowCell = RowRenderData.build(
+                            new TextRenderData(itemObj_cell.getLabelNo(),headTextStyle),
+                            new TextRenderData(itemObj_cell.getNo(),headTextStyle),
+                            new TextRenderData(itemObj_cell.getWeight(),headTextStyle),
+                            new TextRenderData(itemObj_cell.getGoodsWeight(),headTextStyle),
+                            new TextRenderData(itemObj_cell.getVolume(),headTextStyle),
+                            new TextRenderData(itemObj_cell.getProdFactory(),headTextStyle),
+                            new TextRenderData(getDate(itemObj_cell.getProdDate()),headTextStyle),
+                            new TextRenderData(itemObj_cell.getTaskNumber(),headTextStyle),
+                            new TextRenderData(itemObj_cell.getIsPass(),headTextStyle)
+                    );
+                    RowArr.add(RowCell);
+                }
 
 //                Log.d("模板字符", String.valueOf(headArr));
-                // 传入模板的数据
-                Map<String, Object> tempdatas = new HashMap<String, Object>() {{
-                    put("name", stringArrayList.get(position)); // 名称
-                    put("Data", getDate(checkDate)); // 日期
-                    put("nextCheckTime", netCheckTime(checkDate)); // 下次检验日期
-                    put("Facility_name", set_company_name); // 设施名称Facility Name ->> 公司
-                    put("oil_name", set_oil_name); // 设施名称Facility Name ->> ** 油田
-                    put("platform", set_Platform_name); // 检验地点  ->  ** 平台
-                    put("protectArea", ""); // 保护区域 protectArea
-                    // 高压二氧化碳灭火系统 CO2 Fire Extinguishing System
-                    put("co2_Rows", RowArr);
-                }};
-                try {
-                    initWordTem(stringArrayList.get(position),tempdatas);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            // 传入模板的数据
+            Map<String, Object> tempdatas = new HashMap<String, Object>() {{
+                put("name", stringArrayList.get(position)); // 名称
+                put("Data", getDate(checkDate)); // 日期
+                put("nextCheckTime", netCheckTime(checkDate)); // 下次检验日期
+                put("Facility_name", set_company_name); // 设施名称Facility Name ->> 公司
+                put("oil_name", set_oil_name); // 设施名称Facility Name ->> ** 油田
+                put("platform", set_Platform_name); // 检验地点  ->  ** 平台
+                put("protectArea", getallmessage.get(0).get("protectArea")); // 保护区域 protectArea
+                put("Data", getDate(checkDate)); // 日期
+                // 高压二氧化碳灭火系统 CO2 Fire Extinguishing System
+                put("co2_Rows", RowArr);
+            }};
+            try {
+                initWordTem(stringArrayList.get(position),tempdatas);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
         return convertView;

@@ -3154,13 +3154,13 @@ public class BaseData {
         checkType.setParentId(parentId);
         daoSession.insert(checkType);
         // 设备名
-        checkType2 = new CheckType();
-        tableName2 = "灭火器";
-        type = 2;
-        checkType2.setName(tableName2);
-        checkType2.setType(type);
-        checkType2.setParent(checkType);
-        daoSession.insert(checkType2);
+//        checkType2 = new CheckType();
+//        tableName2 = "灭火器";
+//        type = 2;
+//        checkType2.setName(tableName2);
+//        checkType2.setType(type);
+//        checkType2.setParent(checkType);
+//        daoSession.insert(checkType2);
 
         checkType = new CheckType();
         systemName = "气体灭火系统";
@@ -3172,12 +3172,12 @@ public class BaseData {
         daoSession.insert(checkType);
         // 设备名
         checkType2 = new CheckType();
-        tableName2 = "气体灭火系统";
-        type = 2;
-        checkType2.setName(tableName2);
-        checkType2.setType(type);
-        checkType2.setParent(checkType);
-        daoSession.insert(checkType2);
+//        tableName2 = "气体灭火系统";
+//        type = 2;
+//        checkType2.setName(tableName2);
+//        checkType2.setType(type);
+//        checkType2.setParent(checkType);
+//        daoSession.insert(checkType2);
 
         checkType = new CheckType();
         systemName = "防火风闸";
@@ -3188,13 +3188,13 @@ public class BaseData {
         checkType.setParentId(parentId);
         daoSession.insert(checkType);
         // 设备名
-        checkType2 = new CheckType();
-        tableName2 = "防火风闸";
-        type = 2;
-        checkType2.setName(tableName2);
-        checkType2.setType(type);
-        checkType2.setParent(checkType);
-        daoSession.insert(checkType2);
+//        checkType2 = new CheckType();
+//        tableName2 = "防火风闸";
+//        type = 2;
+//        checkType2.setName(tableName2);
+//        checkType2.setType(type);
+//        checkType2.setParent(checkType);
+//        daoSession.insert(checkType2);
 
         checkType = new CheckType();
         systemName = "雨淋阀";
@@ -3205,13 +3205,13 @@ public class BaseData {
         checkType.setParentId(parentId);
         daoSession.insert(checkType);
         // 设备名
-        checkType2 = new CheckType();
-        tableName2 = "海水雨淋灭火系统";
-        type = 2;
-        checkType2.setName(tableName2);
-        checkType2.setType(type);
-        checkType2.setParent(checkType);
-        daoSession.insert(checkType2);
+//        checkType2 = new CheckType();
+//        tableName2 = "海水雨淋灭火系统";
+//        type = 2;
+//        checkType2.setName(tableName2);
+//        checkType2.setType(type);
+//        checkType2.setParent(checkType);
+//        daoSession.insert(checkType2);
 
         checkType = new CheckType();
         systemName = "消防软管站";
@@ -3222,13 +3222,13 @@ public class BaseData {
         checkType.setParentId(parentId);
         daoSession.insert(checkType);
         // 设备名
-        checkType2 = new CheckType();
-        tableName2 = "消防软管站";
-        type = 2;
-        checkType2.setName(tableName2);
-        checkType2.setType(type);
-        checkType2.setParent(checkType);
-        daoSession.insert(checkType2);
+//        checkType2 = new CheckType();
+//        tableName2 = "消防软管站";
+//        type = 2;
+//        checkType2.setName(tableName2);
+//        checkType2.setType(type);
+//        checkType2.setParent(checkType);
+//        daoSession.insert(checkType2);
 
         checkType = new CheckType();
         systemName = "消防水龙带";
@@ -3239,13 +3239,13 @@ public class BaseData {
         checkType.setParentId(parentId);
         daoSession.insert(checkType);
         // 设备名
-        checkType2 = new CheckType();
-        tableName2 = "消防水龙带";
-        type = 2;
-        checkType2.setName(tableName2);
-        checkType2.setType(type);
-        checkType2.setParent(checkType);
-        daoSession.insert(checkType2);
+//        checkType2 = new CheckType();
+//        tableName2 = "消防水龙带";
+//        type = 2;
+//        checkType2.setName(tableName2);
+//        checkType2.setType(type);
+//        checkType2.setParent(checkType);
+//        daoSession.insert(checkType2);
 
         checkType = new CheckType();
         systemName = "火气探头及火灾盘";
@@ -3256,20 +3256,30 @@ public class BaseData {
         checkType.setParentId(parentId);
         daoSession.insert(checkType);
         // 设备名
-        checkType2 = new CheckType();
-        tableName2 = "火气探头检查表";
+//        checkType2 = new CheckType();
+//        tableName2 = "火气探头检查表";
+//        type = 2;
+//        checkType2.setName(tableName2);
+//        checkType2.setType(type);
+//        checkType2.setParent(checkType);
+//        daoSession.insert(checkType2);
+//        checkType2 = new CheckType();
+//        tableName2 = "火气监控系统检查表";
+//        type = 2;
+//        checkType2.setName(tableName2);
+//        checkType2.setType(type);
+//        checkType2.setParent(checkType);
+//        daoSession.insert(checkType2);
+
+
+        checkType = new CheckType();
+        systemName = "火气监控系统";
         type = 2;
-        checkType2.setName(tableName2);
-        checkType2.setType(type);
-        checkType2.setParent(checkType);
-        daoSession.insert(checkType2);
-        checkType2 = new CheckType();
-        tableName2 = "火气监控系统检查表";
-        type = 2;
-        checkType2.setName(tableName2);
-        checkType2.setType(type);
-        checkType2.setParent(checkType);
-        daoSession.insert(checkType2);
+        parentId = 0;
+        checkType.setName(systemName);
+        checkType.setType(type);
+        checkType.setParentId(parentId);
+        daoSession.insert(checkType);
 
         checkType = new CheckType();
         systemName = "厨房湿粉灭火系统";
@@ -3280,13 +3290,13 @@ public class BaseData {
         checkType.setParentId(parentId);
         daoSession.insert(checkType);
         // 设备名
-        checkType2 = new CheckType();
-        tableName2 = "厨房湿粉灭火系统系统检查表";
-        type = 2;
-        checkType2.setName(tableName2);
-        checkType2.setType(type);
-        checkType2.setParent(checkType);
-        daoSession.insert(checkType2);
+//        checkType2 = new CheckType();
+//        tableName2 = "厨房湿粉灭火系统系统检查表";
+//        type = 2;
+//        checkType2.setName(tableName2);
+//        checkType2.setType(type);
+//        checkType2.setParent(checkType);
+//        daoSession.insert(checkType2);
 
         checkType = new CheckType();
         systemName = "泡沫灭火系统";
@@ -3297,13 +3307,13 @@ public class BaseData {
         checkType.setParentId(parentId);
         daoSession.insert(checkType);
         // 设备名
-        checkType2 = new CheckType();
-        tableName2 = "泡沫灭火系统检查表";
-        type = 2;
-        checkType2.setName(tableName2);
-        checkType2.setType(type);
-        checkType2.setParent(checkType);
-        daoSession.insert(checkType2);
+//        checkType2 = new CheckType();
+//        tableName2 = "泡沫灭火系统检查表";
+//        type = 2;
+//        checkType2.setName(tableName2);
+//        checkType2.setType(type);
+//        checkType2.setParent(checkType);
+//        daoSession.insert(checkType2);
 
         checkType = new CheckType();
         systemName = "消防泵";
@@ -3314,13 +3324,13 @@ public class BaseData {
         checkType.setParentId(parentId);
         daoSession.insert(checkType);
         // 设备名
-        checkType2 = new CheckType();
-        tableName2 = "消防泵检查表";
-        type = 2;
-        checkType2.setName(tableName2);
-        checkType2.setType(type);
-        checkType2.setParent(checkType);
-        daoSession.insert(checkType2);
+//        checkType2 = new CheckType();
+//        tableName2 = "消防泵检查表";
+//        type = 2;
+//        checkType2.setName(tableName2);
+//        checkType2.setType(type);
+//        checkType2.setParent(checkType);
+//        daoSession.insert(checkType2);
 
         checkType = new CheckType();
         systemName = "消防员装备箱";
@@ -3331,13 +3341,13 @@ public class BaseData {
         checkType.setParentId(parentId);
         daoSession.insert(checkType);
         // 设备名
-        checkType2 = new CheckType();
-        tableName2 = "消防员装备箱";
-        type = 2;
-        checkType2.setName(tableName2);
-        checkType2.setType(type);
-        checkType2.setParent(checkType);
-        daoSession.insert(checkType2);
+//        checkType2 = new CheckType();
+//        tableName2 = "消防员装备箱";
+//        type = 2;
+//        checkType2.setName(tableName2);
+//        checkType2.setType(type);
+//        checkType2.setParent(checkType);
+//        daoSession.insert(checkType2);
 
         checkType = new CheckType();
         systemName = "消防水炮";
@@ -3348,13 +3358,13 @@ public class BaseData {
         checkType.setParentId(parentId);
         daoSession.insert(checkType);
         // 设备名
-        checkType2 = new CheckType();
-        tableName2 = "消防水炮";
-        type = 2;
-        checkType2.setName(tableName2);
-        checkType2.setType(type);
-        checkType2.setParent(checkType);
-        daoSession.insert(checkType2);
+//        checkType2 = new CheckType();
+//        tableName2 = "消防水炮";
+//        type = 2;
+//        checkType2.setName(tableName2);
+//        checkType2.setType(type);
+//        checkType2.setParent(checkType);
+//        daoSession.insert(checkType2);
 
         // 法律法规分类
         StandardType standardType = new StandardType();
@@ -3457,6 +3467,7 @@ public class BaseData {
         itemObj.setCheckDate(checkDate);
         itemObj.setIsPass(isPass);
         itemObj.setLabelNo(labelNo);
+        itemObj.setTaskNumber("1,2,3,7");
 //        itemObj.setSystemNumber(systemNumber);
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
@@ -3511,6 +3522,7 @@ public class BaseData {
         itemObj.setCheckDate(checkDate);
         itemObj.setIsPass(isPass);
         itemObj.setLabelNo(labelNo);
+        itemObj.setTaskNumber("1,2,3,7");
 //        itemObj.setSystemNumber(systemNumber);
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
@@ -3565,6 +3577,7 @@ public class BaseData {
         itemObj.setCheckDate(checkDate);
         itemObj.setIsPass(isPass);
         itemObj.setLabelNo(labelNo);
+        itemObj.setTaskNumber("1,2,3,7");
 //        itemObj.setSystemNumber(systemNumber);
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
@@ -3619,10 +3632,120 @@ public class BaseData {
         itemObj.setCheckDate(checkDate);
         itemObj.setIsPass(isPass);
         itemObj.setLabelNo(labelNo);
+        itemObj.setTaskNumber("1,2,3,7");
 //        itemObj.setSystemNumber(systemNumber);
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
         ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 3;
+        // checkTypeId 对应 氮气瓶 4
+        checkTypeId = 4;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-08-03 10:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        itemObj = new ItemInfo();
+        no = "DQP0007";
+        volume = "9";
+        weight = "10";
+        goodsWeight = "8";
+        prodFactory = "红日药业";
+        format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        prodDate = null;
+        try {
+            prodDate = format2.parse("2018-08-03 09:08:07");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        observeDate = null;
+        try {
+            observeDate = format2.parse("2019-03-09 09:08:07");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        isPass = "是";
+        labelNo = "BQ0005";
+//        systemNumber = "SD001";
+        protectArea = "主配电间";
+        codePath = "/src/DQP0002.jpg";
+        itemObj.setNo(no);
+        itemObj.setVolume(volume);
+        itemObj.setWeight(weight);
+        itemObj.setGoodsWeight(goodsWeight);
+        itemObj.setProdFactory(prodFactory);
+        itemObj.setProdDate(prodDate);
+        itemObj.setObserveDate(observeDate);
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setTaskNumber("1,2,3,7");
+//        itemObj.setSystemNumber(systemNumber);
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 3;
+        // checkTypeId 对应 氮气瓶 4
+        checkTypeId = 4;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-08-03 10:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        itemObj = new ItemInfo();
+        no = "DQP0005";
+        volume = "9";
+        weight = "10";
+        goodsWeight = "8";
+        prodFactory = "红日药业";
+        format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        prodDate = null;
+        try {
+            prodDate = format2.parse("2018-08-03 09:08:07");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        observeDate = null;
+        try {
+            observeDate = format2.parse("2019-03-09 09:08:07");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        isPass = "是";
+        labelNo = "BQ0005";
+//        systemNumber = "SD001";
+        protectArea = "主配电间";
+        codePath = "/src/DQP0002.jpg";
+        itemObj.setNo(no);
+        itemObj.setVolume(volume);
+        itemObj.setWeight(weight);
+        itemObj.setGoodsWeight(goodsWeight);
+        itemObj.setProdFactory(prodFactory);
+        itemObj.setProdDate(prodDate);
+        itemObj.setObserveDate(observeDate);
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setTaskNumber("1,2,3,7");
+//        itemObj.setSystemNumber(systemNumber);
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
         ///////////////////////////////////////////////////////
         // companyInfoId CompanyInfo{id=165, companyName='渤西作业公司', oilfieldName='BZ13-1', platformName='BZ13-1', isNecessary=1}
         companyInfoId = 165;
@@ -3661,7 +3784,7 @@ public class BaseData {
         isPass = "是";
         labelNo = "BQ0005";
 //        systemNumber = "SD001";
-        protectArea = "主配电间";
+        protectArea = "主配电间1";
         codePath = "/src/DQP0002.jpg";
         itemObj.setNo(no);
         itemObj.setVolume(volume);
@@ -3673,7 +3796,8 @@ public class BaseData {
         itemObj.setCheckDate(checkDate);
         itemObj.setIsPass(isPass);
         itemObj.setLabelNo(labelNo);
-//        itemObj.setSystemNumber(systemNumber);
+        itemObj.setTaskNumber("1,2,3,7");
+//        itemObj.setSystemNumber(number);
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
         ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
@@ -3702,7 +3826,8 @@ public class BaseData {
         itemObj.setCheckDate(checkDate);
         itemObj.setIsPass(isPass);
         itemObj.setLabelNo(labelNo);
-//        itemObj.setSystemNumber(systemNumber);
+        itemObj.setTaskNumber("1,2,3,7");
+//        itemObj.setSystemNumber(number);
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
         ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
@@ -3731,6 +3856,7 @@ public class BaseData {
         itemObj.setCheckDate(checkDate);
         itemObj.setIsPass(isPass);
         itemObj.setLabelNo(labelNo);
+        itemObj.setTaskNumber("1,2,3,7");
 //        itemObj.setSystemNumber(systemNumber);
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
@@ -3760,6 +3886,7 @@ public class BaseData {
         itemObj.setCheckDate(checkDate);
         itemObj.setIsPass(isPass);
         itemObj.setLabelNo(labelNo);
+        itemObj.setTaskNumber("1,2,3,7");
 //        itemObj.setSystemNumber(systemNumber);
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
@@ -3789,15 +3916,1722 @@ public class BaseData {
         itemObj.setCheckDate(checkDate);
         itemObj.setIsPass(isPass);
         itemObj.setLabelNo(labelNo);
+        itemObj.setTaskNumber("1,2,3,7");
 //        itemObj.setSystemNumber(systemNumber);
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
         ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
 
+///////////////////////////////////////////////////////////////////////////////////////////
+        companyInfoId = 165;
+        // checkTypeId 对应 七氟丙烷钢瓶 10
+        checkTypeId = 10;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setNo("1235623");
+        itemObj.setVolume("10");
+
+        itemObj.setGoodsWeight("9");
+        itemObj.setPressure("100");
+
+        itemObj.setProdFactory(prodFactory);
+        itemObj.setProdDate(prodDate);
+        itemObj.setObserveDate(observeDate);
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 七氟丙烷钢瓶 10
+        checkTypeId = 10;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setNo("1523");
+        itemObj.setVolume("10");
+
+        itemObj.setGoodsWeight("9");
+        itemObj.setPressure("100");
+
+        itemObj.setProdFactory(prodFactory);
+        itemObj.setProdDate(prodDate);
+        itemObj.setObserveDate(observeDate);
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 氮气驱动瓶 12
+        checkTypeId = 12;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setNo("1523");
+        itemObj.setVolume("10");
+
+        itemObj.setGoodsWeight("9");
+        itemObj.setPressure("100");
+
+        itemObj.setProdFactory(prodFactory);
+        itemObj.setProdDate(prodDate);
+        itemObj.setObserveDate(observeDate);
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 氮气驱动瓶 12
+        checkTypeId = 12;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setNo("1523");
+        itemObj.setVolume("10");
+
+        itemObj.setGoodsWeight("9");
+        itemObj.setPressure("100");
+
+        itemObj.setProdFactory(prodFactory);
+        itemObj.setProdDate(prodDate);
+        itemObj.setObserveDate(observeDate);
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 氮气驱动瓶 12
+        checkTypeId = 12;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setNo("1523");
+        itemObj.setVolume("10");
+
+        itemObj.setGoodsWeight("9");
+        itemObj.setPressure("100");
+
+        itemObj.setProdFactory(prodFactory);
+        itemObj.setProdDate(prodDate);
+        itemObj.setObserveDate(observeDate);
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 灭火器 18
+        checkTypeId = 18;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setTypeNo("MFZ/ABC1");
+        itemObj.setAgentsType("P");
+        itemObj.setLevel("1A,21B");
+        itemObj.setVolume("10");
+        itemObj.setGoodsWeight("9");
+        itemObj.setPressure("100");
+        itemObj.setProdFactory(prodFactory);
+        itemObj.setProdDate(prodDate);
+        itemObj.setObserveDate(observeDate);
+        itemObj.setTypeConformity("是");
+        itemObj.setPositionConformity("是");
+        itemObj.setAppearance("是");
+        itemObj.setIsPressure("否");
+        itemObj.setEffectiveness("否");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 灭火器 18
+        checkTypeId = 18;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setTypeNo("MFZ/ABC1");
+        itemObj.setAgentsType("P");
+        itemObj.setLevel("1A,21B");
+        itemObj.setVolume("10");
+        itemObj.setGoodsWeight("9");
+        itemObj.setPressure("100");
+        itemObj.setProdFactory(prodFactory);
+        itemObj.setProdDate(prodDate);
+        itemObj.setObserveDate(observeDate);
+        itemObj.setTypeConformity("是");
+        itemObj.setPositionConformity("是");
+        itemObj.setAppearance("是");
+        itemObj.setIsPressure("否");
+        itemObj.setEffectiveness("否");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 灭火器 18
+        checkTypeId = 18;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setTypeNo("MFZ/ABC1");
+        itemObj.setAgentsType("P");
+        itemObj.setLevel("1A,21B");
+        itemObj.setVolume("10");
+        itemObj.setGoodsWeight("9");
+        itemObj.setPressure("100");
+        itemObj.setProdFactory(prodFactory);
+        itemObj.setProdDate(prodDate);
+        itemObj.setObserveDate(observeDate);
+        itemObj.setTypeConformity("是");
+        itemObj.setPositionConformity("是");
+        itemObj.setAppearance("是");
+        itemObj.setIsPressure("否");
+        itemObj.setEffectiveness("否");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 灭火器 18
+        checkTypeId = 18;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setTypeNo("MFZ/ABC1");
+        itemObj.setAgentsType("P");
+        itemObj.setLevel("1A,21B");
+        itemObj.setVolume("10");
+        itemObj.setGoodsWeight("9");
+        itemObj.setPressure("100");
+        itemObj.setProdFactory(prodFactory);
+        itemObj.setProdDate(prodDate);
+        itemObj.setObserveDate(observeDate);
+        itemObj.setTypeConformity("是");
+        itemObj.setPositionConformity("是");
+        itemObj.setAppearance("是");
+        itemObj.setIsPressure("否");
+        itemObj.setEffectiveness("否");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 灭火器 18
+        checkTypeId = 18;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setTypeNo("MFZ/ABC1");
+        itemObj.setAgentsType("P");
+        itemObj.setLevel("1A,21B");
+        itemObj.setVolume("10");
+        itemObj.setGoodsWeight("9");
+        itemObj.setPressure("100");
+        itemObj.setProdFactory(prodFactory);
+        itemObj.setProdDate(prodDate);
+        itemObj.setObserveDate(observeDate);
+        itemObj.setTypeConformity("是");
+        itemObj.setPositionConformity("是");
+        itemObj.setAppearance("是");
+        itemObj.setIsPressure("否");
+        itemObj.setEffectiveness("否");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 感烟探测器 20
+        checkTypeId = 20;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setAppearance("是");
+        itemObj.setResponseTime("5");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 感烟探测器 20
+        checkTypeId = 20;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setAppearance("是");
+        itemObj.setResponseTime("5");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 感烟探测器 20
+        checkTypeId = 20;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setAppearance("是");
+        itemObj.setResponseTime("5");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 感烟探测器 20
+        checkTypeId = 20;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setAppearance("是");
+        itemObj.setResponseTime("5");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 感温探测器 21
+        checkTypeId = 21;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setAppearance("是");
+        itemObj.setResponseTime("5");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 感温探测器 21
+        checkTypeId = 21;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setAppearance("是");
+        itemObj.setResponseTime("5");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 感温探测器 21
+        checkTypeId = 21;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setAppearance("是");
+        itemObj.setResponseTime("5");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 火焰探测器 22
+        checkTypeId = 22;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setAppearance("是");
+        itemObj.setResponseTime("5");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 火焰探测器 22
+        checkTypeId = 22;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setAppearance("是");
+        itemObj.setResponseTime("5");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 手动报警按钮 23
+        checkTypeId = 23;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setAppearance("是");
+        itemObj.setResponseTime("5");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 手动报警按钮 23
+        checkTypeId = 23;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setAppearance("是");
+        itemObj.setResponseTime("5");
+
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 可燃气体探测器 24
+        checkTypeId = 24;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setAppearance("是");
+        itemObj.setResponseTime("5");
+        itemObj.setSetAlarm25("25");
+        itemObj.setSetAlarm50("50");
+        itemObj.setTestAlarm25("26");
+        itemObj.setTestAlarm50("51");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 可燃气体探测器 24
+        checkTypeId = 24;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setAppearance("是");
+        itemObj.setResponseTime("5");
+        itemObj.setSetAlarm25("25");
+        itemObj.setSetAlarm50("50");
+        itemObj.setTestAlarm25("26");
+        itemObj.setTestAlarm50("51");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 氢气探测器 25
+        checkTypeId = 25;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setAppearance("是");
+        itemObj.setResponseTime("5");
+        itemObj.setSetAlarm25("25");
+        itemObj.setSetAlarm50("50");
+        itemObj.setTestAlarm25("26");
+        itemObj.setTestAlarm50("51");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 氢气探测器 25
+        checkTypeId = 25;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setAppearance("是");
+        itemObj.setResponseTime("5");
+        itemObj.setSetAlarm25("25");
+        itemObj.setSetAlarm50("50");
+        itemObj.setTestAlarm25("26");
+        itemObj.setTestAlarm50("51");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+
+        companyInfoId = 165;
+        // checkTypeId 对应 硫化氢探测器 26
+        checkTypeId = 26;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setAppearance("是");
+        itemObj.setResponseTime("5");
+        itemObj.setSetAlarm25("25");
+        itemObj.setSetAlarm50("50");
+        itemObj.setTestAlarm25("26");
+        itemObj.setTestAlarm50("51");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 硫化氢探测器 26
+        checkTypeId = 26;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setAppearance("是");
+        itemObj.setResponseTime("5");
+        itemObj.setSetAlarm25("25");
+        itemObj.setSetAlarm50("50");
+        itemObj.setTestAlarm25("26");
+        itemObj.setTestAlarm50("51");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 CO探测器 27
+        checkTypeId = 27;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setAppearance("是");
+        itemObj.setResponseTime("5");
+        itemObj.setSetAlarm25("25");
+        itemObj.setSetAlarm50("50");
+        itemObj.setTestAlarm25("26");
+        itemObj.setTestAlarm50("51");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 CO探测器 27
+        checkTypeId = 27;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setAppearance("是");
+        itemObj.setResponseTime("5");
+        itemObj.setSetAlarm25("25");
+        itemObj.setSetAlarm50("50");
+        itemObj.setTestAlarm25("26");
+        itemObj.setTestAlarm50("51");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 CO探测器 27
+        checkTypeId = 27;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setAppearance("是");
+        itemObj.setResponseTime("5");
+        itemObj.setSetAlarm25("25");
+        itemObj.setSetAlarm50("50");
+        itemObj.setTestAlarm25("26");
+        itemObj.setTestAlarm50("51");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 火灾报警控制器 28
+        checkTypeId = 28;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setPositionConformity("BBBBB");
+        itemObj.setAppearance("是");
+        itemObj.setCheck("是");
+        itemObj.setSlience("是");
+        itemObj.setReset("是");
+        itemObj.setPowerAlarmFunction("正常");
+        itemObj.setAlarmFunction("是");
+
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 火灾报警控制器 28
+        checkTypeId = 28;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setDeviceType("ZZZ");
+        itemObj.setTypeNo("O");
+        itemObj.setNo("O");
+        itemObj.setPositionConformity("BBBBB");
+        itemObj.setAppearance("是");
+        itemObj.setCheck("是");
+        itemObj.setSlience("是");
+        itemObj.setReset("是");
+        itemObj.setPowerAlarmFunction("正常");
+        itemObj.setAlarmFunction("是");
+
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+
+        companyInfoId = 165;
+        // checkTypeId 对应 厨房药剂瓶 30
+        checkTypeId = 30;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setAgentsType("111ase");
+        itemObj.setNo("O");
+        itemObj.setVolume("10");
+        itemObj.setWeight("5");
+        itemObj.setGoodsWeight("7");
+        itemObj.setFillingDate(prodDate);
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 厨房药剂瓶 30
+        checkTypeId = 30;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setAgentsType("111ase");
+        itemObj.setNo("O");
+        itemObj.setVolume("10");
+        itemObj.setWeight("5");
+        itemObj.setGoodsWeight("7");
+        itemObj.setFillingDate(prodDate);
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 厨房驱动瓶 332
+        checkTypeId = 32;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setNo("O");
+        itemObj.setPressure("10");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 厨房驱动瓶 332
+        checkTypeId = 32;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setNo("O");
+        itemObj.setPressure("10");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 消防软管 41
+        checkTypeId = 41;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setTypeNo("AA");
+        itemObj.setNo("11");
+        itemObj.setDeviceType("masd");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 消防软管 41
+        checkTypeId = 41;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setTypeNo("AA");
+        itemObj.setNo("11");
+        itemObj.setDeviceType("masd");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 消防炮 43
+        checkTypeId = 43;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setTypeNo("AA");
+        itemObj.setNo("11");
+        itemObj.setDeviceType("masd");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+
+        companyInfoId = 165;
+        // checkTypeId 对应 消防炮 43
+        checkTypeId = 43;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setTypeNo("AA");
+        itemObj.setNo("11");
+        itemObj.setDeviceType("masd");
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+//        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+
+        companyInfoId = 165;
+        // checkTypeId 对应 干粉罐 48
+        checkTypeId = 48;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setTypeNo("AA");
+        itemObj.setNo("11");
+        itemObj.setVolume("50");
+        itemObj.setWeight("12");
+        itemObj.setGoodsWeight("11");
+        itemObj.setFillingDate(prodDate);
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 干粉罐 48
+        checkTypeId = 48;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setTypeNo("AA");
+        itemObj.setNo("11");
+        itemObj.setVolume("50");
+        itemObj.setWeight("12");
+        itemObj.setGoodsWeight("11");
+        itemObj.setFillingDate(prodDate);
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 启动瓶 50
+        checkTypeId = 50;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setNo("11");
+        itemObj.setVolume("50");
+        itemObj.setWeight("12");
+        itemObj.setPressure("20");
+        itemObj.setObserveDate(prodDate);
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 启动瓶 50
+        checkTypeId = 50;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setNo("11");
+        itemObj.setVolume("50");
+        itemObj.setWeight("12");
+        itemObj.setPressure("20");
+        itemObj.setObserveDate(prodDate);
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 SCBA气瓶 60
+        checkTypeId = 60;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setNo("11");
+        itemObj.setVolume("50");
+        itemObj.setWeight("12");
+        itemObj.setPressure("20");
+        itemObj.setObserveDate(prodDate);
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 SCBA气瓶 60
+        checkTypeId = 60;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setNo("11");
+        itemObj.setVolume("50");
+        itemObj.setWeight("12");
+        itemObj.setPressure("20");
+        itemObj.setObserveDate(prodDate);
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 EEBD气瓶 62
+        checkTypeId = 62;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setNo("11");
+        itemObj.setVolume("50");
+        itemObj.setWeight("12");
+        itemObj.setPressure("20");
+        itemObj.setObserveDate(prodDate);
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 EEBD气瓶 62
+        checkTypeId = 62;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setNo("11");
+        itemObj.setVolume("50");
+        itemObj.setWeight("12");
+        itemObj.setPressure("20");
+        itemObj.setObserveDate(prodDate);
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        companyInfoId = 165;
+        // checkTypeId 对应 EEBD气瓶 62
+        checkTypeId = 62;
+        // number 区号 SD002
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        itemObj = new ItemInfo();
+        itemObj.setNo("11");
+        itemObj.setVolume("50");
+        itemObj.setWeight("12");
+        itemObj.setPressure("20");
+        itemObj.setObserveDate(prodDate);
+
+        itemObj.setCheckDate(checkDate);
+        itemObj.setIsPass(isPass);
+        itemObj.setLabelNo(labelNo);
+        itemObj.setSystemNumber(number);
+        itemObj.setTaskNumber("1,2,3,7");
+        itemObj.setProtectArea(protectArea);
+        itemObj.setCodePath(codePath);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+
+        ///// 海水雨淋灭火系统
+        companyInfoId = 165;
+        // checkTypeId 37 38 39
+        // yearCheckId
+
+        number = "SD002";
+        // checkDate 检查日期
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        checkDate = null;
+        try {
+            checkDate = format.parse("2019-07-03 09:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long itemId = 0;
+        YearCheckResult retObj = new YearCheckResult();
+        retObj.setIsPass("是");
+        retObj.setDescription("xxxxxx");
+        retObj.setImageUrl("xxxx/xxx/xx");
+        retObj.setProtectArea("配电间as");
+        retObj.setSystemNumber(number);
+        checkTypeId = 37;
+        long yearCheckId = 30;
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        retObj = new YearCheckResult();
+        retObj.setIsPass("是");
+        retObj.setDescription("xxxxxx");
+        retObj.setImageUrl("xxxx/xxx/xx");
+        retObj.setProtectArea("配电间asa");
+        retObj.setSystemNumber(number);
+        checkTypeId = 37;
+        yearCheckId = 31;
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        retObj = new YearCheckResult();
+        retObj.setIsPass("是");
+        retObj.setDescription("xxxxxx");
+        retObj.setImageUrl("xxxx/xxx/xx");
+        retObj.setProtectArea("配电a间asa");
+        retObj.setSystemNumber(number);
+        checkTypeId = 38;
+        yearCheckId = 32;
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        retObj = new YearCheckResult();
+        retObj.setIsPass("是");
+        retObj.setDescription("xxxxxx");
+        retObj.setImageUrl("xxxx/xxx/xx");
+        retObj.setProtectArea("配电间asa");
+        retObj.setSystemNumber(number);
+        checkTypeId = 38;
+        yearCheckId = 33;
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        retObj = new YearCheckResult();
+        retObj.setIsPass("是");
+        retObj.setDescription("xxxxxx");
+        retObj.setImageUrl("xxxx/xxx/xx");
+        retObj.setProtectArea("配电间asa");
+        retObj.setSystemNumber(number);
+        checkTypeId = 39;
+        yearCheckId = 34;
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        retObj = new YearCheckResult();
+        retObj.setIsPass("是");
+        retObj.setDescription("xxxxxx");
+        retObj.setImageUrl("xxxx/xxx/xx");
+        retObj.setProtectArea("配电间asa");
+        retObj.setSystemNumber(number);
+        checkTypeId = 39;
+        yearCheckId = 35;
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        retObj = new YearCheckResult();
+        retObj.setIsPass("是");
+        retObj.setDescription("xxxxxx");
+        retObj.setImageUrl("xxxx/xxx/xx");
+        retObj.setProtectArea("配电间asa");
+        retObj.setSystemNumber(number);
+        checkTypeId = 39;
+        yearCheckId = 36;
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        retObj = new YearCheckResult();
+        retObj.setIsPass("是");
+        retObj.setDescription("xxxxxx");
+        retObj.setImageUrl("xxxx/xxx/xx");
+        retObj.setProtectArea("配电间asa");
+        retObj.setSystemNumber(number);
+        // 泡沫灭火系统检查 55 56 57 58
+        checkTypeId = 55;
+        yearCheckId = 55;
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        retObj = new YearCheckResult();
+        retObj.setIsPass("是");
+        retObj.setDescription("xxxxxx");
+        retObj.setImageUrl("xxxx/xxx/xx");
+        retObj.setProtectArea("配电间asa");
+        retObj.setSystemNumber(number);
+        checkTypeId = 55;
+        yearCheckId = 56;
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        retObj = new YearCheckResult();
+        retObj.setIsPass("是");
+        retObj.setDescription("xxxxxx");
+        retObj.setImageUrl("xxxx/xxx/xx");
+        retObj.setProtectArea("配电间asa");
+        retObj.setSystemNumber(number);
+        checkTypeId = 56;
+        yearCheckId = 57;
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        retObj = new YearCheckResult();
+        retObj.setIsPass("是");
+        retObj.setDescription("xxxxxx");
+        retObj.setImageUrl("xxxx/xxx/xx");
+        retObj.setProtectArea("配电间asa");
+        retObj.setSystemNumber(number);
+        checkTypeId = 56;
+        yearCheckId = 58;
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        retObj = new YearCheckResult();
+        retObj.setIsPass("是");
+        retObj.setDescription("xxxxxx");
+        retObj.setImageUrl("xxxx/xxx/xx");
+        retObj.setProtectArea("配电间asa");
+        retObj.setSystemNumber(number);
+        checkTypeId = 56;
+        yearCheckId = 59;
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        retObj = new YearCheckResult();
+        retObj.setIsPass("是");
+        retObj.setDescription("xxxxxx");
+        retObj.setImageUrl("xxxx/xxx/xx");
+        retObj.setProtectArea("配电间asa");
+        retObj.setSystemNumber(number);
+        checkTypeId = 56;
+        yearCheckId = 60;
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        retObj = new YearCheckResult();
+        retObj.setIsPass("是");
+        retObj.setDescription("xxxxxx");
+        retObj.setImageUrl("xxxx/xxx/xx");
+        retObj.setProtectArea("配电间asa");
+        retObj.setSystemNumber(number);
+        checkTypeId = 57;
+        yearCheckId = 61;
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        retObj = new YearCheckResult();
+        retObj.setIsPass("是");
+        retObj.setDescription("xxxxxx");
+        retObj.setImageUrl("xxxx/xxx/xx");
+        retObj.setProtectArea("配电间asa");
+        retObj.setSystemNumber(number);
+        checkTypeId = 57;
+        yearCheckId = 62;
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        retObj = new YearCheckResult();
+        retObj.setIsPass("是");
+        retObj.setDescription("xxxxxx");
+        retObj.setImageUrl("xxxx/xxx/xx");
+        retObj.setProtectArea("配电间asa");
+        retObj.setSystemNumber(number);
+        checkTypeId = 58;
+        yearCheckId = 63;
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        retObj = new YearCheckResult();
+        retObj.setIsPass("是");
+        retObj.setDescription("xxxxxx");
+        retObj.setImageUrl("xxxx/xxx/xx");
+        retObj.setProtectArea("配电间asa");
+        retObj.setSystemNumber(number);
+        checkTypeId = 58;
+        yearCheckId = 64;
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        retObj = new YearCheckResult();
+        retObj.setIsPass("是");
+        retObj.setDescription("xxxxxx");
+        retObj.setImageUrl("xxxx/xxx/xx");
+        retObj.setProtectArea("配电间asa");
+        retObj.setSystemNumber(number);
+        checkTypeId = 58;
+        yearCheckId = 65;
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
 
     }
-    // ///////////////////////////////
-
 
 }
 

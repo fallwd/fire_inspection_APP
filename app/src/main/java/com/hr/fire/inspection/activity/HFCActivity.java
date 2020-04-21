@@ -1,6 +1,7 @@
 package com.hr.fire.inspection.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.util.Log;
@@ -16,12 +17,17 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.constant.ConstantInspection;
+import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.fragment.HFCFragment1;
 import com.hr.fire.inspection.fragment.HFCFragment2;
 import com.hr.fire.inspection.fragment.HFCFragment3;
+import com.hr.fire.inspection.fragment.HFCFragment4;
+import com.hr.fire.inspection.fragment.HFCFragment5;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @SuppressLint("Registered")
@@ -38,13 +44,34 @@ public class HFCActivity extends AppCompatActivity {
     private HFCFragment1 mHFCFragment1;
     private HFCFragment2 mHFCFragment2;
     private HFCFragment3 mHFCFragment3;
+    private HFCFragment4 mHFCFragment4;
+    private HFCFragment5 mHFCFragment5;
+    private String f_title;
+    private String sys_number;  //系统位号
+    private IntentTransmit it;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivty_carbon_dioxide);
+        getIntentParameter();
         initView();
         initListner();
+    }
+
+    private void getIntentParameter() {
+        //历史中的companyInfoId  ,  systemId和再公司、平台那边传过来的都是一样的ID，使用哪一个都行
+        Intent intent = getIntent();
+        long systemId = intent.getLongExtra("systemId", 0);   //系统Id
+        long platform_id = intent.getLongExtra("platform_id", 0);   //系统Id
+        Date srt_Date = (Date) intent.getSerializableExtra("srt_Date");  //传过来的时间
+        f_title = intent.getStringExtra("f_title"); //传过来的名称
+        sys_number = intent.getStringExtra("sys_number"); //传过来的名称
+        it = new IntentTransmit();
+        it.companyInfoId = platform_id;
+        it.systemId = systemId;
+        it.srt_Date = srt_Date;
+        it.number = sys_number;
     }
 
     public void initView() {
@@ -60,15 +87,21 @@ public class HFCActivity extends AppCompatActivity {
         mViewPager = findViewById(R.id.vp_content);
         titleList.add("七氟丙烷钢瓶信息采集");
         titleList.add("氮气驱动瓶信息采集");
-        titleList.add("七氟丙烷钢瓶");
+        titleList.add("管线管件");
+        titleList.add("保护区");
+        titleList.add("功能性实验");
 
-        mHFCFragment1 = HFCFragment1.newInstance("", "");
-        mHFCFragment2 = HFCFragment2.newInstance("", "");
-        mHFCFragment3 = HFCFragment3.newInstance("", "");
+        mHFCFragment1 = HFCFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
+        mHFCFragment2 = HFCFragment2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
+        mHFCFragment3 = HFCFragment3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
+        mHFCFragment4 = HFCFragment4.newInstance(ConstantInspection.YEARLY_ON_SITE_F4, it);
+        mHFCFragment5 = HFCFragment5.newInstance(ConstantInspection.YEARLY_ON_SITE_F5, it);
 
         fragments.add(mHFCFragment1);
         fragments.add(mHFCFragment2);
         fragments.add(mHFCFragment3);
+        fragments.add(mHFCFragment4);
+        fragments.add(mHFCFragment5);
 
         //设置缓存的页面数据
         mViewPager.setOffscreenPageLimit(fragments.size());
@@ -83,6 +116,11 @@ public class HFCActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int i) {
                 currentPager = i;
+                if (i == 2 || i == 3 || i == 4) {
+                    iv_add_table.setVisibility(View.GONE);
+                } else {
+                    iv_add_table.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
@@ -141,7 +179,7 @@ public class HFCActivity extends AppCompatActivity {
                     }else if (fragment instanceof HFCFragment2){
                         mHFCFragment2.addItemView();
                     }else if (fragment instanceof HFCFragment3){
-                        mHFCFragment3.addItemView();
+//                        mHFCFragment3.addItemView();
                     }
                 }
 //                currentPager  拿到当前的页面
@@ -159,9 +197,13 @@ public class HFCActivity extends AppCompatActivity {
                         mHFCFragment2.saveData();
                     } else if (fragment instanceof HFCFragment3) {
                         mHFCFragment3.saveData();
+                    } else if (fragment instanceof HFCFragment4) {
+                        mHFCFragment4.saveData();
+                    }else if (fragment instanceof HFCFragment4) {
+                        mHFCFragment5.saveData();
                     }
-                }
 
+                }
             }
         });
         iv_finish.setOnClickListener(new View.OnClickListener() {
