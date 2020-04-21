@@ -170,7 +170,8 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
     @Override
     public List<ItemInfo> getItemDataEasy(long companyInfoId, long checkTypeId, String number, Date checkDate) {
         QueryBuilder<ItemInfo> queryBuilder;
-        if(number!=null && number!=""){
+//        if(number!=null && number!=""){
+        if(number!=null){
             queryBuilder = daoSession.queryBuilder(ItemInfo.class).where(
                     ItemInfoDao.Properties.SystemNumber.eq(number),
                     ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
@@ -279,7 +280,8 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 //            Log.i("info", "查询完成02-------------------------------------------");
         }
         else {
-            if(number != null && number!=""){
+//            if(number != null && number!=""){
+            if(number != null){
                 queryBuilder = daoSession.queryBuilder(YearCheckResult.class).where(
                         YearCheckResultDao.Properties.SystemNumber.eq(number),
                         YearCheckResultDao.Properties.CompanyInfoId.eq(companyInfoId),
@@ -517,7 +519,10 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
     public HashMap getResultBySystem(long companyInfoId, Date checkDate, String systemName, String tableName) {
         HashMap systemMap;
         QueryBuilder<CheckType> checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
-                where(CheckTypeDao.Properties.Name.eq(systemName));
+                where(
+                        CheckTypeDao.Properties.Name.eq(systemName),
+                        CheckTypeDao.Properties.Type.eq(1)
+                );
         long systemId = checkTypeQueryBuilder.list().get(0).getId();
         // 获取表id
         QueryBuilder<CheckType> tableQueryBuilder = daoSession.queryBuilder(CheckType.class).
@@ -536,19 +541,19 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 //        Join checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
 //                        where(CheckTypeDao.Properties.ParentId.eq(systemId));
         List<ItemInfo> dataList = queryBuilder.list();
-        String weight;
-        if(dataList.size() > 0){
-            weight = dataList.get(0).getWeight();
-        }
-        else {
-            weight = "0";
-        }
+//        String weight;
+//        if(dataList.size() > 0){
+//            weight = dataList.get(0).getWeight();
+//        }
+//        else {
+//            weight = "0";
+//        }
         systemMap = new HashMap();
         systemMap.put("systemName",systemName);
         systemMap.put("tableName",tableName);
         systemMap.put("data",dataList);
-        systemMap.put("count",dataList.size());
-        systemMap.put("weight",weight);
+//        systemMap.put("count",dataList.size());
+//        systemMap.put("weight",weight);
         // 获取区域和位号
 //        String dateString = "2019-08-03 10:10";
         QueryBuilder<ItemInfo> secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
@@ -597,6 +602,44 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
             }
         }
         systemMap.put("protectArea",protectAreaCombo);
+//        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s AND CAST(%s.CHECK_DATE AS TEXT)='%s'",
+//                ItemInfoDao.TABLENAME,
+//                ItemInfoDao.Properties.GoodsWeight.columnName,
+//                ItemInfoDao.TABLENAME,
+//                CheckTypeDao.TABLENAME,
+//                ItemInfoDao.TABLENAME,
+//                CheckTypeDao.TABLENAME,
+//                CheckTypeDao.TABLENAME,
+//                systemId,
+//                ItemInfoDao.TABLENAME,
+//                checkDate.getTime()
+////                dateString
+//        ), new String []{});
+        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT COUNT(%s) AS C,%s FROM %s WHERE COMPANY_INFO_ID=%s AND CHECK_TYPE_ID=%s AND CAST(CHECK_DATE AS TEXT)='%s' GROUP BY WEIGHT",
+
+                ItemInfoDao.Properties.Weight.columnName,
+                ItemInfoDao.Properties.Weight.columnName,
+                ItemInfoDao.TABLENAME,
+                companyInfoId,
+                checkTypeId,
+                checkDate.getTime()
+//                dateString
+        ), new String []{});
+//        cursor.moveToFirst();
+        String count = "";
+        while (cursor.moveToNext()) {
+            String c = cursor.getString(cursor.getColumnIndex("C"));
+            String weight = cursor.getString(cursor.getColumnIndex("WEIGHT"));
+            if(count!=""){
+                count = count + "," + c + "瓶x" + weight + "L";
+            }
+            else {
+                count = count + c + "瓶x" + weight + "L";
+            }
+        }
+//        Log.i("tang","getOutputItemData:xxx:::" + cursor.getString());
+//        long result = cursor.getLong(0);
+        systemMap.put("count",count);
 
         return systemMap;
 
