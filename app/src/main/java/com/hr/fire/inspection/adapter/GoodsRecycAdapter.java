@@ -4,8 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +26,10 @@ import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
+import com.hr.fire.inspection.utils.StringBitmap;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
+import java.io.File;
 import java.util.List;
 
 public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -51,7 +56,7 @@ public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         final ViewHolder vh = (ViewHolder) holder;
 
         if (dataEasy != null && dataEasy.size() != 0) {
@@ -65,7 +70,12 @@ public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.tv5.setText(yearCheck.getStandard());
             vh.tv6.setText(ycr.get(position).getIsPass());
             vh.ev8.setText(ycr.get(position).getDescription());
-
+            String imageUrl = ycr.get(position).getImageUrl();
+            if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+                //路径  /external_path/Android/data/com.hr.fire.inspection/cache/1587462719699.jpg
+                Uri uri = Uri.fromFile(new File(imageUrl));
+                vh.iv7.setImageURI(uri);
+            }
             //在左侧添加图片
             Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
             drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
@@ -75,6 +85,7 @@ public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             vh.tv7.setVisibility(View.GONE);
             vh.rl7.setVisibility(View.VISIBLE);
+
             vh.tv8.setVisibility(View.GONE);
             vh.ev8.setVisibility(View.VISIBLE);
             vh.tv6.setOnClickListener(new View.OnClickListener() {
@@ -86,8 +97,7 @@ public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.iv7.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    mContext.startActivity(new Intent(mContext, PhotoUploadActivity.class));
-                    mYCCamera.startCamera();
+                    mYCCamera.startCamera(position);
                 }
             });
         }
@@ -184,11 +194,12 @@ public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private YCCamera mYCCamera;
 
+    //接口回调, 将点击事件传递到activity中,打开相机
     public void setmYCCamera(YCCamera y) {
         this.mYCCamera = y;
     }
 
     public interface YCCamera {
-        void startCamera();
+        void startCamera(int postion);
     }
 }
