@@ -76,49 +76,29 @@ public class NavigationActivity extends AppCompatActivity {
     //申请两个权限，录音和文件读写
     //1、首先声明一个数组permissions，将需要的权限都放在里面
     String[] mPermission = new String[]{
-            Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.SYSTEM_ALERT_WINDOW,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.CALL_PHONE};
-    private List<String> mRequestPermission = new ArrayList<>();
-    public static int PERMISSION_REQ = 0x123456;
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+
+    //请求状态码
+    private static int REQUEST_PERMISSION_CODE = 1;
+
 
     //权限判断和申请
     private void initPermission() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            for (String one : mPermission) {
-                if (PackageManager.PERMISSION_GRANTED != this.checkPermission(one, Process.myPid(), Process.myUid())) {
-                    mRequestPermission.add(one);
-                }
-            }
-            if (!mRequestPermission.isEmpty()) {
-                this.requestPermissions(mRequestPermission.toArray(new String[mRequestPermission.size()]), PERMISSION_REQ);
-                return;
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, mPermission, REQUEST_PERMISSION_CODE);
             }
         }
     }
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        // 版本兼容
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.M) {
-            return;
-        }
-        if (requestCode == PERMISSION_REQ) {
-            for (int i = 0; i < grantResults.length; i++) {
-                for (String one : mPermission) {
-                    if (permissions[i].equals(one) && grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                        mRequestPermission.remove(one);
-                    }
-                }
-            }
-
-        }
-    }
-
-    @SuppressLint("MissingSuperCall")
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == PERMISSION_REQ) {
-            if (resultCode == 0) {
-                Log.d("dong", "=== ? ");
+        if (requestCode == REQUEST_PERMISSION_CODE) {
+            for (int i = 0; i < permissions.length; i++) {
+                Log.i("MainActivity", "申请的权限为：" + permissions[i] + ",申请结果：" + grantResults[i]);
             }
         }
+
     }
+
 }

@@ -1,12 +1,16 @@
 package com.hr.fire.inspection.activity;
 
 import android.Manifest;
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +18,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,20 +26,24 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.adapter.GoodsAdapter;
+import com.hr.fire.inspection.adapter.GoodsRecycAdapter;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.ServiceFactory;
-import com.hr.fire.inspection.utils.HYLogUtil;
+import com.hr.fire.inspection.utils.FileRoute;
 
-import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
@@ -44,13 +51,17 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
     public static String CHECK_SYS_DATA = "check_sys_data";  //整个系统数据得对象
     public static String CHECK_DIVICE_ID = "check_divice_id"; //设备表得id
     public static String CHECK_DIVICE = "check_divice"; //用来判断是哪个设备页面跳转进来的
-    private List<YearCheck> checkDataEasy;
+    public static final int TAKE_PHOTO = 1;//拍照
+    private List<YearCheck> checkDataEasy;   //左侧需要检查的内容
+    private List<YearCheckResult> yearCheckResults; //右侧需要用户填写的内容
+
     private IntentTransmit its;
     private long check_id;
     private long divice_id;
     private Long item_id;
-    private List<YearCheckResult> yearCheckResults;
     private String title;
+    private int imgPostion = -1;   //用户点击拍照, 所对应的位置
+    private GoodsRecycAdapter goodsAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -98,6 +109,8 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
         initView();
     }
 
+    private Uri imgUri;
+
     private void initView() {
         TextView tv_title = findViewById(R.id.tv_title);
         tv_title.setText(title);
@@ -109,18 +122,33 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
             }
         });
         Button submit_btn = findViewById(R.id.submit_btn);
-        final ListView list = findViewById(R.id.list);
-        GoodsAdapter goodsAdapter = new GoodsAdapter(this, checkDataEasy, yearCheckResults);
-        list.setAdapter(goodsAdapter);
+
+        final RecyclerView listRrcycler = findViewById(R.id.list);
+        @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        listRrcycler.setLayoutManager(layoutManager);
+        goodsAdapter = new GoodsRecycAdapter(this, checkDataEasy, yearCheckResults);
+        listRrcycler.setAdapter(goodsAdapter);
+        listRrcycler.setItemAnimator(new DefaultItemAnimator());
+        goodsAdapter.setmYCCamera(new GoodsRecycAdapter.YCCamera() {
+            @Override
+            public void startCamera(int postion) {
+                imgPostion = postion;
+                try {
+                    camera();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int childCount = list.getChildCount();
+                int childCount = listRrcycler.getChildCount();
 //                Log.d("dong", "childCount==- " + childCount + "    数据条目 " + yearCheckResults.size());
                 //两边的数据条数是一样的.
                 if (yearCheckResults.size() == childCount) {
                     for (int i = 0; i < childCount; i++) {
-                        LinearLayout childAt = (LinearLayout) list.getChildAt(i);
+                        LinearLayout childAt = (LinearLayout) listRrcycler.getChildAt(i);
                         TextView tv6 = childAt.findViewById(R.id.tv6);
                         //图片参数
                         TextView tv7 = childAt.findViewById(R.id.tv7);
@@ -129,7 +157,7 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
 
                         YearCheckResult yearCheckResult = yearCheckResults.get(i);
                         yearCheckResult.setIsPass(tv6.getText().toString().isEmpty() ? " -- " : tv6.getText().toString());
-                        yearCheckResult.setImageUrl("暂无图片链接");  //可以在iv7中获取
+//                        yearCheckResult.setImageUrl("暂无图片链接");  //可以在iv7中获取
                         yearCheckResult.setDescription(ev8.getText().toString().isEmpty() ? "无隐患描述" : ev8.getText().toString());
                         yearCheckResult.setSystemNumber(its.number);
                         yearCheckResult.setProtectArea(" "); // 保护位号
@@ -200,22 +228,56 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
         startActivityForResult(intent, 123);
     }
 
+    private void camera() throws IOException {
+        //该目录是app应用下面的目录,如果程序被卸载或造成图片丢失. 建议使用: FileRoute.getFilePath();但是需要适配
+        long timeMillis = System.currentTimeMillis();
+        String sPath = new StringBuilder().append(timeMillis).append(".jpg").toString();
+        File outputImage = new File(getExternalCacheDir(), sPath);
+
+        if (Build.VERSION.SDK_INT >= 24) {
+            imgUri = FileProvider
+                    .getUriForFile(this, getApplication().getApplicationContext().getPackageName() + ".fileProvider", outputImage);
+        } else {
+            imgUri = Uri.fromFile(outputImage);
+        }
+        //启动相机
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imgUri);
+        startActivityForResult(intent, TAKE_PHOTO);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 123) {
-
-            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                // 检查该权限是否已经获取
-                int i = ContextCompat.checkSelfPermission(this, permissions[0]);
-                // 权限是否已经 授权 GRANTED---授权  DINIED---拒绝
-                if (i != PackageManager.PERMISSION_GRANTED) {
-                    goToAppSetting();
-                } else {
-                    Toast.makeText(this, "权限获取成功", Toast.LENGTH_SHORT).show();
+        switch (requestCode) {
+            case TAKE_PHOTO:  //拍照的回调
+                if (resultCode == RESULT_OK) {
+                    try {
+                        Bitmap bitmap = BitmapFactory
+                                .decodeStream(getContentResolver().openInputStream(imgUri));
+                        // /external_path/Android/data/com.hr.fire.inspection/cache/1587460070369.jpg
+                        String path = imgUri.getPath();
+                        if (path != null && imgPostion != -1 && goodsAdapter != null) {
+                            yearCheckResults.get(imgPostion).setImageUrl(path);
+                            goodsAdapter.notifyItemChanged(imgPostion);
+                        }
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
+                break;
+            case 123:
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    // 检查该权限是否已经获取
+                    int i = ContextCompat.checkSelfPermission(this, permissions[0]);
+                    // 权限是否已经 授权 GRANTED---授权  DINIED---拒绝
+                    if (i != PackageManager.PERMISSION_GRANTED) {
+                        goToAppSetting();
+                    } else {
+                        Toast.makeText(this, "权限获取成功", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
         }
     }
 }

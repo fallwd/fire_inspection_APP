@@ -54,10 +54,10 @@ public class HFCGoodsAdapter extends BaseAdapter {
     @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        GoodsAdapter.ViewHolder holder = null;
+        ViewHolder holder = null;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_goods_check, parent, false);
-            holder = new GoodsAdapter.ViewHolder();
+            holder = new ViewHolder();
             holder.ll_item = (LinearLayout) convertView.findViewById(R.id.ll_item);
             holder.tv1 = (TextView) convertView.findViewById(R.id.tv1);
             holder.tv2 = (TextView) convertView.findViewById(R.id.tv2);
@@ -72,7 +72,7 @@ public class HFCGoodsAdapter extends BaseAdapter {
             holder.ev8 = (EditText) convertView.findViewById(R.id.ev8);
             convertView.setTag(holder);
         } else {
-            holder = (GoodsAdapter.ViewHolder) convertView.getTag();
+            holder = (ViewHolder) convertView.getTag();
         }
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         holder.ll_item.setLayoutParams(layoutParams);
@@ -96,7 +96,7 @@ public class HFCGoodsAdapter extends BaseAdapter {
         holder.rl7.setVisibility(View.VISIBLE);
         holder.tv8.setVisibility(View.GONE);
         holder.ev8.setVisibility(View.VISIBLE);
-        final GoodsAdapter.ViewHolder finalHolder = holder;
+        final ViewHolder finalHolder = holder;
         holder.tv6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
