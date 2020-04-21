@@ -3,30 +3,13 @@ package com.hr.fire.inspection.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.dao.DaoSession;
-import com.hr.fire.inspection.entity.CheckType;
-import com.hr.fire.inspection.entity.CompanyInfo;
-import com.hr.fire.inspection.entity.ItemInfo;
-import com.hr.fire.inspection.entity.YearCheck;
-import com.hr.fire.inspection.entity.YearCheckResult;
-import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.sqlHelpers.BaseData;
-import com.hr.fire.inspection.sqlHelpers.YearCheckData;
 import com.hr.fire.inspection.utils.DBManager;
-import com.hr.fire.inspection.utils.GreenDaoHelper;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class WelcomeActivity extends AppCompatActivity {
     @Override
@@ -182,7 +165,6 @@ public class WelcomeActivity extends AppCompatActivity {
 //            Log.i("retList:::",""+retList.get(i));
 //
 //        }
-
 
         Toast.makeText(WelcomeActivity.this, "系统将在2秒后为您自动跳转到首页", Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {

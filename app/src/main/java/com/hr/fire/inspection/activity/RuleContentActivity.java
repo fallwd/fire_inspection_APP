@@ -1,16 +1,10 @@
 package com.hr.fire.inspection.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
-
-import com.hr.fire.inspection.R;
-
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Environment;
 import android.os.Bundle;
-//import android.support.v7.app.AppCompatActivity;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,12 +13,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.utils.HYLogUtil;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+//import android.support.v7.app.AppCompatActivity;
 
 public class RuleContentActivity extends AppCompatActivity {
     public static final String TAG = "RuleContentActivity";
