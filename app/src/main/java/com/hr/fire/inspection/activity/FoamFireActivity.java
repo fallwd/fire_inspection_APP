@@ -21,6 +21,7 @@ import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.fragment.FoamFireFragment1;
 import com.hr.fire.inspection.fragment.FoamFireFragment2;
 import com.hr.fire.inspection.fragment.FoamFireFragment3;
+import com.hr.fire.inspection.fragment.FoamFireFragment4;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class FoamFireActivity  extends AppCompatActivity {
     private com.hr.fire.inspection.fragment.FoamFireFragment1 FoamFireFragment1;
     private com.hr.fire.inspection.fragment.FoamFireFragment2 FoamFireFragment2;
     private com.hr.fire.inspection.fragment.FoamFireFragment3 FoamFireFragment3;
+    private com.hr.fire.inspection.fragment.FoamFireFragment4 FoamFireFragment4;
     private String f_title;
     private String sys_number;  //系统位号
     private IntentTransmit it;
@@ -86,15 +88,18 @@ public class FoamFireActivity  extends AppCompatActivity {
 
         FoamFireFragment1 = FoamFireFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
         FoamFireFragment2 = FoamFireFragment2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
-//        FoamFireFragment3 = FoamFireFragment3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
+        FoamFireFragment3 = FoamFireFragment3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
+        FoamFireFragment4 = FoamFireFragment4.newInstance(ConstantInspection.YEARLY_ON_SITE_F4, it);
 
         fragments.add(FoamFireFragment1);
         fragments.add(FoamFireFragment2);
-//        fragments.add(FoamFireFragment3);
+        fragments.add(FoamFireFragment3);
+        fragments.add(FoamFireFragment4);
 
         //设置缓存的页面数据
         mViewPager.setOffscreenPageLimit(fragments.size());
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        //mViewPager滑动监听
         //mViewPager滑动监听
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -105,6 +110,7 @@ public class FoamFireActivity  extends AppCompatActivity {
             @Override
             public void onPageSelected(int i) {
                 currentPager = i;
+                iv_add_table.setVisibility(View.GONE);
             }
 
             @Override
@@ -146,6 +152,7 @@ public class FoamFireActivity  extends AppCompatActivity {
 
             }
         });
+
         mTabLayout.setupWithViewPager(mViewPager);
 //        mTabLayout.getTabAt(1).select();//设置第一个为选中
     }
@@ -174,6 +181,10 @@ public class FoamFireActivity  extends AppCompatActivity {
                         FoamFireFragment1.saveData();
                     }else if(fragment instanceof FoamFireFragment2){
                         FoamFireFragment2.saveData();
+                    }else if(fragment instanceof  FoamFireFragment3){
+                        FoamFireFragment3.saveData();
+                    }else if(fragment instanceof  FoamFireFragment4){
+                        FoamFireFragment4.saveData();
                     }
                 }
             }

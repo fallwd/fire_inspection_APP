@@ -115,20 +115,13 @@
             android:name=".activity.AutomaticFireAlarmAcitivty"
             android:screenOrientation="landscape" />
         <activity
-<<<<<<< HEAD
             android:name=".activity.SeawaterSystemActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".activity.FoamFireActivity"
-=======
-            android:name=".activity.NjKitchenAcitivty"
             android:screenOrientation="landscape" />
         <activity
             android:name=".activity.NjKitchenChecklistAcitivty"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".activity.NjFireFightingWaterAcitivty"
->>>>>>> 59cba3c7636b98f462caf5107c6e9a00384fede6
             android:screenOrientation="landscape" />
     </application>
 </manifest>
