@@ -21,8 +21,8 @@ import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.fragment.NjKitchenFragment1;
 import com.hr.fire.inspection.fragment.NjKitchenFragment2;
-//import com.hr.fire.inspection.fragment.AutomaticFireAlarm3;
-//import com.hr.fire.inspection.fragment.AutomaticFireAlarm4;
+import com.hr.fire.inspection.fragment.NjKitchenFragment3;
+import com.hr.fire.inspection.fragment.NjKitchenFragment4;
 
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 
@@ -44,8 +44,8 @@ public class NjKitchenAcitivty extends AppCompatActivity {
     private int currentPager;
     private NjKitchenFragment1 mNjKitchenFragment1;
     private NjKitchenFragment2 mNjKitchenFragment2;
-//    private AutomaticFireAlarm3 mAutomaticFireAlarm3;
-//    private AutomaticFireAlarm4 mAutomaticFireAlarm4;
+    private NjKitchenFragment3 mNjKitchenFragment3;
+    private NjKitchenFragment4 mNjKitchenFragment4;
 
 
     private String f_title;
@@ -105,15 +105,15 @@ public class NjKitchenAcitivty extends AppCompatActivity {
 
         mNjKitchenFragment1 = NjKitchenFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
         mNjKitchenFragment2 = NjKitchenFragment2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
-//        mAutomaticFireAlarm3 = AutomaticFireAlarm3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
-//        mAutomaticFireAlarm4 = AutomaticFireAlarm4.newInstance(ConstantInspection.YEARLY_ON_SITE_F4, it);
+        mNjKitchenFragment3 = NjKitchenFragment3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
+        mNjKitchenFragment4 = NjKitchenFragment4.newInstance(ConstantInspection.YEARLY_ON_SITE_F4, it);
 
 
 
         fragments.add(mNjKitchenFragment1);
         fragments.add(mNjKitchenFragment2);
-//        fragments.add(mAutomaticFireAlarm3);
-//        fragments.add(mAutomaticFireAlarm4);
+        fragments.add(mNjKitchenFragment3);
+        fragments.add(mNjKitchenFragment4);
 
 
 
@@ -188,11 +188,6 @@ public class NjKitchenAcitivty extends AppCompatActivity {
                     }else if (fragment instanceof NjKitchenFragment2){
                         mNjKitchenFragment2.addItemView();
                     }
-//                    else if (fragment instanceof AutomaticFireAlarm3){
-//                        mAutomaticFireAlarm3.addItemView();
-//                    } else if (fragment instanceof AutomaticFireAlarm4){
-//                        mAutomaticFireAlarm4.addItemView();
-//                    }
                 }
 //                currentPager  拿到当前的页面
             }
@@ -207,12 +202,11 @@ public class NjKitchenAcitivty extends AppCompatActivity {
                         mNjKitchenFragment1.upData();
                     }else if (fragment instanceof NjKitchenFragment2) {
                         mNjKitchenFragment2.upData();
+                    } else if (fragment instanceof NjKitchenFragment3) {
+                        mNjKitchenFragment3.upData();
+                    } else if (fragment instanceof NjKitchenFragment4) {
+                        mNjKitchenFragment4.upData();
                     }
-//                    else if (fragment instanceof AutomaticFireAlarm3) {
-//                        mAutomaticFireAlarm3.upData();
-//                    } else if (fragment instanceof AutomaticFireAlarm4) {
-//                        mAutomaticFireAlarm4.upData();
-//                    }
                 }
 
             }
@@ -230,10 +224,9 @@ public class NjKitchenAcitivty extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mNjKitchenFragment1 = null;
-//        mAutomaticFireAlarm2 = null;
-//        mAutomaticFireAlarm3 = null;
-//        mAutomaticFireAlarm4 = null;
-
+        mNjKitchenFragment2 = null;
+        mNjKitchenFragment3 = null;
+        mNjKitchenFragment4 = null;
         finish();
     }
 }

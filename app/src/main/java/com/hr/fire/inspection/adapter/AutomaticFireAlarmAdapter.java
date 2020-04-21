@@ -62,7 +62,7 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
             Log.e("dong", "position----:" + position);
             Log.e("dong", "info----:" + info);
             vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
-//            vh.et_2.setText(new StringBuffer().append(info.getDeviceType()).append(""));
+            vh.et_2.setText(new StringBuffer().append(info.getDeviceType()).append(""));
             vh.et_3.setText(new StringBuffer().append(info.getProdFactory()).append(""));
             vh.et_4.setText(new StringBuffer().append(info.getTypeNo()).append(""));
             vh.et_5.setText(new StringBuffer().append(info.getNo()).append(""));
@@ -166,7 +166,7 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
         } else {
             ItemInfo itemInfo = new ItemInfo();
             itemInfo.setNo("请编辑");
-//            itemInfo.setDeviceType("请编辑");
+            itemInfo.setDeviceType("请编辑");
             itemInfo.setTypeNo("请编辑");
             itemInfo.setResponseTime("请编辑");
             itemInfo.setIsPass("请编辑");

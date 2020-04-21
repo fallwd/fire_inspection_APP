@@ -127,7 +127,7 @@ public class AutomaticFireAlarm9 extends Fragment {
                 ItemInfo item = itemDataList.get(itemDataList.size() - 1);
                 //如果直接新增会导致后台id冲重复\冲突
                 itemInfo.setNo(item.getNo());
-//                itemInfo.setDeviceType(item.getDeviceType);
+                itemInfo.setDeviceType(item.getDeviceType());
                 itemInfo.setProdFactory(item.getProdFactory());
                 itemInfo.setTypeNo(item.getTypeNo());
                 itemInfo.setPositionConformity(item.getPositionConformity());
@@ -144,7 +144,7 @@ public class AutomaticFireAlarm9 extends Fragment {
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
                 itemInfo.setNo("请添加");
-//              itemInfo.setDeviceType("请添加");
+                itemInfo.setDeviceType("请添加");
                 itemInfo.setProdFactory("请添加");
                 itemInfo.setTypeNo("请添加");
                 itemInfo.setPositionConformity("请添加");
@@ -239,7 +239,7 @@ public class AutomaticFireAlarm9 extends Fragment {
 
 
             ItemInfo itemObj = itemDataList.get(i);
-//            itemObj.setDeviceType(et_2.getText().toString());
+            itemObj.setDeviceType(et_2.getText().toString());
             itemObj.setProdFactory(et_3.getText().toString());
             itemObj.setTypeNo(et_4.getText().toString());
             itemObj.setNo(et_5.getText().toString());

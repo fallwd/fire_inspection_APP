@@ -139,7 +139,7 @@ public class NjKitchenFragment1 extends Fragment {
 //
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
-//                itemInfo.setAgentsType("请编辑");
+                itemInfo.setAgentsType("请编辑");
                 itemInfo.setNo("请编辑");
                 itemInfo.setVolume("请编辑");
                 itemInfo.setWeight("请编辑");
@@ -147,7 +147,7 @@ public class NjKitchenFragment1 extends Fragment {
                 itemInfo.setProdFactory("请编辑");
                 Date date = new Date();
                 itemInfo.setProdDate(date);
-//                itemInfo.setFilingData(date);
+                itemInfo.setFillingDate(date);
                 itemInfo.setTaskNumber("请编辑");
                 itemInfo.setIsPass("请编辑");
                 itemInfo.setLabelNo("请编辑");

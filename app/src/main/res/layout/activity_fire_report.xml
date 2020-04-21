@@ -53,74 +53,78 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:ignore="MissingConstraints">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
                     android:layout_alignParentStart="true"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
                     tools:ignore="MissingConstraints">
 
-                    <!--请选择公司-->
-
                     <Button
-                        android:layout_width="80dp"
-                        android:layout_height="30sp"
+                        android:id="@+id/start_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35sp"
                         android:layout_marginLeft="10dp"
                         android:background="@drawable/button_border"
-                        android:drawableRight="@mipmap/cmander">
+                        android:drawableRight="@mipmap/cmander"
+                        android:textSize="12dp">
 
                     </Button>
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:text="--"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_height="wrap_content" />
+                        android:text="--" />
+
                     <Button
-                        android:layout_width="80dp"
-                        android:layout_height="30sp"
+                        android:id="@+id/end_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35sp"
                         android:layout_marginLeft="10dp"
                         android:background="@drawable/button_border"
-                        android:drawableRight="@mipmap/cmander">
+                        android:drawableRight="@mipmap/cmander"
+                        android:textSize="12sp">
 
                     </Button>
-
+                    <!--请选择公司-->
                     <Spinner
-                        style="@style/spinner_style"
                         android:id="@+id/spinner_bussy"
-                        android:entries="@array/spingarr"
-                        android:background="@drawable/spriner_style" >
-                    </Spinner>
+                        style="@style/spinner_style"
+                        android:background="@drawable/spriner_style"
+                        android:entries="@array/spingarr" />
                     <!--请选择油田-->
                     <Spinner
-                        style="@style/spinner_style"
                         android:id="@+id/spinner_yt"
-                        android:entries="@array/spingarr1"
-                        android:background="@drawable/spriner_style" />
+                        style="@style/spinner_style"
+                        android:background="@drawable/spriner_style"
+                        android:entries="@array/spingarr1" />
                     <!--请选择平台-->
                     <Spinner
-                        style="@style/spinner_style"
                         android:id="@+id/spinner_pt"
-                        android:entries="@array/spingarr2"
-                        android:background="@drawable/spriner_style" />
+                        style="@style/spinner_style"
+                        android:background="@drawable/spriner_style"
+                        android:entries="@array/spingarr2" />
 
                     <!--请选择系统-->
                     <Spinner
-                        style="@style/spinner_style"
                         android:id="@+id/spinner_sys"
-                        android:entries="@array/spingarr3"
-                        android:background="@drawable/spriner_style" />
+                        style="@style/spinner_style"
+                        android:background="@drawable/spriner_style"
+                        android:entries="@array/spingarr3" />
                     <!--请选择检查人-->
                     <Spinner
-                        style="@style/spinner_style"
                         android:id="@+id/spinner_per"
-                        android:entries="@array/spingarr4"
-                        android:background="@drawable/spriner_style" />
+                        style="@style/spinner_style"
+                        android:background="@drawable/spriner_style"
+                        android:entries="@array/spingarr4" />
 
                 </LinearLayout>
 
                 <Button
+                    android:id="@+id/insert_but"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"

@@ -21,6 +21,8 @@ import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.fragment.NjFireFightingWaterFragment1;
 import com.hr.fire.inspection.fragment.NjFireFightingWaterFragment2;
+import com.hr.fire.inspection.fragment.NjFireFightingWaterFragment3;
+import com.hr.fire.inspection.fragment.NjFireFightingWaterFragment4;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 
 import java.util.ArrayList;
@@ -44,8 +46,8 @@ public class NjFireFightingWaterAcitivty extends AppCompatActivity {
     private int currentPager;
     private NjFireFightingWaterFragment1 mNjFireFightingWaterFragment1;
     private NjFireFightingWaterFragment2 mNjFireFightingWaterFragment2;
-//    private AutomaticFireAlarm3 mAutomaticFireAlarm3;
-//    private AutomaticFireAlarm4 mAutomaticFireAlarm4;
+    private NjFireFightingWaterFragment3 mNjFireFightingWaterFragment3;
+    private NjFireFightingWaterFragment4 mNjFireFightingWaterFragment4;
 
 
     private String f_title;
@@ -105,15 +107,15 @@ public class NjFireFightingWaterAcitivty extends AppCompatActivity {
 
         mNjFireFightingWaterFragment1 = NjFireFightingWaterFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
         mNjFireFightingWaterFragment2 = NjFireFightingWaterFragment2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
-//        mAutomaticFireAlarm3 = AutomaticFireAlarm3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
-//        mAutomaticFireAlarm4 = AutomaticFireAlarm4.newInstance(ConstantInspection.YEARLY_ON_SITE_F4, it);
+        mNjFireFightingWaterFragment3 = NjFireFightingWaterFragment3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
+        mNjFireFightingWaterFragment4 = NjFireFightingWaterFragment4.newInstance(ConstantInspection.YEARLY_ON_SITE_F4, it);
 
 
 
         fragments.add(mNjFireFightingWaterFragment1);
         fragments.add(mNjFireFightingWaterFragment2);
-//        fragments.add(mAutomaticFireAlarm3);
-//        fragments.add(mAutomaticFireAlarm4);
+        fragments.add(mNjFireFightingWaterFragment3);
+        fragments.add(mNjFireFightingWaterFragment4);
 
 
 
@@ -188,11 +190,6 @@ public class NjFireFightingWaterAcitivty extends AppCompatActivity {
                     } else if (fragment instanceof NjFireFightingWaterFragment2){
                         mNjFireFightingWaterFragment2.addItemView();
                     }
-//                    else if (fragment instanceof AutomaticFireAlarm3){
-//                        mAutomaticFireAlarm3.addItemView();
-//                    } else if (fragment instanceof AutomaticFireAlarm4){
-//                        mAutomaticFireAlarm4.addItemView();
-//                    }
                 }
 //                currentPager  拿到当前的页面
             }
@@ -207,12 +204,11 @@ public class NjFireFightingWaterAcitivty extends AppCompatActivity {
                         mNjFireFightingWaterFragment1.upData();
                     } else if (fragment instanceof NjFireFightingWaterFragment2) {
                         mNjFireFightingWaterFragment2.upData();
+                    } else if (fragment instanceof NjFireFightingWaterFragment3) {
+                        mNjFireFightingWaterFragment3.upData();
+                    } else if (fragment instanceof NjFireFightingWaterFragment4) {
+                        mNjFireFightingWaterFragment4.upData();
                     }
-//                    else if (fragment instanceof AutomaticFireAlarm3) {
-//                        mAutomaticFireAlarm3.upData();
-//                    } else if (fragment instanceof AutomaticFireAlarm4) {
-//                        mAutomaticFireAlarm4.upData();
-//                    }
                 }
 
             }
@@ -231,8 +227,8 @@ public class NjFireFightingWaterAcitivty extends AppCompatActivity {
         super.onDestroy();
         mNjFireFightingWaterFragment1 = null;
         mNjFireFightingWaterFragment2 = null;
-//        mAutomaticFireAlarm3 = null;
-//        mAutomaticFireAlarm4 = null;
+        mNjFireFightingWaterFragment3 = null;
+        mNjFireFightingWaterFragment4 = null;
 
         finish();
     }

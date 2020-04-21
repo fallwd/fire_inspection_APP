@@ -31,6 +31,7 @@
             android:id="@+id/output_word"
             android:layout_width="50dp"
             android:layout_height="30dp"
+            android:focusable="false"
             android:layout_alignParentTop="true"
             android:translationX="-10dp"
             android:layout_alignParentEnd="true"
