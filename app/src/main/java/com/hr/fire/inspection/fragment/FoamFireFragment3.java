@@ -2,7 +2,6 @@ package com.hr.fire.inspection.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,29 +18,28 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.adapter.HFC3Adapter;
+import com.hr.fire.inspection.adapter.FoamFireAdapter3;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.ServiceFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class HFCFragment3 extends Fragment {
+public class FoamFireFragment3  extends Fragment {
     View rootView;
-    private static HFCFragment3 fragment3;
+    private static FoamFireFragment3 fragment3;
     private static String mKey;
     private IntentTransmit its;
-    private HFC3Adapter adapter;
+    private FoamFireAdapter3 adapter;
     private RecyclerView rc_list;
     private List<YearCheck> checkDataEasy;
     private List<YearCheckResult> yearCheckResults;
 
-    public static HFCFragment3 newInstance(String key, IntentTransmit value) {
+    public static FoamFireFragment3 newInstance(String key, IntentTransmit value) {
         if (fragment3 == null) {
-            fragment3 = new HFCFragment3();
+            fragment3 = new FoamFireFragment3();
         }
         mKey = key;
         Bundle args = new Bundle();
@@ -105,7 +103,7 @@ public class HFCFragment3 extends Fragment {
         rc_list = rootView.findViewById(R.id.rc_list3);
         @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rc_list.setLayoutManager(layoutManager);
-        adapter = new HFC3Adapter(getActivity(), checkDataEasy, yearCheckResults);
+        adapter = new FoamFireAdapter3(getActivity(), checkDataEasy, yearCheckResults);
         rc_list.setAdapter(adapter);
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
@@ -134,7 +132,7 @@ public class HFCFragment3 extends Fragment {
                 ServiceFactory.getYearCheckService().update(yearCheckResult);
             }
         }
-        Toast.makeText(getContext(), "\"管线管件\"数据保存成功", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "\"管路及控制阀门\"数据保存成功", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -142,5 +140,4 @@ public class HFCFragment3 extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
     }
-
 }

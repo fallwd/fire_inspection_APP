@@ -31,6 +31,9 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
     public List<YearCheck> getCheckDataAll() {
         QueryBuilder<YearCheck> queryBuilder = daoSession.queryBuilder(YearCheck.class);
         List<YearCheck> dataList = queryBuilder.list();
+        for(int i=0;i<dataList.size();i++){
+            Log.i("getCheckDataAll",dataList.get(i).toString());
+        }
         return dataList;
     }
 
@@ -38,6 +41,9 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
     public List<CheckType> getCheckTypeAll() {
         QueryBuilder<CheckType>  queryBuilder = daoSession.queryBuilder(CheckType.class);
         List<CheckType> dataList = queryBuilder.list();
+        for(int i=0;i<dataList.size();i++){
+            Log.i("getCheckTypeAll",dataList.get(i).toString());
+        }
         return dataList;
     }
 
@@ -297,13 +303,13 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 );
             }
             dataList = queryBuilder.list();
-//            Log.i("info", "查询完成02-------------------------------------------");
-//            for (int i = 0; i < dataList.size(); i++) {
-//                YearCheckResult result = dataList.get(i);
-//                Log.i("result", result.toString());
-//                Log.i("result", result.getYearCheck().toString());
-//            }
-//            Log.i("info", "查询完成02-------------------------------------------");
+            Log.i("info", "查询完成02-------------------------------------------");
+            for (int i = 0; i < dataList.size(); i++) {
+                YearCheckResult result = dataList.get(i);
+                Log.i("result", result.toString());
+                Log.i("result", result.getYearCheck().toString());
+            }
+            Log.i("info", "查询完成02-------------------------------------------");
         }
         return dataList;
     }
@@ -602,43 +608,26 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
             }
         }
         systemMap.put("protectArea",protectAreaCombo);
-//        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT SUM(%s.%s) FROM %s INNER JOIN %s ON %s.CHECK_TYPE_ID=%s._id WHERE %s.PARENT_ID=%s AND CAST(%s.CHECK_DATE AS TEXT)='%s'",
-//                ItemInfoDao.TABLENAME,
-//                ItemInfoDao.Properties.GoodsWeight.columnName,
-//                ItemInfoDao.TABLENAME,
-//                CheckTypeDao.TABLENAME,
-//                ItemInfoDao.TABLENAME,
-//                CheckTypeDao.TABLENAME,
-//                CheckTypeDao.TABLENAME,
-//                systemId,
-//                ItemInfoDao.TABLENAME,
-//                checkDate.getTime()
-////                dateString
-//        ), new String []{});
-        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT COUNT(%s) AS C,%s FROM %s WHERE COMPANY_INFO_ID=%s AND CHECK_TYPE_ID=%s AND CAST(CHECK_DATE AS TEXT)='%s' GROUP BY WEIGHT",
+        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT COUNT(%s) AS C,%s FROM %s WHERE COMPANY_INFO_ID=%s AND CHECK_TYPE_ID=%s AND CAST(CHECK_DATE AS TEXT)='%s' GROUP BY VOLUME",
 
-                ItemInfoDao.Properties.Weight.columnName,
-                ItemInfoDao.Properties.Weight.columnName,
+                ItemInfoDao.Properties.Volume.columnName,
+                ItemInfoDao.Properties.Volume.columnName,
                 ItemInfoDao.TABLENAME,
                 companyInfoId,
                 checkTypeId,
                 checkDate.getTime()
-//                dateString
         ), new String []{});
-//        cursor.moveToFirst();
         String count = "";
         while (cursor.moveToNext()) {
             String c = cursor.getString(cursor.getColumnIndex("C"));
-            String weight = cursor.getString(cursor.getColumnIndex("WEIGHT"));
+            String volume = cursor.getString(cursor.getColumnIndex("VOLUME"));
             if(count!=""){
-                count = count + "," + c + "瓶x" + weight + "L";
+                count = count + "," + c + "瓶x" + volume + "L";
             }
             else {
-                count = count + c + "瓶x" + weight + "L";
+                count = count + c + "瓶x" + volume + "L";
             }
         }
-//        Log.i("tang","getOutputItemData:xxx:::" + cursor.getString());
-//        long result = cursor.getLong(0);
         systemMap.put("count",count);
 
         return systemMap;

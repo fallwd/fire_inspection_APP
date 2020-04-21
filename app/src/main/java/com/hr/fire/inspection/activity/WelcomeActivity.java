@@ -77,6 +77,16 @@ public class WelcomeActivity extends AppCompatActivity {
 //        for(int i=0;i<dataList.size();i++){
 //            Log.i("getItemDataEasy",dataList.get(i).toString());
 //        }
+
+        // 测试插入检查结果
+//        ServiceFactory.getYearCheckService().getCheckDataAll();
+//        ServiceFactory.getYearCheckService().getCheckTypeAll();
+//        // 高压二氧化碳灭火系统 id 1
+//        // 管线管件 id 6
+//        //
+//        YearCheckResult y = new YearCheckResult();
+//        y.setIsPass("是");
+
         ////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -151,12 +161,13 @@ public class WelcomeActivity extends AppCompatActivity {
 //        Log.i("getOutputList",""+allList);
 ////
         // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
-//        long companyInfoId = 3;
+//        long companyInfoId = 165;
 //        // checkDate 检查日期
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 //        Date checkDate = null;
 //        try {
-//            checkDate = format.parse("2019-08-03 10:10");
+////            checkDate = format.parse("2019-08-03 10:10");
+//            checkDate = format.parse("2019-07-03 09:10");
 //        } catch (ParseException e) {
 //            e.printStackTrace();
 //        }

@@ -102,7 +102,6 @@
         <activity
             android:name=".activity.CarbonDioxideAcitivty"
             android:screenOrientation="landscape" />
-
         <activity
             android:name=".activity.CarBonGoodsWeightAcitivty"
             android:screenOrientation="landscape" />
@@ -116,10 +115,13 @@
             android:name=".activity.AutomaticFireAlarmAcitivty"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".activity.SeawaterSystemActivity"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".activity.NjKitchenAcitivty"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".activity.NjKitchenChecklistAcitivty"
+            android:name=".activity.FoamFireActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".activity.NjFireFightingWaterAcitivty"
@@ -127,6 +129,8 @@
         <activity
             android:name=".activity.DFXIAcitivty"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.NjKitchenChecklistAcitivty"
+            android:screenOrientation="landscape" />
     </application>
-
 </manifest>

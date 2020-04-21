@@ -36,6 +36,7 @@ public class HFC1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private IntentTransmit intentTransmit;   //之前页面数据的传参,如系统号\公司id...
 
     public HFC1Adapter() {
+
     }
 
     public HFC1Adapter(Context mContext, List<ItemInfo> mData) {
@@ -71,7 +72,7 @@ public class HFC1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.et_7.setText(new StringBuffer().append(mProdDate).append(""));
             vh.et_8.setText(new StringBuffer().append(mCheckDate).append(""));
             vh.et_9.setText(new StringBuffer().append("").append(""));
-            vh.et_10.setText(new StringBuffer().append("").append(""));
+            vh.et_10.setText(new StringBuffer().append("").append(position + 1));
 
             //在左侧添加图片
             Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
@@ -92,26 +93,13 @@ public class HFC1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.tv_9.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                if (checkid == 0 || intentTransmit == null) {
-//                    Toast.makeText(mContext, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                Intent intent = new Intent(mContext, HFCGoodsWeightActivity.class);
-//                intent.putExtra(HFCGoodsWeightActivity.CHECK_ID, checkid);
-//                if (mData.get(position).getId() != 0) {
-//                    intent.putExtra(HFCGoodsWeightActivity.CHECK_DIVICE_ID, mData.get(position).getId());
-//                }
-//                intent.putExtra(HFCGoodsWeightActivity.CHECK_SYS_DATA, intentTransmit);
-//                Log.e("dong", "系统位号----:" + intentTransmit.number);
-//                mContext.startActivity(intent);
-
                     if (checkid == 0 || intentTransmit == null) {
                         Toast.makeText(mContext, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     Intent intent = new Intent(mContext, CarBonGoodsWeightAcitivty.class);
                     intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_ID, checkid);
-                    intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE, "药剂瓶  >  检查表");
+                    intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE, "  七氟丙烷钢瓶>  检查表");
                     intent.putExtra("item_id", mData.get(position).getId());
 
                     if (mData.get(position).getId() != 0) {

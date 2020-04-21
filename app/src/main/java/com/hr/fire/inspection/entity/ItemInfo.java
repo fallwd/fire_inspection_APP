@@ -34,13 +34,15 @@ public class ItemInfo   {
 
     private String typeNo;//型号
 
-    private String deviceType;//设备型号
+    private String deviceType;//设备类型 规格型号
 
     private String agentsType;//介质类型
 
     private Date fillingDate;//灌装日期
 
-    private String no; //编号 瓶号
+    private String no; //编号 瓶号 位号
+
+    private String level; // 级别
 
     private String volume; //容积
 
@@ -59,6 +61,8 @@ public class ItemInfo   {
     private String positionConformity;//位置符合性
 
     private String appearance;//外观是否良好
+
+    private String isPressure;//压力/重量是否合格
 
     private String check;//自检是否良好
 
@@ -113,17 +117,17 @@ private transient DaoSession daoSession;
 @Generated(hash = 547138643)
 private transient ItemInfoDao myDao;
 
-@Generated(hash = 48858648)
+@Generated(hash = 355893341)
 public ItemInfo(Long id, Long checkTypeId, Long companyInfoId, String typeNo,
-        String deviceType, String agentsType, Date fillingDate, String no, String volume,
-        String weight, String goodsWeight, String pressure, String prodFactory,
-        Date prodDate, String typeConformity, String positionConformity,
-        String appearance, String check, String slience, String reset,
-        String powerAlarmFunction, String alarmFunction, String effectiveness,
-        String responseTime, String description, String setAlarm25, String setAlarm50,
-        String testAlarm25, String testAlarm50, Date observeDate, String taskNumber,
-        String isPass, String labelNo, String imageUrl, String codePath,
-        String SystemNumber, String ProtectArea, Date checkDate) {
+        String deviceType, String agentsType, Date fillingDate, String no, String level,
+        String volume, String weight, String goodsWeight, String pressure,
+        String prodFactory, Date prodDate, String typeConformity,
+        String positionConformity, String appearance, String isPressure, String check,
+        String slience, String reset, String powerAlarmFunction, String alarmFunction,
+        String effectiveness, String responseTime, String description, String setAlarm25,
+        String setAlarm50, String testAlarm25, String testAlarm50, Date observeDate,
+        String taskNumber, String isPass, String labelNo, String imageUrl,
+        String codePath, String SystemNumber, String ProtectArea, Date checkDate) {
     this.id = id;
     this.checkTypeId = checkTypeId;
     this.companyInfoId = companyInfoId;
@@ -132,6 +136,7 @@ public ItemInfo(Long id, Long checkTypeId, Long companyInfoId, String typeNo,
     this.agentsType = agentsType;
     this.fillingDate = fillingDate;
     this.no = no;
+    this.level = level;
     this.volume = volume;
     this.weight = weight;
     this.goodsWeight = goodsWeight;
@@ -141,6 +146,7 @@ public ItemInfo(Long id, Long checkTypeId, Long companyInfoId, String typeNo,
     this.typeConformity = typeConformity;
     this.positionConformity = positionConformity;
     this.appearance = appearance;
+    this.isPressure = isPressure;
     this.check = check;
     this.slience = slience;
     this.reset = reset;
@@ -655,6 +661,22 @@ public void __setDaoSession(DaoSession daoSession) {
 
     public void setFillingDate(Date fillingDate) {
         this.fillingDate = fillingDate;
+    }
+
+    public String getLevel() {
+        return this.level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getIsPressure() {
+        return this.isPressure;
+    }
+
+    public void setIsPressure(String isPressure) {
+        this.isPressure = isPressure;
     }
 
 }

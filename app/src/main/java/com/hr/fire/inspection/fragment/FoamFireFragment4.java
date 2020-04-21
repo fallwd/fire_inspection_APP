@@ -2,7 +2,6 @@ package com.hr.fire.inspection.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,29 +18,28 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.adapter.HFC3Adapter;
+import com.hr.fire.inspection.adapter.FoamFireAdapter4;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.ServiceFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class HFCFragment3 extends Fragment {
+public class FoamFireFragment4 extends Fragment {
     View rootView;
-    private static HFCFragment3 fragment3;
+    private static FoamFireFragment4 fragment3;
     private static String mKey;
     private IntentTransmit its;
-    private HFC3Adapter adapter;
+    private FoamFireAdapter4 adapter;
     private RecyclerView rc_list;
     private List<YearCheck> checkDataEasy;
     private List<YearCheckResult> yearCheckResults;
 
-    public static HFCFragment3 newInstance(String key, IntentTransmit value) {
+    public static FoamFireFragment4 newInstance(String key, IntentTransmit value) {
         if (fragment3 == null) {
-            fragment3 = new HFCFragment3();
+            fragment3 = new FoamFireFragment4();
         }
         mKey = key;
         Bundle args = new Bundle();
@@ -78,9 +76,9 @@ public class HFCFragment3 extends Fragment {
         //根据二氧化碳系统的ID,拿到二氧化碳下面的检查表数据
         List<CheckType> checkTypes = ServiceFactory.getYearCheckService().gettableNameData(its.systemId);
         //在二氧化碳的子表数据中,拿到管线管件对应的id, 通过id去查询管线管件需要检查的内容
-        checkDataEasy = ServiceFactory.getYearCheckService().getCheckDataEasy(checkTypes.get(2).getId());
+        checkDataEasy = ServiceFactory.getYearCheckService().getCheckDataEasy(checkTypes.get(3).getId());
         //获取用户需要填写的数据,如果没有数据,就需要插入的默认数据（流程4）。如果有数据就
-        yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(2).getId(), its.number, its.srt_Date);
+        yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(3).getId(), its.number, its.srt_Date);
         if (yearCheckResults == null || yearCheckResults.size() == 0) {
             for (int i = 0; i < checkDataEasy.size(); i++) {
 //                Log.d("dong", "第一次加载数据 = ");
@@ -93,8 +91,8 @@ public class HFCFragment3 extends Fragment {
                 ycr.setProtectArea(" "); // 保护位号
                 ycr.setCheckDate(its.srt_Date);  //检查日期
                 ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, checkDataEasy.get(i).getId(), its.companyInfoId,
-                        checkTypes.get(2).getId(), its.number, its.srt_Date);
-                yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(2).getId(), its.number, its.srt_Date);
+                        checkTypes.get(3).getId(), its.number, its.srt_Date);
+                yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(3).getId(), its.number, its.srt_Date);
             }
         }
         initView();
@@ -105,7 +103,7 @@ public class HFCFragment3 extends Fragment {
         rc_list = rootView.findViewById(R.id.rc_list3);
         @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rc_list.setLayoutManager(layoutManager);
-        adapter = new HFC3Adapter(getActivity(), checkDataEasy, yearCheckResults);
+        adapter = new FoamFireAdapter4(getActivity(), checkDataEasy, yearCheckResults);
         rc_list.setAdapter(adapter);
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
@@ -113,7 +111,6 @@ public class HFCFragment3 extends Fragment {
 
     public void saveData() {
         int childCount = rc_list.getChildCount();
-//                Log.d("dong", "childCount==- " + childCount + "    数据条目 " + yearCheckResults.size());
         //两边的数据条数是一样的.
         if (yearCheckResults.size() == childCount) {
             for (int i = 0; i < childCount; i++) {
@@ -134,7 +131,7 @@ public class HFCFragment3 extends Fragment {
                 ServiceFactory.getYearCheckService().update(yearCheckResult);
             }
         }
-        Toast.makeText(getContext(), "\"管线管件\"数据保存成功", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "\"功能性实验\"数据保存成功", Toast.LENGTH_SHORT).show();
     }
 
 

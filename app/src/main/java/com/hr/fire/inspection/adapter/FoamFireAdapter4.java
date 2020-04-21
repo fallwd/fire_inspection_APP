@@ -25,13 +25,12 @@ import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
 
-public class HFC3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class FoamFireAdapter4 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<YearCheckResult> ycr;
     private Context mContext;
     private List<YearCheck> mData;
 
-
-    public HFC3Adapter(Context mContext, List<YearCheck> mData, List<YearCheckResult> yearCheckResults) {
+    public FoamFireAdapter4(Context mContext, List<YearCheck> mData, List<YearCheckResult> yearCheckResults) {
         this.mContext = mContext;
         this.mData = mData;
         this.ycr = yearCheckResults;
@@ -42,14 +41,14 @@ public class HFC3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_hfc3_form_input, parent, false);
-        HFC3Adapter.ViewHolder holder = new HFC3Adapter.ViewHolder(view);
+        FoamFireAdapter4.ViewHolder holder = new FoamFireAdapter4.ViewHolder(view);
         return holder;
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-        final HFC3Adapter.ViewHolder vh = (HFC3Adapter.ViewHolder) holder;
+        final FoamFireAdapter4.ViewHolder vh = (FoamFireAdapter4.ViewHolder) holder;
         if (mData != null && mData.size() != 0) {
             YearCheck yearCheck = mData.get(position);
             ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);

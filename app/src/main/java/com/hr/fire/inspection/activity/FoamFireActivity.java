@@ -1,6 +1,5 @@
 package com.hr.fire.inspection.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -19,19 +18,17 @@ import com.google.android.material.tabs.TabLayout;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.IntentTransmit;
-import com.hr.fire.inspection.fragment.HFCFragment1;
-import com.hr.fire.inspection.fragment.HFCFragment2;
-import com.hr.fire.inspection.fragment.HFCFragment3;
-import com.hr.fire.inspection.fragment.HFCFragment4;
-import com.hr.fire.inspection.fragment.HFCFragment5;
+import com.hr.fire.inspection.fragment.FoamFireFragment1;
+import com.hr.fire.inspection.fragment.FoamFireFragment2;
+import com.hr.fire.inspection.fragment.FoamFireFragment3;
+import com.hr.fire.inspection.fragment.FoamFireFragment4;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@SuppressLint("Registered")
-public class HFCActivity extends AppCompatActivity {
+public class FoamFireActivity  extends AppCompatActivity {
     private List<String> titleList = new ArrayList<String>();
     private List<Fragment> fragments = new ArrayList<Fragment>();
     private TabLayout mTabLayout;
@@ -41,11 +38,10 @@ public class HFCActivity extends AppCompatActivity {
     private ImageView iv_add_table;
     private TextView tvInspectionPro;
     private int currentPager;
-    private HFCFragment1 mHFCFragment1;
-    private HFCFragment2 mHFCFragment2;
-    private HFCFragment3 mHFCFragment3;
-    private HFCFragment4 mHFCFragment4;
-    private HFCFragment5 mHFCFragment5;
+    private com.hr.fire.inspection.fragment.FoamFireFragment1 FoamFireFragment1;
+    private com.hr.fire.inspection.fragment.FoamFireFragment2 FoamFireFragment2;
+    private com.hr.fire.inspection.fragment.FoamFireFragment3 FoamFireFragment3;
+    private com.hr.fire.inspection.fragment.FoamFireFragment4 FoamFireFragment4;
     private String f_title;
     private String sys_number;  //系统位号
     private IntentTransmit it;
@@ -85,27 +81,25 @@ public class HFCActivity extends AppCompatActivity {
 
         mTabLayout = findViewById(R.id.tl_tabs);
         mViewPager = findViewById(R.id.vp_content);
-        titleList.add("七氟丙烷钢瓶信息采集");
-        titleList.add("氮气驱动瓶信息采集");
-        titleList.add("管线管件");
-        titleList.add("保护区");
-        titleList.add("功能性实验");
+        titleList.add("泡沫发生装置");
+        titleList.add("储罐撬块");
+        titleList.add("管路及控制阀门");
+        titleList.add("功能性试验");
 
-        mHFCFragment1 = HFCFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
-        mHFCFragment2 = HFCFragment2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
-        mHFCFragment3 = HFCFragment3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
-        mHFCFragment4 = HFCFragment4.newInstance(ConstantInspection.YEARLY_ON_SITE_F4, it);
-        mHFCFragment5 = HFCFragment5.newInstance(ConstantInspection.YEARLY_ON_SITE_F5, it);
+        FoamFireFragment1 = FoamFireFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
+        FoamFireFragment2 = FoamFireFragment2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
+        FoamFireFragment3 = FoamFireFragment3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
+        FoamFireFragment4 = FoamFireFragment4.newInstance(ConstantInspection.YEARLY_ON_SITE_F4, it);
 
-        fragments.add(mHFCFragment1);
-        fragments.add(mHFCFragment2);
-        fragments.add(mHFCFragment3);
-        fragments.add(mHFCFragment4);
-        fragments.add(mHFCFragment5);
+        fragments.add(FoamFireFragment1);
+        fragments.add(FoamFireFragment2);
+        fragments.add(FoamFireFragment3);
+        fragments.add(FoamFireFragment4);
 
         //设置缓存的页面数据
         mViewPager.setOffscreenPageLimit(fragments.size());
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        //mViewPager滑动监听
         //mViewPager滑动监听
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -116,11 +110,7 @@ public class HFCActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int i) {
                 currentPager = i;
-                if (i == 2 || i == 3 || i == 4) {
-                    iv_add_table.setVisibility(View.GONE);
-                } else {
-                    iv_add_table.setVisibility(View.VISIBLE);
-                }
+                iv_add_table.setVisibility(View.GONE);
             }
 
             @Override
@@ -162,6 +152,7 @@ public class HFCActivity extends AppCompatActivity {
 
             }
         });
+
         mTabLayout.setupWithViewPager(mViewPager);
 //        mTabLayout.getTabAt(1).select();//设置第一个为选中
     }
@@ -173,13 +164,8 @@ public class HFCActivity extends AppCompatActivity {
                 if (fragments != null && fragments.size() != 0) {
                     Log.d("dong", "instanceof CarbonFragment1  onClick");
                     Fragment fragment = fragments.get(currentPager);
-                    if (fragment instanceof HFCFragment1) {
-                        Log.d("dong", "instanceof CarbonFragment1");
-                        mHFCFragment1.addItemView();
-                    }else if (fragment instanceof HFCFragment2){
-                        mHFCFragment2.addItemView();
-                    }else if (fragment instanceof HFCFragment3){
-//                        mHFCFragment3.addItemView();
+                    if (fragment instanceof FoamFireFragment1) {
+
                     }
                 }
 //                currentPager  拿到当前的页面
@@ -191,18 +177,15 @@ public class HFCActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (fragments != null && fragments.size() != 0) {
                     Fragment fragment = fragments.get(currentPager);
-                    if (fragment instanceof HFCFragment1) {
-                        mHFCFragment1.saveData();
-                    } else if (fragment instanceof HFCFragment2) {
-                        mHFCFragment2.saveData();
-                    } else if (fragment instanceof HFCFragment3) {
-                        mHFCFragment3.saveData();
-                    } else if (fragment instanceof HFCFragment4) {
-                        mHFCFragment4.saveData();
-                    }else if (fragment instanceof HFCFragment4) {
-                        mHFCFragment5.saveData();
+                    if (fragment instanceof FoamFireFragment1) {
+                        FoamFireFragment1.saveData();
+                    }else if(fragment instanceof FoamFireFragment2){
+                        FoamFireFragment2.saveData();
+                    }else if(fragment instanceof  FoamFireFragment3){
+                        FoamFireFragment3.saveData();
+                    }else if(fragment instanceof  FoamFireFragment4){
+                        FoamFireFragment4.saveData();
                     }
-
                 }
             }
         });
@@ -220,3 +203,5 @@ public class HFCActivity extends AppCompatActivity {
         finish();
     }
 }
+
+

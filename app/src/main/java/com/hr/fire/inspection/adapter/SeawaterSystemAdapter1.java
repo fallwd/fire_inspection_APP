@@ -20,21 +20,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.YearCheck;
-import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
 
-public class HFC3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<YearCheckResult> ycr;
+public class SeawaterSystemAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<YearCheck> mData;
 
 
-    public HFC3Adapter(Context mContext, List<YearCheck> mData, List<YearCheckResult> yearCheckResults) {
+    public SeawaterSystemAdapter1(Context mContext, List<YearCheck> mData) {
         this.mContext = mContext;
         this.mData = mData;
-        this.ycr = yearCheckResults;
     }
 
     @NonNull
@@ -42,14 +39,13 @@ public class HFC3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_hfc3_form_input, parent, false);
-        HFC3Adapter.ViewHolder holder = new HFC3Adapter.ViewHolder(view);
+        SeawaterSystemAdapter1.ViewHolder holder = new SeawaterSystemAdapter1.ViewHolder(view);
         return holder;
 
     }
-
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-        final HFC3Adapter.ViewHolder vh = (HFC3Adapter.ViewHolder) holder;
+        final  SeawaterSystemAdapter1.ViewHolder vh = ( SeawaterSystemAdapter1.ViewHolder) holder;
         if (mData != null && mData.size() != 0) {
             YearCheck yearCheck = mData.get(position);
             ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -61,8 +57,6 @@ public class HFC3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.tv4.setText(yearCheck.getRequirement());
             vh.tv5.setText(yearCheck.getStandard());
 
-            vh.tv6.setText(ycr.get(position).getIsPass());
-            vh.ev8.setText(ycr.get(position).getDescription());
 
             //在左侧添加图片
             Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
@@ -79,9 +73,6 @@ public class HFC3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.tv6.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Log.d("dong","点击的状post== " + position);
-
-                    //如果点击的是最后一个条目, 那么控件的高度需要增加  否则弹框会被挡住
                     showPopWind(vh.tv6);
                 }
             });
@@ -91,8 +82,11 @@ public class HFC3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     mContext.startActivity(new Intent(mContext, PhotoUploadActivity.class));
                 }
             });
+
         }
+
     }
+
 
     @Override
     public int getItemCount() {
@@ -112,7 +106,6 @@ public class HFC3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ImageView iv7;
         TextView tv8;
         EditText ev8;
-        View vw;
 
         ViewHolder(View view) {
             super(view);
@@ -148,7 +141,6 @@ public class HFC3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         hrPopup.setOutsideTouchable(true);
         hrPopup.setContentView(PopupRootView);
         hrPopup.showAsDropDown(tv6);
-
         rl_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
