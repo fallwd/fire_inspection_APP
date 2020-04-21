@@ -116,7 +116,7 @@
 
             <TextView
                 android:id="@+id/et_7"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@null"
@@ -132,7 +132,7 @@
 
             <TextView
                 android:id="@+id/et_8"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@null"
@@ -149,7 +149,7 @@
 
             <TextView
                 android:id="@+id/et_9"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@null"
@@ -165,7 +165,7 @@
 
             <TextView
                 android:id="@+id/et_10"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@null"
@@ -182,7 +182,7 @@
 
             <TextView
                 android:id="@+id/et_11"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@null"
@@ -199,7 +199,7 @@
 
             <TextView
                 android:id="@+id/et_12"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@null"

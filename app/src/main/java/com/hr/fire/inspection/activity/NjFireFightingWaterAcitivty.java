@@ -1,5 +1,6 @@
 package com.hr.fire.inspection.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -18,19 +19,20 @@ import com.google.android.material.tabs.TabLayout;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.IntentTransmit;
-import com.hr.fire.inspection.fragment.CarbonFragment1;
-import com.hr.fire.inspection.fragment.CarbonFragment2;
-import com.hr.fire.inspection.fragment.CarbonFragment3;
-import com.hr.fire.inspection.fragment.CarbonFragment4;
-import com.hr.fire.inspection.fragment.CarbonFragment5;
+import com.hr.fire.inspection.fragment.NjFireFightingWaterFragment1;
+import com.hr.fire.inspection.fragment.NjFireFightingWaterFragment2;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CarbonDioxideAcitivty extends AppCompatActivity {
-    private static final String TAG = "CarbonDioxideAcitivty";
+//import com.hr.fire.inspection.fragment.AutomaticFireAlarm3;
+//import com.hr.fire.inspection.fragment.AutomaticFireAlarm4;
+
+@SuppressLint("Registered")
+public class NjFireFightingWaterAcitivty extends AppCompatActivity {
+    private static final String TAG = "AutomaticFireAlarmAcitivty";
     private List<String> titleList = new ArrayList<String>();
     private List<Fragment> fragments = new ArrayList<Fragment>();
     private TabLayout mTabLayout;
@@ -40,14 +42,18 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
     private ImageView iv_add_table;
     private TextView tvInspectionPro;
     private int currentPager;
-    private CarbonFragment1 carbonFragment1;
-    private CarbonFragment2 carbonFragment2;
-    private CarbonFragment3 carbonFragment3;
-    private CarbonFragment4 carbonFragment4;
-    private CarbonFragment5 carbonFragment5;
+    private NjFireFightingWaterFragment1 mNjFireFightingWaterFragment1;
+    private NjFireFightingWaterFragment2 mNjFireFightingWaterFragment2;
+//    private AutomaticFireAlarm3 mAutomaticFireAlarm3;
+//    private AutomaticFireAlarm4 mAutomaticFireAlarm4;
+
+
     private String f_title;
     private String sys_number;  //系统位号
     private IntentTransmit it;
+
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,17 +67,24 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
     private void getIntentParameter() {
         //历史中的companyInfoId  ,  systemId和再公司、平台那边传过来的都是一样的ID，使用哪一个都行
         Intent intent = getIntent();
+        long companyInfoId = intent.getLongExtra("companyInfoId", 0);  //公司ID
         long systemId = intent.getLongExtra("systemId", 0);   //系统Id
         long platform_id = intent.getLongExtra("platform_id", 0);   //系统Id
+        Log.i("md", "intent1111： " + systemId);
+        Log.i("md", "intent2222： " + platform_id);
         Date srt_Date = (Date) intent.getSerializableExtra("srt_Date");  //传过来的时间
         f_title = intent.getStringExtra("f_title"); //传过来的名称
         sys_number = intent.getStringExtra("sys_number"); //传过来的名称
         it = new IntentTransmit();
         it.companyInfoId = platform_id;
         it.systemId = systemId;
+//        it.platform_id = platform_id;
         it.srt_Date = srt_Date;
         it.number = sys_number;
+        Log.d("dong", "sys_id-----" + systemId+ "platform_id-------"+platform_id+ "f_title--------"+f_title + "IT111111"+ it);
     }
+
+
 
     public void initView() {
         iv_finish = findViewById(R.id.iv_finish);
@@ -79,27 +92,31 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
         tvInspectionPro = findViewById(R.id.tv_inspection_pro);
         iv_save = findViewById(R.id.iv_save);
         String text = new StringBuilder().append("消防年检  >  ").append(f_title).toString();
-        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#00A779", 8, text.length());
+        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#E51C23", 0, 3);
         tvInspectionPro.setText(showTextColor);
 
         mTabLayout = findViewById(R.id.tl_tabs);
         mViewPager = findViewById(R.id.vp_content);
-        titleList.add("药剂瓶");
-        titleList.add("氮气瓶");
-        titleList.add("管线管件");
-        titleList.add("保护区");
+        titleList.add("消防软管");
+        titleList.add("消防炮");
+        titleList.add("其他部件");
         titleList.add("功能性试验");
 
-        carbonFragment1 = CarbonFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
-        carbonFragment2 = CarbonFragment2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
-        carbonFragment3 = CarbonFragment3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
-        carbonFragment4 = CarbonFragment4.newInstance(ConstantInspection.YEARLY_ON_SITE_F4, it);
-        carbonFragment5 = CarbonFragment5.newInstance(ConstantInspection.YEARLY_ON_SITE_F5, it);
-        fragments.add(carbonFragment1);
-        fragments.add(carbonFragment2);
-        fragments.add(carbonFragment3);
-        fragments.add(carbonFragment4);
-        fragments.add(carbonFragment5);
+
+        mNjFireFightingWaterFragment1 = NjFireFightingWaterFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
+        mNjFireFightingWaterFragment2 = NjFireFightingWaterFragment2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
+//        mAutomaticFireAlarm3 = AutomaticFireAlarm3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
+//        mAutomaticFireAlarm4 = AutomaticFireAlarm4.newInstance(ConstantInspection.YEARLY_ON_SITE_F4, it);
+
+
+
+        fragments.add(mNjFireFightingWaterFragment1);
+        fragments.add(mNjFireFightingWaterFragment2);
+//        fragments.add(mAutomaticFireAlarm3);
+//        fragments.add(mAutomaticFireAlarm4);
+
+
+
         //设置缓存的页面数据
         mViewPager.setOffscreenPageLimit(fragments.size());
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
@@ -113,11 +130,6 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
             @Override
             public void onPageSelected(int i) {
                 currentPager = i;
-                if (i == 2 || i == 3 || i == 4) {
-                    iv_add_table.setVisibility(View.GONE);
-                } else {
-                    iv_add_table.setVisibility(View.VISIBLE);
-                }
             }
 
             @Override
@@ -168,35 +180,44 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (fragments != null && fragments.size() != 0) {
+                    Log.d("dong", "instanceof CarbonFragment1  onClick");
                     Fragment fragment = fragments.get(currentPager);
-                    if (fragment instanceof CarbonFragment1) {
-                        carbonFragment1.addItemView();
-                    } else if (fragment instanceof CarbonFragment2) {
-                        carbonFragment2.addItemView();
+                    if (fragment instanceof NjFireFightingWaterFragment1) {
+                        Log.d("dong", "instanceof CarbonFragment1");
+                        mNjFireFightingWaterFragment1.addItemView();
+                    } else if (fragment instanceof NjFireFightingWaterFragment2){
+                        mNjFireFightingWaterFragment2.addItemView();
                     }
+//                    else if (fragment instanceof AutomaticFireAlarm3){
+//                        mAutomaticFireAlarm3.addItemView();
+//                    } else if (fragment instanceof AutomaticFireAlarm4){
+//                        mAutomaticFireAlarm4.addItemView();
+//                    }
                 }
-
+//                currentPager  拿到当前的页面
             }
         });
+        //点击保存时候调用
         iv_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (fragments != null && fragments.size() != 0) {
                     Fragment fragment = fragments.get(currentPager);
-                    if (fragment instanceof CarbonFragment1) {
-                        carbonFragment1.upData();
-                    } else if (fragment instanceof CarbonFragment2) {
-                        carbonFragment2.upData();
-                    } else if (fragment instanceof CarbonFragment3) {
-                        carbonFragment3.upData();
-                    } else if (fragment instanceof CarbonFragment4) {
-                        carbonFragment4.upData();
-                    } else if (fragment instanceof CarbonFragment5) {
-                        carbonFragment5.upData();
+                    if (fragment instanceof NjFireFightingWaterFragment1) {
+                        mNjFireFightingWaterFragment1.upData();
+                    } else if (fragment instanceof NjFireFightingWaterFragment2) {
+                        mNjFireFightingWaterFragment2.upData();
                     }
+//                    else if (fragment instanceof AutomaticFireAlarm3) {
+//                        mAutomaticFireAlarm3.upData();
+//                    } else if (fragment instanceof AutomaticFireAlarm4) {
+//                        mAutomaticFireAlarm4.upData();
+//                    }
                 }
+
             }
         });
+
         iv_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -208,11 +229,11 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        carbonFragment1 = null;
-        carbonFragment2 = null;
-        carbonFragment3 = null;
-        carbonFragment4 = null;
-        carbonFragment5 = null;
+        mNjFireFightingWaterFragment1 = null;
+        mNjFireFightingWaterFragment2 = null;
+//        mAutomaticFireAlarm3 = null;
+//        mAutomaticFireAlarm4 = null;
+
         finish();
     }
 }
