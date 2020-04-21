@@ -16,30 +16,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Button;
-import android.widget.TextView;
-
-import com.deepoove.poi.XWPFTemplate;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.FireItemAdapter;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.SystemList;
 import com.hr.fire.inspection.service.ServiceFactory;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 //年检中: 设备列表
 public class FireActivity extends AppCompatActivity {
@@ -64,9 +51,9 @@ public class FireActivity extends AppCompatActivity {
         company_name = b.getString("company_name");
         initData();
     }
-
     private void initData() {
         systemNameData = ServiceFactory.getYearCheckService().getSystemNameData();
+//        Log.d("dong", "s==== " + systemNameData.size() + "   " + systemNameData.toString());
     }
 
     Intent intent = new Intent();
@@ -87,9 +74,21 @@ public class FireActivity extends AppCompatActivity {
                 Long sys_id = systemNameData.get(position).getId();
                 String str_title = systemNameData.get(position).getName();
                 intent.setClass(FireActivity.this, SystemTagProtectionAreaActivity.class);
+                String f_title = systemNameData.get(position).getName();
+                //跳转详情
+                if (f_title.equals("高压二氧化碳灭火系统") || f_title.equals("七氟丙烷气体灭火系统")
+                        || f_title.equals("海水雨淋灭火系统") || f_title.equals("干粉灭火系统")
+                        || f_title.equals("泡沫灭火系统")) {
+                    intent.setClass(FireActivity.this, SystemTagProtectionAreaActivity.class);
+                } else {
+                    intent.putExtra("sys_number", ""); //改页面是没有这个参数的
+                    intent.setClass(FireActivity.this, CarbondioxideRecordAcitivty.class);
+
+                }
                 intent.putExtra("sys_id", sys_id);
                 intent.putExtra("platform_id", platform_id);
-                intent.putExtra("f_title", str_title);
+                intent.putExtra("f_title", f_title);
+                Log.d("dong", "sys_id-----" + sys_id+ "platform_id-------"+platform_id+ "f_title--------"+f_title);
                 startActivity(intent);
                 //这个时候,需要关闭当前页面,并且关闭之前所有选择的页面
                 finish();
@@ -118,8 +117,8 @@ public class FireActivity extends AppCompatActivity {
         });
 
         // 点击返回上一页
-        ImageButton imageButton = (ImageButton) findViewById(R.id.backHome);
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        ImageView iv_finish = (ImageView) findViewById(R.id.iv_finish);
+        iv_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

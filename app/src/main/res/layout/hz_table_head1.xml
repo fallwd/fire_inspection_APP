@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="35dp"
     android:background="#ffffff"
     android:gravity="center_vertical"
     android:stretchColumns="*">
@@ -19,28 +19,26 @@
             android:layout_gravity="center">
 
             <TextView
-                android:id="@+id/tv_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="序号"
-                android:textSize="12sp" />
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </RelativeLayout>
-
         <RelativeLayout
             android:layout_width="30dp"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/et_2"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:text="瓶号"
-                android:textSize="12sp" />
+                android:text="设备类型"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -48,84 +46,46 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-            <EditText
-                android:id="@+id/et_3"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:text="9.1222222"
-                android:textSize="12sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="22dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <EditText
-                android:id="@+id/et_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:text="3"
-                android:textSize="12sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="22dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <EditText
-                android:id="@+id/et_5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:text="50"
-                android:textSize="12sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="25dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <EditText
-                android:id="@+id/et_6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
                 android:text="生产厂家"
-                android:textSize="12sp" />
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </RelativeLayout>
 
+
         <RelativeLayout
-            android:layout_width="35dp"
+            android:layout_width="22dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-            <EditText
-                android:id="@+id/et_7"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:text="生产时间"
-                android:textSize="12sp" />
+                android:text="型号"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="22dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+4
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="0dp"
+                android:text="编号"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -133,33 +93,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-            <EditText
-                android:id="@+id/et_8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:text="是"
-                android:textSize="12sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rl_9"
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
             <TextView
-                android:id="@+id/tv_9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="@null"
-                android:maxLines="1"
-                android:text="检查表"
-                android:textSize="10sp" />
+                android:text="外观是否良好"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -168,27 +109,68 @@
             android:layout_gravity="center">
 
             <TextView
-                android:id="@+id/tv_10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="少时诵诗书所所所所所所所所所所"
-                android:textSize="12sp" />
+                android:text="响应时间/s"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rl_11"
-            android:layout_width="24dp"
-            android:layout_height="match_parent"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="是否合格"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="6dp"
-                android:background="@mipmap/remove_item"
-                android:textSize="12sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/scene_photos"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/hidden_danger"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="操作"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </RelativeLayout>
     </TableRow>
+
 
 </TableLayout>

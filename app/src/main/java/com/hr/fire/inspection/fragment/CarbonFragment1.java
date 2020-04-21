@@ -2,14 +2,12 @@ package com.hr.fire.inspection.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,13 +23,9 @@ import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
-import com.hr.fire.inspection.service.impl.YearCheckServiceImpl;
-import com.hr.fire.inspection.utils.HYLogUtil;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 
-import java.io.Serializable;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -64,7 +58,6 @@ public class CarbonFragment1 extends Fragment {
         if (getArguments() != null) {
             its = (IntentTransmit) getArguments().getSerializable(mKey);
         }
-
     }
 
     @Override
@@ -96,7 +89,7 @@ public class CarbonFragment1 extends Fragment {
         }
         //参数1:公司id, 参数2:检查表类型对应的id, 参数3:输入的系统位号，如果没有就填"",或者SD002,否则没数据   参数4:日期
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(0).getId(), its.number == null ? "" : its.number, its.srt_Date);
-        Log.d("dong","itemDataList== " +itemDataList.toString());
+        Log.d("dong", "itemDataList默认服务器数据== " + itemDataList.toString());
     }
 
     private void initView() {
@@ -118,58 +111,87 @@ public class CarbonFragment1 extends Fragment {
     //动态添加条目
     public void addItemView() {
         if (adapter != null) {
-            adapter.addData(itemDataList.size());
-            //点击"＋", 就像数据库中插入一条数据, 点"保存"就更新所有数据
-            rc_list.post(new Runnable() {
-                @Override
-                public void run() {
-                    addData();
-                }
-            });
+            ItemInfo itemInfo = new ItemInfo();
+            if (itemDataList != null && itemDataList.size() != 0) {
+                //点击新增,有数据,就拿到最后一条数据新增,创建一个新的对象
+                ItemInfo item = itemDataList.get(itemDataList.size() - 1);
+                //如果直接新增会导致后台id冲重复\冲突
+                itemInfo.setVolume(item.getVolume());
+                itemInfo.setWeight(item.getWeight());
+                itemInfo.setGoodsWeight(item.getGoodsWeight());
+                itemInfo.setProdFactory(item.getProdFactory());
+                itemInfo.setProdDate(item.getProdDate());
+                itemInfo.setCheckDate(item.getCheckDate());
+            } else {
+                //点击新增,如果没有数据,就造一条默认数据
+                itemInfo.setVolume("9");
+                itemInfo.setWeight("3");
+                itemInfo.setGoodsWeight("50");
+                itemInfo.setProdFactory("未知");
+                Date date = new Date();
+                itemInfo.setProdDate(date);
+                itemInfo.setCheckDate(date);
+            }
+            long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
+            //表示数据插入成功,再次查询,拿到最新的数据
+            if (l1 == 0) {
+                itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(0).getId(), its.number == null ? "" : its.number, its.srt_Date);
+                adapter.setNewData(itemDataList);
+            } else {
+                ToastUtil.show(getActivity(), "未知错误,新增失败", Toast.LENGTH_SHORT);
+            }
+//            adapter.addData(itemDataList.size());
+//            //点击"＋", 就像数据库中插入一条数据, 点"保存"就更新所有数据
+//            rc_list.post(new Runnable() {
+//                @Override
+//                public void run() {
+//                    addData();
+//                }
+//            });
         }
     }
 
     @SuppressLint("SimpleDateFormat")
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    //点击"＋", 就像数据库中插入一条数据, 点"保存"就更新所有数据
-    public void addData() {
-        int childCount = rc_list.getChildCount();
-        if (childCount == 0) {
-            return;
-        }
-        //这些数据需要从上层传参过来
-        ItemInfo itemObj = new ItemInfo();
-        LinearLayout childAt = (LinearLayout) rc_list.getChildAt(childCount - 1);
-        TextView tv_1 = childAt.findViewById(R.id.tv_1);
-        EditText et_2 = childAt.findViewById(R.id.et_2);
-        EditText et_3 = childAt.findViewById(R.id.et_3);
-        EditText et_4 = childAt.findViewById(R.id.et_4);
-        EditText et_5 = childAt.findViewById(R.id.et_5);
-        EditText et_6 = childAt.findViewById(R.id.et_6);
-        EditText et_7 = childAt.findViewById(R.id.et_7);
-        EditText et_8 = childAt.findViewById(R.id.et_8);
-        TextView tv_9 = childAt.findViewById(R.id.tv_9);
-        itemObj.setNo(et_2.getText().toString());
-        itemObj.setVolume(et_3.getText().toString());
-        itemObj.setWeight(et_4.getText().toString());
-        itemObj.setGoodsWeight(et_5.getText().toString());
-        itemObj.setProdFactory(et_6.getText().toString());
-        Date date = TimeUtil.getInstance().hhmmssTodata(et_7.getText().toString());
-        Date date1 = TimeUtil.getInstance().hhmmssTodata(et_8.getText().toString());
-        itemObj.setProdDate(date);
-        itemObj.setObserveDate(date1);
-        itemObj.setCheckDate(new Date());
-//        itemObj.setIsPass("是");
-//        itemObj.setLabelNo("BQ0002");
-//        itemObj.setSystemNumber("SD002");
-//        itemObj.setProtectArea("主配电间");
-//        itemObj.setCodePath("检查表图片路径:/src/YJP0002.jpg");
-        long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
-        if (l1 == 0) {
-            Toast.makeText(getContext(), "药剂瓶数据添加成功", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    //点击"＋", 就像数据库中插入一条数据, 点"保存"就更新所有数据
+//    public void addData() {
+//        int childCount = rc_list.getChildCount();
+//        if (childCount == 0) {
+//            return;
+//        }
+//        //这些数据需要从上层传参过来
+//        ItemInfo itemObj = new ItemInfo();
+//        LinearLayout childAt = (LinearLayout) rc_list.getChildAt(childCount - 1);
+//        TextView tv_1 = childAt.findViewById(R.id.tv_1);
+//        EditText et_2 = childAt.findViewById(R.id.et_2);
+//        EditText et_3 = childAt.findViewById(R.id.et_3);
+//        EditText et_4 = childAt.findViewById(R.id.et_4);
+//        EditText et_5 = childAt.findViewById(R.id.et_5);
+//        EditText et_6 = childAt.findViewById(R.id.et_6);
+//        EditText et_7 = childAt.findViewById(R.id.et_7);
+//        EditText et_8 = childAt.findViewById(R.id.et_8);
+//        TextView tv_9 = childAt.findViewById(R.id.tv_9);
+//        itemObj.setNo(et_2.getText().toString());
+//        itemObj.setVolume(et_3.getText().toString());
+//        itemObj.setWeight(et_4.getText().toString());
+//        itemObj.setGoodsWeight(et_5.getText().toString());
+//        itemObj.setProdFactory(et_6.getText().toString());
+//        Date date = TimeUtil.getInstance().hhmmssTodata(et_7.getText().toString());
+//        Date date1 = TimeUtil.getInstance().hhmmssTodata(et_8.getText().toString());
+//        itemObj.setProdDate(date);
+//        itemObj.setObserveDate(date1);
+//        itemObj.setCheckDate(new Date());
+////        itemObj.setIsPass("是");
+////        itemObj.setLabelNo("BQ0002");
+////        itemObj.setSystemNumber("SD002");
+////        itemObj.setProtectArea("主配电间");
+////        itemObj.setCodePath("检查表图片路径:/src/YJP0002.jpg");
+//        long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
+//        if (l1 == 0) {
+//            Toast.makeText(getContext(), "药剂瓶数据添加成功", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
     public void upData() {
         int itemCount = rc_list.getChildCount();

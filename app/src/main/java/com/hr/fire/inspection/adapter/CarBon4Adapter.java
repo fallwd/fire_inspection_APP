@@ -42,17 +42,17 @@ public class CarBon4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         CarBon4Adapter.ViewHolder vh = (CarBon4Adapter.ViewHolder) holder;
         if (mData != null && mData.size() != 0) {
-            YearCheck info = mData.get(position);
-            vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
-            vh.et_2.setText(new StringBuffer().append(info.getProject()).append(""));
-            vh.et_3.setText(new StringBuffer().append(info.getContent()).append(""));
-            vh.et_4.setText(new StringBuffer().append(info.getRequirement()).append(""));
-            vh.et_5.setText(new StringBuffer().append(info.getStandard()).append(""));
-            vh.et_6.setText(new StringBuffer().append("").append(""));
-            vh.et_7.setText(new StringBuffer().append("").append(""));
-            vh.et_8.setText(new StringBuffer().append("").append(""));
+//            YearCheck info = mData.get(position);
+//            vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
+//            vh.et_2.setText(new StringBuffer().append(info.getProject()).append(""));
+//            vh.et_3.setText(new StringBuffer().append(info.getContent()).append(""));
+//            vh.et_4.setText(new StringBuffer().append(info.getRequirement()).append(""));
+//            vh.et_5.setText(new StringBuffer().append(info.getStandard()).append(""));
+//            vh.et_6.setText(new StringBuffer().append("").append(""));
+//            vh.et_7.setText(new StringBuffer().append("").append(""));
+//            vh.et_8.setText(new StringBuffer().append("").append(""));
         }
-        vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
+//        vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
     }
 
 

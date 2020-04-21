@@ -1,5 +1,6 @@
 package com.hr.fire.inspection.adapter;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
@@ -14,50 +15,49 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 
 import com.deepoove.poi.XWPFTemplate;
+//import com.deepoove.poi.policy.HackLoopTableRenderPolicy;
+import com.deepoove.poi.config.Configure;
+//import com.deepoove.poi.policy.HackLoopTableRenderPolicy;
+import com.deepoove.poi.data.MiniTableRenderData;
+import com.deepoove.poi.data.RowRenderData;
+import com.deepoove.poi.data.TextRenderData;
+import com.deepoove.poi.data.style.Style;
+import com.deepoove.poi.data.style.TableStyle;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.FireReportActivity;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
 
-import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
-import org.apache.poi.xwpf.usermodel.TextAlignment;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
-import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTBorder;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTblBorders;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTblPr;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTblWidth;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.STBorder;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class FireReportItemAdapter extends BaseAdapter {
 
     private List<String> stringArrayList;
     private List<Long> companyInfoId;
-    private List checkDate;
+    private List<Date> checkDate;
     private final FireReportActivity mContext;
     private String sele;
     private String set_company_name;
     private String set_oil_name;
     private String set_Platform_name;
 
+    // ————————————————————————————————————————————————————————
     public FireReportItemAdapter(FireReportActivity mContext) {
         this.mContext = mContext;
     }
@@ -100,20 +100,58 @@ public class FireReportItemAdapter extends BaseAdapter {
 
                 // 获取后台参数
 
-                final List<HashMap> getallmessage = ServiceFactory.getYearCheckService().getOutputItemData(companyInfoId.get(position), (Date) checkDate.get(position));
+                final List<HashMap> getallmessage = ServiceFactory.getYearCheckService().getOutputItemData(companyInfoId.get(position), checkDate.get(position));
 
                 // 获取第一个系统
                 Log.d("getallmessage", String.valueOf(getallmessage.get(0)));
                 // 获取ItemInfo对象
                 final List<ItemInfo> date = (List) getallmessage.get(0).get("data");
-                Log.d("getallmessage", String.valueOf(date.get(0)));
+//                assert date != null;
+//                Log.d("getallmessage", String.valueOf(date.get(0)));
                 ItemInfo itemObj = date.get(0);
                 // 获取时间
                 final Date checkDate = itemObj.getCheckDate();
-                Log.d("getallmessage", checkDate+"");
+//                Log.d("getallmessage", checkDate+"");
+
+                final List<ItemInfo> co2_arr = new ArrayList<>();
+                // 循环遍历数据库返回值 分配每个系统的参数 插入到每个系统的表中
+                for (int i = 0; i < getallmessage.size() ; i++) {
+                    String systemName = (String) getallmessage.get(i).get("systemName"); // 获取每个表的名称
+                    final List getItemInfo = (List) getallmessage.get(i).get("data");
+                    assert getItemInfo != null;
+                    for (int j = 0; j < getItemInfo.size() ; j++) {
+                        ItemInfo itemObj1 = date.get(j);
+                        assert systemName != null;
+                        if ("高压二氧化碳灭火系统".equals(systemName)) {
+                            co2_arr.add(itemObj1);
+                        }
+                    }
+                }
+
+                Style headTextStyle = new Style();
+                headTextStyle.setFontFamily("Hei");
+                headTextStyle.setFontSize(9);
+                headTextStyle.setColor("000000");
 
 
+                List RowArr=new ArrayList();
+                    for (int i = 0; i < co2_arr.size() ; i++) {
+                        ItemInfo itemObj_cell = co2_arr.get(i);
+                        RowRenderData RowCell = RowRenderData.build(
+                                new TextRenderData(itemObj_cell.getLabelNo(),headTextStyle),
+                                new TextRenderData(itemObj_cell.getNo(),headTextStyle),
+                                new TextRenderData(itemObj_cell.getWeight(),headTextStyle),
+                                new TextRenderData(itemObj_cell.getGoodsWeight(),headTextStyle),
+                                new TextRenderData(itemObj_cell.getVolume(),headTextStyle),
+                                new TextRenderData(itemObj_cell.getProdFactory(),headTextStyle),
+                                new TextRenderData(getDate(itemObj_cell.getProdDate()),headTextStyle),
+                                new TextRenderData(itemObj_cell.getTaskNumber(),headTextStyle),
+                                new TextRenderData(itemObj_cell.getIsPass(),headTextStyle)
+                        );
+                        RowArr.add(RowCell);
+                    }
 
+//                Log.d("模板字符", String.valueOf(headArr));
                 // 传入模板的数据
                 Map<String, Object> tempdatas = new HashMap<String, Object>() {{
                     put("name", stringArrayList.get(position)); // 名称
@@ -123,6 +161,8 @@ public class FireReportItemAdapter extends BaseAdapter {
                     put("oil_name", set_oil_name); // 设施名称Facility Name ->> ** 油田
                     put("platform", set_Platform_name); // 检验地点  ->  ** 平台
                     put("protectArea", ""); // 保护区域 protectArea
+                    // 高压二氧化碳灭火系统 CO2 Fire Extinguishing System
+                    put("co2_Rows", RowArr);
                 }};
                 try {
                     initWordTem(stringArrayList.get(position),tempdatas);
@@ -137,7 +177,7 @@ public class FireReportItemAdapter extends BaseAdapter {
     public void setData(List<HashMap> mapList) {
         stringArrayList = new ArrayList<>();
         companyInfoId = new ArrayList<>();
-        checkDate = new ArrayList();
+        checkDate = new ArrayList<Date>();
         for (int i = 0; i < mapList.size(); i++) {
             HashMap hashMap = mapList.get(i);
             String ret = (String) hashMap.get("ret");
@@ -176,7 +216,6 @@ public class FireReportItemAdapter extends BaseAdapter {
 
 
     // 生成报告 参数
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private void initWordTem(String itemCon, Map<String, Object> tempdatas) throws IOException {
         Log.d("文件名称", String.valueOf(tempdatas));
         System.setProperty("org.apache.poi.javax.xml.stream.XMLInputFactory", "com.fasterxml.aalto.stax.InputFactoryImpl");
@@ -184,14 +223,15 @@ public class FireReportItemAdapter extends BaseAdapter {
         System.setProperty("org.apache.poi.javax.xml.stream.XMLEventFactory", "com.fasterxml.aalto.stax.EventFactoryImpl");
 
         InputStream open = mContext.getAssets().open("In_template.docx");
-        XWPFTemplate template = XWPFTemplate.compile(open).render(tempdatas);
+        Configure configs=Configure.createDefault();
+        configs.customPolicy("co2_Rows",  new DetailTablePolicy());
 
-
+        XWPFTemplate template = XWPFTemplate.compile(open,configs).render(tempdatas);
         try {
             FileOutputStream out;
             String path = Environment.getExternalStorageDirectory().getPath();
             File file = new File(path + "/" + itemCon + ".docx");
-            Log.d("key", String.valueOf(file));
+            Log.d("生成的文件路径名：", String.valueOf(file));
             out = new FileOutputStream(file);
             template.write(out);
             out.flush();
@@ -205,6 +245,8 @@ public class FireReportItemAdapter extends BaseAdapter {
             e.printStackTrace();
             Toast.makeText(mContext, "报告生成失败", Toast.LENGTH_SHORT).show();
         }
+
+
     }
 
     /**
@@ -221,7 +263,7 @@ public class FireReportItemAdapter extends BaseAdapter {
         calendar.add(Calendar.DATE, -1);//减1天
         checkDate = calendar.getTime();
         System.out.println(checkDate);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         String sim = dateFormat.format(checkDate);
         Log.i("md", "推迟的时间为： " + sim);
         return sim;
@@ -230,14 +272,14 @@ public class FireReportItemAdapter extends BaseAdapter {
     /**
      * 获取手机时间  年/月/日
      *
-     * @param date*/
+     * @param date
+     * @return*/
 
     private String getDate(Date date) {
 //        Date date = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日");
-        String sim = dateFormat.format(date);
-//        Log.i("md", "时间sim为： "+sim);
-        return sim;
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        //        Log.i("md", "时间sim为： "+sim);
+        return dateFormat.format(date);
     }
 
     /**
@@ -246,140 +288,22 @@ public class FireReportItemAdapter extends BaseAdapter {
      * @param table     需要插入数据的表格
      * @param tableList 插入数据集合
      */
-//    public static void insertTable(XWPFTable table, List<String[]> tableList) {
-//        //table.addNewRowBetween 没实现，官网文档也说明，只有函数名，但没具体实现，但很多文章还介绍如何使用这个函数，真是害人
-//        //table.insertNewTableRow 本文用这个可以，但是要创建 cell，否则不显示数据
-//        //table.addRow() 在表格最后加一行
-//        // table.addRow(XWPFTableRow row, int pos) 没试过，你可以试试。
-//        //table.createRow() 在表格最后一加行
-//
-//        for (int i = 0; i < tableList.size(); i++) {//遍历要添加的数据的list
-//            XWPFTableRow newRow = table.insertNewTableRow(i + 1);//为表格添加行
-//            String[] strings = tableList.get(i);//获取list中的字符串数组
-//            for (int j = 0; j < strings.length; j++) {//遍历list中的字符串数组
-//                String strings1 = strings[j];
-//                newRow.createCell();//在新增的行上面创建cell
-//                newRow.getCell(j).setText(strings1);//给每个cell赋值。
-//
-//            }
-//        }
-//    }
+    public static void insertTable(XWPFTable table, List<String[]> tableList) {
+        Log.d("表格数据", String.valueOf(tableList));
+        //table.addNewRowBetween 没实现，官网文档也说明，只有函数名，但没具体实现，但很多文章还介绍如何使用这个函数，真是害人
+        //table.insertNewTableRow 本文用这个可以，但是要创建 cell，否则不显示数据
+        //table.addRow() 在表格最后加一行
+        // table.addRow(XWPFTableRow row, int pos) 没试过，你可以试试。
+        //table.createRow() 在表格最后一加行
 
-    public static class MainTest {
-        public static void main(String[] args) throws Exception {
-            word2();
-        }
-
-        public static void word2() {
-            XWPFDocument doc = new XWPFDocument();
-            titleStyle(doc, "项目信息列表");
-
-
-            // 创建20行7列
-            XWPFTable table = doc.createTable(21, 7);
-            tableBorderStyle(table);
-            // table.set
-            List<XWPFTableCell> tableCells1 = table.getRow(0).getTableCells();
-            tableTextStyle(tableCells1, 0, "编码");
-            tableTextStyle(tableCells1, 1, "名称");
-            tableTextStyle(tableCells1, 2, "地址");
-            tableTextStyle(tableCells1, 3, "电话");
-            tableTextStyle(tableCells1, 4, "负责人");
-            tableTextStyle(tableCells1, 5, "类型");
-            tableTextStyle(tableCells1, 6, "备注");
-            for (int i = 1; i < 21; i++) {
-                List<XWPFTableCell> tableCells2 = table.getRow(i).getTableCells();
-                for (int j = 0; j < 7; j++) {
-                    tableTextStyle(tableCells2.get(j), i + "->" + j);
-                }
+        for (int i = 0; i < tableList.size(); i++) {//遍历要添加的数据的list
+            XWPFTableRow newRow = table.insertNewTableRow(i + 1);//为表格添加行
+            String[] strings = tableList.get(i);//获取list中的字符串数组
+            for (int j = 0; j < strings.length; j++) {//遍历list中的字符串数组
+                String strings1 = strings[j];
+                newRow.createCell();//在新增的行上面创建cell
+                newRow.getCell(j).setText(strings1);//给每个cell赋值。
             }
-//            try {
-//                File f = new File("E:\\tmp\\wordTest\\aaa-" + Math.random() + ".docx");
-//                if (f.exists() == false) {
-//                    f.createNewFile();
-//                }
-//                FileOutputStream out = new FileOutputStream(f);
-//                doc.write(out);
-//                out.close();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-        }
-
-        private static void tableBorderStyle(XWPFTable table) {
-            //表格属性
-            CTTblPr tablePr = table.getCTTbl().addNewTblPr();
-            //表格宽度
-            CTTblWidth width = tablePr.addNewTblW();
-            width.setW(BigInteger.valueOf(8000));
-            //表格颜色
-            CTTblBorders borders = table.getCTTbl().getTblPr().addNewTblBorders();
-            //表格内部横向表格颜色
-            CTBorder hBorder = borders.addNewInsideH();
-            hBorder.setVal(STBorder.Enum.forString("single"));
-            hBorder.setSz(new BigInteger("1"));
-            hBorder.setColor("dddddd");
-            //表格内部纵向表格颜色
-            CTBorder vBorder = borders.addNewInsideV();
-            vBorder.setVal(STBorder.Enum.forString("single"));
-            vBorder.setSz(new BigInteger("1"));
-            vBorder.setColor("dddddd");
-            //表格最左边一条线的样式
-            CTBorder lBorder = borders.addNewLeft();
-            lBorder.setVal(STBorder.Enum.forString("single"));
-            lBorder.setSz(new BigInteger("1"));
-            lBorder.setColor("dddddd");
-            //表格最左边一条线的样式
-            CTBorder rBorder = borders.addNewRight();
-            rBorder.setVal(STBorder.Enum.forString("single"));
-            rBorder.setSz(new BigInteger("1"));
-            rBorder.setColor("dddddd");
-            //表格最上边一条线（顶部）的样式
-            CTBorder tBorder = borders.addNewTop();
-            tBorder.setVal(STBorder.Enum.forString("single"));
-            tBorder.setSz(new BigInteger("1"));
-            tBorder.setColor("dddddd");
-            //表格最下边一条线（底部）的样式
-            CTBorder bBorder = borders.addNewBottom();
-            bBorder.setVal(STBorder.Enum.forString("single"));
-            bBorder.setSz(new BigInteger("1"));
-            bBorder.setColor("dddddd");
-        }
-
-        private static void tableTextStyle(List<XWPFTableCell> tableCells1, int index, String text) {
-            tableTextStyle(tableCells1.get(index), text);
-        }
-
-        private static void tableTextStyle(XWPFTableCell tableCell, String text) {
-            XWPFParagraph p0 = tableCell.addParagraph();
-            tableCell.setParagraph(p0);
-            XWPFRun r0 = p0.createRun();
-            // 设置字体是否加粗
-//        r0.setBold(true);
-            r0.setFontSize(12);
-            // 设置使用何种字体
-            r0.setFontFamily("Helvetica Neue");
-            // 设置上下两行之间的间距
-            r0.setTextPosition(12);
-            r0.setColor("333333");
-            r0.setText(text);
-        }
-
-        private static void titleStyle(XWPFDocument doc, String title) {
-            XWPFParagraph p1 = doc.createParagraph();
-            // 设置字体对齐方式
-            p1.setAlignment(ParagraphAlignment.CENTER);
-            p1.setVerticalAlignment(TextAlignment.TOP);
-            // 第一页要使用p1所定义的属性
-            XWPFRun r1 = p1.createRun();
-            // 设置字体是否加粗
-            r1.setBold(true);
-            r1.setFontSize(20);
-            // 设置使用何种字体
-            r1.setFontFamily("Courier");
-            // 设置上下两行之间的间距
-            r1.setTextPosition(20);
-            r1.setText(title);
         }
     }
 }

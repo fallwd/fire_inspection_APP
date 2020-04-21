@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
+
 import com.hr.fire.inspection.dao.DaoSession;
 import com.hr.fire.inspection.dao.YearCheckResultDao;
 import com.hr.fire.inspection.dao.CompanyInfoDao;
@@ -26,13 +27,19 @@ public class ItemInfo   {
     private Long checkTypeId;
 
     @ToOne(joinProperty = "checkTypeId")
-    private CheckType checkType; //设备类型
+    private CheckType checkType; //检查类型
 
     private Long companyInfoId;
     @ToOne(joinProperty = "companyInfoId")
     private CompanyInfo companyInfo;//公司选择信息
 
     private String typeNo;//型号
+
+//    private String deviceType;//设备型号
+
+//    private String agentsType;//介质类型
+//
+//    private Date fillingDate;//灌装日期
 
     private String no; //编号
 
@@ -108,17 +115,15 @@ private transient DaoSession daoSession;
 private transient ItemInfoDao myDao;
 
 @Generated(hash = 1061526940)
-public ItemInfo(Long id, Long checkTypeId, Long companyInfoId, String typeNo,
-        String no, String volume, String weight, String goodsWeight,
-        String pressure, String prodFactory, Date prodDate,
-        String typeConformity, String positionConformity, String appearance,
-        String check, String slience, String reset, String powerAlarmFunction,
-        String alarmFunction, String effectiveness, String responseTime,
-        String description, String setAlarm25, String setAlarm50,
-        String testAlarm25, String testAlarm50, Date observeDate,
+public ItemInfo(Long id, Long checkTypeId, Long companyInfoId, String typeNo, String no,
+        String volume, String weight, String goodsWeight, String pressure,
+        String prodFactory, Date prodDate, String typeConformity,
+        String positionConformity, String appearance, String check, String slience,
+        String reset, String powerAlarmFunction, String alarmFunction,
+        String effectiveness, String responseTime, String description, String setAlarm25,
+        String setAlarm50, String testAlarm25, String testAlarm50, Date observeDate,
         String taskNumber, String isPass, String labelNo, String imageUrl,
-        String codePath, String SystemNumber, String ProtectArea,
-        Date checkDate) {
+        String codePath, String SystemNumber, String ProtectArea, Date checkDate) {
     this.id = id;
     this.checkTypeId = checkTypeId;
     this.companyInfoId = companyInfoId;
@@ -621,4 +626,5 @@ public void __setDaoSession(DaoSession daoSession) {
                 ", checkResultList=" + checkResultList +
                 '}';
     }
+
 }

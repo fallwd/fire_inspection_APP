@@ -28,7 +28,7 @@
                 android:textStyle="bold" />
         </RelativeLayout>
         <RelativeLayout
-            android:layout_width="30dp"
+            android:layout_width="25dp"
             android:layout_height="wrap_content">
 
             <TextView
@@ -42,7 +42,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="35dp"
+            android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -58,7 +58,7 @@
 
 
         <RelativeLayout
-            android:layout_width="22dp"
+            android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -73,10 +73,9 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="22dp"
+            android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-4
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -104,7 +103,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="35dp"
+            android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -112,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="响应时间/s"
+                android:text="设定高报值/25ppm"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -126,20 +125,79 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="设定高高报值/50ppm"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="测试高报值25ppm"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="测试高高报值/50ppm"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="响应时间"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:text="是否合格"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
         <RelativeLayout
-            android:layout_width="35dp"
+            android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/scene_photos"
+                android:layout_centerInParent="true"
+                android:text="照片"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -152,7 +210,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/hidden_danger"
+                android:layout_centerInParent="true"
+                android:text="隐患描述"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold" />

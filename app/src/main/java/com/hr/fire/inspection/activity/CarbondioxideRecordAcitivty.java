@@ -19,10 +19,12 @@ import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.GridRecordAdapter;
 import com.hr.fire.inspection.entity.Function;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.TimeUtil;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,11 +33,12 @@ import java.util.List;
 
 //二氧化碳年检记录
 public class CarbondioxideRecordAcitivty extends AppCompatActivity implements View.OnClickListener {
+    CarbondioxideRecordAcitivty mContext = this;
     public static int[] icon = {R.mipmap.file};
     private long sys_id;
     private long platform_id;
     private String f_title;
-    private String sys_number;
+    private String sys_number = "";  //有几个系统是没有这个数据的,
     private List<HashMap> historyList;
     private int selected_tag = -1;  //用户选中的条目
 
@@ -49,6 +52,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         platform_id = intent.getLongExtra("platform_id", 0);  //平台ID
         f_title = intent.getStringExtra("f_title");  //传过来的系统名称
         sys_number = intent.getStringExtra("sys_number");  //系统位号
+        Log.d("dong", "sys_id==========" + sys_id+ "platform_id========"+platform_id+ "f_title==========="+f_title);
 
     }
 
@@ -60,6 +64,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
     }
 
     private ArrayList hot = new ArrayList<>();
+
     private void initView() {
         if (historyList.size() == 0) {
             Toast.makeText(this, "没有历史年检记录,请点击\"下一步\"进行新建", Toast.LENGTH_SHORT).show();
@@ -96,27 +101,64 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 finish();
                 break;
             case R.id.bt_next:
-                Intent intent = new Intent(this, CarbonDioxideAcitivty.class);
+                //不同的系统,匹配不同的跳转页面
+                Intent intent = regularIntent();
+                intent.putExtra("systemId", sys_id);    //系统ID
+                intent.putExtra("platform_id", platform_id);    //公司ID
+                intent.putExtra("f_title", f_title); //系统名称 :高压二氧化碳灭火系统
+                intent.putExtra("sys_number", sys_number); //系统位号 ：SD002(用户自己填写的)
                 if (selected_tag == -1) {
-                    //selected_tag=-1时,表示用户没有选择任何记录,  新建一个巡检记录
-                    intent.putExtra("srt_Date", new Date()); //记录的时间
-                    intent.putExtra("systemId", sys_id);    //系统ID
-                    intent.putExtra("platform_id", platform_id);    //公司ID
-                    intent.putExtra("f_title", f_title); //系统名称 :高压二氧化碳灭火系统
-                    intent.putExtra("sys_number", sys_number); //系统位号 ：SD002(用户自己填写的)
+                    Date curDateHHmm = TimeUtil.getCurDateHHmm();
+                    //selected_tag=-1时,表示用户没有选择任何记录,  新建一个巡检记录,新建记录是根据date来判断的.
+                    intent.putExtra("srt_Date", curDateHHmm); //记录的时间
                     startActivity(intent);
                 } else {
                     HashMap hashMap = historyList.get(selected_tag);
                     //拿到历史数据中的记录, 并修改历史记录
                     Date checkDate = (Date) hashMap.get("checkDate"); //时间
                     intent.putExtra("srt_Date", checkDate); //记录的时间
-                    intent.putExtra("systemId", sys_id);    //系统ID
-                    intent.putExtra("platform_id", platform_id);    //公司ID
-                    intent.putExtra("f_title", f_title); //系统名称 :高压二氧化碳灭火系统
-                    intent.putExtra("sys_number", sys_number); //系统位号 ：SD002(用户自己填写的)
                     startActivity(intent);
                 }
                 break;
         }
+    }
+
+    //不同的系统跳转不同的页面,根据服务器ID来匹配
+    private Intent regularIntent() {
+        Intent intent = new Intent(this, CarbonDioxideAcitivty.class);
+        switch ((int) sys_id) {
+            case 1:  //二氧化碳系统
+                intent.setClass(this, CarbonDioxideAcitivty.class);
+                break;
+            case 9:  //七氟丙烷灭火系统
+                intent.setClass(this, HFCActivity.class);
+                break;
+            case 17:  //灭火器
+//                intent.setClass(this, CarbonDioxideAcitivty.class);
+                break;
+            case 19:  //火灾自动报警系统
+                intent.setClass(this, AutomaticFireAlarmAcitivty.class);
+                break;
+            case 29:  //厨房设备灭火装置
+//                intent.setClass(this, CarbonDioxideAcitivty.class);
+                break;
+            case 36:  //海水雨淋灭火系统
+//                intent.setClass(this, CarbonDioxideAcitivty.class);
+                break;
+            case 40:  //消防水灭火系统
+//                intent.setClass(this, CarbonDioxideAcitivty.class);
+                break;
+            case 47:  //固定式干粉灭火系统
+//                intent.setClass(this, CarbonDioxideAcitivty.class);
+                break;
+            case 54:  //泡沫灭火系统
+//                intent.setClass(this, CarbonDioxideAcitivty.class);
+                break;
+            case 59:  //消防员装备
+//                intent.setClass(this, CarbonDioxideAcitivty.class);
+                break;
+
+        }
+        return intent;
     }
 }

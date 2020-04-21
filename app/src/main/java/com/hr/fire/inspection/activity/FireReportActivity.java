@@ -34,6 +34,7 @@ public class FireReportActivity extends AppCompatActivity {
     private String company_name;
     private String oil_name;
     private String Platform_name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,7 +118,6 @@ public class FireReportActivity extends AppCompatActivity {
             }
         }
     }
-
     private void init_yt_Data(String infocontcompanyName) {
         // 请选择油田  ->>> 传入公司参数 infocontcompanyName
         yt_dataList = ServiceFactory.getCompanyInfoService().getOilfieldList(infocontcompanyName);

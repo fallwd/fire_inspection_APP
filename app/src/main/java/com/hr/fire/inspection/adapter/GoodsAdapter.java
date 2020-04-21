@@ -85,15 +85,18 @@ public class GoodsAdapter extends BaseAdapter {
         holder.tv5.setText(yearCheck.getStandard());
         holder.tv6.setText(ycr.get(position).getIsPass());
         holder.ev8.setText(ycr.get(position).getDescription());
+
         //在左侧添加图片
         Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         holder.tv6.setCompoundDrawables(null, null, drawable, null);
         Drawable drawable1 = mContext.getResources().getDrawable(R.drawable.listview_border_margin);
         holder.tv6.setBackground(drawable1);
+
         holder.tv7.setVisibility(View.GONE);
         holder.rl7.setVisibility(View.VISIBLE);
         holder.tv8.setVisibility(View.GONE);
+        holder.ev8.setVisibility(View.VISIBLE);
         final ViewHolder finalHolder = holder;
         holder.tv6.setOnClickListener(new View.OnClickListener() {
             @Override

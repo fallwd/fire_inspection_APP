@@ -75,6 +75,7 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 }
                 Intent intent = new Intent(mContext, CarBonGoodsWeightAcitivty.class);
                 intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_ID, checkid);
+                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE, "药剂瓶  >  检查表");
                 intent.putExtra("item_id", mData.get(position).getId());
 
                 if (mData.get(position).getId() != 0) {
@@ -107,7 +108,7 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             notifyItemInserted(position);
         } else {
             ItemInfo itemInfo = new ItemInfo();
-            itemInfo.setVolume("9.1");
+            itemInfo.setVolume("9");
             itemInfo.setWeight("3");
             itemInfo.setGoodsWeight("50");
             itemInfo.setProdFactory("未知");
@@ -118,7 +119,6 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             //添加动画
             notifyItemInserted(position);
         }
-//        notifyDataSetChanged();
     }
 
     //  删除数据
@@ -147,6 +147,11 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void setCheckId(Long id, IntentTransmit it) {
         checkid = id;
         intentTransmit = it;
+    }
+
+    public void setNewData(List<ItemInfo> itemDataList) {
+        this.mData = itemDataList;
+        notifyDataSetChanged();
     }
 
 

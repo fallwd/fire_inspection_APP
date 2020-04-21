@@ -21,7 +21,7 @@ public class CheckType  {
 
     private String name; //类型名称
 
-    private int type; //年检 月检 巡检等(1 年检)
+    private int type; //年检 1 巡检 2
 
     private Long parentId;
 
