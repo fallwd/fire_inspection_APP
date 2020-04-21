@@ -3,30 +3,13 @@ package com.hr.fire.inspection.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.dao.DaoSession;
-import com.hr.fire.inspection.entity.CheckType;
-import com.hr.fire.inspection.entity.CompanyInfo;
-import com.hr.fire.inspection.entity.ItemInfo;
-import com.hr.fire.inspection.entity.YearCheck;
-import com.hr.fire.inspection.entity.YearCheckResult;
-import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.sqlHelpers.BaseData;
-import com.hr.fire.inspection.sqlHelpers.YearCheckData;
 import com.hr.fire.inspection.utils.DBManager;
-import com.hr.fire.inspection.utils.GreenDaoHelper;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class WelcomeActivity extends AppCompatActivity {
     @Override
@@ -34,15 +17,13 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-//         初始化数据库,插入测试数据
-
 //         清空数据库
-//        DBManager cleanObj = new DBManager(this);
-//        cleanObj.deleSQL();
-//        // 初始化数据库
-//        BaseData baseData = new BaseData();
-//        baseData.initData();
-//        baseData.insertTestData();
+        DBManager cleanObj = new DBManager(this);
+        cleanObj.deleSQL();
+        // 初始化数据库
+        BaseData baseData = new BaseData();
+        baseData.initData();
+        baseData.insertTestData();
         // 调用接口测试
 //        List<CompanyInfo> companyList = ServiceFactory.getCompanyInfoService().getAll();
 //        for(int i=0;i<companyList.size();i++){

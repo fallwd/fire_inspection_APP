@@ -124,14 +124,14 @@ public class NjKitchenFragment1 extends Fragment {
                 ItemInfo item = itemDataList.get(itemDataList.size() - 1);
                 //如果直接新增会导致后台id冲重复\冲突
 
-//                itemInfo.setAgentsType(item.getAgentsType());
+                itemInfo.setAgentsType(item.getAgentsType());
                 itemInfo.setNo(item.getNo());
                 itemInfo.setVolume(item.getVolume());
                 itemInfo.setWeight(item.getWeight());
                 itemInfo.setGoodsWeight(item.getGoodsWeight());
                 itemInfo.setProdFactory(item.getProdFactory());
                 itemInfo.setProdDate(item.getProdDate());
-//                itemInfo.setFilingData(item.getFilingData());
+                itemInfo.setFillingDate(item.getFillingDate());
                 itemInfo.setTaskNumber(item.getTaskNumber());
                 itemInfo.setIsPass(item.getIsPass());
                 itemInfo.setLabelNo(item.getLabelNo());
@@ -173,7 +173,7 @@ public class NjKitchenFragment1 extends Fragment {
 //                药剂重/kg e  goodsWeight
 //                生产厂家 e prodFactory
 //                生产日期 e prodDate
-//                灌装日期 e  FilingData
+//                灌装日期 e  FillingDate
 //                工作代号 e  taskNumber
 //                检查表 t
 //                是否合格 t isPass
@@ -215,7 +215,7 @@ public class NjKitchenFragment1 extends Fragment {
             RelativeLayout et_15 = childAt.findViewById(R.id.et_15);
 
             ItemInfo itemObj = itemDataList.get(i);
-//          itemObj.setAgentsType(et_2.getText().toString());
+            itemObj.setAgentsType(et_2.getText().toString());
             itemObj.setNo(et_3.getText().toString());
             itemObj.setVolume(et_4.getText().toString());
             itemObj.setWeight(et_5.getText().toString());
@@ -224,7 +224,7 @@ public class NjKitchenFragment1 extends Fragment {
             Date date = TimeUtil.getInstance().hhmmssTodata(et_8.getText().toString());
             Date date1 = TimeUtil.getInstance().hhmmssTodata(et_9.getText().toString());
             itemObj.setProdDate(date);
-//          itemObj.setFilingData(date1);
+            itemObj.setFillingDate(date1);
             itemObj.setTaskNumber(et_10.getText().toString());
             itemObj.setIsPass(et_12.getText().toString());
             itemObj.setLabelNo(et_13.getText().toString());

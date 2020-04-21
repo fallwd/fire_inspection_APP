@@ -60,7 +60,7 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
             Log.e("dong", "position----:" + position);
             Log.e("dong", "info----:" + info);
             vh.et_1.setText(new StringBuffer().append(" ").append(position + 1));
-//            vh.et_2.setText(new StringBuffer().append(info.getAgentsType()).append(""));
+            vh.et_2.setText(new StringBuffer().append(info.getAgentsType()).append(""));
             vh.et_3.setText(new StringBuffer().append(info.getNo()).append(""));
             vh.et_4.setText(new StringBuffer().append(info.getVolume()).append(""));
             vh.et_5.setText(new StringBuffer().append(info.getWeight()).append(""));
@@ -69,9 +69,9 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 
             String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getProdDate());
-//            String mCheckDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getFilingDate());
+            String mCheckDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getFillingDate());
             vh.et_8.setText(new StringBuffer().append(mProdDate).append(""));
-//            vh.et_9.setText(new StringBuffer().append(mCheckDate).append(""));
+            vh.et_9.setText(new StringBuffer().append(mCheckDate).append(""));
 
             vh.et_10.setText(new StringBuffer().append(info.getTaskNumber()).append(""));
 
@@ -186,7 +186,7 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
             notifyItemInserted(position);
         } else {
             ItemInfo itemInfo = new ItemInfo();
-//          itemInfo.setAgentsType("请编辑");   // 介质类型
+            itemInfo.setAgentsType("请编辑");   // 介质类型
             itemInfo.setNo("请编辑");
             itemInfo.setVolume("请编辑");
             itemInfo.setWeight("请编辑");
@@ -194,7 +194,7 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
             itemInfo.setProdFactory("请编辑");
             Date date = new Date();
             itemInfo.setProdDate(date);
-//          itemInfo.setFilingData(date);    灌装日期
+            itemInfo.setFillingDate(date);    //灌装日期
             itemInfo.setTaskNumber("请编辑");
             itemInfo.setIsPass("请编辑");
             itemInfo.setLabelNo("请编辑");
