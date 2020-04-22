@@ -31,7 +31,6 @@ public class FoamFireAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHold
     private Context mContext;
     private List<YearCheck> mData;
 
-
     public FoamFireAdapter1(Context mContext, List<YearCheck> mData, List<YearCheckResult> yearCheckResults) {
         this.mContext = mContext;
         this.mData = mData;
@@ -45,7 +44,6 @@ public class FoamFireAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHold
                 .inflate(R.layout.item_hfc3_form_input, parent, false);
         FoamFireAdapter1.ViewHolder holder = new FoamFireAdapter1.ViewHolder(view);
         return holder;
-
     }
 
     @Override

@@ -20,17 +20,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.YearCheck;
+import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
 
 public class SeawaterSystemAdapter3 extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+    private List<YearCheckResult> ycr;
     private Context mContext;
     private List<YearCheck> mData;
 
-    public SeawaterSystemAdapter3(Context mContext, List<YearCheck> mData) {
+
+    public SeawaterSystemAdapter3(Context mContext, List<YearCheck> mData, List<YearCheckResult> yearCheckResults) {
         this.mContext = mContext;
         this.mData = mData;
+        this.ycr = yearCheckResults;
     }
 
     @NonNull
@@ -40,11 +44,11 @@ public class SeawaterSystemAdapter3 extends RecyclerView.Adapter<RecyclerView.Vi
                 .inflate(R.layout.item_hfc3_form_input, parent, false);
         SeawaterSystemAdapter3.ViewHolder holder = new SeawaterSystemAdapter3.ViewHolder(view);
         return holder;
-
     }
+
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-        final  SeawaterSystemAdapter3.ViewHolder vh = ( SeawaterSystemAdapter3.ViewHolder) holder;
+        final SeawaterSystemAdapter3.ViewHolder vh = (SeawaterSystemAdapter3.ViewHolder) holder;
         if (mData != null && mData.size() != 0) {
             YearCheck yearCheck = mData.get(position);
             ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -56,6 +60,8 @@ public class SeawaterSystemAdapter3 extends RecyclerView.Adapter<RecyclerView.Vi
             vh.tv4.setText(yearCheck.getRequirement());
             vh.tv5.setText(yearCheck.getStandard());
 
+            vh.tv6.setText(ycr.get(position).getIsPass());
+            vh.ev8.setText(ycr.get(position).getDescription());
 
             //在左侧添加图片
             Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
@@ -72,6 +78,9 @@ public class SeawaterSystemAdapter3 extends RecyclerView.Adapter<RecyclerView.Vi
             vh.tv6.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+//                    Log.d("dong","点击的状post== " + position);
+
+                    //如果点击的是最后一个条目, 那么控件的高度需要增加  否则弹框会被挡住
                     showPopWind(vh.tv6);
                 }
             });
@@ -81,11 +90,8 @@ public class SeawaterSystemAdapter3 extends RecyclerView.Adapter<RecyclerView.Vi
                     mContext.startActivity(new Intent(mContext, PhotoUploadActivity.class));
                 }
             });
-
         }
-
     }
-
 
     @Override
     public int getItemCount() {
@@ -105,6 +111,7 @@ public class SeawaterSystemAdapter3 extends RecyclerView.Adapter<RecyclerView.Vi
         ImageView iv7;
         TextView tv8;
         EditText ev8;
+        View vw;
 
         ViewHolder(View view) {
             super(view);
@@ -140,6 +147,7 @@ public class SeawaterSystemAdapter3 extends RecyclerView.Adapter<RecyclerView.Vi
         hrPopup.setOutsideTouchable(true);
         hrPopup.setContentView(PopupRootView);
         hrPopup.showAsDropDown(tv6);
+
         rl_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -105,6 +105,7 @@ public class SeawaterSystemActivity  extends AppCompatActivity {
             @Override
             public void onPageSelected(int i) {
                 currentPager = i;
+                iv_add_table.setVisibility(View.GONE);
             }
 
             @Override
