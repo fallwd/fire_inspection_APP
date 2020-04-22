@@ -43,7 +43,6 @@ public class DryPowderFireSystemActivity extends AppCompatActivity {
     private com.hr.fire.inspection.fragment.DryPowderFireSystemFragment2 DryPowderFireSystemFragment2;
     private com.hr.fire.inspection.fragment.DryPowderFireSystemFragment3 DryPowderFireSystemFragment3;
     private com.hr.fire.inspection.fragment.DryPowderFireSystemFragment4 DryPowderFireSystemFragment4;
-    private com.hr.fire.inspection.fragment.DryPowderFireSystemFragment5 DryPowderFireSystemFragment5;
     private String f_title;
     private String sys_number;  //系统位号
     private IntentTransmit it;
@@ -89,14 +88,14 @@ public class DryPowderFireSystemActivity extends AppCompatActivity {
         titleList.add("功能性试验");
 
         DryPowderFireSystemFragment1 = DryPowderFireSystemFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
-//        DryPowderFireSystemFragment2 = DryPowderFireSystemFragment2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
-//        DryPowderFireSystemFragment3 = DryPowderFireSystemFragment3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
-//        DryPowderFireSystemFragment4 = DryPowderFireSystemFragment4.newInstance(ConstantInspection.YEARLY_ON_SITE_F4, it);
+        DryPowderFireSystemFragment2 = DryPowderFireSystemFragment2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
+        DryPowderFireSystemFragment3 = DryPowderFireSystemFragment3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
+        DryPowderFireSystemFragment4 = DryPowderFireSystemFragment4.newInstance(ConstantInspection.YEARLY_ON_SITE_F4, it);
 
         fragments.add(DryPowderFireSystemFragment1);
-//        fragments.add(DryPowderFireSystemFragment2);
-//        fragments.add(DryPowderFireSystemFragment3);
-//        fragments.add(DryPowderFireSystemFragment4);
+        fragments.add(DryPowderFireSystemFragment2);
+        fragments.add(DryPowderFireSystemFragment3);
+        fragments.add(DryPowderFireSystemFragment4);
 
         //设置缓存的页面数据
         mViewPager.setOffscreenPageLimit(fragments.size());
@@ -112,7 +111,11 @@ public class DryPowderFireSystemActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int i) {
                 currentPager = i;
-                iv_add_table.setVisibility(View.GONE);
+                if (i == 2 || i == 3 || i == 4) {
+                    iv_add_table.setVisibility(View.GONE);
+                } else {
+                    iv_add_table.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
@@ -168,6 +171,8 @@ public class DryPowderFireSystemActivity extends AppCompatActivity {
                     Fragment fragment = fragments.get(currentPager);
                     if (fragment instanceof DryPowderFireSystemFragment1) {
                         DryPowderFireSystemFragment1.addItemView();
+                    }else if(fragment instanceof DryPowderFireSystemFragment2){
+                        DryPowderFireSystemFragment2.addItemView();
                     }
                 }
 //                currentPager  拿到当前的页面
@@ -181,14 +186,13 @@ public class DryPowderFireSystemActivity extends AppCompatActivity {
                     Fragment fragment = fragments.get(currentPager);
                     if (fragment instanceof DryPowderFireSystemFragment1) {
                         DryPowderFireSystemFragment1.saveData();
+                    } else if(fragment instanceof DryPowderFireSystemFragment2){
+                        DryPowderFireSystemFragment2.saveData();
+                    } else if(fragment instanceof DryPowderFireSystemFragment3){
+                        DryPowderFireSystemFragment3.saveData();
+                    } else if(fragment instanceof DryPowderFireSystemFragment4){
+                        DryPowderFireSystemFragment4.saveData();
                     }
-//                    else if(fragment instanceof com.hr.fire.inspection.fragment.FoamFireFragment2){
-//                        FoamFireFragment2.saveData();
-//                    }else if(fragment instanceof com.hr.fire.inspection.fragment.FoamFireFragment3){
-//                        FoamFireFragment3.saveData();
-//                    }else if(fragment instanceof com.hr.fire.inspection.fragment.FoamFireFragment4){
-//                        FoamFireFragment4.saveData();
-//                    }
                 }
             }
         });

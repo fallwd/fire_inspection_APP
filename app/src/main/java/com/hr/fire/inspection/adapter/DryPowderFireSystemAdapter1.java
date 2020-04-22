@@ -109,7 +109,7 @@ public class DryPowderFireSystemAdapter1 extends RecyclerView.Adapter<RecyclerVi
 
                 Intent intent = new Intent(mContext, CarBonGoodsWeightAcitivty.class);
                 intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_ID, checkid);
-                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE, "药剂瓶 >  检查表");
+                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE, "干粉罐>  检查表");
                 intent.putExtra("item_id", mData.get(position).getId());
 
                 if (mData.get(position).getId() != 0) {
