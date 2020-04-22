@@ -33,10 +33,13 @@
                     android:hint="@string/PleaseInputText"
                     android:textSize="16dp"
                     android:autofillHints="search" />
-
         </LinearLayout>
 
-
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:text="获取父级id"
+            android:id="@+id/btnParent"/>
         <TextView
             android:id="@+id/textcont"
             android:layout_width="wrap_content"
