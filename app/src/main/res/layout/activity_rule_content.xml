@@ -1,23 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/but1"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints,UselessParent">
+
+                <ImageButton
+                    android:id="@+id/backHome"
+                    android:layout_width="20dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@mipmap/left_icon"
+                    android:scaleType="fitXY"
+                    android:contentDescription="TODO" />
+
+                <EditText
+                    android:background="@drawable/edit_report"
+                    android:layout_width="match_parent"
+                    android:paddingStart="10dp"
+                    android:drawableLeft="@mipmap/search"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:hint="@string/PleaseInputText"
+                    android:textSize="16dp"
+                    android:autofillHints="search" />
+
+        </LinearLayout>
+
+
         <TextView
             android:id="@+id/textcont"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="PingFangSC-Regular"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
         <ListView
-            android:id="@+id/list"
+            android:id="@+id/law_content_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:dividerHeight="1sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:background="@drawable/listview_border"
             >
         </ListView>
 </LinearLayout>

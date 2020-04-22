@@ -70,6 +70,7 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getProdDate());
             String mCheckDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getFillingDate());
+
             vh.et_8.setText(new StringBuffer().append(mProdDate).append(""));
             vh.et_9.setText(new StringBuffer().append(mCheckDate).append(""));
 

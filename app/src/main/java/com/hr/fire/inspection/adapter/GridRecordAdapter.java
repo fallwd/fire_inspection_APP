@@ -1,6 +1,7 @@
 package com.hr.fire.inspection.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,7 @@ public class GridRecordAdapter extends RecyclerView.Adapter<GridRecordAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull GridRecordAdapter.MyViewHolder holder, final int position) {
+        Log.d("检查记录：", String.valueOf(data));
         holder.tvText.setText(data.get(position).getName());
         holder.itemView.setTag(data.get(position));
         holder.rl_view.setOnClickListener(new View.OnClickListener() {

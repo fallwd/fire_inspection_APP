@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
+
 import com.hr.fire.inspection.dao.DaoSession;
 import com.hr.fire.inspection.dao.YearCheckResultDao;
 import com.hr.fire.inspection.dao.CompanyInfoDao;

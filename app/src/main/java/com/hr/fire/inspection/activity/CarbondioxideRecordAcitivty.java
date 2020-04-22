@@ -82,7 +82,9 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         
         rc_list.setLayoutManager(new GridLayoutManager(this, 4));
         GridRecordAdapter toolAdapter = new GridRecordAdapter(this, hot, historyList.size());
+        Log.d("检查记录：", String.valueOf(historyList));
         rc_list.setAdapter(toolAdapter);
+
         toolAdapter.setOnItemClickListener(new GridRecordAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int tag) {
@@ -154,7 +156,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 intent.setClass(this, FoamFireActivity.class);
                 break;
             case 59:  //消防员装备
-//                intent.setClass(this, CarbonDioxideAcitivty.class);
+                intent.setClass(this, DFXIAcitivty.class);
                 break;
         }
         return intent;

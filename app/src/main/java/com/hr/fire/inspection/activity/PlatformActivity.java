@@ -21,6 +21,7 @@ import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class PlatformActivity extends AppCompatActivity implements View.OnClickListener {
@@ -80,10 +81,15 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 long current_id = idlist.get(position);
+                String Platform_name = list.get(position);
+                Toast.makeText(PlatformActivity.this,"你点击了第" + Platform_name + "项",Toast.LENGTH_SHORT).show();
+
                 intent.setClass(PlatformActivity.this, FireActivity.class);
                 intent.putExtra("Platform_ID", current_id);
+                intent.putExtra("Platform_name", Platform_name);
+                intent.putExtra("company_name", company_name);
+                intent.putExtra("oil_name", oil_name);
                 startActivity(intent);
-
             }
         });
 

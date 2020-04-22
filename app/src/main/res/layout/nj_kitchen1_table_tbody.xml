@@ -76,7 +76,7 @@
                 android:text="容积/L"
                 android:textSize="12sp" />
         </RelativeLayout>
-        	药剂重/kg	生产厂家	生产日期	灌装日期
+
         <RelativeLayout
             android:layout_width="25dp"
             android:layout_height="wrap_content"
