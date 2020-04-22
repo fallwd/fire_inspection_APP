@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,12 +25,13 @@ import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
 
-public class FoamFireAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class DryPowderFireSystemAdapter4 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<YearCheckResult> ycr;
     private Context mContext;
     private List<YearCheck> mData;
 
-    public FoamFireAdapter1(Context mContext, List<YearCheck> mData, List<YearCheckResult> yearCheckResults) {
+
+    public DryPowderFireSystemAdapter4(Context mContext, List<YearCheck> mData, List<YearCheckResult> yearCheckResults) {
         this.mContext = mContext;
         this.mData = mData;
         this.ycr = yearCheckResults;
@@ -42,13 +42,14 @@ public class FoamFireAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHold
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_hfc3_form_input, parent, false);
-        FoamFireAdapter1.ViewHolder holder = new FoamFireAdapter1.ViewHolder(view);
+        DryPowderFireSystemAdapter4.ViewHolder holder = new DryPowderFireSystemAdapter4.ViewHolder(view);
         return holder;
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-        final FoamFireAdapter1.ViewHolder vh = (FoamFireAdapter1.ViewHolder) holder;
+        final DryPowderFireSystemAdapter4.ViewHolder vh = (DryPowderFireSystemAdapter4.ViewHolder) holder;
         if (mData != null && mData.size() != 0) {
             YearCheck yearCheck = mData.get(position);
             ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -177,4 +178,3 @@ public class FoamFireAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHold
         });
     }
 }
-

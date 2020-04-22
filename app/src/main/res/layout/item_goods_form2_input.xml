@@ -29,21 +29,6 @@
                 android:textSize="12sp" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="16dp"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/et_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:text=""
-                android:textSize="12sp" />
-        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="16dp"
@@ -97,6 +82,7 @@
                 android:textSize="12sp" />
         </RelativeLayout>
 
+
         <RelativeLayout
             android:layout_width="35dp"
             android:layout_height="wrap_content"
@@ -115,6 +101,7 @@
         </RelativeLayout>
 
 
+
         <RelativeLayout
             android:layout_width="40dp"
             android:layout_height="wrap_content"
@@ -122,24 +109,6 @@
 
             <EditText
                 android:id="@+id/et_6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@null"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:text="灌装日期"
-                android:textSize="12sp" />
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <EditText
-                android:id="@+id/et_7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -156,9 +125,8 @@
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-
             <EditText
-                android:id="@+id/et_8"
+                android:id="@+id/et_7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -168,6 +136,24 @@
                 android:text="生产日期"
                 android:textSize="12sp" />
         </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <EditText
+                android:id="@+id/et_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:text="水压试验日期"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="30dp"

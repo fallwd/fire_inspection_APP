@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.adapter.SeawaterSystemAdapter3;
+import com.hr.fire.inspection.adapter.DryPowderFireSystemAdapter3;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.YearCheck;
@@ -27,20 +27,19 @@ import com.hr.fire.inspection.service.ServiceFactory;
 
 import java.util.List;
 
-public class SeawaterSystemFragment3 extends Fragment {
-
+public class DryPowderFireSystemFragment3  extends Fragment {
     View rootView;
-    private static SeawaterSystemFragment3 fragment3;
+    private static DryPowderFireSystemFragment3 fragment3;
     private static String mKey;
     private IntentTransmit its;
-    private SeawaterSystemAdapter3 adapter;
+    private DryPowderFireSystemAdapter3 adapter;
     private RecyclerView rc_list;
     private List<YearCheck> checkDataEasy;
     private List<YearCheckResult> yearCheckResults;
 
-    public static SeawaterSystemFragment3 newInstance(String key, IntentTransmit value) {
+    public static DryPowderFireSystemFragment3 newInstance(String key, IntentTransmit value) {
         if (fragment3 == null) {
-            fragment3 = new SeawaterSystemFragment3();
+            fragment3 = new DryPowderFireSystemFragment3();
         }
         mKey = key;
         Bundle args = new Bundle();
@@ -70,6 +69,7 @@ public class SeawaterSystemFragment3 extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initData();
+
     }
 
     private void initData() {
@@ -103,7 +103,7 @@ public class SeawaterSystemFragment3 extends Fragment {
         rc_list = rootView.findViewById(R.id.rc_list3);
         @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rc_list.setLayoutManager(layoutManager);
-        adapter = new SeawaterSystemAdapter3(getActivity(), checkDataEasy, yearCheckResults);
+        adapter = new DryPowderFireSystemAdapter3(getActivity(), checkDataEasy, yearCheckResults);
         rc_list.setAdapter(adapter);
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
@@ -132,8 +132,9 @@ public class SeawaterSystemFragment3 extends Fragment {
                 ServiceFactory.getYearCheckService().update(yearCheckResult);
             }
         }
-        Toast.makeText(getContext(), "\"功能性实验\"数据保存成功", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "\"管线管件\"数据保存成功", Toast.LENGTH_SHORT).show();
     }
+
 
     @Override
     public void onDestroyView() {

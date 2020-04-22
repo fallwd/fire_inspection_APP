@@ -6,6 +6,18 @@
         <compositeConfiguration>
           <compositeBuild compositeDefinitionSource="SCRIPT" />
         </compositeConfiguration>
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT" />
+        </compositeConfiguration>
+=======
+        <option name="testRunner" value="PLATFORM" />
+>>>>>>> ba1c2f0a2c31ea60a7bb92f77a337b6773b4500e
+>>>>>>> 43f8906b09e98bcb402f958efa74fcfa2e6b6c30
+>>>>>>> 63b658f9de28f736fbcb79fd94371b52d1d2d841
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="resolveModulePerSourceSet" value="false" />

@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.adapter.SeawaterSystemAdapter3;
+import com.hr.fire.inspection.adapter.DryPowderFireSystemAdapter4;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.YearCheck;
@@ -27,26 +27,25 @@ import com.hr.fire.inspection.service.ServiceFactory;
 
 import java.util.List;
 
-public class SeawaterSystemFragment3 extends Fragment {
-
+public class DryPowderFireSystemFragment4 extends Fragment {
     View rootView;
-    private static SeawaterSystemFragment3 fragment3;
+    private static DryPowderFireSystemFragment4 fragment4;
     private static String mKey;
     private IntentTransmit its;
-    private SeawaterSystemAdapter3 adapter;
+    private DryPowderFireSystemAdapter4 adapter;
     private RecyclerView rc_list;
     private List<YearCheck> checkDataEasy;
     private List<YearCheckResult> yearCheckResults;
 
-    public static SeawaterSystemFragment3 newInstance(String key, IntentTransmit value) {
-        if (fragment3 == null) {
-            fragment3 = new SeawaterSystemFragment3();
+    public static DryPowderFireSystemFragment4 newInstance(String key, IntentTransmit value) {
+        if (fragment4 == null) {
+            fragment4 = new DryPowderFireSystemFragment4();
         }
         mKey = key;
         Bundle args = new Bundle();
         args.putSerializable(key, value);
-        fragment3.setArguments(args);
-        return fragment3;
+        fragment4.setArguments(args);
+        return fragment4;
     }
 
     @Override
@@ -61,7 +60,7 @@ public class SeawaterSystemFragment3 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_hfc3, container, false);
+            rootView = inflater.inflate(R.layout.fragment_carbon3, container, false);
         }
         return rootView;
     }
@@ -70,15 +69,16 @@ public class SeawaterSystemFragment3 extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initData();
+
     }
 
     private void initData() {
         //根据二氧化碳系统的ID,拿到二氧化碳下面的检查表数据
         List<CheckType> checkTypes = ServiceFactory.getYearCheckService().gettableNameData(its.systemId);
         //在二氧化碳的子表数据中,拿到管线管件对应的id, 通过id去查询管线管件需要检查的内容
-        checkDataEasy = ServiceFactory.getYearCheckService().getCheckDataEasy(checkTypes.get(2).getId());
+        checkDataEasy = ServiceFactory.getYearCheckService().getCheckDataEasy(checkTypes.get(3).getId());
         //获取用户需要填写的数据,如果没有数据,就需要插入的默认数据（流程4）。如果有数据就
-        yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(2).getId(), its.number, its.srt_Date);
+        yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(3).getId(), its.number, its.srt_Date);
         if (yearCheckResults == null || yearCheckResults.size() == 0) {
             for (int i = 0; i < checkDataEasy.size(); i++) {
 //                Log.d("dong", "第一次加载数据 = ");
@@ -91,8 +91,8 @@ public class SeawaterSystemFragment3 extends Fragment {
                 ycr.setProtectArea(" "); // 保护位号
                 ycr.setCheckDate(its.srt_Date);  //检查日期
                 ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, checkDataEasy.get(i).getId(), its.companyInfoId,
-                        checkTypes.get(2).getId(), its.number, its.srt_Date);
-                yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(2).getId(), its.number, its.srt_Date);
+                        checkTypes.get(3).getId(), its.number, its.srt_Date);
+                yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(3).getId(), its.number, its.srt_Date);
             }
         }
         initView();
@@ -103,7 +103,7 @@ public class SeawaterSystemFragment3 extends Fragment {
         rc_list = rootView.findViewById(R.id.rc_list3);
         @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rc_list.setLayoutManager(layoutManager);
-        adapter = new SeawaterSystemAdapter3(getActivity(), checkDataEasy, yearCheckResults);
+        adapter = new DryPowderFireSystemAdapter4(getActivity(), checkDataEasy, yearCheckResults);
         rc_list.setAdapter(adapter);
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
@@ -132,8 +132,9 @@ public class SeawaterSystemFragment3 extends Fragment {
                 ServiceFactory.getYearCheckService().update(yearCheckResult);
             }
         }
-        Toast.makeText(getContext(), "\"功能性实验\"数据保存成功", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), " \"保护区\" 数据保存成功", Toast.LENGTH_SHORT).show();
     }
+
 
     @Override
     public void onDestroyView() {

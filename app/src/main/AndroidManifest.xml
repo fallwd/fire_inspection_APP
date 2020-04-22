@@ -144,5 +144,8 @@
         <activity
             android:name=".activity.NjKitchenChecklistAcitivty"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.DryPowderFireSystemActivity"
+            android:screenOrientation="landscape" />
     </application>
 </manifest>
