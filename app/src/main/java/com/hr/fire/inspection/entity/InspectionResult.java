@@ -430,6 +430,45 @@ public void __setDaoSession(DaoSession daoSession) {
     myDao = daoSession != null ? daoSession.getInspectionResultDao() : null;
 }
 
-
-
+    @Override
+    public String toString() {
+        return "InspectionResult{" +
+                "id=" + id +
+                ", checkTypeId=" + checkTypeId +
+                ", checkType=" + checkType +
+                ", companyInfoId=" + companyInfoId +
+                ", companyInfo=" + companyInfo +
+                ", profession='" + profession + '\'' +
+                ", checkPerson='" + checkPerson + '\'' +
+                ", checkDate=" + checkDate +
+                ", description='" + description + '\'' +
+                ", imgPath='" + imgPath + '\'' +
+                ", param1='" + param1 + '\'' +
+                ", param2='" + param2 + '\'' +
+                ", param3='" + param3 + '\'' +
+                ", param4='" + param4 + '\'' +
+                ", param5='" + param5 + '\'' +
+                ", param6='" + param6 + '\'' +
+                ", param7='" + param7 + '\'' +
+                ", param8='" + param8 + '\'' +
+                ", param9='" + param9 + '\'' +
+                ", param10='" + param10 + '\'' +
+                ", param11='" + param11 + '\'' +
+                ", param12='" + param12 + '\'' +
+                ", param13='" + param13 + '\'' +
+                ", param14='" + param14 + '\'' +
+                ", param15='" + param15 + '\'' +
+                ", param16='" + param16 + '\'' +
+                ", param17='" + param17 + '\'' +
+                ", param18='" + param18 + '\'' +
+                ", param19='" + param19 + '\'' +
+                ", param20='" + param20 + '\'' +
+                ", param21='" + param21 + '\'' +
+                ", param22='" + param22 + '\'' +
+                ", param23='" + param23 + '\'' +
+                ", param24='" + param24 + '\'' +
+                ", param25='" + param25 + '\'' +
+                ", param26='" + param26 + '\'' +
+                '}';
+    }
 }
