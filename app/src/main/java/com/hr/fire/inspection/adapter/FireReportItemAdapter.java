@@ -47,7 +47,6 @@ public class FireReportItemAdapter extends BaseAdapter {
     private List<Long> companyInfoId;
     private List<Date> checkDate;
     private final FireReportActivity mContext;
-    private String sele;
     private String set_company_name;
     private String set_oil_name;
     private String set_Platform_name;
@@ -262,10 +261,6 @@ public class FireReportItemAdapter extends BaseAdapter {
 //        Log.d("key12222", String.valueOf(companyInfoId));
 //        Log.d("key12222", String.valueOf(checkDate));
 
-    }
-
-    public void setSelectedData(String data) {
-        sele = data;
     }
 
     public void get_company_name(String company_name) {
@@ -662,7 +657,8 @@ public class FireReportItemAdapter extends BaseAdapter {
         }
         return RowArr;
     };
-//    private void initSystemData(){
+    // 获取各表的参数，报告没问题可删除
+    //    private void initSystemData(){
 //        // 根据表明筛选数据
 //        Log.d("getallmessageSize---", getallmessage.size()+"");
 //        // 高压二氧化碳灭火系统
@@ -817,31 +813,6 @@ public class FireReportItemAdapter extends BaseAdapter {
             return dateFormat.format(date);
         }catch (Exception e) {
             return null;
-        }
-    };
-
-    /**
-     * 为表格插入数据，行数不够添加新行
-     *
-     * @param table     需要插入数据的表格
-     * @param tableList 插入数据集合
-     */
-    public static void insertTable(XWPFTable table, List<String[]> tableList) {
-        Log.d("表格数据", String.valueOf(tableList));
-        //table.addNewRowBetween 没实现，官网文档也说明，只有函数名，但没具体实现，但很多文章还介绍如何使用这个函数，真是害人
-        //table.insertNewTableRow 本文用这个可以，但是要创建 cell，否则不显示数据
-        //table.addRow() 在表格最后加一行
-        // table.addRow(XWPFTableRow row, int pos) 没试过，你可以试试。
-        //table.createRow() 在表格最后一加行
-
-        for (int i = 0; i < tableList.size(); i++) {//遍历要添加的数据的list
-            XWPFTableRow newRow = table.insertNewTableRow(i + 1);//为表格添加行
-            String[] strings = tableList.get(i);//获取list中的字符串数组
-            for (int j = 0; j < strings.length; j++) {//遍历list中的字符串数组
-                String strings1 = strings[j];
-                newRow.createCell();//在新增的行上面创建cell
-                newRow.getCell(j).setText(strings1);//给每个cell赋值。
-            }
         }
     }
 }
