@@ -1,5 +1,7 @@
 package com.hr.fire.inspection.activity;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -39,6 +41,7 @@ public class FireReportActivity extends AppCompatActivity {
         // 获取Bundle的信息
         // 获得公司名称  油田名称
         Bundle b = getIntent().getExtras();
+        assert b != null;
         oil_name = b.getString("oil_name");
         company_name = b.getString("company_name");
         Platform_name = b.getString("Platform_name");
@@ -98,7 +101,7 @@ public class FireReportActivity extends AppCompatActivity {
         for (int i = 0; i < bussy_dataList.size(); i++) {
             CompanyInfo CompanyListItem = bussy_dataList.get(i);
             String companyName = CompanyListItem.getCompanyName();
-            if (companyName != null && companyName != "") {
+            if (companyName != null && !companyName.equals("")) {
                 bessy_list.add(companyName);
             }
         }
@@ -113,7 +116,7 @@ public class FireReportActivity extends AppCompatActivity {
         for (int i = 0; i < yt_dataList.size(); i++) {
             CompanyInfo CompanyListItem = yt_dataList.get(i);
             String getOilName = CompanyListItem.getOilfieldName();
-            if(getOilName != null && getOilName != ""){
+            if(getOilName != null && !getOilName.equals("")){
                 yt_list.add(getOilName);
             }
         }
@@ -127,7 +130,7 @@ public class FireReportActivity extends AppCompatActivity {
         for (int i = 0; i < yt_dataList.size(); i++) {
             CompanyInfo CompanyListItem = yt_dataList.get(i);
             String getPlatformName = CompanyListItem.getPlatformName();
-            if(getPlatformName != null && getPlatformName != ""){
+            if(getPlatformName != null && !getPlatformName.equals("")){
                 platform_list.add(getPlatformName);
             }
         }
@@ -144,12 +147,9 @@ public class FireReportActivity extends AppCompatActivity {
         //加载适配器
         ListView main_list2 = findViewById(R.id.main_list2);
         main_list2.setAdapter(fireReportItemAdapter);
-        main_list2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        main_list2.setOnItemClickListener((parent, view, position, id) -> {
 //                final Long id1 = mList.get(position).getId();
 //                Toast.makeText(FireReportActivity.this, "当前id为：" + id1, Toast.LENGTH_SHORT).show();
-            }
         });
     }
 
@@ -166,7 +166,7 @@ public class FireReportActivity extends AppCompatActivity {
         calendar.add(Calendar.DATE, -1);//减1天
         date = calendar.getTime();
         System.out.println(date);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         String sim = dateFormat.format(date);
         Log.i("md", "推迟的时间为： " + sim);
         return sim;
@@ -178,15 +178,14 @@ public class FireReportActivity extends AppCompatActivity {
 
     private String getData() {
         Date date = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        String sim = dateFormat.format(date);
-//        Log.i("md", "时间sim为： "+sim);
-        return sim;
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        //        Log.i("md", "时间sim为： "+sim);
+        return dateFormat.format(date);
     }
 
     private void InitSetSpinner(final Spinner spinner, ArrayList<String> list) {
         //适配器
-        ArrayAdapter<String> arr_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, list);
+        ArrayAdapter<String> arr_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, list);
         //设置样式
         arr_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //加载适配器

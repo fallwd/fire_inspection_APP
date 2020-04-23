@@ -23,9 +23,6 @@ import com.hr.fire.inspection.activity.FireReportActivity;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
 
-import org.apache.poi.xwpf.usermodel.XWPFTable;
-import org.apache.poi.xwpf.usermodel.XWPFTableRow;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -156,20 +153,20 @@ public class FireReportItemAdapter extends BaseAdapter {
             //泡沫灭火系统
             List<HashMap> CAFS_system_data = getallmessage.stream().filter(d -> "泡沫灭火系统".equals(d.get("systemName"))).collect(Collectors.toList());
             // 七氟丙烷灭火系统
-            List<HashMap> Heptafluoropropane_data = getallmessage.stream().filter(d -> "七氟丙烷钢瓶".equals(d.get("tableName"))).collect(Collectors.toList());
-            List<ItemInfo> Hf_data  = (List<ItemInfo>) Heptafluoropropane_data.get(0).get("data");
+            List<HashMap> Heliotrope_data = getallmessage.stream().filter(d -> "七氟丙烷钢瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+            List<ItemInfo> Hf_data  = (List<ItemInfo>) Heliotrope_data.get(0).get("data");
             List<HashMap> NitrogenDriveBottle_data = getallmessage.stream().filter(d -> "氮气驱动瓶".equals(d.get("tableName"))).collect(Collectors.toList());
             List<ItemInfo> ND_data  = (List<ItemInfo>) NitrogenDriveBottle_data.get(0).get("data");
             // 固定式干粉灭火系统
             List<HashMap> DryPowderCans = getallmessage.stream().filter(d -> "干粉罐".equals(d.get("tableName"))).collect(Collectors.toList());
             List<ItemInfo> gf_data  = (List<ItemInfo>) DryPowderCans.get(0).get("data");
-            List<HashMap> actnationBottle = getallmessage.stream().filter(d -> "启动瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+            List<HashMap> actuationBottle = getallmessage.stream().filter(d -> "启动瓶".equals(d.get("tableName"))).collect(Collectors.toList());
             // 厨房设备灭火装置
-            List<HashMap> chufang_system = getallmessage.stream().filter(d -> "厨房设备灭火装置".equals(d.get("systemName"))).collect(Collectors.toList());
-            List<HashMap> DrivingBottle = chufang_system.stream().filter(d -> "驱动瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+            List<HashMap> chafing_system = getallmessage.stream().filter(d -> "厨房设备灭火装置".equals(d.get("systemName"))).collect(Collectors.toList());
+            List<HashMap> DrivingBottle = chafing_system.stream().filter(d -> "驱动瓶".equals(d.get("tableName"))).collect(Collectors.toList());
             List<ItemInfo> qd_data  = (List<ItemInfo>) DrivingBottle.get(0).get("data");
-            List<HashMap> yaoji = chufang_system.stream().filter(d -> "药剂瓶".equals(d.get("tableName"))).collect(Collectors.toList());
-            List<ItemInfo> yjp_data  = (List<ItemInfo>) yaoji.get(0).get("data");
+            List<HashMap> yogi = chafing_system.stream().filter(d -> "药剂瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+            List<ItemInfo> yjp_data  = (List<ItemInfo>) yogi.get(0).get("data");
             //消防水灭火系统
             List<HashMap> fireHose = getallmessage.stream().filter(d -> "消防软管".equals(d.get("tableName"))).collect(Collectors.toList());
             List<ItemInfo> fireHose_data  = (List<ItemInfo>) fireHose.get(0).get("data");
@@ -186,12 +183,12 @@ public class FireReportItemAdapter extends BaseAdapter {
             List<ItemInfo> HeatDetector_data  = (List<ItemInfo>) HeatDetector.get(0).get("data");
             List<HashMap> FlameDetector= getallmessage.stream().filter(d -> "火焰探测器".equals(d.get("tableName"))).collect(Collectors.toList());
             List<ItemInfo> FlameDetector_data  = (List<ItemInfo>) FlameDetector.get(0).get("data");
-            List<HashMap> Manualalarmbutton= getallmessage.stream().filter(d -> "手动报警按钮".equals(d.get("tableName"))).collect(Collectors.toList());
-            List<ItemInfo> Manualalarmbutton_data  = (List<ItemInfo>) Manualalarmbutton.get(0).get("data");
-            List<HashMap> TGAT= getallmessage.stream().filter(d -> "可燃气体探测器".equals(d.get("tableName"))).collect(Collectors.toList());
-            List<ItemInfo> TGAT_data = (List<ItemInfo>) TGAT.get(0).get("data");
-            List<HashMap> hydrogensulfidedetector= getallmessage.stream().filter(d -> "硫化氢探测器".equals(d.get("tableName"))).collect(Collectors.toList());
-            List<ItemInfo> hydrogensulfidedetector_data  = (List<ItemInfo>) hydrogensulfidedetector.get(0).get("data");
+            List<HashMap> Malformation= getallmessage.stream().filter(d -> "手动报警按钮".equals(d.get("tableName"))).collect(Collectors.toList());
+            List<ItemInfo> Malformation_data  = (List<ItemInfo>) Malformation.get(0).get("data");
+            List<HashMap> TAT= getallmessage.stream().filter(d -> "可燃气体探测器".equals(d.get("tableName"))).collect(Collectors.toList());
+            List<ItemInfo> TGAT_data = (List<ItemInfo>) TAT.get(0).get("data");
+            List<HashMap> hydrogenate= getallmessage.stream().filter(d -> "硫化氢探测器".equals(d.get("tableName"))).collect(Collectors.toList());
+            List<ItemInfo> hydrogenate_data  = (List<ItemInfo>) hydrogenate.get(0).get("data");
 
             // 传入模板的数据
             Map<String, Object> tempdatas = new HashMap<String, Object>() {{
@@ -204,34 +201,49 @@ public class FireReportItemAdapter extends BaseAdapter {
                 put("co2_yjp_count", PotionBottle_data.get(0).get("count"));                // 高压二氧化碳灭火系统 药剂瓶数量Quantity×药剂瓶容积
                 put("protectArea", PotionBottle_data.get(0).get("protectArea"));            // 高压二氧化碳灭火系统 覆盖保护区域
                 put("co2_dq_count", NitrogenCylinder_data.get(0).get("count"));             // 高压二氧化碳灭火系统 氮气瓶数量Quantity×氮气瓶容积
+                assert co2_yjp_data != null;
                 put("co2_yjp_Rows", getCo2_yjp_table(co2_yjp_data));                        // 高压二氧化碳灭火系统 药剂瓶 CO2 Fire Extinguishing System
+                assert co2_N2_data != null;
                 put("co2_N2_Rows", getCo2_N2_table(co2_N2_data));                           // 高压二氧化碳灭火系统 氮气瓶  CO2 Fire Extinguishing System
                 put("mhq_table",getMHQ_table());                                            // 灭火器系统
                 put("mhprotectArea",CAFS_system_data.get(0).get("protectArea"));            // 七氟丙烷灭火器系统 覆盖保护区域
-                put("HFCount",Heptafluoropropane_data.get(0).get("count"));                 // 七氟丙烷灭火系统 气瓶数量Quantity×储气瓶容积
+                put("HFCount",Heliotrope_data.get(0).get("count"));                 // 七氟丙烷灭火系统 气瓶数量Quantity×储气瓶容积
                 put("NDCount",NitrogenDriveBottle_data.get(0).get("count"));                // 七氟丙烷灭火系统 气瓶数量Quantity×储气瓶容积
+                assert Hf_data != null;
                 put("HfRows",get_Hf_table(Hf_data));                                       // 七氟丙烷灭火系统  七氟丙烷钢瓶
+                assert ND_data != null;
                 put("NDRows",get_ND_table(ND_data));                                       // 七氟丙烷灭火系统  氮气驱动瓶
                 put("ganfenCount", DryPowderCans.get(0).get("count"));                     // 干粉灭火系统 气瓶数量Quantity×储气瓶容积
-                put("StartCount", actnationBottle.get(0).get("count"));                     // 干粉灭火系统 气瓶数量Quantity×驱动气瓶容积
-                put("gfProtectArea", actnationBottle.get(0).get("protectArea"));            // 干粉灭火系统 保护区域
+                put("StartCount", actuationBottle.get(0).get("count"));                     // 干粉灭火系统 气瓶数量Quantity×驱动气瓶容积
+                put("gfProtectArea", actuationBottle.get(0).get("protectArea"));            // 干粉灭火系统 保护区域
+                assert gf_data != null;
                 put("gfRows", get_gf_table(gf_data));                                        // 干粉灭火系统 干粉罐
-                put("YJCount", yaoji.get(0).get("count"));                                   // 厨房设备灭火装置 药剂瓶数量Quantity×容积
+                put("YJCount", yogi.get(0).get("count"));                                   // 厨房设备灭火装置 药剂瓶数量Quantity×容积
                 put("QDCount", DrivingBottle.get(0).get("count"));                            // 厨房设备灭火装置 气瓶数量Quantity×驱动气瓶容积
-                put("YJRows", get_chyjp_table(yjp_data));                                     //厨房设备灭火装置 药剂瓶
+                assert yjp_data != null;
+                put("YJRows", get_champ_table(yjp_data));                                     //厨房设备灭火装置 药剂瓶
+                assert qd_data != null;
                 put("QDRows", get_chqdp_table(qd_data));                                       // 厨房设备灭火装置 驱动瓶
                 put("FireMonitorCount", FireMonitor.get(0).get("count"));                      //消防水灭火系统  消火栓数量
                 put("fireHoseCount", fireHose.get(0).get("count"));                             //消防水灭火系统  消防水软管站数量
+                assert fireHose_data != null;
                 put("firHRows", get_fireH_table(fireHose_data));                                //消防水灭火系统  消防水软管
                 put("seasystemCount", sea_system.get(0).get("count"));                          // 海水雨淋灭火系统 雨淋阀数量
                 put("seaSystemProtectArea", sea_system.get(0).get("protectArea"));              // 海水雨淋灭火系统 覆盖保护区域
+                assert EEBDBottle_data != null;
                 put("EEBDBottleRows", get_EEBDBottle_table(EEBDBottle_data));                   // 消防员装备和EEBD Marine Fireman's Outfit & EEBD
+                assert SmokeDetector_data != null;
                 put("SmokeDRows", get_SmokeDete_table(SmokeDetector_data));                     // 感烟探测器Smoke
+                assert HeatDetector_data != null;
                 put("HeatDRows", get_HeatDetector_table(HeatDetector_data));                      // 感温探测器
+                assert FlameDetector_data != null;
                 put("FlameDeRows", get_FlameDetector_table(FlameDetector_data));                   // 火焰探测器
+                assert TGAT_data != null;
                 put("TGATRows", get_TGA_table(TGAT_data));                                          // 可燃气体探测器
-                put("hydrogensulRows", get_lhq_table(hydrogensulfidedetector_data));                // 硫化氢探测器
-                put("ManuabtnRows", get_Manuabtn_table(Manualalarmbutton_data));                    //手动报警按钮
+                assert hydrogenate_data != null;
+                put("hydrogensulRows", get_lhq_table(hydrogenate_data));                // 硫化氢探测器
+                assert Malformation_data != null;
+                put("ManuabtnRows", get_Manuabtn_table(Malformation_data));                    //手动报警按钮
 
             }
             };
@@ -247,7 +259,7 @@ public class FireReportItemAdapter extends BaseAdapter {
     public void setData(List<HashMap> mapList) {
         stringArrayList = new ArrayList<>();
         companyInfoId = new ArrayList<>();
-        checkDate = new ArrayList<Date>();
+        checkDate = new ArrayList<>();
         for (int i = 0; i < mapList.size(); i++) {
             HashMap hashMap = mapList.get(i);
             String ret = (String) hashMap.get("ret");
@@ -276,7 +288,7 @@ public class FireReportItemAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        public Button viewBtn;
+        Button viewBtn;
         TextView sayTextView;
     }
 
@@ -286,7 +298,7 @@ public class FireReportItemAdapter extends BaseAdapter {
         headTextStyle.setFontFamily("Hei");
         headTextStyle.setFontSize(9);
         headTextStyle.setColor("000000");
-        List<RowRenderData> RowArr = new ArrayList<RowRenderData>();
+        List<RowRenderData> RowArr = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             ItemInfo itemObj_cell = data.get(i);
             RowRenderData RowCell = RowRenderData.build(
@@ -303,7 +315,8 @@ public class FireReportItemAdapter extends BaseAdapter {
             RowArr.add(RowCell);
         }
         return RowArr;
-    };
+    }
+
     // 获取高压二氧化碳灭火系统表格参数->  氮气瓶
     private List<RowRenderData> getCo2_N2_table(List<ItemInfo> data) {
         Style headTextStyle = new Style();
@@ -326,7 +339,8 @@ public class FireReportItemAdapter extends BaseAdapter {
             RowArr.add(RowCell);
         }
         return RowArr;
-    };
+    }
+
     // 灭火器系统
     private List<RowRenderData> getMHQ_table(){
         // 灭火器
@@ -336,6 +350,7 @@ public class FireReportItemAdapter extends BaseAdapter {
         headTextStyle.setFontSize(9);
         headTextStyle.setColor("000000");
         List<RowRenderData> RowArr = new ArrayList<>();
+        assert data != null;
         for (int i = 0; i < data.size(); i++) {
             ItemInfo itemObj_cell = data.get(i);
             RowRenderData RowCell = RowRenderData.build(
@@ -351,14 +366,15 @@ public class FireReportItemAdapter extends BaseAdapter {
             RowArr.add(RowCell);
         }
         return RowArr;
-    };
+    }
+
     // 七氟丙烷灭火系统->  七氟丙烷钢瓶
     private List<RowRenderData> get_Hf_table(List<ItemInfo> data) {
         Style headTextStyle = new Style();
         headTextStyle.setFontFamily("Hei");
         headTextStyle.setFontSize(9);
         headTextStyle.setColor("000000");
-        List<RowRenderData> RowArr = new ArrayList<RowRenderData>();
+        List<RowRenderData> RowArr = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             ItemInfo itemObj_cell = data.get(i);
             RowRenderData RowCell = RowRenderData.build(
@@ -375,13 +391,14 @@ public class FireReportItemAdapter extends BaseAdapter {
             RowArr.add(RowCell);
         }
         return RowArr;
-    };
+    }
+
     private List<RowRenderData> get_ND_table(List<ItemInfo> data) {
         Style headTextStyle = new Style();
         headTextStyle.setFontFamily("Hei");
         headTextStyle.setFontSize(9);
         headTextStyle.setColor("000000");
-        List<RowRenderData> RowArr = new ArrayList<RowRenderData>();
+        List<RowRenderData> RowArr = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             ItemInfo itemObj_cell = data.get(i);
             RowRenderData RowCell = RowRenderData.build(
@@ -397,14 +414,15 @@ public class FireReportItemAdapter extends BaseAdapter {
             RowArr.add(RowCell);
         }
         return RowArr;
-    };
+    }
+
     // 干粉灭火系统 -》干粉罐
     private List<RowRenderData> get_gf_table(List<ItemInfo> data) {
         Style headTextStyle = new Style();
         headTextStyle.setFontFamily("Hei");
         headTextStyle.setFontSize(9);
         headTextStyle.setColor("000000");
-        List<RowRenderData> RowArr = new ArrayList<RowRenderData>();
+        List<RowRenderData> RowArr = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             ItemInfo itemObj_cell = data.get(i);
             RowRenderData RowCell = RowRenderData.build(
@@ -421,14 +439,15 @@ public class FireReportItemAdapter extends BaseAdapter {
             RowArr.add(RowCell);
         }
         return RowArr;
-    };
+    }
+
     //厨房设备灭火装置 药剂瓶
-    private List<RowRenderData> get_chyjp_table(List<ItemInfo> data) {
+    private List<RowRenderData> get_champ_table(List<ItemInfo> data) {
         Style headTextStyle = new Style();
         headTextStyle.setFontFamily("Hei");
         headTextStyle.setFontSize(9);
         headTextStyle.setColor("000000");
-        List<RowRenderData> RowArr = new ArrayList<RowRenderData>();
+        List<RowRenderData> RowArr = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             ItemInfo itemObj_cell = data.get(i);
             RowRenderData RowCell = RowRenderData.build(
@@ -444,13 +463,14 @@ public class FireReportItemAdapter extends BaseAdapter {
             RowArr.add(RowCell);
         }
         return RowArr;
-    };
+    }
+
     private List<RowRenderData> get_chqdp_table(List<ItemInfo> data) {
         Style headTextStyle = new Style();
         headTextStyle.setFontFamily("Hei");
         headTextStyle.setFontSize(9);
         headTextStyle.setColor("000000");
-        List<RowRenderData> RowArr = new ArrayList<RowRenderData>();
+        List<RowRenderData> RowArr = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             ItemInfo itemObj_cell = data.get(i);
             RowRenderData RowCell = RowRenderData.build(
@@ -466,14 +486,15 @@ public class FireReportItemAdapter extends BaseAdapter {
             RowArr.add(RowCell);
         }
         return RowArr;
-    };
+    }
+
     // 消防水灭火系统 消防水系统
     private List<RowRenderData> get_fireH_table(List<ItemInfo> data) {
         Style headTextStyle = new Style();
         headTextStyle.setFontFamily("Hei");
         headTextStyle.setFontSize(9);
         headTextStyle.setColor("000000");
-        List<RowRenderData> RowArr = new ArrayList<RowRenderData>();
+        List<RowRenderData> RowArr = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             ItemInfo itemObj_cell = data.get(i);
             RowRenderData RowCell = RowRenderData.build(
@@ -487,14 +508,15 @@ public class FireReportItemAdapter extends BaseAdapter {
             RowArr.add(RowCell);
         }
         return RowArr;
-    };
+    }
+
     //消防员装备和EEBD Marine Fireman's Outfit & EEBD
     private List<RowRenderData> get_EEBDBottle_table(List<ItemInfo> data) {
         Style headTextStyle = new Style();
         headTextStyle.setFontFamily("Hei");
         headTextStyle.setFontSize(9);
         headTextStyle.setColor("000000");
-        List<RowRenderData> RowArr = new ArrayList<RowRenderData>();
+        List<RowRenderData> RowArr = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             ItemInfo itemObj_cell = data.get(i);
             RowRenderData RowCell = RowRenderData.build(
@@ -510,14 +532,15 @@ public class FireReportItemAdapter extends BaseAdapter {
             RowArr.add(RowCell);
         }
         return RowArr;
-    };
+    }
+
     // 感烟探测器Smoke detectors
     private List<RowRenderData> get_SmokeDete_table(List<ItemInfo> data) {
         Style headTextStyle = new Style();
         headTextStyle.setFontFamily("Hei");
         headTextStyle.setFontSize(8);
         headTextStyle.setColor("000000");
-        List<RowRenderData> RowArr = new ArrayList<RowRenderData>();
+        List<RowRenderData> RowArr = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             ItemInfo itemObj_cell = data.get(i);
             RowRenderData RowCell = RowRenderData.build(
@@ -533,14 +556,15 @@ public class FireReportItemAdapter extends BaseAdapter {
             RowArr.add(RowCell);
         }
         return RowArr;
-    };
+    }
+
     //感温探测器
     private List<RowRenderData> get_HeatDetector_table(List<ItemInfo> data) {
         Style headTextStyle = new Style();
         headTextStyle.setFontFamily("Hei");
         headTextStyle.setFontSize(8);
         headTextStyle.setColor("000000");
-        List<RowRenderData> RowArr = new ArrayList<RowRenderData>();
+        List<RowRenderData> RowArr = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             ItemInfo itemObj_cell = data.get(i);
             RowRenderData RowCell = RowRenderData.build(
@@ -556,14 +580,15 @@ public class FireReportItemAdapter extends BaseAdapter {
             RowArr.add(RowCell);
         }
         return RowArr;
-    };
+    }
+
     //火焰探测器
     private List<RowRenderData> get_FlameDetector_table(List<ItemInfo> data) {
         Style headTextStyle = new Style();
         headTextStyle.setFontFamily("Hei");
         headTextStyle.setFontSize(8);
         headTextStyle.setColor("000000");
-        List<RowRenderData> RowArr = new ArrayList<RowRenderData>();
+        List<RowRenderData> RowArr = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             ItemInfo itemObj_cell = data.get(i);
             RowRenderData RowCell = RowRenderData.build(
@@ -579,14 +604,15 @@ public class FireReportItemAdapter extends BaseAdapter {
             RowArr.add(RowCell);
         }
         return RowArr;
-    };
+    }
+
     // 可燃气体探测器
     private List<RowRenderData> get_TGA_table(List<ItemInfo> data) {
         Style headTextStyle = new Style();
         headTextStyle.setFontFamily("Hei");
         headTextStyle.setFontSize(8);
         headTextStyle.setColor("000000");
-        List<RowRenderData> RowArr = new ArrayList<RowRenderData>();
+        List<RowRenderData> RowArr = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             ItemInfo itemObj_cell = data.get(i);
             RowRenderData RowCell = RowRenderData.build(
@@ -606,14 +632,15 @@ public class FireReportItemAdapter extends BaseAdapter {
             RowArr.add(RowCell);
         }
         return RowArr;
-    };
+    }
+
     //硫化氢探测器
     private List<RowRenderData> get_lhq_table(List<ItemInfo> data) {
         Style headTextStyle = new Style();
         headTextStyle.setFontFamily("Hei");
         headTextStyle.setFontSize(8);
         headTextStyle.setColor("000000");
-        List<RowRenderData> RowArr = new ArrayList<RowRenderData>();
+        List<RowRenderData> RowArr = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             ItemInfo itemObj_cell = data.get(i);
             RowRenderData RowCell = RowRenderData.build(
@@ -633,14 +660,15 @@ public class FireReportItemAdapter extends BaseAdapter {
             RowArr.add(RowCell);
         }
         return RowArr;
-    };
+    }
+
     //手动火灾报警按钮
     private List<RowRenderData> get_Manuabtn_table(List<ItemInfo> data) {
         Style headTextStyle = new Style();
         headTextStyle.setFontFamily("Hei");
         headTextStyle.setFontSize(8);
         headTextStyle.setColor("000000");
-        List<RowRenderData> RowArr = new ArrayList<RowRenderData>();
+        List<RowRenderData> RowArr = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             ItemInfo itemObj_cell = data.get(i);
             RowRenderData RowCell = RowRenderData.build(
@@ -656,7 +684,7 @@ public class FireReportItemAdapter extends BaseAdapter {
             RowArr.add(RowCell);
         }
         return RowArr;
-    };
+    }
     // 获取各表的参数，报告没问题可删除
     //    private void initSystemData(){
 //        // 根据表明筛选数据
@@ -789,16 +817,12 @@ public class FireReportItemAdapter extends BaseAdapter {
 
     private String netCheckTime(Date checkDate) {
         Calendar calendar = Calendar.getInstance();
-//        Date date = new Date(System.currentTimeMillis());
         calendar.setTime(checkDate);
         calendar.add(Calendar.YEAR, +1);
         calendar.add(Calendar.DATE, -1);//减1天
         checkDate = calendar.getTime();
-//        System.out.println(checkDate);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        String sim = dateFormat.format(checkDate);
-//        Log.i("md", "推迟的时间为： " + sim);
-        return sim;
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        return dateFormat.format(checkDate);
     }
 
     /**
