@@ -53,8 +53,10 @@ public class InspectionServiceImpl extends BaseServiceImpl<InspectionResult> imp
         for(int i=0;i<dataList.size();i++){
             InspectionResult ret = dataList.get(i);
 //            Log.i("getHistoryList:::",ret.toString());
-            long DBsystemId = ret.getCheckType().getParent().getId();
-            String systemName = ret.getCheckType().getParent().getName();
+//            long DBsystemId = ret.getCheckType().getParent().getId();
+//            String systemName = ret.getCheckType().getParent().getName();
+            long DBsystemId = ret.getCheckType().getId();
+            String systemName = ret.getCheckType().getName();
             String companyName = ret.getCompanyInfo().getCompanyName();
             String oilfieldName = ret.getCompanyInfo().getOilfieldName();
             String platformName = ret.getCompanyInfo().getPlatformName();

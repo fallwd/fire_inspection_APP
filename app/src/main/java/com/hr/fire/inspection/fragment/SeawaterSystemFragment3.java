@@ -30,24 +30,25 @@ import java.util.List;
 public class SeawaterSystemFragment3 extends Fragment {
 
     View rootView;
-    private static SeawaterSystemFragment3 fragment1;
+    private static SeawaterSystemFragment3 fragment3;
     private static String mKey;
-    private SeawaterSystemAdapter3 adapter;
     private IntentTransmit its;
+    private SeawaterSystemAdapter3 adapter;
     private RecyclerView rc_list;
     private List<YearCheck> checkDataEasy;
     private List<YearCheckResult> yearCheckResults;
 
-    public static SeawaterSystemFragment3 newInstance(String key,IntentTransmit value) {
-        if (fragment1 == null) {
-            fragment1 = new SeawaterSystemFragment3();
+    public static SeawaterSystemFragment3 newInstance(String key, IntentTransmit value) {
+        if (fragment3 == null) {
+            fragment3 = new SeawaterSystemFragment3();
         }
         mKey = key;
         Bundle args = new Bundle();
         args.putSerializable(key, value);
-        fragment1.setArguments(args);
-        return fragment1;
+        fragment3.setArguments(args);
+        return fragment3;
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +56,7 @@ public class SeawaterSystemFragment3 extends Fragment {
             its = (IntentTransmit) getArguments().getSerializable(mKey);
         }
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,13 +70,14 @@ public class SeawaterSystemFragment3 extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initData();
-        initView();
     }
 
     private void initData() {
+        //根据二氧化碳系统的ID,拿到二氧化碳下面的检查表数据
         List<CheckType> checkTypes = ServiceFactory.getYearCheckService().gettableNameData(its.systemId);
+        //在二氧化碳的子表数据中,拿到管线管件对应的id, 通过id去查询管线管件需要检查的内容
         checkDataEasy = ServiceFactory.getYearCheckService().getCheckDataEasy(checkTypes.get(2).getId());
-        //3.获取用户需要填写的数据,如果没有数据,就需要插入的默认数据（流程4）。如果有数据就
+        //获取用户需要填写的数据,如果没有数据,就需要插入的默认数据（流程4）。如果有数据就
         yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(2).getId(), its.number, its.srt_Date);
         if (yearCheckResults == null || yearCheckResults.size() == 0) {
             for (int i = 0; i < checkDataEasy.size(); i++) {
@@ -87,31 +90,20 @@ public class SeawaterSystemFragment3 extends Fragment {
                 ycr.setSystemNumber(its.number);
                 ycr.setProtectArea(" "); // 保护位号
                 ycr.setCheckDate(its.srt_Date);  //检查日期
-                ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, checkDataEasy.get(i).getId(), its.companyInfoId, checkTypes.get(2).getId(), its.number, its.srt_Date);
+                ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, checkDataEasy.get(i).getId(), its.companyInfoId,
+                        checkTypes.get(2).getId(), its.number, its.srt_Date);
                 yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(2).getId(), its.number, its.srt_Date);
             }
         }
         initView();
     }
 
-    //动态添加条目
-    public void addItemView() {
-        if (adapter != null) {
-//            adapter.addData(itemDataList.size());
-//            rc_list.post(new Runnable() {
-//                @Override
-//                public void run() {
-//                    addData();
-//                }
-//            });
-        }
-    }
     private void initView() {
 
         rc_list = rootView.findViewById(R.id.rc_list3);
         @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rc_list.setLayoutManager(layoutManager);
-        adapter = new SeawaterSystemAdapter3(getActivity(), checkDataEasy);
+        adapter = new SeawaterSystemAdapter3(getActivity(), checkDataEasy, yearCheckResults);
         rc_list.setAdapter(adapter);
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
@@ -143,4 +135,8 @@ public class SeawaterSystemFragment3 extends Fragment {
         Toast.makeText(getContext(), "\"功能性实验\"数据保存成功", Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
 }

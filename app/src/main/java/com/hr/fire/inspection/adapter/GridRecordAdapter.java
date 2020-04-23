@@ -1,6 +1,5 @@
 package com.hr.fire.inspection.adapter;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.util.Log;
@@ -15,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
@@ -46,7 +46,7 @@ public class GridRecordAdapter extends RecyclerView.Adapter<GridRecordAdapter.My
         return holder;
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(@NonNull final GridRecordAdapter.MyViewHolder holder, final int position) {
         holder.tvText.setText(data.get(position).getName());
@@ -57,6 +57,7 @@ public class GridRecordAdapter extends RecyclerView.Adapter<GridRecordAdapter.My
                 holder.cb_button.setVisibility(View.VISIBLE);
                 holder.cb_button.setChecked(aBoolean);
                 holder.rl_bg.setBackground(context.getDrawable(R.drawable.listview_border_nomargin));
+
             } else {
                 holder.cb_button.setVisibility(View.GONE);
                 holder.rl_bg.setBackground(null);
@@ -68,9 +69,6 @@ public class GridRecordAdapter extends RecyclerView.Adapter<GridRecordAdapter.My
                 listener.onItemClick(position);
             }
         });
-        Log.d("dong", "bindView =  " + data.get(position).isGray());
-
-
     }
 
     @Override
