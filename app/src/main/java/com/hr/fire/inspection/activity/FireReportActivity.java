@@ -49,37 +49,25 @@ public class FireReportActivity extends AppCompatActivity {
         initData(); // 初始化接口数据
 
         // 点击返回上一页
-        ImageButton imageButton = (ImageButton) findViewById(R.id.backHome);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
+        ImageButton imageButton = findViewById(R.id.backHome);
+        imageButton.setOnClickListener(v -> finish());
         // 设置起止时间
-        Button start_time = (Button) findViewById(R.id.start_time);
-        Button end_time = (Button) findViewById(R.id.end_time);
+        Button start_time = findViewById(R.id.start_time);
+        Button end_time = findViewById(R.id.end_time);
         start_time.setText(getData());
         end_time.setText(netCheckTime());
-        final Spinner spinner_buss = (Spinner) findViewById(R.id.spinner_bussy);
-        final Spinner spinner_yt = (Spinner) findViewById(R.id.spinner_yt);
-        Spinner spinner_sys = (Spinner) findViewById(R.id.spinner_sys);
-        Spinner spinner_pt = (Spinner) findViewById(R.id.spinner_pt);
-        Spinner spinner_per = (Spinner) findViewById(R.id.spinner_per);
+        final Spinner spinner_buss = findViewById(R.id.spinner_bussy);
+        final Spinner spinner_yt = findViewById(R.id.spinner_yt);
+        Spinner spinner_sys =  findViewById(R.id.spinner_sys);
+        Spinner spinner_pt = findViewById(R.id.spinner_pt);
+        Spinner spinner_per =  findViewById(R.id.spinner_per);
 
 
         //数据
         ArrayList<String>
-                data_list1 = new ArrayList<>(),
-                data_list2 = new ArrayList<>(),
                 data_list3 = new ArrayList<>(),
                 data_list4 = new ArrayList<>(),
                 data_list5 = new ArrayList<>();
-
-//        data_list3.add(oil_name);
-//        data_list4.add("深圳");
-//        data_list5.add("深圳");
 
         // 初始化下拉框，并监听事件
         InitSetSpinner(spinner_buss,bussy_list);

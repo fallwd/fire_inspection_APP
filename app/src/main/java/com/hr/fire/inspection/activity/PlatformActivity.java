@@ -93,6 +93,7 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 long current_id = idlist.get(position);
                 String Platform_name = list.get(position);
+<<<<<<< HEAD
                 Toast.makeText(PlatformActivity.this,"你点击了第" + Platform_name + "项",Toast.LENGTH_SHORT).show();
                 // 此处判断是不是消防巡检点击进来  是则需传入检查专业  检查人等
                 if(f_title.equals("xunjian")){
@@ -112,6 +113,13 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
                     intent.putExtra("company_name", company_name);
                     intent.putExtra("oil_name", oil_name);
                 }
+=======
+                intent.setClass(PlatformActivity.this, FireActivity.class);
+                intent.putExtra("Platform_ID", current_id);
+                intent.putExtra("Platform_name", Platform_name);
+                intent.putExtra("company_name", company_name);
+                intent.putExtra("oil_name", oil_name);
+>>>>>>> d5ac9552e5d439c63c9c45cee7f894ee990e4cc4
                 startActivity(intent);
             }
         });
