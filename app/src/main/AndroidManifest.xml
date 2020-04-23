@@ -147,5 +147,14 @@
         <activity
             android:name=".activity.DryPowderFireSystemActivity"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.CheckHomeActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.CheckActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.FilesCheckActivity"
+            android:screenOrientation="landscape" />
     </application>
 </manifest>

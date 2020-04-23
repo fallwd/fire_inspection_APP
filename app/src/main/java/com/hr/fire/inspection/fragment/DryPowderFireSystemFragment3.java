@@ -99,7 +99,6 @@ public class DryPowderFireSystemFragment3  extends Fragment {
     }
 
     private void initView() {
-
         rc_list = rootView.findViewById(R.id.rc_list3);
         @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rc_list.setLayoutManager(layoutManager);

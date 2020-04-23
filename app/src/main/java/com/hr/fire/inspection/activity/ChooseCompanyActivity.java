@@ -27,13 +27,20 @@ import static android.widget.Toast.*;
 
 public class ChooseCompanyActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<String> list;
-    List<CompanyInfo> dataList;
     private ImageView insert_btn;
+    private String f_title;
+    private String duty;
+    private String check_name;
+    private String check_date;
+    Bundle b;
+    List<CompanyInfo> dataList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_company);
+
         insert_btn = (ImageView) this.findViewById(R.id.insert_btn);
         ImageView iv_finish = (ImageView) this.findViewById(R.id.iv_finish);
         iv_finish.setOnClickListener(new View.OnClickListener() {
@@ -42,13 +49,28 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
                 finish();
             }
         });
+
+
+        b = getIntent().getExtras();
+        f_title = b.getString("f_title");
+        Toast.makeText(ChooseCompanyActivity.this, f_title, Toast.LENGTH_SHORT).show();
+        if(f_title.equals("xunjian")){
+            getIntentInfo();
+        }
         initData();
     }
 
     @Override
+
     protected void onStart() {
         super.onStart();
         initData();
+    }
+
+    private void getIntentInfo() {
+        duty = b.getString("duty");
+        check_name = b.getString("check_name");
+        check_date = b.getString("check_date");
     }
 
     private void initData() {
@@ -75,6 +97,14 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
                         String str = list.get(position);
                         Intent intent = new Intent(ChooseCompanyActivity.this, OilFieldActivity.class);
                         intent.putExtra("company_name", str);
+                        // 如果是消防巡检  点进去需要传这几个参数
+                        if(f_title.equals("xunjian")){
+                            Toast.makeText(ChooseCompanyActivity.this,f_title,Toast.LENGTH_SHORT).show();
+                            intent.putExtra("f_title", f_title);
+                            intent.putExtra("duty", duty);
+                            intent.putExtra("check_name",check_name);
+                            intent.putExtra("check_date",check_date);
+                        }
                         startActivity(intent);
             }
         });

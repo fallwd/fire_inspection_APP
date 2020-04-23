@@ -54,7 +54,6 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         f_title = intent.getStringExtra("f_title");  //传过来的系统名称
         sys_number = intent.getStringExtra("sys_number");  //系统位号
         Log.d("dong", "sys_id==========" + sys_id+ "platform_id========"+platform_id+ "f_title==========="+f_title);
-
     }
 
     @Override
