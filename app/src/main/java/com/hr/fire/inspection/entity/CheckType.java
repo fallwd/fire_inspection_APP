@@ -23,6 +23,8 @@ public class CheckType  {
 
     private int type; //年检 1 巡检 2
 
+    private int level;
+
     private Long parentId;
 
     @ToOne(joinProperty = "parentId")
@@ -36,11 +38,12 @@ private transient DaoSession daoSession;
 @Generated(hash = 1270543700)
 private transient CheckTypeDao myDao;
 
-@Generated(hash = 119751077)
-public CheckType(Long id, String name, int type, Long parentId) {
+@Generated(hash = 1117687931)
+public CheckType(Long id, String name, int type, int level, Long parentId) {
     this.id = id;
     this.name = name;
     this.type = type;
+    this.level = level;
     this.parentId = parentId;
 }
 
@@ -161,8 +164,17 @@ public void __setDaoSession(DaoSession daoSession) {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", type=" + type +
+                ", level=" + level +
                 ", parentId=" + parentId +
                 ", parent=" + parent +
                 '}';
+    }
+
+    public int getLevel() {
+        return this.level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 }
