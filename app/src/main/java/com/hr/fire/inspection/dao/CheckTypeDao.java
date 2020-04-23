@@ -32,8 +32,7 @@ public class CheckTypeDao extends AbstractDao<CheckType, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
         public final static Property Type = new Property(2, int.class, "type", false, "TYPE");
-        public final static Property Level = new Property(3, int.class, "level", false, "LEVEL");
-        public final static Property ParentId = new Property(4, Long.class, "parentId", false, "PARENT_ID");
+        public final static Property ParentId = new Property(3, Long.class, "parentId", false, "PARENT_ID");
     }
 
     private DaoSession daoSession;
@@ -55,8 +54,7 @@ public class CheckTypeDao extends AbstractDao<CheckType, Long> {
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"NAME\" TEXT," + // 1: name
                 "\"TYPE\" INTEGER NOT NULL ," + // 2: type
-                "\"LEVEL\" INTEGER NOT NULL ," + // 3: level
-                "\"PARENT_ID\" INTEGER);"); // 4: parentId
+                "\"PARENT_ID\" INTEGER);"); // 3: parentId
     }
 
     /** Drops the underlying database table. */
@@ -79,11 +77,10 @@ public class CheckTypeDao extends AbstractDao<CheckType, Long> {
             stmt.bindString(2, name);
         }
         stmt.bindLong(3, entity.getType());
-        stmt.bindLong(4, entity.getLevel());
  
         Long parentId = entity.getParentId();
         if (parentId != null) {
-            stmt.bindLong(5, parentId);
+            stmt.bindLong(4, parentId);
         }
     }
 
@@ -101,11 +98,10 @@ public class CheckTypeDao extends AbstractDao<CheckType, Long> {
             stmt.bindString(2, name);
         }
         stmt.bindLong(3, entity.getType());
-        stmt.bindLong(4, entity.getLevel());
  
         Long parentId = entity.getParentId();
         if (parentId != null) {
-            stmt.bindLong(5, parentId);
+            stmt.bindLong(4, parentId);
         }
     }
 
@@ -126,8 +122,7 @@ public class CheckTypeDao extends AbstractDao<CheckType, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
             cursor.getInt(offset + 2), // type
-            cursor.getInt(offset + 3), // level
-            cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4) // parentId
+            cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3) // parentId
         );
         return entity;
     }
@@ -137,8 +132,7 @@ public class CheckTypeDao extends AbstractDao<CheckType, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setType(cursor.getInt(offset + 2));
-        entity.setLevel(cursor.getInt(offset + 3));
-        entity.setParentId(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
+        entity.setParentId(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
      }
     
     @Override
