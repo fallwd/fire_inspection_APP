@@ -102,12 +102,9 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                         function.setGray(false);
                         hotSelecte.add(i, false);
                     }
-                    Log.d("dong", "hot====  " + i + "  ---  " + function);
                 }
                 toolAdapter.setCheckState(hotSelecte);
                 toolAdapter.notifyDataSetChanged();
-                Log.d("dong", "==" + hotSelecte.size() + " -- 选择的标签  -- " + tag + "  == " + hotSelecte.toString());
-                Log.d("dong", "==" + hot.size() + " -- 选择的标签  -- " + tag + "  == " + hot.toString());
             }
         });
     }
