@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
+import com.hr.fire.inspection.activity.QRCodeExistenceAcitivty;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
@@ -109,10 +110,12 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 showPopWind(vh.tv_11);
             }
         });
-        vh.et_12.setOnClickListener(new View.OnClickListener() {
+        vh.tv_12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "生成二维码", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.setClass(mContext, QRCodeExistenceAcitivty.class);
+                mContext.startActivity(intent);
             }
         });
     }

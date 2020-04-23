@@ -6,30 +6,43 @@
     android:background="@drawable/selector_bg_white_gray"
     android:padding="8dp">
 
-    <ImageView
-        android:id="@+id/img_pic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
-        android:src="@mipmap/file" />
-
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/img_pic"
-        android:layout_centerHorizontal="true">
+        android:id="@+id/rl_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv_text"
+        <ImageView
+            android:id="@+id/img_pic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="历史"
-            android:textSize="14sp" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            android:src="@mipmap/file" />
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_pic"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:id="@+id/tv_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="历史"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <CheckBox
+            android:id="@+id/cb_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:enabled="false"
+            android:gravity="center"
+            android:visibility="gone" />
 
     </RelativeLayout>
-
 </RelativeLayout>
