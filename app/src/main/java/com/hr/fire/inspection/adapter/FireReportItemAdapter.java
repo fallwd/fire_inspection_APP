@@ -52,55 +52,55 @@ public class FireReportItemAdapter extends BaseAdapter {
     private String set_oil_name;
     private String set_Platform_name;
     private List<HashMap> getallmessage;
-    private final List<ItemInfo> co2_arr = new ArrayList<>();
-    private String PotionBottle = "药剂瓶";
-    private List PotionBottle_data;
-    private String NitrogenCylinder = "氮气瓶";
-    private List NitrogenCylinder_data;
-    private String Heptafluoropropane = "七氟丙烷钢瓶";
-    private List Heptafluoropropane_data;
-    private String NitrogenDriveBottle = "氮气驱动瓶";
-    private List NitrogenDriveBottle_data;
-    private String annihilator = "灭火器";
-    private List annihilator_data;
-    private String SmokeDetector = "感烟探测器";
-    private List SmokeDetector_data;
-    private String HeatDetector = "感温探测器";
-    private List HeatDetector_data;
-    private String FlameDetector = "火焰探测器";
-    private List FlameDetector_data;
-    private String Manualalarmbutton = "手动报警按钮";
-    private List Manualalarmbutton_data;
-    private String TGAT = "可燃气体探测器";
-    private List TGAT_data;
-    private String Hydrogendetector = "氢气探测器";
-    private List Hydrogendetector_data;
-    private String hydrogensulfidedetector = "硫化氢探测器";
-    private List hydrogensulfidedetector_data;
-    private String COdetector = "CO探测器";
-    private List COdetector_data;
-    private String facp = "火灾报警控制器";
-    private List facp_data;
-    private String DrivingBottle = "驱动瓶";
-    private List DrivingBottle_data;
-    private String yaoji_bottle = "药剂瓶";
-    private List yaoji_data;
-    private String sea_system = "海水雨淋灭火系统";
-    private List sea_system_data;
-    private String fireHose = "消防软管";
-    private List fireHose_data;
-    private String FireMonitor = "消防炮";
-    private List FireMonitor_data;
-    private String DryPowderCans = "干粉罐";
-    private List DryPowderCans_data;
-    private String actnationBottle= "启动瓶";
-    private List actnationBottle_data;
-    private String SCBABottle= "SCBA气瓶";
-    private List SCBABottle_data;
-    private String EEBDBottle= "EEBD气瓶";
-    private List EEBDBottle_data;
-    private String CAFS_system= "泡沫灭火系统";
-    private List CAFS_system_data;
+//    private final List<ItemInfo> co2_arr = new ArrayList<>();
+//    private String PotionBottle = "药剂瓶";
+//    private List PotionBottle_data;
+//    private String NitrogenCylinder = "氮气瓶";
+//    private List NitrogenCylinder_data;
+//    private String Heptafluoropropane = "七氟丙烷钢瓶";
+//    private List Heptafluoropropane_data;
+//    private String NitrogenDriveBottle = "氮气驱动瓶";
+//    private List NitrogenDriveBottle_data;
+//    private String annihilator = "灭火器";
+//    private List annihilator_data;
+//    private String SmokeDetector = "感烟探测器";
+//    private List SmokeDetector_data;
+//    private String HeatDetector = "感温探测器";
+//    private List HeatDetector_data;
+//    private String FlameDetector = "火焰探测器";
+//    private List FlameDetector_data;
+//    private String Manualalarmbutton = "手动报警按钮";
+//    private List Manualalarmbutton_data;
+//    private String TGAT = "可燃气体探测器";
+//    private List TGAT_data;
+//    private String Hydrogendetector = "氢气探测器";
+//    private List Hydrogendetector_data;
+//    private String hydrogensulfidedetector = "硫化氢探测器";
+//    private List hydrogensulfidedetector_data;
+//    private String COdetector = "CO探测器";
+//    private List COdetector_data;
+//    private String facp = "火灾报警控制器";
+//    private List facp_data;
+//    private String DrivingBottle = "驱动瓶";
+//    private List DrivingBottle_data;
+//    private String yaoji_bottle = "药剂瓶";
+//    private List yaoji_data;
+//    private String sea_system = "海水雨淋灭火系统";
+//    private List sea_system_data;
+//    private String fireHose = "消防软管";
+//    private List fireHose_data;
+//    private String FireMonitor = "消防炮";
+//    private List FireMonitor_data;
+//    private String DryPowderCans = "干粉罐";
+//    private List DryPowderCans_data;
+//    private String actnationBottle= "启动瓶";
+//    private List actnationBottle_data;
+//    private String SCBABottle= "SCBA气瓶";
+//    private List SCBABottle_data;
+//    private String EEBDBottle= "EEBD气瓶";
+//    private List EEBDBottle_data;
+//    private String CAFS_system= "泡沫灭火系统";
+//    private List CAFS_system_data;
 
 
     // ————————————————————————————————————————————————————————
@@ -148,7 +148,6 @@ public class FireReportItemAdapter extends BaseAdapter {
             final List<ItemInfo> date = (List) getallmessage.get(0).get("data");
                 assert date != null;
             ItemInfo itemObj = date.get(0);
-            initSystemData(); // 初始化各系统的列表数据
             // 高压二氧化碳灭火系统
             List<HashMap> co2_system = getallmessage.stream().filter(d -> "高压二氧化碳灭火系统".equals(d.get("systemName"))).collect(Collectors.toList());
             List<HashMap> PotionBottle_data = co2_system.stream().filter(d -> "药剂瓶".equals(d.get("tableName"))).collect(Collectors.toList());
@@ -663,81 +662,81 @@ public class FireReportItemAdapter extends BaseAdapter {
         }
         return RowArr;
     };
-    private void initSystemData(){
-        // 根据表明筛选数据
-        Log.d("getallmessageSize---", getallmessage.size()+"");
-        // 高压二氧化碳灭火系统
-        List<HashMap> co2_system = getallmessage.stream().filter(d -> "高压二氧化碳灭火系统".equals(d.get("systemName"))).collect(Collectors.toList());
-        Log.d("高压二氧化碳灭火系统", co2_system+"");
-        PotionBottle_data = co2_system.stream().filter(d -> "药剂瓶".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("药剂瓶", PotionBottle_data+"");
-        NitrogenCylinder_data= co2_system.stream().filter(d -> "氮气瓶".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("氮气瓶", NitrogenCylinder_data+"");
-
-        // 七氟丙烷灭火系统
-        Heptafluoropropane_data = getallmessage.stream().filter(d -> "七氟丙烷钢瓶".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("七氟丙烷钢瓶", Heptafluoropropane_data+"");
-
-        NitrogenDriveBottle_data = getallmessage.stream().filter(d -> "氮气驱动瓶".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("氮气驱动瓶", NitrogenDriveBottle_data+"");
-
-        // 灭火器
-        annihilator_data = getallmessage.stream().filter(d -> "灭火器".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("灭火器", annihilator_data+"");
-
-        // 火灾自动报警系统
-        SmokeDetector_data= getallmessage.stream().filter(d -> "感烟探测器".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("感烟探测器", SmokeDetector_data+"");
-        HeatDetector_data = getallmessage.stream().filter(d -> "感温探测器".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("感温探测器", HeatDetector_data+"");
-        FlameDetector_data= getallmessage.stream().filter(d -> "火焰探测器".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("火焰探测器", FlameDetector_data+"");
-        Manualalarmbutton_data= getallmessage.stream().filter(d -> "手动报警按钮".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("手动报警按钮", Manualalarmbutton_data+"");
-        TGAT_data= getallmessage.stream().filter(d -> "可燃气体探测器".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("可燃气体探测器",  TGAT_data+"");
-        Hydrogendetector_data= getallmessage.stream().filter(d -> "氢气探测器".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("氢气探测器",  Hydrogendetector_data+"");
-        hydrogensulfidedetector_data= getallmessage.stream().filter(d -> "硫化氢探测器".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("硫化氢探测器",  hydrogensulfidedetector_data+"");
-        COdetector_data = getallmessage.stream().filter(d -> "CO探测器".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("CO探测器",  COdetector_data+"");
-        facp_data = getallmessage.stream().filter(d -> "火灾报警控制器".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("火灾报警控制器",  facp_data+"");
-
-        // 厨房设备灭火装置
-        List<HashMap> chufang_system = getallmessage.stream().filter(d -> "厨房设备灭火装置".equals(d.get("systemName"))).collect(Collectors.toList());
-        Log.d("厨房设备灭火装置", chufang_system+"");
-        DrivingBottle_data = chufang_system.stream().filter(d -> "驱动瓶".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("驱动瓶",  DrivingBottle_data+"");
-        yaoji_data = chufang_system.stream().filter(d -> "药剂瓶".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("药剂瓶",  yaoji_data+"");
-
-        // 海水雨淋灭火系统
-        sea_system_data = getallmessage.stream().filter(d -> "海水雨淋灭火系统".equals(d.get("systemName"))).collect(Collectors.toList());
-        Log.d("厨房设备灭火装置", sea_system_data+"");
-
-        //消防水灭火系统
-        fireHose_data = getallmessage.stream().filter(d -> "消防软管".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("消防软管",  fireHose_data+"");
-        FireMonitor_data = getallmessage.stream().filter(d -> "消防炮".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("消防软管",  FireMonitor_data+"");
-        // 固定式干粉灭火系统
-        DryPowderCans_data = getallmessage.stream().filter(d -> "干粉罐".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("干粉罐",  DryPowderCans_data+"");
-        actnationBottle_data = getallmessage.stream().filter(d -> "启动瓶".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("启动瓶",  actnationBottle_data+"");
-
-        // 消防员装备
-        SCBABottle_data = getallmessage.stream().filter(d -> "SCBA气瓶".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("SCBA气瓶",  SCBABottle_data+"");
-        EEBDBottle_data = getallmessage.stream().filter(d -> "EEBD气瓶".equals(d.get("tableName"))).collect(Collectors.toList());
-        Log.d("EEBD气瓶",  EEBDBottle_data+"");
-
-        // 泡沫灭火系统
-        CAFS_system_data = getallmessage.stream().filter(d -> "泡沫灭火系统".equals(d.get("systemName"))).collect(Collectors.toList());
-        Log.d("泡沫灭火系统", CAFS_system_data+"");
-    }
+//    private void initSystemData(){
+//        // 根据表明筛选数据
+//        Log.d("getallmessageSize---", getallmessage.size()+"");
+//        // 高压二氧化碳灭火系统
+//        List<HashMap> co2_system = getallmessage.stream().filter(d -> "高压二氧化碳灭火系统".equals(d.get("systemName"))).collect(Collectors.toList());
+//        Log.d("高压二氧化碳灭火系统", co2_system+"");
+//        PotionBottle_data = co2_system.stream().filter(d -> "药剂瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("药剂瓶", PotionBottle_data+"");
+//        NitrogenCylinder_data= co2_system.stream().filter(d -> "氮气瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("氮气瓶", NitrogenCylinder_data+"");
+//
+//        // 七氟丙烷灭火系统
+//        Heptafluoropropane_data = getallmessage.stream().filter(d -> "七氟丙烷钢瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("七氟丙烷钢瓶", Heptafluoropropane_data+"");
+//
+//        NitrogenDriveBottle_data = getallmessage.stream().filter(d -> "氮气驱动瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("氮气驱动瓶", NitrogenDriveBottle_data+"");
+//
+//        // 灭火器
+//        annihilator_data = getallmessage.stream().filter(d -> "灭火器".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("灭火器", annihilator_data+"");
+//
+//        // 火灾自动报警系统
+//        SmokeDetector_data= getallmessage.stream().filter(d -> "感烟探测器".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("感烟探测器", SmokeDetector_data+"");
+//        HeatDetector_data = getallmessage.stream().filter(d -> "感温探测器".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("感温探测器", HeatDetector_data+"");
+//        FlameDetector_data= getallmessage.stream().filter(d -> "火焰探测器".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("火焰探测器", FlameDetector_data+"");
+//        Manualalarmbutton_data= getallmessage.stream().filter(d -> "手动报警按钮".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("手动报警按钮", Manualalarmbutton_data+"");
+//        TGAT_data= getallmessage.stream().filter(d -> "可燃气体探测器".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("可燃气体探测器",  TGAT_data+"");
+//        Hydrogendetector_data= getallmessage.stream().filter(d -> "氢气探测器".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("氢气探测器",  Hydrogendetector_data+"");
+//        hydrogensulfidedetector_data= getallmessage.stream().filter(d -> "硫化氢探测器".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("硫化氢探测器",  hydrogensulfidedetector_data+"");
+//        COdetector_data = getallmessage.stream().filter(d -> "CO探测器".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("CO探测器",  COdetector_data+"");
+//        facp_data = getallmessage.stream().filter(d -> "火灾报警控制器".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("火灾报警控制器",  facp_data+"");
+//
+//        // 厨房设备灭火装置
+//        List<HashMap> chufang_system = getallmessage.stream().filter(d -> "厨房设备灭火装置".equals(d.get("systemName"))).collect(Collectors.toList());
+//        Log.d("厨房设备灭火装置", chufang_system+"");
+//        DrivingBottle_data = chufang_system.stream().filter(d -> "驱动瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("驱动瓶",  DrivingBottle_data+"");
+//        yaoji_data = chufang_system.stream().filter(d -> "药剂瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("药剂瓶",  yaoji_data+"");
+//
+//        // 海水雨淋灭火系统
+//        sea_system_data = getallmessage.stream().filter(d -> "海水雨淋灭火系统".equals(d.get("systemName"))).collect(Collectors.toList());
+//        Log.d("厨房设备灭火装置", sea_system_data+"");
+//
+//        //消防水灭火系统
+//        fireHose_data = getallmessage.stream().filter(d -> "消防软管".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("消防软管",  fireHose_data+"");
+//        FireMonitor_data = getallmessage.stream().filter(d -> "消防炮".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("消防软管",  FireMonitor_data+"");
+//        // 固定式干粉灭火系统
+//        DryPowderCans_data = getallmessage.stream().filter(d -> "干粉罐".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("干粉罐",  DryPowderCans_data+"");
+//        actnationBottle_data = getallmessage.stream().filter(d -> "启动瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("启动瓶",  actnationBottle_data+"");
+//
+//        // 消防员装备
+//        SCBABottle_data = getallmessage.stream().filter(d -> "SCBA气瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("SCBA气瓶",  SCBABottle_data+"");
+//        EEBDBottle_data = getallmessage.stream().filter(d -> "EEBD气瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+//        Log.d("EEBD气瓶",  EEBDBottle_data+"");
+//
+//        // 泡沫灭火系统
+//        CAFS_system_data = getallmessage.stream().filter(d -> "泡沫灭火系统".equals(d.get("systemName"))).collect(Collectors.toList());
+//        Log.d("泡沫灭火系统", CAFS_system_data+"");
+//    }
 
     // 生成报告
     private void initWordTem(String itemCon, Map<String, Object> tempdatas) throws IOException {
