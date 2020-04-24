@@ -24,9 +24,9 @@ import android.widget.Toast;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.FireReportItemAdapter;
+import com.hr.fire.inspection.adapter.SearchAdapter;
 import com.hr.fire.inspection.entity.CompanyInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
-import com.liuwan.search.util.SearchAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

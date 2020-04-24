@@ -1,7 +1,5 @@
 package com.hr.fire.inspection.adapter;
 
-import com.liuwan.search.util.PinyinHelper;
-
 import java.util.HashSet;
 import java.util.Set;
 

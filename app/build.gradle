@@ -20,13 +20,8 @@ android {
         }
     }
     compileOptions {
-<<<<<<< HEAD
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
-=======
         targetCompatibility = '1.8'
         sourceCompatibility = '1.8'
->>>>>>> 65eaa45d10799313919ca6cf9d2fb2641c2f7bce
     }
 
     allprojects {
