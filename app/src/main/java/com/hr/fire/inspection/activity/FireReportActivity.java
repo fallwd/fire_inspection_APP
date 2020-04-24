@@ -2,21 +2,31 @@ package com.hr.fire.inspection.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.FireReportItemAdapter;
 import com.hr.fire.inspection.entity.CompanyInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.liuwan.search.util.SearchAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,11 +42,14 @@ public class FireReportActivity extends AppCompatActivity {
     private String company_name;
     private String oil_name;
     private String Platform_name;
-
+    private LinearLayout empty;
+    private AutoCompleteTextView search;
+    private List stringArrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fire_report);
+
 
         // 获取Bundle的信息
         // 获得公司名称  油田名称
@@ -85,13 +98,58 @@ public class FireReportActivity extends AppCompatActivity {
                 InitSetSpinner(spinner_yt, yt_list);
             }
         });
+        // 模糊查询
+        empty = findViewById(R.id.empty);
+        search = findViewById(R.id.search);
+        empty.setOnClickListener(v -> {
+            switch (v.getId()) {
+                case R.id.empty:
+                    search.setText("");
+                    break;
+            }
+        });
+        FireReportItemAdapter fireReportItemAdapter = new FireReportItemAdapter(this);
+        ListView main_list2 = findViewById(R.id.main_list2);
+        search.setOnEditorActionListener((v, actionId, event) -> {
+            // TODO Auto-generated method stub
+            if(actionId == EditorInfo.IME_ACTION_SEARCH)
+            {
+                Toast.makeText(FireReportActivity.this,search.getText().toString(),Toast.LENGTH_SHORT).show();
+                // search pressed and perform your functionality.
+                //加载适配器
+                List<String> arr = new ArrayList<>();
+                arr.add(search.getText().toString());
+                fireReportItemAdapter.refresh(arr);
+                main_list2.setAdapter(fireReportItemAdapter);
+                View view = getWindow().peekDecorView();
+                if (view != null) {
+                    InputMethodManager inputmanger = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputmanger.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+            }
+            return false;
+        });
+        // 自动提示适配器
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, str);
+        // 支持拼音检索
+        String[] str = (String[]) stringArrayList.toArray(new String[stringArrayList.size()]);
+        SearchAdapter adapter = new SearchAdapter<>(FireReportActivity.this,
+                android.R.layout.simple_list_item_1, str, SearchAdapter.ALL);
+        search.setAdapter(adapter);
     }
 
     private void initData() {
         //获取报告列表
         mapList = ServiceFactory.getYearCheckService().getOutputList();
         Log.d("key", String.valueOf(mapList));
+        stringArrayList = new ArrayList<>();
+        for (int i = 0; i < mapList.size(); i++) {
+            HashMap hashMap = mapList.get(i);
+            String ret = (String) hashMap.get("ret");
+            stringArrayList.add(ret);
+        }
         init_company_spinner(); // 初始化公司列表
+
     }
     private void init_company_spinner (){
         // 获取公司列表
@@ -147,10 +205,6 @@ public class FireReportActivity extends AppCompatActivity {
         //加载适配器
         ListView main_list2 = findViewById(R.id.main_list2);
         main_list2.setAdapter(fireReportItemAdapter);
-        main_list2.setOnItemClickListener((parent, view, position, id) -> {
-//                final Long id1 = mList.get(position).getId();
-//                Toast.makeText(FireReportActivity.this, "当前id为：" + id1, Toast.LENGTH_SHORT).show();
-        });
     }
 
         /**
@@ -165,10 +219,8 @@ public class FireReportActivity extends AppCompatActivity {
         calendar.add(Calendar.YEAR, +1);
         calendar.add(Calendar.DATE, -1);//减1天
         date = calendar.getTime();
-        System.out.println(date);
         @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         String sim = dateFormat.format(date);
-        Log.i("md", "推迟的时间为： " + sim);
         return sim;
     }
 
@@ -179,7 +231,6 @@ public class FireReportActivity extends AppCompatActivity {
     private String getData() {
         Date date = new Date();
         @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        //        Log.i("md", "时间sim为： "+sim);
         return dateFormat.format(date);
     }
 
@@ -191,5 +242,4 @@ public class FireReportActivity extends AppCompatActivity {
         //加载适配器
         spinner.setAdapter(arr_adapter);
     }
-
 }

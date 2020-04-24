@@ -22,6 +22,7 @@
     <string name="daoru">导入</string>
     <string name="PleaseInputText">请输入查询信息</string>
     <string name="report_output">导出</string>
+    <string name="search">搜索</string>
     <string-array name="spingarr">
         <item>请选择公司</item>
     </string-array>
