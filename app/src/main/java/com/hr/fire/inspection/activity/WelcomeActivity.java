@@ -227,52 +227,8 @@ public class WelcomeActivity extends AppCompatActivity {
 
         ///////////////////测试巡检接口///////////////////////////////////////////////
 
-        // 测试隐患库接口
-//        String year = "2019";
-//        List<HashMap> retData1 = ServiceFactory.getAnalysisService().getCompanyCountByYearCheck(year);
-//        for(int i=0;i<retData1.size();i++){
-//            Log.i("retList:::","getCompanyCountByYearCheck:::"+retData1.get(i));
-//
-//        }
-//        Log.i("retList:::","////////////////////////////////////");
-//        List<HashMap> retData2 = ServiceFactory.getAnalysisService().getOilfieldCountByYearCheck(year);
-//        for(int i=0;i<retData2.size();i++){
-//            Log.i("retList:::","getOilfieldCountByYearCheck:::"+retData2.get(i));
-//
-//        }
-//        Log.i("retList:::","////////////////////////////////////");
-//        List<HashMap> retData3 = ServiceFactory.getAnalysisService().getPlatformCountByYearCheck(year);
-//        for(int i=0;i<retData3.size();i++){
-//            Log.i("retList:::","getPlatformCountByYearCheck:::"+retData3.get(i));
-//
-//        }
-//        Log.i("retList:::","////////////////////////////////////");
-//        List<HashMap> retData4 = ServiceFactory.getAnalysisService().getSystemCountByYearCheck(year);
-//        for(int i=0;i<retData4.size();i++){
-//            Log.i("retList:::","getSystemCountByYearCheck:::"+retData4.get(i));
-//
-//        }
+        // 测试隐患库接
 
-//        List<HashMap> retDataA = ServiceFactory.getAnalysisService().getCompanyCountByInspection(year);
-//        for(int i=0;i<retDataA.size();i++){
-//            Log.i("retList:::","getSystemCountByYearCheck:::"+retDataA.get(i));
-//
-//        }
-//        List<HashMap> retDataB = ServiceFactory.getAnalysisService().getOilfieldCountByInspection(year);
-//        for(int i=0;i<retDataB.size();i++){
-//            Log.i("retList:::","getSystemCountByYearCheck:::"+retDataB.get(i));
-//
-//        }
-//        List<HashMap> retDataC = ServiceFactory.getAnalysisService().getPlatformCountByInspection(year);
-//        for(int i=0;i<retDataC.size();i++){
-//            Log.i("retList:::","getSystemCountByYearCheck:::"+retDataC.get(i));
-//
-//        }
-//        List<HashMap> retDataD = ServiceFactory.getAnalysisService().getSystemCountByInspection(year);
-//        for(int i=0;i<retDataD.size();i++){
-//            Log.i("retList:::","getSystemCountByYearCheck:::"+retDataD.get(i));
-//
-//        }
 
 
 
