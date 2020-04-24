@@ -31,14 +31,25 @@ public class OilFieldActivity extends AppCompatActivity implements View.OnClickL
     private ArrayList<String> list;
     private String infocontcompanyName;
     private ImageView insert_btn;
+    private String f_title;
+    private String duty;
+    private String check_name;
+    private String check_date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oil_field);
-        Bundle b1 = getIntent().getExtras();
+
         //获取Bundle的信息
+        Bundle b1 = getIntent().getExtras();
         infocontcompanyName = b1.getString("company_name");
+
+        f_title = b1.getString("f_title");
+        if(f_title.equals("xunjian")){
+            getIntentInfo();
+        }
+
         insert_btn = (ImageView) this.findViewById(R.id.insert_btn);
         ImageView iv_finish = (ImageView) this.findViewById(R.id.iv_finish);
         TextView tv_inspection_pro = (TextView) this.findViewById(R.id.tv_inspection_pro);
@@ -87,6 +98,13 @@ public class OilFieldActivity extends AppCompatActivity implements View.OnClickL
                 // 跳转时传入下一页面 公司名称 油田名称
                 intent.putExtra("company_name", infocontcompanyName);
                 intent.putExtra("oil_name", oil_name);
+                intent.putExtra("f_title", f_title);
+                // 同上  若为消防巡检  则需要传入参数
+                if(f_title.equals("xunjian")){
+                    intent.putExtra("duty", duty);
+                    intent.putExtra("check_name",check_name);
+                    intent.putExtra("check_date",check_date);
+                }
                 startActivity(intent);
             }
         });
@@ -113,6 +131,14 @@ public class OilFieldActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
+    private void getIntentInfo() {
+        Bundle b = getIntent().getExtras();
+        f_title = b.getString("f_title");
+        duty = b.getString("duty");
+        check_name = b.getString("check_name");
+        check_date = b.getString("check_date");
+
+    }
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.del_btn:   //lv条目中 iv_del

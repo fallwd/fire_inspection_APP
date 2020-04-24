@@ -36,7 +36,6 @@
             android:name=".activity.FireReportActivity"
             android:screenOrientation="landscape"
             tools:ignore="DuplicateActivity,LockedOrientationActivity" />
-
         <provider xmlns:tools="http://schemas.android.com/tools"
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.hr.fire.inspection.fileProvider"
@@ -151,6 +150,18 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".activity.DryPowderFireSystemActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.CheckHomeActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.CheckActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.FilesCheckActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.HiddenLibaryActivity"
             android:screenOrientation="landscape" />
     </application>
 </manifest>
