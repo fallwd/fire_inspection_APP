@@ -1,5 +1,7 @@
 package com.hr.fire.inspection.activity;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -10,7 +12,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.FireReportItemAdapter;
@@ -26,10 +27,7 @@ import java.util.List;
 
 public class FireReportActivity extends AppCompatActivity {
     private List<HashMap> mapList; // 获取报告列表
-    private FireReportItemAdapter fireReportItemAdapter;
-    private List<CompanyInfo> bussy_dataList; // 获取公司列表
-    private ArrayList<String> bussy_list;
-    private List<CompanyInfo> yt_dataList; // 获取公司列表
+    private ArrayList<String> bessy_list;
     private ArrayList<String> yt_list;
     private String company_name;
     private String oil_name;
@@ -43,6 +41,7 @@ public class FireReportActivity extends AppCompatActivity {
         // 获取Bundle的信息
         // 获得公司名称  油田名称
         Bundle b = getIntent().getExtras();
+        assert b != null;
         oil_name = b.getString("oil_name");
         company_name = b.getString("company_name");
         Platform_name = b.getString("Platform_name");
@@ -58,85 +57,89 @@ public class FireReportActivity extends AppCompatActivity {
         end_time.setText(netCheckTime());
         final Spinner spinner_buss = findViewById(R.id.spinner_bussy);
         final Spinner spinner_yt = findViewById(R.id.spinner_yt);
-        Spinner spinner_sys =  findViewById(R.id.spinner_sys);
-        Spinner spinner_pt = findViewById(R.id.spinner_pt);
-        Spinner spinner_per =  findViewById(R.id.spinner_per);
-
-
-        //数据
-        ArrayList<String>
-                data_list3 = new ArrayList<>(),
-                data_list4 = new ArrayList<>(),
-                data_list5 = new ArrayList<>();
-
-        // 初始化下拉框，并监听事件
-        InitSetSpinner(spinner_buss,bussy_list);
-
-        InitSetSpinner(spinner_sys, data_list3);
-        InitSetSpinner(spinner_pt, data_list4);
-        InitSetSpinner(spinner_per, data_list5);
-
-
-        // 点击油田下拉框 获取公司选中的参数
-//        spinner_yt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                //
-//                InitSetSpinner(spinner_yt, yt_list);
-//                String str = spinner_buss.getSelectedItem().toString();
-//                Toast.makeText(FireReportActivity.this, str, Toast.LENGTH_SHORT).show();
-//                init_yt_Data(str);
-//            }
-//        });
+        // 选择公司 搜索油田数据
+        spinner_buss.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String sectName = (String) parent.getItemAtPosition(position);
+                init_yt_spinner(sectName);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                bessy_list.clear();
+                bessy_list.add("请选择公司");
+                InitSetSpinner(spinner_buss, bessy_list);
+            }
+        });
+        // 选择油田 搜索油田平台
+        spinner_yt.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String sectName = (String) parent.getItemAtPosition(position);
+                init_platform_spinner(sectName);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                yt_list.clear();
+                yt_list.add("请选择油田");
+                InitSetSpinner(spinner_yt, yt_list);
+            }
+        });
     }
 
     private void initData() {
         //获取报告列表
         mapList = ServiceFactory.getYearCheckService().getOutputList();
         Log.d("key", String.valueOf(mapList));
-
+        init_company_spinner(); // 初始化公司列表
+    }
+    private void init_company_spinner (){
         // 获取公司列表
-        bussy_dataList = ServiceFactory.getCompanyInfoService().getCompanyList();
-        bussy_list = new ArrayList<>();
+        final Spinner spinner_buss = findViewById(R.id.spinner_bussy);
+        List<CompanyInfo> bussy_dataList = ServiceFactory.getCompanyInfoService().getCompanyList();
+        bessy_list = new ArrayList<>();
         for (int i = 0; i < bussy_dataList.size(); i++) {
             CompanyInfo CompanyListItem = bussy_dataList.get(i);
             String companyName = CompanyListItem.getCompanyName();
-            if (companyName != null && companyName != "") {
-                bussy_list.add(companyName);
+            if (companyName != null && !companyName.equals("")) {
+                bessy_list.add(companyName);
             }
         }
+        InitSetSpinner(spinner_buss, bessy_list);
+        init_yt_spinner(company_name);
     }
-    private void init_yt_Data(String infocontcompanyName) {
-        // 请选择油田  ->>> 传入公司参数 infocontcompanyName
-        yt_dataList = ServiceFactory.getCompanyInfoService().getOilfieldList(infocontcompanyName);
+    private void init_yt_spinner(String companyName) {
+        // 请选择油田  ->>> 传入公司参数 companyName
+        final Spinner spinner_yt = findViewById(R.id.spinner_yt);
+        List<CompanyInfo> yt_dataList = ServiceFactory.getCompanyInfoService().getOilfieldList(companyName);
         yt_list = new ArrayList<>();
-
         for (int i = 0; i < yt_dataList.size(); i++) {
             CompanyInfo CompanyListItem = yt_dataList.get(i);
-            String companyName = CompanyListItem.getOilfieldName();
-            if(companyName != null && companyName != ""){
-                yt_list.add(companyName);
+            String getOilName = CompanyListItem.getOilfieldName();
+            if(getOilName != null && !getOilName.equals("")){
+                yt_list.add(getOilName);
             }
         }
+        InitSetSpinner(spinner_yt, yt_list);
     }
-    //
-    private ArrayList<String> initgetList(List datalist, String str){
-        ArrayList<String> list;
-        list = new ArrayList<>();
-
-        for (int i = 0; i < datalist.size(); i++) {
-            CompanyInfo ListItem = (CompanyInfo) datalist.get(i);
-            String name = ListItem.getOilfieldName();
-            if(name != null && name != ""){
-                list.add(name);
+    private void init_platform_spinner(String OilName) {
+        // 请选择平台  ->>> 传入油田参数 OilName
+        Spinner spinner_pt =  findViewById(R.id.spinner_pt);
+        List<CompanyInfo> yt_dataList = ServiceFactory.getCompanyInfoService().getPlatformList(OilName);
+        ArrayList<String> platform_list = new ArrayList<>();
+        for (int i = 0; i < yt_dataList.size(); i++) {
+            CompanyInfo CompanyListItem = yt_dataList.get(i);
+            String getPlatformName = CompanyListItem.getPlatformName();
+            if(getPlatformName != null && !getPlatformName.equals("")){
+                platform_list.add(getPlatformName);
             }
         }
-        return list;
-    };
+        InitSetSpinner(spinner_pt, platform_list);
+    }
     protected void onStart() {
         super.onStart();
         //设置样式
-        fireReportItemAdapter = new FireReportItemAdapter(this);
+        FireReportItemAdapter fireReportItemAdapter = new FireReportItemAdapter(this);
         fireReportItemAdapter.get_oil_name(oil_name);
         fireReportItemAdapter.get_Platform_name(Platform_name);
         fireReportItemAdapter.get_company_name(company_name);
@@ -144,12 +147,9 @@ public class FireReportActivity extends AppCompatActivity {
         //加载适配器
         ListView main_list2 = findViewById(R.id.main_list2);
         main_list2.setAdapter(fireReportItemAdapter);
-        main_list2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        main_list2.setOnItemClickListener((parent, view, position, id) -> {
 //                final Long id1 = mList.get(position).getId();
 //                Toast.makeText(FireReportActivity.this, "当前id为：" + id1, Toast.LENGTH_SHORT).show();
-            }
         });
     }
 
@@ -166,7 +166,7 @@ public class FireReportActivity extends AppCompatActivity {
         calendar.add(Calendar.DATE, -1);//减1天
         date = calendar.getTime();
         System.out.println(date);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         String sim = dateFormat.format(date);
         Log.i("md", "推迟的时间为： " + sim);
         return sim;
@@ -178,42 +178,18 @@ public class FireReportActivity extends AppCompatActivity {
 
     private String getData() {
         Date date = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        String sim = dateFormat.format(date);
-//        Log.i("md", "时间sim为： "+sim);
-        return sim;
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        //        Log.i("md", "时间sim为： "+sim);
+        return dateFormat.format(date);
     }
 
     private void InitSetSpinner(final Spinner spinner, ArrayList<String> list) {
-
         //适配器
-        ArrayAdapter<String> arr_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        ArrayAdapter<String> arr_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, list);
         //设置样式
-        arr_adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        arr_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //加载适配器
         spinner.setAdapter(arr_adapter);
-        //给Spinner添加事件监听
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            //当选中某一个数据项时触发该方法
-            /*
-             * parent接收的是被选择的数据项所属的 Spinner对象，
-             * view参数接收的是显示被选择的数据项的TextView对象
-             * position接收的是被选择的数据项在适配器中的位置
-             * id被选择的数据项的行号
-             */
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("dong", String.valueOf(id));
-                String data = (String) spinner.getItemAtPosition(position);//从spinner中获取被选择的数据
-                fireReportItemAdapter.setSelectedData(data);
-                Toast.makeText(FireReportActivity.this, data, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Log.d("dong","===onNothingSelected");
-            }
-        });
     }
+
 }

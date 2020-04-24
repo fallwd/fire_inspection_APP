@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -53,7 +54,12 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         platform_id = intent.getLongExtra("platform_id", 0);  //平台ID
         f_title = intent.getStringExtra("f_title");  //传过来的系统名称
         sys_number = intent.getStringExtra("sys_number");  //系统位号
+<<<<<<< HEAD
         Log.d("dong", "sys_id==========" + sys_id+ "platform_id========"+platform_id+ "f_title==========="+f_title);
+=======
+        Log.d("dong", "sys_id==========" + sys_id + "platform_id========" + platform_id + "f_title===========" + f_title);
+
+>>>>>>> 546d55b1ca3a50b49bd11f8b43099f57aebf11a3
     }
 
     @Override
@@ -63,7 +69,8 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         initView();
     }
 
-    private ArrayList hot = new ArrayList<>();
+    private ArrayList<Function> hot = new ArrayList<>();
+    private ArrayList<Boolean> hotSelecte = new ArrayList<>();
 
     private void initView() {
         if (historyList.size() == 0) {
@@ -71,24 +78,37 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         }
         ImageView iv_finish = findViewById(R.id.iv_finish);
         TextView tv_inspection_pro = findViewById(R.id.tv_inspection_pro);
-        RecyclerView rc_list = findViewById(R.id.rc_list);
+        final RecyclerView rc_list = findViewById(R.id.rc_list);
         Button bt_next = findViewById(R.id.bt_next);
         iv_finish.setOnClickListener(this);
         bt_next.setOnClickListener(this);
+        hot.clear();
+
         for (int i = 0; i < historyList.size(); i++) {
-            hot.add(new Function((String) historyList.get(i).get("ret"), 0, false));
+            hot.add(new Function((String) historyList.get(i).get("ret"), 0));
         }
-        
         rc_list.setLayoutManager(new GridLayoutManager(this, 4));
-        GridRecordAdapter toolAdapter = new GridRecordAdapter(this, hot, historyList.size());
-        Log.d("检查记录：", String.valueOf(historyList));
+        final GridRecordAdapter toolAdapter = new GridRecordAdapter(this, hot, historyList.size());
         rc_list.setAdapter(toolAdapter);
 
         toolAdapter.setOnItemClickListener(new GridRecordAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int tag) {
+                hotSelecte.clear();
                 //点击选中的记录
                 selected_tag = tag;
+                for (int i = 0; i < hot.size(); i++) {
+                    Function function = hot.get(tag);
+                    if (tag == i) {
+                        function.setGray(true);
+                        hotSelecte.add(i, true);
+                    } else {
+                        function.setGray(false);
+                        hotSelecte.add(i, false);
+                    }
+                }
+                toolAdapter.setCheckState(hotSelecte);
+                toolAdapter.notifyDataSetChanged();
             }
         });
     }

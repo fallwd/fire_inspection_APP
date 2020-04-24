@@ -4,29 +4,6 @@ public class Function {
     private String name;
     private int icon;
     private boolean isGray = false;
-
-    public boolean isShowRedCircle() {
-        return isShowRedCircle;
-    }
-
-    public void setShowRedCircle(boolean showRedCircle) {
-        isShowRedCircle = showRedCircle;
-    }
-
-    //显示右上角的红点
-    private boolean isShowRedCircle;
-
-    //需要在右上角显示"新"的时候设置为true即可
-    private boolean isNewFunc;
-
-    public boolean isNewFunc() {
-        return isNewFunc;
-    }
-
-    public void setNewFunc(boolean newFunc) {
-        isNewFunc = newFunc;
-    }
-
     private int tag;
 
     public Function(String name, int icon, boolean isGray) {
@@ -68,5 +45,15 @@ public class Function {
 
     public void setGray(boolean gray) {
         isGray = gray;
+    }
+
+    @Override
+    public String toString() {
+        return "Function{" +
+                "name='" + name + '\'' +
+                ", icon=" + icon +
+                ", isGray=" + isGray +
+                ", tag=" + tag +
+                '}';
     }
 }

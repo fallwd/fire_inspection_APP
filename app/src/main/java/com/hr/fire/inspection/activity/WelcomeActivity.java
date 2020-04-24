@@ -3,24 +3,13 @@ package com.hr.fire.inspection.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.entity.CheckType;
-import com.hr.fire.inspection.entity.CompanyInfo;
-import com.hr.fire.inspection.entity.InspectionResult;
-import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.sqlHelpers.BaseData;
 import com.hr.fire.inspection.utils.DBManager;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 
 public class WelcomeActivity extends AppCompatActivity {
     @Override
@@ -28,7 +17,6 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-//         初始化数据库,插入测试数据
 //         清空数据库
         DBManager cleanObj = new DBManager(this);
         cleanObj.deleSQL();
@@ -36,13 +24,6 @@ public class WelcomeActivity extends AppCompatActivity {
         BaseData baseData = new BaseData();
         baseData.initData();
         baseData.insertTestData();
-//         清空数据库
-//        DBManager cleanObj = new DBManager(this);
-//        cleanObj.deleSQL();
-//        // 初始化数据库
-//        BaseData baseData = new BaseData();
-//        baseData.initData();
-//        baseData.insertTestData();
         // 调用接口测试
 //        List<CompanyInfo> companyList = ServiceFactory.getCompanyInfoService().getAll();
 //        for(int i=0;i<companyList.size();i++){
@@ -195,87 +176,6 @@ public class WelcomeActivity extends AppCompatActivity {
 //            Log.i("retList:::",""+retList.get(i));
 //
 //        }
-
-        ///////////////////测试巡检接口///////////////////////////////////////////////
-//        List<CheckType> retList = ServiceFactory.getInspectionService().getSystemNameData();
-//        for(int i=0;i<retList.size();i++){
-//            Log.i("retList:::",""+retList.get(i));
-//
-//        }
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-//        Date checkDate = null;
-//        try {
-//            checkDate = format.parse("2019-08-03 10:10");
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        long companyInfoId = 165;
-//        // 灭火器
-//        long systemId = 72;
-//        List<InspectionResult> retList = ServiceFactory.getInspectionService().getInspectionData(companyInfoId, systemId, checkDate);
-//        for(int i=0;i<retList.size();i++){
-//            Log.i("retList:::","getInspectionData:::"+retList.get(i));
-//
-//        }
-
-//        List<HashMap> retList = ServiceFactory.getInspectionService().getHistoryList(companyInfoId, systemId);
-//        for(int i=0;i<retList.size();i++){
-//            Log.i("retList:::","getInspectionData:::"+retList.get(i));
-//
-//        }
-
-
-        ///////////////////测试巡检接口///////////////////////////////////////////////
-
-        // 测试隐患库接口
-//        String year = "2019";
-//        List<HashMap> retData1 = ServiceFactory.getAnalysisService().getCompanyCountByYearCheck(year);
-//        for(int i=0;i<retData1.size();i++){
-//            Log.i("retList:::","getCompanyCountByYearCheck:::"+retData1.get(i));
-//
-//        }
-//        Log.i("retList:::","////////////////////////////////////");
-//        List<HashMap> retData2 = ServiceFactory.getAnalysisService().getOilfieldCountByYearCheck(year);
-//        for(int i=0;i<retData2.size();i++){
-//            Log.i("retList:::","getOilfieldCountByYearCheck:::"+retData2.get(i));
-//
-//        }
-//        Log.i("retList:::","////////////////////////////////////");
-//        List<HashMap> retData3 = ServiceFactory.getAnalysisService().getPlatformCountByYearCheck(year);
-//        for(int i=0;i<retData3.size();i++){
-//            Log.i("retList:::","getPlatformCountByYearCheck:::"+retData3.get(i));
-//
-//        }
-//        Log.i("retList:::","////////////////////////////////////");
-//        List<HashMap> retData4 = ServiceFactory.getAnalysisService().getSystemCountByYearCheck(year);
-//        for(int i=0;i<retData4.size();i++){
-//            Log.i("retList:::","getSystemCountByYearCheck:::"+retData4.get(i));
-//
-//        }
-
-//        List<HashMap> retDataA = ServiceFactory.getAnalysisService().getCompanyCountByInspection(year);
-//        for(int i=0;i<retDataA.size();i++){
-//            Log.i("retList:::","getSystemCountByYearCheck:::"+retDataA.get(i));
-//
-//        }
-//        List<HashMap> retDataB = ServiceFactory.getAnalysisService().getOilfieldCountByInspection(year);
-//        for(int i=0;i<retDataB.size();i++){
-//            Log.i("retList:::","getSystemCountByYearCheck:::"+retDataB.get(i));
-//
-//        }
-//        List<HashMap> retDataC = ServiceFactory.getAnalysisService().getPlatformCountByInspection(year);
-//        for(int i=0;i<retDataC.size();i++){
-//            Log.i("retList:::","getSystemCountByYearCheck:::"+retDataC.get(i));
-//
-//        }
-//        List<HashMap> retDataD = ServiceFactory.getAnalysisService().getSystemCountByInspection(year);
-//        for(int i=0;i<retDataD.size();i++){
-//            Log.i("retList:::","getSystemCountByYearCheck:::"+retDataD.get(i));
-//
-//        }
-
-
-
 
         Toast.makeText(WelcomeActivity.this, "系统将在2秒后为您自动跳转到首页", Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
