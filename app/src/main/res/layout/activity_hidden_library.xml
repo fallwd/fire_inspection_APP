@@ -2,24 +2,15 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <include layout="@layout/currency_title" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@color/white">
-
-
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
@@ -27,18 +18,120 @@
                 android:id="@+id/tl_tabs"
                 android:layout_width="800dp"
                 android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 app:tabBackground="@drawable/tab_background"
                 app:tabIndicatorColor="@null"
                 app:tabRippleColor="@color/colorPrimary"
                 app:tabSelectedTextColor="@color/bgm_white"
                 app:tabTextColor="@color/title_gray" />
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/vp_content"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/listview_border_nomargin"
+                android:paddingBottom="10dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:padding="10dp"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:ignore="MissingConstraints">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentLeft="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            tools:ignore="MissingConstraints">
+
+                            <ImageButton
+                                android:layout_width="35dp"
+                                android:background="@drawable/ewm"
+                                android:layout_height="35dp" />
+                            <Button
+                                android:id="@+id/start_time"
+                                android:layout_width="70dp"
+                                android:layout_height="35sp"
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/button_border"
+                                android:drawableEnd="@mipmap/cmander"
+                                android:drawableRight="@mipmap/cmander"
+                                android:textSize="10sp">
+
+                            </Button>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="--" />
+
+                            <Button
+                                android:id="@+id/end_time"
+                                android:layout_width="70dp"
+                                android:layout_height="35sp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/button_border"
+                                android:drawableRight="@mipmap/cmander"
+                                android:textSize="10sp" />
+                            <!--请选择公司-->
+                            <Spinner
+                                android:id="@+id/spinner_bussy"
+                                style="@style/spinner_style"
+                                android:background="@drawable/spriner_style"
+                                android:entries="@array/spingarr" />
+                            <!--请选择油田-->
+                            <Spinner
+                                android:id="@+id/spinner_yt"
+                                style="@style/spinner_style"
+                                android:background="@drawable/spriner_style"
+                                android:entries="@array/spingarr1" />
+                            <!--请选择平台-->
+                            <Spinner
+                                android:id="@+id/spinner_pt"
+                                style="@style/spinner_style"
+                                android:background="@drawable/spriner_style"
+                                android:entries="@array/spingarr3" />
+
+                            <!--请选择系统-->
+                            <Spinner
+                                android:id="@+id/spinner_sys"
+                                style="@style/spinner_style"
+                                android:autofillHints="@string/search"
+                                android:background="@drawable/spriner_style"
+                                android:entries="@array/spingarr4" />
+
+                        </LinearLayout>
+                        <!-- 统计-->
+                        <Button
+                            android:id="@+id/Statistics"
+                            android:layout_width="60dp"
+                            android:layout_height="35dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/listview_border_margin"
+                            android:text="@string/Statistics" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/vp_content"
+                    android:padding="10dp"
+                    android:background="@drawable/topborder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
         </LinearLayout>
-
-    </RelativeLayout>
-
 </LinearLayout>
