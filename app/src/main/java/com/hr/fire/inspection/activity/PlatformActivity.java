@@ -30,6 +30,7 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
     private List<CompanyInfo> dataList;
     private String oil_name;
     private String company_name;
+
     private String f_title;
     private String duty;
     private String check_name;
@@ -40,16 +41,15 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_platform);
         Bundle b = getIntent().getExtras();
-        // 获取Bundle的信息
-        // 获得公司名称  油田名称
+        // 获取Bundle的信息 公司名称  油田名称    若从消防巡检点过来   则需要获取其他参数
         oil_name = b.getString("oil_name");
         company_name = b.getString("company_name");
-        // 若从消防巡检点过来   则需要赋值参数
+
         f_title = b.getString("f_title");
-        Toast.makeText(PlatformActivity.this, f_title, Toast.LENGTH_SHORT).show();
         if(f_title.equals("xunjian")){
             getIntentInfo();
         }
+
         //后期需要使用接口回掉.关闭页面
         finishImpl();
         ImageView insert_btn = (ImageView) this.findViewById(R.id.insert_btn);
@@ -93,8 +93,6 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 long current_id = idlist.get(position);
                 String Platform_name = list.get(position);
-<<<<<<< HEAD
-                Toast.makeText(PlatformActivity.this,"你点击了第" + Platform_name + "项",Toast.LENGTH_SHORT).show();
                 // 此处判断是不是消防巡检点击进来  是则需传入检查专业  检查人等
                 if(f_title.equals("xunjian")){
                     intent.setClass(PlatformActivity.this, CheckActivity.class);
@@ -112,14 +110,8 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
                     intent.putExtra("Platform_name", Platform_name);
                     intent.putExtra("company_name", company_name);
                     intent.putExtra("oil_name", oil_name);
+                    intent.putExtra("f_title", f_title);
                 }
-=======
-                intent.setClass(PlatformActivity.this, FireActivity.class);
-                intent.putExtra("Platform_ID", current_id);
-                intent.putExtra("Platform_name", Platform_name);
-                intent.putExtra("company_name", company_name);
-                intent.putExtra("oil_name", oil_name);
->>>>>>> d5ac9552e5d439c63c9c45cee7f894ee990e4cc4
                 startActivity(intent);
             }
         });

@@ -2,6 +2,7 @@ package com.hr.fire.inspection.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.GridRecordAdapter;
 import com.hr.fire.inspection.entity.Function;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.TextSpannableUtil;
 import com.hr.fire.inspection.utils.TimeUtil;
 
 import java.util.ArrayList;
@@ -42,12 +44,16 @@ public class FilesCheckActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_files_check);
         Intent intent = getIntent();
+        TextView tv_inspection_pro = (TextView) this.findViewById(R.id.tv_inspection_pro);
         sys_id = intent.getLongExtra("sys_id", 0); //系统ID
         platform_id = intent.getLongExtra("platform_id", 0);  //平台ID
         str_title = intent.getStringExtra("str_title");  //传过来的系统名称
         duty = intent.getStringExtra("duty");
         check_name = intent.getStringExtra("check_name");
         check_date = intent.getStringExtra("check_date");
+        String srt = new StringBuffer().append("").append("消防巡检").toString();
+        SpannableString textColor = TextSpannableUtil.showTextColor(srt, "#00A779", srt.length() - 0, srt.length());
+        tv_inspection_pro.setText(textColor);
     }
 
 
@@ -120,10 +126,10 @@ public class FilesCheckActivity extends AppCompatActivity implements View.OnClic
 
     //不同的系统跳转不同的页面,根据服务器ID来匹配
     private Intent regularIntent() {
-        Intent intent = new Intent(this, CarbonDioxideAcitivty.class);
+        Intent intent = new Intent(this, HiddenLibaryActivity.class);
         switch ((int) sys_id) {
             case 72:  //灭火器
-
+                intent.setClass(this, HiddenLibaryActivity.class);
                 break;
             case 73:  //气体灭火系统
 
@@ -150,7 +156,7 @@ public class FilesCheckActivity extends AppCompatActivity implements View.OnClic
 
                 break;
             case 81:  //泡沫灭火
-                intent.setClass(this, DFXIAcitivty.class);
+
                 break;
             case 82:  //消防泵
 

@@ -36,14 +36,8 @@ public class NavigationActivity extends AppCompatActivity {
         LinearLayout btn1 = (LinearLayout) findViewById(R.id.Navigation_Btn1);
         btn1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-//                Intent intent = new Intent(NavigationActivity.this, FireActivity.class);
-
-////                Intent intent = new Intent(NavigationActivity.this, CarbonDioxideAcitivty.class);
-//
                 Intent intent = new Intent(NavigationActivity.this, ChooseCompanyActivity.class);
-//
-
-//                Intent intent = new Intent(NavigationActivity.this, ChooseCompanyActivity.class);
+                intent.putExtra("f_title","nianjian");
                 startActivity(intent);
             }
         });
@@ -59,7 +53,9 @@ public class NavigationActivity extends AppCompatActivity {
 
         btn3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(NavigationActivity.this, MainActivity.class);
+                Intent intent = new Intent(NavigationActivity.this, HiddenLibaryActivity.class);
+
+
                 startActivity(intent);
             }
         });

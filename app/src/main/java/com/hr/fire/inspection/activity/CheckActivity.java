@@ -50,16 +50,14 @@ public class CheckActivity  extends AppCompatActivity {
         Platform_name = b.getString("Platform_name");
         company_name = b.getString("company_name");
         //  需要时打开
-//        f_title = b.getString("f_title");
+        //  f_title = b.getString("f_title");
         duty = b.getString("duty");
         check_name = b.getString("check_name");
         check_date = b.getString("check_date");
-
         initData();
     }
     private void initData() {
         systemNameData = ServiceFactory.getInspectionService().getSystemNameData();
-//        Log.d("dong", "s==== " + systemNameData.size() + "   " + systemNameData.toString());
     }
 
     Intent intent = new Intent();
@@ -99,7 +97,6 @@ public class CheckActivity  extends AppCompatActivity {
                 intent.putExtra("duty",duty);
                 intent.putExtra("check_name", check_name);
                 intent.putExtra("check_date", check_date);
-
 
                 Log.d("dong", "sys_id-----" + sys_id+ "platform_id-------"+platform_id+ "str_title--------"+str_title + "duty" + duty+ "check_name" + check_name+"check_date"+check_date);
                 startActivity(intent);

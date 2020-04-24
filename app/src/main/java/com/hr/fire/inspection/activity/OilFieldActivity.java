@@ -40,10 +40,11 @@ public class OilFieldActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oil_field);
-        Bundle b1 = getIntent().getExtras();
+
         //获取Bundle的信息
+        Bundle b1 = getIntent().getExtras();
         infocontcompanyName = b1.getString("company_name");
-        // 若从消防巡检点过来   则需要赋值参数
+
         f_title = b1.getString("f_title");
         if(f_title.equals("xunjian")){
             getIntentInfo();
@@ -97,15 +98,13 @@ public class OilFieldActivity extends AppCompatActivity implements View.OnClickL
                 // 跳转时传入下一页面 公司名称 油田名称
                 intent.putExtra("company_name", infocontcompanyName);
                 intent.putExtra("oil_name", oil_name);
-
+                intent.putExtra("f_title", f_title);
                 // 同上  若为消防巡检  则需要传入参数
                 if(f_title.equals("xunjian")){
-                    intent.putExtra("f_title", f_title);
                     intent.putExtra("duty", duty);
                     intent.putExtra("check_name",check_name);
                     intent.putExtra("check_date",check_date);
                 }
-
                 startActivity(intent);
             }
         });
