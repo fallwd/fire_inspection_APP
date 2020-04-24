@@ -31,15 +31,25 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
     private String oil_name;
     private String company_name;
 
+    private String f_title;
+    private String duty;
+    private String check_name;
+    private String check_date;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_platform);
         Bundle b = getIntent().getExtras();
-        // 获取Bundle的信息
-        // 获得公司名称  油田名称
+        // 获取Bundle的信息 公司名称  油田名称    若从消防巡检点过来   则需要获取其他参数
         oil_name = b.getString("oil_name");
         company_name = b.getString("company_name");
+
+        f_title = b.getString("f_title");
+        if(f_title.equals("xunjian")){
+            getIntentInfo();
+        }
+
         //后期需要使用接口回掉.关闭页面
         finishImpl();
         ImageView insert_btn = (ImageView) this.findViewById(R.id.insert_btn);
@@ -63,6 +73,7 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
                 finish();
             }
         });
+
         if (company_name != null && oil_name != null) {
             String srt = new StringBuffer().append("检查所属  >  ").append(company_name).
                     append("  >  ").append(oil_name).append("  >  ").append("请选择平台").toString();
@@ -82,11 +93,25 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 long current_id = idlist.get(position);
                 String Platform_name = list.get(position);
-                intent.setClass(PlatformActivity.this, FireActivity.class);
-                intent.putExtra("Platform_ID", current_id);
-                intent.putExtra("Platform_name", Platform_name);
-                intent.putExtra("company_name", company_name);
-                intent.putExtra("oil_name", oil_name);
+                // 此处判断是不是消防巡检点击进来  是则需传入检查专业  检查人等
+                if(f_title.equals("xunjian")){
+                    intent.setClass(PlatformActivity.this, CheckActivity.class);
+                    intent.putExtra("Platform_ID", current_id);
+                    intent.putExtra("Platform_name", Platform_name);
+                    intent.putExtra("company_name", company_name);
+                    intent.putExtra("oil_name", oil_name);
+                    intent.putExtra("f_title", f_title);
+                    intent.putExtra("duty", duty);
+                    intent.putExtra("check_name",check_name);
+                    intent.putExtra("check_date",check_date);
+                }else{
+                    intent.setClass(PlatformActivity.this, FireActivity.class);
+                    intent.putExtra("Platform_ID", current_id);
+                    intent.putExtra("Platform_name", Platform_name);
+                    intent.putExtra("company_name", company_name);
+                    intent.putExtra("oil_name", oil_name);
+                    intent.putExtra("f_title", f_title);
+                }
                 startActivity(intent);
             }
         });
@@ -114,6 +139,13 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
+    private void getIntentInfo() {
+        Bundle b = getIntent().getExtras();
+        f_title = b.getString("f_title");
+        duty = b.getString("duty");
+        check_name = b.getString("check_name");
+        check_date = b.getString("check_date");
+    }
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.del_btn:   //lv条目中 iv_del
@@ -148,7 +180,6 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
                             PlatformAdapter platformAdapter = new PlatformAdapter(PlatformActivity.this, PlatformActivity.this);
                             platformAdapter.setData(list);
                             platform_list_item.setAdapter(platformAdapter);
-
                         } else {
                             Toast.makeText(PlatformActivity.this, "删除失败", Toast.LENGTH_SHORT).show();
                         }
