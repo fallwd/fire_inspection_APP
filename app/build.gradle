@@ -19,6 +19,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility = '1.8'
+        sourceCompatibility = '1.8'
+    }
 
     allprojects {
         repositories {
@@ -67,7 +71,7 @@ dependencies {
 }
 
 greendao {
-    schemaVersion 7 //数据库版本号
+    schemaVersion 8 //数据库版本号
     daoPackage 'com.hr.fire.inspection.dao' //代表GreenDao自动生成的有关数据库操作工具类所要存放的包名
     targetGenDir 'src/main/java' //路径
 }
