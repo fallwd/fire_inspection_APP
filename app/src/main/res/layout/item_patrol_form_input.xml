@@ -37,8 +37,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@null"
-                android:singleLine="true"
                 android:maxLines="1"
+                android:singleLine="true"
                 android:text="瓶号"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -54,8 +54,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@null"
-                android:singleLine="true"
                 android:maxLines="1"
+                android:singleLine="true"
                 android:text="9.1"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -71,8 +71,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@null"
-                android:singleLine="true"
                 android:maxLines="1"
+                android:singleLine="true"
                 android:text="3"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -88,8 +88,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@null"
-                android:singleLine="true"
                 android:maxLines="1"
+                android:singleLine="true"
                 android:text="50"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -105,8 +105,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@null"
-                android:singleLine="true"
                 android:maxLines="1"
+                android:singleLine="true"
                 android:text="生产厂家"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -122,8 +122,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@null"
-                android:singleLine="true"
                 android:maxLines="1"
+                android:singleLine="true"
                 android:text="生产时间"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -139,9 +139,24 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@null"
-                android:singleLine="true"
                 android:maxLines="1"
+                android:singleLine="true"
                 android:text="水压试验日期"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="42dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tv_11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="未选择"
+                android:textColor="@color/title_black"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -172,7 +187,39 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="空"
+                android:text="合格"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="42dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <EditText
+                android:id="@+id/et_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:hint="请输入"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/title_black"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="30dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="生成"
+                android:textColor="@color/title_black"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -184,7 +231,6 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginLeft="6dp"
                 android:background="@mipmap/remove_item"
                 android:textSize="12sp" />
         </RelativeLayout>

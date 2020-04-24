@@ -1,7 +1,9 @@
 package com.hr.fire.inspection.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,10 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
+import com.hr.fire.inspection.activity.QRCodeExistenceAcitivty;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TimeUtil;
+import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.Date;
 import java.util.List;
@@ -51,7 +55,7 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-        ViewHolder vh = (ViewHolder) holder;
+        final ViewHolder vh = (ViewHolder) holder;
         if (mData != null && mData.size() != 0) {
             ItemInfo info = mData.get(position);
             vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
@@ -92,6 +96,26 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             @Override
             public void onClick(View v) {
                 removeData(position);
+            }
+        });
+        vh.tv_10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopWind(vh.tv_10);
+            }
+        });
+        vh.tv_11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopWind(vh.tv_11);
+            }
+        });
+        vh.tv_12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(mContext, QRCodeExistenceAcitivty.class);
+                mContext.startActivity(intent);
             }
         });
     }
@@ -171,6 +195,9 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         TextView tv_10;
         RelativeLayout rl_9;
         RelativeLayout rl_11;
+        TextView tv_11;
+        TextView tv_12;
+        EditText et_12;
 
         ViewHolder(View view) {
             super(view);
@@ -186,6 +213,56 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             tv_10 = (TextView) view.findViewById(R.id.tv_10);
             rl_9 = (RelativeLayout) view.findViewById(R.id.rl_9);
             rl_11 = (RelativeLayout) view.findViewById(R.id.rl_11);
+            tv_11 = (TextView) view.findViewById(R.id.tv_11);
+            tv_12 = (TextView) view.findViewById(R.id.tv_12);
+            et_12 = (EditText) view.findViewById(R.id.et_12);
         }
+    }
+
+    private HrPopup hrPopup;
+
+    //显示对话框,用户选择是否异常的弹框
+    private void showPopWind(final TextView tv) {
+        View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods, null);
+        if (hrPopup == null) {
+            hrPopup = new HrPopup((Activity) mContext);
+        }
+        RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
+        RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
+        RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
+        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setBackgroundDrawable(new BitmapDrawable());
+        hrPopup.setFocusable(true);
+        hrPopup.setOutsideTouchable(true);
+        hrPopup.setContentView(PopupRootView);
+        hrPopup.showAsDropDown(tv);
+        rl_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv.setText("是");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+        rl_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv.setText("否");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+        rl_other.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv.setText("其他");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
     }
 }
