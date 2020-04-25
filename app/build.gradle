@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
-//import org.apache.poi.ss.usermodel.CellType;
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.hr.fire.inspection"
-        minSdkVersion 24
+        minSdkVersion 14
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -19,10 +19,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility = '1.8'
+        sourceCompatibility = '1.8'
     }
 
     allprojects {
@@ -56,8 +55,8 @@ dependencies {
     //事件处理框架
     implementation 'org.greenrobot:greendao:3.2.2'
     // 生成word报告框架
-//    compile group: 'com.deepoove', name: 'poi-tl', version: '1.4.2'
-    implementation('com.deepoove:poi-tl:1.4.2') {
+//        implementation group: 'com.deepoove', name: 'poi-tl', version: '1.4.0'
+    implementation('com.deepoove:poi-tl:1.4.0') {
         //在Android 中 poi-tl 所依赖的库会导致无法编译
         //所以只使用 poi-tl 的填充功能
         //然后使用其他作者提供的 poi
@@ -68,6 +67,7 @@ dependencies {
         exclude group: 'org.apache.poi', module: 'poi'
     }
     implementation files('libs/poishadow-all.jar')
+    implementation 'com.android.support:multidex:1.0.3'
 }
 
 greendao {

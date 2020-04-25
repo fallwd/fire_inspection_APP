@@ -42,12 +42,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:paddingTop="10dp"
             android:background="@drawable/border"
-            android:layout_height="wrap_content">
+            android:orientation="vertical"
+            android:paddingTop="10dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -58,6 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     tools:ignore="MissingConstraints">
@@ -69,7 +70,7 @@
                         android:layout_marginLeft="10dp"
                         android:background="@drawable/button_border"
                         android:drawableRight="@mipmap/cmander"
-                        android:textSize="12dp">
+                        android:textSize="12sp">
 
                     </Button>
 
@@ -83,12 +84,11 @@
                         android:id="@+id/end_time"
                         android:layout_width="wrap_content"
                         android:layout_height="35sp"
+                        android:layout_marginStart="10dp"
                         android:layout_marginLeft="10dp"
                         android:background="@drawable/button_border"
                         android:drawableRight="@mipmap/cmander"
-                        android:textSize="12sp">
-
-                    </Button>
+                        android:textSize="12sp" />
                     <!--请选择公司-->
                     <Spinner
                         android:id="@+id/spinner_bussy"
@@ -106,20 +106,7 @@
                         android:id="@+id/spinner_pt"
                         style="@style/spinner_style"
                         android:background="@drawable/spriner_style"
-                        android:entries="@array/spingarr2" />
-
-                    <!--请选择系统-->
-                    <Spinner
-                        android:id="@+id/spinner_sys"
-                        style="@style/spinner_style"
-                        android:background="@drawable/spriner_style"
                         android:entries="@array/spingarr3" />
-                    <!--请选择检查人-->
-                    <Spinner
-                        android:id="@+id/spinner_per"
-                        style="@style/spinner_style"
-                        android:background="@drawable/spriner_style"
-                        android:entries="@array/spingarr4" />
 
                 </LinearLayout>
 
@@ -128,29 +115,51 @@
                     android:layout_width="50dp"
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
-                    android:translationX="-10dp"
-                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
                     android:background="@drawable/listview_border_margin"
-                    android:text="@string/daoru" />
+                    android:text="@string/daoru"
+                    android:translationX="-10dp" />
 
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/empty"
                 android:layout_width="match_parent"
-                android:padding="10dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/border"
-                android:orientation="vertical">
-                    <EditText
-                        android:background="@drawable/edit_report"
-                        android:layout_width="match_parent"
-                        android:paddingStart="10dp"
-                        android:drawableLeft="@mipmap/search"
-                        android:layout_height="30dp"
-                        android:hint="@string/PleaseInputText"
-                        android:textSize="16dp"
-                        android:autofillHints="search" />
+                android:orientation="horizontal"
+                android:padding="10dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:ignore="MissingConstraints">
+                        <ImageButton
+                            android:layout_width="20dp"
+                            android:background="@mipmap/search"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_height="23dp"/>
+
+                        <AutoCompleteTextView
+                            android:id="@+id/search"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:background="@null"
+                            android:completionThreshold="1"
+                            android:hint="输入报告名称"
+                            android:imeOptions="actionSearch"
+                            android:maxLength="100"
+                            android:dropDownHeight="250dp"
+                            android:dropDownWidth="match_parent"
+                            android:singleLine="true"
+                            android:textColor="#317F6D"
+                            android:textColorHint="#317F6D"
+                            android:textSize="15sp"
+                            android:layout_marginStart="35dp"
+                            android:layout_marginLeft="35dp" />
+
+                </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout

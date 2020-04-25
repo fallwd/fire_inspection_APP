@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,26 +24,48 @@ import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.CompanyAdapter;
 import com.hr.fire.inspection.entity.CompanyInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.TextSpannableUtil;
 
 import static android.widget.Toast.*;
 
 public class ChooseCompanyActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<String> list;
-    List<CompanyInfo> dataList;
     private ImageView insert_btn;
+    private String f_title;
+    private String duty;
+    private String check_name;
+    private String check_date;
+    List<CompanyInfo> dataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_company);
+
         insert_btn = (ImageView) this.findViewById(R.id.insert_btn);
         ImageView iv_finish = (ImageView) this.findViewById(R.id.iv_finish);
+        TextView tv_inspection_pro = (TextView) this.findViewById(R.id.tv_inspection_pro);
+
         iv_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
+        Bundle b = getIntent().getExtras();
+
+
+        f_title = b.getString("f_title");
+        String system_title = "消防巡检";
+
+        // 如果选件页点过来  那么则获取输入的三个参数
+        if(f_title.equals("xunjian")){
+            String srt = new StringBuffer().append("").append(system_title).toString();
+            SpannableString textColor = TextSpannableUtil.showTextColor(srt, "#00A779", srt.length() - 0, srt.length());
+            tv_inspection_pro.setText(textColor);
+            getIntentInfo();
+        }
         initData();
     }
 
@@ -49,6 +73,14 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
     protected void onStart() {
         super.onStart();
         initData();
+    }
+
+    private void getIntentInfo() {
+        Bundle b = getIntent().getExtras();
+        f_title = b.getString("f_title");
+        duty = b.getString("duty");
+        check_name = b.getString("check_name");
+        check_date = b.getString("check_date");
     }
 
     private void initData() {
@@ -67,7 +99,6 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
         companyAdapter.setData(list);
         company_list_item.setAdapter(companyAdapter);
 
-
         // 监听点击事件
         company_list_item.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -75,6 +106,13 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
                         String str = list.get(position);
                         Intent intent = new Intent(ChooseCompanyActivity.this, OilFieldActivity.class);
                         intent.putExtra("company_name", str);
+                        intent.putExtra("f_title", f_title);
+                        // 如果是消防巡检  点进去需要传这几个参数
+                        if(f_title.equals("xunjian")){
+                            intent.putExtra("duty", duty);
+                            intent.putExtra("check_name",check_name);
+                            intent.putExtra("check_date",check_date);
+                        }
                         startActivity(intent);
             }
         });
