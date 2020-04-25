@@ -101,9 +101,9 @@ public class RuleContentActivity extends AppCompatActivity {
         }
 
 
-        for (int i = 0; i<currentFiles.length; i++) {
-            Log.i("data","获取全部数据" + currentFiles[i]);
-        }
+//        for (int i = 0; i<currentFiles.length; i++) {
+//            Log.i("data","获取全部数据" + currentFiles[i]);
+//        }
 
         seach_text.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable edit) {
@@ -115,10 +115,10 @@ public class RuleContentActivity extends AppCompatActivity {
                 File sdcard2 = Environment.getExternalStoragePublicDirectory("Android/pdf");
                 searhResData = sdcard2.listFiles();
 
-                for (int i = 0; i < searhResData.length; i++) {
+//                for (int i = 0; i < searhResData.length; i++) {
 //                    Log.i("123", "1111111111"+searhResData[i].getAbsolutePath().endsWith(text));
 
-                }
+//                }
             }
 
             @Override
