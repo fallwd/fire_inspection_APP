@@ -59,6 +59,10 @@ public class RuleContentActivity extends AppCompatActivity {
         textcont.setText(infocont);
 
 
+
+
+
+
         // 获取系统的SDCard的目录
         File sdcard = Environment.getExternalStorageDirectory();
         if (infocont.equals(" ")) {
@@ -94,6 +98,11 @@ public class RuleContentActivity extends AppCompatActivity {
             // 使用当前目录下的全部文件、文件夹来填充ListView
             Log.i("md", "currentFiles11111111111" + currentFiles);
             inflateListView(currentFiles);
+        }
+
+
+        for (int i = 0; i<currentFiles.length; i++) {
+            Log.i("data","获取全部数据" + currentFiles[i]);
         }
 
         seach_text.addTextChangedListener(new TextWatcher() {
