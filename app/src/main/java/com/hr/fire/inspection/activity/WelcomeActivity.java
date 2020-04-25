@@ -273,6 +273,31 @@ public class WelcomeActivity extends AppCompatActivity {
 //            Log.i("retList:::","getSystemCountByYearCheck:::"+retDataD.get(i));
 //
 //        }
+        //////////////////////////银魂库预览接口///////////////////////////////////////////////
+//        String year = "2019";
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        Date startDate = null;
+//        try {
+//            startDate = format.parse(year + "-01-01 00:00:00");
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        Date endDate = null;
+//        try {
+//            endDate = format.parse(year + "-12-31 00:00:00");
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//
+////        List<HashMap> retData = ServiceFactory.getAnalysisService().getYearCheckView(3,0,startDate,endDate);
+//        List<HashMap> retData = ServiceFactory.getAnalysisService().getYearCheckView(165,36,startDate,endDate);
+////        List<HashMap> retData = ServiceFactory.getAnalysisService().getYearCheckView(0,0,null,endDate);
+//        for(int i=0;i<retData.size();i++){
+//            Log.i("retList:::","getYearCheckView:::"+retData.get(i));
+//
+//        }
+
+        //////////////////////////银魂库预览接口///////////////////////////////////////////////
 
 
 

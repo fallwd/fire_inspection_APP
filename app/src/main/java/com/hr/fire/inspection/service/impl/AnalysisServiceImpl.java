@@ -12,6 +12,9 @@ import com.hr.fire.inspection.entity.CompanyInfo;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.AnalysisService;
 
+import org.greenrobot.greendao.query.QueryBuilder;
+import org.greenrobot.greendao.query.WhereCondition;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -437,6 +440,396 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
             retList.add(retObj);
         }
         return retList;
+    }
+
+    @Override
+    public List<HashMap> getYearCheckView(long platformId, long systemId, Date startDate, Date endDate) {
+        // 多个判断
+//        QueryBuilder<YearCheckResult> queryBuilder;
+        String company;
+        String oilfield;
+        String platform;
+        String checkDate;
+        if(platformId==0 && systemId==0){
+            if(startDate!=null && endDate!=null){
+                Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT Q.%s AS PROTECT_AREA,Q.%s AS SYSTEM_NUMBER,Q.%s AS CHECK_DATE,W.%s AS COMPANY,W.%s AS OILFIELD,W.%s AS PLATFORM,R.PARENT_NAME AS SYSTEM FROM %s AS Q INNER JOIN %s AS W ON Q.COMPANY_INFO_ID=W._id " +
+                                "INNER JOIN (SELECT E3._id AS ID,E3.NAME AS NAME,E3.PARENT_ID AS PARENT_ID,E4.NAME AS PARENT_NAME FROM %s AS E3 INNER JOIN %s AS E4 ON E3.PARENT_ID=E4._id WHERE E3.TYPE=1 AND E4.PARENT_ID=0 UNION SELECT E1._id AS ID,E1.NAME AS NAME,E5._id AS PARENT_ID,E5.NAME AS PARENT_NAME FROM %s AS E1 INNER JOIN %s AS E2 ON E1.PARENT_ID=E2._id INNER JOIN %s AS E5 ON E2.PARENT_ID=E5._id WHERE E1.TYPE=1 AND E2.PARENT_ID!=0 AND E5.PARENT_ID=0) AS R ON Q.CHECK_TYPE_ID=R.ID " +
+                                "WHERE Q.%s='否' AND CAST(Q.CHECK_DATE AS INTEGER)>%s AND CAST(Q.CHECK_DATE AS INTEGER)<%s GROUP BY W.%s,R.PARENT_NAME,Q.CHECK_DATE,Q.PROTECT_AREA,Q.SYSTEM_NUMBER",
+                        YearCheckResultDao.Properties.ProtectArea.columnName,
+                        YearCheckResultDao.Properties.SystemNumber.columnName,
+                        YearCheckResultDao.Properties.CheckDate.columnName,
+                        CompanyInfoDao.Properties.CompanyName.columnName,
+                        CompanyInfoDao.Properties.OilfieldName.columnName,
+                        CompanyInfoDao.Properties.PlatformName.columnName,
+                        YearCheckResultDao.TABLENAME,
+                        CompanyInfoDao.TABLENAME,
+
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+
+                        YearCheckResultDao.Properties.IsPass.columnName,
+                        startDate.getTime(),
+                        endDate.getTime(),
+                        CompanyInfoDao.Properties.PlatformName.columnName
+
+                ), new String []{});
+                ArrayList<HashMap> retList = new ArrayList();
+                while (cursor.moveToNext()) {
+                    HashMap retObj = new HashMap();
+                    company = cursor.getString(cursor.getColumnIndex("COMPANY"));
+                    oilfield = cursor.getString(cursor.getColumnIndex("OILFIELD"));
+                    platform = cursor.getString(cursor.getColumnIndex("PLATFORM"));
+                    retObj.put("company",company+"_"+oilfield+"_"+platform);
+                    retObj.put("system",cursor.getString(cursor.getColumnIndex("SYSTEM")));
+                    retObj.put("protectArea",cursor.getString(cursor.getColumnIndex("PROTECT_AREA")));
+                    retObj.put("systemNumber",cursor.getString(cursor.getColumnIndex("SYSTEM_NUMBER")));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    checkDate = cursor.getString(cursor.getColumnIndex("CHECK_DATE"));
+                    checkDate = format.format(new Date(Long.valueOf(checkDate)));
+                    retObj.put("checkDate",checkDate);
+                    retObj.put("platformId",platformId);
+                    retObj.put("systemId",systemId);
+                    retList.add(retObj);
+                }
+                return retList;
+            }
+            else {
+                Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT Q.%s AS PROTECT_AREA,Q.%s AS SYSTEM_NUMBER,Q.%s AS CHECK_DATE,W.%s AS COMPANY,W.%s AS OILFIELD,W.%s AS PLATFORM,R.PARENT_NAME AS SYSTEM FROM %s AS Q INNER JOIN %s AS W ON Q.COMPANY_INFO_ID=W._id " +
+                                "INNER JOIN (SELECT E3._id AS ID,E3.NAME AS NAME,E3.PARENT_ID AS PARENT_ID,E4.NAME AS PARENT_NAME FROM %s AS E3 INNER JOIN %s AS E4 ON E3.PARENT_ID=E4._id WHERE E3.TYPE=1 AND E4.PARENT_ID=0 UNION SELECT E1._id AS ID,E1.NAME AS NAME,E5._id AS PARENT_ID,E5.NAME AS PARENT_NAME FROM %s AS E1 INNER JOIN %s AS E2 ON E1.PARENT_ID=E2._id INNER JOIN %s AS E5 ON E2.PARENT_ID=E5._id WHERE E1.TYPE=1 AND E2.PARENT_ID!=0 AND E5.PARENT_ID=0) AS R ON Q.CHECK_TYPE_ID=R.ID " +
+                                "WHERE Q.%s='否' GROUP BY W.%s,R.PARENT_NAME,Q.CHECK_DATE,Q.PROTECT_AREA,Q.SYSTEM_NUMBER",
+                        YearCheckResultDao.Properties.ProtectArea.columnName,
+                        YearCheckResultDao.Properties.SystemNumber.columnName,
+                        YearCheckResultDao.Properties.CheckDate.columnName,
+                        CompanyInfoDao.Properties.CompanyName.columnName,
+                        CompanyInfoDao.Properties.OilfieldName.columnName,
+                        CompanyInfoDao.Properties.PlatformName.columnName,
+                        YearCheckResultDao.TABLENAME,
+                        CompanyInfoDao.TABLENAME,
+
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+
+                        YearCheckResultDao.Properties.IsPass.columnName,
+
+                        CompanyInfoDao.Properties.PlatformName.columnName
+
+                ), new String []{});
+                ArrayList<HashMap> retList = new ArrayList();
+                while (cursor.moveToNext()) {
+                    HashMap retObj = new HashMap();
+                    company = cursor.getString(cursor.getColumnIndex("COMPANY"));
+                    oilfield = cursor.getString(cursor.getColumnIndex("OILFIELD"));
+                    platform = cursor.getString(cursor.getColumnIndex("PLATFORM"));
+                    retObj.put("company",company+"_"+oilfield+"_"+platform);
+                    retObj.put("system",cursor.getString(cursor.getColumnIndex("SYSTEM")));
+                    retObj.put("protectArea",cursor.getString(cursor.getColumnIndex("PROTECT_AREA")));
+                    retObj.put("systemNumber",cursor.getString(cursor.getColumnIndex("SYSTEM_NUMBER")));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    checkDate = cursor.getString(cursor.getColumnIndex("CHECK_DATE"));
+                    checkDate = format.format(new Date(Long.valueOf(checkDate)));
+                    retObj.put("checkDate",checkDate);
+                    retObj.put("platformId",platformId);
+                    retObj.put("systemId",systemId);
+                    retList.add(retObj);
+                }
+                return retList;
+            }
+
+        }
+        else if(platformId!=0 && systemId==0){
+            if(startDate!=null && endDate!=null){
+                Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT Q.%s AS PROTECT_AREA,Q.%s AS SYSTEM_NUMBER,Q.%s AS CHECK_DATE,W.%s AS COMPANY,W.%s AS OILFIELD,W.%s AS PLATFORM,R.PARENT_NAME AS SYSTEM FROM %s AS Q INNER JOIN %s AS W ON Q.COMPANY_INFO_ID=W._id " +
+                                "INNER JOIN (SELECT E3._id AS ID,E3.NAME AS NAME,E3.PARENT_ID AS PARENT_ID,E4.NAME AS PARENT_NAME FROM %s AS E3 INNER JOIN %s AS E4 ON E3.PARENT_ID=E4._id WHERE E3.TYPE=1 AND E4.PARENT_ID=0 UNION SELECT E1._id AS ID,E1.NAME AS NAME,E5._id AS PARENT_ID,E5.NAME AS PARENT_NAME FROM %s AS E1 INNER JOIN %s AS E2 ON E1.PARENT_ID=E2._id INNER JOIN %s AS E5 ON E2.PARENT_ID=E5._id WHERE E1.TYPE=1 AND E2.PARENT_ID!=0 AND E5.PARENT_ID=0) AS R ON Q.CHECK_TYPE_ID=R.ID " +
+                                "WHERE Q.%s='否' AND Q.%s=%s AND CAST(Q.CHECK_DATE AS INTEGER)>%s AND CAST(Q.CHECK_DATE AS INTEGER)<%s GROUP BY W.%s,R.PARENT_NAME,Q.CHECK_DATE,Q.PROTECT_AREA,Q.SYSTEM_NUMBER",
+                        YearCheckResultDao.Properties.ProtectArea.columnName,
+                        YearCheckResultDao.Properties.SystemNumber.columnName,
+                        YearCheckResultDao.Properties.CheckDate.columnName,
+                        CompanyInfoDao.Properties.CompanyName.columnName,
+                        CompanyInfoDao.Properties.OilfieldName.columnName,
+                        CompanyInfoDao.Properties.PlatformName.columnName,
+                        YearCheckResultDao.TABLENAME,
+                        CompanyInfoDao.TABLENAME,
+
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+
+                        YearCheckResultDao.Properties.IsPass.columnName,
+                        YearCheckResultDao.Properties.CompanyInfoId.columnName,
+                        platformId,
+                        startDate.getTime(),
+                        endDate.getTime(),
+                        CompanyInfoDao.Properties.PlatformName.columnName
+
+                ), new String []{});
+                ArrayList<HashMap> retList = new ArrayList();
+                while (cursor.moveToNext()) {
+                    HashMap retObj = new HashMap();
+                    company = cursor.getString(cursor.getColumnIndex("COMPANY"));
+                    oilfield = cursor.getString(cursor.getColumnIndex("OILFIELD"));
+                    platform = cursor.getString(cursor.getColumnIndex("PLATFORM"));
+                    retObj.put("company",company+"_"+oilfield+"_"+platform);
+                    retObj.put("system",cursor.getString(cursor.getColumnIndex("SYSTEM")));
+                    retObj.put("protectArea",cursor.getString(cursor.getColumnIndex("PROTECT_AREA")));
+                    retObj.put("systemNumber",cursor.getString(cursor.getColumnIndex("SYSTEM_NUMBER")));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    checkDate = cursor.getString(cursor.getColumnIndex("CHECK_DATE"));
+                    checkDate = format.format(new Date(Long.valueOf(checkDate)));
+                    retObj.put("checkDate",checkDate);
+                    retObj.put("platformId",platformId);
+                    retObj.put("systemId",systemId);
+                    retList.add(retObj);
+                }
+                return retList;
+            }
+            else {
+                Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT Q.%s AS PROTECT_AREA,Q.%s AS SYSTEM_NUMBER,Q.%s AS CHECK_DATE,W.%s AS COMPANY,W.%s AS OILFIELD,W.%s AS PLATFORM,R.PARENT_NAME AS SYSTEM FROM %s AS Q INNER JOIN %s AS W ON Q.COMPANY_INFO_ID=W._id " +
+                                "INNER JOIN (SELECT E3._id AS ID,E3.NAME AS NAME,E3.PARENT_ID AS PARENT_ID,E4.NAME AS PARENT_NAME FROM %s AS E3 INNER JOIN %s AS E4 ON E3.PARENT_ID=E4._id WHERE E3.TYPE=1 AND E4.PARENT_ID=0 UNION SELECT E1._id AS ID,E1.NAME AS NAME,E5._id AS PARENT_ID,E5.NAME AS PARENT_NAME FROM %s AS E1 INNER JOIN %s AS E2 ON E1.PARENT_ID=E2._id INNER JOIN %s AS E5 ON E2.PARENT_ID=E5._id WHERE E1.TYPE=1 AND E2.PARENT_ID!=0 AND E5.PARENT_ID=0) AS R ON Q.CHECK_TYPE_ID=R.ID " +
+                                "WHERE Q.%s='否' AND Q.%s=%s GROUP BY W.%s,R.PARENT_NAME,Q.CHECK_DATE,Q.PROTECT_AREA,Q.SYSTEM_NUMBER",
+                        YearCheckResultDao.Properties.ProtectArea.columnName,
+                        YearCheckResultDao.Properties.SystemNumber.columnName,
+                        YearCheckResultDao.Properties.CheckDate.columnName,
+                        CompanyInfoDao.Properties.CompanyName.columnName,
+                        CompanyInfoDao.Properties.OilfieldName.columnName,
+                        CompanyInfoDao.Properties.PlatformName.columnName,
+                        YearCheckResultDao.TABLENAME,
+                        CompanyInfoDao.TABLENAME,
+
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+
+                        YearCheckResultDao.Properties.IsPass.columnName,
+                        YearCheckResultDao.Properties.CompanyInfoId.columnName,
+                        platformId,
+                        CompanyInfoDao.Properties.PlatformName.columnName
+
+                ), new String []{});
+                ArrayList<HashMap> retList = new ArrayList();
+                while (cursor.moveToNext()) {
+                    HashMap retObj = new HashMap();
+                    company = cursor.getString(cursor.getColumnIndex("COMPANY"));
+                    oilfield = cursor.getString(cursor.getColumnIndex("OILFIELD"));
+                    platform = cursor.getString(cursor.getColumnIndex("PLATFORM"));
+                    retObj.put("company",company+"_"+oilfield+"_"+platform);
+                    retObj.put("system",cursor.getString(cursor.getColumnIndex("SYSTEM")));
+                    retObj.put("protectArea",cursor.getString(cursor.getColumnIndex("PROTECT_AREA")));
+                    retObj.put("systemNumber",cursor.getString(cursor.getColumnIndex("SYSTEM_NUMBER")));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    checkDate = cursor.getString(cursor.getColumnIndex("CHECK_DATE"));
+                    checkDate = format.format(new Date(Long.valueOf(checkDate)));
+                    retObj.put("checkDate",checkDate);
+                    retObj.put("platformId",platformId);
+                    retObj.put("systemId",systemId);
+                    retList.add(retObj);
+                }
+                return retList;
+            }
+
+        }
+        else if(platformId==0 && systemId!=0) {
+            if (startDate != null && endDate != null) {
+                Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT Q.%s AS PROTECT_AREA,Q.%s AS SYSTEM_NUMBER,Q.%s AS CHECK_DATE,W.%s AS COMPANY,W.%s AS OILFIELD,W.%s AS PLATFORM,R.PARENT_NAME AS SYSTEM FROM %s AS Q INNER JOIN %s AS W ON Q.COMPANY_INFO_ID=W._id " +
+                                "INNER JOIN (SELECT E3._id AS ID,E3.NAME AS NAME,E3.PARENT_ID AS PARENT_ID,E4.NAME AS PARENT_NAME FROM %s AS E3 INNER JOIN %s AS E4 ON E3.PARENT_ID=E4._id WHERE E3.TYPE=1 AND E4.PARENT_ID=0 UNION SELECT E1._id AS ID,E1.NAME AS NAME,E5._id AS PARENT_ID,E5.NAME AS PARENT_NAME FROM %s AS E1 INNER JOIN %s AS E2 ON E1.PARENT_ID=E2._id INNER JOIN %s AS E5 ON E2.PARENT_ID=E5._id WHERE E1.TYPE=1 AND E2.PARENT_ID!=0 AND E5.PARENT_ID=0) AS R ON Q.CHECK_TYPE_ID=R.ID " +
+                                "WHERE Q.%s='否' AND R.PARENT_ID=%s AND CAST(Q.CHECK_DATE AS INTEGER)>%s AND CAST(Q.CHECK_DATE AS INTEGER)<%s GROUP BY W.%s,R.PARENT_NAME,Q.CHECK_DATE,Q.PROTECT_AREA,Q.SYSTEM_NUMBER",
+                        YearCheckResultDao.Properties.ProtectArea.columnName,
+                        YearCheckResultDao.Properties.SystemNumber.columnName,
+                        YearCheckResultDao.Properties.CheckDate.columnName,
+                        CompanyInfoDao.Properties.CompanyName.columnName,
+                        CompanyInfoDao.Properties.OilfieldName.columnName,
+                        CompanyInfoDao.Properties.PlatformName.columnName,
+                        YearCheckResultDao.TABLENAME,
+                        CompanyInfoDao.TABLENAME,
+
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+
+                        YearCheckResultDao.Properties.IsPass.columnName,
+//                        CheckTypeDao.Properties.ParentId.columnName,
+                        systemId,
+                        startDate.getTime(),
+                        endDate.getTime(),
+                        CompanyInfoDao.Properties.PlatformName.columnName
+
+                ), new String[]{});
+                ArrayList<HashMap> retList = new ArrayList();
+                while (cursor.moveToNext()) {
+                    HashMap retObj = new HashMap();
+                    company = cursor.getString(cursor.getColumnIndex("COMPANY"));
+                    oilfield = cursor.getString(cursor.getColumnIndex("OILFIELD"));
+                    platform = cursor.getString(cursor.getColumnIndex("PLATFORM"));
+                    retObj.put("company", company + "_" + oilfield + "_" + platform);
+                    retObj.put("system", cursor.getString(cursor.getColumnIndex("SYSTEM")));
+                    retObj.put("protectArea", cursor.getString(cursor.getColumnIndex("PROTECT_AREA")));
+                    retObj.put("systemNumber", cursor.getString(cursor.getColumnIndex("SYSTEM_NUMBER")));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    checkDate = cursor.getString(cursor.getColumnIndex("CHECK_DATE"));
+                    checkDate = format.format(new Date(Long.valueOf(checkDate)));
+                    retObj.put("checkDate", checkDate);
+                    retObj.put("platformId",platformId);
+                    retObj.put("systemId",systemId);
+                    retList.add(retObj);
+                }
+                return retList;
+            } else {
+                Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT Q.%s AS PROTECT_AREA,Q.%s AS SYSTEM_NUMBER,Q.%s AS CHECK_DATE,W.%s AS COMPANY,W.%s AS OILFIELD,W.%s AS PLATFORM,R.PARENT_NAME AS SYSTEM FROM %s AS Q INNER JOIN %s AS W ON Q.COMPANY_INFO_ID=W._id " +
+                                "INNER JOIN (SELECT E3._id AS ID,E3.NAME AS NAME,E3.PARENT_ID AS PARENT_ID,E4.NAME AS PARENT_NAME FROM %s AS E3 INNER JOIN %s AS E4 ON E3.PARENT_ID=E4._id WHERE E3.TYPE=1 AND E4.PARENT_ID=0 UNION SELECT E1._id AS ID,E1.NAME AS NAME,E5._id AS PARENT_ID,E5.NAME AS PARENT_NAME FROM %s AS E1 INNER JOIN %s AS E2 ON E1.PARENT_ID=E2._id INNER JOIN %s AS E5 ON E2.PARENT_ID=E5._id WHERE E1.TYPE=1 AND E2.PARENT_ID!=0 AND E5.PARENT_ID=0) AS R ON Q.CHECK_TYPE_ID=R.ID " +
+                                "WHERE Q.%s='否' AND R.PARENT_ID=%s GROUP BY W.%s,R.PARENT_NAME,Q.CHECK_DATE,Q.PROTECT_AREA,Q.SYSTEM_NUMBER",
+                        YearCheckResultDao.Properties.ProtectArea.columnName,
+                        YearCheckResultDao.Properties.SystemNumber.columnName,
+                        YearCheckResultDao.Properties.CheckDate.columnName,
+                        CompanyInfoDao.Properties.CompanyName.columnName,
+                        CompanyInfoDao.Properties.OilfieldName.columnName,
+                        CompanyInfoDao.Properties.PlatformName.columnName,
+                        YearCheckResultDao.TABLENAME,
+                        CompanyInfoDao.TABLENAME,
+
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+
+                        YearCheckResultDao.Properties.IsPass.columnName,
+//                        CheckTypeDao.Properties.ParentId.columnName,
+                        systemId,
+                        CompanyInfoDao.Properties.PlatformName.columnName
+
+                ), new String[]{});
+                ArrayList<HashMap> retList = new ArrayList();
+                while (cursor.moveToNext()) {
+                    HashMap retObj = new HashMap();
+                    company = cursor.getString(cursor.getColumnIndex("COMPANY"));
+                    oilfield = cursor.getString(cursor.getColumnIndex("OILFIELD"));
+                    platform = cursor.getString(cursor.getColumnIndex("PLATFORM"));
+                    retObj.put("company", company + "_" + oilfield + "_" + platform);
+                    retObj.put("system", cursor.getString(cursor.getColumnIndex("SYSTEM")));
+                    retObj.put("protectArea", cursor.getString(cursor.getColumnIndex("PROTECT_AREA")));
+                    retObj.put("systemNumber", cursor.getString(cursor.getColumnIndex("SYSTEM_NUMBER")));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    checkDate = cursor.getString(cursor.getColumnIndex("CHECK_DATE"));
+                    checkDate = format.format(new Date(Long.valueOf(checkDate)));
+                    retObj.put("checkDate", checkDate);
+                    retObj.put("platformId",platformId);
+                    retObj.put("systemId",systemId);
+                    retList.add(retObj);
+                }
+                return retList;
+            }
+        }
+        else if(platformId!=0 && systemId!=0) {
+            if (startDate != null && endDate != null) {
+                Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT Q.%s AS PROTECT_AREA,Q.%s AS SYSTEM_NUMBER,Q.%s AS CHECK_DATE,W.%s AS COMPANY,W.%s AS OILFIELD,W.%s AS PLATFORM,R.PARENT_NAME AS SYSTEM FROM %s AS Q INNER JOIN %s AS W ON Q.COMPANY_INFO_ID=W._id " +
+                                "INNER JOIN (SELECT E3._id AS ID,E3.NAME AS NAME,E3.PARENT_ID AS PARENT_ID,E4.NAME AS PARENT_NAME FROM %s AS E3 INNER JOIN %s AS E4 ON E3.PARENT_ID=E4._id WHERE E3.TYPE=1 AND E4.PARENT_ID=0 UNION SELECT E1._id AS ID,E1.NAME AS NAME,E5._id AS PARENT_ID,E5.NAME AS PARENT_NAME FROM %s AS E1 INNER JOIN %s AS E2 ON E1.PARENT_ID=E2._id INNER JOIN %s AS E5 ON E2.PARENT_ID=E5._id WHERE E1.TYPE=1 AND E2.PARENT_ID!=0 AND E5.PARENT_ID=0) AS R ON Q.CHECK_TYPE_ID=R.ID " +
+                                "WHERE Q.%s='否' AND R.PARENT_ID=%s AND Q.%s=%s AND CAST(Q.CHECK_DATE AS INTEGER)>%s AND CAST(Q.CHECK_DATE AS INTEGER)<%s GROUP BY W.%s,R.PARENT_NAME,Q.CHECK_DATE,Q.PROTECT_AREA,Q.SYSTEM_NUMBER",
+                        YearCheckResultDao.Properties.ProtectArea.columnName,
+                        YearCheckResultDao.Properties.SystemNumber.columnName,
+                        YearCheckResultDao.Properties.CheckDate.columnName,
+                        CompanyInfoDao.Properties.CompanyName.columnName,
+                        CompanyInfoDao.Properties.OilfieldName.columnName,
+                        CompanyInfoDao.Properties.PlatformName.columnName,
+                        YearCheckResultDao.TABLENAME,
+                        CompanyInfoDao.TABLENAME,
+
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+
+                        YearCheckResultDao.Properties.IsPass.columnName,
+//                        CheckTypeDao.Properties.ParentId.columnName,
+                        systemId,
+                        YearCheckResultDao.Properties.CompanyInfoId.columnName,
+                        platformId,
+                        startDate.getTime(),
+                        endDate.getTime(),
+                        CompanyInfoDao.Properties.PlatformName.columnName
+
+                ), new String[]{});
+                ArrayList<HashMap> retList = new ArrayList();
+                while (cursor.moveToNext()) {
+                    HashMap retObj = new HashMap();
+                    company = cursor.getString(cursor.getColumnIndex("COMPANY"));
+                    oilfield = cursor.getString(cursor.getColumnIndex("OILFIELD"));
+                    platform = cursor.getString(cursor.getColumnIndex("PLATFORM"));
+                    retObj.put("company", company + "_" + oilfield + "_" + platform);
+                    retObj.put("system", cursor.getString(cursor.getColumnIndex("SYSTEM")));
+                    retObj.put("protectArea", cursor.getString(cursor.getColumnIndex("PROTECT_AREA")));
+                    retObj.put("systemNumber", cursor.getString(cursor.getColumnIndex("SYSTEM_NUMBER")));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    checkDate = cursor.getString(cursor.getColumnIndex("CHECK_DATE"));
+                    checkDate = format.format(new Date(Long.valueOf(checkDate)));
+                    retObj.put("checkDate", checkDate);
+                    retObj.put("platformId",platformId);
+                    retObj.put("systemId",systemId);
+                    retList.add(retObj);
+                }
+                return retList;
+            } else {
+                Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT Q.%s AS PROTECT_AREA,Q.%s AS SYSTEM_NUMBER,Q.%s AS CHECK_DATE,W.%s AS COMPANY,W.%s AS OILFIELD,W.%s AS PLATFORM,R.PARENT_NAME AS SYSTEM FROM %s AS Q INNER JOIN %s AS W ON Q.COMPANY_INFO_ID=W._id " +
+                                "INNER JOIN (SELECT E3._id AS ID,E3.NAME AS NAME,E3.PARENT_ID AS PARENT_ID,E4.NAME AS PARENT_NAME FROM %s AS E3 INNER JOIN %s AS E4 ON E3.PARENT_ID=E4._id WHERE E3.TYPE=1 AND E4.PARENT_ID=0 UNION SELECT E1._id AS ID,E1.NAME AS NAME,E5._id AS PARENT_ID,E5.NAME AS PARENT_NAME FROM %s AS E1 INNER JOIN %s AS E2 ON E1.PARENT_ID=E2._id INNER JOIN %s AS E5 ON E2.PARENT_ID=E5._id WHERE E1.TYPE=1 AND E2.PARENT_ID!=0 AND E5.PARENT_ID=0) AS R ON Q.CHECK_TYPE_ID=R.ID " +
+                                "WHERE Q.%s='否' AND R.PARENT_ID=%s AND Q.%s=%s GROUP BY W.%s,R.PARENT_NAME,Q.CHECK_DATE,Q.PROTECT_AREA,Q.SYSTEM_NUMBER",
+                        YearCheckResultDao.Properties.ProtectArea.columnName,
+                        YearCheckResultDao.Properties.SystemNumber.columnName,
+                        YearCheckResultDao.Properties.CheckDate.columnName,
+                        CompanyInfoDao.Properties.CompanyName.columnName,
+                        CompanyInfoDao.Properties.OilfieldName.columnName,
+                        CompanyInfoDao.Properties.PlatformName.columnName,
+                        YearCheckResultDao.TABLENAME,
+                        CompanyInfoDao.TABLENAME,
+
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.TABLENAME,
+
+                        YearCheckResultDao.Properties.IsPass.columnName,
+//                        CheckTypeDao.Properties.ParentId.columnName,
+                        systemId,
+                        YearCheckResultDao.Properties.CompanyInfoId.columnName,
+                        platformId,
+                        CompanyInfoDao.Properties.PlatformName.columnName
+
+                ), new String[]{});
+                ArrayList<HashMap> retList = new ArrayList();
+                while (cursor.moveToNext()) {
+                    HashMap retObj = new HashMap();
+                    company = cursor.getString(cursor.getColumnIndex("COMPANY"));
+                    oilfield = cursor.getString(cursor.getColumnIndex("OILFIELD"));
+                    platform = cursor.getString(cursor.getColumnIndex("PLATFORM"));
+                    retObj.put("company", company + "_" + oilfield + "_" + platform);
+                    retObj.put("system", cursor.getString(cursor.getColumnIndex("SYSTEM")));
+                    retObj.put("protectArea", cursor.getString(cursor.getColumnIndex("PROTECT_AREA")));
+                    retObj.put("systemNumber", cursor.getString(cursor.getColumnIndex("SYSTEM_NUMBER")));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    checkDate = cursor.getString(cursor.getColumnIndex("CHECK_DATE"));
+                    checkDate = format.format(new Date(Long.valueOf(checkDate)));
+                    retObj.put("checkDate", checkDate);
+                    retObj.put("platformId",platformId);
+                    retObj.put("systemId",systemId);
+                    retList.add(retObj);
+                }
+                return retList;
+            }
+        }
+
+
+        return null;
     }
 
 
