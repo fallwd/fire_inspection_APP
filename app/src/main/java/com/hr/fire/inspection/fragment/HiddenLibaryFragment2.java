@@ -69,9 +69,9 @@ public class HiddenLibaryFragment2 extends Fragment {
 
 
     private void initView() {
-        if (itemDataList.size() == 0) {
-            Toast.makeText(getActivity(), "暂无数据", Toast.LENGTH_SHORT).show();
-        }
+//        if (itemDataList.size() == 0) {
+//            Toast.makeText(getActivity(), "暂无数据", Toast.LENGTH_SHORT).show();
+//        }
         rc_list = rootView.findViewById(R.id.rc_list);
         @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rc_list.setLayoutManager(layoutManager);

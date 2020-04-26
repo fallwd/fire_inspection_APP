@@ -46,7 +46,7 @@ public class HiddenLibraryAdapter2  extends RecyclerView.Adapter<RecyclerView.Vi
             ItemInfo info = mData.get(position);
             vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
             vh.tv_2.setText(new StringBuffer().append("").append(position + 1));
-            vh.tv_3.setText(new StringBuffer().append("").append(""));
+//            vh.tv_3.setText(new StringBuffer().append("").append(""));
             vh.tv_4.setText(new StringBuffer().append("").append("222"));
             vh.tv_5.setText(new StringBuffer().append("").append("3333"));
             vh.tv_6.setText(new StringBuffer().append("").append("444"));
@@ -80,7 +80,7 @@ public class HiddenLibraryAdapter2  extends RecyclerView.Adapter<RecyclerView.Vi
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_1;
         TextView tv_2;
-        TextView tv_3;
+//        TextView tv_3;
         TextView tv_4;
         TextView tv_5;
         TextView tv_6;
@@ -92,7 +92,7 @@ public class HiddenLibraryAdapter2  extends RecyclerView.Adapter<RecyclerView.Vi
             super(view);
             tv_1 = (TextView) view.findViewById(R.id.tv_1);
             tv_2 = (TextView) view.findViewById(R.id.tv_2);
-            tv_3 = (TextView) view.findViewById(R.id.tv_3);
+//            tv_3 = (TextView) view.findViewById(R.id.tv_3);
             tv_4 = (TextView) view.findViewById(R.id.tv_4);
             tv_5 = (TextView) view.findViewById(R.id.tv_5);
             tv_6 = (TextView) view.findViewById(R.id.tv_6);

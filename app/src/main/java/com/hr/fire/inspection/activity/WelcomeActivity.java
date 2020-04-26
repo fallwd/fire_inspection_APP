@@ -217,6 +217,12 @@ public class WelcomeActivity extends AppCompatActivity {
 
         ///////////////////测试巡检接口///////////////////////////////////////////////
 
+        // 测试隐患库接
+
+
+
+
+
         // 测试隐患库接口
 //        String year = "2019";
 //        List<HashMap> retData1 = ServiceFactory.getAnalysisService().getCompanyCountByYearCheck(year);
@@ -298,6 +304,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //
 //        }
         //////////////////////////银魂库预览接口///////////////////////////////////////////////
+
 
         Toast.makeText(WelcomeActivity.this, "系统将在2秒后为您自动跳转到首页", Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
