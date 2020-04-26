@@ -21,7 +21,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="要说的话:"
+                android:text="send text to webview:"
                 android:textColor="#000000"
                 android:textSize="14sp" />
 
@@ -38,17 +38,16 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@null"
-                    android:hint="请输入要说的话"
+                    android:hint="请输入内容"
                     android:imeOptions="flagNoExtractUi"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:textCursorDrawable="@drawable/edit_theme"
                     android:textSize="12sp" />
+
             </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
-
     <!--按钮操作-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,7 +56,6 @@
         android:layout_marginRight="70dp"
         android:gravity="right"
         android:orientation="horizontal">
-
         <Button
             android:id="@+id/cancel_btn"
             android:layout_width="70dp"
@@ -67,7 +65,6 @@
             android:text="取消"
             android:textColor="#000000"
             android:textSize="12dp" />
-
         <Button
             android:id="@+id/button1"
             android:layout_width="70dp"
@@ -84,5 +81,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </WebView>
+
 </LinearLayout>
 

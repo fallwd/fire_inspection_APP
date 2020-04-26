@@ -2,67 +2,257 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
 <style>
-    .todo_list{
-      margin-left:0;
+    .todo_list {
+        margin-left: 0;
     }
-    .todo_list_item{
-       width:100%;
-       height:36px;
-       line-height:36px;
-       border-bottom:1px solid #ccc;
+
+    .todo_list_item {
+        width: 100%;
+        height: 36px;
+        line-height: 36px;
+        border-bottom: 1px solid #ccc;
     }
-    .name{
-      float:left;
+
+    .name {
+        float: left;
     }
-    .delete{
-       color:red;
-       float:right;
-       margin-left:50px;
+
+    .delete {
+        color: red;
+        float: right;
+        margin-left: 50px;
+    }
+
+    .oricle_wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #oricle {
+        width: 200px;
+        height: 200px;
     }
 </style>
-<body>
-  <div>这是web网页</div>
-   <ul class="todo_list" id="todo_list">
 
-   </ul>
-  <!--<p id="mb"></p>-->
-  <script>
-    var dataList = [];
-    function runJs(text) {
-      if(text!==""){
-         dataList.push(text);
-         renderList(dataList)
-      }
-      <!--document.getElementById("mb").innerHTML = text-->
-    }
-    function renderList(list){
-       var str = ``;
-       list.forEach(function(item,index){
-           str += `<li class="todo_list_item" id="todo_list_item_${index}"><span class="name">${item}</span><span class="delete">删除</span></li>`
-       })
-       document.getElementById("todo_list").innerHTML = str
-       if(list.length>0){
-         document.getElementById("todo_list").addEventListener('click', function (ev) {
-            var target = ev.target || ev.srcElement;
-            if (target.className == "delete") {
-                var e = document.getElementById(target.parentNode.id);
-                var text = e.firstChild.innerText;
-                dataList.forEach(function(item,i){
-                   if(item == text){
-                      dataList = dataList.splice(i,1);
-                      document.getElementById("todo_list").removeChild(e);
-                   }
-                })
+<body>
+    <!--<ul class="todo_list" id="todo_list"></ul>-->
+    <div class="oricle_wrapper">
+        <div id="oricle"></div>
+    </div>
+    <script src="./jquery.min.js"></script>
+    <script src="./echarts.min.js"></script>
+    <script>
+        var dataList = [];
+
+        function runJs(text) {
+            if (text !== "") {
+                renderChart();
             }
-          });
-       }
-    }
-  </script>
+        }
+
+        function renderChart() {
+            var m2R2Data = [{
+                    value: 335,
+                    legendname: '种类01',
+                    name: "种类01  335",
+                    itemStyle: {
+                        color: "#8d7fec"
+                    }
+                },
+                {
+                    value: 310,
+                    legendname: '种类02',
+                    name: "种类02  310",
+                    itemStyle: {
+                        color: "#5085f2"
+                    }
+                },
+                {
+                    value: 234,
+                    legendname: '种类03',
+                    name: "种类03  234",
+                    itemStyle: {
+                        color: "#e75fc3"
+                    }
+                },
+                {
+                    value: 154,
+                    legendname: '种类04',
+                    name: "种类04  154",
+                    itemStyle: {
+                        color: "#f87be2"
+                    }
+                },
+                {
+                    value: 335,
+                    legendname: '种类05',
+                    name: "种类05  335",
+                    itemStyle: {
+                        color: "#f2719a"
+                    }
+                },
+                {
+                    value: 335,
+                    legendname: '种类06',
+                    name: "种类06  335",
+                    itemStyle: {
+                        color: "#fca4bb"
+                    }
+                },
+                {
+                    value: 335,
+                    legendname: '种类07',
+                    name: "种类07  335",
+                    itemStyle: {
+                        color: "#f59a8f"
+                    }
+                },
+                {
+                    value: 335,
+                    legendname: '种类08',
+                    name: "种类08  335",
+                    itemStyle: {
+                        color: "#fdb301"
+                    }
+                },
+                {
+                    value: 335,
+                    legendname: '种类09',
+                    name: "种类09  335",
+                    itemStyle: {
+                        color: "#57e7ec"
+                    }
+                },
+                {
+                    value: 335,
+                    legendname: '种类10',
+                    name: "种类10  335",
+                    itemStyle: {
+                        color: "#cf9ef1"
+                    }
+                },
+                {
+                    value: 335,
+                    legendname: '种类09',
+                    name: "种类11  335",
+                    itemStyle: {
+                        color: "#57e7ec"
+                    }
+                },
+                {
+                    value: 335,
+                    legendname: '种类10',
+                    name: "种类12  335",
+                    itemStyle: {
+                        color: "#cf9ef1"
+                    }
+                },
+            ];
+            var option = {
+                title: [{
+                        text: '标题',
+                        textStyle: {
+                            fontSize: 16,
+                            color: "black"
+                        },
+                        left: "2%"
+                    },
+                    {
+                        text: '合计',
+                        subtext: 12312 + '个',
+                        textStyle: {
+                            fontSize: 20,
+                            color: "black"
+                        },
+                        subtextStyle: {
+                            fontSize: 20,
+                            color: 'black'
+                        },
+                        textAlign: "center",
+                        x: '34.5%',
+                        y: '44%',
+                    }
+                ],
+                tooltip: {
+                    trigger: 'item',
+                    formatter: function (parms) {
+                        var str = parms.seriesName + "</br>" +
+                            parms.marker + "" + parms.data.legendname + "</br>" +
+                            "数量：" + parms.data.value + "</br>" +
+                            "占比：" + parms.percent + "%";
+                        return str;
+                    }
+                },
+                legend: {
+                    type: "scroll",
+                    orient: 'vertical',
+                    left: '70%',
+                    align: 'left',
+                    top: 'middle',
+                    textStyle: {
+                        color: '#8C8C8C'
+                    },
+                    height: 250
+                },
+                series: [{
+                    name: '标题',
+                    type: 'pie',
+                    center: ['35%', '50%'],
+                    radius: ['40%', '65%'],
+                    clockwise: false, //饼图的扇区是否是顺时针排布
+                    avoidLabelOverlap: false,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'outter',
+                            formatter: function (parms) {
+                                return parms.data.legendname
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            length: 5,
+                            length2: 3,
+                            smooth: true,
+                        }
+                    },
+                    data: m2R2Data
+                }]
+            };
+            var pie = echarts.init(document.getElementById("oricle"));
+            pie.setOption(option);
+        }
+    </script>
 </body>
 </html>
+
+<!--function renderList(list){-->
+<!--var str = ``;-->
+<!--list.forEach(function(item,index){-->
+<!--str += `<li class="todo_list_item" id="todo_list_item_${index}"><span class="name">${item}</span><span class="delete">删除</span></li>`-->
+<!--})-->
+<!--document.getElementById("todo_list").innerHTML = str-->
+<!--if(list.length>0){-->
+<!--document.getElementById("todo_list").addEventListener('click', function (ev) {-->
+<!--var target = ev.target || ev.srcElement;-->
+<!--if (target.className == "delete") {-->
+<!--var e = document.getElementById(target.parentNode.id);-->
+<!--var text = e.firstChild.innerText;-->
+<!--dataList.forEach(function(item,i){-->
+<!--if(item == text){-->
+<!--dataList = dataList.splice(i,1);-->
+<!--document.getElementById("todo_list").removeChild(e);-->
+<!--}-->
+<!--})-->
+<!--}-->
+<!--});-->
+<!--}-->
+<!--}-->
