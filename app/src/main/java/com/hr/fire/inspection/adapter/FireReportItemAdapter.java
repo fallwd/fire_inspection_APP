@@ -1,6 +1,7 @@
 package com.hr.fire.inspection.adapter;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import com.deepoove.poi.XWPFTemplate;
 //import com.deepoove.poi.policy.HackLoopTableRenderPolicy;
@@ -119,6 +122,7 @@ public class FireReportItemAdapter extends BaseAdapter {
         return position;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
@@ -253,6 +257,7 @@ public class FireReportItemAdapter extends BaseAdapter {
                 e.printStackTrace();
             }
         });
+        // 点击搜索实现模糊查询
         return convertView;
     }
 
@@ -269,10 +274,6 @@ public class FireReportItemAdapter extends BaseAdapter {
             stringArrayList.add(ret);
             checkDate.add(check_date);
         }
-//        Log.d("key12222", String.valueOf(stringArrayList));
-//        Log.d("key12222", String.valueOf(companyInfoId));
-//        Log.d("key12222", String.valueOf(checkDate));
-
     }
 
     public void get_company_name(String company_name) {
@@ -285,6 +286,11 @@ public class FireReportItemAdapter extends BaseAdapter {
 
     public void get_Platform_name(String platform_name) {
         set_Platform_name = platform_name;
+    }
+
+    public void refresh(List arr) {
+        this.stringArrayList = arr;
+        Log.d("更新报告列表", this.stringArrayList+ "");
     }
 
     static class ViewHolder {
@@ -342,6 +348,7 @@ public class FireReportItemAdapter extends BaseAdapter {
     }
 
     // 灭火器系统
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private List<RowRenderData> getMHQ_table(){
         // 灭火器
         List<ItemInfo> data = (List<ItemInfo>) getallmessage.stream().filter(d -> "灭火器".equals(d.get("tableName"))).collect(Collectors.toList()).get(0).get("data");

@@ -1,5 +1,6 @@
 package com.hr.fire.inspection.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,5 +38,12 @@ public interface AnalysisService {
      */
     List<HashMap> getSystemCountByYearCheck(String year);
     List<HashMap> getSystemCountByInspection(String year);
+
+    /**
+     * 隐患预览 年月日 模糊查询a
+     * @param platformId没有的话填0，systemId没有的话填0，startDate没有的话填null,endDate没有的话填null
+     * @return
+     */
+    List<HashMap> getYearCheckView(long platformId, long systemId, Date startDate,Date endDate);
 
 }

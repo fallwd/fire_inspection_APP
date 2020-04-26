@@ -20,11 +20,13 @@ import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.HYLogUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class HiddenLibaryFragment1 extends Fragment {
@@ -32,10 +34,11 @@ public class HiddenLibaryFragment1 extends Fragment {
     private static HiddenLibaryFragment1 fragment1;
     private static String mKey;
     private HiddenLibraryAdapter1 adapter;
-    private List<ItemInfo> itemDataList = new ArrayList<>();
+    private List<HashMap> itemDataList = new ArrayList<>();
     private RecyclerView rc_list;
     private IntentTransmit its;
     private List<CheckType> checkTypes;
+    private List<HashMap> retData;
 
     public static HiddenLibaryFragment1 newInstance(String key, IntentTransmit value) {
         if (fragment1 == null) {
@@ -67,22 +70,29 @@ public class HiddenLibaryFragment1 extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initData();
         initView();
     }
 
 
-
+    private void initData() {
+        //参数
+        retData = ServiceFactory.getAnalysisService().getYearCheckView(0,0,null, null);
+        HYLogUtil.getInstance().d("获取隐患库年检表格数据,数据查看:" + retData.size() + "  " + retData.toString());
+        // 一级表插入数据insertItemData
+    }
     private void initView() {
-        if (itemDataList.size() == 0) {
-            Toast.makeText(getActivity(), "暂无数据", Toast.LENGTH_SHORT).show();
-        }
+//        if (retData.size() == 0) {
+//            Toast.makeText(getActivity(), "暂无数据", Toast.LENGTH_SHORT).show();
+//        }
         rc_list = rootView.findViewById(R.id.rc_list);
         @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rc_list.setLayoutManager(layoutManager);
-        adapter = new HiddenLibraryAdapter1(getActivity(), itemDataList);
+        adapter = new HiddenLibraryAdapter1(getActivity(), retData);
         rc_list.setAdapter(adapter);
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
+
 
     }
 

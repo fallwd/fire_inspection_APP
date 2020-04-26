@@ -6,7 +6,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.hr.fire.inspection"
-        minSdkVersion 17
+        minSdkVersion 14
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -20,8 +20,9 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility = '1.8'
+
         sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
     }
 
     allprojects {
