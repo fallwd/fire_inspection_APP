@@ -53,9 +53,7 @@ public class NavigationActivity extends AppCompatActivity {
 
         btn3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(NavigationActivity.this, HiddenLibaryActivity.class);
-
-
+                Intent intent = new Intent(NavigationActivity.this,MainActivity.class);
                 startActivity(intent);
             }
         });
