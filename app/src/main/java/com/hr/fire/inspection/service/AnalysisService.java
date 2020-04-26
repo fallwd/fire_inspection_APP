@@ -21,7 +21,7 @@ public interface AnalysisService {
      * @param
      * @return
      */
-    List<HashMap> getOilfieldCountByYearCheck(String year);
+    List<HashMap> getOilfieldCountByYearCheck(String year,String companyName);
     List<HashMap> getOilfieldCountByInspection(String year);
 
     /**
@@ -47,6 +47,15 @@ public interface AnalysisService {
      * @return
      */
     List<HashMap> getYearCheckView(long platformId, long systemId, Date startDate,Date endDate);
+    List<HashMap> getInspectionView(long platformId, long systemId, Date startDate,Date endDate);
+
+
+    /**
+     * 隐患详情
+     * @param platformId没有的话填0，systemId没有的话填0，startDate没有的话填null,endDate没有的话填null
+     * @return
+     */
     List<YearCheckResult> getYearCheckDetail(long platformId, long systemId, String checkDate, String systemNumber, String protectArea);
+    List<YearCheckResult> getInspectionDetail(long platformId, long systemId, String checkDate, String checkPerson, String profession);
 
 }

@@ -307,7 +307,8 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
             for (int i = 0; i < dataList.size(); i++) {
                 YearCheckResult result = dataList.get(i);
                 Log.i("result", result.toString());
-                Log.i("result", result.getYearCheck().toString());
+                Log.i(
+                        "result", result.getYearCheck().toString());
             }
             Log.i("info", "查询完成02-------------------------------------------");
         }
