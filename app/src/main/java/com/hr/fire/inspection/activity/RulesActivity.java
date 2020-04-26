@@ -30,17 +30,18 @@ public class RulesActivity extends AppCompatActivity {
         tvInspectionPro.setText(text);
 
 
-        String str_con = "行业标准";
-        String str_con2 = "国家法律";
-        String str_con3 = "国际标准";
-        String str_con4 = "行政规范";
-        String str_con5 = "行业规章";
-        String str_con6 = "国家标准";
-        String str_con7 = "良好作业实践及指导性文件";
-        String str_con8 = "监管性机构规范性文件";
-        String str_con9 = "其他";
+        String str_con1 = "行业标准";
+        String str_con2 = "企业标准";
+        String str_con3 = "国家法律";
+        String str_con4 = "国际标准";
+        String str_con5 = "行政规范";
+        String str_con6 = "行业规章";
+        String str_con7 = "国家标准";
+        String str_con8 = "良好作业实践及指导性文件";
+        String str_con9 = "监管性机构规范性文件";
+        String str_con10 = "其他";
 
-        mList.add(str_con);
+        mList.add(str_con1);
         mList.add(str_con2);
         mList.add(str_con3);
         mList.add(str_con4);
@@ -49,6 +50,7 @@ public class RulesActivity extends AppCompatActivity {
         mList.add(str_con7);
         mList.add(str_con8);
         mList.add(str_con9);
+        mList.add(str_con10);
         //列表
         ListView main_list = findViewById(R.id.main_list);
         LawItemAdapter lawItemAdapter = new LawItemAdapter(this);

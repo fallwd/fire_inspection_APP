@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+    .todo_list{
+      margin-left:0;
+    }
+    .todo_list_item{
+       width:100%;
+       height:36px;
+       line-height:36px;
+       border-bottom:1px solid #ccc;
+    }
+    .name{
+      float:left;
+    }
+    .delete{
+       color:red;
+       float:right;
+       margin-left:50px;
+    }
+</style>
+<body>
+  <div>这是web网页</div>
+   <ul class="todo_list" id="todo_list">
+
+   </ul>
+  <!--<p id="mb"></p>-->
+  <script>
+    var dataList = [];
+    function runJs(text) {
+      if(text!==""){
+         dataList.push(text);
+         renderList(dataList)
+      }
+      <!--document.getElementById("mb").innerHTML = text-->
+    }
+    function renderList(list){
+       var str = ``;
+       list.forEach(function(item,index){
+           str += `<li class="todo_list_item" id="todo_list_item_${index}"><span class="name">${item}</span><span class="delete">删除</span></li>`
+       })
+       document.getElementById("todo_list").innerHTML = str
+       if(list.length>0){
+         document.getElementById("todo_list").addEventListener('click', function (ev) {
+            var target = ev.target || ev.srcElement;
+            if (target.className == "delete") {
+                var e = document.getElementById(target.parentNode.id);
+                var text = e.firstChild.innerText;
+                dataList.forEach(function(item,i){
+                   if(item == text){
+                      dataList = dataList.splice(i,1);
+                      document.getElementById("todo_list").removeChild(e);
+                   }
+                })
+            }
+          });
+       }
+    }
+  </script>
+</body>
+</html>
