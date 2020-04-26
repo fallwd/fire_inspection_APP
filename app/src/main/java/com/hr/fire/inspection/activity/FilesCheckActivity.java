@@ -129,7 +129,9 @@ public class FilesCheckActivity extends AppCompatActivity implements View.OnClic
         Intent intent = new Intent(this, HiddenLibaryActivity.class);
         switch ((int) sys_id) {
             case 72:  //灭火器
-                intent.setClass(this, HiddenLibaryActivity.class);
+//                intent.setClass(this, HiddenLibaryActivity.class);
+                intent.setClass(this, XJFireExtinguisherActivity.class);
+
                 break;
             case 73:  //气体灭火系统
 

@@ -62,17 +62,23 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
                 CompanyInfoDao.Properties.CompanyName.columnName
 
         ), new String []{});
+        ArrayList<HashMap> allDataList = new ArrayList<>();
+        HashMap currentData = new HashMap();
+        currentData.put("name","company");
         ArrayList<HashMap> retList = new ArrayList();
         while (cursor.moveToNext()) {
             HashMap retObj = new HashMap();
 //            Log.i("tang","getCompanyCountByYearCheck");
 //            Log.i("tang",cursor.getString(cursor.getColumnIndex("C")));
 //            Log.i("tang",cursor.getString(cursor.getColumnIndex("COMPANY")));
-            retObj.put("company",cursor.getString(cursor.getColumnIndex("COMPANY")));
-            retObj.put("count",cursor.getString(cursor.getColumnIndex("C")));
+            retObj.put("name",cursor.getString(cursor.getColumnIndex("COMPANY")));
+            retObj.put("value",cursor.getString(cursor.getColumnIndex("C")));
+            retObj.put("type","company");
             retList.add(retObj);
         }
-        return retList;
+        currentData.put("data",retList);
+        allDataList.add(currentData);
+        return allDataList;
     }
 
     @Override
@@ -122,7 +128,7 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
     }
 
     @Override
-    public List<HashMap> getOilfieldCountByYearCheck(String year) {
+    public List<HashMap> getOilfieldCountByYearCheck(String year, String companyName) {
         // 拼接年份
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date startDate = null;
@@ -137,9 +143,10 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        List<HashMap> allDataList = this.getCompanyCountByYearCheck(year);
 
         Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT COUNT(%s.%s) AS C,%s.%s AS COMPANY,%s.%s AS OILFIELD FROM %s INNER JOIN %s ON %s.COMPANY_INFO_ID=%s._id " +
-                        "WHERE %s.%s='否' AND CAST(%s.CHECK_DATE AS INTEGER)>%s AND CAST(%s.CHECK_DATE AS INTEGER)<%s GROUP BY %s.%s",
+                        "WHERE %s.%s='否' AND %s.%s='%s' AND CAST(%s.CHECK_DATE AS INTEGER)>%s AND CAST(%s.CHECK_DATE AS INTEGER)<%s GROUP BY %s.%s",
                 YearCheckResultDao.TABLENAME,
                 YearCheckResultDao.Properties.IsPass.columnName,
                 CompanyInfoDao.TABLENAME,
@@ -152,6 +159,11 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
                 CompanyInfoDao.TABLENAME,
                 YearCheckResultDao.TABLENAME,
                 YearCheckResultDao.Properties.IsPass.columnName,
+
+                CompanyInfoDao.TABLENAME,
+                CompanyInfoDao.Properties.CompanyName.columnName,
+                companyName,
+
                 YearCheckResultDao.TABLENAME,
                 startDate.getTime(),
                 YearCheckResultDao.TABLENAME,
@@ -160,15 +172,20 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
                 CompanyInfoDao.Properties.OilfieldName.columnName
 
         ), new String []{});
+        HashMap currentData = new HashMap();
+        currentData.put("name","oilfield");
         ArrayList<HashMap> retList = new ArrayList();
         while (cursor.moveToNext()) {
             HashMap retObj = new HashMap();
-            retObj.put("company",cursor.getString(cursor.getColumnIndex("COMPANY")));
-            retObj.put("oilfield",cursor.getString(cursor.getColumnIndex("OILFIELD")));
-            retObj.put("count",cursor.getString(cursor.getColumnIndex("C")));
+//            retObj.put("company",cursor.getString(cursor.getColumnIndex("COMPANY")));
+            retObj.put("name",cursor.getString(cursor.getColumnIndex("OILFIELD")));
+            retObj.put("value",cursor.getString(cursor.getColumnIndex("C")));
+            retObj.put("type","oilfield");
             retList.add(retObj);
         }
-        return retList;
+        currentData.put("data",retList);
+        allDataList.add(currentData);
+        return allDataList;
     }
 
     @Override
@@ -842,6 +859,394 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
     }
 
     @Override
+    public List<HashMap> getInspectionView(long platformId, long systemId, Date startDate, Date endDate) {
+        String company;
+        String oilfield;
+        String platform;
+        String checkDate;
+        if(platformId==0 && systemId==0){
+            if(startDate!=null && endDate!=null){
+                Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT A.%s AS CHECK_PERSON,A.%s AS PROFESSION,A.%s AS CHECK_DATE,B.%s AS COMPANY,B.%s AS OILFIELD,B.%s AS PLATFORM,E.NAME AS SYSTEM,A.%s AS COMPANY_ID,E.%s AS SYSTEM_ID FROM %s AS A " +
+                                "INNER JOIN %s AS B ON A.COMPANY_INFO_ID=B._id INNER JOIN %s AS E ON A.CHECK_TYPE_ID=E._id " +
+                                "WHERE " +
+                                "(A.PARAM1='否' OR A.PARAM2='否' OR A.PARAM3='否' OR A.PARAM4='否' OR A.PARAM5='否' OR A.PARAM6='否' OR A.PARAM7='否' OR A.PARAM8='否' OR A.PARAM9='否' OR A.PARAM10='否' OR A.PARAM11='否'" +
+                                " OR A.PARAM12='否' OR A.PARAM13='否' OR A.PARAM14='否' OR A.PARAM15='否' OR A.PARAM16='否' OR A.PARAM17='否' OR A.PARAM18='否' OR A.PARAM19='否' OR A.PARAM20='否' OR A.PARAM21='否' OR A.PARAM22='否' OR A.PARAM23='否' OR A.PARAM24='否' OR A.PARAM25='否' OR A.PARAM26='否') " +
+                                "AND CAST(A.CHECK_DATE AS INTEGER)>%s AND CAST(A.CHECK_DATE AS INTEGER)<%s GROUP BY B.%s,E.NAME,A.CHECK_DATE,A.CHECK_PERSON,A.PROFESSION",
+                        InspectionResultDao.Properties.CheckPerson.columnName,
+                        InspectionResultDao.Properties.Profession.columnName,
+                        InspectionResultDao.Properties.CheckDate.columnName,
+                        CompanyInfoDao.Properties.CompanyName.columnName,
+                        CompanyInfoDao.Properties.OilfieldName.columnName,
+                        CompanyInfoDao.Properties.PlatformName.columnName,
+                        InspectionResultDao.Properties.CompanyInfoId.columnName,
+                        CheckTypeDao.Properties.Id.columnName,
+                        InspectionResultDao.TABLENAME,
+                        CompanyInfoDao.TABLENAME,
+
+                        CheckTypeDao.TABLENAME,
+
+                        startDate.getTime(),
+                        endDate.getTime(),
+
+                        CompanyInfoDao.Properties.PlatformName.columnName
+
+                ), new String []{});
+                ArrayList<HashMap> retList = new ArrayList();
+                while (cursor.moveToNext()) {
+                    HashMap retObj = new HashMap();
+                    company = cursor.getString(cursor.getColumnIndex("COMPANY"));
+                    oilfield = cursor.getString(cursor.getColumnIndex("OILFIELD"));
+                    platform = cursor.getString(cursor.getColumnIndex("PLATFORM"));
+                    retObj.put("company",company+"_"+oilfield+"_"+platform);
+                    retObj.put("system",cursor.getString(cursor.getColumnIndex("SYSTEM")));
+                    retObj.put("checkPerson",cursor.getString(cursor.getColumnIndex("CHECK_PERSON")));
+                    retObj.put("profession",cursor.getString(cursor.getColumnIndex("PROFESSION")));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    checkDate = cursor.getString(cursor.getColumnIndex("CHECK_DATE"));
+                    checkDate = format.format(new Date(Long.valueOf(checkDate)));
+                    retObj.put("checkDate",checkDate);
+                    retObj.put("platformId",cursor.getString(cursor.getColumnIndex("COMPANY_ID")));
+                    retObj.put("systemId",cursor.getString(cursor.getColumnIndex("SYSTEM_ID")));
+                    retList.add(retObj);
+                }
+                return retList;
+            }
+            else{
+                Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT A.%s AS CHECK_PERSON,A.%s AS PROFESSION,A.%s AS CHECK_DATE,B.%s AS COMPANY,B.%s AS OILFIELD,B.%s AS PLATFORM,E.NAME AS SYSTEM,A.%s AS COMPANY_ID,E.%s AS SYSTEM_ID FROM %s AS A " +
+                                "INNER JOIN %s AS B ON A.COMPANY_INFO_ID=B._id INNER JOIN %s AS E ON A.CHECK_TYPE_ID=E._id " +
+                                "WHERE " +
+                                "(A.PARAM1='否' OR A.PARAM2='否' OR A.PARAM3='否' OR A.PARAM4='否' OR A.PARAM5='否' OR A.PARAM6='否' OR A.PARAM7='否' OR A.PARAM8='否' OR A.PARAM9='否' OR A.PARAM10='否' OR A.PARAM11='否'" +
+                                " OR A.PARAM12='否' OR A.PARAM13='否' OR A.PARAM14='否' OR A.PARAM15='否' OR A.PARAM16='否' OR A.PARAM17='否' OR A.PARAM18='否' OR A.PARAM19='否' OR A.PARAM20='否' OR A.PARAM21='否' OR A.PARAM22='否' OR A.PARAM23='否' OR A.PARAM24='否' OR A.PARAM25='否' OR A.PARAM26='否') " +
+                                "GROUP BY B.%s,E.NAME,A.CHECK_DATE,A.CHECK_PERSON,A.PROFESSION",
+                        InspectionResultDao.Properties.CheckPerson.columnName,
+                        InspectionResultDao.Properties.Profession.columnName,
+                        InspectionResultDao.Properties.CheckDate.columnName,
+                        CompanyInfoDao.Properties.CompanyName.columnName,
+                        CompanyInfoDao.Properties.OilfieldName.columnName,
+                        CompanyInfoDao.Properties.PlatformName.columnName,
+                        InspectionResultDao.Properties.CompanyInfoId.columnName,
+                        CheckTypeDao.Properties.Id.columnName,
+                        InspectionResultDao.TABLENAME,
+                        CompanyInfoDao.TABLENAME,
+
+                        CheckTypeDao.TABLENAME,
+                        CompanyInfoDao.Properties.PlatformName.columnName
+
+                ), new String []{});
+                ArrayList<HashMap> retList = new ArrayList();
+                while (cursor.moveToNext()) {
+                    HashMap retObj = new HashMap();
+                    company = cursor.getString(cursor.getColumnIndex("COMPANY"));
+                    oilfield = cursor.getString(cursor.getColumnIndex("OILFIELD"));
+                    platform = cursor.getString(cursor.getColumnIndex("PLATFORM"));
+                    retObj.put("company",company+"_"+oilfield+"_"+platform);
+                    retObj.put("system",cursor.getString(cursor.getColumnIndex("SYSTEM")));
+                    retObj.put("checkPerson",cursor.getString(cursor.getColumnIndex("CHECK_PERSON")));
+                    retObj.put("profession",cursor.getString(cursor.getColumnIndex("PROFESSION")));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    checkDate = cursor.getString(cursor.getColumnIndex("CHECK_DATE"));
+                    checkDate = format.format(new Date(Long.valueOf(checkDate)));
+                    retObj.put("checkDate",checkDate);
+                    retObj.put("platformId",cursor.getString(cursor.getColumnIndex("COMPANY_ID")));
+                    retObj.put("systemId",cursor.getString(cursor.getColumnIndex("SYSTEM_ID")));
+                    retList.add(retObj);
+                }
+                return retList;
+            }
+        }
+        ///////////
+        else if(platformId!=0 && systemId==0){
+            if(startDate!=null && endDate!=null){
+                Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT A.%s AS CHECK_PERSON,A.%s AS PROFESSION,A.%s AS CHECK_DATE,B.%s AS COMPANY,B.%s AS OILFIELD,B.%s AS PLATFORM,E.NAME AS SYSTEM,A.%s AS COMPANY_ID,E.%s AS SYSTEM_ID FROM %s AS A " +
+                                "INNER JOIN %s AS B ON A.COMPANY_INFO_ID=B._id INNER JOIN %s AS E ON A.CHECK_TYPE_ID=E._id " +
+                                "WHERE " +
+                                "(A.PARAM1='否' OR A.PARAM2='否' OR A.PARAM3='否' OR A.PARAM4='否' OR A.PARAM5='否' OR A.PARAM6='否' OR A.PARAM7='否' OR A.PARAM8='否' OR A.PARAM9='否' OR A.PARAM10='否' OR A.PARAM11='否'" +
+                                " OR A.PARAM12='否' OR A.PARAM13='否' OR A.PARAM14='否' OR A.PARAM15='否' OR A.PARAM16='否' OR A.PARAM17='否' OR A.PARAM18='否' OR A.PARAM19='否' OR A.PARAM20='否' OR A.PARAM21='否' OR A.PARAM22='否' OR A.PARAM23='否' OR A.PARAM24='否' OR A.PARAM25='否' OR A.PARAM26='否') " +
+                                "AND A.%s=%s AND CAST(A.CHECK_DATE AS INTEGER)>%s AND CAST(A.CHECK_DATE AS INTEGER)<%s GROUP BY B.%s,E.NAME,A.CHECK_DATE,A.CHECK_PERSON,A.PROFESSION",
+                        InspectionResultDao.Properties.CheckPerson.columnName,
+                        InspectionResultDao.Properties.Profession.columnName,
+                        InspectionResultDao.Properties.CheckDate.columnName,
+                        CompanyInfoDao.Properties.CompanyName.columnName,
+                        CompanyInfoDao.Properties.OilfieldName.columnName,
+                        CompanyInfoDao.Properties.PlatformName.columnName,
+                        InspectionResultDao.Properties.CompanyInfoId.columnName,
+                        CheckTypeDao.Properties.Id.columnName,
+                        InspectionResultDao.TABLENAME,
+                        CompanyInfoDao.TABLENAME,
+
+                        CheckTypeDao.TABLENAME,
+
+                        InspectionResultDao.Properties.CompanyInfoId.columnName,
+                        platformId,
+                        startDate.getTime(),
+                        endDate.getTime(),
+
+                        CompanyInfoDao.Properties.PlatformName.columnName
+
+                ), new String []{});
+                ArrayList<HashMap> retList = new ArrayList();
+                while (cursor.moveToNext()) {
+                    HashMap retObj = new HashMap();
+                    company = cursor.getString(cursor.getColumnIndex("COMPANY"));
+                    oilfield = cursor.getString(cursor.getColumnIndex("OILFIELD"));
+                    platform = cursor.getString(cursor.getColumnIndex("PLATFORM"));
+                    retObj.put("company",company+"_"+oilfield+"_"+platform);
+                    retObj.put("system",cursor.getString(cursor.getColumnIndex("SYSTEM")));
+                    retObj.put("checkPerson",cursor.getString(cursor.getColumnIndex("CHECK_PERSON")));
+                    retObj.put("profession",cursor.getString(cursor.getColumnIndex("PROFESSION")));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    checkDate = cursor.getString(cursor.getColumnIndex("CHECK_DATE"));
+                    checkDate = format.format(new Date(Long.valueOf(checkDate)));
+                    retObj.put("checkDate",checkDate);
+                    retObj.put("platformId",cursor.getString(cursor.getColumnIndex("COMPANY_ID")));
+                    retObj.put("systemId",cursor.getString(cursor.getColumnIndex("SYSTEM_ID")));
+                    retList.add(retObj);
+                }
+                return retList;
+            }
+            else{
+                Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT A.%s AS CHECK_PERSON,A.%s AS PROFESSION,A.%s AS CHECK_DATE,B.%s AS COMPANY,B.%s AS OILFIELD,B.%s AS PLATFORM,E.NAME AS SYSTEM,A.%s AS COMPANY_ID,E.%s AS SYSTEM_ID FROM %s AS A " +
+                                "INNER JOIN %s AS B ON A.COMPANY_INFO_ID=B._id INNER JOIN %s AS E ON A.CHECK_TYPE_ID=E._id " +
+                                "WHERE " +
+                                "(A.PARAM1='否' OR A.PARAM2='否' OR A.PARAM3='否' OR A.PARAM4='否' OR A.PARAM5='否' OR A.PARAM6='否' OR A.PARAM7='否' OR A.PARAM8='否' OR A.PARAM9='否' OR A.PARAM10='否' OR A.PARAM11='否'" +
+                                " OR A.PARAM12='否' OR A.PARAM13='否' OR A.PARAM14='否' OR A.PARAM15='否' OR A.PARAM16='否' OR A.PARAM17='否' OR A.PARAM18='否' OR A.PARAM19='否' OR A.PARAM20='否' OR A.PARAM21='否' OR A.PARAM22='否' OR A.PARAM23='否' OR A.PARAM24='否' OR A.PARAM25='否' OR A.PARAM26='否') " +
+                                "AND A.%s=%s GROUP BY B.%s,E.NAME,A.CHECK_DATE,A.CHECK_PERSON,A.PROFESSION",
+                        InspectionResultDao.Properties.CheckPerson.columnName,
+                        InspectionResultDao.Properties.Profession.columnName,
+                        InspectionResultDao.Properties.CheckDate.columnName,
+                        CompanyInfoDao.Properties.CompanyName.columnName,
+                        CompanyInfoDao.Properties.OilfieldName.columnName,
+                        CompanyInfoDao.Properties.PlatformName.columnName,
+                        InspectionResultDao.Properties.CompanyInfoId.columnName,
+                        CheckTypeDao.Properties.Id.columnName,
+                        InspectionResultDao.TABLENAME,
+                        CompanyInfoDao.TABLENAME,
+
+                        CheckTypeDao.TABLENAME,
+                        InspectionResultDao.Properties.CompanyInfoId.columnName,
+                        platformId,
+                        CompanyInfoDao.Properties.PlatformName.columnName
+
+                ), new String []{});
+                ArrayList<HashMap> retList = new ArrayList();
+                while (cursor.moveToNext()) {
+                    HashMap retObj = new HashMap();
+                    company = cursor.getString(cursor.getColumnIndex("COMPANY"));
+                    oilfield = cursor.getString(cursor.getColumnIndex("OILFIELD"));
+                    platform = cursor.getString(cursor.getColumnIndex("PLATFORM"));
+                    retObj.put("company",company+"_"+oilfield+"_"+platform);
+                    retObj.put("system",cursor.getString(cursor.getColumnIndex("SYSTEM")));
+                    retObj.put("checkPerson",cursor.getString(cursor.getColumnIndex("CHECK_PERSON")));
+                    retObj.put("profession",cursor.getString(cursor.getColumnIndex("PROFESSION")));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    checkDate = cursor.getString(cursor.getColumnIndex("CHECK_DATE"));
+                    checkDate = format.format(new Date(Long.valueOf(checkDate)));
+                    retObj.put("checkDate",checkDate);
+                    retObj.put("platformId",cursor.getString(cursor.getColumnIndex("COMPANY_ID")));
+                    retObj.put("systemId",cursor.getString(cursor.getColumnIndex("SYSTEM_ID")));
+                    retList.add(retObj);
+                }
+                return retList;
+            }
+        }
+        //////
+        else if(platformId==0 && systemId!=0){
+            if(startDate!=null && endDate!=null){
+                Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT A.%s AS CHECK_PERSON,A.%s AS PROFESSION,A.%s AS CHECK_DATE,B.%s AS COMPANY,B.%s AS OILFIELD,B.%s AS PLATFORM,E.NAME AS SYSTEM,A.%s AS COMPANY_ID,E.%s AS SYSTEM_ID FROM %s AS A " +
+                                "INNER JOIN %s AS B ON A.COMPANY_INFO_ID=B._id INNER JOIN %s AS E ON A.CHECK_TYPE_ID=E._id " +
+                                "WHERE " +
+                                "(A.PARAM1='否' OR A.PARAM2='否' OR A.PARAM3='否' OR A.PARAM4='否' OR A.PARAM5='否' OR A.PARAM6='否' OR A.PARAM7='否' OR A.PARAM8='否' OR A.PARAM9='否' OR A.PARAM10='否' OR A.PARAM11='否'" +
+                                " OR A.PARAM12='否' OR A.PARAM13='否' OR A.PARAM14='否' OR A.PARAM15='否' OR A.PARAM16='否' OR A.PARAM17='否' OR A.PARAM18='否' OR A.PARAM19='否' OR A.PARAM20='否' OR A.PARAM21='否' OR A.PARAM22='否' OR A.PARAM23='否' OR A.PARAM24='否' OR A.PARAM25='否' OR A.PARAM26='否') " +
+                                "AND E.%s=%s AND CAST(A.CHECK_DATE AS INTEGER)>%s AND CAST(A.CHECK_DATE AS INTEGER)<%s GROUP BY B.%s,E.NAME,A.CHECK_DATE,A.CHECK_PERSON,A.PROFESSION",
+                        InspectionResultDao.Properties.CheckPerson.columnName,
+                        InspectionResultDao.Properties.Profession.columnName,
+                        InspectionResultDao.Properties.CheckDate.columnName,
+                        CompanyInfoDao.Properties.CompanyName.columnName,
+                        CompanyInfoDao.Properties.OilfieldName.columnName,
+                        CompanyInfoDao.Properties.PlatformName.columnName,
+                        InspectionResultDao.Properties.CompanyInfoId.columnName,
+                        CheckTypeDao.Properties.Id.columnName,
+                        InspectionResultDao.TABLENAME,
+                        CompanyInfoDao.TABLENAME,
+
+                        CheckTypeDao.TABLENAME,
+
+                        CheckTypeDao.Properties.Id.columnName,
+                        systemId,
+                        startDate.getTime(),
+                        endDate.getTime(),
+
+                        CompanyInfoDao.Properties.PlatformName.columnName
+
+                ), new String []{});
+                ArrayList<HashMap> retList = new ArrayList();
+                while (cursor.moveToNext()) {
+                    HashMap retObj = new HashMap();
+                    company = cursor.getString(cursor.getColumnIndex("COMPANY"));
+                    oilfield = cursor.getString(cursor.getColumnIndex("OILFIELD"));
+                    platform = cursor.getString(cursor.getColumnIndex("PLATFORM"));
+                    retObj.put("company",company+"_"+oilfield+"_"+platform);
+                    retObj.put("system",cursor.getString(cursor.getColumnIndex("SYSTEM")));
+                    retObj.put("checkPerson",cursor.getString(cursor.getColumnIndex("CHECK_PERSON")));
+                    retObj.put("profession",cursor.getString(cursor.getColumnIndex("PROFESSION")));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    checkDate = cursor.getString(cursor.getColumnIndex("CHECK_DATE"));
+                    checkDate = format.format(new Date(Long.valueOf(checkDate)));
+                    retObj.put("checkDate",checkDate);
+                    retObj.put("platformId",cursor.getString(cursor.getColumnIndex("COMPANY_ID")));
+                    retObj.put("systemId",cursor.getString(cursor.getColumnIndex("SYSTEM_ID")));
+                    retList.add(retObj);
+                }
+                return retList;
+            }
+            else{
+                Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT A.%s AS CHECK_PERSON,A.%s AS PROFESSION,A.%s AS CHECK_DATE,B.%s AS COMPANY,B.%s AS OILFIELD,B.%s AS PLATFORM,E.NAME AS SYSTEM,A.%s AS COMPANY_ID,E.%s AS SYSTEM_ID FROM %s AS A " +
+                                "INNER JOIN %s AS B ON A.COMPANY_INFO_ID=B._id INNER JOIN %s AS E ON A.CHECK_TYPE_ID=E._id " +
+                                "WHERE " +
+                                "(A.PARAM1='否' OR A.PARAM2='否' OR A.PARAM3='否' OR A.PARAM4='否' OR A.PARAM5='否' OR A.PARAM6='否' OR A.PARAM7='否' OR A.PARAM8='否' OR A.PARAM9='否' OR A.PARAM10='否' OR A.PARAM11='否'" +
+                                " OR A.PARAM12='否' OR A.PARAM13='否' OR A.PARAM14='否' OR A.PARAM15='否' OR A.PARAM16='否' OR A.PARAM17='否' OR A.PARAM18='否' OR A.PARAM19='否' OR A.PARAM20='否' OR A.PARAM21='否' OR A.PARAM22='否' OR A.PARAM23='否' OR A.PARAM24='否' OR A.PARAM25='否' OR A.PARAM26='否') " +
+                                "AND E.%s=%s GROUP BY B.%s,E.NAME,A.CHECK_DATE,A.CHECK_PERSON,A.PROFESSION",
+                        InspectionResultDao.Properties.CheckPerson.columnName,
+                        InspectionResultDao.Properties.Profession.columnName,
+                        InspectionResultDao.Properties.CheckDate.columnName,
+                        CompanyInfoDao.Properties.CompanyName.columnName,
+                        CompanyInfoDao.Properties.OilfieldName.columnName,
+                        CompanyInfoDao.Properties.PlatformName.columnName,
+                        InspectionResultDao.Properties.CompanyInfoId.columnName,
+                        CheckTypeDao.Properties.Id.columnName,
+                        InspectionResultDao.TABLENAME,
+                        CompanyInfoDao.TABLENAME,
+
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.Properties.Id.columnName,
+                        systemId,
+                        CompanyInfoDao.Properties.PlatformName.columnName
+
+                ), new String []{});
+                ArrayList<HashMap> retList = new ArrayList();
+                while (cursor.moveToNext()) {
+                    HashMap retObj = new HashMap();
+                    company = cursor.getString(cursor.getColumnIndex("COMPANY"));
+                    oilfield = cursor.getString(cursor.getColumnIndex("OILFIELD"));
+                    platform = cursor.getString(cursor.getColumnIndex("PLATFORM"));
+                    retObj.put("company",company+"_"+oilfield+"_"+platform);
+                    retObj.put("system",cursor.getString(cursor.getColumnIndex("SYSTEM")));
+                    retObj.put("checkPerson",cursor.getString(cursor.getColumnIndex("CHECK_PERSON")));
+                    retObj.put("profession",cursor.getString(cursor.getColumnIndex("PROFESSION")));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    checkDate = cursor.getString(cursor.getColumnIndex("CHECK_DATE"));
+                    checkDate = format.format(new Date(Long.valueOf(checkDate)));
+                    retObj.put("checkDate",checkDate);
+                    retObj.put("platformId",cursor.getString(cursor.getColumnIndex("COMPANY_ID")));
+                    retObj.put("systemId",cursor.getString(cursor.getColumnIndex("SYSTEM_ID")));
+                    retList.add(retObj);
+                }
+                return retList;
+            }
+        }
+        else if(platformId!=0 && systemId!=0){
+            if(startDate!=null && endDate!=null){
+                Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT A.%s AS CHECK_PERSON,A.%s AS PROFESSION,A.%s AS CHECK_DATE,B.%s AS COMPANY,B.%s AS OILFIELD,B.%s AS PLATFORM,E.NAME AS SYSTEM,A.%s AS COMPANY_ID,E.%s AS SYSTEM_ID FROM %s AS A " +
+                                "INNER JOIN %s AS B ON A.COMPANY_INFO_ID=B._id INNER JOIN %s AS E ON A.CHECK_TYPE_ID=E._id " +
+                                "WHERE " +
+                                "(A.PARAM1='否' OR A.PARAM2='否' OR A.PARAM3='否' OR A.PARAM4='否' OR A.PARAM5='否' OR A.PARAM6='否' OR A.PARAM7='否' OR A.PARAM8='否' OR A.PARAM9='否' OR A.PARAM10='否' OR A.PARAM11='否'" +
+                                " OR A.PARAM12='否' OR A.PARAM13='否' OR A.PARAM14='否' OR A.PARAM15='否' OR A.PARAM16='否' OR A.PARAM17='否' OR A.PARAM18='否' OR A.PARAM19='否' OR A.PARAM20='否' OR A.PARAM21='否' OR A.PARAM22='否' OR A.PARAM23='否' OR A.PARAM24='否' OR A.PARAM25='否' OR A.PARAM26='否') " +
+                                "AND E.%s=%s AND A.%s=%s AND CAST(A.CHECK_DATE AS INTEGER)>%s AND CAST(A.CHECK_DATE AS INTEGER)<%s GROUP BY B.%s,E.NAME,A.CHECK_DATE,A.CHECK_PERSON,A.PROFESSION",
+                        InspectionResultDao.Properties.CheckPerson.columnName,
+                        InspectionResultDao.Properties.Profession.columnName,
+                        InspectionResultDao.Properties.CheckDate.columnName,
+                        CompanyInfoDao.Properties.CompanyName.columnName,
+                        CompanyInfoDao.Properties.OilfieldName.columnName,
+                        CompanyInfoDao.Properties.PlatformName.columnName,
+                        InspectionResultDao.Properties.CompanyInfoId.columnName,
+                        CheckTypeDao.Properties.Id.columnName,
+                        InspectionResultDao.TABLENAME,
+                        CompanyInfoDao.TABLENAME,
+
+                        CheckTypeDao.TABLENAME,
+
+                        CheckTypeDao.Properties.Id.columnName,
+                        systemId,
+                        InspectionResultDao.Properties.CompanyInfoId.columnName,
+                        platformId,
+                        startDate.getTime(),
+                        endDate.getTime(),
+
+                        CompanyInfoDao.Properties.PlatformName.columnName
+
+                ), new String []{});
+                ArrayList<HashMap> retList = new ArrayList();
+                while (cursor.moveToNext()) {
+                    HashMap retObj = new HashMap();
+                    company = cursor.getString(cursor.getColumnIndex("COMPANY"));
+                    oilfield = cursor.getString(cursor.getColumnIndex("OILFIELD"));
+                    platform = cursor.getString(cursor.getColumnIndex("PLATFORM"));
+                    retObj.put("company",company+"_"+oilfield+"_"+platform);
+                    retObj.put("system",cursor.getString(cursor.getColumnIndex("SYSTEM")));
+                    retObj.put("checkPerson",cursor.getString(cursor.getColumnIndex("CHECK_PERSON")));
+                    retObj.put("profession",cursor.getString(cursor.getColumnIndex("PROFESSION")));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    checkDate = cursor.getString(cursor.getColumnIndex("CHECK_DATE"));
+                    checkDate = format.format(new Date(Long.valueOf(checkDate)));
+                    retObj.put("checkDate",checkDate);
+                    retObj.put("platformId",cursor.getString(cursor.getColumnIndex("COMPANY_ID")));
+                    retObj.put("systemId",cursor.getString(cursor.getColumnIndex("SYSTEM_ID")));
+                    retList.add(retObj);
+                }
+                return retList;
+            }
+            else{
+                Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT A.%s AS CHECK_PERSON,A.%s AS PROFESSION,A.%s AS CHECK_DATE,B.%s AS COMPANY,B.%s AS OILFIELD,B.%s AS PLATFORM,E.NAME AS SYSTEM,A.%s AS COMPANY_ID,E.%s AS SYSTEM_ID FROM %s AS A " +
+                                "INNER JOIN %s AS B ON A.COMPANY_INFO_ID=B._id INNER JOIN %s AS E ON A.CHECK_TYPE_ID=E._id " +
+                                "WHERE " +
+                                "(A.PARAM1='否' OR A.PARAM2='否' OR A.PARAM3='否' OR A.PARAM4='否' OR A.PARAM5='否' OR A.PARAM6='否' OR A.PARAM7='否' OR A.PARAM8='否' OR A.PARAM9='否' OR A.PARAM10='否' OR A.PARAM11='否'" +
+                                " OR A.PARAM12='否' OR A.PARAM13='否' OR A.PARAM14='否' OR A.PARAM15='否' OR A.PARAM16='否' OR A.PARAM17='否' OR A.PARAM18='否' OR A.PARAM19='否' OR A.PARAM20='否' OR A.PARAM21='否' OR A.PARAM22='否' OR A.PARAM23='否' OR A.PARAM24='否' OR A.PARAM25='否' OR A.PARAM26='否') " +
+                                "AND E.%s=%s AND A.%s=%s GROUP BY B.%s,E.NAME,A.CHECK_DATE,A.CHECK_PERSON,A.PROFESSION",
+                        InspectionResultDao.Properties.CheckPerson.columnName,
+                        InspectionResultDao.Properties.Profession.columnName,
+                        InspectionResultDao.Properties.CheckDate.columnName,
+                        CompanyInfoDao.Properties.CompanyName.columnName,
+                        CompanyInfoDao.Properties.OilfieldName.columnName,
+                        CompanyInfoDao.Properties.PlatformName.columnName,
+                        InspectionResultDao.Properties.CompanyInfoId.columnName,
+                        CheckTypeDao.Properties.Id.columnName,
+                        InspectionResultDao.TABLENAME,
+                        CompanyInfoDao.TABLENAME,
+
+                        CheckTypeDao.TABLENAME,
+                        CheckTypeDao.Properties.Id.columnName,
+                        systemId,
+                        InspectionResultDao.Properties.CompanyInfoId.columnName,
+                        platformId,
+                        CompanyInfoDao.Properties.PlatformName.columnName
+
+                ), new String []{});
+                ArrayList<HashMap> retList = new ArrayList();
+                while (cursor.moveToNext()) {
+                    HashMap retObj = new HashMap();
+                    company = cursor.getString(cursor.getColumnIndex("COMPANY"));
+                    oilfield = cursor.getString(cursor.getColumnIndex("OILFIELD"));
+                    platform = cursor.getString(cursor.getColumnIndex("PLATFORM"));
+                    retObj.put("company",company+"_"+oilfield+"_"+platform);
+                    retObj.put("system",cursor.getString(cursor.getColumnIndex("SYSTEM")));
+                    retObj.put("checkPerson",cursor.getString(cursor.getColumnIndex("CHECK_PERSON")));
+                    retObj.put("profession",cursor.getString(cursor.getColumnIndex("PROFESSION")));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    checkDate = cursor.getString(cursor.getColumnIndex("CHECK_DATE"));
+                    checkDate = format.format(new Date(Long.valueOf(checkDate)));
+                    retObj.put("checkDate",checkDate);
+                    retObj.put("platformId",cursor.getString(cursor.getColumnIndex("COMPANY_ID")));
+                    retObj.put("systemId",cursor.getString(cursor.getColumnIndex("SYSTEM_ID")));
+                    retList.add(retObj);
+                }
+                return retList;
+            }
+        }
+
+        return null;
+    }
+
+    @Override
     public List<YearCheckResult> getYearCheckDetail(long platformId, long systemId, String checkDate, String systemNumber, String protectArea) {
         QueryBuilder<YearCheckResult> queryBuilder;
         List<YearCheckResult> dataList1;
@@ -882,6 +1287,11 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
         dataList.addAll(dataList1);
 
         return dataList;
+    }
+
+    @Override
+    public List<YearCheckResult> getInspectionDetail(long platformId, long systemId, String checkDate, String checkPerson, String profession) {
+        return null;
     }
 
 
