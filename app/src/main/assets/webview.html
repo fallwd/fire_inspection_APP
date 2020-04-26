@@ -36,200 +36,107 @@
     }
 
     #oricle {
-        width: 200px;
-        height: 200px;
+        width: 100%;
+        height: 240px;
     }
 </style>
 
 <body>
-    <!--<ul class="todo_list" id="todo_list"></ul>-->
     <div class="oricle_wrapper">
         <div id="oricle"></div>
     </div>
     <script src="./jquery.min.js"></script>
     <script src="./echarts.min.js"></script>
     <script>
-        var dataList = [];
-
-        function runJs(text) {
-            if (text !== "") {
-                renderChart();
-            }
-        }
-
         function renderChart() {
-            var m2R2Data = [{
-                    value: 335,
-                    legendname: '种类01',
-                    name: "种类01  335",
-                    itemStyle: {
-                        color: "#8d7fec"
-                    }
-                },
-                {
-                    value: 310,
-                    legendname: '种类02',
-                    name: "种类02  310",
-                    itemStyle: {
-                        color: "#5085f2"
-                    }
-                },
-                {
-                    value: 234,
-                    legendname: '种类03',
-                    name: "种类03  234",
-                    itemStyle: {
-                        color: "#e75fc3"
-                    }
-                },
-                {
-                    value: 154,
-                    legendname: '种类04',
-                    name: "种类04  154",
-                    itemStyle: {
-                        color: "#f87be2"
-                    }
-                },
-                {
-                    value: 335,
-                    legendname: '种类05',
-                    name: "种类05  335",
-                    itemStyle: {
-                        color: "#f2719a"
-                    }
-                },
-                {
-                    value: 335,
-                    legendname: '种类06',
-                    name: "种类06  335",
-                    itemStyle: {
-                        color: "#fca4bb"
-                    }
-                },
-                {
-                    value: 335,
-                    legendname: '种类07',
-                    name: "种类07  335",
-                    itemStyle: {
-                        color: "#f59a8f"
-                    }
-                },
-                {
-                    value: 335,
-                    legendname: '种类08',
-                    name: "种类08  335",
-                    itemStyle: {
-                        color: "#fdb301"
-                    }
-                },
-                {
-                    value: 335,
-                    legendname: '种类09',
-                    name: "种类09  335",
-                    itemStyle: {
-                        color: "#57e7ec"
-                    }
-                },
-                {
-                    value: 335,
-                    legendname: '种类10',
-                    name: "种类10  335",
-                    itemStyle: {
-                        color: "#cf9ef1"
-                    }
-                },
-                {
-                    value: 335,
-                    legendname: '种类09',
-                    name: "种类11  335",
-                    itemStyle: {
-                        color: "#57e7ec"
-                    }
-                },
-                {
-                    value: 335,
-                    legendname: '种类10',
-                    name: "种类12  335",
-                    itemStyle: {
-                        color: "#cf9ef1"
-                    }
-                },
-            ];
-            var option = {
-                title: [{
-                        text: '标题',
-                        textStyle: {
-                            fontSize: 16,
-                            color: "black"
-                        },
-                        left: "2%"
-                    },
-                    {
-                        text: '合计',
-                        subtext: 12312 + '个',
-                        textStyle: {
-                            fontSize: 20,
-                            color: "black"
-                        },
-                        subtextStyle: {
-                            fontSize: 20,
-                            color: 'black'
-                        },
-                        textAlign: "center",
-                        x: '34.5%',
-                        y: '44%',
-                    }
-                ],
+           var option = {
                 tooltip: {
                     trigger: 'item',
-                    formatter: function (parms) {
-                        var str = parms.seriesName + "</br>" +
-                            parms.marker + "" + parms.data.legendname + "</br>" +
-                            "数量：" + parms.data.value + "</br>" +
-                            "占比：" + parms.percent + "%";
-                        return str;
-                    }
+                    formatter: '{a} <br/>{b}: {c} ({d}%)'
                 },
                 legend: {
-                    type: "scroll",
+                    show：false,
                     orient: 'vertical',
-                    left: '70%',
-                    align: 'left',
-                    top: 'middle',
-                    textStyle: {
-                        color: '#8C8C8C'
-                    },
-                    height: 250
+                    left: 50,
+                    data: ['传统', '法律', '房地产', '互联网', '金融', '军工','媒体', '其它', '通信', '政企', '咨询','制造业', '法律', '房地产商', '电商', '工具', '科技', '平台', '其它', '社区', '视频', '阅读', '直播', '制造商', '资讯', '自媒体', '综合', '保险', '基金', '审计', '银行', '证券', '军工', '广电', '日报', '服务', '其它', '医疗', '制药', '运营商', '制造商', '大型企业', '服务商', '政府', '咨询']
                 },
-                series: [{
-                    name: '标题',
-                    type: 'pie',
-                    center: ['35%', '50%'],
-                    radius: ['40%', '65%'],
-                    clockwise: false, //饼图的扇区是否是顺时针排布
-                    avoidLabelOverlap: false,
-                    label: {
-                        normal: {
-                            show: true,
-                            position: 'outter',
-                            formatter: function (parms) {
-                                return parms.data.legendname
-                            }
-                        }
+                series: [
+                    {
+                        name: '系统',
+                        type: 'pie',
+                        selectedMode: 'single',
+                        radius: [0, '30%'],
+
+                        label: {
+                            position: 'inner'
+                        },
+                        labelLine: {
+                            show: false
+                        },
+                        data: [
+                                {value: 20, name: '隐患A' },
+                                {value: 25, name: '隐患B'},
+                                {value: 30, name: '隐患C',selected:true},
+                                {value: 35, name: '隐患D'},
+                                {value: 40, name: '隐患E'}
+                        ]
                     },
-                    labelLine: {
-                        normal: {
-                            length: 5,
-                            length2: 3,
-                            smooth: true,
-                        }
+                    {
+                        name: '油田',
+                        type: 'pie',
+                        radius: ['38%', '55%'],
+                        label: {
+                            position: 'inner'
+                        },
+                        data: [
+                            {value: 20, name: '油田A'},
+                            {value: 25, name: '油田B'},
+                            {value: 30, name: '油田C',selected:true},
+                            {value: 35, name: '油田D'},
+                            {value: 40, name: '油田E'}
+                        ]
                     },
-                    data: m2R2Data
-                }]
-            };
+                    {
+                        name: '平台',
+                        type: 'pie',
+                        radius: ['60%', '75%'],
+                        label: {
+                          position:'inside'
+                        },
+                        data: [
+                            {value: 20, name: '平台A'},
+                            {value: 25, name: '平台B'},
+                            {value: 30, name: '平台C'},
+                            {value: 35, name: '平台D', selected:true},
+                            {value: 40, name: '平台E'}
+                        ]
+                    },
+                    {
+                        name: '公司',
+                        type: 'pie',
+                        radius: ['80%', '95%'],
+                        label: {
+
+                        },
+                        data: [
+                            {value: 20, name: '公司A'},
+                            {value: 25, name: '公司B'},
+                            {value: 30, name: '公司C', selected:true},
+                            {value: 35, name: '公司D'},
+                            {value: 40, name: '公司E'}
+                        ]
+                    }
+                ]
+            }
             var pie = echarts.init(document.getElementById("oricle"));
             pie.setOption(option);
+            pie.on('click',function(a){
+                 alert(a.name)
+                 window.injectedObject.startFunction(a.name)
+            })
+            pie.resize();
         }
+        renderChart();
     </script>
 </body>
 </html>
