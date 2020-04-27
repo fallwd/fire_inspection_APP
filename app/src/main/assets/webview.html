@@ -48,38 +48,37 @@
     <script src="./jquery.min.js"></script>
     <script src="./echarts.min.js"></script>
     <script>
-        function renderChart() {
-           var option = {
+        function runJs(isContinue, data) {
+            if (isContinue) {
+                renderChart(data)
+            }
+        }
+
+        function renderChart(data) {
+            data = JSON.parse(data);
+            var option = {
                 tooltip: {
                     trigger: 'item',
                     formatter: '{a} <br/>{b}: {c} ({d}%)'
                 },
                 legend: {
-                    show：false,
                     orient: 'vertical',
+                    show: 'false',
                     left: 50,
-                    data: ['传统', '法律', '房地产', '互联网', '金融', '军工','媒体', '其它', '通信', '政企', '咨询','制造业', '法律', '房地产商', '电商', '工具', '科技', '平台', '其它', '社区', '视频', '阅读', '直播', '制造商', '资讯', '自媒体', '综合', '保险', '基金', '审计', '银行', '证券', '军工', '广电', '日报', '服务', '其它', '医疗', '制药', '运营商', '制造商', '大型企业', '服务商', '政府', '咨询']
+                    data: []
                 },
-                series: [
-                    {
+                series: [{
                         name: '系统',
                         type: 'pie',
                         selectedMode: 'single',
                         radius: [0, '30%'],
-
                         label: {
                             position: 'inner'
                         },
                         labelLine: {
                             show: false
                         },
-                        data: [
-                                {value: 20, name: '隐患A' },
-                                {value: 25, name: '隐患B'},
-                                {value: 30, name: '隐患C',selected:true},
-                                {value: 35, name: '隐患D'},
-                                {value: 40, name: '隐患E'}
-                        ]
+                        data: []
                     },
                     {
                         name: '油田',
@@ -88,28 +87,16 @@
                         label: {
                             position: 'inner'
                         },
-                        data: [
-                            {value: 20, name: '油田A'},
-                            {value: 25, name: '油田B'},
-                            {value: 30, name: '油田C',selected:true},
-                            {value: 35, name: '油田D'},
-                            {value: 40, name: '油田E'}
-                        ]
+                        data: []
                     },
                     {
                         name: '平台',
                         type: 'pie',
                         radius: ['60%', '75%'],
                         label: {
-                          position:'inside'
+                            position: 'inside'
                         },
-                        data: [
-                            {value: 20, name: '平台A'},
-                            {value: 25, name: '平台B'},
-                            {value: 30, name: '平台C'},
-                            {value: 35, name: '平台D', selected:true},
-                            {value: 40, name: '平台E'}
-                        ]
+                        data: []
                     },
                     {
                         name: '公司',
@@ -118,48 +105,27 @@
                         label: {
 
                         },
-                        data: [
-                            {value: 20, name: '公司A'},
-                            {value: 25, name: '公司B'},
-                            {value: 30, name: '公司C', selected:true},
-                            {value: 35, name: '公司D'},
-                            {value: 40, name: '公司E'}
-                        ]
+                        data: []
                     }
                 ]
             }
             var pie = echarts.init(document.getElementById("oricle"));
+            if (data.length == 1) {
+                option.series[3].data = data[0].data;
+            } else if (data.length == 2) {
+                option.series[3].data = data[0].data;
+                option.series[2].data = data[1].data;
+            }
             pie.setOption(option);
-            pie.on('click',function(a){
-                 alert(a.name)
-                 window.injectedObject.startFunction(a.name)
+            pie.on('click', function (a) {
+                 if(a.data.type=="company"){
+                      window.injectedObject.startFunction(a.name)
+                 }else if{
+                     alert("将要加载平台数据")
+                 }
             })
             pie.resize();
         }
-        renderChart();
     </script>
 </body>
 </html>
-
-<!--function renderList(list){-->
-<!--var str = ``;-->
-<!--list.forEach(function(item,index){-->
-<!--str += `<li class="todo_list_item" id="todo_list_item_${index}"><span class="name">${item}</span><span class="delete">删除</span></li>`-->
-<!--})-->
-<!--document.getElementById("todo_list").innerHTML = str-->
-<!--if(list.length>0){-->
-<!--document.getElementById("todo_list").addEventListener('click', function (ev) {-->
-<!--var target = ev.target || ev.srcElement;-->
-<!--if (target.className == "delete") {-->
-<!--var e = document.getElementById(target.parentNode.id);-->
-<!--var text = e.firstChild.innerText;-->
-<!--dataList.forEach(function(item,i){-->
-<!--if(item == text){-->
-<!--dataList = dataList.splice(i,1);-->
-<!--document.getElementById("todo_list").removeChild(e);-->
-<!--}-->
-<!--})-->
-<!--}-->
-<!--});-->
-<!--}-->
-<!--}-->
