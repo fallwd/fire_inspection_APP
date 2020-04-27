@@ -26,6 +26,7 @@ public class MyJavascriptInterface {
      */
     @JavascriptInterface
     public void startFunction(String data) {
-        Log.e("startFunction", "----有参" + data);
+        //  这里接收到参数  需要去查数据库
+
     }
 }
