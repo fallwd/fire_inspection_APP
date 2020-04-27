@@ -50,10 +50,9 @@ public class NavigationActivity extends AppCompatActivity {
         });
         LinearLayout btn3 = (LinearLayout) findViewById(R.id.Navigation_Btn3);
 
-
         btn3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(NavigationActivity.this,MainActivity.class);
+                Intent intent = new Intent(NavigationActivity.this, HiddenLibaryActivity.class);
                 startActivity(intent);
             }
         });
@@ -65,7 +64,6 @@ public class NavigationActivity extends AppCompatActivity {
             }
         });
     }
-
 
     //申请两个权限，录音和文件读写
     //1、首先声明一个数组permissions，将需要的权限都放在里面
@@ -94,5 +92,4 @@ public class NavigationActivity extends AppCompatActivity {
         }
 
     }
-
 }
