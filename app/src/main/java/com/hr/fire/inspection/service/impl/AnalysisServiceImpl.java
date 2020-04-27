@@ -180,6 +180,7 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
 //            retObj.put("company",cursor.getString(cursor.getColumnIndex("COMPANY")));
             retObj.put("name",cursor.getString(cursor.getColumnIndex("OILFIELD")));
             retObj.put("value",cursor.getString(cursor.getColumnIndex("C")));
+            retObj.put("param1",companyName);
             retObj.put("type","oilfield");
             retList.add(retObj);
         }
@@ -234,7 +235,7 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
     }
 
     @Override
-    public List<HashMap> getPlatformCountByYearCheck(String year) {
+    public List<HashMap> getPlatformCountByYearCheck(String year, String companyName, String oilfieldName) {
         // 拼接年份
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date startDate = null;
@@ -249,9 +250,10 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        List<HashMap> allDataList = this.getOilfieldCountByYearCheck(year,companyName);
 
         Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT COUNT(%s.%s) AS C,%s.%s AS COMPANY,%s.%s AS OILFIELD,%s.%s AS PLATFORM FROM %s INNER JOIN %s ON %s.COMPANY_INFO_ID=%s._id " +
-                        "WHERE %s.%s='否' AND CAST(%s.CHECK_DATE AS INTEGER)>%s AND CAST(%s.CHECK_DATE AS INTEGER)<%s GROUP BY %s.%s",
+                        "WHERE %s.%s='否' AND %s.%s='%s' AND CAST(%s.CHECK_DATE AS INTEGER)>%s AND CAST(%s.CHECK_DATE AS INTEGER)<%s GROUP BY %s.%s",
                 YearCheckResultDao.TABLENAME,
                 YearCheckResultDao.Properties.IsPass.columnName,
                 CompanyInfoDao.TABLENAME,
@@ -266,6 +268,11 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
                 CompanyInfoDao.TABLENAME,
                 YearCheckResultDao.TABLENAME,
                 YearCheckResultDao.Properties.IsPass.columnName,
+
+                CompanyInfoDao.TABLENAME,
+                CompanyInfoDao.Properties.OilfieldName.columnName,
+                oilfieldName,
+
                 YearCheckResultDao.TABLENAME,
                 startDate.getTime(),
                 YearCheckResultDao.TABLENAME,
@@ -274,16 +281,23 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
                 CompanyInfoDao.Properties.PlatformName.columnName
 
         ), new String []{});
+        HashMap currentData = new HashMap();
+        currentData.put("name","platform");
         ArrayList<HashMap> retList = new ArrayList();
         while (cursor.moveToNext()) {
             HashMap retObj = new HashMap();
-            retObj.put("company",cursor.getString(cursor.getColumnIndex("COMPANY")));
-            retObj.put("oilfield",cursor.getString(cursor.getColumnIndex("OILFIELD")));
-            retObj.put("platform",cursor.getString(cursor.getColumnIndex("PLATFORM")));
-            retObj.put("count",cursor.getString(cursor.getColumnIndex("C")));
+//            retObj.put("company",cursor.getString(cursor.getColumnIndex("COMPANY")));
+//            retObj.put("oilfield",cursor.getString(cursor.getColumnIndex("OILFIELD")));
+            retObj.put("name",cursor.getString(cursor.getColumnIndex("PLATFORM")));
+            retObj.put("value",cursor.getString(cursor.getColumnIndex("C")));
+            retObj.put("param1",companyName);
+            retObj.put("param2",oilfieldName);
+            retObj.put("type","platform");
             retList.add(retObj);
         }
-        return retList;
+        currentData.put("data",retList);
+        allDataList.add(currentData);
+        return allDataList;
     }
 
     @Override
@@ -334,7 +348,7 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
     }
 
     @Override
-    public List<HashMap> getSystemCountByYearCheck(String year) {
+    public List<HashMap> getSystemCountByYearCheck(String year, String companyName, String oilfieldName, String platform) {
         // 拼接年份
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date startDate = null;
@@ -352,9 +366,10 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
         // 三层关系sql 思路 两张表联合，
         // 一张表inner join parentId=0 --->一级
         // 另一张表 inner join parentId!=0 --->二级 inner join parentId=0 一级
+        List<HashMap> allDataList = this.getPlatformCountByYearCheck(year,companyName,oilfieldName);
         Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT COUNT(Q.%s) AS C,W.%s AS COMPANY,W.%s AS OILFIELD,W.%s AS PLATFORM,R.PARENT_NAME AS SYSTEM FROM %s AS Q INNER JOIN %s AS W ON Q.COMPANY_INFO_ID=W._id " +
                         "INNER JOIN (SELECT E3._id AS ID,E3.NAME AS NAME,E3.PARENT_ID AS PARENT_ID,E4.NAME AS PARENT_NAME FROM %s AS E3 INNER JOIN %s AS E4 ON E3.PARENT_ID=E4._id WHERE E3.TYPE=1 AND E4.PARENT_ID=0 UNION SELECT E1._id AS ID,E1.NAME AS NAME,E5._id AS PARENT_ID,E5.NAME AS PARENT_NAME FROM %s AS E1 INNER JOIN %s AS E2 ON E1.PARENT_ID=E2._id INNER JOIN %s AS E5 ON E2.PARENT_ID=E5._id WHERE E1.TYPE=1 AND E2.PARENT_ID!=0 AND E5.PARENT_ID=0) AS R ON Q.CHECK_TYPE_ID=R.ID " +
-                        "WHERE Q.%s='否' AND CAST(Q.CHECK_DATE AS INTEGER)>%s AND CAST(Q.CHECK_DATE AS INTEGER)<%s GROUP BY W.%s,R.PARENT_NAME",
+                        "WHERE Q.%s='否' AND W.%s='%s' AND CAST(Q.CHECK_DATE AS INTEGER)>%s AND CAST(Q.CHECK_DATE AS INTEGER)<%s GROUP BY W.%s,R.PARENT_NAME",
                 YearCheckResultDao.Properties.IsPass.columnName,
                 CompanyInfoDao.Properties.CompanyName.columnName,
                 CompanyInfoDao.Properties.OilfieldName.columnName,
@@ -369,22 +384,29 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
                 CheckTypeDao.TABLENAME,
 
                 YearCheckResultDao.Properties.IsPass.columnName,
+
+                CompanyInfoDao.Properties.PlatformName.columnName,
+                platform,
+
                 startDate.getTime(),
                 endDate.getTime(),
                 CompanyInfoDao.Properties.PlatformName.columnName
 
         ), new String []{});
+        HashMap currentData = new HashMap();
+        currentData.put("name","system");
         ArrayList<HashMap> retList = new ArrayList();
         while (cursor.moveToNext()) {
             HashMap retObj = new HashMap();
 //            Log.i("tang","getCompanyCountByYearCheck");
 //            Log.i("tang",cursor.getString(cursor.getColumnIndex("C")));
 //            Log.i("tang",cursor.getString(cursor.getColumnIndex("COMPANY")));
-            retObj.put("company",cursor.getString(cursor.getColumnIndex("COMPANY")));
-            retObj.put("oilfield",cursor.getString(cursor.getColumnIndex("OILFIELD")));
-            retObj.put("platform",cursor.getString(cursor.getColumnIndex("PLATFORM")));
-            retObj.put("system",cursor.getString(cursor.getColumnIndex("SYSTEM")));
-            retObj.put("count",cursor.getString(cursor.getColumnIndex("C")));
+//            retObj.put("company",cursor.getString(cursor.getColumnIndex("COMPANY")));
+//            retObj.put("oilfield",cursor.getString(cursor.getColumnIndex("OILFIELD")));
+//            retObj.put("platform",cursor.getString(cursor.getColumnIndex("PLATFORM")));
+            retObj.put("name",cursor.getString(cursor.getColumnIndex("SYSTEM")));
+            retObj.put("value",cursor.getString(cursor.getColumnIndex("C")));
+            retObj.put("type","system");
             retList.add(retObj);
         }
 
@@ -406,7 +428,9 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
 ////            retList.add(retObj);
 //        }
 
-        return retList;
+        currentData.put("data",retList);
+        allDataList.add(currentData);
+        return allDataList;
     }
 
     @Override
