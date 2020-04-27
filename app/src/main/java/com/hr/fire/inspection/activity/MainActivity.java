@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onJsAlert(WebView view, String url, String message, final JsResult result) {

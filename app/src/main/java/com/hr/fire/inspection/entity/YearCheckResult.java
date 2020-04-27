@@ -267,25 +267,7 @@ public void __setDaoSession(DaoSession daoSession) {
     myDao = daoSession != null ? daoSession.getYearCheckResultDao() : null;
 }
 
-    @Override
-    public String toString() {
-        return "YearCheckResult{" +
-                "id=" + id +
-                ", yearCheckId=" + yearCheckId +
-                ", yearCheck=" + yearCheck +
-                ", isPass='" + isPass + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", videoUrl='" + videoUrl + '\'' +
-                ", description='" + description + '\'' +
-                ", itemInfoId=" + itemInfoId +
-                ", itemInfo=" + itemInfo +
-                ", targetId=" + targetId +
-                ", daoSession=" + daoSession +
-                ", myDao=" + myDao +
-                ", yearCheck__resolvedKey=" + yearCheck__resolvedKey +
-                ", itemInfo__resolvedKey=" + itemInfo__resolvedKey +
-                '}';
-    }
+
 
     public Long getCheckTypeId() {
         return this.checkTypeId;
@@ -387,4 +369,26 @@ public void __setDaoSession(DaoSession daoSession) {
         }
     }
 
+    @Override
+    public String toString() {
+        return "YearCheckResult{" +
+                "id=" + id +
+                ", yearCheckId=" + yearCheckId +
+                ", yearCheck=" + yearCheck +
+                ", isPass='" + isPass + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", videoUrl='" + videoUrl + '\'' +
+                ", description='" + description + '\'' +
+                ", SystemNumber='" + SystemNumber + '\'' +
+                ", ProtectArea='" + ProtectArea + '\'' +
+                ", checkDate=" + checkDate +
+                ", itemInfoId=" + itemInfoId +
+                ", itemInfo=" + itemInfo +
+                ", companyInfoId=" + companyInfoId +
+                ", companyInfo=" + companyInfo +
+                ", checkTypeId=" + checkTypeId +
+                ", checkType=" + checkType +
+                ", targetId=" + targetId +
+                '}';
+    }
 }
