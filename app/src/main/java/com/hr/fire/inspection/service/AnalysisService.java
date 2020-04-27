@@ -29,7 +29,7 @@ public interface AnalysisService {
      * @param
      * @return
      */
-    List<HashMap> getPlatformCountByYearCheck(String year);
+    List<HashMap> getPlatformCountByYearCheck(String year, String companyName, String oilfieldName);
     List<HashMap> getPlatformCountByInspection(String year);
 
 
@@ -38,7 +38,7 @@ public interface AnalysisService {
      * @param
      * @return
      */
-    List<HashMap> getSystemCountByYearCheck(String year);
+    List<HashMap> getSystemCountByYearCheck(String year, String companyName, String oilfieldName, String platform);
     List<HashMap> getSystemCountByInspection(String year);
 
     /**
