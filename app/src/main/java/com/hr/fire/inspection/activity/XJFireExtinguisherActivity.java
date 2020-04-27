@@ -67,7 +67,7 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final int TAKE_PHOTO = 1;//拍照
-    private int imgPostion;
+    private int imgPostion = -1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -328,7 +328,8 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
                         String path = imgUri.getPath();
                         if (path != null && imgPostion != -1 && contentApapter != null) {
                             inspectionResults.get(imgPostion).setImgPath(path);
-                            contentApapter.notifyItemChanged(imgPostion);
+                            //TODO 会崩溃.
+//                            contentApapter.notifyItemChanged(imgPostion);
                         }
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
