@@ -2,6 +2,7 @@ package com.hr.fire.inspection.activity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
@@ -23,6 +24,7 @@ import com.hr.fire.inspection.entity.CompanyInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class StatiSticsActivity  extends AppCompatActivity {
@@ -149,6 +151,9 @@ public class StatiSticsActivity  extends AppCompatActivity {
                 InitSetSpinner(spinner_pt, platform_list);
             }
         });
+
+        List<HashMap> retData1 = ServiceFactory.getAnalysisService().getCompanyCountByYearCheck("2019");
+        Log.i("retList:::","getCompanyCountByYearCheck:::"+retData1);
 
     }
 
