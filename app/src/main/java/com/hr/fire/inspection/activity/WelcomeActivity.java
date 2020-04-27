@@ -216,35 +216,32 @@ public class WelcomeActivity extends AppCompatActivity {
 
 
         ///////////////////测试巡检接口///////////////////////////////////////////////
-
-        // 测试隐患库接
-
-
-
-
-
         // 测试隐患库接口
 //        String year = "2019";
 //        List<HashMap> retData1 = ServiceFactory.getAnalysisService().getCompanyCountByYearCheck(year);
+//        Log.i("retList:::","getCompanyCountByYearCheck:::"+retData1);
 //        for(int i=0;i<retData1.size();i++){
 //            Log.i("retList:::","getCompanyCountByYearCheck:::"+retData1.get(i));
 //
 //        }
 //        Log.i("retList:::","////////////////////////////////////");
-//        List<HashMap> retData2 = ServiceFactory.getAnalysisService().getOilfieldCountByYearCheck(year);
-//        for(int i=0;i<retData2.size();i++){
+//        List<HashMap> retData2 = ServiceFactory.getAnalysisService().getOilfieldCountByYearCheck(year,"渤西作业公司");
+//        Log.i("retList:::","getOilfieldCountByYearCheck:::"+retData2);
+        //        for(int i=0;i<retData2.size();i++){
 //            Log.i("retList:::","getOilfieldCountByYearCheck:::"+retData2.get(i));
 //
 //        }
 //        Log.i("retList:::","////////////////////////////////////");
-//        List<HashMap> retData3 = ServiceFactory.getAnalysisService().getPlatformCountByYearCheck(year);
-//        for(int i=0;i<retData3.size();i++){
+//        List<HashMap> retData3 = ServiceFactory.getAnalysisService().getPlatformCountByYearCheck(year,"渤西作业公司","BZ13-1");
+//        Log.i("retList:::","getPlatformCountByYearCheck:::"+retData3);
+        //        for(int i=0;i<retData3.size();i++){
 //            Log.i("retList:::","getPlatformCountByYearCheck:::"+retData3.get(i));
 //
 //        }
 //        Log.i("retList:::","////////////////////////////////////");
-//        List<HashMap> retData4 = ServiceFactory.getAnalysisService().getSystemCountByYearCheck(year);
-//        for(int i=0;i<retData4.size();i++){
+//        List<HashMap> retData4 = ServiceFactory.getAnalysisService().getSystemCountByYearCheck(year,"渤西作业公司","BZ13-1","BZ13-1");
+//        Log.i("retList:::","getSystemCountByYearCheck:::"+retData4);
+        //        for(int i=0;i<retData4.size();i++){
 //            Log.i("retList:::","getSystemCountByYearCheck:::"+retData4.get(i));
 //
 //        }
@@ -303,6 +300,15 @@ public class WelcomeActivity extends AppCompatActivity {
 //            Log.i("retList:::","getYearCheckDetail:::"+retList.get(i));
 //
 //        }
+            // systemId 72
+//                List<HashMap> retData = ServiceFactory.getAnalysisService().getInspectionView(0,0,startDate,endDate);
+//        List<HashMap> retData = ServiceFactory.getAnalysisService().getInspectionView(165,72,startDate,endDate);
+////        List<HashMap> retData = ServiceFactory.getAnalysisService().getInspectionView(0,0,null,null);
+//        for(int i=0;i<retData.size();i++){
+//            Log.i("retList:::","getInspectionView:::"+retData.get(i));
+//
+//        }
+
         //////////////////////////银魂库预览接口///////////////////////////////////////////////
 
 

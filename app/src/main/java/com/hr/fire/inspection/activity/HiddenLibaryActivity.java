@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,7 +34,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-public class HiddenLibaryActivity  extends AppCompatActivity {
+public class HiddenLibaryActivity extends AppCompatActivity {
     private static final String TAG = "HiddenLibaryActivity";
     private List<String> titleList = new ArrayList<String>();
     private List<Fragment> fragments = new ArrayList<Fragment>();
@@ -41,6 +42,7 @@ public class HiddenLibaryActivity  extends AppCompatActivity {
     private ViewPager mViewPager;
     private ImageView iv_finish;
     private TextView tvInspectionPro;
+    private Button Statistics;
     private int currentPager;
 
     private HiddenLibaryFragment1 hiddenLibaryFragment1;
@@ -92,6 +94,19 @@ public class HiddenLibaryActivity  extends AppCompatActivity {
     public void initView() {
         iv_finish = findViewById(R.id.iv_finish);
         tvInspectionPro = findViewById(R.id.tv_inspection_pro);
+
+        //  统计跳转
+        Statistics = findViewById(R.id.Statistics);
+        Statistics.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(HiddenLibaryActivity.this, StatiSticsActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
         String text = new StringBuilder().append("隐患库").toString();
         SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#00A779", 0, text.length());
         tvInspectionPro.setText(showTextColor);
