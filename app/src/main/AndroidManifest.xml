@@ -163,5 +163,9 @@
         <activity
             android:name=".activity.HiddenLibaryActivity"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.HiddenLibaryDetailActivity"
+            android:screenOrientation="landscape" />
+
     </application>
 </manifest>

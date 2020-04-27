@@ -45,10 +45,7 @@ public class HiddenLibaryActivity  extends AppCompatActivity {
 
     private HiddenLibaryFragment1 hiddenLibaryFragment1;
     private HiddenLibaryFragment2 hiddenLibaryFragment2;
-    private String str_title;
-    private String duty;
-    private String check_name;
-    private String check_date;
+
     private IntentTransmit it;
     private ArrayList<String> bessy_list;
     private ArrayList<String> yt_list;
@@ -90,17 +87,6 @@ public class HiddenLibaryActivity  extends AppCompatActivity {
                 InitSetSpinner(spinner_yt, yt_list);
             }
         });
-    }
-
-    private void getIntentParameter() {
-        //历史中的companyInfoId  ,  systemId和再公司、平台那边传过来的都是一样的ID，使用哪一个都行
-        Intent intent = getIntent();
-        long systemId = intent.getLongExtra("systemId", 0);   //系统Id
-        long platform_id = intent.getLongExtra("platform_id", 0);   //系统Id
-        str_title = intent.getStringExtra("str_title"); //传过来的名称
-        it = new IntentTransmit();
-        it.companyInfoId = platform_id;
-        it.systemId = systemId;
     }
 
     public void initView() {
@@ -197,7 +183,6 @@ public class HiddenLibaryActivity  extends AppCompatActivity {
         finish();
     }
     private void initData() {
-
         init_company_spinner(); // 初始化公司列表
         init_system_spinner(0); //初始化年检系统列表
     }
