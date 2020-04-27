@@ -219,6 +219,9 @@ public class StatiSticsActivity extends AppCompatActivity {
             }
         });
 
+        List<HashMap> retData1 = ServiceFactory.getAnalysisService().getCompanyCountByYearCheck("2019");
+        Log.i("retList:::","getCompanyCountByYearCheck:::"+retData1);
+
     }
 
     @Override
