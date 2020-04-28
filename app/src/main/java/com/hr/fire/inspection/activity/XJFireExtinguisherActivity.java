@@ -289,6 +289,8 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
             itemObj.setParam9(tv_fire9.getText().toString());
             itemObj.setParam10(et_fire10.getText().toString());
             itemObj.setParam11(tv_fire11.getText().toString());
+            Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
+                    + tv_fire1.getText().toString() + "  " + et_fire2.getText().toString() + " " + et_fire2.getText().toString());
             service.update(itemObj);
         }
         Toast.makeText(this, "数据保存成功", Toast.LENGTH_SHORT).show();
