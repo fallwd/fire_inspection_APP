@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.gesture.GestureOverlayView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".activity.CheckReport">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/but1"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        tools:ignore="MissingConstraints,UselessParent">
+
+        <ImageButton
+            android:id="@+id/backHome"
+            android:layout_width="20dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
+            android:background="@mipmap/left_icon"
+            android:scaleType="fitXY"
+            android:contentDescription="TODO" />
+
+        <TextView
+            android:id="@+id/account_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="@string/checkReport"
+            android:textColor="@color/title_green"
+            android:textSize="20sp"
+            android:layout_marginStart="8dp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/layer_border"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                tools:ignore="MissingConstraints">
+
+                <!--请选择公司-->
+                <Spinner
+                    android:id="@+id/spinner_bussy"
+                    style="@style/spinner_style"
+                    android:background="@drawable/spriner_style"
+                    android:entries="@array/spingarr" />
+                <!--请选择油田-->
+                <Spinner
+                    android:id="@+id/spinner_yt"
+                    style="@style/spinner_style"
+                    android:background="@drawable/spriner_style"
+                    android:entries="@array/spingarr1" />
+                <!--请选择平台-->
+                <Spinner
+                    android:id="@+id/spinner_pt"
+                    style="@style/spinner_style"
+                    android:background="@drawable/spriner_style"
+                    android:entries="@array/spingarr3" />
+
+                <!--请选择监察人-->
+                <Spinner
+                    android:id="@+id/spinner_per"
+                    style="@style/spinner_style"
+                    android:background="@drawable/spriner_style"
+                    android:entries="@array/spingarr4" />
+
+                <!--选择负责专业-->
+                <Spinner
+                    android:id="@+id/spinner_project"
+                    style="@style/spinner_style"
+                    android:background="@drawable/spriner_style"
+                    android:entries="@array/spingarr5" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/insert_but"
+                android:layout_width="50dp"
+                android:layout_height="35dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/listview_border_margin"
+                android:text="@string/daoru"
+                android:translationX="-10dp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/border"
+            android:orientation="horizontal"
+            android:padding="10dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="MissingConstraints">
+                <ImageButton
+                    android:layout_width="20dp"
+                    android:background="@mipmap/search"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="23dp"/>
+
+                <AutoCompleteTextView
+                    android:id="@+id/search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:background="@null"
+                    android:completionThreshold="1"
+                    android:hint="输入报告名称"
+                    android:imeOptions="actionSearch"
+                    android:maxLength="100"
+                    android:dropDownHeight="250dp"
+                    android:dropDownWidth="match_parent"
+                    android:singleLine="true"
+                    android:textColor="#317F6D"
+                    android:textColorHint="#317F6D"
+                    android:textSize="15sp"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginLeft="35dp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/main_list2"
+                android:background="@drawable/border"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
+
+</android.gesture.GestureOverlayView>
