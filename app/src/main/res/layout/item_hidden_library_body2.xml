@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="35dp"
     android:background="#ffffff"
@@ -19,21 +20,20 @@
             android:layout_gravity="center">
 
             <TextView
+                android:id="@+id/tv_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="序号"
-                android:textColor="@color/title_black"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textSize="12sp" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-
             <TextView
+                android:id="@+id/tv_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -42,13 +42,12 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
-
         <RelativeLayout
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-
             <TextView
+                android:id="@+id/tv_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -64,10 +63,11 @@
             android:layout_gravity="center">
 
             <TextView
+                android:id="@+id/tv_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="系统位号"
+                android:text="检查负责人"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -79,10 +79,11 @@
             android:layout_gravity="center">
 
             <TextView
+                android:id="@+id/tv_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="保护区域"
+                android:text="负责专业"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -94,6 +95,7 @@
             android:layout_gravity="center">
 
             <TextView
+                android:id="@+id/tv_7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -110,27 +112,27 @@
             android:layout_gravity="center">
 
             <TextView
+                android:id="@+id/tv_8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="是否合格"
+                android:text="是否整改"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/rl_11"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="操作"
-                android:textColor="@color/title_black"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="6dp"
+                android:background="@mipmap/detail_icon"
+                android:textSize="12sp" />
         </RelativeLayout>
     </TableRow>
 </TableLayout>

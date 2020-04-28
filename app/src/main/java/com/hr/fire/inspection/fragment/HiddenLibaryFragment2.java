@@ -53,7 +53,7 @@ public class HiddenLibaryFragment2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_hidden_library1, container, false);
+            rootView = inflater.inflate(R.layout.fragment_hidden_library2, container, false);
         }
         return rootView;
     }
@@ -61,15 +61,15 @@ public class HiddenLibaryFragment2 extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        initData();
-//        initView();
+        initData();
+        initView();
     }
 
 
     private void initData() {
         //参数
-//        retData = ServiceFactory.getAnalysisService().getInspectionView(0,0,null, null);
-//        HYLogUtil.getInstance().d("获取隐患库巡检表格数据,数据查看:" + retData.size() + "  " + retData.toString());
+        retData = ServiceFactory.getAnalysisService().getInspectionView(0,0,null, null);
+        HYLogUtil.getInstance().d("获取隐患库巡检表格数据,数据查看:" + retData.size() + "  " + retData.toString());
     }
     private void initView() {
 //        if (retData.size() == 0) {

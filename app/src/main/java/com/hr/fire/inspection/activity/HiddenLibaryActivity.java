@@ -1,6 +1,8 @@
 package com.hr.fire.inspection.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,16 +54,25 @@ public class HiddenLibaryActivity extends AppCompatActivity {
     private IntentTransmit it;
     private ArrayList<String> bessy_list;
     private ArrayList<String> yt_list;
-
+    private List<CompanyInfo> bussy_dataList;
+    private List<CompanyInfo> yt_dataList;
+    private List<CompanyInfo> pt_dataList;
+    private long platformId;
+//    platformId没有的话填0，systemId没有的话填0，startDate没有的话填null,endDate没有的话填null
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hidden_library);
+
         initView();
         initListner();
         initData();
+
         final Spinner spinner_buss = findViewById(R.id.spinner_bussy);
         final Spinner spinner_yt = findViewById(R.id.spinner_yt);
+        final Spinner spinner_pt = findViewById(R.id.spinner_pt);
+
+
         // 选择公司 搜索油田数据
         spinner_buss.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -89,6 +101,58 @@ public class HiddenLibaryActivity extends AppCompatActivity {
                 InitSetSpinner(spinner_yt, yt_list);
             }
         });
+//        // 选择平台
+//        spinner_pt.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//            }
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//                yt_list.clear();
+//                yt_list.add("请选择平台");
+//                InitSetSpinner(spinner_pt, yt_list);
+//            }
+//        });
+        spinner_pt.setOnItemSelectedListener(new SpinnerSelectedListener());//添加事件
+
+    }
+    class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            String sectName = (String) parent.getItemAtPosition(position);
+            Log.i("aaa", "bessy_list平台==" + pt_dataList);
+            if (pt_dataList != null) {
+                for (int i = 0; i < pt_dataList.size(); i++) {
+                    if (pt_dataList.get(i).getPlatformName() == sectName) {
+                        platformId = pt_dataList.get(i).getId();
+                    }
+                }
+                Log.i("aaa", "bessy_list平台==" + platformId);
+
+                HiddenLibaryFragment1 hiddenLibaryFragment1 = new HiddenLibaryFragment1();
+                Bundle bundle = new Bundle();
+                bundle.putString("key", "这是方法二");
+                hiddenLibaryFragment1.setArguments(bundle);
+
+
+                long p_id = Long.valueOf(platformId);
+                it = new IntentTransmit();
+                it.companyInfoId = p_id;
+                Log.i("aaa", "bessy_list平台==" + it);
+//                    mViewPager = findViewById(R.id.vp_content);
+//                    hiddenLibaryFragment1 =HiddenLibaryFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
+//                    hiddenLibaryFragment2 =HiddenLibaryFragment2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
+//                    fragments.add(hiddenLibaryFragment1);
+//                    fragments.add(hiddenLibaryFragment2);
+//                    mViewPager.setOffscreenPageLimit(fragments.size());
+            }
+        }
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            yt_list.clear();
+            yt_list.add("请选择平台");
+//            InitSetSpinner(spinner_pt, yt_list);
+        }
     }
 
     public void initView() {
@@ -105,7 +169,6 @@ public class HiddenLibaryActivity extends AppCompatActivity {
                 finish();
             }
         });
-
 
         String text = new StringBuilder().append("隐患库").toString();
         SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#00A779", 0, text.length());
@@ -205,7 +268,7 @@ public class HiddenLibaryActivity extends AppCompatActivity {
     private void init_company_spinner (){
         // 获取公司列表
         final Spinner spinner_buss = findViewById(R.id.spinner_bussy);
-        List<CompanyInfo> bussy_dataList = ServiceFactory.getCompanyInfoService().getCompanyList();
+        bussy_dataList = ServiceFactory.getCompanyInfoService().getCompanyList();
         bessy_list = new ArrayList<>();
         for (int i = 0; i < bussy_dataList.size(); i++) {
             CompanyInfo CompanyListItem = bussy_dataList.get(i);
@@ -220,7 +283,7 @@ public class HiddenLibaryActivity extends AppCompatActivity {
     private void init_yt_spinner(String companyName) {
         // 请选择油田  ->>> 传入公司参数 companyName
         final Spinner spinner_yt = findViewById(R.id.spinner_yt);
-        List<CompanyInfo> yt_dataList = ServiceFactory.getCompanyInfoService().getOilfieldList(companyName);
+        yt_dataList = ServiceFactory.getCompanyInfoService().getOilfieldList(companyName);
         yt_list = new ArrayList<>();
         for (int i = 0; i < yt_dataList.size(); i++) {
             CompanyInfo CompanyListItem = yt_dataList.get(i);
@@ -235,10 +298,10 @@ public class HiddenLibaryActivity extends AppCompatActivity {
     private void init_platform_spinner(String OilName) {
         // 请选择平台  ->>> 传入油田参数 OilName
         Spinner spinner_pt =  findViewById(R.id.spinner_pt);
-        List<CompanyInfo> yt_dataList = ServiceFactory.getCompanyInfoService().getPlatformList(OilName);
+        pt_dataList = ServiceFactory.getCompanyInfoService().getPlatformList(OilName);
         ArrayList<String> platform_list = new ArrayList<>();
-        for (int i = 0; i < yt_dataList.size(); i++) {
-            CompanyInfo CompanyListItem = yt_dataList.get(i);
+        for (int i = 0; i < pt_dataList.size(); i++) {
+            CompanyInfo CompanyListItem = pt_dataList.get(i);
             String getPlatformName = CompanyListItem.getPlatformName();
             if(getPlatformName != null && !getPlatformName.equals("")){
                 platform_list.add(getPlatformName);
@@ -262,6 +325,7 @@ public class HiddenLibaryActivity extends AppCompatActivity {
             CheckType SystemListItem = system_dataList.get(i);
             String getSystemName = SystemListItem.getName();
             if(getSystemName != null && !getSystemName.equals("")){
+//                Log.i("aaa", "bessy_list系统名" + getSystemName);
                 system_list.add(getSystemName);
             }
         }

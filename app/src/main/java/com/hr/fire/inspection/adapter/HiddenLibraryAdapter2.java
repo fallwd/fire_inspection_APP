@@ -37,7 +37,7 @@ public class HiddenLibraryAdapter2  extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_drypower1_input, parent, false);
+                .inflate(R.layout.fragment_drypower2_input, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -55,8 +55,8 @@ public class HiddenLibraryAdapter2  extends RecyclerView.Adapter<RecyclerView.Vi
             vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
             vh.tv_2.setText(new StringBuffer().append(info.get("system")).append(""));
             vh.tv_4.setText(new StringBuffer().append(info.get("company")).append(""));
-            vh.tv_5.setText(new StringBuffer().append(info.get("systemNumber")).append(""));
-            vh.tv_6.setText(new StringBuffer().append(info.get("protectArea")).append(""));
+            vh.tv_5.setText(new StringBuffer().append(info.get("checkPerson")).append(""));
+            vh.tv_6.setText(new StringBuffer().append(info.get("profession")).append(""));
             vh.tv_7.setText(new StringBuffer().append(info.get("checkDate")).append(""));
             vh.tv_8.setText(new StringBuffer().append("").append("否"));
         }
