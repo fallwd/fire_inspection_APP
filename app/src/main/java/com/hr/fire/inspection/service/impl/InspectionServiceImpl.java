@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-public class InspectionServiceImpl extends BaseServiceImpl<Object> implements InspectionService {
+public class InspectionServiceImpl extends BaseServiceImpl<InspectionResult> implements InspectionService {
     @Override
     public List<CheckType> getSystemNameData() {
         QueryBuilder<CheckType> queryBuilder = daoSession.queryBuilder(CheckType.class).
