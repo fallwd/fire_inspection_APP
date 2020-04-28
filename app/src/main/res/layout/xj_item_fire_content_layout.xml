@@ -17,6 +17,7 @@
             android:layout_marginLeft="8dp">
 
             <TextView
+                android:id="@+id/tv_fire1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -42,6 +43,18 @@
                 android:textColor="@color/title_black"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+            <!--默认是隐藏的,当用户输入后,才会有数据-->
+            <TextView
+                android:id="@+id/tv_fire2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="是"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -57,9 +70,23 @@
                 android:layout_centerInParent="true"
                 android:background="@null"
                 android:hint="请输入"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:textColor="@color/title_black"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+            <!--默认是隐藏的,当用户输入后,才会有数据-->
+            <TextView
+                android:id="@+id/tv_fire3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="是"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -70,6 +97,7 @@
             android:layout_marginLeft="8dp">
 
             <TextView
+                android:id="@+id/tv_fire4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -87,6 +115,7 @@
             android:layout_marginLeft="8dp">
 
             <TextView
+                android:id="@+id/tv_fire5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -104,6 +133,7 @@
             android:layout_marginLeft="8dp">
 
             <TextView
+                android:id="@+id/tv_fire6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -121,6 +151,7 @@
             android:layout_marginLeft="8dp">
 
             <TextView
+                android:id="@+id/tv_fire7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -138,6 +169,7 @@
             android:layout_marginLeft="8dp">
 
             <TextView
+                android:id="@+id/tv_fire8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -155,6 +187,7 @@
             android:layout_marginLeft="8dp">
 
             <TextView
+                android:id="@+id/tv_fire9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -178,9 +211,23 @@
                 android:layout_centerInParent="true"
                 android:background="@null"
                 android:hint="请输入"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
+            <!--默认是隐藏的,当用户输入后,才会有数据-->
+            <TextView
+
+                android:id="@+id/tv_fire10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="是"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -191,15 +238,35 @@
             android:layout_marginLeft="8dp">
 
             <TextView
+                android:id="@+id/tv_fire11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="8dp"
-                android:background="@mipmap/cmander"
+                android:background="@mipmap/scene_photos_icon"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_fire12"
+            android:layout_width="60dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="8dp"
+                android:background="@mipmap/detail_icon"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
     </LinearLayout>
 
     <View

@@ -1,6 +1,8 @@
 package com.hr.fire.inspection.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,17 +10,26 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.view.tableview.HrPopup;
+
+import java.util.List;
 
 public class XJFirstContentApapter extends RecyclerView.Adapter {
     Context mContext;
+    private List<InspectionResult> mData;
 
-    public XJFirstContentApapter(Context c) {
+    public XJFirstContentApapter(Context c, List<InspectionResult> inspectionResults) {
         this.mContext = c;
+        this.mData = inspectionResults;
     }
 
     @NonNull
@@ -32,17 +43,135 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myholder = (MyViewHolder) holder;
-        myholder.rl_fire1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("dong", "点击了我==" + position);
-            }
-        });
+        myholder.rl_fire1.setOnClickListener(new MyOnClickListener(myholder, position));
+        myholder.rl_fire4.setOnClickListener(new MyOnClickListener(myholder, position));
+        myholder.rl_fire5.setOnClickListener(new MyOnClickListener(myholder, position));
+        myholder.rl_fire6.setOnClickListener(new MyOnClickListener(myholder, position));
+        myholder.rl_fire7.setOnClickListener(new MyOnClickListener(myholder, position));
+        myholder.rl_fire8.setOnClickListener(new MyOnClickListener(myholder, position));
+        myholder.rl_fire9.setOnClickListener(new MyOnClickListener(myholder, position));
+        myholder.rl_fire11.setOnClickListener(new MyOnClickListener(myholder, position));
+        myholder.rl_fire12.setOnClickListener(new MyOnClickListener(myholder, position));
     }
 
     @Override
     public int getItemCount() {
-        return 20;
+        return mData.size();
+    }
+
+    public void setNewData(List<InspectionResult> inspectionResults) {
+        this.mData = inspectionResults;
+        notifyDataSetChanged();
+    }
+
+
+    private HrPopup hrPopup;
+
+    //显示对话框,用户选择是否异常的弹框
+    private void showPopWind(TextView tv) {
+        View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods, null);
+        if (hrPopup == null) {
+            hrPopup = new HrPopup((Activity) mContext);
+        }
+        RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
+        RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
+        RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
+        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setBackgroundDrawable(new BitmapDrawable());
+        hrPopup.setFocusable(true);
+        hrPopup.setOutsideTouchable(true);
+        hrPopup.setContentView(PopupRootView);
+        hrPopup.showAsDropDown(tv);
+        rl_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv.setText("是");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+        rl_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv.setText("否");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+        rl_other.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv.setText("其他");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+    }
+
+    //点击事件写在外层
+    class MyOnClickListener implements View.OnClickListener {
+        private final MyViewHolder myholder;
+        private int position;
+
+        public MyOnClickListener(MyViewHolder holder, int position) {
+            this.myholder = holder;
+            this.position = position;
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.rl_fire1:
+                    showPopWind(myholder.tv_fire1);
+                    break;
+                case R.id.rl_fire4:
+                    showPopWind(myholder.tv_fire4);
+                    break;
+                case R.id.rl_fire5:
+                    showPopWind(myholder.tv_fire5);
+                    break;
+                case R.id.rl_fire6:
+                    showPopWind(myholder.tv_fire6);
+                    break;
+                case R.id.rl_fire7:
+                    showPopWind(myholder.tv_fire7);
+                    break;
+                case R.id.rl_fire8:
+                    showPopWind(myholder.tv_fire8);
+                    break;
+                case R.id.rl_fire9:
+                    showPopWind(myholder.tv_fire9);
+                    break;
+                case R.id.rl_fire11:
+                    mYCCamera.startCamera(position);
+                    break;
+                case R.id.rl_fire12:
+                    removeData(position);
+                    break;
+            }
+        }
+    }
+
+    public void removeData(int position) {
+        if (mData != null && mData.size() == 1) {
+            Toast.makeText(mContext, "基础表格,无法删除", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (mData != null && mData.size() != 0 && mData.size() > 1) {
+            //1.删除数据库数据,
+//            InspectionResult itemInfo = mData.get(position);
+//            ServiceFactory.getInspectionService().delete(itemInfo);
+//            //2.刷新列表数据,  理论上应该是数据库删除成功后,有一个返回值,在进行刷新
+//            mData.remove(position);
+//            //删除动画
+//            notifyItemRemoved(position);
+//            //通知重新绑定某一范围内的的数据与界面
+//            notifyItemRangeChanged(position, mData.size() - position);//通知数据与界面重新绑定
+        }
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -57,6 +186,19 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
         private RelativeLayout rl_fire9;
         private EditText et_fire10;
         private RelativeLayout rl_fire11;
+        private RelativeLayout rl_fire12;
+
+        private TextView tv_fire1;
+        private TextView tv_fire2;
+        private TextView tv_fire3;
+        private TextView tv_fire4;
+        private TextView tv_fire5;
+        private TextView tv_fire6;
+        private TextView tv_fire7;
+        private TextView tv_fire8;
+        private TextView tv_fire9;
+        private TextView tv_fire10;
+        private TextView tv_fire11;
 
         public MyViewHolder(View view) {
             super(view);
@@ -71,6 +213,30 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
             rl_fire9 = (RelativeLayout) view.findViewById(R.id.rl_fire9);
             et_fire10 = (EditText) view.findViewById(R.id.et_fire10);
             rl_fire11 = (RelativeLayout) view.findViewById(R.id.rl_fire11);
+            rl_fire12 = (RelativeLayout) view.findViewById(R.id.rl_fire12);
+
+            tv_fire1 = (TextView) view.findViewById(R.id.tv_fire1);
+            tv_fire2 = (TextView) view.findViewById(R.id.tv_fire2);
+            tv_fire3 = (TextView) view.findViewById(R.id.tv_fire3);
+            tv_fire4 = (TextView) view.findViewById(R.id.tv_fire4);
+            tv_fire5 = (TextView) view.findViewById(R.id.tv_fire5);
+            tv_fire6 = (TextView) view.findViewById(R.id.tv_fire6);
+            tv_fire7 = (TextView) view.findViewById(R.id.tv_fire7);
+            tv_fire8 = (TextView) view.findViewById(R.id.tv_fire8);
+            tv_fire9 = (TextView) view.findViewById(R.id.tv_fire9);
+            tv_fire10 = (TextView) view.findViewById(R.id.tv_fire10);
+            tv_fire11 = (TextView) view.findViewById(R.id.tv_fire11);
         }
+    }
+
+    private YCCamera mYCCamera;
+
+    //接口回调, 将点击事件传递到activity中,打开相机
+    public void setmYCCamera(YCCamera y) {
+        this.mYCCamera = y;
+    }
+
+    public interface YCCamera {
+        void startCamera(int postion);
     }
 }
