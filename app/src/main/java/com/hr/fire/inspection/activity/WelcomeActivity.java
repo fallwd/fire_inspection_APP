@@ -309,6 +309,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //
 //        }
 
+//        ServiceFactory.getInspectionService().
         //////////////////////////银魂库预览接口///////////////////////////////////////////////
 
 

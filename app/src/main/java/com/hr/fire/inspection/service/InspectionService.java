@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-public interface InspectionService {
+public interface InspectionService extends BaseService<Object>{
 
     /**
      * 获取系统类型数据
