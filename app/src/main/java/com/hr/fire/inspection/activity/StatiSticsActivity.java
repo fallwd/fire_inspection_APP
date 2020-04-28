@@ -27,13 +27,10 @@ import com.hr.fire.inspection.entity.CompanyInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import android.webkit.JavascriptInterface;
 
 public class StatiSticsActivity extends AppCompatActivity {
 
@@ -41,6 +38,7 @@ public class StatiSticsActivity extends AppCompatActivity {
     private ArrayList<String> yt_list;
     private ArrayList<String> platform_list;
     private List<String> timeList = new ArrayList<String>();
+
     // 选中的年份
     private String selectTime="2019";
     // 选中的公司名称
@@ -50,10 +48,10 @@ public class StatiSticsActivity extends AppCompatActivity {
     // 选中的平台名称
     private String platName="";
 
-
     private  List<HashMap> companyChartData;
-
     private  List<HashMap> oilChartData;
+    private  List<HashMap> platformChartData;
+    private  List<HashMap> systemChartData;
 
     WebView mWebView;
 
@@ -66,21 +64,48 @@ public class StatiSticsActivity extends AppCompatActivity {
         }
 
         @JavascriptInterface
-        public void startFunction(String data) {
+        public void getOil(String data) {
             //  这里接收到参数  需要去查数据库
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    oilChartData = ServiceFactory.getAnalysisService().getOilfieldCountByYearCheck(selectTime, data);
+                    // 通过公司名称 获取油田
+                    companyName = data;
+                    oilChartData = ServiceFactory.getAnalysisService().getOilfieldCountByYearCheck(selectTime, companyName);
                     JSONArray oilChartResult = new JSONArray(oilChartData);
                     mWebView.loadUrl("javascript:runJs('" + true  + "', '" + oilChartResult + "')");
                 }
             });
         }
 
-
+        @JavascriptInterface
+        public void getPlatform(String data) {
+            //  这里接收到参数  需要去查数据库
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    oilName = data;
+                    // 传入公司名称 油田名称
+                    platformChartData = ServiceFactory.getAnalysisService().getPlatformCountByYearCheck(selectTime, companyName, oilName);;
+                    JSONArray platformChartResult = new JSONArray(platformChartData);
+                    mWebView.loadUrl("javascript:runJs('" + true  + "', '" + platformChartResult + "')");
+                }
+            });
+        }
+        @JavascriptInterface
+        public void getSystem(String data) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    platName = data;
+                    // 传入公司名称 油田名称 平台名称
+                    systemChartData = ServiceFactory.getAnalysisService().getSystemCountByYearCheck(selectTime, companyName, oilName, platName);;
+                    JSONArray systemChartResult = new JSONArray(systemChartData);
+                    mWebView.loadUrl("javascript:runJs('" + true  + "', '" + systemChartResult + "')");
+                }
+            });
+        }
     }
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -93,44 +118,24 @@ public class StatiSticsActivity extends AppCompatActivity {
         final Spinner spinner_time = findViewById(R.id.spinner_time);
 
         initData();
+        // 初始化时间选择器
         timeList.add("2019");
         timeList.add("2020");
         InitSetSpinner(spinner_time, (ArrayList<String>) timeList);
 
+        // 定位到webview
         mWebView =(WebView) findViewById(R.id.webview);
-
         WebSettings webSettings = mWebView.getSettings();
-
         // 设置与Js交互的权限
         webSettings.setJavaScriptEnabled(true);
         // 设置允许JS弹窗
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
 
+        // 默认传入公司数据
         companyChartData= ServiceFactory.getAnalysisService().getCompanyCountByYearCheck(selectTime);
-        // 转化成key value 形式
-
         JSONArray companyChartResult = new JSONArray(companyChartData);
-
         mWebView.loadUrl("file:///android_asset/webview.html");
-
         mWebView.addJavascriptInterface(new MyJavascriptInterface(this), "injectedObject");
-
-        //定义要调用的方法
-        //msg由js调用的时候传递
-//        mWebView.addJavascriptInterface(new MyJavascriptInterface(this), "injectedObject");
-//            @JavascriptInterface
-//            public void startFunction(String name) {
-//                oilChartData = ServiceFactory.getAnalysisService().getOilfieldCountByYearCheck(selectTime, name);
-//                JSONArray oilChartResult = new JSONArray(oilChartData);
-//                mWebView.setWebViewClient(new WebViewClient() {
-//                    @Override
-//                    public void onPageFinished(WebView view, String url) {
-//                        mWebView.loadUrl("file:///android_asset/webview.html");
-//                        mWebView.loadUrl("javascript:refreshJs('" + true  + "', '" + oilChartResult + "')");
-//                        super.onPageFinished(view, url);
-//                    }
-//                });
-//            }
 
 
         mWebView.setWebViewClient(new WebViewClient() {
@@ -140,7 +145,6 @@ public class StatiSticsActivity extends AppCompatActivity {
                 super.onPageFinished(view, url);
             }
         });
-
 
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
@@ -161,8 +165,7 @@ public class StatiSticsActivity extends AppCompatActivity {
         });
 
         //  默认查询2020的
-        spinner_time.setSelection(1,true);
-
+        spinner_time.setSelection(0,true);
         spinner_time.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -218,10 +221,6 @@ public class StatiSticsActivity extends AppCompatActivity {
                 InitSetSpinner(spinner_pt, platform_list);
             }
         });
-
-        List<HashMap> retData1 = ServiceFactory.getAnalysisService().getCompanyCountByYearCheck("2019");
-        Log.i("retList:::","getCompanyCountByYearCheck:::"+retData1);
-
     }
 
     @Override
@@ -308,6 +307,8 @@ public class StatiSticsActivity extends AppCompatActivity {
         }
         InitSetSpinner(spinner_sys, system_list);
     }
+
+
     // 下拉框
     private void InitSetSpinner(final Spinner spinner, ArrayList<String> list) {
         //适配器

@@ -53,9 +53,9 @@
                 renderChart(data)
             }
         }
-
         function renderChart(data) {
             data = JSON.parse(data);
+            var pie = echarts.init(document.getElementById("oricle"));
             var option = {
                 tooltip: {
                     trigger: 'item',
@@ -109,19 +109,32 @@
                     }
                 ]
             }
-            var pie = echarts.init(document.getElementById("oricle"));
             if (data.length == 1) {
                 option.series[3].data = data[0].data;
             } else if (data.length == 2) {
                 option.series[3].data = data[0].data;
                 option.series[2].data = data[1].data;
+            } else if(data.length == 3){
+                option.series[3].data = data[0].data;
+                option.series[2].data = data[1].data;
+                option.series[1].data = data[2].data;
+            } else if(data.length == 4){
+                option.series[3].data = data[0].data;
+                option.series[2].data = data[1].data;
+                option.series[1].data = data[2].data;
+                option.series[0].data = data[3].data;
             }
             pie.setOption(option);
-            pie.on('click', function (a) {
-                 if(a.data.type=="company"){
-                      window.injectedObject.startFunction(a.name)
-                 }else if{
-                     alert("将要加载平台数据")
+            pie.on('click', function(a) {
+              window.injectedObject.getOil(a.name);
+                 if(a.data.type == "company"){
+                     window.injectedObject.getOil(a.name);
+                 }else if(a.data.type === "oilfield"){
+                     window.injectedObject.getPlatform(a.name);
+                 }else if(a.data.type === "platform"){
+                     window.injectedObject.getSystem(a.name);
+                 }else{
+
                  }
             })
             pie.resize();
