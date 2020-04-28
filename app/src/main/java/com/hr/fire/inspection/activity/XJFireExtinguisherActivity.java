@@ -235,11 +235,13 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 result.setParam7("是");
                 result.setParam8("否");
                 result.setParam9("否");
+                result.setParam10("请输入");
             }
             long l = service.insertInspectionData(result, companyInfoId, systemId, parse_check_date);
             //表示数据插入成功,再次查询,拿到最新的数据
             if (l == 0) {
                 inspectionResults = service.getInspectionData(companyInfoId, systemId, parse_check_date);
+                Log.d("dong", "inspectionResults=  " + inspectionResults.size() + "  " + inspectionResults.get(0).getParam2());
                 firstColumnApapter.setNewData(inspectionResults);
                 contentApapter.setNewData(inspectionResults);
             } else {
