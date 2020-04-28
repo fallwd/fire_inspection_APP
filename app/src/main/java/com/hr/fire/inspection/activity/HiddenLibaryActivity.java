@@ -121,12 +121,14 @@ public class HiddenLibaryActivity extends AppCompatActivity {
         });
 
 
+
         String text = new StringBuilder().append("隐患库").toString();
         SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#00A779", 0, text.length());
         tvInspectionPro.setText(showTextColor);
 
         mTabLayout = findViewById(R.id.tl_tabs);
         mViewPager = findViewById(R.id.vp_content);
+        Statistics = findViewById(R.id.Statistics);
         titleList.add("消防年检隐患库");
         titleList.add("消防巡检隐患库");
 
@@ -150,7 +152,11 @@ public class HiddenLibaryActivity extends AppCompatActivity {
             public void onPageSelected(int i) {
                 currentPager = i;
                 init_system_spinner(currentPager);
-//                Log.d("隐患库页面滑动参数", currentPager+"");
+                if (i == 1) {
+                   Statistics.setVisibility(View.GONE);
+                } else {
+                    Statistics.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
