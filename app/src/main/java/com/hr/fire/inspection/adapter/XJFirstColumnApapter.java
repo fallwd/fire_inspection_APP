@@ -13,12 +13,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.entity.InspectionResult;
+
+import java.util.List;
 
 public class XJFirstColumnApapter extends RecyclerView.Adapter {
     Context mContext;
+    private List<InspectionResult> mData;
 
-    public XJFirstColumnApapter(Context c) {
+    public XJFirstColumnApapter(Context c, List<InspectionResult> inspectionResults) {
         this.mContext = c;
+        this.mData = inspectionResults;
     }
 
     @NonNull
@@ -32,12 +37,18 @@ public class XJFirstColumnApapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myholder = (MyViewHolder) holder;
-        myholder.tv_serial_number.setText(position + "");
+        int index = position + 1;//m默认索引是0
+        myholder.tv_serial_number.setText(String.valueOf(index));
     }
 
     @Override
     public int getItemCount() {
-        return 20;
+        return mData.size();
+    }
+
+    public void setNewData(List<InspectionResult> inspectionResults) {
+        mData = inspectionResults;
+        notifyDataSetChanged();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
