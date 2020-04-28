@@ -43,6 +43,20 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myholder = (MyViewHolder) holder;
+        InspectionResult result = mData.get(position);
+        myholder.tv_fire1.setText(result.getParam1());
+        myholder.et_fire2.setText(result.getParam2());
+        myholder.et_fire3.setText(result.getParam3());
+        myholder.tv_fire4.setText(result.getParam4());
+        myholder.tv_fire5.setText(result.getParam5());
+        myholder.tv_fire6.setText(result.getParam6());
+        myholder.tv_fire7.setText(result.getParam7());
+        myholder.tv_fire8.setText(result.getParam8());
+        myholder.tv_fire9.setText(result.getParam9());
+        if (result.getParam10() != null) {
+            myholder.et_fire10.setText(result.getParam10());
+//            myholder.tv_fire10.setText(result.getParam10());
+        }
         myholder.rl_fire1.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire4.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire5.setOnClickListener(new MyOnClickListener(myholder, position));
@@ -163,14 +177,14 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
         }
         if (mData != null && mData.size() != 0 && mData.size() > 1) {
             //1.删除数据库数据,
-//            InspectionResult itemInfo = mData.get(position);
-//            ServiceFactory.getInspectionService().delete(itemInfo);
-//            //2.刷新列表数据,  理论上应该是数据库删除成功后,有一个返回值,在进行刷新
-//            mData.remove(position);
-//            //删除动画
-//            notifyItemRemoved(position);
-//            //通知重新绑定某一范围内的的数据与界面
-//            notifyItemRangeChanged(position, mData.size() - position);//通知数据与界面重新绑定
+            InspectionResult itemInfo = mData.get(position);
+            ServiceFactory.getInspectionService().delete(itemInfo);
+            //2.刷新列表数据,  理论上应该是数据库删除成功后,有一个返回值,在进行刷新
+            mData.remove(position);
+            //删除动画
+            notifyItemRemoved(position);
+            //通知重新绑定某一范围内的的数据与界面
+            notifyItemRangeChanged(position, mData.size() - position);//通知数据与界面重新绑定
         }
     }
 
