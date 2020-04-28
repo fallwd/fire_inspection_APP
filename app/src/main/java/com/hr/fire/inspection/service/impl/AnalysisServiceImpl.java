@@ -10,6 +10,7 @@ import com.hr.fire.inspection.dao.ItemInfoDao;
 import com.hr.fire.inspection.dao.YearCheckResultDao;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.CompanyInfo;
+import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.AnalysisService;
 
@@ -1314,8 +1315,30 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
     }
 
     @Override
-    public List<YearCheckResult> getInspectionDetail(long platformId, long systemId, String checkDate, String checkPerson, String profession) {
-        return null;
+    public List<InspectionResult> getInspectionDetail(long platformId, long systemId, String checkDate, String checkPerson, String profession) {
+
+        QueryBuilder<InspectionResult> queryBuilder;
+        List<InspectionResult> dataList1;
+        List<InspectionResult> dataList;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date checkDateD = null;
+        try {
+            checkDateD = format.parse(checkDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        // 如何实现or查询
+        queryBuilder = daoSession.queryBuilder(InspectionResult.class).
+                where(
+                        InspectionResultDao.Properties.CheckPerson.eq(checkPerson),
+                        InspectionResultDao.Properties.Profession.eq(profession),
+                        InspectionResultDao.Properties.CompanyInfoId.eq(platformId),
+                        InspectionResultDao.Properties.CheckDate.eq(checkDateD),
+                        InspectionResultDao.Properties.CheckTypeId.eq(systemId)
+//                        InspectionResultDao.Properties.Param1.eq("否")
+                );
+        dataList = queryBuilder.list();
+        return dataList;
     }
 
 

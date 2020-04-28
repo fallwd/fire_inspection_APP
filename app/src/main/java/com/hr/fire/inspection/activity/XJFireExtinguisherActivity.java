@@ -224,10 +224,10 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 result.setProfession(duty);
                 result.setCheckPerson(check_name);
                 result.setCheckDate(parse_check_date);
-                result.setDescription("隐患数据?");
-                result.setImgPath("照片路径?");
+                result.setDescription("暂无");
+                result.setImgPath("暂无图片");
                 result.setParam1("MFZ/ABC5");
-                result.setParam2("请填写.?");
+                result.setParam2("请填写.");
                 result.setParam3("0");
                 result.setParam4("是");
                 result.setParam5("是");
@@ -235,11 +235,13 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 result.setParam7("是");
                 result.setParam8("否");
                 result.setParam9("否");
+                result.setParam10("请输入.");
             }
             long l = service.insertInspectionData(result, companyInfoId, systemId, parse_check_date);
             //表示数据插入成功,再次查询,拿到最新的数据
             if (l == 0) {
                 inspectionResults = service.getInspectionData(companyInfoId, systemId, parse_check_date);
+                Log.d("dong", "inspectionResults=  " + inspectionResults.size() + "  " + inspectionResults.get(0).getParam2());
                 firstColumnApapter.setNewData(inspectionResults);
                 contentApapter.setNewData(inspectionResults);
             } else {
@@ -289,6 +291,8 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
             itemObj.setParam9(tv_fire9.getText().toString());
             itemObj.setParam10(et_fire10.getText().toString());
             itemObj.setParam11(tv_fire11.getText().toString());
+            Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
+                    + tv_fire1.getText().toString() + "  " + et_fire2.getText().toString() + " " + et_fire2.getText().toString());
             service.update(itemObj);
         }
         Toast.makeText(this, "数据保存成功", Toast.LENGTH_SHORT).show();

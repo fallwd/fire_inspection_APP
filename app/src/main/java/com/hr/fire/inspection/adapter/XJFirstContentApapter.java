@@ -10,12 +10,15 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
@@ -40,6 +43,20 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myholder = (MyViewHolder) holder;
+        InspectionResult result = mData.get(position);
+        myholder.tv_fire1.setText(result.getParam1());
+        myholder.et_fire2.setText(result.getParam2());
+        myholder.et_fire3.setText(result.getParam3());
+        myholder.tv_fire4.setText(result.getParam4());
+        myholder.tv_fire5.setText(result.getParam5());
+        myholder.tv_fire6.setText(result.getParam6());
+        myholder.tv_fire7.setText(result.getParam7());
+        myholder.tv_fire8.setText(result.getParam8());
+        myholder.tv_fire9.setText(result.getParam9());
+        if (result.getParam10() != null) {
+            myholder.et_fire10.setText(result.getParam10());
+//            myholder.tv_fire10.setText(result.getParam10());
+        }
         myholder.rl_fire1.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire4.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire5.setOnClickListener(new MyOnClickListener(myholder, position));
@@ -47,12 +64,8 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
         myholder.rl_fire7.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire8.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire9.setOnClickListener(new MyOnClickListener(myholder, position));
-        myholder.rl_fire11.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mYCCamera.startCamera(position);
-            }
-        });
+        myholder.rl_fire11.setOnClickListener(new MyOnClickListener(myholder, position));
+        myholder.rl_fire12.setOnClickListener(new MyOnClickListener(myholder, position));
     }
 
     @Override
@@ -147,9 +160,32 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
                 case R.id.rl_fire9:
                     showPopWind(myholder.tv_fire9);
                     break;
+                case R.id.rl_fire11:
+                    mYCCamera.startCamera(position);
+                    break;
+                case R.id.rl_fire12:
+                    removeData(position);
+                    break;
             }
         }
+    }
 
+    public void removeData(int position) {
+        if (mData != null && mData.size() == 1) {
+            Toast.makeText(mContext, "基础表格,无法删除", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (mData != null && mData.size() != 0 && mData.size() > 1) {
+            //1.删除数据库数据,
+            InspectionResult itemInfo = mData.get(position);
+            ServiceFactory.getInspectionService().delete(itemInfo);
+            //2.刷新列表数据,  理论上应该是数据库删除成功后,有一个返回值,在进行刷新
+            mData.remove(position);
+            //删除动画
+            notifyItemRemoved(position);
+            //通知重新绑定某一范围内的的数据与界面
+            notifyItemRangeChanged(position, mData.size() - position);//通知数据与界面重新绑定
+        }
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -164,6 +200,7 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
         private RelativeLayout rl_fire9;
         private EditText et_fire10;
         private RelativeLayout rl_fire11;
+        private RelativeLayout rl_fire12;
 
         private TextView tv_fire1;
         private TextView tv_fire2;
@@ -190,6 +227,7 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
             rl_fire9 = (RelativeLayout) view.findViewById(R.id.rl_fire9);
             et_fire10 = (EditText) view.findViewById(R.id.et_fire10);
             rl_fire11 = (RelativeLayout) view.findViewById(R.id.rl_fire11);
+            rl_fire12 = (RelativeLayout) view.findViewById(R.id.rl_fire12);
 
             tv_fire1 = (TextView) view.findViewById(R.id.tv_fire1);
             tv_fire2 = (TextView) view.findViewById(R.id.tv_fire2);

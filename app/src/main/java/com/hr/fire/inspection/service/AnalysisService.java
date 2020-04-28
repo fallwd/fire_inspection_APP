@@ -1,5 +1,6 @@
 package com.hr.fire.inspection.service;
 
+import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.entity.YearCheckResult;
 
 import java.util.Date;
@@ -56,6 +57,6 @@ public interface AnalysisService {
      * @return
      */
     List<YearCheckResult> getYearCheckDetail(long platformId, long systemId, String checkDate, String systemNumber, String protectArea);
-    List<YearCheckResult> getInspectionDetail(long platformId, long systemId, String checkDate, String checkPerson, String profession);
+    List<InspectionResult> getInspectionDetail(long platformId, long systemId, String checkDate, String checkPerson, String profession);
 
 }
