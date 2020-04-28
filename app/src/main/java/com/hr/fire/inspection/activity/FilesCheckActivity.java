@@ -137,7 +137,7 @@ public class FilesCheckActivity extends AppCompatActivity implements View.OnClic
 
                 break;
             case 74:  //防火风闸
-
+                intent.setClass(this, XJFireDamperActivity.class);
                 break;
             case 75:  //雨淋阀
 

@@ -2,7 +2,6 @@ package com.hr.fire.inspection.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -20,7 +19,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.OrientationHelper;
@@ -28,7 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.XJFirstColumnApapter;
-import com.hr.fire.inspection.adapter.XJFirstContentApapter;
+import com.hr.fire.inspection.adapter.XJFireDamperContentApapter;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
 import com.hr.fire.inspection.utils.ToastUtil;
@@ -43,7 +41,7 @@ import java.util.Date;
 import java.util.List;
 
 //巡检: 灭火器页面
-public class XJFireExtinguisherActivity extends AppCompatActivity implements View.OnClickListener {
+public class XJFireDamperActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView iv_finish;
     private TextView tv_inspection_pro;
     private TextView iv_save;
@@ -63,7 +61,7 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
     private List<InspectionResult> inspectionResults;
     private InspectionServiceImpl service;
     private XJFirstColumnApapter firstColumnApapter;
-    private XJFirstContentApapter contentApapter;
+    private XJFireDamperContentApapter contentApapter;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final int TAKE_PHOTO = 1;//拍照
@@ -72,7 +70,7 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.xj_fire_extinguisher_activity);
+        setContentView(R.layout.xj_fire_damper_activity);
         getIntentData();
         initData();
         initView();
@@ -138,9 +136,9 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
         mLayoutManager2.setOrientation(OrientationHelper.VERTICAL);
         //给RecyclerView设置布局管理器
         rl_content.setLayoutManager(mLayoutManager2);
-        contentApapter = new XJFirstContentApapter(this, inspectionResults);
+        contentApapter = new XJFireDamperContentApapter(this, inspectionResults);
         rl_content.setAdapter(contentApapter);
-        contentApapter.setmYCCamera(new XJFirstContentApapter.YCCamera() {
+        contentApapter.setmYCCamera(new XJFireDamperContentApapter.YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;
@@ -204,6 +202,7 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 Log.d("dong", "默认有数据==之后吧");
                 //有数据的时候,拿到最后一条数据进行填充
                 InspectionResult item = inspectionResults.get(inspectionResults.size() - 1);
+                Log.d("dong", "item321" + item);
                 result.setProfession(item.getProfession());
                 result.setCheckPerson(item.getCheckPerson());
                 result.setCheckDate(item.getCheckDate());
@@ -220,7 +219,7 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 result.setParam9(item.getParam9());
             } else {
                 //没有数据造一段默认数据
-                Log.d("dong", "默认没有数据吧==");
+                Log.d("dong", "我有数据不走这里");
                 result.setProfession(duty);
                 result.setCheckPerson(check_name);
                 result.setCheckDate(parse_check_date);
@@ -263,7 +262,7 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
         int itemCount = rl_content.getChildCount();
         for (int i = 0; i < itemCount; i++) {
             LinearLayout childAt = (LinearLayout) rl_content.getChildAt(i);
-            TextView tv_fire1 = childAt.findViewById(R.id.tv_fire1);
+//            TextView tv_fire1 = childAt.findViewById(R.id.tv_fire1);
             EditText et_fire2 = childAt.findViewById(R.id.et_fire2);
             EditText et_fire3 = childAt.findViewById(R.id.et_fire3);
             TextView tv_fire4 = childAt.findViewById(R.id.tv_fire4);
@@ -277,10 +276,12 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
 
 
             InspectionResult itemObj = inspectionResults.get(i);
+            Log.i("aaa", "传的对象111"+inspectionResults.get(i));
             itemObj.setProfession(itemObj.getProfession());
             itemObj.setCheckPerson(itemObj.getCheckPerson());
             itemObj.setCheckDate(itemObj.getCheckDate());
-            itemObj.setParam1(tv_fire1.getText().toString());
+            itemObj.setDescription(itemObj.getDescription());
+//            itemObj.setParam1(tv_fire1.getText().toString());
             itemObj.setParam2(et_fire2.getText().toString());
             itemObj.setParam3(et_fire3.getText().toString());
             itemObj.setParam4(tv_fire4.getText().toString());
@@ -291,8 +292,10 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
             itemObj.setParam9(tv_fire9.getText().toString());
             itemObj.setParam10(et_fire10.getText().toString());
             itemObj.setParam11(tv_fire11.getText().toString());
-            Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
-                    + tv_fire1.getText().toString() + "  " + et_fire2.getText().toString() + " " + et_fire2.getText().toString());
+
+//            Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
+//                     + et_fire2.getText().toString() + " " + et_fire2.getText().toString());
+
             service.update(itemObj);
         }
         Toast.makeText(this, "数据保存成功", Toast.LENGTH_SHORT).show();
