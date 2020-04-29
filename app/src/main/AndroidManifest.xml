@@ -188,5 +188,11 @@
         <activity
             android:name=".activity.XJFireHoseStationActivity"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.XJWaterHose"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.XJKitchenWetPowder"
+            android:screenOrientation="landscape" />
     </application>
 </manifest>

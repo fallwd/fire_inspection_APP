@@ -67,19 +67,6 @@ public class XJGasContentAdapter extends RecyclerView.Adapter{
         myholder.tv_gas18.setText(result.getParam18());
         myholder.tv_gas19.setText(result.getParam19());
 
-        myholder.tv_gas9.setText(result.getParam9());
-        myholder.tv_gas10.setText(result.getParam10());
-        myholder.tv_gas11.setText(result.getParam11());
-
-        myholder.tv_gas12.setText(result.getParam12());
-        myholder.tv_gas13.setText(result.getParam13());
-        myholder.tv_gas14.setText(result.getParam14());
-        myholder.tv_gas15.setText(result.getParam15());
-        myholder.tv_gas16.setText(result.getParam16());
-        myholder.tv_gas17.setText(result.getParam17());
-        myholder.tv_gas18.setText(result.getParam18());
-        myholder.tv_gas19.setText(result.getParam19());
-
         myholder.tv_gas20.setText(result.getParam20());
         myholder.tv_gas21.setText(result.getParam21());
         myholder.tv_gas22.setText(result.getParam22());
