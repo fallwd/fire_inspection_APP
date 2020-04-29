@@ -237,9 +237,7 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
             tv_fire6 = (TextView) view.findViewById(R.id.tv_fire6);
             tv_fire7 = (TextView) view.findViewById(R.id.tv_fire7);
             tv_fire8 = (TextView) view.findViewById(R.id.tv_fire8);
-            tv_fire9 = (TextView) view.findViewById(R.id.tv_fire9);
-            tv_fire10 = (TextView) view.findViewById(R.id.tv_fire10);
-            tv_fire11 = (TextView) view.findViewById(R.id.tv_fire11);
+
         }
     }
 
