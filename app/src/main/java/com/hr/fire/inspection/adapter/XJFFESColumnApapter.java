@@ -4,26 +4,21 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.entity.InspectionResult;
-import com.hr.fire.inspection.service.ServiceFactory;
 
 import java.util.List;
 
-public class XJFirstColumnApapter extends RecyclerView.Adapter {
+public class XJFFESColumnApapter extends RecyclerView.Adapter {
     Context mContext;
     private List<InspectionResult> mData;
 
-    public XJFirstColumnApapter(Context c, List<InspectionResult> inspectionResults) {
+    public XJFFESColumnApapter(Context c, List<InspectionResult> inspectionResults) {
         this.mContext = c;
         this.mData = inspectionResults;
     }
@@ -31,7 +26,7 @@ public class XJFirstColumnApapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.xj_item_fire_column_layout, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.xj_ffes_column_layout, parent, false);
         MyViewHolder holder = new MyViewHolder(view);
         return holder;
     }

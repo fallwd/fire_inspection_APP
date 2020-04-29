@@ -10,4 +10,11 @@
         <attr name="tablecontent_height" format="integer"/>
 
     </declare-styleable>
+
+    <declare-styleable name="PickerView">
+
+        <attr name="isLoop" format="boolean" />
+
+    </declare-styleable>
+
 </resources>

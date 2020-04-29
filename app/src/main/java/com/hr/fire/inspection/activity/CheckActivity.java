@@ -59,7 +59,6 @@ public class CheckActivity extends AppCompatActivity {
     }
     private void initData() {
         systemNameData = ServiceFactory.getInspectionService().getSystemNameData();
-//        Log.d("dong", "s==== " + systemNameData.size() + "   " + systemNameData.toString());
     }
 
     Intent intent = new Intent();

@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -46,7 +47,7 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
         company_name = b.getString("company_name");
 
         f_title = b.getString("f_title");
-        if(f_title.equals("xunjian")){
+        if (f_title.equals("xunjian")) {
             getIntentInfo();
         }
 
@@ -94,7 +95,7 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
                 long current_id = idlist.get(position);
                 String Platform_name = list.get(position);
                 // 此处判断是不是消防巡检点击进来  是则需传入检查专业  检查人等
-                if(f_title.equals("xunjian")){
+                if (f_title.equals("xunjian")) {
                     intent.setClass(PlatformActivity.this, CheckActivity.class);
                     intent.putExtra("Platform_ID", current_id);
                     intent.putExtra("Platform_name", Platform_name);
@@ -102,9 +103,9 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
                     intent.putExtra("oil_name", oil_name);
                     intent.putExtra("f_title", f_title);
                     intent.putExtra("duty", duty);
-                    intent.putExtra("check_name",check_name);
-                    intent.putExtra("check_date",check_date);
-                }else{
+                    intent.putExtra("check_name", check_name);
+                    intent.putExtra("check_date", check_date);
+                } else {
                     intent.setClass(PlatformActivity.this, FireActivity.class);
                     intent.putExtra("Platform_ID", current_id);
                     intent.putExtra("Platform_name", Platform_name);
@@ -146,6 +147,7 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
         check_name = b.getString("check_name");
         check_date = b.getString("check_date");
     }
+
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.del_btn:   //lv条目中 iv_del

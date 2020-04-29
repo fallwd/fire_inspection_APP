@@ -3,6 +3,8 @@ package com.hr.fire.inspection.utils;
 import android.annotation.SuppressLint;
 import android.util.Log;
 
+import com.fasterxml.aalto.util.TextUtil;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -69,8 +71,8 @@ public class TimeUtil {
     // 2019-07-23  >  转  data
     public String dataToHHmmss(Date date) {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        String strMillis = format.format(date);
-        return strMillis;
+        String str= format.format(date);
+        return str;
     }
 
     //将data 转  时间2019-07-23
@@ -141,5 +143,27 @@ public class TimeUtil {
         long ts = date.getTime();
         res = String.valueOf(ts);
         return res;
+    }
+
+    /**
+     * 使用用户格式提取字符串日期
+     *
+     * @param strDate 日期字符串
+     * @param pattern 日期格式
+     * @return
+     */
+
+    public static Date parse(String strDate, String pattern) {
+
+        if (strDate == null || strDate.length() == 0) {
+            return null;
+        }
+        try {
+            SimpleDateFormat df = new SimpleDateFormat(pattern);
+            return df.parse(strDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
