@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="45dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="内部属性是否齐全"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="160dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="灭火剂存储钢瓶外观是否良好"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="140dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="灭火药剂药量是否充足"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="140dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="氮气瓶外观是否良好"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="易熔片钢丝机构外表面是否清洁，油污是否清洗干净"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="检查灭火剂喷口外表面是否清洁，油污是否清洗干净"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="易熔片是否按照制造商说明进行更换"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="喷嘴是否有喷帽"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="手动释放功能是否正常"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text=" 复位检查复位机构是否工作正常"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="隐患描述"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="8dp"
+            android:text="照片"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="8dp"
+            android:text="删除"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+</LinearLayout>
