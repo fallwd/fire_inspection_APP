@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="45dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="90dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="25dp"
+        android:gravity="center_vertical"
+        android:text="雨淋阀位号"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="90dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="安装位置"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="90dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="保护区域"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="雨淋阀外观是否良好"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="140dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="喷头外观及数量是否良好"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="雨淋阀控制阀门开关状态是否正常"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="140dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="雨淋阀供气压力是否正常"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="170dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="雨淋阀手动/自动启动是否正常"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="雨淋阀前后压力表是否正常"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="140dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="雨淋阀供气压力是否正常"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="消防泵手动/自动启动是否正常"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="140dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="中控是否正常显示和反馈"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="160dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="保护区域现场喷淋是否正常"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="140dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="喷头是否存在堵塞问题"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="隐患描述"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="90dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="8dp"
+            android:text="照片"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="8dp"
+            android:text="删除"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -16,16 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.HiddenLibraryAdapter1;
-import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
-import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
-import com.hr.fire.inspection.utils.HYLogUtil;
-import com.hr.fire.inspection.utils.ToastUtil;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,10 +28,8 @@ public class HiddenLibaryFragment1 extends Fragment {
     private static HiddenLibaryFragment1 fragment1;
     private static String mKey;
     private HiddenLibraryAdapter1 adapter;
-    private List<HashMap> itemDataList = new ArrayList<>();
     private RecyclerView rc_list;
     private IntentTransmit its;
-    private List<CheckType> checkTypes;
     private List<HashMap> retData;
 
     public static HiddenLibaryFragment1 newInstance(String key, IntentTransmit value) {
@@ -55,9 +47,14 @@ public class HiddenLibaryFragment1 extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            String string = getArguments().getString("key");
+            Toast.makeText(getActivity(), string, Toast.LENGTH_LONG).show();
+
             its = (IntentTransmit) getArguments().getSerializable(mKey);
+            Log.d("啊啊啊啊","its"+ its);
         }
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -78,8 +75,7 @@ public class HiddenLibaryFragment1 extends Fragment {
     private void initData() {
         //参数
         retData = ServiceFactory.getAnalysisService().getYearCheckView(0,0,null, null);
-        HYLogUtil.getInstance().d("获取隐患库年检表格数据,数据查看:" + retData.size() + "  " + retData.toString());
-        // 一级表插入数据insertItemData
+//        HYLogUtil.getInstance().d("获取隐患库年检表格数据,数据查看:" + retData.size() + "  " + retData.toString());
     }
     private void initView() {
 //        if (retData.size() == 0) {
@@ -92,8 +88,6 @@ public class HiddenLibaryFragment1 extends Fragment {
         rc_list.setAdapter(adapter);
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
-
-
     }
 
 

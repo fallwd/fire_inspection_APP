@@ -1,40 +1,40 @@
 package com.hr.fire.inspection.activity;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.adapter.CheckAdapter;
+import com.hr.fire.inspection.adapter.CheckItemAdapter;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.SystemList;
 import com.hr.fire.inspection.service.ServiceFactory;
-
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-public class CheckActivity  extends AppCompatActivity {
+//巡检设备列表
+public class CheckActivity extends AppCompatActivity {
     private long platform_id;
     private String company_name;
     private String oil_name;
     private String Platform_name;
-    private String f_title;
+    private List<CheckType> systemNameData;
+    private ArrayList<SystemList> listSys = new ArrayList<>();
     private String duty;
     private String check_name;
     private String check_date;
 
-    private List<CheckType> systemNameData;
-    private ArrayList<SystemList> listSys = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +55,11 @@ public class CheckActivity  extends AppCompatActivity {
         check_name = b.getString("check_name");
         check_date = b.getString("check_date");
         initData();
+
     }
     private void initData() {
         systemNameData = ServiceFactory.getInspectionService().getSystemNameData();
+//        Log.d("dong", "s==== " + systemNameData.size() + "   " + systemNameData.toString());
     }
 
     Intent intent = new Intent();
@@ -65,13 +67,16 @@ public class CheckActivity  extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        // 标题
+        TextView tv_inspection_pro = findViewById(R.id.tv_inspection_pro);
+        tv_inspection_pro.setText("消防巡检");
         //列表
         ListView main_list = findViewById(R.id.main_list);
-        CheckAdapter fireItemAdapter = new CheckAdapter(this);
+        CheckItemAdapter fireItemAdapter = new CheckItemAdapter(this);
         fireItemAdapter.setData(systemNameData);
         main_list.setAdapter(fireItemAdapter);
 
-        //点击跳转详情页
+//点击跳转详情页
         main_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -105,34 +110,28 @@ public class CheckActivity  extends AppCompatActivity {
             }
         });
 
+
+
         // 点击跳转报告页
         Button pr_but = findViewById(R.id.product_report_button);
-        pr_but.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onClick(View v) {
-                for (int i = 0; i < systemNameData.size(); i++) {
-                    listSys.add(new SystemList(systemNameData.get(i).getId(), systemNameData.get(i).getName()));
-                }
-                // 点击跳转
-                Intent intent = new Intent(CheckActivity.this, FireReportActivity.class);
-                intent.putExtra("list", (Serializable) listSys);
-                intent.putExtra("company_name", company_name);
-                intent.putExtra("oil_name", oil_name);
-                intent.putExtra("Platform_name", Platform_name);
-                intent.putExtra("platform_id", platform_id);
-                // 页面传值
-                startActivity(intent);
+        pr_but.setOnClickListener(v -> {
+            for (int i = 0; i < systemNameData.size(); i++) {
+                listSys.add(new SystemList(systemNameData.get(i).getId(), systemNameData.get(i).getName()));
             }
+            // 点击跳转
+            Intent intent = new Intent(CheckActivity.this, CheckReport.class);
+            intent.putExtra("list", (Serializable) listSys);
+            intent.putExtra("company_name", company_name);
+            intent.putExtra("oil_name", oil_name);
+            intent.putExtra("Platform_name", Platform_name);
+            intent.putExtra("platform_id", platform_id);
+            // 页面传值
+            startActivity(intent);
         });
 
         // 点击返回上一页
-        ImageView iv_finish = (ImageView) findViewById(R.id.iv_finish);
-        iv_finish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        ImageView iv_finish = findViewById(R.id.iv_finish);
+        iv_finish.setOnClickListener(v -> finish());
     }
+
 }
