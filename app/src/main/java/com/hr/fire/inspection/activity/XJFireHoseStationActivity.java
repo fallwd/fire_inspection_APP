@@ -25,8 +25,8 @@ import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.adapter.XJFireHoseStationContentApapter;
 import com.hr.fire.inspection.adapter.XJFirstColumnApapter;
-import com.hr.fire.inspection.adapter.XJFireDamperContentApapter;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
 import com.hr.fire.inspection.utils.ToastUtil;
@@ -41,7 +41,7 @@ import java.util.Date;
 import java.util.List;
 
 //巡检: 灭火器页面
-public class XJFireDamperActivity extends AppCompatActivity implements View.OnClickListener {
+public class XJFireHoseStationActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView iv_finish;
     private TextView tv_inspection_pro;
     private TextView iv_save;
@@ -61,7 +61,7 @@ public class XJFireDamperActivity extends AppCompatActivity implements View.OnCl
     private List<InspectionResult> inspectionResults;
     private InspectionServiceImpl service;
     private XJFirstColumnApapter firstColumnApapter;
-    private XJFireDamperContentApapter contentApapter;
+    private XJFireHoseStationContentApapter contentApapter;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final int TAKE_PHOTO = 1;//拍照
@@ -70,7 +70,7 @@ public class XJFireDamperActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.xj_fire_damper_activity);
+        setContentView(R.layout.xj_fire_hose_station_activity);
         getIntentData();
         initData();
         initView();
@@ -83,11 +83,9 @@ public class XJFireDamperActivity extends AppCompatActivity implements View.OnCl
         systemId = intent.getLongExtra("systemId", -1);
         companyInfoId = intent.getLongExtra("platform_id", -1);
         str_title = intent.getStringExtra("str_title"); //系统名称 :高压二氧化碳灭火系统
-
         duty = intent.getStringExtra("duty");  // 专业
         check_name = intent.getStringExtra("check_name"); // 检查人
         check_date = intent.getStringExtra("check_date"); //用户选择的时间
-        Log.i("aaaa","传参获取的数据"+systemId+"--------"+ companyInfoId+"--------" + str_title);
         //测试用, 因为前面传过来的时间格式有问题
         check_date = "2020-04-23 18:21";
         try {
@@ -138,9 +136,9 @@ public class XJFireDamperActivity extends AppCompatActivity implements View.OnCl
         mLayoutManager2.setOrientation(OrientationHelper.VERTICAL);
         //给RecyclerView设置布局管理器
         rl_content.setLayoutManager(mLayoutManager2);
-        contentApapter = new XJFireDamperContentApapter(this, inspectionResults);
+        contentApapter = new XJFireHoseStationContentApapter(this, inspectionResults);
         rl_content.setAdapter(contentApapter);
-        contentApapter.setmYCCamera(new XJFireDamperContentApapter.YCCamera() {
+        contentApapter.setmYCCamera(new XJFireHoseStationContentApapter.YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;
@@ -212,30 +210,42 @@ public class XJFireDamperActivity extends AppCompatActivity implements View.OnCl
                 result.setImgPath(item.getImgPath());
                 result.setParam2(item.getParam2());
                 result.setParam3(item.getParam3());
-                result.setParam4(item.getParam4());
+//                result.setParam4(item.getParam4());
                 result.setParam5(item.getParam5());
                 result.setParam6(item.getParam6());
                 result.setParam7(item.getParam7());
                 result.setParam8(item.getParam8());
                 result.setParam9(item.getParam9());
+                result.setParam10(item.getParam10());
+                result.setParam11(item.getParam11());
+                result.setParam12(item.getParam12());
+                result.setParam13(item.getParam13());
+                result.setParam14(item.getParam14());
+                result.setParam15(item.getParam15());
             } else {
                 //没有数据造一段默认数据
-                Log.d("dong", "我有数据不走这里");
                 result.setProfession(duty);
                 result.setCheckPerson(check_name);
                 result.setCheckDate(parse_check_date);
                 result.setDescription("暂无");
                 result.setImgPath("暂无图片");
                 result.setParam2("请输入");
-                result.setParam3("CEPA-X-6201");
-                result.setParam4("是");
+                result.setParam3("请输入");
+//                result.setParam4("是");
                 result.setParam5("是");
                 result.setParam6("是");
                 result.setParam7("是");
                 result.setParam8("否");
                 result.setParam9("否");
-                result.setParam10("请输入");
+                result.setParam10("是");
+                result.setParam11("是");
+                result.setParam12("是");
+                result.setParam13("是");
+                result.setParam14("否");
+                result.setParam15("否");
+                result.setParam16("请输入");
             }
+            Log.i("aaa","我插入的数据"+result);
             long l = service.insertInspectionData(result, companyInfoId, systemId, parse_check_date);
             //表示数据插入成功,再次查询,拿到最新的数据
             if (l == 0) {
@@ -271,8 +281,14 @@ public class XJFireDamperActivity extends AppCompatActivity implements View.OnCl
             TextView tv_fire7 = childAt.findViewById(R.id.tv_fire7);
             TextView tv_fire8 = childAt.findViewById(R.id.tv_fire8);
             TextView tv_fire9 = childAt.findViewById(R.id.tv_fire9);
-            EditText et_fire10 = childAt.findViewById(R.id.et_fire10);
+            TextView tv_fire10 = childAt.findViewById(R.id.tv_fire10);
             TextView tv_fire11 = childAt.findViewById(R.id.tv_fire11);
+            TextView tv_fire12 = childAt.findViewById(R.id.tv_fire12);
+            TextView tv_fire13 = childAt.findViewById(R.id.tv_fire13);
+            TextView tv_fire14 = childAt.findViewById(R.id.tv_fire14);
+            TextView tv_fire15 = childAt.findViewById(R.id.tv_fire15);
+            EditText et_fire16 = childAt.findViewById(R.id.et_fire16);
+            TextView tv_fire17 = childAt.findViewById(R.id.tv_fire17);
 
 
             InspectionResult itemObj = inspectionResults.get(i);
@@ -284,15 +300,21 @@ public class XJFireDamperActivity extends AppCompatActivity implements View.OnCl
 //            itemObj.setParam1(tv_fire1.getText().toString());
             itemObj.setParam2(et_fire2.getText().toString());
             itemObj.setParam3(et_fire3.getText().toString());
-            itemObj.setParam4(tv_fire4.getText().toString());
+//            itemObj.setParam4(tv_fire4.getText().toString());
             itemObj.setParam5(tv_fire5.getText().toString());
             itemObj.setParam6(tv_fire6.getText().toString());
             itemObj.setParam7(tv_fire7.getText().toString());
             itemObj.setParam8(tv_fire8.getText().toString());
             itemObj.setParam9(tv_fire9.getText().toString());
-            itemObj.setParam10(et_fire10.getText().toString());
+            itemObj.setParam10(tv_fire10.getText().toString());
             itemObj.setParam11(tv_fire11.getText().toString());
-
+            itemObj.setParam12(tv_fire12.getText().toString());
+            itemObj.setParam13(tv_fire13.getText().toString());
+            itemObj.setParam14(tv_fire14.getText().toString());
+            itemObj.setParam15(tv_fire15.getText().toString());
+            itemObj.setParam16(et_fire16.getText().toString());
+            itemObj.setParam17(tv_fire17.getText().toString());
+            Log.i("bbb","我保存的数据"+itemObj);
 //            Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
 //                     + et_fire2.getText().toString() + " " + et_fire2.getText().toString());
             service.update(itemObj);

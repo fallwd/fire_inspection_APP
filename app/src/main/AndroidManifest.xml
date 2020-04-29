@@ -179,5 +179,11 @@
         <activity
             android:name=".activity.XJFireDamperActivity"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.XJDelugeValveActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.XJFireHoseStationActivity"
+            android:screenOrientation="landscape" />
     </application>
 </manifest>
