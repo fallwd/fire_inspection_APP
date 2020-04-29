@@ -149,16 +149,16 @@ public class FilesCheckActivity extends AppCompatActivity implements View.OnClic
 
                 break;
             case 78:  //火气探头及火灾盘
-
+                intent.setClass(this, XJFAGPActivity.class);
                 break;
             case 79:  //火气监控系统
-
+                intent.setClass(this, XJFAGMActivity.class);
                 break;
             case 80:  //厨房湿粉灭火系统
 
                 break;
             case 81:  //泡沫灭火
-
+                intent.setClass(this, XJFFESActivity.class);
                 break;
             case 82:  //消防泵
 

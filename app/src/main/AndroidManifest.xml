@@ -185,5 +185,14 @@
         <activity
             android:name=".activity.XJFireHoseStationActivity"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.XJFAGPActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.XJFAGMActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.XJFFESActivity"
+            android:screenOrientation="landscape" />
     </application>
 </manifest>
