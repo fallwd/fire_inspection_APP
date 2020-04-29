@@ -25,8 +25,8 @@ import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.adapter.XJFireHoseStationContentApapter;
-import com.hr.fire.inspection.adapter.XJFirstColumnApapter;
+import com.hr.fire.inspection.adapter.XJFFESContentApapter;
+import com.hr.fire.inspection.adapter.XJFFESColumnApapter;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
 import com.hr.fire.inspection.utils.ToastUtil;
@@ -41,7 +41,7 @@ import java.util.Date;
 import java.util.List;
 
 //巡检: 灭火器页面
-public class XJFireHoseStationActivity extends AppCompatActivity implements View.OnClickListener {
+public class XJFFESActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView iv_finish;
     private TextView tv_inspection_pro;
     private TextView iv_save;
@@ -60,8 +60,8 @@ public class XJFireHoseStationActivity extends AppCompatActivity implements View
     private String srt_date;
     private List<InspectionResult> inspectionResults;
     private InspectionServiceImpl service;
-    private XJFirstColumnApapter firstColumnApapter;
-    private XJFireHoseStationContentApapter contentApapter;
+    private XJFFESColumnApapter firstColumnApapter;
+    private XJFFESContentApapter contentApapter;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final int TAKE_PHOTO = 1;//拍照
@@ -70,7 +70,7 @@ public class XJFireHoseStationActivity extends AppCompatActivity implements View
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.xj_fire_hose_station_activity);
+        setContentView(R.layout.xj_ffes_activity);
         getIntentData();
         initData();
         initView();
@@ -83,9 +83,11 @@ public class XJFireHoseStationActivity extends AppCompatActivity implements View
         systemId = intent.getLongExtra("systemId", -1);
         companyInfoId = intent.getLongExtra("platform_id", -1);
         str_title = intent.getStringExtra("str_title"); //系统名称 :高压二氧化碳灭火系统
+
         duty = intent.getStringExtra("duty");  // 专业
         check_name = intent.getStringExtra("check_name"); // 检查人
         check_date = intent.getStringExtra("check_date"); //用户选择的时间
+        Log.i("aaaa","传参获取的数据"+systemId+"--------"+ companyInfoId+"--------" + str_title);
         //测试用, 因为前面传过来的时间格式有问题
         check_date = "2020-04-23 18:21";
         try {
@@ -128,7 +130,7 @@ public class XJFireHoseStationActivity extends AppCompatActivity implements View
         mLayoutManager.setOrientation(OrientationHelper.VERTICAL);
         //给RecyclerView设置布局管理器
         rl_firstColumn.setLayoutManager(mLayoutManager);
-        firstColumnApapter = new XJFirstColumnApapter(this, inspectionResults);
+        firstColumnApapter = new XJFFESColumnApapter(this, inspectionResults);
         rl_firstColumn.setAdapter(firstColumnApapter);
 
 
@@ -136,9 +138,9 @@ public class XJFireHoseStationActivity extends AppCompatActivity implements View
         mLayoutManager2.setOrientation(OrientationHelper.VERTICAL);
         //给RecyclerView设置布局管理器
         rl_content.setLayoutManager(mLayoutManager2);
-        contentApapter = new XJFireHoseStationContentApapter(this, inspectionResults);
+        contentApapter = new XJFFESContentApapter(this, inspectionResults);
         rl_content.setAdapter(contentApapter);
-        contentApapter.setmYCCamera(new XJFireHoseStationContentApapter.YCCamera() {
+        contentApapter.setmYCCamera(new XJFFESContentApapter.YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;
@@ -156,6 +158,7 @@ public class XJFireHoseStationActivity extends AppCompatActivity implements View
         rl_firstColumn.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
                 if (recyclerView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE) {
                     rl_content.scrollBy(dx, dy);
                 }
@@ -164,6 +167,7 @@ public class XJFireHoseStationActivity extends AppCompatActivity implements View
         rl_content.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
                 if (recyclerView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE) {
                     rl_firstColumn.scrollBy(dx, dy);
                 }
@@ -208,7 +212,7 @@ public class XJFireHoseStationActivity extends AppCompatActivity implements View
                 result.setImgPath(item.getImgPath());
                 result.setParam2(item.getParam2());
                 result.setParam3(item.getParam3());
-//                result.setParam4(item.getParam4());
+                result.setParam4(item.getParam4());
                 result.setParam5(item.getParam5());
                 result.setParam6(item.getParam6());
                 result.setParam7(item.getParam7());
@@ -220,30 +224,52 @@ public class XJFireHoseStationActivity extends AppCompatActivity implements View
                 result.setParam13(item.getParam13());
                 result.setParam14(item.getParam14());
                 result.setParam15(item.getParam15());
+                result.setParam16(item.getParam16());
+                result.setParam17(item.getParam17());
+                result.setParam18(item.getParam18());
+                result.setParam19(item.getParam19());
+                result.setParam20(item.getParam20());
+                result.setParam21(item.getParam21());
+                result.setParam22(item.getParam22());
+                result.setParam23(item.getParam23());
+                result.setParam24(item.getParam24());
+
+
+
             } else {
                 //没有数据造一段默认数据
+                Log.d("dong", "我有数据不走这里");
                 result.setProfession(duty);
                 result.setCheckPerson(check_name);
                 result.setCheckDate(parse_check_date);
                 result.setDescription("暂无");
                 result.setImgPath("暂无图片");
+                result.setParam1("请输入");
                 result.setParam2("请输入");
                 result.setParam3("请输入");
-//                result.setParam4("是");
+                result.setParam4("是");
                 result.setParam5("是");
                 result.setParam6("是");
                 result.setParam7("是");
-                result.setParam8("否");
-                result.setParam9("否");
+                result.setParam8("是");
+                result.setParam9("是");
                 result.setParam10("是");
                 result.setParam11("是");
                 result.setParam12("是");
                 result.setParam13("是");
-                result.setParam14("否");
-                result.setParam15("否");
-                result.setParam16("请输入");
+                result.setParam14("是");
+                result.setParam15("是");
+                result.setParam16("是");
+                result.setParam17("是");
+                result.setParam18("是");
+                result.setParam19("是");
+                result.setParam20("是");
+                result.setParam21("是");
+                result.setParam22("是");
+                result.setParam23("是");
+                result.setParam24("是");
+                result.setParam25("请输入");
             }
-            Log.i("aaa","我插入的数据"+result);
             long l = service.insertInspectionData(result, companyInfoId, systemId, parse_check_date);
             //表示数据插入成功,再次查询,拿到最新的数据
             if (l == 0) {
@@ -270,7 +296,7 @@ public class XJFireHoseStationActivity extends AppCompatActivity implements View
         int itemCount = rl_content.getChildCount();
         for (int i = 0; i < itemCount; i++) {
             LinearLayout childAt = (LinearLayout) rl_content.getChildAt(i);
-//            TextView tv_fire1 = childAt.findViewById(R.id.tv_fire1);
+            EditText et_fire1 = childAt.findViewById(R.id.et_fire1);
             EditText et_fire2 = childAt.findViewById(R.id.et_fire2);
             EditText et_fire3 = childAt.findViewById(R.id.et_fire3);
             TextView tv_fire4 = childAt.findViewById(R.id.tv_fire4);
@@ -285,8 +311,18 @@ public class XJFireHoseStationActivity extends AppCompatActivity implements View
             TextView tv_fire13 = childAt.findViewById(R.id.tv_fire13);
             TextView tv_fire14 = childAt.findViewById(R.id.tv_fire14);
             TextView tv_fire15 = childAt.findViewById(R.id.tv_fire15);
-            EditText et_fire16 = childAt.findViewById(R.id.et_fire16);
+            TextView tv_fire16 = childAt.findViewById(R.id.tv_fire16);
             TextView tv_fire17 = childAt.findViewById(R.id.tv_fire17);
+            TextView tv_fire18 = childAt.findViewById(R.id.tv_fire18);
+            TextView tv_fire19 = childAt.findViewById(R.id.tv_fire19);
+            TextView tv_fire20 = childAt.findViewById(R.id.tv_fire20);
+            TextView tv_fire21 = childAt.findViewById(R.id.tv_fire21);
+            TextView tv_fire22 = childAt.findViewById(R.id.tv_fire22);
+            TextView tv_fire23 = childAt.findViewById(R.id.tv_fire23);
+            TextView tv_fire24 = childAt.findViewById(R.id.tv_fire24);
+            EditText et_fire25 = childAt.findViewById(R.id.et_fire25);
+            TextView tv_fire26 = childAt.findViewById(R.id.tv_fire26);
+
 
 
             InspectionResult itemObj = inspectionResults.get(i);
@@ -295,10 +331,10 @@ public class XJFireHoseStationActivity extends AppCompatActivity implements View
             itemObj.setCheckPerson(itemObj.getCheckPerson());
             itemObj.setCheckDate(itemObj.getCheckDate());
             itemObj.setDescription(itemObj.getDescription());
-//            itemObj.setParam1(tv_fire1.getText().toString());
+            itemObj.setParam1(et_fire1.getText().toString());
             itemObj.setParam2(et_fire2.getText().toString());
             itemObj.setParam3(et_fire3.getText().toString());
-//            itemObj.setParam4(tv_fire4.getText().toString());
+            itemObj.setParam4(tv_fire4.getText().toString());
             itemObj.setParam5(tv_fire5.getText().toString());
             itemObj.setParam6(tv_fire6.getText().toString());
             itemObj.setParam7(tv_fire7.getText().toString());
@@ -310,9 +346,17 @@ public class XJFireHoseStationActivity extends AppCompatActivity implements View
             itemObj.setParam13(tv_fire13.getText().toString());
             itemObj.setParam14(tv_fire14.getText().toString());
             itemObj.setParam15(tv_fire15.getText().toString());
-            itemObj.setParam16(et_fire16.getText().toString());
+            itemObj.setParam16(tv_fire16.getText().toString());
             itemObj.setParam17(tv_fire17.getText().toString());
-            Log.i("bbb","我保存的数据"+itemObj);
+            itemObj.setParam18(tv_fire18.getText().toString());
+            itemObj.setParam19(tv_fire19.getText().toString());
+            itemObj.setParam20(tv_fire20.getText().toString());
+            itemObj.setParam21(tv_fire21.getText().toString());
+            itemObj.setParam22(tv_fire22.getText().toString());
+            itemObj.setParam23(tv_fire23.getText().toString());
+            itemObj.setParam24(tv_fire24.getText().toString());
+            itemObj.setParam25(et_fire25.getText().toString());
+
 //            Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
 //                     + et_fire2.getText().toString() + " " + et_fire2.getText().toString());
             service.update(itemObj);
