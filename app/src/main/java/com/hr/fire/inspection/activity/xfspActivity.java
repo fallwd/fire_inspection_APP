@@ -1,8 +1,15 @@
 package com.hr.fire.inspection.activity;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.OrientationHelper;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -17,18 +24,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.OrientationHelper;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.XJFirstColumnApapter;
 import com.hr.fire.inspection.adapter.XJFirstContentApapter;
+import com.hr.fire.inspection.adapter.xfspAdapter;
+import com.hr.fire.inspection.adapter.xfspFistcolumn;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
 import com.hr.fire.inspection.utils.ToastUtil;
@@ -42,8 +42,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-//巡检: 灭火器页面
-public class XJFireExtinguisherActivity extends AppCompatActivity implements View.OnClickListener {
+public class xfspActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView iv_finish;
     private TextView tv_inspection_pro;
     private TextView iv_save;
@@ -62,17 +61,17 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
     private String srt_date;
     private List<InspectionResult> inspectionResults;
     private InspectionServiceImpl service;
-    private XJFirstColumnApapter firstColumnApapter;
-    private XJFirstContentApapter contentApapter;
+    private xfspFistcolumn firstColumnApapter;
+    private xfspAdapter contentApapter;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final int TAKE_PHOTO = 1;//拍照
     private int imgPostion = -1;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.xj_fire_extinguisher_activity);
+        setContentView(R.layout.activity_xfsp);
         getIntentData();
         initData();
         initView();
@@ -130,7 +129,7 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
         mLayoutManager.setOrientation(OrientationHelper.VERTICAL);
         //给RecyclerView设置布局管理器
         rl_firstColumn.setLayoutManager(mLayoutManager);
-        firstColumnApapter = new XJFirstColumnApapter(this, inspectionResults);
+        firstColumnApapter = new xfspFistcolumn(this, inspectionResults);
         rl_firstColumn.setAdapter(firstColumnApapter);
 
 
@@ -138,17 +137,14 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
         mLayoutManager2.setOrientation(OrientationHelper.VERTICAL);
         //给RecyclerView设置布局管理器
         rl_content.setLayoutManager(mLayoutManager2);
-        contentApapter = new XJFirstContentApapter(this, inspectionResults);
+        contentApapter = new xfspAdapter(this, inspectionResults);
         rl_content.setAdapter(contentApapter);
-        contentApapter.setmYCCamera(new XJFirstContentApapter.YCCamera() {
-            @Override
-            public void startCamera(int postion) {
-                imgPostion = postion;
-                try {
-                    camera();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        contentApapter.setmYCCamera(postion -> {
+            imgPostion = postion;
+            try {
+                camera();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
     }
@@ -208,34 +204,21 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 result.setCheckPerson(item.getCheckPerson());
                 result.setCheckDate(item.getCheckDate());
                 result.setDescription(item.getDescription());
-                result.setImgPath(item.getImgPath());
                 result.setParam1(item.getParam1());
                 result.setParam2(item.getParam2());
                 result.setParam3(item.getParam3());
                 result.setParam4(item.getParam4());
-                result.setParam5(item.getParam5());
-                result.setParam6(item.getParam6());
-                result.setParam7(item.getParam7());
-                result.setParam8(item.getParam8());
-                result.setParam9(item.getParam9());
             } else {
                 //没有数据造一段默认数据
-                Log.d("dong", "默认没有数据吧==");
                 result.setProfession(duty);
                 result.setCheckPerson(check_name);
                 result.setCheckDate(parse_check_date);
-                result.setDescription("暂无");
-                result.setImgPath("暂无图片");
-                result.setParam1("MFZ/ABC5");
-                result.setParam2("请填写.");
-                result.setParam3("0");
+                result.setParam1("是");
+                result.setParam2("是");
+                result.setParam3("是");
                 result.setParam4("是");
-                result.setParam5("是");
-                result.setParam6("是");
-                result.setParam7("是");
-                result.setParam8("否");
-                result.setParam9("否");
-                result.setParam10("请输入.");
+                result.setDescription("暂无");
+                result.setImgPath("暂无图片222");
             }
             long l = service.insertInspectionData(result, companyInfoId, systemId, parse_check_date);
             //表示数据插入成功,再次查询,拿到最新的数据
@@ -264,16 +247,11 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
         for (int i = 0; i < itemCount; i++) {
             LinearLayout childAt = (LinearLayout) rl_content.getChildAt(i);
             TextView tv_fire1 = childAt.findViewById(R.id.tv_fire1);
-            EditText et_fire2 = childAt.findViewById(R.id.et_fire2);
-            EditText et_fire3 = childAt.findViewById(R.id.et_fire3);
+            TextView tv_fire2 = childAt.findViewById(R.id.tv_fire2);
+            TextView tv_fire3 = childAt.findViewById(R.id.tv_fire3);
             TextView tv_fire4 = childAt.findViewById(R.id.tv_fire4);
             TextView tv_fire5 = childAt.findViewById(R.id.tv_fire5);
             TextView tv_fire6 = childAt.findViewById(R.id.tv_fire6);
-            TextView tv_fire7 = childAt.findViewById(R.id.tv_fire7);
-            TextView tv_fire8 = childAt.findViewById(R.id.tv_fire8);
-            TextView tv_fire9 = childAt.findViewById(R.id.tv_fire9);
-            EditText et_fire10 = childAt.findViewById(R.id.et_fire10);
-            TextView tv_fire11 = childAt.findViewById(R.id.tv_fire11);
 
 
             InspectionResult itemObj = inspectionResults.get(i);
@@ -281,18 +259,13 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
             itemObj.setCheckPerson(itemObj.getCheckPerson());
             itemObj.setCheckDate(itemObj.getCheckDate());
             itemObj.setParam1(tv_fire1.getText().toString());
-            itemObj.setParam2(et_fire2.getText().toString());
-            itemObj.setParam3(et_fire3.getText().toString());
+            itemObj.setParam2(tv_fire2.getText().toString());
+            itemObj.setParam3(tv_fire3.getText().toString());
             itemObj.setParam4(tv_fire4.getText().toString());
-            itemObj.setParam5(tv_fire5.getText().toString());
-            itemObj.setParam6(tv_fire6.getText().toString());
-            itemObj.setParam7(tv_fire7.getText().toString());
-            itemObj.setParam8(tv_fire8.getText().toString());
-            itemObj.setParam9(tv_fire9.getText().toString());
-            itemObj.setParam10(et_fire10.getText().toString());
-            itemObj.setParam11(tv_fire11.getText().toString());
+            itemObj.setDescription(tv_fire5.getText().toString());
+            itemObj.setImgPath(tv_fire6.getText().toString());
             Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
-                    + tv_fire1.getText().toString() + "  " + et_fire2.getText().toString() + " " + et_fire2.getText().toString());
+                    + tv_fire1.getText().toString() + "  " + tv_fire2.getText().toString() + " " + tv_fire2.getText().toString());
             service.update(itemObj);
         }
         Toast.makeText(this, "数据保存成功", Toast.LENGTH_SHORT).show();

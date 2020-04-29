@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -15,12 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.HiddenLibraryAdapter2;
-import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
-import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.HYLogUtil;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class HiddenLibaryFragment2 extends Fragment {
@@ -28,10 +27,9 @@ public class HiddenLibaryFragment2 extends Fragment {
     private static HiddenLibaryFragment2 fragment1;
     private static String mKey;
     private HiddenLibraryAdapter2 adapter;
-    private List<ItemInfo> itemDataList = new ArrayList<>();
     private RecyclerView rc_list;
     private IntentTransmit its;
-    private List<CheckType> checkTypes;
+    private List<HashMap> retData;
 
     public static HiddenLibaryFragment2 newInstance(String key, IntentTransmit value) {
         if (fragment1 == null) {
@@ -55,7 +53,7 @@ public class HiddenLibaryFragment2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_hidden_library1, container, false);
+            rootView = inflater.inflate(R.layout.fragment_hidden_library2, container, false);
         }
         return rootView;
     }
@@ -63,23 +61,27 @@ public class HiddenLibaryFragment2 extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initData();
         initView();
     }
 
 
-
+    private void initData() {
+        //参数
+        retData = ServiceFactory.getAnalysisService().getInspectionView(0,0,null, null);
+        HYLogUtil.getInstance().d("获取隐患库巡检表格数据,数据查看:" + retData.size() + "  " + retData.toString());
+    }
     private void initView() {
-//        if (itemDataList.size() == 0) {
+//        if (retData.size() == 0) {
 //            Toast.makeText(getActivity(), "暂无数据", Toast.LENGTH_SHORT).show();
 //        }
         rc_list = rootView.findViewById(R.id.rc_list);
         @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rc_list.setLayoutManager(layoutManager);
-        adapter = new HiddenLibraryAdapter2(getActivity(), itemDataList);
+        adapter = new HiddenLibraryAdapter2(getActivity(), retData);
         rc_list.setAdapter(adapter);
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
-
     }
 
 

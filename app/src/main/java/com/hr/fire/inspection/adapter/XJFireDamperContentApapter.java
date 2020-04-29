@@ -3,7 +3,6 @@ package com.hr.fire.inspection.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,17 +16,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.entity.InspectionResult;
-import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
 
-public class XJFirstContentApapter extends RecyclerView.Adapter {
+public class XJFireDamperContentApapter extends RecyclerView.Adapter {
     Context mContext;
     private List<InspectionResult> mData;
 
-    public XJFirstContentApapter(Context c, List<InspectionResult> inspectionResults) {
+    public XJFireDamperContentApapter(Context c, List<InspectionResult> inspectionResults) {
         this.mContext = c;
         this.mData = inspectionResults;
     }
@@ -35,7 +33,7 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.xj_item_fire_content_layout, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.xj_fire_damper_content_layout, parent, false);
         MyViewHolder holder = new MyViewHolder(view);
         return holder;
     }
@@ -44,7 +42,7 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myholder = (MyViewHolder) holder;
         InspectionResult result = mData.get(position);
-        myholder.tv_fire1.setText(result.getParam1());
+//        myholder.tv_fire1.setText(result.getParam1());
         myholder.et_fire2.setText(result.getParam2());
         myholder.et_fire3.setText(result.getParam3());
         myholder.tv_fire4.setText(result.getParam4());
@@ -57,7 +55,7 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
             myholder.et_fire10.setText(result.getParam10());
 //            myholder.tv_fire10.setText(result.getParam10());
         }
-        myholder.rl_fire1.setOnClickListener(new MyOnClickListener(myholder, position));
+//        myholder.rl_fire1.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire4.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire5.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire6.setOnClickListener(new MyOnClickListener(myholder, position));
@@ -139,9 +137,9 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.rl_fire1:
-                    showPopWind(myholder.tv_fire1);
-                    break;
+//                case R.id.rl_fire1:
+//                    showPopWind(myholder.tv_fire1);
+//                    break;
                 case R.id.rl_fire4:
                     showPopWind(myholder.tv_fire4);
                     break;
@@ -202,7 +200,7 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
         private RelativeLayout rl_fire11;
         private RelativeLayout rl_fire12;
 
-        private TextView tv_fire1;
+//        private TextView tv_fire1;
         private TextView tv_fire2;
         private TextView tv_fire3;
         private TextView tv_fire4;
@@ -229,7 +227,7 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
             rl_fire11 = (RelativeLayout) view.findViewById(R.id.rl_fire11);
             rl_fire12 = (RelativeLayout) view.findViewById(R.id.rl_fire12);
 
-            tv_fire1 = (TextView) view.findViewById(R.id.tv_fire1);
+//            tv_fire1 = (TextView) view.findViewById(R.id.tv_fire1);
             tv_fire2 = (TextView) view.findViewById(R.id.tv_fire2);
             tv_fire3 = (TextView) view.findViewById(R.id.tv_fire3);
             tv_fire4 = (TextView) view.findViewById(R.id.tv_fire4);
@@ -238,6 +236,8 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
             tv_fire7 = (TextView) view.findViewById(R.id.tv_fire7);
             tv_fire8 = (TextView) view.findViewById(R.id.tv_fire8);
             tv_fire9 = (TextView) view.findViewById(R.id.tv_fire9);
+            tv_fire10 = (TextView) view.findViewById(R.id.tv_fire10);
+            tv_fire11 = (TextView) view.findViewById(R.id.tv_fire11);
         }
     }
 

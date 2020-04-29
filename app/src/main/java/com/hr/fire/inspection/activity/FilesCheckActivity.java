@@ -134,16 +134,16 @@ public class FilesCheckActivity extends AppCompatActivity implements View.OnClic
 
                 break;
             case 73:  //气体灭火系统
-
+                intent.setClass(this, XJGasFireSystem.class);
                 break;
             case 74:  //防火风闸
-
+                intent.setClass(this, XJFireDamperActivity.class);
                 break;
             case 75:  //雨淋阀
-
+                intent.setClass(this, XJDelugeValveActivity.class);
                 break;
             case 76:  //消防软管站
-
+                intent.setClass(this, XJFireHoseStationActivity.class);
                 break;
             case 77:  //消防水龙带
 
@@ -167,6 +167,7 @@ public class FilesCheckActivity extends AppCompatActivity implements View.OnClic
 
                 break;
             case 84:  //消防水炮
+                intent.setClass(this, xfspActivity.class);
                 break;
         }
         return intent;

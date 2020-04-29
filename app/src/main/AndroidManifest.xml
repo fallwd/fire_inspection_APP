@@ -26,6 +26,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activity.xfspActivity"></activity>
+        <activity android:name=".activity.XJFireWaterActivity" />
         <activity
             android:name=".activity.CheckReport"
             android:screenOrientation="landscape" />
@@ -168,10 +170,26 @@
             android:name=".activity.HiddenLibaryActivity"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".activity.HiddenLibaryDetailActivity"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".activity.StatiSticsActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".activity.XJFireExtinguisherActivity"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.XJGasFireSystem"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.XJFireDamperActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.XJDelugeValveActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.XJFireHoseStationActivity"
+            android:screenOrientation="landscape" />
     </application>
+
 </manifest>

@@ -6,7 +6,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.hr.fire.inspection"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -36,7 +36,7 @@ android {
             jcenter()
             maven { url "https://jitpack.io" }
             //libs 目录
-            flatDir{
+            flatDir {
                 dirs "libs"
             }
         }
