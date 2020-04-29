@@ -151,6 +151,13 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 }
             }
         });
+        //刷新序号列表
+        contentApapter.setDeleteRefresh(new XJFirstContentApapter.RemoveXH() {
+            @Override
+            public void deleteRefresh(int postion) {
+                firstColumnApapter.notifyDataSetChanged();
+            }
+        });
     }
 
     //设置同步滑动

@@ -64,7 +64,8 @@ public class FilesCheckActivity extends AppCompatActivity implements View.OnClic
         initView();
     }
 
-    private ArrayList hot = new ArrayList<>();
+    private ArrayList<Function> hot = new ArrayList<>();
+    private ArrayList<Boolean> hotSelecte = new ArrayList<>();
 
     private void initView() {
         if (historyList.size() == 0) {
@@ -87,10 +88,42 @@ public class FilesCheckActivity extends AppCompatActivity implements View.OnClic
         toolAdapter.setOnItemClickListener(new GridRecordAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int tag) {
+                hotSelecte.clear();
                 //点击选中的记录
                 selected_tag = tag;
+                for (int i = 0; i < hot.size(); i++) {
+                    Function function = hot.get(tag);
+                    if (tag == i) {
+                        function.setGray(true);
+                        hotSelecte.add(i, true);
+                    } else {
+                        function.setGray(false);
+                        hotSelecte.add(i, false);
+                    }
+                }
+                toolAdapter.setCheckState(hotSelecte);
+                toolAdapter.notifyDataSetChanged();
+                //点击某一个历史记录直接跳转到表格，在表格页面显示相对应的历史数据
+                startRecordAcitivty();
             }
         });
+    }
+
+    private void startRecordAcitivty() {
+        //不同的系统,匹配不同的跳转页面
+        //不同的系统,匹配不同的跳转页面
+        Intent intent = regularIntent();
+        intent.putExtra("systemId", sys_id);    //系统ID
+        intent.putExtra("platform_id", platform_id);    //公司ID
+        intent.putExtra("str_title", str_title); //系统名称 :高压二氧化碳灭火系统
+        intent.putExtra("duty", duty); // 专业
+        intent.putExtra("check_name", check_name); // 检查人
+        intent.putExtra("check_date", check_date); //  检查日期
+        HashMap hashMap = historyList.get(selected_tag);
+        //拿到历史数据中的记录, 并修改历史记录
+        Date checkDate = (Date) hashMap.get("checkDate"); //时间
+        intent.putExtra("srt_Date", checkDate); //记录的时间
+        startActivity(intent);
     }
 
     @Override
@@ -106,20 +139,13 @@ public class FilesCheckActivity extends AppCompatActivity implements View.OnClic
                 intent.putExtra("platform_id", platform_id);    //公司ID
                 intent.putExtra("str_title", str_title); //系统名称 :高压二氧化碳灭火系统
                 intent.putExtra("duty", duty); // 专业
-                intent.putExtra("check_name",check_name); // 检查人
-                intent.putExtra("check_date",check_date); //  检查日期
-                if (selected_tag == -1) {
-                    Date curDateHHmm = TimeUtil.getCurDateHHmm();
-                    //selected_tag=-1时,表示用户没有选择任何记录,  新建一个巡检记录,新建记录是根据date来判断的.
-                    intent.putExtra("srt_Date", curDateHHmm); //记录的时间
-                    startActivity(intent);
-                } else {
-                    HashMap hashMap = historyList.get(selected_tag);
-                    //拿到历史数据中的记录, 并修改历史记录
-                    Date checkDate = (Date) hashMap.get("checkDate"); //时间
-                    intent.putExtra("srt_Date", checkDate); //记录的时间
-                    startActivity(intent);
-                }
+                intent.putExtra("check_name", check_name); // 检查人
+                intent.putExtra("check_date", check_date); //  检查日期
+                Date curDateHHmm = TimeUtil.getCurDateHHmm();
+                //selected_tag=-1时,表示用户没有选择任何记录,  新建一个巡检记录,新建记录是根据date来判断的.
+                intent.putExtra("srt_Date", curDateHHmm); //记录的时间
+                startActivity(intent);
+
                 break;
         }
     }

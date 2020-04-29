@@ -8,12 +8,14 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.service.ServiceFactory;
 
 import java.util.List;
 
