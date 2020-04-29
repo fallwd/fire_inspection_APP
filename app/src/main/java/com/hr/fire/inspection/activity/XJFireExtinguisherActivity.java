@@ -89,7 +89,6 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
         check_name = intent.getStringExtra("check_name"); // 检查人
         check_date = intent.getStringExtra("check_date"); //用户选择的时间
         //测试用, 因为前面传过来的时间格式有问题
-        check_date = "2020-04-23 18:21";
         try {
             //这个解析方式是没有问题的 ,需要保证前面传入的数据是 2020-04-23 18:21 格式
             parse_check_date = sdf.parse(check_date);
