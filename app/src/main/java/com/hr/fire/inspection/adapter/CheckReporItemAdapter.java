@@ -233,7 +233,6 @@ public class CheckReporItemAdapter extends BaseAdapter {
         }
     //消防水炮
     private void getXXSPData(HSSFSheet sheet, List<InspectionResult> excelList, HSSFCellStyle cellStyle) {
-        Log.d("221", "222222");
         for(int i=2, j= 0;j<excelList.size();i++,j++){
             //创建新的下一行  i为行数
             HSSFRow nextRow = sheet.createRow(i);

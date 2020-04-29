@@ -3,7 +3,6 @@ package com.hr.fire.inspection.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,17 +16,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.entity.InspectionResult;
-import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
 
-public class XJFirstContentApapter extends RecyclerView.Adapter {
+public class XJKitchenWetPowderContentAdapter  extends RecyclerView.Adapter{
+
     Context mContext;
     private List<InspectionResult> mData;
 
-    public XJFirstContentApapter(Context c, List<InspectionResult> inspectionResults) {
+    public XJKitchenWetPowderContentAdapter(Context c, List<InspectionResult> inspectionResults) {
         this.mContext = c;
         this.mData = inspectionResults;
     }
@@ -35,37 +34,47 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.xj_item_fire_content_layout, parent, false);
-        MyViewHolder holder = new MyViewHolder(view);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.xj_kitchen_wet_powder_content, parent, false);
+        XJKitchenWetPowderContentAdapter.MyViewHolder holder = new XJKitchenWetPowderContentAdapter.MyViewHolder(view);
         return holder;
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        MyViewHolder myholder = (MyViewHolder) holder;
+        XJKitchenWetPowderContentAdapter.MyViewHolder myholder = (XJKitchenWetPowderContentAdapter.MyViewHolder) holder;
         InspectionResult result = mData.get(position);
-        myholder.tv_fire1.setText(result.getParam1());
-        myholder.et_fire2.setText(result.getParam2());
-        myholder.et_fire3.setText(result.getParam3());
-        myholder.tv_fire4.setText(result.getParam4());
-        myholder.tv_fire5.setText(result.getParam5());
-        myholder.tv_fire6.setText(result.getParam6());
-        myholder.tv_fire7.setText(result.getParam7());
-        myholder.tv_fire8.setText(result.getParam8());
-        myholder.tv_fire9.setText(result.getParam9());
+
+        myholder.tv_gas1.setText(result.getParam1());
+        myholder.tv_gas2.setText(result.getParam2());
+        myholder.tv_gas3.setText(result.getParam3());
+        myholder.tv_gas4.setText(result.getParam4());
+        myholder.tv_gas5.setText(result.getParam5());
+        myholder.tv_gas6.setText(result.getParam6());
+        myholder.tv_gas7.setText(result.getParam7());
+        myholder.tv_gas8.setText(result.getParam8());
+        myholder.tv_gas9.setText(result.getParam9());
+
+        myholder.tv_gas10.setText(result.getParam10());
+
+
         if (result.getParam10() != null) {
             myholder.et_fire10.setText(result.getParam10());
-//            myholder.tv_fire10.setText(result.getParam10());
         }
-        myholder.rl_fire1.setOnClickListener(new MyOnClickListener(myholder, position));
-        myholder.rl_fire4.setOnClickListener(new MyOnClickListener(myholder, position));
-        myholder.rl_fire5.setOnClickListener(new MyOnClickListener(myholder, position));
-        myholder.rl_fire6.setOnClickListener(new MyOnClickListener(myholder, position));
-        myholder.rl_fire7.setOnClickListener(new MyOnClickListener(myholder, position));
-        myholder.rl_fire8.setOnClickListener(new MyOnClickListener(myholder, position));
-        myholder.rl_fire9.setOnClickListener(new MyOnClickListener(myholder, position));
-        myholder.rl_fire11.setOnClickListener(new MyOnClickListener(myholder, position));
-        myholder.rl_fire12.setOnClickListener(new MyOnClickListener(myholder, position));
+
+        myholder.gas1.setOnClickListener(new XJKitchenWetPowderContentAdapter.MyOnClickListener(myholder, position));
+        myholder.gas2.setOnClickListener(new XJKitchenWetPowderContentAdapter.MyOnClickListener(myholder, position));
+        myholder.gas3.setOnClickListener(new XJKitchenWetPowderContentAdapter.MyOnClickListener(myholder, position));
+        myholder.gas4.setOnClickListener(new XJKitchenWetPowderContentAdapter.MyOnClickListener(myholder, position));
+        myholder.gas5.setOnClickListener(new XJKitchenWetPowderContentAdapter.MyOnClickListener(myholder, position));
+        myholder.gas6.setOnClickListener(new XJKitchenWetPowderContentAdapter.MyOnClickListener(myholder, position));
+        myholder.gas7.setOnClickListener(new XJKitchenWetPowderContentAdapter.MyOnClickListener(myholder, position));
+        myholder.gas8.setOnClickListener(new XJKitchenWetPowderContentAdapter.MyOnClickListener(myholder, position));
+        myholder.gas9.setOnClickListener(new XJKitchenWetPowderContentAdapter.MyOnClickListener(myholder, position));
+        myholder.gas10.setOnClickListener(new XJKitchenWetPowderContentAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire11.setOnClickListener(new XJKitchenWetPowderContentAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire12.setOnClickListener(new XJKitchenWetPowderContentAdapter.MyOnClickListener(myholder, position));
+
     }
 
     @Override
@@ -128,10 +137,10 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
 
     //点击事件写在外层
     class MyOnClickListener implements View.OnClickListener {
-        private final MyViewHolder myholder;
+        private final XJKitchenWetPowderContentAdapter.MyViewHolder myholder;
         private int position;
 
-        public MyOnClickListener(MyViewHolder holder, int position) {
+        public MyOnClickListener(XJKitchenWetPowderContentAdapter.MyViewHolder holder, int position) {
             this.myholder = holder;
             this.position = position;
         }
@@ -139,26 +148,35 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.rl_fire1:
-                    showPopWind(myholder.tv_fire1);
+                case R.id.gas1:
+                    showPopWind(myholder.tv_gas1);
                     break;
-                case R.id.rl_fire4:
-                    showPopWind(myholder.tv_fire4);
+                case R.id.gas2:
+                    showPopWind(myholder.tv_gas2);
                     break;
-                case R.id.rl_fire5:
-                    showPopWind(myholder.tv_fire5);
+                case R.id.gas3:
+                    showPopWind(myholder.tv_gas3);
                     break;
-                case R.id.rl_fire6:
-                    showPopWind(myholder.tv_fire6);
+                case R.id.gas4:
+                    showPopWind(myholder.tv_gas4);
                     break;
-                case R.id.rl_fire7:
-                    showPopWind(myholder.tv_fire7);
+                case R.id.gas5:
+                    showPopWind(myholder.tv_gas5);
                     break;
-                case R.id.rl_fire8:
-                    showPopWind(myholder.tv_fire8);
+                case R.id.gas6:
+                    showPopWind(myholder.tv_gas6);
                     break;
-                case R.id.rl_fire9:
-                    showPopWind(myholder.tv_fire9);
+                case R.id.gas7:
+                    showPopWind(myholder.tv_gas7);
+                    break;
+                case R.id.gas8:
+                    showPopWind(myholder.tv_gas8);
+                    break;
+                case R.id.gas9:
+                    showPopWind(myholder.tv_gas9);
+                    break;
+                case R.id.gas10:
+                    showPopWind(myholder.tv_gas10);
                     break;
                 case R.id.rl_fire11:
                     mYCCamera.startCamera(position);
@@ -189,62 +207,68 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        private RelativeLayout rl_fire1;
-        private EditText et_fire2;
-        private EditText et_fire3;
-        private RelativeLayout rl_fire4;
-        private RelativeLayout rl_fire5;
-        private RelativeLayout rl_fire6;
-        private RelativeLayout rl_fire7;
-        private RelativeLayout rl_fire8;
-        private RelativeLayout rl_fire9;
+        private RelativeLayout gas1;
+        private RelativeLayout gas2;
+        private RelativeLayout gas3;
+        private RelativeLayout gas4;
+        private RelativeLayout gas5;
+        private RelativeLayout gas6;
+        private RelativeLayout gas7;
+        private RelativeLayout gas8;
+        private RelativeLayout gas9;
+        private RelativeLayout gas10;
+
         private EditText et_fire10;
         private RelativeLayout rl_fire11;
         private RelativeLayout rl_fire12;
 
-        private TextView tv_fire1;
-        private TextView tv_fire2;
-        private TextView tv_fire3;
-        private TextView tv_fire4;
-        private TextView tv_fire5;
-        private TextView tv_fire6;
-        private TextView tv_fire7;
-        private TextView tv_fire8;
-        private TextView tv_fire9;
-        private TextView tv_fire10;
-        private TextView tv_fire11;
+        private TextView tv_gas1;
+        private TextView tv_gas2;
+        private TextView tv_gas3;
+        private TextView tv_gas4;
+        private TextView tv_gas5;
+        private TextView tv_gas6;
+        private TextView tv_gas7;
+        private TextView tv_gas8;
+        private TextView tv_gas9;
+        private TextView tv_gas10;
+
 
         public MyViewHolder(View view) {
             super(view);
-            rl_fire1 = (RelativeLayout) view.findViewById(R.id.rl_fire1);
-            et_fire2 = (EditText) view.findViewById(R.id.et_fire2);
-            et_fire3 = (EditText) view.findViewById(R.id.et_fire3);
-            rl_fire4 = (RelativeLayout) view.findViewById(R.id.rl_fire4);
-            rl_fire5 = (RelativeLayout) view.findViewById(R.id.rl_fire5);
-            rl_fire6 = (RelativeLayout) view.findViewById(R.id.rl_fire6);
-            rl_fire7 = (RelativeLayout) view.findViewById(R.id.rl_fire7);
-            rl_fire8 = (RelativeLayout) view.findViewById(R.id.rl_fire8);
-            rl_fire9 = (RelativeLayout) view.findViewById(R.id.rl_fire9);
+            gas1 = view.findViewById(R.id.gas1);
+            gas2 = view.findViewById(R.id.gas2);
+            gas3 = view.findViewById(R.id.gas3);
+            gas4 = view.findViewById(R.id.gas4);
+            gas5 = view.findViewById(R.id.gas5);
+            gas6 = view.findViewById(R.id.gas6);
+            gas7 = view.findViewById(R.id.gas7);
+            gas8 = view.findViewById(R.id.gas8);
+            gas9 = view.findViewById(R.id.gas9);
+            gas10 = view.findViewById(R.id.gas10);
+
+            tv_gas1 = view.findViewById(R.id.tv_gas1);
+            tv_gas2 = view.findViewById(R.id.tv_gas2);
+            tv_gas3 = view.findViewById(R.id.tv_gas3);
+            tv_gas4 = view.findViewById(R.id.tv_gas4);
+            tv_gas5 = view.findViewById(R.id.tv_gas5);
+            tv_gas6 = view.findViewById(R.id.tv_gas6);
+            tv_gas7 = view.findViewById(R.id.tv_gas7);
+            tv_gas8 = view.findViewById(R.id.tv_gas8);
+            tv_gas9 = view.findViewById(R.id.tv_gas9);
+            tv_gas10 = view.findViewById(R.id.tv_gas10);
+
             et_fire10 = (EditText) view.findViewById(R.id.et_fire10);
             rl_fire11 = (RelativeLayout) view.findViewById(R.id.rl_fire11);
             rl_fire12 = (RelativeLayout) view.findViewById(R.id.rl_fire12);
 
-            tv_fire1 = (TextView) view.findViewById(R.id.tv_fire1);
-            tv_fire2 = (TextView) view.findViewById(R.id.tv_fire2);
-            tv_fire3 = (TextView) view.findViewById(R.id.tv_fire3);
-            tv_fire4 = (TextView) view.findViewById(R.id.tv_fire4);
-            tv_fire5 = (TextView) view.findViewById(R.id.tv_fire5);
-            tv_fire6 = (TextView) view.findViewById(R.id.tv_fire6);
-            tv_fire7 = (TextView) view.findViewById(R.id.tv_fire7);
-            tv_fire8 = (TextView) view.findViewById(R.id.tv_fire8);
-            tv_fire9 = (TextView) view.findViewById(R.id.tv_fire9);
         }
     }
 
-    private YCCamera mYCCamera;
+    private XJKitchenWetPowderContentAdapter.YCCamera mYCCamera;
 
     //接口回调, 将点击事件传递到activity中,打开相机
-    public void setmYCCamera(YCCamera y) {
+    public void setmYCCamera(XJKitchenWetPowderContentAdapter.YCCamera y) {
         this.mYCCamera = y;
     }
 

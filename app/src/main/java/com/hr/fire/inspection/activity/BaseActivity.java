@@ -47,7 +47,7 @@ public abstract class BaseActivity extends Activity implements View.OnClickListe
         Log.d(TAG, "BaseActivity-->onCreate()");
 
         Bundle bundle = getIntent().getExtras();
-        initParms(bundle);
+        initparms(bundle);
         View mView = bindView();
         if (null == mView) {
             mContextView = LayoutInflater.from(this)
@@ -95,7 +95,7 @@ public abstract class BaseActivity extends Activity implements View.OnClickListe
      *
      * @param parms
      */
-    public abstract void initParms(Bundle parms);
+    public abstract void initparms(Bundle parms);
 
     /**
      * [绑定视图]

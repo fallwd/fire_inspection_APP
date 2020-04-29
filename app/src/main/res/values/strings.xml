@@ -25,6 +25,7 @@
     <string name="search">搜索</string>
     <string name="Statistics">统计</string>
     <string name="checkReport">消防巡检报告</string>
+    <string name="xj_xfsp">消防水炮</string>
     <string-array name="spingarr">
         <item>公司</item>
     </string-array>

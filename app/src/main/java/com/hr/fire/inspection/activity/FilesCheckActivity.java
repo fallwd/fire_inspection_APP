@@ -131,10 +131,9 @@ public class FilesCheckActivity extends AppCompatActivity implements View.OnClic
             case 72:  //灭火器
 //                intent.setClass(this, HiddenLibaryActivity.class);
                 intent.setClass(this, XJFireExtinguisherActivity.class);
-
                 break;
             case 73:  //气体灭火系统
-
+                intent.setClass(this, XJGasFireSystem.class);
                 break;
             case 74:  //防火风闸
                 intent.setClass(this, XJFireDamperActivity.class);
@@ -146,7 +145,7 @@ public class FilesCheckActivity extends AppCompatActivity implements View.OnClic
                 intent.setClass(this, XJFireHoseStationActivity.class);
                 break;
             case 77:  //消防水龙带
-
+                intent.setClass(this, XJWaterHose.class);
                 break;
             case 78:  //火气探头及火灾盘
                 intent.setClass(this, XJFAGPActivity.class);
@@ -155,7 +154,7 @@ public class FilesCheckActivity extends AppCompatActivity implements View.OnClic
                 intent.setClass(this, XJFAGMActivity.class);
                 break;
             case 80:  //厨房湿粉灭火系统
-
+                intent.setClass(this, XJKitchenWetPowder.class);
                 break;
             case 81:  //泡沫灭火
                 intent.setClass(this, XJFFESActivity.class);
@@ -167,6 +166,7 @@ public class FilesCheckActivity extends AppCompatActivity implements View.OnClic
 
                 break;
             case 84:  //消防水炮
+                intent.setClass(this, xfspActivity.class);
                 break;
         }
         return intent;
