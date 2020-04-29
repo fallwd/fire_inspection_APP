@@ -160,7 +160,7 @@ public class FilesCheckActivity extends AppCompatActivity implements View.OnClic
 
                 break;
             case 82:  //消防泵
-
+                intent.setClass(this, xj_xfbActivity.class);
                 break;
             case 83:  //消防员装备箱
 
