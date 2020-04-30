@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
-        tools:ignore="ProtectedPermissions" />
+        tools:ignore="ProtectedPermissions"/>
 
     <application
         android:name=".utils.GreenDaoHelper"
@@ -63,7 +63,6 @@
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -121,7 +120,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".activity.CarbonDioxideAcitivty"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".activity.CarBonGoodsWeightAcitivty"
             android:screenOrientation="landscape" />
@@ -133,7 +132,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".activity.AutomaticFireAlarmAcitivty"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".activity.SeawaterSystemActivity"
             android:screenOrientation="landscape" />
@@ -205,11 +204,11 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".activity.XJKitchenWetPowder"
-
             android:screenOrientation="landscape" />
+
         <activity
             android:name=".activity.XJFireEquipment"
-            android:screenOrientation="landscape" />
-    </application>
+            android:screenOrientation="landscape"/>
 
+    </application>
 </manifest>
