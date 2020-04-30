@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.sqlHelpers.BaseData;
@@ -247,6 +248,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //        }
 
 //        List<HashMap> retDataA = ServiceFactory.getAnalysisService().getCompanyCountByInspection(year);
+//        Log.i("retList:::","getCompanyCountByInspection:::"+retDataA);
 //        for(int i=0;i<retDataA.size();i++){
 //            Log.i("retList:::","getSystemCountByYearCheck:::"+retDataA.get(i));
 //
@@ -301,11 +303,22 @@ public class WelcomeActivity extends AppCompatActivity {
 //
 //        }
             // systemId 72
-//                List<HashMap> retData = ServiceFactory.getAnalysisService().getInspectionView(0,0,startDate,endDate);
-//        List<HashMap> retData = ServiceFactory.getAnalysisService().getInspectionView(165,72,startDate,endDate);
+//        List<HashMap> retData = ServiceFactory.getAnalysisService().getInspectionView(0,0,startDate,endDate);
+////        List<HashMap> retData = ServiceFactory.getAnalysisService().getInspectionView(165,72,startDate,endDate);
 ////        List<HashMap> retData = ServiceFactory.getAnalysisService().getInspectionView(0,0,null,null);
 //        for(int i=0;i<retData.size();i++){
 //            Log.i("retList:::","getInspectionView:::"+retData.get(i));
+//        }
+//
+//        long platformId = 165;
+//        long systemId = 72;
+//        String checkDate = "2019-08-03 10:10:00";
+//        String checkPerson = "张三";
+//        String profession = "安全";
+//        // long platformId, long systemId, String checkDate, String checkPerson, String profession
+//        List<InspectionResult> retList = ServiceFactory.getAnalysisService().getInspectionDetail(platformId,systemId,checkDate,checkPerson,profession);
+//        for(int i=0;i<retList.size();i++){
+//            Log.i("retList:::","getInspectionDetail:::"+retList.get(i));
 //
 //        }
 
