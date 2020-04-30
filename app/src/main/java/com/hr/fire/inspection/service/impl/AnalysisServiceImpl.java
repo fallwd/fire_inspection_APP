@@ -115,17 +115,23 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
                 CompanyInfoDao.Properties.CompanyName.columnName
 
         ), new String []{});
+        ArrayList<HashMap> allDataList = new ArrayList<>();
+        HashMap currentData = new HashMap();
+        currentData.put("name","company");
         ArrayList<HashMap> retList = new ArrayList();
         while (cursor.moveToNext()) {
             HashMap retObj = new HashMap();
 //            Log.i("tang","getCompanyCountByYearCheck");
 //            Log.i("tang",cursor.getString(cursor.getColumnIndex("C")));
 //            Log.i("tang",cursor.getString(cursor.getColumnIndex("COMPANY")));
-            retObj.put("company",cursor.getString(cursor.getColumnIndex("COMPANY")));
-            retObj.put("count",cursor.getString(cursor.getColumnIndex("C")));
+            retObj.put("name",cursor.getString(cursor.getColumnIndex("COMPANY")));
+            retObj.put("value",cursor.getString(cursor.getColumnIndex("C")));
+            retObj.put("type","company");
             retList.add(retObj);
         }
-        return retList;
+        currentData.put("data", retList);
+        allDataList.add(currentData);
+        return allDataList;
     }
 
     @Override
@@ -1329,14 +1335,53 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
         }
         // 如何实现or查询
         queryBuilder = daoSession.queryBuilder(InspectionResult.class).
+//                where(
+//                        daoSession.queryBuilder(InspectionResult.class).and(
+//                        InspectionResultDao.Properties.CheckPerson.eq(checkPerson),
+//                        InspectionResultDao.Properties.Profession.eq(profession),
+//                        InspectionResultDao.Properties.CompanyInfoId.eq(platformId),
+//                        InspectionResultDao.Properties.CheckDate.eq(checkDateD),
+//                        InspectionResultDao.Properties.CheckTypeId.eq(systemId),
+//                                daoSession.queryBuilder(InspectionResult.class).or(
+//                                        InspectionResultDao.Properties.Param1.eq("否")
+//                                )
+//                        )
+//                );
                 where(
                         InspectionResultDao.Properties.CheckPerson.eq(checkPerson),
                         InspectionResultDao.Properties.Profession.eq(profession),
                         InspectionResultDao.Properties.CompanyInfoId.eq(platformId),
                         InspectionResultDao.Properties.CheckDate.eq(checkDateD),
-                        InspectionResultDao.Properties.CheckTypeId.eq(systemId)
-//                        InspectionResultDao.Properties.Param1.eq("否")
-                );
+                        InspectionResultDao.Properties.CheckTypeId.eq(systemId),
+                        daoSession.queryBuilder(InspectionResult.class).or(
+                                InspectionResultDao.Properties.Param1.eq("否"),
+                                InspectionResultDao.Properties.Param2.eq("否"),
+                                InspectionResultDao.Properties.Param3.eq("否"),
+                                InspectionResultDao.Properties.Param4.eq("否"),
+                                InspectionResultDao.Properties.Param5.eq("否"),
+                                InspectionResultDao.Properties.Param6.eq("否"),
+                                InspectionResultDao.Properties.Param7.eq("否"),
+                                InspectionResultDao.Properties.Param8.eq("否"),
+                                InspectionResultDao.Properties.Param9.eq("否"),
+                                InspectionResultDao.Properties.Param10.eq("否"),
+                                InspectionResultDao.Properties.Param11.eq("否"),
+                                InspectionResultDao.Properties.Param12.eq("否"),
+                                InspectionResultDao.Properties.Param13.eq("否"),
+                                InspectionResultDao.Properties.Param14.eq("否"),
+                                InspectionResultDao.Properties.Param15.eq("否"),
+                                InspectionResultDao.Properties.Param16.eq("否"),
+                                InspectionResultDao.Properties.Param17.eq("否"),
+                                InspectionResultDao.Properties.Param18.eq("否"),
+                                InspectionResultDao.Properties.Param19.eq("否"),
+                                InspectionResultDao.Properties.Param20.eq("否"),
+                                InspectionResultDao.Properties.Param21.eq("否"),
+                                InspectionResultDao.Properties.Param22.eq("否"),
+                                InspectionResultDao.Properties.Param23.eq("否"),
+                                InspectionResultDao.Properties.Param24.eq("否"),
+                                InspectionResultDao.Properties.Param25.eq("否"),
+                                InspectionResultDao.Properties.Param26.eq("否")
+                        )
+                    );
         dataList = queryBuilder.list();
         return dataList;
     }

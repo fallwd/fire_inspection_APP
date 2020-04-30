@@ -26,7 +26,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.xfspActivity"></activity>
+        <activity android:name=".activity.xj_xfbActivity"></activity>
+        <activity android:name=".activity.xfspActivity" />
         <activity android:name=".activity.XJFireWaterActivity" />
         <activity
             android:name=".activity.CheckReport"
@@ -205,6 +206,9 @@
         <activity
             android:name=".activity.XJKitchenWetPowder"
 
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.XJFireEquipment"
             android:screenOrientation="landscape" />
     </application>
 

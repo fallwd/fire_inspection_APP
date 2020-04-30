@@ -6,7 +6,6 @@ package com.hr.fire.inspection.adapter;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
-        import android.widget.EditText;
         import android.widget.RelativeLayout;
         import android.widget.TextView;
         import android.widget.Toast;
@@ -21,11 +20,11 @@ package com.hr.fire.inspection.adapter;
 
         import java.util.List;
 
-public class xfspAdapter extends RecyclerView.Adapter {
+public class xfb_contentAdapter extends RecyclerView.Adapter {
     Context mContext;
     private List<InspectionResult> mData;
 
-    public xfspAdapter(Context c, List<InspectionResult> inspectionResults) {
+    public xfb_contentAdapter(Context c, List<InspectionResult> inspectionResults) {
         this.mContext = c;
         this.mData = inspectionResults;
     }
@@ -46,8 +45,8 @@ public class xfspAdapter extends RecyclerView.Adapter {
         myholder.tv_fire2.setText(result.getParam2());
         myholder.tv_fire3.setText(result.getParam3());
         myholder.tv_fire4.setText(result.getParam4());
-        myholder.rl_fire6.setOnClickListener(new xfspAdapter.MyOnClickListener(myholder, position));
-        myholder.rl_fire7.setOnClickListener(new xfspAdapter.MyOnClickListener(myholder, position));
+        myholder.tv_fire17.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
+        myholder.tv_fire18.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
     }
 
     @Override
@@ -112,10 +111,10 @@ public class xfspAdapter extends RecyclerView.Adapter {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.rl_fire6:
+                case R.id.tv_fire17:
                     mYCCamera.startCamera(position);
                     break;
-                case R.id.rl_fire7:
+                case R.id.tv_fire18:
                     removeData(position);
                     break;
             }
@@ -150,6 +149,8 @@ public class xfspAdapter extends RecyclerView.Adapter {
         private TextView tv_fire7;
         private RelativeLayout rl_fire6;
         private RelativeLayout rl_fire7;
+        private TextView tv_fire17;
+        private TextView tv_fire18;
 
         public MyViewHolder(View view) {
             super(view);
@@ -163,6 +164,8 @@ public class xfspAdapter extends RecyclerView.Adapter {
             tv_fire5 = view.findViewById(R.id.tv_fire5);
             tv_fire6 = view.findViewById(R.id.tv_fire6);
             tv_fire7 = view.findViewById(R.id.tv_fire7);
+            tv_fire17= view.findViewById(R.id.tv_fire17);
+            tv_fire18= view.findViewById(R.id.tv_fire18);
         }
     }
 

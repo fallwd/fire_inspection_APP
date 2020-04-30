@@ -186,10 +186,10 @@ public class FilesCheckActivity extends AppCompatActivity implements View.OnClic
                 intent.setClass(this, XJFFESActivity.class);
                 break;
             case 82:  //消防泵
-
+                intent.setClass(this, xj_xfbActivity.class);
                 break;
             case 83:  //消防员装备箱
-
+                intent.setClass(this, XJFireEquipment.class);
                 break;
             case 84:  //消防水炮
                 intent.setClass(this, xfspActivity.class);
