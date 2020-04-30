@@ -156,7 +156,6 @@ public class XJFireHoseStationActivity extends AppCompatActivity implements View
         rl_firstColumn.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
                 if (recyclerView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE) {
                     rl_content.scrollBy(dx, dy);
                 }
@@ -165,7 +164,6 @@ public class XJFireHoseStationActivity extends AppCompatActivity implements View
         rl_content.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
                 if (recyclerView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE) {
                     rl_firstColumn.scrollBy(dx, dy);
                 }

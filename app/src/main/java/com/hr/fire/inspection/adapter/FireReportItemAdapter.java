@@ -143,7 +143,7 @@ public class FireReportItemAdapter extends BaseAdapter {
             Toast.makeText(mContext, "正在生成报告，请稍后...", Toast.LENGTH_SHORT).show();
             // 获取后台参数
             getallmessage = ServiceFactory.getYearCheckService().getOutputItemData(companyInfoId.get(position), checkDate.get(position));
-
+            Log.d("年检报告后台数据", getallmessage+"");
             // 获取ItemInfo对象
             final List<ItemInfo> date = (List) getallmessage.get(0).get("data");
                 assert date != null;
@@ -257,7 +257,6 @@ public class FireReportItemAdapter extends BaseAdapter {
                 e.printStackTrace();
             }
         });
-        // 点击搜索实现模糊查询
         return convertView;
     }
 

@@ -54,7 +54,6 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         platform_id = intent.getLongExtra("platform_id", 0);  //平台ID
         f_title = intent.getStringExtra("f_title");  //传过来的系统名称
         sys_number = intent.getStringExtra("sys_number");  //系统位号
-        Log.d("dong", "sys_id==========" + sys_id+ "platform_id========"+platform_id+ "f_title==========="+f_title);
     }
 
     @Override
@@ -104,9 +103,27 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 }
                 toolAdapter.setCheckState(hotSelecte);
                 toolAdapter.notifyDataSetChanged();
+                //点击某一个历史记录直接跳转到表格，在表格页面显示相对应的历史数据
+                startRecordAcitivty();
             }
         });
     }
+
+
+    private void startRecordAcitivty() {
+        //不同的系统,匹配不同的跳转页面
+        Intent intent = regularIntent();
+        intent.putExtra("systemId", sys_id);    //系统ID
+        intent.putExtra("platform_id", platform_id);    //公司ID
+        intent.putExtra("f_title", f_title); //系统名称 :高压二氧化碳灭火系统
+        intent.putExtra("sys_number", sys_number); //系统位号 ：SD002(用户自己填写的)
+        HashMap hashMap = historyList.get(selected_tag);
+        //拿到历史数据中的记录, 并修改历史记录
+        Date checkDate = (Date) hashMap.get("checkDate"); //时间
+        intent.putExtra("srt_Date", checkDate); //记录的时间
+        startActivity(intent);
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -121,18 +138,18 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 intent.putExtra("platform_id", platform_id);    //公司ID
                 intent.putExtra("f_title", f_title); //系统名称 :高压二氧化碳灭火系统
                 intent.putExtra("sys_number", sys_number); //系统位号 ：SD002(用户自己填写的)
-                if (selected_tag == -1) {
+//                if (selected_tag == -1) {
                     Date curDateHHmm = TimeUtil.getCurDateHHmm();
                     //selected_tag=-1时,表示用户没有选择任何记录,  新建一个巡检记录,新建记录是根据date来判断的.
                     intent.putExtra("srt_Date", curDateHHmm); //记录的时间
                     startActivity(intent);
-                } else {
-                    HashMap hashMap = historyList.get(selected_tag);
-                    //拿到历史数据中的记录, 并修改历史记录
-                    Date checkDate = (Date) hashMap.get("checkDate"); //时间
-                    intent.putExtra("srt_Date", checkDate); //记录的时间
-                    startActivity(intent);
-                }
+//                } else {
+//                    HashMap hashMap = historyList.get(selected_tag);
+//                    //拿到历史数据中的记录, 并修改历史记录
+//                    Date checkDate = (Date) hashMap.get("checkDate"); //时间
+//                    intent.putExtra("srt_Date", checkDate); //记录的时间
+//                    startActivity(intent);
+//                }
                 break;
         }
     }
