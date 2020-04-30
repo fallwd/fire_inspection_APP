@@ -28,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_marginLeft="6dp"
-                    android:text="厨房湿粉灭火系统"
+                    android:text="消防装备箱检查表"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </RelativeLayout>
@@ -79,7 +79,7 @@
                 <TextView
                     android:id="@+id/tv_xh_title"
                     android:layout_width="45dp"
-                    android:layout_height="45dp"
+                    android:layout_height="90dp"
                     android:gravity="center"
                     android:text="序号"
                     android:textColor="@color/title_black"
@@ -109,7 +109,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <!--这里是巡检标题栏,需要处理好与滑动RecyclerView之间的大小\距离-->
-                    <include layout="@layout/xj_kitchen_wet_powder_head" />
+                    <include layout="@layout/xj_fire_equipment_head" />
 
                     <View
                         android:layout_width="match_parent"
