@@ -54,7 +54,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
         <activity
             android:name=".activity.PhotoUploadActivity"
             android:screenOrientation="landscape" />
@@ -204,11 +203,9 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".activity.XJKitchenWetPowder"
-            android:screenOrientation="landscape" />
-
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".activity.XJFireEquipment"
             android:screenOrientation="landscape"/>
-
     </application>
 </manifest>
