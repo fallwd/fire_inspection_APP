@@ -101,23 +101,19 @@
                 android:textSize="14sp" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/ll_time"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/linearborder"
                 android:orientation="horizontal">
 
-                <EditText
+                <TextView
                     android:id="@+id/check_date"
-                    android:layout_width="200dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@null"
-                    android:hint="请填写检查日期"
-                    android:imeOptions="flagNoExtractUi"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textCursorDrawable="@drawable/edit_theme"
+                    android:text="2020-01-01  09:05"
                     android:textSize="12sp" />
             </LinearLayout>
 

@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="90dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        android:background="@drawable/layer_border_bottom">
+
+        <TextView
+            android:layout_width="540dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center"
+            android:text="手电"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="330dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center"
+            android:text="防火服"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="330dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center"
+            android:text="消防战斗服"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="400dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center"
+            android:text="备用气瓶"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="400dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center"
+            android:text="消防靴"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center"
+            android:text="太平斧"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="1740dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center"
+            android:text="EEBD"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="1920dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center"
+            android:text="SCBA"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="180dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center"
+        android:text="检查手电是否有防爆标志"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center"
+        android:text="检查手电是否超出有效期"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="检查手电是否在可用状态"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="检查外观是否良好，没有破损等缺陷"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="检查是否在有效期范围内"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="检查外观是否良好"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+
+    <TextView
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="检查是否在有效期范围内"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+
+
+        <TextView
+            android:layout_width="160dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="检查压力是否符合要求"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="检查其外表是否存在凹坑、裂纹、划伤、腐蚀、磕伤、鼓包等缺陷"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="检查消防靴是否完好，橡胶是否老化和破损等缺陷"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="160dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="检查消防靴的有效期"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+
+
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="手柄具有耐高电压绝缘，检查其是否完好，是否有破损等缺陷"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="检查头罩上进气分散器与输气管接头的联接是否牢固、可靠"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+
+        <TextView
+            android:layout_width="180dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="检查头罩是否干燥"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="检查输气管与快速接头连接是否牢固"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="检查减压器与气瓶的瓶头阀连接是否牢固"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+
+        <TextView
+            android:layout_width="180dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="检查气瓶内气源压力"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="脱开头罩，检查气瓶压力是否维持不变"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="检查挎包是否完好无损，肩带缝合线是否断裂，尼龙搭扣牢固可用"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+
+
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="检查全面罩的透明窗、环状密封、系带、供气阀是否完好，检查供气阀与全面罩的连接是否牢固"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="检查供气阀的动作是否灵活，与低压导管（俗称中压导管）的连接是否牢固"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="检查气源压力表是否正常指示压力"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="检查背托是否完好无损，左右肩带、左右腰带缝合线是否断裂"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="检查气瓶的固定带是否牢固，气瓶与减压阀的连接是否牢固"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="检查气瓶内的压力"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="检查整套呼吸器的气密性"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="检查全面罩和供气阀的匹配情况"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="隐患描述"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="8dp"
+                android:text="照片"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="8dp"
+                android:text="删除"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

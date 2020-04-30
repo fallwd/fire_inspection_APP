@@ -17,7 +17,7 @@ public class InspectionActivity extends BaseActivity {
     }
 
     @Override
-    public void initParms(Bundle parms) {
+    public void initparms(Bundle parms) {
 
     }
 

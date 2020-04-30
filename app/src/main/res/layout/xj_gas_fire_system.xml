@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/currency_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:background="@drawable/listview_border_margin"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <RelativeLayout
+                android:layout_width="80dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/title_background_selected">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="6dp"
+                    android:text="气体灭火系统"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_add_table"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:background="@mipmap/add_item" />
+
+                <TextView
+                    android:id="@+id/iv_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="6dp"
+                    android:background="@drawable/listview_border_margin"
+                    android:text="保存" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white_view_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_xh_title"
+                    android:layout_width="45dp"
+                    android:layout_height="90dp"
+                    android:gravity="center"
+                    android:text="序号"
+                    android:textColor="@color/title_black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:background="@color/white_view_line" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rl_firstColumn"
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <com.hr.fire.inspection.view.tableview.HListViewScrollView
+                android:id="@+id/chs_datagroup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="false"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!--这里是巡检标题栏,需要处理好与滑动RecyclerView之间的大小\距离-->
+                    <include layout="@layout/xj_gas_fire_system_head" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:background="@color/white_view_line" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rl_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+            </com.hr.fire.inspection.view.tableview.HListViewScrollView>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/item_hidden_library_head" />
+    <include layout="@layout/item_hidden_library_head1" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc_list"

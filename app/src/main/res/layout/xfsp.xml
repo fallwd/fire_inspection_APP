@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="45dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="泡沫炮部件是否完好"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="操作是否灵活"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="170dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="喷射性能和喷射强度是否合格"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="175dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="泡沫炮直流/开花功能是否正常"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="隐患描述"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="8dp"
+            android:text="照片"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="8dp"
+            android:text="删除"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+
+</LinearLayout>

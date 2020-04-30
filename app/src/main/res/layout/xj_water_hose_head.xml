@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="45dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="位置"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="种类"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="外观是否良好"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="140dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="阀门外观及起闭是否良好"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="水龙带是否破损"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="140dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="枪头开花直流/是否正常"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="枪头是否能与水带连接紧密"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="水带是否与消火栓连接紧密"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="160dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="喷水射程与强度是否符合要求"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="隐患描述"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="8dp"
+            android:text="照片"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="8dp"
+            android:text="删除"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+</LinearLayout>

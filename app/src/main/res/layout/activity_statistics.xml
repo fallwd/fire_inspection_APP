@@ -47,32 +47,18 @@
                             style="@style/spinner_style"
                             android:background="@drawable/spriner_style"
                             android:entries="@array/spingarr" />
-                        <!--请选择公司-->
-                        <Spinner
-                            android:id="@+id/spinner_bussy"
-                            style="@style/spinner_style"
-                            android:background="@drawable/spriner_style"
-                            android:entries="@array/spingarr" />
-                        <!--请选择油田-->
-                        <Spinner
-                            android:id="@+id/spinner_yt"
-                            style="@style/spinner_style"
-                            android:background="@drawable/spriner_style"
-                            android:entries="@array/spingarr1" />
-                        <!--请选择平台-->
-                        <Spinner
-                            android:id="@+id/spinner_pt"
-                            style="@style/spinner_style"
-                            android:background="@drawable/spriner_style"
-                            android:entries="@array/spingarr3" />
 
-                        <!--请选择系统-->
-                        <Spinner
-                            android:id="@+id/spinner_sys"
-                            style="@style/spinner_style"
-                            android:autofillHints="@string/search"
-                            android:background="@drawable/spriner_style"
-                            android:entries="@array/spingarr4" />
+                        <!-- 统计-->
+                        <Button
+                            android:id="@+id/clear_statisty"
+                            android:layout_width="60dp"
+                            android:layout_height="35dp"
+                            android:layout_marginLeft="40dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/listview_border_margin"
+                            android:text="置空" />
+
                     </LinearLayout>
 
                 </RelativeLayout>

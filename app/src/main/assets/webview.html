@@ -48,6 +48,7 @@
     <script src="./jquery.min.js"></script>
     <script src="./echarts.min.js"></script>
     <script>
+
         function runJs(isContinue, data) {
             if (isContinue) {
                 renderChart(data)
@@ -55,7 +56,7 @@
         }
         function renderChart(data) {
             data = JSON.parse(data);
-            var pie = echarts.init(document.getElementById("oricle"));
+            var pie =  echarts.init(document.getElementById("oricle"));
             var option = {
                 tooltip: {
                     trigger: 'item',
@@ -67,6 +68,7 @@
                     left: 50,
                     data: []
                 },
+                color:["#597EF7","#85A5FF","#A5DDEA","#C3CE90", "#F0D695","#9CD88F","#4DC59A","#D6E4FF","#ADC6FF", "#CFD8DC", "#B0BEC5", "#D9F7BE","#FFC6C6"],
                 series: [{
                         name: '系统',
                         type: 'pie',
@@ -124,6 +126,7 @@
                 option.series[1].data = data[2].data;
                 option.series[0].data = data[3].data;
             }
+            pie.clear()
             pie.setOption(option);
             pie.on('click', function(a) {
               window.injectedObject.getOil(a.name);

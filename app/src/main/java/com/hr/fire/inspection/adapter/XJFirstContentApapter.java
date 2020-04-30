@@ -165,6 +165,8 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
                     break;
                 case R.id.rl_fire12:
                     removeData(position);
+                    //通知序号列表刷新数据和高度
+                    mRemoveXH.deleteRefresh(position);
                     break;
             }
         }
@@ -244,13 +246,24 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
     }
 
     private YCCamera mYCCamera;
+    private RemoveXH mRemoveXH;
 
     //接口回调, 将点击事件传递到activity中,打开相机
     public void setmYCCamera(YCCamera y) {
         this.mYCCamera = y;
     }
 
+    //接口回调, 将点击事件传递到activity中,刷新序号
+    public void setDeleteRefresh(RemoveXH xh) {
+        this.mRemoveXH = xh;
+    }
+
+
     public interface YCCamera {
         void startCamera(int postion);
+    }
+
+    public interface RemoveXH {
+        void deleteRefresh(int postion);
     }
 }
