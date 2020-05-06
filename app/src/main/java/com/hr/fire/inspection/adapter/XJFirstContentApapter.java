@@ -268,7 +268,7 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
         void startCamera(int postion);
     }
 
-    public interface RemoveXH {
-        void deleteRefresh(int postion);
-    }
+//    public interface RemoveXH {
+//        void deleteRefresh(int postion);
+//    }
 }

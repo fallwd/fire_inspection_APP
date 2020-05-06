@@ -3,15 +3,12 @@ package com.hr.fire.inspection.activity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.SpannableString;
-import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,7 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class HiddenLibaryDetailActivity extends AppCompatActivity {
+public class HiddenLibaryDetailActivity1 extends AppCompatActivity {
     private static final String TAG = "HiddenLibaryActivity";
     private List<String> titleList = new ArrayList<String>();
     private List<Fragment> fragments = new ArrayList<Fragment>();
@@ -52,7 +49,7 @@ public class HiddenLibaryDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hidden_library_detail);
+        setContentView(R.layout.activity_hidden_library_detail1);
         getIntentParameter();
         initView();
     }
