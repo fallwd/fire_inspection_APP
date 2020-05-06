@@ -5,10 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,12 +24,15 @@ import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
 import com.hr.fire.inspection.activity.QRCodeExistenceAcitivty;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.entity.WorkIItemBean;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
@@ -34,14 +40,16 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private Long checkid;  //检查表的Id
     private IntentTransmit intentTransmit;   //之前页面数据的传参,如系统号\公司id...
 
+    private Map<Integer, List<WorkIItemBean>> mapSelection = new HashMap();
+
     public CarBon1Adapter() {
     }
 
     public CarBon1Adapter(Context mContext, List<ItemInfo> mData) {
         this.mContext = mContext;
         this.mData = mData;
+        mapSelection.clear();
     }
-
 
     @NonNull
     @Override
@@ -69,6 +77,12 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             vh.et_7.setText(new StringBuffer().append(mProdDate).append(""));
             vh.et_8.setText(new StringBuffer().append(mCheckDate).append(""));
             vh.tv_9.setText(new StringBuffer().append("药剂瓶").append(position + 1).append("号表"));
+            vh.tv_11.setText(new StringBuffer().append(info.getTaskNumber()));
+
+            //初始化工作表数据
+            WorkIItemBean mWorkIItemBean = new WorkIItemBean();
+            List<WorkIItemBean> workSelectData = mWorkIItemBean.getWorkSelectData();
+            mapSelection.put(position, workSelectData);
         }
         vh.rl_9.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +91,6 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     Toast.makeText(mContext, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 Intent intent = new Intent(mContext, CarBonGoodsWeightAcitivty.class);
                 intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_ID, checkid);
                 intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE, "药剂瓶 >  检查表");
@@ -87,7 +100,6 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE_ID, mData.get(position).getId());
                 }
                 intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_SYS_DATA, intentTransmit);
-
                 mContext.startActivity(intent);
 
             }
@@ -107,7 +119,7 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         vh.tv_11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopWind(vh.tv_11);
+                showPopWindWork(vh.tv_11, mapSelection, position);
             }
         });
         vh.tv_12.setOnClickListener(new View.OnClickListener() {
@@ -219,6 +231,7 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
+
     private HrPopup hrPopup;
 
     //显示对话框,用户选择是否异常的弹框
@@ -264,5 +277,55 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 }
             }
         });
+    }
+
+
+    private void showPopWindWork(TextView tv_11, Map<Integer, List<WorkIItemBean>> mapSelectData, int position) {
+        View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods_item, null);
+        if (hrPopup == null) {
+            hrPopup = new HrPopup((Activity) mContext);
+        }
+        ListView list_work = PopupRootView.findViewById(R.id.list_work);
+        TextView tv_canl = PopupRootView.findViewById(R.id.tv_canl);
+        TextView tv_confirm = PopupRootView.findViewById(R.id.tv_confirm);
+
+        List<WorkIItemBean> workIItemBeans = mapSelectData.get(position);
+        WorkSheetAdapter workSheetAdapter = new WorkSheetAdapter(mContext, workIItemBeans);
+        list_work.setAdapter(workSheetAdapter);
+        hrPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        hrPopup.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+        hrPopup.setBackgroundDrawable(new BitmapDrawable());
+        hrPopup.setFocusable(false);
+        hrPopup.setOutsideTouchable(false);
+        hrPopup.setContentView(PopupRootView);
+//        hrPopup.showAsDropDown(tv);
+        tv_canl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+        tv_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                    List<WorkIItemBean> selection = workSheetAdapter.getSelection();
+                    mapSelectData.put(position, selection);
+                    //将结果赋值给tv11
+                    StringBuilder builder = new StringBuilder();
+                    for (int i = 0; i < selection.size(); i++) {
+                        WorkIItemBean mBean = selection.get(i);
+                        if (mBean.isState()) {
+                            builder.append(1 + i).append(",");
+                        }
+                    }
+                    tv_11.setText(builder.toString().substring(0, builder.length() - 1));
+                }
+            }
+        });
+        hrPopup.showAtLocation(hrPopup.getContentView(), Gravity.CENTER, 0, 0);
     }
 }
