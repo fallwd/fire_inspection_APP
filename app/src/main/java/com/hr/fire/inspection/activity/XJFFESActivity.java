@@ -88,8 +88,6 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
         check_name = intent.getStringExtra("check_name"); // 检查人
         check_date = intent.getStringExtra("check_date"); //用户选择的时间
         Log.i("aaaa","传参获取的数据"+systemId+"--------"+ companyInfoId+"--------" + str_title);
-        //测试用, 因为前面传过来的时间格式有问题
-        check_date = "2020-04-23 18:21";
         try {
             //这个解析方式是没有问题的 ,需要保证前面传入的数据是 2020-04-23 18:21 格式
             parse_check_date = sdf.parse(check_date);
@@ -210,6 +208,7 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
                 result.setCheckDate(item.getCheckDate());
                 result.setDescription(item.getDescription());
                 result.setImgPath(item.getImgPath());
+                result.setParam1(item.getParam1());
                 result.setParam2(item.getParam2());
                 result.setParam3(item.getParam3());
                 result.setParam4(item.getParam4());
@@ -233,8 +232,6 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
                 result.setParam22(item.getParam22());
                 result.setParam23(item.getParam23());
                 result.setParam24(item.getParam24());
-
-
 
             } else {
                 //没有数据造一段默认数据
@@ -322,7 +319,6 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
             TextView tv_fire24 = childAt.findViewById(R.id.tv_fire24);
             EditText et_fire25 = childAt.findViewById(R.id.et_fire25);
             TextView tv_fire26 = childAt.findViewById(R.id.tv_fire26);
-
 
 
             InspectionResult itemObj = inspectionResults.get(i);

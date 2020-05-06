@@ -137,7 +137,6 @@ public class OilFieldActivity extends AppCompatActivity implements View.OnClickL
         duty = b.getString("duty");
         check_name = b.getString("check_name");
         check_date = b.getString("check_date");
-
     }
     public void onClick(View v) {
         switch (v.getId()) {

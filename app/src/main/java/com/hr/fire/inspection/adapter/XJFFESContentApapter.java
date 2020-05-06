@@ -42,9 +42,9 @@ public class XJFFESContentApapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myholder = (MyViewHolder) holder;
         InspectionResult result = mData.get(position);
-        myholder.tv_fire1.setText(result.getParam1());
-        myholder.tv_fire2.setText(result.getParam2());
-        myholder.tv_fire3.setText(result.getParam3());
+        myholder.et_fire1.setText(result.getParam1());
+        myholder.et_fire2.setText(result.getParam2());
+        myholder.et_fire3.setText(result.getParam3());
         myholder.tv_fire4.setText(result.getParam4());
         myholder.tv_fire5.setText(result.getParam5());
         myholder.tv_fire6.setText(result.getParam6());
@@ -167,7 +167,6 @@ public class XJFFESContentApapter extends RecyclerView.Adapter {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-
                 case R.id.rl_fire4:
                     showPopWind(myholder.tv_fire4);
                     break;
