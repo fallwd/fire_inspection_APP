@@ -1,24 +1,26 @@
 package com.hr.fire.inspection.adapter;
 
-        import android.app.Activity;
-        import android.content.Context;
-        import android.graphics.drawable.BitmapDrawable;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.RelativeLayout;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
-        import androidx.annotation.NonNull;
-        import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-        import com.hr.fire.inspection.R;
-        import com.hr.fire.inspection.entity.InspectionResult;
-        import com.hr.fire.inspection.service.ServiceFactory;
-        import com.hr.fire.inspection.view.tableview.HrPopup;
+import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.view.tableview.HrPopup;
 
-        import java.util.List;
+import java.util.List;
+
 
 public class xfb_contentAdapter extends RecyclerView.Adapter {
     Context mContext;
@@ -45,8 +47,33 @@ public class xfb_contentAdapter extends RecyclerView.Adapter {
         myholder.tv_fire2.setText(result.getParam2());
         myholder.tv_fire3.setText(result.getParam3());
         myholder.tv_fire4.setText(result.getParam4());
-        myholder.tv_fire17.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
-        myholder.tv_fire18.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
+        myholder.tv_fire5.setText(result.getParam5());
+        myholder.tv_fire6.setText(result.getParam6());
+        myholder.tv_fire7.setText(result.getParam7());
+        myholder.tv_fire8.setText(result.getParam8());
+        myholder.tv_fire9.setText(result.getParam9());
+        myholder.tv_fire10.setText(result.getParam10());
+        myholder.tv_fire11.setText(result.getParam12());
+        myholder.tv_fire13.setText(result.getParam13());
+        myholder.tv_fire14.setText(result.getParam14());
+        myholder.tv_fire15.setText(result.getParam15());
+        myholder.et_fire10.setText(result.getParam16());
+
+        myholder.rl_fire1.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire2.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire3.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire4.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire5.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire6.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire7.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire8.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire9.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire10.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire11.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire12.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire13.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire14.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire15.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
     }
 
     @Override
@@ -111,6 +138,51 @@ public class xfb_contentAdapter extends RecyclerView.Adapter {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
+                case R.id.rl_fire1:
+                    showPopWind(myholder.tv_fire1);
+                    break;
+                case R.id.rl_fire2:
+                    showPopWind(myholder.tv_fire2);
+                    break;
+                case R.id.rl_fire3:
+                    showPopWind(myholder.tv_fire3);
+                    break;
+                case R.id.rl_fire4:
+                    showPopWind(myholder.tv_fire4);
+                    break;
+                case R.id.rl_fire5:
+                    showPopWind(myholder.tv_fire5);
+                    break;
+                case R.id.rl_fire6:
+                    showPopWind(myholder.tv_fire6);
+                    break;
+                case R.id.rl_fire7:
+                    showPopWind(myholder.tv_fire7);
+                    break;
+                case R.id.rl_fire8:
+                    showPopWind(myholder.tv_fire8);
+                    break;
+                case R.id.rl_fire9:
+                    showPopWind(myholder.tv_fire9);
+                    break;
+                case R.id.rl_fire10:
+                    showPopWind(myholder.tv_fire10);
+                    break;
+                case R.id.rl_fire11:
+                    showPopWind(myholder.tv_fire11);
+                    break;
+                case R.id.rl_fire12:
+                    showPopWind(myholder.tv_fire12);
+                    break;
+                case R.id.rl_fire13:
+                    showPopWind(myholder.tv_fire13);
+                    break;
+                case R.id.rl_fire14:
+                    showPopWind(myholder.tv_fire14);
+                    break;
+                case R.id.rl_fire15:
+                    showPopWind(myholder.tv_fire15);
+                    break;
                 case R.id.tv_fire17:
                     mYCCamera.startCamera(position);
                     break;
@@ -147,15 +219,54 @@ public class xfb_contentAdapter extends RecyclerView.Adapter {
         private TextView tv_fire5;
         private TextView tv_fire6;
         private TextView tv_fire7;
-        private RelativeLayout rl_fire6;
-        private RelativeLayout rl_fire7;
+        private TextView tv_fire8;
+        private TextView tv_fire9;
+        private TextView tv_fire10;
+        private TextView tv_fire11;
+        private TextView tv_fire12;
+        private TextView tv_fire13;
+        private TextView tv_fire14;
+        private TextView tv_fire15;
+        private EditText et_fire10;
         private TextView tv_fire17;
         private TextView tv_fire18;
+        private RelativeLayout rl_fire1;
+        private RelativeLayout rl_fire2;
+        private RelativeLayout rl_fire3;
+        private RelativeLayout rl_fire4;
+        private RelativeLayout rl_fire5;
+        private RelativeLayout rl_fire6;
+        private RelativeLayout rl_fire7;
+        private RelativeLayout rl_fire8;
+        private RelativeLayout rl_fire9;
+        private RelativeLayout rl_fire10;
+        private RelativeLayout rl_fire11;
+        private RelativeLayout rl_fire12;
+        private RelativeLayout rl_fire13;
+        private RelativeLayout rl_fire14;
+        private RelativeLayout rl_fire15;
+        private RelativeLayout rl_fire16;
 
         public MyViewHolder(View view) {
             super(view);
+            rl_fire1 = view.findViewById(R.id.rl_fire1);
+            rl_fire2 = view.findViewById(R.id.rl_fire2);
+            rl_fire3 = view.findViewById(R.id.rl_fire3);
+            rl_fire4 = view.findViewById(R.id.rl_fire4);
+            rl_fire5 = view.findViewById(R.id.rl_fire5);
             rl_fire6 = view.findViewById(R.id.rl_fire6);
             rl_fire7 = view.findViewById(R.id.rl_fire7);
+            rl_fire8 = view.findViewById(R.id.rl_fire8);
+            rl_fire9 = view.findViewById(R.id.rl_fire9);
+            rl_fire10 = view.findViewById(R.id.rl_fire10);
+            rl_fire11 = view.findViewById(R.id.rl_fire11);
+            rl_fire12 = view.findViewById(R.id.rl_fire12);
+            rl_fire13 = view.findViewById(R.id.rl_fire13);
+            rl_fire14 = view.findViewById(R.id.rl_fire14);
+            rl_fire15 = view.findViewById(R.id.rl_fire15);
+
+
+
 
             tv_fire1 = view.findViewById(R.id.tv_fire1);
             tv_fire2 = view.findViewById(R.id.tv_fire2);
@@ -164,8 +275,19 @@ public class xfb_contentAdapter extends RecyclerView.Adapter {
             tv_fire5 = view.findViewById(R.id.tv_fire5);
             tv_fire6 = view.findViewById(R.id.tv_fire6);
             tv_fire7 = view.findViewById(R.id.tv_fire7);
-            tv_fire17= view.findViewById(R.id.tv_fire17);
-            tv_fire18= view.findViewById(R.id.tv_fire18);
+            tv_fire8 = view.findViewById(R.id.tv_fire8);
+            tv_fire9 = view.findViewById(R.id.tv_fire9);
+            tv_fire10 = view.findViewById(R.id.tv_fire10);
+            tv_fire11 = view.findViewById(R.id.tv_fire11);
+            tv_fire12 = view.findViewById(R.id.tv_fire12);
+            tv_fire13= view.findViewById(R.id.tv_fire13);
+            tv_fire14 = view.findViewById(R.id.tv_fire14);
+            tv_fire15 = view.findViewById(R.id.tv_fire15);
+            et_fire10 = view.findViewById(R.id.et_fire10);
+            tv_fire17 = view.findViewById(R.id.tv_fire17);
+            tv_fire18 = view.findViewById(R.id.tv_fire18);
+
+
         }
     }
 

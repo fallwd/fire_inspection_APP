@@ -111,7 +111,6 @@ public class FilesCheckActivity extends AppCompatActivity implements View.OnClic
 
     private void startRecordAcitivty() {
         //不同的系统,匹配不同的跳转页面
-        //不同的系统,匹配不同的跳转页面
         Intent intent = regularIntent();
         intent.putExtra("systemId", sys_id);    //系统ID
         intent.putExtra("platform_id", platform_id);    //公司ID

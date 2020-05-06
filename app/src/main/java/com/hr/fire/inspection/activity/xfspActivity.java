@@ -87,8 +87,6 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
         duty = intent.getStringExtra("duty");  // 专业
         check_name = intent.getStringExtra("check_name"); // 检查人
         check_date = intent.getStringExtra("check_date"); //用户选择的时间
-        //测试用, 因为前面传过来的时间格式有问题
-        check_date = "2020-04-23 18:21";
         try {
             //这个解析方式是没有问题的 ,需要保证前面传入的数据是 2020-04-23 18:21 格式
             parse_check_date = sdf.parse(check_date);
@@ -217,8 +215,9 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
                 result.setParam2("是");
                 result.setParam3("是");
                 result.setParam4("是");
+                result.setParam5("请输入");
                 result.setDescription("暂无");
-                result.setImgPath("暂无图片222");
+                result.setImgPath("暂无图片");
             }
             long l = service.insertInspectionData(result, companyInfoId, systemId, parse_check_date);
             //表示数据插入成功,再次查询,拿到最新的数据
@@ -250,8 +249,7 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
             TextView tv_fire2 = childAt.findViewById(R.id.tv_fire2);
             TextView tv_fire3 = childAt.findViewById(R.id.tv_fire3);
             TextView tv_fire4 = childAt.findViewById(R.id.tv_fire4);
-            TextView tv_fire5 = childAt.findViewById(R.id.tv_fire5);
-            TextView tv_fire6 = childAt.findViewById(R.id.tv_fire6);
+            EditText et_fire10 = childAt.findViewById(R.id.et_fire10);
 
 
             InspectionResult itemObj = inspectionResults.get(i);
@@ -262,8 +260,8 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
             itemObj.setParam2(tv_fire2.getText().toString());
             itemObj.setParam3(tv_fire3.getText().toString());
             itemObj.setParam4(tv_fire4.getText().toString());
-            itemObj.setDescription(tv_fire5.getText().toString());
-            itemObj.setImgPath(tv_fire6.getText().toString());
+            itemObj.setParam5(et_fire10.getText().toString());
+
             Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
                     + tv_fire1.getText().toString() + "  " + tv_fire2.getText().toString() + " " + tv_fire2.getText().toString());
             service.update(itemObj);
