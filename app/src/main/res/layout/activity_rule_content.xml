@@ -22,17 +22,27 @@
                     android:scaleType="fitXY"
                     android:contentDescription="TODO" />
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/seach_text"
-                    android:background="@drawable/edit_report"
                     android:layout_width="match_parent"
-                    android:paddingStart="10dp"
-                    android:drawableLeft="@mipmap/search"
                     android:layout_height="30dp"
+                    android:background="@drawable/edit_report"
+                    android:completionThreshold="1"
+                    android:hint="输入报告名称"
+                    android:imeOptions="actionSearch"
+                    android:maxLength="80"
+                    android:dropDownHeight="250dp"
+                    android:dropDownWidth="match_parent"
+                    android:singleLine="true"
+                    android:textColor="#317F6D"
+                    android:textColorHint="#317F6D"
+                    android:drawableLeft="@mipmap/search"
+                    android:textSize="15sp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_marginLeft="10dp"
-                    android:hint="@string/PleaseInputText"
-                    android:textSize="16dp"
-                    android:autofillHints="search"/>
+                    android:layout_marginRight="50dp" />
+
         </LinearLayout>
 
         <TextView
