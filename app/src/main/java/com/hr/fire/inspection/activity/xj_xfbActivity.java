@@ -220,6 +220,13 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
                 result.setParam7(item.getParam7());
                 result.setParam8(item.getParam8());
                 result.setParam9(item.getParam9());
+                result.setParam10(item.getParam10());
+                result.setParam11(item.getParam11());
+                result.setParam12(item.getParam12());
+                result.setParam13(item.getParam13());
+                result.setParam14(item.getParam14());
+                result.setParam15(item.getParam18());
+
             } else {
                 //没有数据造一段默认数据
                 Log.d("dong", "默认没有数据吧==");
@@ -238,6 +245,12 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
                 result.setParam8("否");
                 result.setParam9("否");
                 result.setParam10("是");
+                result.setParam11("是");
+                result.setParam12("是");
+                result.setParam13("否");
+                result.setParam14("是");
+                result.setParam15("是");
+                result.setParam16("请输入");
             }
             long l = service.insertInspectionData(result, companyInfoId, systemId, parse_check_date);
             //表示数据插入成功,再次查询,拿到最新的数据
@@ -274,6 +287,7 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
             TextView tv_fire7 = childAt.findViewById(R.id.tv_fire7);
             TextView tv_fire8 = childAt.findViewById(R.id.tv_fire8);
             TextView tv_fire9 = childAt.findViewById(R.id.tv_fire9);
+            EditText et_fire10 = childAt.findViewById(R.id.et_fire10);
             TextView tv_fire10 = childAt.findViewById(R.id.tv_fire10);
             TextView tv_fire11 = childAt.findViewById(R.id.tv_fire11);
             TextView tv_fire12 = childAt.findViewById(R.id.tv_fire12);
@@ -303,6 +317,7 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
             itemObj.setParam13(tv_fire14.getText().toString());
             itemObj.setParam14(tv_fire15.getText().toString());
             itemObj.setParam15(tv_fire16.getText().toString());
+            itemObj.setParam16(et_fire10.getText().toString());
             Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
                     + tv_fire1.getText().toString() + "  " + tv_fire2.getText().toString() + " " + tv_fire3.getText().toString());
             service.update(itemObj);
