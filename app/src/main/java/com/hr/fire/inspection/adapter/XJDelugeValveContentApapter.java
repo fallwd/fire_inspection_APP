@@ -189,6 +189,8 @@ public class XJDelugeValveContentApapter extends RecyclerView.Adapter {
                     break;
                 case R.id.rl_fire17:
                     removeData(position);
+                    //通知序号列表刷新数据和高度
+                    mRemoveXH.deleteRefresh(position);
                     break;
             }
         }
@@ -288,6 +290,7 @@ public class XJDelugeValveContentApapter extends RecyclerView.Adapter {
     }
 
     private YCCamera mYCCamera;
+    private XJFirstContentApapter.RemoveXH mRemoveXH;
 
     //接口回调, 将点击事件传递到activity中,打开相机
     public void setmYCCamera(YCCamera y) {

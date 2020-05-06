@@ -248,6 +248,11 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
     private YCCamera mYCCamera;
     private RemoveXH mRemoveXH;
 
+
+    public interface RemoveXH {
+        void deleteRefresh(int postion);
+    }
+
     //接口回调, 将点击事件传递到activity中,打开相机
     public void setmYCCamera(YCCamera y) {
         this.mYCCamera = y;

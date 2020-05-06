@@ -101,9 +101,11 @@ public class RuleContentActivity extends AppCompatActivity {
         }
 
 
-//        for (int i = 0; i<currentFiles.length; i++) {
-//            Log.i("data","获取全部数据" + currentFiles[i]);
-//        }
+        for (int i = 0; i < currentFiles.length; i++) {
+            Log.i("data","获取全部数据" + currentFiles[i]);
+        }
+
+
 
         seach_text.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable edit) {
