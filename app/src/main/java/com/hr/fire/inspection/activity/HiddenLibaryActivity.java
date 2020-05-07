@@ -149,8 +149,8 @@ public class HiddenLibaryActivity extends AppCompatActivity {
         }
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
-            yt_list.clear();
-            yt_list.add("请选择平台");
+//            yt_list.clear();
+//            yt_list.add("请选择平台");
 //            InitSetSpinner(spinner_pt, yt_list);
         }
     }

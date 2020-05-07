@@ -1,10 +1,13 @@
 package com.hr.fire.inspection.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.SpannableString;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -123,6 +126,12 @@ public class HiddenLibaryDetailActivity2 extends AppCompatActivity {
             case 73:  //气体灭火系统
                 View layout2 = layoutInflater.inflate(R.layout.xj_gas_fire_system_head,null);
                 layout_head.addView(layout2);
+
+                // 动态控制序号高度
+                TextView textView4= (TextView)findViewById(R.id.tv_xh_title);
+                LinearLayout.LayoutParams linearParams4 =(LinearLayout.LayoutParams) textView4.getLayoutParams(); //取控件textView当前的布局参数
+                linearParams4.height = dip2px(HiddenLibaryDetailActivity2.this,90);
+                textView4.setLayoutParams(linearParams4);
                 break;
             case 74:  //防火风闸
                 View layout3 = layoutInflater.inflate(R.layout.xj_fire_damper_layout,null);
@@ -155,14 +164,33 @@ public class HiddenLibaryDetailActivity2 extends AppCompatActivity {
             case 81:  //泡沫灭火
                 View layout10 = layoutInflater.inflate(R.layout.xj_ffes_layout,null);
                 layout_head.addView(layout10);
+
+                // 动态控制序号高度
+                TextView textView= (TextView)findViewById(R.id.tv_xh_title);
+                LinearLayout.LayoutParams linearParams =(LinearLayout.LayoutParams) textView.getLayoutParams(); //取控件textView当前的布局参数
+                linearParams.height = dip2px(HiddenLibaryDetailActivity2.this,90);
+                textView.setLayoutParams(linearParams);
+
                 break;
             case 82:  //消防泵
                 View layout11 = layoutInflater.inflate(R.layout.xfb_head,null);
                 layout_head.addView(layout11);
+
+                // 动态控制序号高度
+                TextView textView2= (TextView)findViewById(R.id.tv_xh_title);
+                LinearLayout.LayoutParams linearParams2 =(LinearLayout.LayoutParams) textView2.getLayoutParams(); //取控件textView当前的布局参数
+                linearParams2.height = dip2px(HiddenLibaryDetailActivity2.this,90);
+                textView2.setLayoutParams(linearParams2);
                 break;
             case 83:  //消防员装备箱
                 View layout12 = layoutInflater.inflate(R.layout.xj_fire_equipment_head,null);
                 layout_head.addView(layout12);
+
+                // 动态控制序号高度
+                TextView textView3= (TextView)findViewById(R.id.tv_xh_title);
+                LinearLayout.LayoutParams linearParams3 =(LinearLayout.LayoutParams) textView3.getLayoutParams(); //取控件textView当前的布局参数
+                linearParams3.height = dip2px(HiddenLibaryDetailActivity2.this,90);
+                textView3.setLayoutParams(linearParams3);
                 break;
             case 84:  //消防水炮
                 View layout13 = layoutInflater.inflate(R.layout.xfsp,null);
@@ -175,6 +203,10 @@ public class HiddenLibaryDetailActivity2 extends AppCompatActivity {
         initListner();
     }
 
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
 
     private void initView() {
         iv_finish = findViewById(R.id.iv_finish);
