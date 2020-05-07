@@ -29,7 +29,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="60dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
             <TextView
@@ -43,7 +43,7 @@
                 android:textStyle="bold" />
         </RelativeLayout>
         <RelativeLayout
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
             <TextView
@@ -90,7 +90,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="50dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -107,7 +107,7 @@
 
 
         <RelativeLayout
-            android:layout_width="20dp"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -116,7 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="是否整改"
+                android:text="是否合格"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -124,13 +124,13 @@
 
         <RelativeLayout
             android:id="@+id/rl_11"
-            android:layout_width="match_parent"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_gravity="center">
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginLeft="6dp"
+                android:layout_centerInParent="true"
                 android:background="@mipmap/detail_icon"
                 android:textSize="12sp" />
         </RelativeLayout>

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -137,36 +138,42 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.rl_fire1:
-                    showPopWind(myholder.tv_fire1);
-                    break;
-                case R.id.rl_fire4:
-                    showPopWind(myholder.tv_fire4);
-                    break;
-                case R.id.rl_fire5:
-                    showPopWind(myholder.tv_fire5);
-                    break;
-                case R.id.rl_fire6:
-                    showPopWind(myholder.tv_fire6);
-                    break;
-                case R.id.rl_fire7:
-                    showPopWind(myholder.tv_fire7);
-                    break;
-                case R.id.rl_fire8:
-                    showPopWind(myholder.tv_fire8);
-                    break;
-                case R.id.rl_fire9:
-                    showPopWind(myholder.tv_fire9);
-                    break;
-                case R.id.rl_fire11:
-                    mYCCamera.startCamera(position);
-                    break;
-                case R.id.rl_fire12:
-                    removeData(position);
-                    //通知序号列表刷新数据和高度
-                    mRemoveXH.deleteRefresh(position);
-                    break;
+            String param26 = null;
+            for (int i = 0; i<mData.size(); i++) {
+                param26 = mData.get(i).getParam26();
+            }
+            if (param26 != "隐患库") {
+                switch (v.getId()) {
+                    case R.id.rl_fire1:
+                        showPopWind(myholder.tv_fire1);
+                        break;
+                    case R.id.rl_fire4:
+                        showPopWind(myholder.tv_fire4);
+                        break;
+                    case R.id.rl_fire5:
+                        showPopWind(myholder.tv_fire5);
+                        break;
+                    case R.id.rl_fire6:
+                        showPopWind(myholder.tv_fire6);
+                        break;
+                    case R.id.rl_fire7:
+                        showPopWind(myholder.tv_fire7);
+                        break;
+                    case R.id.rl_fire8:
+                        showPopWind(myholder.tv_fire8);
+                        break;
+                    case R.id.rl_fire9:
+                        showPopWind(myholder.tv_fire9);
+                        break;
+                    case R.id.rl_fire11:
+                        mYCCamera.startCamera(position);
+                        break;
+                    case R.id.rl_fire12:
+                        removeData(position);
+                        //通知序号列表刷新数据和高度
+                        mRemoveXH.deleteRefresh(position);
+                        break;
+                }
             }
         }
     }
@@ -247,6 +254,11 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
     private YCCamera mYCCamera;
     private RemoveXH mRemoveXH;
 
+
+    public interface RemoveXH {
+        void deleteRefresh(int postion);
+    }
+
     //接口回调, 将点击事件传递到activity中,打开相机
     public void setmYCCamera(YCCamera y) {
         this.mYCCamera = y;
@@ -262,7 +274,7 @@ public class XJFirstContentApapter extends RecyclerView.Adapter {
         void startCamera(int postion);
     }
 
-    public interface RemoveXH {
-        void deleteRefresh(int postion);
-    }
+//    public interface RemoveXH {
+//        void deleteRefresh(int postion);
+//    }
 }
