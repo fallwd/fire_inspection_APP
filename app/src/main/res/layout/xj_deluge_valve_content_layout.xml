@@ -333,7 +333,7 @@
 
         <RelativeLayout
             android:id="@+id/rl_fire16"
-            android:layout_width="60dp"
+            android:layout_width="110dp"
             android:layout_height="45dp"
             android:layout_gravity="center"
             android:layout_marginLeft="8dp">
@@ -352,7 +352,7 @@
 
         <RelativeLayout
             android:id="@+id/rl_fire17"
-            android:layout_width="60dp"
+            android:layout_width="80dp"
             android:layout_height="45dp"
             android:layout_gravity="center"
             android:layout_marginLeft="8dp">
@@ -362,7 +362,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="8dp"
-                android:background="@mipmap/detail_icon"
+                android:background="@mipmap/remove_item"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold" />

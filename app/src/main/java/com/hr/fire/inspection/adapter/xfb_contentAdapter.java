@@ -57,7 +57,9 @@ public class xfb_contentAdapter extends RecyclerView.Adapter {
         myholder.tv_fire13.setText(result.getParam13());
         myholder.tv_fire14.setText(result.getParam14());
         myholder.tv_fire15.setText(result.getParam15());
-        myholder.et_fire10.setText(result.getParam16());
+        if (result.getDescription() != null) {
+            myholder.et_fire10.setText(result.getDescription());
+        }
 
         myholder.rl_fire1.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
         myholder.rl_fire2.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
@@ -74,6 +76,7 @@ public class xfb_contentAdapter extends RecyclerView.Adapter {
         myholder.rl_fire13.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
         myholder.rl_fire14.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
         myholder.rl_fire15.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire18.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
     }
 
     @Override
@@ -137,58 +140,66 @@ public class xfb_contentAdapter extends RecyclerView.Adapter {
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.rl_fire1:
-                    showPopWind(myholder.tv_fire1);
-                    break;
-                case R.id.rl_fire2:
-                    showPopWind(myholder.tv_fire2);
-                    break;
-                case R.id.rl_fire3:
-                    showPopWind(myholder.tv_fire3);
-                    break;
-                case R.id.rl_fire4:
-                    showPopWind(myholder.tv_fire4);
-                    break;
-                case R.id.rl_fire5:
-                    showPopWind(myholder.tv_fire5);
-                    break;
-                case R.id.rl_fire6:
-                    showPopWind(myholder.tv_fire6);
-                    break;
-                case R.id.rl_fire7:
-                    showPopWind(myholder.tv_fire7);
-                    break;
-                case R.id.rl_fire8:
-                    showPopWind(myholder.tv_fire8);
-                    break;
-                case R.id.rl_fire9:
-                    showPopWind(myholder.tv_fire9);
-                    break;
-                case R.id.rl_fire10:
-                    showPopWind(myholder.tv_fire10);
-                    break;
-                case R.id.rl_fire11:
-                    showPopWind(myholder.tv_fire11);
-                    break;
-                case R.id.rl_fire12:
-                    showPopWind(myholder.tv_fire12);
-                    break;
-                case R.id.rl_fire13:
-                    showPopWind(myholder.tv_fire13);
-                    break;
-                case R.id.rl_fire14:
-                    showPopWind(myholder.tv_fire14);
-                    break;
-                case R.id.rl_fire15:
-                    showPopWind(myholder.tv_fire15);
-                    break;
-                case R.id.tv_fire17:
-                    mYCCamera.startCamera(position);
-                    break;
-                case R.id.tv_fire18:
-                    removeData(position);
-                    break;
+            String param26 = null;
+            for (int i = 0; i<mData.size(); i++) {
+                param26 = mData.get(i).getParam26();
+            }
+            if (param26 != "隐患库") {
+                switch (v.getId()) {
+                    case R.id.rl_fire1:
+                        showPopWind(myholder.tv_fire1);
+                        break;
+                    case R.id.rl_fire2:
+                        showPopWind(myholder.tv_fire2);
+                        break;
+                    case R.id.rl_fire3:
+                        showPopWind(myholder.tv_fire3);
+                        break;
+                    case R.id.rl_fire4:
+                        showPopWind(myholder.tv_fire4);
+                        break;
+                    case R.id.rl_fire5:
+                        showPopWind(myholder.tv_fire5);
+                        break;
+                    case R.id.rl_fire6:
+                        showPopWind(myholder.tv_fire6);
+                        break;
+                    case R.id.rl_fire7:
+                        showPopWind(myholder.tv_fire7);
+                        break;
+                    case R.id.rl_fire8:
+                        showPopWind(myholder.tv_fire8);
+                        break;
+                    case R.id.rl_fire9:
+                        showPopWind(myholder.tv_fire9);
+                        break;
+                    case R.id.rl_fire10:
+                        showPopWind(myholder.tv_fire10);
+                        break;
+                    case R.id.rl_fire11:
+                        showPopWind(myholder.tv_fire11);
+                        break;
+                    case R.id.rl_fire12:
+                        showPopWind(myholder.tv_fire12);
+                        break;
+                    case R.id.rl_fire13:
+                        showPopWind(myholder.tv_fire13);
+                        break;
+                    case R.id.rl_fire14:
+                        showPopWind(myholder.tv_fire14);
+                        break;
+                    case R.id.rl_fire15:
+                        showPopWind(myholder.tv_fire15);
+                        break;
+                    case R.id.tv_fire17:
+                        mYCCamera.startCamera(position);
+                        break;
+                    case R.id.rl_fire18:
+                        removeData(position);
+                        //通知序号列表刷新数据和高度
+                        mRemoveXH.deleteRefresh(position);
+                        break;
+                }
             }
         }
     }
@@ -246,6 +257,7 @@ public class xfb_contentAdapter extends RecyclerView.Adapter {
         private RelativeLayout rl_fire14;
         private RelativeLayout rl_fire15;
         private RelativeLayout rl_fire16;
+        private RelativeLayout rl_fire18;
 
         public MyViewHolder(View view) {
             super(view);
@@ -264,8 +276,7 @@ public class xfb_contentAdapter extends RecyclerView.Adapter {
             rl_fire13 = view.findViewById(R.id.rl_fire13);
             rl_fire14 = view.findViewById(R.id.rl_fire14);
             rl_fire15 = view.findViewById(R.id.rl_fire15);
-
-
+            rl_fire18 = view.findViewById(R.id.rl_fire18);
 
 
             tv_fire1 = view.findViewById(R.id.tv_fire1);
@@ -287,18 +298,27 @@ public class xfb_contentAdapter extends RecyclerView.Adapter {
             tv_fire17 = view.findViewById(R.id.tv_fire17);
             tv_fire18 = view.findViewById(R.id.tv_fire18);
 
-
         }
     }
 
-    private YCCamera mYCCamera;
-
+    private xfb_contentAdapter.YCCamera mYCCamera;
+    private xfb_contentAdapter.RemoveXH mRemoveXH;
     //接口回调, 将点击事件传递到activity中,打开相机
-    public void setmYCCamera(YCCamera y) {
+    public void setmYCCamera(xfb_contentAdapter.YCCamera y) {
         this.mYCCamera = y;
     }
 
+    //接口回调, 将点击事件传递到activity中,刷新序号
+    public void setDeleteRefresh(xfb_contentAdapter.RemoveXH xh) {
+        this.mRemoveXH = xh;
+    }
+
+
     public interface YCCamera {
         void startCamera(int postion);
+    }
+
+    public interface RemoveXH {
+        void deleteRefresh(int postion);
     }
 }

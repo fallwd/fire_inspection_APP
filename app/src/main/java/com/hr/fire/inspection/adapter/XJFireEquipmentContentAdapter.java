@@ -77,8 +77,8 @@ public class XJFireEquipmentContentAdapter extends RecyclerView.Adapter{
 
 
 
-        if (result.getParam10() != null) {
-            myholder.et_fire10.setText(result.getParam26());
+        if (result.getDescription() != null) {
+            myholder.et_fire10.setText(result.getDescription());
         }
 
         myholder.gas1.setOnClickListener(new XJFireEquipmentContentAdapter.MyOnClickListener(myholder, position));
@@ -184,94 +184,102 @@ public class XJFireEquipmentContentAdapter extends RecyclerView.Adapter{
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.gas1:
-                    showPopWind(myholder.tv_gas1);
-                    break;
-                case R.id.gas2:
-                    showPopWind(myholder.tv_gas2);
-                    break;
-                case R.id.gas3:
-                    showPopWind(myholder.tv_gas3);
-                    break;
-                case R.id.gas4:
-                    showPopWind(myholder.tv_gas4);
-                    break;
-                case R.id.gas5:
-                    showPopWind(myholder.tv_gas5);
-                    break;
-                case R.id.gas6:
-                    showPopWind(myholder.tv_gas6);
-                    break;
-                case R.id.gas7:
-                    showPopWind(myholder.tv_gas7);
-                    break;
-                case R.id.gas8:
-                    showPopWind(myholder.tv_gas8);
-                    break;
-                case R.id.gas9:
-                    showPopWind(myholder.tv_gas9);
-                    break;
-                case R.id.gas10:
-                    showPopWind(myholder.tv_gas10);
-                    break;
-                case R.id.gas11:
-                    showPopWind(myholder.tv_gas11);
-                    break;
-                case R.id.gas12:
-                    showPopWind(myholder.tv_gas12);
-                    break;
-                case R.id.gas13:
-                    showPopWind(myholder.tv_gas13);
-                    break;
-                case R.id.gas14:
-                    showPopWind(myholder.tv_gas14);
-                    break;
-                case R.id.gas15:
-                    showPopWind(myholder.tv_gas15);
-                    break;
-                case R.id.gas16:
-                    showPopWind(myholder.tv_gas16);
-                    break;
-                case R.id.gas17:
-                    showPopWind(myholder.tv_gas17);
-                    break;
-                case R.id.gas18:
-                    showPopWind(myholder.tv_gas18);
-                    break;
-                case R.id.gas19:
-                    showPopWind(myholder.tv_gas19);
-                    break;
-                case R.id.gas20:
-                    showPopWind(myholder.tv_gas20);
-                    break;
-                case R.id.gas21:
-                    showPopWind(myholder.tv_gas21);
-                    break;
-                case R.id.gas22:
-                    showPopWind(myholder.tv_gas22);
-                    break;
-                case R.id.gas23:
-                    showPopWind(myholder.tv_gas23);
-                    break;
-                case R.id.gas24:
-                    showPopWind(myholder.tv_gas24);
-                    break;
-                case R.id.gas25:
-                    showPopWind(myholder.tv_gas25);
-                    break;
-                case R.id.gas26:
-                    showPopWind(myholder.tv_gas26);
-                    break;
-                case R.id.gas27:
-                    showPopWind(myholder.tv_gas27);
-                    break;
-                case R.id.rl_fire11:
-                    mYCCamera.startCamera(position);
-                    break;
-                case R.id.rl_fire12:
-                    removeData(position);
-                    break;
+            String param26 = null;
+            for (int i = 0; i<mData.size(); i++) {
+                param26 = mData.get(i).getParam26();
+            }
+            if (param26 != "隐患库") {
+                switch (v.getId()) {
+                    case R.id.gas1:
+                        showPopWind(myholder.tv_gas1);
+                        break;
+                    case R.id.gas2:
+                        showPopWind(myholder.tv_gas2);
+                        break;
+                    case R.id.gas3:
+                        showPopWind(myholder.tv_gas3);
+                        break;
+                    case R.id.gas4:
+                        showPopWind(myholder.tv_gas4);
+                        break;
+                    case R.id.gas5:
+                        showPopWind(myholder.tv_gas5);
+                        break;
+                    case R.id.gas6:
+                        showPopWind(myholder.tv_gas6);
+                        break;
+                    case R.id.gas7:
+                        showPopWind(myholder.tv_gas7);
+                        break;
+                    case R.id.gas8:
+                        showPopWind(myholder.tv_gas8);
+                        break;
+                    case R.id.gas9:
+                        showPopWind(myholder.tv_gas9);
+                        break;
+                    case R.id.gas10:
+                        showPopWind(myholder.tv_gas10);
+                        break;
+                    case R.id.gas11:
+                        showPopWind(myholder.tv_gas11);
+                        break;
+                    case R.id.gas12:
+                        showPopWind(myholder.tv_gas12);
+                        break;
+                    case R.id.gas13:
+                        showPopWind(myholder.tv_gas13);
+                        break;
+                    case R.id.gas14:
+                        showPopWind(myholder.tv_gas14);
+                        break;
+                    case R.id.gas15:
+                        showPopWind(myholder.tv_gas15);
+                        break;
+                    case R.id.gas16:
+                        showPopWind(myholder.tv_gas16);
+                        break;
+                    case R.id.gas17:
+                        showPopWind(myholder.tv_gas17);
+                        break;
+                    case R.id.gas18:
+                        showPopWind(myholder.tv_gas18);
+                        break;
+                    case R.id.gas19:
+                        showPopWind(myholder.tv_gas19);
+                        break;
+                    case R.id.gas20:
+                        showPopWind(myholder.tv_gas20);
+                        break;
+                    case R.id.gas21:
+                        showPopWind(myholder.tv_gas21);
+                        break;
+                    case R.id.gas22:
+                        showPopWind(myholder.tv_gas22);
+                        break;
+                    case R.id.gas23:
+                        showPopWind(myholder.tv_gas23);
+                        break;
+                    case R.id.gas24:
+                        showPopWind(myholder.tv_gas24);
+                        break;
+                    case R.id.gas25:
+                        showPopWind(myholder.tv_gas25);
+                        break;
+                    case R.id.gas26:
+                        showPopWind(myholder.tv_gas26);
+                        break;
+                    case R.id.gas27:
+                        showPopWind(myholder.tv_gas27);
+                        break;
+                    case R.id.rl_fire11:
+                        mYCCamera.startCamera(position);
+                        break;
+                    case R.id.rl_fire12:
+                        removeData(position);
+                        //通知序号列表刷新数据和高度
+                        mRemoveXH.deleteRefresh(position);
+                        break;
+                }
             }
         }
     }
@@ -428,14 +436,24 @@ public class XJFireEquipmentContentAdapter extends RecyclerView.Adapter{
     }
 
     private XJFireEquipmentContentAdapter.YCCamera mYCCamera;
-
+    private XJFireEquipmentContentAdapter.RemoveXH mRemoveXH;
     //接口回调, 将点击事件传递到activity中,打开相机
     public void setmYCCamera(XJFireEquipmentContentAdapter.YCCamera y) {
         this.mYCCamera = y;
     }
 
+    //接口回调, 将点击事件传递到activity中,刷新序号
+    public void setDeleteRefresh(XJFireEquipmentContentAdapter.RemoveXH xh) {
+        this.mRemoveXH = xh;
+    }
+
+
     public interface YCCamera {
         void startCamera(int postion);
+    }
+
+    public interface RemoveXH {
+        void deleteRefresh(int postion);
     }
 
 }

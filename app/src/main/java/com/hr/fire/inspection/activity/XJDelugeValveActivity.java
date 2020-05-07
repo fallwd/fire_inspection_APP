@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.adapter.XJFireDamperContentApapter;
 import com.hr.fire.inspection.adapter.XJFirstColumnApapter;
 import com.hr.fire.inspection.adapter.XJDelugeValveContentApapter;
 import com.hr.fire.inspection.entity.InspectionResult;
@@ -147,6 +148,13 @@ public class XJDelugeValveActivity extends AppCompatActivity implements View.OnC
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        });
+        //刷新序号列表
+        contentApapter.setDeleteRefresh(new XJDelugeValveContentApapter.RemoveXH() {
+            @Override
+            public void deleteRefresh(int postion) {
+                firstColumnApapter.notifyDataSetChanged();
             }
         });
     }
@@ -308,7 +316,7 @@ public class XJDelugeValveActivity extends AppCompatActivity implements View.OnC
             itemObj.setParam12(tv_fire12.getText().toString());
             itemObj.setParam13(tv_fire13.getText().toString());
             itemObj.setParam14(tv_fire14.getText().toString());
-            itemObj.setParam15(et_fire15.getText().toString());
+            itemObj.setDescription(et_fire15.getText().toString());
             itemObj.setParam16(tv_fire16.getText().toString());
             Log.d("dong", "itemObj == "+itemObj);
             service.update(itemObj);

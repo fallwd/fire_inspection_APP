@@ -46,7 +46,7 @@ public class xfspAdapter extends RecyclerView.Adapter {
         myholder.tv_fire2.setText(result.getParam2());
         myholder.tv_fire3.setText(result.getParam3());
         myholder.tv_fire4.setText(result.getParam4());
-        myholder.et_fire10.setText(result.getParam5());
+        myholder.et_fire10.setText(result.getDescription());
         myholder.rl_fire1.setOnClickListener(new xfspAdapter.MyOnClickListener(myholder, position));
         myholder.rl_fire2.setOnClickListener(new xfspAdapter.MyOnClickListener(myholder, position));
         myholder.rl_fire3.setOnClickListener(new xfspAdapter.MyOnClickListener(myholder, position));
@@ -116,25 +116,33 @@ public class xfspAdapter extends RecyclerView.Adapter {
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.rl_fire1:
-                    showPopWind(myholder.tv_fire1);
-                    break;
-                case R.id.rl_fire2:
-                    showPopWind(myholder.tv_fire2);
-                    break;
-                case R.id.rl_fire3:
-                    showPopWind(myholder.tv_fire3);
-                    break;
-                case R.id.rl_fire4:
-                    showPopWind(myholder.tv_fire4);
-                    break;
-                case R.id.rl_fire6:
-                    mYCCamera.startCamera(position);
-                    break;
-                case R.id.tv_fire7:
-                    removeData(position);
-                    break;
+            String param26 = null;
+            for (int i = 0; i<mData.size(); i++) {
+                param26 = mData.get(i).getParam26();
+            }
+            if (param26 != "隐患库") {
+                switch (v.getId()) {
+                    case R.id.rl_fire1:
+                        showPopWind(myholder.tv_fire1);
+                        break;
+                    case R.id.rl_fire2:
+                        showPopWind(myholder.tv_fire2);
+                        break;
+                    case R.id.rl_fire3:
+                        showPopWind(myholder.tv_fire3);
+                        break;
+                    case R.id.rl_fire4:
+                        showPopWind(myholder.tv_fire4);
+                        break;
+                    case R.id.rl_fire6:
+                        mYCCamera.startCamera(position);
+                        break;
+                    case R.id.tv_fire7:
+                        removeData(position);
+                        //通知序号列表刷新数据和高度
+                        mRemoveXH.deleteRefresh(position);
+                        break;
+                }
             }
         }
     }
@@ -196,14 +204,24 @@ public class xfspAdapter extends RecyclerView.Adapter {
         }
     }
 
-    private YCCamera mYCCamera;
-
+    private xfspAdapter.YCCamera mYCCamera;
+    private xfspAdapter.RemoveXH mRemoveXH;
     //接口回调, 将点击事件传递到activity中,打开相机
-    public void setmYCCamera(YCCamera y) {
+    public void setmYCCamera(xfspAdapter.YCCamera y) {
         this.mYCCamera = y;
     }
 
+    //接口回调, 将点击事件传递到activity中,刷新序号
+    public void setDeleteRefresh(xfspAdapter.RemoveXH xh) {
+        this.mRemoveXH = xh;
+    }
+
+
     public interface YCCamera {
         void startCamera(int postion);
+    }
+
+    public interface RemoveXH {
+        void deleteRefresh(int postion);
     }
 }

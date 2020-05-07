@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.XJFFESContentApapter;
 import com.hr.fire.inspection.adapter.XJFFESColumnApapter;
+import com.hr.fire.inspection.adapter.XJKitchenWetPowderContentAdapter;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
 import com.hr.fire.inspection.utils.ToastUtil;
@@ -149,6 +150,13 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
                 }
             }
         });
+        //刷新序号列表
+        contentApapter.setDeleteRefresh(new XJFFESContentApapter.RemoveXH() {
+            @Override
+            public void deleteRefresh(int postion) {
+                firstColumnApapter.notifyDataSetChanged();
+            }
+        });
     }
 
     //设置同步滑动
@@ -185,7 +193,6 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.iv_save:
                 saveToUpdara();
                 break;
-
         }
     }
 
@@ -351,7 +358,8 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
             itemObj.setParam22(tv_fire22.getText().toString());
             itemObj.setParam23(tv_fire23.getText().toString());
             itemObj.setParam24(tv_fire24.getText().toString());
-            itemObj.setParam25(et_fire25.getText().toString());
+//            itemObj.setParam25();
+            itemObj.setDescription(et_fire25.getText().toString());
 
 //            Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
 //                     + et_fire2.getText().toString() + " " + et_fire2.getText().toString());
