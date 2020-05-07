@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="序号321"
+                android:text="序号"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold" />

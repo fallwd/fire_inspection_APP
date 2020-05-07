@@ -220,13 +220,11 @@ public class RuleContentActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, str, SearchAdapter.ALL);
         search.setAdapter(adapter);
     }
-
     /**
      * 根据文件夹填充ListView
      *
      * @param files
      */
-
     private void inflateListView(File[] files) {
         List<Map<String, Object>> listItems = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < files.length; i++) {

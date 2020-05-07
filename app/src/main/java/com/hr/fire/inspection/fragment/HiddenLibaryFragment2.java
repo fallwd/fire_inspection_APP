@@ -18,7 +18,10 @@ import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.HYLogUtil;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -61,20 +64,28 @@ public class HiddenLibaryFragment2 extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initData();
+        try {
+            initData();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         initView();
     }
 
 
-    private void initData() {
+    private void initData() throws ParseException {
         //参数
-        retData = ServiceFactory.getAnalysisService().getInspectionView(0,0,null, null);
-        HYLogUtil.getInstance().d("获取隐患库巡检表格数据,数据查看:" + retData.size() + "  " + retData.toString());
+        DateFormat format2= new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        if (its != null && its.end_time != "" && its.start_time != ""){
+            Date starTime = format2.parse(its.start_time);
+            Date endTime = format2.parse(its.end_time);
+            retData = ServiceFactory.getAnalysisService().getInspectionView(its.platformId,its.systemId,starTime, endTime);
+            HYLogUtil.getInstance().d("获取隐患库巡检表格数据,数据更新查看:" + retData.size() + "  " + retData.toString());
+        }else{
+            retData = ServiceFactory.getAnalysisService().getInspectionView(0,0,null, null);
+        }
     }
     private void initView() {
-//        if (retData.size() == 0) {
-//            Toast.makeText(getActivity(), "暂无数据", Toast.LENGTH_SHORT).show();
-//        }
         rc_list = rootView.findViewById(R.id.rc_list);
         @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rc_list.setLayoutManager(layoutManager);
@@ -83,11 +94,6 @@ public class HiddenLibaryFragment2 extends Fragment {
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
     }
-
-
-    @SuppressLint("SimpleDateFormat")
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
 
     @Override
     public void onDestroyView() {
