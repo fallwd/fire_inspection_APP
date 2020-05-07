@@ -18,8 +18,12 @@ import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.HiddenLibraryAdapter1;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.HYLogUtil;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,6 +41,7 @@ public class HiddenLibaryFragment1 extends Fragment {
             fragment1 = new HiddenLibaryFragment1();
         }
         mKey = key;
+
         Bundle args = new Bundle();
         args.putSerializable(key, value);
         fragment1.setArguments(args);
@@ -46,14 +51,8 @@ public class HiddenLibaryFragment1 extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            String string = getArguments().getString("key");
-            Toast.makeText(getActivity(), string, Toast.LENGTH_LONG).show();
-
             its = (IntentTransmit) getArguments().getSerializable(mKey);
-        }
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,20 +65,36 @@ public class HiddenLibaryFragment1 extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initData();
+
+        if (getArguments() != null) {
+            its = (IntentTransmit) getArguments().getSerializable(mKey);
+            Log.d("its====",""+ its);
+            try {
+                initData();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private void initData() throws ParseException {
+        DateFormat format2= new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+        if (its != null && its.end_time != "" && its.start_time != ""){
+            Date starTime = format2.parse(its.start_time);
+            Date endTime = format2.parse(its.end_time);
+            Log.d("time==========", "开始时间======"+starTime+"\n结束时间====="+endTime +"\n系统ID==="+its.systemId+"\n平台ID====="+its.platformId);
+            retData = ServiceFactory.getAnalysisService().getYearCheckView(its.platformId,its.systemId,starTime, endTime);
+            HYLogUtil.getInstance().d("获取隐患库年检格数据,数据更新查看:" + retData.size() + "  " + retData.toString());
+        }else{
+            Toast.makeText(getActivity(), "为了方便查询精确数据，建议选择时间范围", Toast.LENGTH_SHORT).show();
+            retData = ServiceFactory.getAnalysisService().getYearCheckView(0,0,null, null);
+        }
         initView();
     }
-
-
-    private void initData() {
-        //参数
-        retData = ServiceFactory.getAnalysisService().getYearCheckView(0,0,null, null);
-//        HYLogUtil.getInstance().d("获取隐患库年检表格数据,数据查看:" + retData.size() + "  " + retData.toString());
-    }
     private void initView() {
-//        if (retData.size() == 0) {
-//            Toast.makeText(getActivity(), "暂无数据", Toast.LENGTH_SHORT).show();
-//        }
+        if (retData.size() == 0) {
+            Toast.makeText(getActivity(), "暂无数据", Toast.LENGTH_SHORT).show();
+        }
         rc_list = rootView.findViewById(R.id.rc_list);
         @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rc_list.setLayoutManager(layoutManager);
@@ -88,11 +103,6 @@ public class HiddenLibaryFragment1 extends Fragment {
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
     }
-
-
-    @SuppressLint("SimpleDateFormat")
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
 
     @Override
     public void onDestroyView() {

@@ -61,13 +61,13 @@
                                 android:layout_height="35dp" />
                             <Button
                                 android:id="@+id/start_time"
-                                android:layout_width="100dp"
+                                android:layout_width="130dp"
                                 android:layout_height="35sp"
                                 android:layout_marginLeft="10dp"
                                 android:background="@drawable/button_border"
                                 android:drawableEnd="@mipmap/cmander"
                                 android:drawableRight="@mipmap/cmander"
-                                android:textSize="10sp">
+                                android:textSize="12sp">
 
                             </Button>
 
@@ -79,17 +79,19 @@
 
                             <Button
                                 android:id="@+id/end_time"
-                                android:layout_width="100dp"
+                                android:layout_width="130dp"
                                 android:layout_height="35sp"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginLeft="10dp"
                                 android:background="@drawable/button_border"
                                 android:drawableRight="@mipmap/cmander"
-                                android:textSize="10sp" />
+                                android:textSize="12sp" />
                             <!--请选择公司-->
                             <Spinner
                                 android:id="@+id/spinner_bussy"
                                 style="@style/spinner_style"
+                                android:layout_width="115dp"
+                                android:paddingRight="15dp"
                                 android:background="@drawable/spriner_style"
                                 android:entries="@array/spingarr" />
                             <!--请选择油田-->
@@ -110,6 +112,7 @@
                                 android:id="@+id/spinner_sys"
                                 style="@style/spinner_style"
                                 android:autofillHints="@string/search"
+                                android:layout_width="120dp"
                                 android:background="@drawable/spriner_style"
                                 android:entries="@array/spingarr4" />
 

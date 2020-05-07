@@ -48,7 +48,7 @@ public interface AnalysisService {
      * @return
      */
     List<HashMap> getYearCheckView(long platformId, long systemId, Date startDate,Date endDate);
-    List<HashMap> getInspectionView(long platformId, long systemId, Date startDate,Date endDate);
+    List<HashMap> getInspectionView(long platformId, long systemId, Date startDate, Date endDate);
 
 
     /**

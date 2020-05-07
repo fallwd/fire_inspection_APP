@@ -27,16 +27,16 @@
     <string name="checkReport">消防巡检报告</string>
     <string name="xj_xfsp">消防水炮</string>
     <string-array name="spingarr">
-        <item>公司</item>
+        <item>请选择公司</item>
     </string-array>
     <string-array name="spingarr1">
-        <item>油田</item>
+        <item>请选择油田</item>
     </string-array>
     <string-array name="spingarr3">
-        <item>平台</item>
+        <item>请选择平台</item>
     </string-array>
     <string-array name="spingarr4">
-        <item>系统</item>
+        <item>请选择系统</item>
     </string-array>
     <string-array name="spingarr5">
         <item>选择负责专业</item>
