@@ -3,6 +3,7 @@ package com.hr.fire.inspection.activity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.SpannableString;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,7 +44,7 @@ public class HiddenLibaryDetailActivity1 extends AppCompatActivity {
     private List<YearCheckResult> yearCheckResults; //数据集合
     private long platformId;
     private long systemId;
-    private HiddenLibraryDetailAdapter1 aaa;
+    private HiddenLibraryDetailAdapter1 data;
 
 
     @Override
@@ -52,6 +53,7 @@ public class HiddenLibaryDetailActivity1 extends AppCompatActivity {
         setContentView(R.layout.activity_hidden_library_detail1);
         getIntentParameter();
         initView();
+        initListner();
     }
 
     private void getIntentParameter() {
@@ -80,11 +82,18 @@ public class HiddenLibaryDetailActivity1 extends AppCompatActivity {
         @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         listRrcycler.setLayoutManager(layoutManager);
 
-        aaa = new HiddenLibraryDetailAdapter1(this, yearCheckResults);
-        listRrcycler.setAdapter(aaa);
+        data = new HiddenLibraryDetailAdapter1(this, yearCheckResults);
+        listRrcycler.setAdapter(data);
         listRrcycler.setItemAnimator(new DefaultItemAnimator());
     }
-
+    private void initListner() {
+        iv_finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
 
     @Override
     protected void onDestroy() {

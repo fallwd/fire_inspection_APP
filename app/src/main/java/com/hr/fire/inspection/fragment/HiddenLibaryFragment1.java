@@ -51,7 +51,6 @@ public class HiddenLibaryFragment1 extends Fragment {
             Toast.makeText(getActivity(), string, Toast.LENGTH_LONG).show();
 
             its = (IntentTransmit) getArguments().getSerializable(mKey);
-            Log.d("啊啊啊啊","its"+ its);
         }
     }
 
