@@ -117,28 +117,36 @@ public class HiddenLibaryActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
-                // 滚动中监听
+
             }
 
             @Override
             public void onPageSelected(int i) {
                 currentPager = i;
-                init_system_spinner(currentPager);
-                if (i == 1) {
-                    Statistics.setVisibility(View.GONE);
-                } else {
-                    Statistics.setVisibility(View.VISIBLE);
-                }
             }
 
             @Override
             public void onPageScrollStateChanged(int i) {
-                // 滚动结束
+
             }
         });
         //每项只进入一次
-        mViewPager.setAdapter(new myAdapter(getSupportFragmentManager()));
+        mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return fragments.get(position);
+            }
 
+            @Override
+            public int getCount() {
+                return fragments.size();
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return titleList.get(position);
+            }
+        });
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
