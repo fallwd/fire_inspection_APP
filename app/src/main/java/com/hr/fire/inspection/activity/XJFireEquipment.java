@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.XJFireEquipmentCloumnAdapter;
 import com.hr.fire.inspection.adapter.XJFireEquipmentContentAdapter;
+import com.hr.fire.inspection.adapter.XJKitchenWetPowderContentAdapter;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
 import com.hr.fire.inspection.utils.ToastUtil;
@@ -149,7 +151,13 @@ public class XJFireEquipment extends AppCompatActivity  implements View.OnClickL
                     e.printStackTrace();
                 }
             }
-
+        });
+        //刷新序号列表
+        contentApapter.setDeleteRefresh(new XJFireEquipmentContentAdapter.RemoveXH() {
+            @Override
+            public void deleteRefresh(int postion) {
+                firstColumnApapter.notifyDataSetChanged();
+            }
         });
     }
 
@@ -321,11 +329,14 @@ public class XJFireEquipment extends AppCompatActivity  implements View.OnClickL
             TextView tv_gas25 = childAt.findViewById(R.id.tv_gas25);
             TextView tv_gas26 = childAt.findViewById(R.id.tv_gas26);
             TextView tv_gas27 = childAt.findViewById(R.id.tv_gas27);
+            EditText et_fire10 = childAt.findViewById(R.id.et_fire10);
 
             InspectionResult itemObj = inspectionResults.get(i);
             itemObj.setProfession(itemObj.getProfession());
             itemObj.setCheckPerson(itemObj.getCheckPerson());
             itemObj.setCheckDate(itemObj.getCheckDate());
+            itemObj.setDescription(et_fire10.getText().toString());
+            itemObj.setParam1(tv_gas1.getText().toString());
             itemObj.setParam1(tv_gas1.getText().toString());
             itemObj.setParam2(tv_gas2.getText().toString());
             itemObj.setParam3(tv_gas3.getText().toString());
@@ -352,7 +363,6 @@ public class XJFireEquipment extends AppCompatActivity  implements View.OnClickL
             itemObj.setParam24(tv_gas24.getText().toString());
             itemObj.setParam25(tv_gas25.getText().toString());
             itemObj.setParam26(tv_gas26.getText().toString());
-
 
             service.update(itemObj);
         }

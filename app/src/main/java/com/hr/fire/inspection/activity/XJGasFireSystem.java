@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hr.fire.inspection.R;
 
 
+import com.hr.fire.inspection.adapter.XJFirstContentApapter;
 import com.hr.fire.inspection.adapter.XJGasColumnAdapter;
 import com.hr.fire.inspection.adapter.XJGasContentAdapter;
 import com.hr.fire.inspection.entity.InspectionResult;
@@ -91,7 +92,6 @@ public class XJGasFireSystem extends AppCompatActivity implements View.OnClickLi
         //测试用, 因为前面传过来的时间格式有问题
         check_date = "2020-04-23 18:21";
 
-
         try {
             //这个解析方式是没有问题的 ,需要保证前面传入的数据是 2020-04-23 18:21 格式
             parse_check_date = sdf.parse(check_date);
@@ -152,7 +152,13 @@ public class XJGasFireSystem extends AppCompatActivity implements View.OnClickLi
                     e.printStackTrace();
                 }
             }
-
+        });
+        //刷新序号列表
+        contentApapter.setDeleteRefresh(new XJGasContentAdapter.RemoveXH() {
+            @Override
+            public void deleteRefresh(int postion) {
+                firstColumnApapter.notifyDataSetChanged();
+            }
         });
     }
 
@@ -297,8 +303,9 @@ public class XJGasFireSystem extends AppCompatActivity implements View.OnClickLi
         for (int i = 0; i < itemCount; i++) {
             LinearLayout childAt = (LinearLayout) rl_content.getChildAt(i);
 
-            TextView et_gas1 = childAt.findViewById(R.id.et_gas1);
-            TextView et_gas2 = childAt.findViewById(R.id.et_gas2);
+            EditText et_gas1 = childAt.findViewById(R.id.et_gas1);
+            EditText et_gas2 = childAt.findViewById(R.id.et_gas2);
+            EditText et_fire10 = childAt.findViewById(R.id.et_fire10);
             TextView tv_gas1 = childAt.findViewById(R.id.tv_gas1);
             TextView tv_gas2 = childAt.findViewById(R.id.tv_gas2);
             TextView tv_gas3 = childAt.findViewById(R.id.tv_gas3);
@@ -329,6 +336,7 @@ public class XJGasFireSystem extends AppCompatActivity implements View.OnClickLi
             itemObj.setProfession(itemObj.getProfession());
             itemObj.setCheckPerson(itemObj.getCheckPerson());
             itemObj.setCheckDate(itemObj.getCheckDate());
+            itemObj.setDescription(et_fire10.getText().toString());
             itemObj.setParam1(et_gas1.getText().toString());
             itemObj.setParam2(et_gas2.getText().toString());
             itemObj.setParam3(tv_gas3.getText().toString());

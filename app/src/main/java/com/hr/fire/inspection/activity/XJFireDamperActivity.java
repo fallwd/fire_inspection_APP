@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.XJFirstColumnApapter;
 import com.hr.fire.inspection.adapter.XJFireDamperContentApapter;
+import com.hr.fire.inspection.adapter.XJGasContentAdapter;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
 import com.hr.fire.inspection.utils.ToastUtil;
@@ -151,6 +152,13 @@ public class XJFireDamperActivity extends AppCompatActivity implements View.OnCl
                 }
             }
         });
+        //刷新序号列表
+        contentApapter.setDeleteRefresh(new XJFireDamperContentApapter.RemoveXH() {
+            @Override
+            public void deleteRefresh(int postion) {
+                firstColumnApapter.notifyDataSetChanged();
+            }
+        });
     }
 
     //设置同步滑动
@@ -208,6 +216,7 @@ public class XJFireDamperActivity extends AppCompatActivity implements View.OnCl
                 result.setProfession(item.getProfession());
                 result.setCheckPerson(item.getCheckPerson());
                 result.setCheckDate(item.getCheckDate());
+                result.setDescription(item.getDescription());
                 result.setDescription(item.getDescription());
                 result.setImgPath(item.getImgPath());
                 result.setParam2(item.getParam2());
@@ -280,7 +289,7 @@ public class XJFireDamperActivity extends AppCompatActivity implements View.OnCl
             itemObj.setProfession(itemObj.getProfession());
             itemObj.setCheckPerson(itemObj.getCheckPerson());
             itemObj.setCheckDate(itemObj.getCheckDate());
-            itemObj.setDescription(itemObj.getDescription());
+            itemObj.setDescription(et_fire10.getText().toString());
 //            itemObj.setParam1(tv_fire1.getText().toString());
             itemObj.setParam2(et_fire2.getText().toString());
             itemObj.setParam3(et_fire3.getText().toString());
@@ -290,7 +299,6 @@ public class XJFireDamperActivity extends AppCompatActivity implements View.OnCl
             itemObj.setParam7(tv_fire7.getText().toString());
             itemObj.setParam8(tv_fire8.getText().toString());
             itemObj.setParam9(tv_fire9.getText().toString());
-            itemObj.setParam10(et_fire10.getText().toString());
             itemObj.setParam11(tv_fire11.getText().toString());
 
 //            Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "

@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.adapter.XJFireEquipmentContentAdapter;
 import com.hr.fire.inspection.adapter.XJFirstColumnApapter;
 import com.hr.fire.inspection.adapter.XJFirstContentApapter;
 import com.hr.fire.inspection.adapter.xfspAdapter;
@@ -145,6 +146,16 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
                 e.printStackTrace();
             }
         });
+        //刷新序号列表
+        contentApapter.setDeleteRefresh(new xfspAdapter.RemoveXH() {
+            @Override
+            public void deleteRefresh(int postion) {
+                firstColumnApapter.notifyDataSetChanged();
+            }
+        });
+
+
+
     }
 
     //设置同步滑动
@@ -260,7 +271,7 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
             itemObj.setParam2(tv_fire2.getText().toString());
             itemObj.setParam3(tv_fire3.getText().toString());
             itemObj.setParam4(tv_fire4.getText().toString());
-            itemObj.setParam5(et_fire10.getText().toString());
+            itemObj.setDescription(et_fire10.getText().toString());
 
             Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
                     + tv_fire1.getText().toString() + "  " + tv_fire2.getText().toString() + " " + tv_fire2.getText().toString());
