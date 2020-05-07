@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.adapter.XJFAGMContentApapter;
 import com.hr.fire.inspection.adapter.XJKitchenWetPowderColumnAdapter;
 import com.hr.fire.inspection.adapter.XJKitchenWetPowderContentAdapter;
 import com.hr.fire.inspection.entity.InspectionResult;
@@ -148,7 +150,13 @@ public class XJKitchenWetPowder extends AppCompatActivity implements View.OnClic
                     e.printStackTrace();
                 }
             }
-
+        });
+        //刷新序号列表
+        contentApapter.setDeleteRefresh(new XJKitchenWetPowderContentAdapter.RemoveXH() {
+            @Override
+            public void deleteRefresh(int postion) {
+                firstColumnApapter.notifyDataSetChanged();
+            }
         });
     }
 
@@ -272,12 +280,14 @@ public class XJKitchenWetPowder extends AppCompatActivity implements View.OnClic
             TextView tv_gas8 = childAt.findViewById(R.id.tv_gas8);
             TextView tv_gas9 = childAt.findViewById(R.id.tv_gas9);
             TextView tv_gas10 = childAt.findViewById(R.id.tv_gas10);
+            EditText et_fire10 = childAt.findViewById(R.id.et_fire10);
 
 
             InspectionResult itemObj = inspectionResults.get(i);
             itemObj.setProfession(itemObj.getProfession());
             itemObj.setCheckPerson(itemObj.getCheckPerson());
             itemObj.setCheckDate(itemObj.getCheckDate());
+            itemObj.setDescription(et_fire10.getText().toString());
             itemObj.setParam1(tv_gas1.getText().toString());
             itemObj.setParam2(tv_gas2.getText().toString());
             itemObj.setParam3(tv_gas3.getText().toString());

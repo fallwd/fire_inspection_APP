@@ -27,6 +27,7 @@ package com.hr.fire.inspection.activity;
         import androidx.recyclerview.widget.RecyclerView;
 
         import com.hr.fire.inspection.R;
+        import com.hr.fire.inspection.adapter.XJFFESContentApapter;
         import com.hr.fire.inspection.adapter.XJFirstColumnApapter;
         import com.hr.fire.inspection.adapter.XJFirstContentApapter;
         import com.hr.fire.inspection.adapter.XJxfbAdapter;
@@ -153,6 +154,13 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
                 }
             }
         });
+        //刷新序号列表
+        contentApapter.setDeleteRefresh(new xfb_contentAdapter.RemoveXH() {
+            @Override
+            public void deleteRefresh(int postion) {
+                firstColumnApapter.notifyDataSetChanged();
+            }
+        });
     }
 
     //设置同步滑动
@@ -225,7 +233,7 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
                 result.setParam12(item.getParam12());
                 result.setParam13(item.getParam13());
                 result.setParam14(item.getParam14());
-                result.setParam15(item.getParam18());
+                result.setParam15(item.getParam15());
 
             } else {
                 //没有数据造一段默认数据
@@ -301,6 +309,7 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
             itemObj.setProfession(itemObj.getProfession());
             itemObj.setCheckPerson(itemObj.getCheckPerson());
             itemObj.setCheckDate(itemObj.getCheckDate());
+            itemObj.setDescription(et_fire10.getText().toString());
             itemObj.setParam1(tv_fire1.getText().toString());
             itemObj.setParam2(tv_fire2.getText().toString());
             itemObj.setParam3(tv_fire3.getText().toString());
@@ -317,7 +326,7 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
             itemObj.setParam13(tv_fire14.getText().toString());
             itemObj.setParam14(tv_fire15.getText().toString());
             itemObj.setParam15(tv_fire16.getText().toString());
-            itemObj.setParam16(et_fire10.getText().toString());
+//            itemObj.setParam16();
             Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
                     + tv_fire1.getText().toString() + "  " + tv_fire2.getText().toString() + " " + tv_fire3.getText().toString());
             service.update(itemObj);

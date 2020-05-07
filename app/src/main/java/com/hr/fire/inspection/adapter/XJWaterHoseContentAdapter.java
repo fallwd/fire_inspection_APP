@@ -36,7 +36,6 @@ public class XJWaterHoseContentAdapter extends RecyclerView.Adapter{
         View view = LayoutInflater.from(mContext).inflate(R.layout.xj_water_hose_content, parent, false);
         XJWaterHoseContentAdapter.MyViewHolder holder = new XJWaterHoseContentAdapter.MyViewHolder(view);
         return holder;
-
     }
 
     @Override
@@ -56,8 +55,8 @@ public class XJWaterHoseContentAdapter extends RecyclerView.Adapter{
 
 
 
-        if (result.getParam10() != null) {
-            myholder.et_fire10.setText(result.getParam10());
+        if (result.getDescription() != null) {
+            myholder.et_fire10.setText(result.getDescription());
         }
 
         myholder.gas1.setOnClickListener(new XJWaterHoseContentAdapter.MyOnClickListener(myholder, position));
@@ -171,6 +170,8 @@ public class XJWaterHoseContentAdapter extends RecyclerView.Adapter{
                     break;
                 case R.id.rl_fire12:
                     removeData(position);
+                    //通知序号列表刷新数据和高度
+                    mRemoveXH.deleteRefresh(position);
                     break;
             }
         }
@@ -256,13 +257,23 @@ public class XJWaterHoseContentAdapter extends RecyclerView.Adapter{
     }
 
     private XJWaterHoseContentAdapter.YCCamera mYCCamera;
-
+    private XJWaterHoseContentAdapter.RemoveXH mRemoveXH;
     //接口回调, 将点击事件传递到activity中,打开相机
     public void setmYCCamera(XJWaterHoseContentAdapter.YCCamera y) {
         this.mYCCamera = y;
     }
 
+    //接口回调, 将点击事件传递到activity中,刷新序号
+    public void setDeleteRefresh(XJWaterHoseContentAdapter.RemoveXH xh) {
+        this.mRemoveXH = xh;
+    }
+
+
     public interface YCCamera {
         void startCamera(int postion);
+    }
+
+    public interface RemoveXH {
+        void deleteRefresh(int postion);
     }
 }

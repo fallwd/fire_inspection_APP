@@ -58,8 +58,8 @@ public class XJKitchenWetPowderContentAdapter  extends RecyclerView.Adapter{
         myholder.tv_gas10.setText(result.getParam10());
 
 
-        if (result.getParam10() != null) {
-            myholder.et_fire10.setText(result.getParam10());
+        if (result.getDescription() != null) {
+            myholder.et_fire10.setText(result.getDescription());
         }
 
         myholder.gas1.setOnClickListener(new XJKitchenWetPowderContentAdapter.MyOnClickListener(myholder, position));
@@ -183,6 +183,8 @@ public class XJKitchenWetPowderContentAdapter  extends RecyclerView.Adapter{
                     break;
                 case R.id.rl_fire12:
                     removeData(position);
+                    //通知序号列表刷新数据和高度
+                    mRemoveXH.deleteRefresh(position);
                     break;
             }
         }
@@ -266,13 +268,24 @@ public class XJKitchenWetPowderContentAdapter  extends RecyclerView.Adapter{
     }
 
     private XJKitchenWetPowderContentAdapter.YCCamera mYCCamera;
-
+    private XJKitchenWetPowderContentAdapter.RemoveXH mRemoveXH;
     //接口回调, 将点击事件传递到activity中,打开相机
     public void setmYCCamera(XJKitchenWetPowderContentAdapter.YCCamera y) {
         this.mYCCamera = y;
     }
 
+    //接口回调, 将点击事件传递到activity中,刷新序号
+    public void setDeleteRefresh(XJKitchenWetPowderContentAdapter.RemoveXH xh) {
+        this.mRemoveXH = xh;
+    }
+
+
     public interface YCCamera {
         void startCamera(int postion);
     }
+
+    public interface RemoveXH {
+        void deleteRefresh(int postion);
+    }
+
 }

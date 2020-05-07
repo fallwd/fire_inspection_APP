@@ -67,8 +67,8 @@ public class XJFFESContentApapter extends RecyclerView.Adapter {
         myholder.tv_fire23.setText(result.getParam23());
         myholder.tv_fire24.setText(result.getParam24());
 
-        if (result.getParam25() != null) {
-            myholder.et_fire25.setText(result.getParam25());
+        if (result.getDescription() != null) {
+            myholder.et_fire25.setText(result.getDescription());
         }
 
         myholder.rl_fire4.setOnClickListener(new MyOnClickListener(myholder, position));
@@ -235,6 +235,8 @@ public class XJFFESContentApapter extends RecyclerView.Adapter {
                     break;
                 case R.id.rl_fire27:
                     removeData(position);
+                    //通知序号列表刷新数据和高度
+                    mRemoveXH.deleteRefresh(position);
                     break;
             }
         }
@@ -380,13 +382,23 @@ public class XJFFESContentApapter extends RecyclerView.Adapter {
     }
 
     private YCCamera mYCCamera;
-
+    private XJFFESContentApapter.RemoveXH mRemoveXH;
     //接口回调, 将点击事件传递到activity中,打开相机
-    public void setmYCCamera(YCCamera y) {
+    public void setmYCCamera(XJFFESContentApapter.YCCamera y) {
         this.mYCCamera = y;
     }
 
+    //接口回调, 将点击事件传递到activity中,刷新序号
+    public void setDeleteRefresh(XJFFESContentApapter.RemoveXH xh) {
+        this.mRemoveXH = xh;
+    }
+
+
     public interface YCCamera {
         void startCamera(int postion);
+    }
+
+    public interface RemoveXH {
+        void deleteRefresh(int postion);
     }
 }

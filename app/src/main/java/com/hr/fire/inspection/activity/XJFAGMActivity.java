@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.XJFAGMContentApapter;
+import com.hr.fire.inspection.adapter.XJFAGPContentApapter;
 import com.hr.fire.inspection.adapter.XJFirstColumnApapter;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
@@ -149,6 +150,13 @@ public class XJFAGMActivity extends AppCompatActivity implements View.OnClickLis
                 }
             }
         });
+        //刷新序号列表
+        contentApapter.setDeleteRefresh(new XJFAGMContentApapter.RemoveXH() {
+            @Override
+            public void deleteRefresh(int postion) {
+                firstColumnApapter.notifyDataSetChanged();
+            }
+        });
     }
 
     //设置同步滑动
@@ -262,12 +270,14 @@ public class XJFAGMActivity extends AppCompatActivity implements View.OnClickLis
             TextView tv_fire4 = childAt.findViewById(R.id.tv_fire4);
             TextView tv_fire5 = childAt.findViewById(R.id.tv_fire5);
             TextView tv_fire6 = childAt.findViewById(R.id.tv_fire6);
+            EditText et_fire7 = childAt.findViewById(R.id.et_fire7);
 
 
             InspectionResult itemObj = inspectionResults.get(i);
             itemObj.setProfession(itemObj.getProfession());
             itemObj.setCheckPerson(itemObj.getCheckPerson());
             itemObj.setCheckDate(itemObj.getCheckDate());
+            itemObj.setDescription(et_fire7.getText().toString());
             itemObj.setParam1(tv_fire1.getText().toString());
             itemObj.setParam2(tv_fire2.getText().toString());
             itemObj.setParam3(tv_fire3.getText().toString());

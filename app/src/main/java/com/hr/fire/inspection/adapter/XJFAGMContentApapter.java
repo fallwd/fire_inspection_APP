@@ -48,8 +48,8 @@ public class XJFAGMContentApapter extends RecyclerView.Adapter {
         myholder.tv_fire4.setText(result.getParam4());
         myholder.tv_fire5.setText(result.getParam5());
         myholder.tv_fire6.setText(result.getParam6());
-        if (result.getParam7() != null) {
-            myholder.et_fire7.setText(result.getParam7());
+        if (result.getDescription() != null) {
+            myholder.et_fire7.setText(result.getDescription());
         }
         myholder.rl_fire1.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire2.setOnClickListener(new MyOnClickListener(myholder, position));
@@ -58,6 +58,7 @@ public class XJFAGMContentApapter extends RecyclerView.Adapter {
         myholder.rl_fire5.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire6.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire8.setOnClickListener(new MyOnClickListener(myholder, position));
+        myholder.rl_fire9.setOnClickListener(new MyOnClickListener(myholder, position));
     }
 
     @Override
@@ -154,6 +155,8 @@ public class XJFAGMContentApapter extends RecyclerView.Adapter {
                     break;
                 case R.id.rl_fire9:
                     removeData(position);
+                    //通知序号列表刷新数据和高度
+                    mRemoveXH.deleteRefresh(position);
                     break;
             }
         }
@@ -184,9 +187,9 @@ public class XJFAGMContentApapter extends RecyclerView.Adapter {
         private RelativeLayout rl_fire4;
         private RelativeLayout rl_fire5;
         private RelativeLayout rl_fire6;
-        private EditText et_fire7;
         private RelativeLayout rl_fire8;
         private RelativeLayout rl_fire9;
+        private EditText et_fire7;
 
 
         private TextView tv_fire1;
@@ -206,10 +209,9 @@ public class XJFAGMContentApapter extends RecyclerView.Adapter {
             rl_fire4 = (RelativeLayout) view.findViewById(R.id.rl_fire4);
             rl_fire5 = (RelativeLayout) view.findViewById(R.id.rl_fire5);
             rl_fire6 = (RelativeLayout) view.findViewById(R.id.rl_fire6);
-            et_fire7 = (EditText) view.findViewById(R.id.et_fire7);
             rl_fire8 = (RelativeLayout) view.findViewById(R.id.rl_fire8);
             rl_fire9 = (RelativeLayout) view.findViewById(R.id.rl_fire9);
-
+            et_fire7 = (EditText) view.findViewById(R.id.et_fire7);
 
             tv_fire1 = (TextView) view.findViewById(R.id.tv_fire1);
             tv_fire2 = (TextView) view.findViewById(R.id.tv_fire2);
@@ -222,14 +224,24 @@ public class XJFAGMContentApapter extends RecyclerView.Adapter {
         }
     }
 
-    private YCCamera mYCCamera;
-
+    private XJFAGMContentApapter.YCCamera mYCCamera;
+    private XJFAGMContentApapter.RemoveXH mRemoveXH;
     //接口回调, 将点击事件传递到activity中,打开相机
-    public void setmYCCamera(YCCamera y) {
+    public void setmYCCamera(XJFAGMContentApapter.YCCamera y) {
         this.mYCCamera = y;
     }
 
+    //接口回调, 将点击事件传递到activity中,刷新序号
+    public void setDeleteRefresh(XJFAGMContentApapter.RemoveXH xh) {
+        this.mRemoveXH = xh;
+    }
+
+
     public interface YCCamera {
         void startCamera(int postion);
+    }
+
+    public interface RemoveXH {
+        void deleteRefresh(int postion);
     }
 }

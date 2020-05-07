@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.adapter.XJFireDamperContentApapter;
 import com.hr.fire.inspection.adapter.XJFireHoseStationContentApapter;
 import com.hr.fire.inspection.adapter.XJFirstColumnApapter;
 import com.hr.fire.inspection.entity.InspectionResult;
@@ -149,6 +150,14 @@ public class XJFireHoseStationActivity extends AppCompatActivity implements View
                 }
             }
         });
+        //刷新序号列表
+        contentApapter.setDeleteRefresh(new XJFireHoseStationContentApapter.RemoveXH() {
+            @Override
+            public void deleteRefresh(int postion) {
+                firstColumnApapter.notifyDataSetChanged();
+            }
+        });
+
     }
 
     //设置同步滑动
@@ -294,7 +303,7 @@ public class XJFireHoseStationActivity extends AppCompatActivity implements View
             itemObj.setProfession(itemObj.getProfession());
             itemObj.setCheckPerson(itemObj.getCheckPerson());
             itemObj.setCheckDate(itemObj.getCheckDate());
-            itemObj.setDescription(itemObj.getDescription());
+            itemObj.setDescription(et_fire16.getText().toString());
 //            itemObj.setParam1(tv_fire1.getText().toString());
             itemObj.setParam2(et_fire2.getText().toString());
             itemObj.setParam3(et_fire3.getText().toString());
