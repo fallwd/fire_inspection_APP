@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
+import com.hr.fire.inspection.activity.QRCodeExistenceAcitivty;
+import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
@@ -139,7 +141,7 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
             vh.et_12.setBackground(drawable1);
 
 
- //         照相机的图片  需要把对应的xml转换为textview
+            //         照相机的图片  需要把对应的xml转换为textview
             vh.et_13.setVisibility(View.GONE);
             vh.et_13.setVisibility(View.VISIBLE);
             vh.et_13.setOnClickListener(new View.OnClickListener() {
@@ -148,7 +150,6 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
                     mContext.startActivity(new Intent(mContext, PhotoUploadActivity.class));
                 }
             });
-//            vh.et_14.setImageAlpha(new StringBuffer().append(info.getCodePath()).append(""));      // 二维码导入
             vh.et_15.setText(new StringBuffer().append(info.getDescription()).append(""));
         }
 
@@ -156,6 +157,15 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
             @Override
             public void onClick(View v) {
                 removeData(position);
+            }
+        });
+        vh.et_14.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra(ConstantInspection.CHECK_DIVICE, "火灾报警系统控制器");
+                intent.setClass(mContext, QRCodeExistenceAcitivty.class);
+                mContext.startActivity(intent);
             }
         });
     }
@@ -490,6 +500,7 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
         this.mData = itemDataList;
         notifyDataSetChanged();
     }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_1;
         EditText et_2;

@@ -9,8 +9,6 @@
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_marginLeft="11dp"
-        android:layout_marginRight="11dp"
         android:gravity="center_vertical">
 
         <RelativeLayout
@@ -27,6 +25,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="25dp"
             android:layout_height="wrap_content">
@@ -77,6 +76,7 @@
             android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,10 +87,12 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -116,6 +118,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="25dp"
             android:layout_height="wrap_content"
@@ -130,6 +133,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="25dp"
             android:layout_height="wrap_content"
@@ -144,6 +148,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="25dp"
             android:layout_height="wrap_content"
@@ -173,6 +178,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="25dp"
             android:layout_height="wrap_content"
@@ -202,6 +208,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="25dp"
             android:layout_height="wrap_content"
@@ -216,6 +223,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="35dp"
             android:layout_height="wrap_content"
@@ -235,6 +243,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

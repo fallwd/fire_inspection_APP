@@ -68,7 +68,6 @@ public class AutomaticFireAlarm8 extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             it = (IntentTransmit) getArguments().getSerializable(mKey);
-            Log.e("dong", "f1传参5555====" + it.toString());
         }
 
     }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.NjKitchenChecklistAcitivty;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
+import com.hr.fire.inspection.activity.QRCodeExistenceAcitivty;
+import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
@@ -52,6 +56,7 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
         return holder;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         NjKitchenAdapter1.ViewHolder vh = (NjKitchenAdapter1.ViewHolder) holder;
@@ -113,7 +118,15 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.et_12.setBackground(drawable1);
 
             vh.et_13.setText(new StringBuffer().append(info.getLabelNo()).append(""));
-//            vh.et_14.setText(new StringBuffer().append(info.getCodePath()).append(""));  // 二维码怎么添加
+            vh.et_14.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.putExtra(ConstantInspection.CHECK_DIVICE, "驱动瓶信息");
+                    intent.setClass(mContext, QRCodeExistenceAcitivty.class);
+                    mContext.startActivity(intent);
+                }
+            });
 
         }
 
@@ -239,6 +252,7 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.mData = itemDataList;
         notifyDataSetChanged();
     }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView et_1;
         EditText et_2;
@@ -250,7 +264,7 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
         EditText et_7;
         EditText et_8;
         EditText et_9;
-        EditText et_10;
+        TextView et_10;
 
         TextView et_11;
         TextView et_12;
@@ -271,7 +285,7 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
             et_7 = (EditText) view.findViewById(R.id.et_7);
             et_8 = (EditText) view.findViewById(R.id.et_8);
             et_9 = (EditText) view.findViewById(R.id.et_9);
-            et_10 = (EditText) view.findViewById(R.id.et_10);
+            et_10 = (TextView) view.findViewById(R.id.et_10);
 
             et_11 = (TextView) view.findViewById(R.id.et_11);
             et_12 = (TextView) view.findViewById(R.id.et_12);
