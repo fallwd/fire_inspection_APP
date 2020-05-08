@@ -270,7 +270,7 @@ public class CheckReporItemAdapter extends BaseAdapter {
 
     //消防员装备箱
     private void getXFZZXData(HSSFSheet sheet, List<InspectionResult> excelList, HSSFCellStyle cellStyle) {
-        for(int i=2, j= 0;j<excelList.size();i++,j++){
+        for(int i=3, j= 0;j<excelList.size();i++,j++){
             //创建新的下一行  i为行数
             HSSFRow nextRow = sheet.createRow(i);
             InspectionResult inspectionResult = excelList.get(j);
@@ -349,7 +349,7 @@ public class CheckReporItemAdapter extends BaseAdapter {
 
     // 消防泵
     private void getXFBData(HSSFSheet sheet, List<InspectionResult> excelList, HSSFCellStyle cellStyle) {
-        for(int i=2, j= 0;j<excelList.size();i++,j++){
+        for(int i=3, j= 0;j<excelList.size();i++,j++){
             //创建新的下一行  i为行数
             HSSFRow nextRow = sheet.createRow(i);
             InspectionResult inspectionResult = excelList.get(j);
@@ -396,7 +396,7 @@ public class CheckReporItemAdapter extends BaseAdapter {
 
     //泡沫灭火系统
     private void getPMMHData(HSSFSheet sheet, List<InspectionResult> excelList, HSSFCellStyle cellStyle) {
-        for(int i=2, j= 0;j<excelList.size();i++,j++){
+        for(int i=3, j= 0;j<excelList.size();i++,j++){
             //创建新的下一行  i为行数
             HSSFRow nextRow = sheet.createRow(i);
             InspectionResult inspectionResult = excelList.get(j);
@@ -704,7 +704,7 @@ public class CheckReporItemAdapter extends BaseAdapter {
 
     // 气体灭火器系统
     private void getMHSystem(HSSFSheet sheet, List<InspectionResult> excelList, HSSFCellStyle cellStyle) {
-        for(int i=2, j= 0;j<excelList.size();i++,j++){
+        for(int i=3, j= 0;j<excelList.size();i++,j++){
             //创建新的下一行  i为行数
             HSSFRow nextRow = sheet.createRow(i);
             InspectionResult inspectionResult = excelList.get(j);
