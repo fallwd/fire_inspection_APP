@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="45dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="型号"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:ignore="RtlCompat" />
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="灭火剂类型"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:ignore="RtlCompat" />
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="灭火级别"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:ignore="RtlCompat" />
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="工作代号"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:ignore="RtlCompat" />
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="生产厂家"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:ignore="RtlCompat" />
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="生产日期"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:ignore="RtlCompat" />
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="型号符合性"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:ignore="RtlCompat" />
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="位置符合性"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:ignore="RtlCompat" />
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="外观是否良好"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:ignore="RtlCompat" />
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="压力/重量是否合格"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:ignore="RtlCompat" />
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="药剂有效性"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:ignore="RtlCompat" />
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="维修日期"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:ignore="RtlCompat" />
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="检测结果"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:ignore="RtlCompat" />
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="检验标签"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:ignore="RtlCompat" />
+
+    <RelativeLayout
+        android:layout_width="80dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:paddingLeft="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="8dp"
+            android:text="照片"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:paddingLeft="35dp"
+        android:gravity="center_vertical"
+        android:text="隐患描述"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="二维码"
+        android:textColor="@color/title_black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:ignore="RtlCompat" />
+
+
+    <RelativeLayout
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="8dp"
+            android:text="删除"
+            android:textColor="@color/title_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+</LinearLayout>

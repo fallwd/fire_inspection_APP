@@ -16,6 +16,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -25,12 +26,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.adapter.XJFireEquipmentContentAdapter;
 import com.hr.fire.inspection.adapter.XJFirstColumnApapter;
 import com.hr.fire.inspection.adapter.XJFirstContentApapter;
 import com.hr.fire.inspection.adapter.xfspAdapter;
 import com.hr.fire.inspection.adapter.xfspFistcolumn;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
+import com.hr.fire.inspection.utils.TextSpannableUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 import com.hr.fire.inspection.view.tableview.HListViewScrollView;
 
@@ -63,6 +66,7 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
     private InspectionServiceImpl service;
     private xfspFistcolumn firstColumnApapter;
     private xfspAdapter contentApapter;
+    private TextView tvInspectionPro;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final int TAKE_PHOTO = 1;//拍照
@@ -87,8 +91,6 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
         duty = intent.getStringExtra("duty");  // 专业
         check_name = intent.getStringExtra("check_name"); // 检查人
         check_date = intent.getStringExtra("check_date"); //用户选择的时间
-        //测试用, 因为前面传过来的时间格式有问题
-        check_date = "2020-04-23 18:21";
         try {
             //这个解析方式是没有问题的 ,需要保证前面传入的数据是 2020-04-23 18:21 格式
             parse_check_date = sdf.parse(check_date);
@@ -120,6 +122,10 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
         iv_finish.setOnClickListener(this);
         iv_add_table.setOnClickListener(this);
         iv_save.setOnClickListener(this);
+        tvInspectionPro = findViewById(R.id.tv_inspection_pro);
+        String text = new StringBuilder().append("消防巡检>消防水炮").toString();
+        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#00A779", 0, text.length());
+        tvInspectionPro.setText(showTextColor);
     }
 
     @SuppressLint("WrongConstant")
@@ -147,6 +153,16 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
                 e.printStackTrace();
             }
         });
+        //刷新序号列表
+        contentApapter.setDeleteRefresh(new xfspAdapter.RemoveXH() {
+            @Override
+            public void deleteRefresh(int postion) {
+                firstColumnApapter.notifyDataSetChanged();
+            }
+        });
+
+
+
     }
 
     //设置同步滑动
@@ -217,8 +233,9 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
                 result.setParam2("是");
                 result.setParam3("是");
                 result.setParam4("是");
+                result.setParam5("请输入");
                 result.setDescription("暂无");
-                result.setImgPath("暂无图片222");
+                result.setImgPath("暂无图片");
             }
             long l = service.insertInspectionData(result, companyInfoId, systemId, parse_check_date);
             //表示数据插入成功,再次查询,拿到最新的数据
@@ -250,8 +267,7 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
             TextView tv_fire2 = childAt.findViewById(R.id.tv_fire2);
             TextView tv_fire3 = childAt.findViewById(R.id.tv_fire3);
             TextView tv_fire4 = childAt.findViewById(R.id.tv_fire4);
-            TextView tv_fire5 = childAt.findViewById(R.id.tv_fire5);
-            TextView tv_fire6 = childAt.findViewById(R.id.tv_fire6);
+            EditText et_fire10 = childAt.findViewById(R.id.et_fire10);
 
 
             InspectionResult itemObj = inspectionResults.get(i);
@@ -262,8 +278,8 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
             itemObj.setParam2(tv_fire2.getText().toString());
             itemObj.setParam3(tv_fire3.getText().toString());
             itemObj.setParam4(tv_fire4.getText().toString());
-            itemObj.setDescription(tv_fire5.getText().toString());
-            itemObj.setImgPath(tv_fire6.getText().toString());
+            itemObj.setDescription(et_fire10.getText().toString());
+
             Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
                     + tv_fire1.getText().toString() + "  " + tv_fire2.getText().toString() + " " + tv_fire2.getText().toString());
             service.update(itemObj);

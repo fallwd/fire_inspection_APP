@@ -1,54 +1,47 @@
 package com.hr.fire.inspection.activity;
 
-        import android.annotation.SuppressLint;
-        import android.content.Intent;
-        import android.content.pm.PackageManager;
-        import android.graphics.Bitmap;
-        import android.graphics.BitmapFactory;
-        import android.net.Uri;
-        import android.os.Build;
-        import android.os.Bundle;
-        import android.provider.MediaStore;
-        import android.text.SpannableString;
-        import android.util.Log;
-        import android.view.View;
-        import android.widget.EditText;
-        import android.widget.ImageView;
-        import android.widget.LinearLayout;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
-        import androidx.annotation.NonNull;
-        import androidx.annotation.Nullable;
-        import androidx.appcompat.app.AppCompatActivity;
-        import androidx.core.content.ContextCompat;
-        import androidx.core.content.FileProvider;
-        import androidx.recyclerview.widget.LinearLayoutManager;
-        import androidx.recyclerview.widget.OrientationHelper;
-        import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.OrientationHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
-        import com.hr.fire.inspection.R;
-        import com.hr.fire.inspection.adapter.XJFFESContentApapter;
-        import com.hr.fire.inspection.adapter.XJFirstColumnApapter;
-        import com.hr.fire.inspection.adapter.XJFirstContentApapter;
-        import com.hr.fire.inspection.adapter.XJxfbAdapter;
-        import com.hr.fire.inspection.adapter.xfb_contentAdapter;
-        import com.hr.fire.inspection.entity.InspectionResult;
-        import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
-        import com.hr.fire.inspection.utils.TextSpannableUtil;
-        import com.hr.fire.inspection.utils.ToastUtil;
-        import com.hr.fire.inspection.view.tableview.HListViewScrollView;
+import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.adapter.NJMhqContentApapter;
+import com.hr.fire.inspection.adapter.XJFirstColumnApapter;
+import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
+import com.hr.fire.inspection.utils.ToastUtil;
+import com.hr.fire.inspection.view.tableview.HListViewScrollView;
 
-        import java.io.File;
-        import java.io.FileNotFoundException;
-        import java.io.IOException;
-        import java.text.ParseException;
-        import java.text.SimpleDateFormat;
-        import java.util.Date;
-        import java.util.List;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 //巡检: 灭火器页面
-public class xj_xfbActivity extends AppCompatActivity implements View.OnClickListener {
+public class NJFireExtinguisherActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView iv_finish;
     private TextView tv_inspection_pro;
     private TextView iv_save;
@@ -67,9 +60,8 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
     private String srt_date;
     private List<InspectionResult> inspectionResults;
     private InspectionServiceImpl service;
-    private XJxfbAdapter firstColumnApapter;
-    private xfb_contentAdapter contentApapter;
-    private TextView  tvInspectionPro;
+    private XJFirstColumnApapter firstColumnApapter;
+    private NJMhqContentApapter contentApapter;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final int TAKE_PHOTO = 1;//拍照
@@ -78,7 +70,7 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_xj_xfb);
+        setContentView(R.layout.nj_mhq_activity);
         getIntentData();
         initData();
         initView();
@@ -127,10 +119,6 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
         iv_finish.setOnClickListener(this);
         iv_add_table.setOnClickListener(this);
         iv_save.setOnClickListener(this);
-        tvInspectionPro = findViewById(R.id.tv_inspection_pro);
-        String text = new StringBuilder().append("消防巡检>消防泵").toString();
-        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#00A779", 0, text.length());
-        tvInspectionPro.setText(showTextColor);
     }
 
     @SuppressLint("WrongConstant")
@@ -140,7 +128,7 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
         mLayoutManager.setOrientation(OrientationHelper.VERTICAL);
         //给RecyclerView设置布局管理器
         rl_firstColumn.setLayoutManager(mLayoutManager);
-        firstColumnApapter = new XJxfbAdapter(this, inspectionResults);
+        firstColumnApapter = new XJFirstColumnApapter(this, inspectionResults);
         rl_firstColumn.setAdapter(firstColumnApapter);
 
 
@@ -148,9 +136,9 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
         mLayoutManager2.setOrientation(OrientationHelper.VERTICAL);
         //给RecyclerView设置布局管理器
         rl_content.setLayoutManager(mLayoutManager2);
-        contentApapter = new xfb_contentAdapter(this, inspectionResults);
+        contentApapter = new NJMhqContentApapter(this, inspectionResults);
         rl_content.setAdapter(contentApapter);
-        contentApapter.setmYCCamera(new xfb_contentAdapter.YCCamera() {
+        contentApapter.setmYCCamera(new NJMhqContentApapter.YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;
@@ -162,7 +150,7 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
         //刷新序号列表
-        contentApapter.setDeleteRefresh(new xfb_contentAdapter.RemoveXH() {
+        contentApapter.setDeleteRefresh(new NJMhqContentApapter.RemoveXH() {
             @Override
             public void deleteRefresh(int postion) {
                 firstColumnApapter.notifyDataSetChanged();
@@ -232,16 +220,6 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
                 result.setParam4(item.getParam4());
                 result.setParam5(item.getParam5());
                 result.setParam6(item.getParam6());
-                result.setParam7(item.getParam7());
-                result.setParam8(item.getParam8());
-                result.setParam9(item.getParam9());
-                result.setParam10(item.getParam10());
-                result.setParam11(item.getParam11());
-                result.setParam12(item.getParam12());
-                result.setParam13(item.getParam13());
-                result.setParam14(item.getParam14());
-                result.setParam15(item.getParam15());
-
             } else {
                 //没有数据造一段默认数据
                 Log.d("dong", "默认没有数据吧==");
@@ -252,20 +230,11 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
                 result.setImgPath("暂无图片");
                 result.setParam1("是");
                 result.setParam2("是");
-                result.setParam3("否");
+                result.setParam3("是");
                 result.setParam4("是");
                 result.setParam5("是");
                 result.setParam6("是");
-                result.setParam7("是");
-                result.setParam8("否");
-                result.setParam9("否");
-                result.setParam10("是");
-                result.setParam11("是");
-                result.setParam12("是");
-                result.setParam13("否");
-                result.setParam14("是");
-                result.setParam15("是");
-                result.setParam16("请输入");
+                result.setParam7("请输入");
             }
             long l = service.insertInspectionData(result, companyInfoId, systemId, parse_check_date);
             //表示数据插入成功,再次查询,拿到最新的数据
@@ -293,49 +262,28 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
         int itemCount = rl_content.getChildCount();
         for (int i = 0; i < itemCount; i++) {
             LinearLayout childAt = (LinearLayout) rl_content.getChildAt(i);
+
             TextView tv_fire1 = childAt.findViewById(R.id.tv_fire1);
             TextView tv_fire2 = childAt.findViewById(R.id.tv_fire2);
             TextView tv_fire3 = childAt.findViewById(R.id.tv_fire3);
             TextView tv_fire4 = childAt.findViewById(R.id.tv_fire4);
             TextView tv_fire5 = childAt.findViewById(R.id.tv_fire5);
             TextView tv_fire6 = childAt.findViewById(R.id.tv_fire6);
-            TextView tv_fire7 = childAt.findViewById(R.id.tv_fire7);
-            TextView tv_fire8 = childAt.findViewById(R.id.tv_fire8);
-            TextView tv_fire9 = childAt.findViewById(R.id.tv_fire9);
-            EditText et_fire10 = childAt.findViewById(R.id.et_fire10);
-            TextView tv_fire10 = childAt.findViewById(R.id.tv_fire10);
-            TextView tv_fire11 = childAt.findViewById(R.id.tv_fire11);
-            TextView tv_fire12 = childAt.findViewById(R.id.tv_fire12);
-            TextView tv_fire13 = childAt.findViewById(R.id.tv_fire13);
-            TextView tv_fire14 = childAt.findViewById(R.id.tv_fire14);
-            TextView tv_fire15 = childAt.findViewById(R.id.tv_fire15);
-            TextView tv_fire16 = childAt.findViewById(R.id.tv_fire16);
+            EditText et_fire7 = childAt.findViewById(R.id.et_fire7);
 
 
             InspectionResult itemObj = inspectionResults.get(i);
             itemObj.setProfession(itemObj.getProfession());
             itemObj.setCheckPerson(itemObj.getCheckPerson());
             itemObj.setCheckDate(itemObj.getCheckDate());
-            itemObj.setDescription(et_fire10.getText().toString());
+            itemObj.setDescription(et_fire7.getText().toString());
             itemObj.setParam1(tv_fire1.getText().toString());
             itemObj.setParam2(tv_fire2.getText().toString());
             itemObj.setParam3(tv_fire3.getText().toString());
             itemObj.setParam4(tv_fire4.getText().toString());
             itemObj.setParam5(tv_fire5.getText().toString());
             itemObj.setParam6(tv_fire6.getText().toString());
-            itemObj.setParam7(tv_fire7.getText().toString());
-            itemObj.setParam8(tv_fire8.getText().toString());
-            itemObj.setParam9(tv_fire9.getText().toString());
-            itemObj.setParam10(tv_fire10.getText().toString());
-            itemObj.setParam11(tv_fire11.getText().toString());
-            itemObj.setParam10(tv_fire12.getText().toString());
-            itemObj.setParam12(tv_fire13.getText().toString());
-            itemObj.setParam13(tv_fire14.getText().toString());
-            itemObj.setParam14(tv_fire15.getText().toString());
-            itemObj.setParam15(tv_fire16.getText().toString());
-//            itemObj.setParam16();
-            Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
-                    + tv_fire1.getText().toString() + "  " + tv_fire2.getText().toString() + " " + tv_fire3.getText().toString());
+
             service.update(itemObj);
         }
         Toast.makeText(this, "数据保存成功", Toast.LENGTH_SHORT).show();

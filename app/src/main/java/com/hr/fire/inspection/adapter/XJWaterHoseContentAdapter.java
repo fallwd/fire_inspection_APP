@@ -36,7 +36,6 @@ public class XJWaterHoseContentAdapter extends RecyclerView.Adapter{
         View view = LayoutInflater.from(mContext).inflate(R.layout.xj_water_hose_content, parent, false);
         XJWaterHoseContentAdapter.MyViewHolder holder = new XJWaterHoseContentAdapter.MyViewHolder(view);
         return holder;
-
     }
 
     @Override
@@ -56,8 +55,8 @@ public class XJWaterHoseContentAdapter extends RecyclerView.Adapter{
 
 
 
-        if (result.getParam10() != null) {
-            myholder.et_fire10.setText(result.getParam10());
+        if (result.getDescription() != null) {
+            myholder.et_fire10.setText(result.getDescription());
         }
 
         myholder.gas1.setOnClickListener(new XJWaterHoseContentAdapter.MyOnClickListener(myholder, position));
@@ -144,34 +143,42 @@ public class XJWaterHoseContentAdapter extends RecyclerView.Adapter{
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.gas3:
-                    showPopWind(myholder.tv_gas3);
-                    break;
-                case R.id.gas4:
-                    showPopWind(myholder.tv_gas4);
-                    break;
-                case R.id.gas5:
-                    showPopWind(myholder.tv_gas5);
-                    break;
-                case R.id.gas6:
-                    showPopWind(myholder.tv_gas6);
-                    break;
-                case R.id.gas7:
-                    showPopWind(myholder.tv_gas7);
-                    break;
-                case R.id.gas8:
-                    showPopWind(myholder.tv_gas8);
-                    break;
-                case R.id.gas9:
-                    showPopWind(myholder.tv_gas9);
-                    break;
-                case R.id.rl_fire11:
-                    mYCCamera.startCamera(position);
-                    break;
-                case R.id.rl_fire12:
-                    removeData(position);
-                    break;
+            String param26 = null;
+            for (int i = 0; i<mData.size(); i++) {
+                param26 = mData.get(i).getParam26();
+            }
+            if (param26 != "隐患库") {
+                switch (v.getId()) {
+                    case R.id.gas3:
+                        showPopWind(myholder.tv_gas3);
+                        break;
+                    case R.id.gas4:
+                        showPopWind(myholder.tv_gas4);
+                        break;
+                    case R.id.gas5:
+                        showPopWind(myholder.tv_gas5);
+                        break;
+                    case R.id.gas6:
+                        showPopWind(myholder.tv_gas6);
+                        break;
+                    case R.id.gas7:
+                        showPopWind(myholder.tv_gas7);
+                        break;
+                    case R.id.gas8:
+                        showPopWind(myholder.tv_gas8);
+                        break;
+                    case R.id.gas9:
+                        showPopWind(myholder.tv_gas9);
+                        break;
+                    case R.id.rl_fire11:
+                        mYCCamera.startCamera(position);
+                        break;
+                    case R.id.rl_fire12:
+                        removeData(position);
+                        //通知序号列表刷新数据和高度
+                        mRemoveXH.deleteRefresh(position);
+                        break;
+                }
             }
         }
     }
@@ -256,13 +263,23 @@ public class XJWaterHoseContentAdapter extends RecyclerView.Adapter{
     }
 
     private XJWaterHoseContentAdapter.YCCamera mYCCamera;
-
+    private XJWaterHoseContentAdapter.RemoveXH mRemoveXH;
     //接口回调, 将点击事件传递到activity中,打开相机
     public void setmYCCamera(XJWaterHoseContentAdapter.YCCamera y) {
         this.mYCCamera = y;
     }
 
+    //接口回调, 将点击事件传递到activity中,刷新序号
+    public void setDeleteRefresh(XJWaterHoseContentAdapter.RemoveXH xh) {
+        this.mRemoveXH = xh;
+    }
+
+
     public interface YCCamera {
         void startCamera(int postion);
+    }
+
+    public interface RemoveXH {
+        void deleteRefresh(int postion);
     }
 }

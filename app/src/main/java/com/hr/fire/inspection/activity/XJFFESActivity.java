@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -27,8 +28,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.XJFFESContentApapter;
 import com.hr.fire.inspection.adapter.XJFFESColumnApapter;
+import com.hr.fire.inspection.adapter.XJKitchenWetPowderContentAdapter;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
+import com.hr.fire.inspection.utils.TextSpannableUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 import com.hr.fire.inspection.view.tableview.HListViewScrollView;
 
@@ -66,6 +69,7 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final int TAKE_PHOTO = 1;//拍照
     private int imgPostion = -1;
+    private TextView tvInspectionPro;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,8 +92,6 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
         check_name = intent.getStringExtra("check_name"); // 检查人
         check_date = intent.getStringExtra("check_date"); //用户选择的时间
         Log.i("aaaa","传参获取的数据"+systemId+"--------"+ companyInfoId+"--------" + str_title);
-        //测试用, 因为前面传过来的时间格式有问题
-        check_date = "2020-04-23 18:21";
         try {
             //这个解析方式是没有问题的 ,需要保证前面传入的数据是 2020-04-23 18:21 格式
             parse_check_date = sdf.parse(check_date);
@@ -121,6 +123,10 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
         iv_finish.setOnClickListener(this);
         iv_add_table.setOnClickListener(this);
         iv_save.setOnClickListener(this);
+        tvInspectionPro = findViewById(R.id.tv_inspection_pro);
+        String text = new StringBuilder().append("消防巡检>泡沫灭火系统").toString();
+        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#00A779", 0, text.length());
+        tvInspectionPro.setText(showTextColor);
     }
 
     @SuppressLint("WrongConstant")
@@ -149,6 +155,13 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        });
+        //刷新序号列表
+        contentApapter.setDeleteRefresh(new XJFFESContentApapter.RemoveXH() {
+            @Override
+            public void deleteRefresh(int postion) {
+                firstColumnApapter.notifyDataSetChanged();
             }
         });
     }
@@ -187,7 +200,6 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.iv_save:
                 saveToUpdara();
                 break;
-
         }
     }
 
@@ -210,6 +222,7 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
                 result.setCheckDate(item.getCheckDate());
                 result.setDescription(item.getDescription());
                 result.setImgPath(item.getImgPath());
+                result.setParam1(item.getParam1());
                 result.setParam2(item.getParam2());
                 result.setParam3(item.getParam3());
                 result.setParam4(item.getParam4());
@@ -233,8 +246,6 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
                 result.setParam22(item.getParam22());
                 result.setParam23(item.getParam23());
                 result.setParam24(item.getParam24());
-
-
 
             } else {
                 //没有数据造一段默认数据
@@ -324,7 +335,6 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
             TextView tv_fire26 = childAt.findViewById(R.id.tv_fire26);
 
 
-
             InspectionResult itemObj = inspectionResults.get(i);
             Log.i("aaa", "传的对象111"+inspectionResults.get(i));
             itemObj.setProfession(itemObj.getProfession());
@@ -355,7 +365,8 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
             itemObj.setParam22(tv_fire22.getText().toString());
             itemObj.setParam23(tv_fire23.getText().toString());
             itemObj.setParam24(tv_fire24.getText().toString());
-            itemObj.setParam25(et_fire25.getText().toString());
+//            itemObj.setParam25();
+            itemObj.setDescription(et_fire25.getText().toString());
 
 //            Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
 //                     + et_fire2.getText().toString() + " " + et_fire2.getText().toString());

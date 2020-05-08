@@ -58,8 +58,8 @@ public class XJKitchenWetPowderContentAdapter  extends RecyclerView.Adapter{
         myholder.tv_gas10.setText(result.getParam10());
 
 
-        if (result.getParam10() != null) {
-            myholder.et_fire10.setText(result.getParam10());
+        if (result.getDescription() != null) {
+            myholder.et_fire10.setText(result.getDescription());
         }
 
         myholder.gas1.setOnClickListener(new XJKitchenWetPowderContentAdapter.MyOnClickListener(myholder, position));
@@ -147,43 +147,51 @@ public class XJKitchenWetPowderContentAdapter  extends RecyclerView.Adapter{
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.gas1:
-                    showPopWind(myholder.tv_gas1);
-                    break;
-                case R.id.gas2:
-                    showPopWind(myholder.tv_gas2);
-                    break;
-                case R.id.gas3:
-                    showPopWind(myholder.tv_gas3);
-                    break;
-                case R.id.gas4:
-                    showPopWind(myholder.tv_gas4);
-                    break;
-                case R.id.gas5:
-                    showPopWind(myholder.tv_gas5);
-                    break;
-                case R.id.gas6:
-                    showPopWind(myholder.tv_gas6);
-                    break;
-                case R.id.gas7:
-                    showPopWind(myholder.tv_gas7);
-                    break;
-                case R.id.gas8:
-                    showPopWind(myholder.tv_gas8);
-                    break;
-                case R.id.gas9:
-                    showPopWind(myholder.tv_gas9);
-                    break;
-                case R.id.gas10:
-                    showPopWind(myholder.tv_gas10);
-                    break;
-                case R.id.rl_fire11:
-                    mYCCamera.startCamera(position);
-                    break;
-                case R.id.rl_fire12:
-                    removeData(position);
-                    break;
+            String param26 = null;
+            for (int i = 0; i<mData.size(); i++) {
+                param26 = mData.get(i).getParam26();
+            }
+            if (param26 != "隐患库") {
+                switch (v.getId()) {
+                    case R.id.gas1:
+                        showPopWind(myholder.tv_gas1);
+                        break;
+                    case R.id.gas2:
+                        showPopWind(myholder.tv_gas2);
+                        break;
+                    case R.id.gas3:
+                        showPopWind(myholder.tv_gas3);
+                        break;
+                    case R.id.gas4:
+                        showPopWind(myholder.tv_gas4);
+                        break;
+                    case R.id.gas5:
+                        showPopWind(myholder.tv_gas5);
+                        break;
+                    case R.id.gas6:
+                        showPopWind(myholder.tv_gas6);
+                        break;
+                    case R.id.gas7:
+                        showPopWind(myholder.tv_gas7);
+                        break;
+                    case R.id.gas8:
+                        showPopWind(myholder.tv_gas8);
+                        break;
+                    case R.id.gas9:
+                        showPopWind(myholder.tv_gas9);
+                        break;
+                    case R.id.gas10:
+                        showPopWind(myholder.tv_gas10);
+                        break;
+                    case R.id.rl_fire11:
+                        mYCCamera.startCamera(position);
+                        break;
+                    case R.id.rl_fire12:
+                        removeData(position);
+                        //通知序号列表刷新数据和高度
+                        mRemoveXH.deleteRefresh(position);
+                        break;
+                }
             }
         }
     }
@@ -266,13 +274,24 @@ public class XJKitchenWetPowderContentAdapter  extends RecyclerView.Adapter{
     }
 
     private XJKitchenWetPowderContentAdapter.YCCamera mYCCamera;
-
+    private XJKitchenWetPowderContentAdapter.RemoveXH mRemoveXH;
     //接口回调, 将点击事件传递到activity中,打开相机
     public void setmYCCamera(XJKitchenWetPowderContentAdapter.YCCamera y) {
         this.mYCCamera = y;
     }
 
+    //接口回调, 将点击事件传递到activity中,刷新序号
+    public void setDeleteRefresh(XJKitchenWetPowderContentAdapter.RemoveXH xh) {
+        this.mRemoveXH = xh;
+    }
+
+
     public interface YCCamera {
         void startCamera(int postion);
     }
+
+    public interface RemoveXH {
+        void deleteRefresh(int postion);
+    }
+
 }

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="45dp"
-    android:orientation="vertical"
-    tools:ignore="MissingDefaultResource">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -13,22 +12,36 @@
 
         <RelativeLayout
             android:id="@+id/rl_fire1"
-            android:layout_width="match_parent"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-           >
+            >
+            <EditText
+                android:id="@+id/et_fire1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:hint="请输入"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tv_fire1"
                 android:layout_width="80dp"
                 android:layout_height="45dp"
+                android:textAlignment="center"
+                tools:ignore="RtlCompat"
                 android:layout_marginLeft="8dp"
                 android:gravity="center_vertical"
-                android:text="是"
+                android:text="型号"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
-                android:textAlignment="center"
                 android:textStyle="bold"
-                tools:ignore="RtlCompat" />
+                android:visibility="gone"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -44,42 +57,37 @@
                 android:textAlignment="center"
                 android:layout_marginLeft="8dp"
                 android:gravity="center_vertical"
-                android:text="是"
+                android:text="灭火剂类型"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 tools:ignore="RtlCompat" />
         </RelativeLayout>
-
         <RelativeLayout
             android:id="@+id/rl_fire3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             >
-
             <TextView
                 android:id="@+id/tv_fire3"
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:layout_height="45dp"
-                android:layout_marginLeft="8dp"
                 android:textAlignment="center"
+                android:layout_marginLeft="8dp"
                 android:gravity="center_vertical"
-                android:text="是"
+                android:text="灭火级别"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 tools:ignore="RtlCompat" />
-
         </RelativeLayout>
-
         <RelativeLayout
             android:id="@+id/rl_fire4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             >
-
             <TextView
                 android:id="@+id/tv_fire4"
                 android:layout_width="80dp"
@@ -87,7 +95,7 @@
                 android:textAlignment="center"
                 android:layout_marginLeft="8dp"
                 android:gravity="center_vertical"
-                android:text="是"
+                android:text="工作代号"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -96,106 +104,126 @@
 
         <RelativeLayout
             android:id="@+id/rl_fire5"
-            android:layout_width="match_parent"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             >
+            <EditText
+                android:id="@+id/et_fire5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:hint="请输入"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_fire5"
                 android:layout_width="80dp"
                 android:layout_height="45dp"
+                android:textAlignment="center"
+                tools:ignore="RtlCompat"
                 android:layout_marginLeft="8dp"
                 android:gravity="center_vertical"
-                android:text="是"
-                android:textAlignment="center"
+                android:text="型号"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                tools:ignore="RtlCompat" />
-
+                android:visibility="gone"/>
         </RelativeLayout>
-
         <RelativeLayout
             android:id="@+id/rl_fire6"
-            android:layout_width="match_parent"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             >
+            <EditText
+                android:id="@+id/et_fire6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:hint="请输入"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tv_fire6"
                 android:layout_width="80dp"
                 android:layout_height="45dp"
+                android:textAlignment="center"
+                tools:ignore="RtlCompat"
                 android:layout_marginLeft="8dp"
                 android:gravity="center_vertical"
-                android:text="是"
-                android:textAlignment="center"
+                android:text="型号"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                tools:ignore="DuplicateIds,RtlCompat" />
+                android:visibility="gone"/>
         </RelativeLayout>
-
         <RelativeLayout
             android:id="@+id/rl_fire7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-           >
+            >
             <TextView
                 android:id="@+id/tv_fire7"
                 android:layout_width="80dp"
                 android:layout_height="45dp"
+                android:textAlignment="center"
                 android:layout_marginLeft="8dp"
                 android:gravity="center_vertical"
-                android:text="是"
+                android:text="工作代号"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                android:textAlignment="center"
                 tools:ignore="RtlCompat" />
         </RelativeLayout>
-
         <RelativeLayout
             android:id="@+id/rl_fire8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             >
-
             <TextView
                 android:id="@+id/tv_fire8"
                 android:layout_width="80dp"
                 android:layout_height="45dp"
-                android:layout_marginLeft="8dp"
-                android:gravity="center"
                 android:textAlignment="center"
-                tools:ignore="RtlCompat"
-                android:text="是"
+                android:layout_marginLeft="8dp"
+                android:gravity="center_vertical"
+                android:text="工作代号"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
-                android:textStyle="bold" />
-
+                android:textStyle="bold"
+                tools:ignore="RtlCompat" />
         </RelativeLayout>
-        <!--   合并单元格-->
         <RelativeLayout
             android:id="@+id/rl_fire9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-           >
+            >
             <TextView
                 android:id="@+id/tv_fire9"
                 android:layout_width="80dp"
                 android:layout_height="45dp"
-                android:layout_marginLeft="8dp"
                 android:textAlignment="center"
-                tools:ignore="RtlCompat"
+                android:layout_marginLeft="8dp"
                 android:gravity="center_vertical"
-                android:text="是"
+                android:text="工作代号"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="RtlCompat" />
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/rl_fire10"
@@ -208,13 +236,13 @@
                 android:layout_width="80dp"
                 android:layout_height="45dp"
                 android:textAlignment="center"
-                tools:ignore="RtlCompat"
                 android:layout_marginLeft="8dp"
                 android:gravity="center_vertical"
-                android:text="是"
+                android:text="工作代号"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="RtlCompat" />
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/rl_fire11"
@@ -226,21 +254,34 @@
                 android:id="@+id/tv_fire11"
                 android:layout_width="80dp"
                 android:layout_height="45dp"
-                android:layout_marginLeft="8dp"
                 android:textAlignment="center"
-                tools:ignore="RtlCompat"
+                android:layout_marginLeft="8dp"
                 android:gravity="center_vertical"
-                android:text="是"
+                android:text="工作代号"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="RtlCompat" />
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/rl_fire12"
-            android:layout_width="match_parent"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             >
+            <EditText
+                android:id="@+id/et_fire12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:hint="请输入"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tv_fire12"
                 android:layout_width="80dp"
@@ -249,11 +290,13 @@
                 tools:ignore="RtlCompat"
                 android:layout_marginLeft="8dp"
                 android:gravity="center_vertical"
-                android:text="是"
+                android:text="维修日期"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone"/>
         </RelativeLayout>
+
 
         <RelativeLayout
             android:id="@+id/rl_fire13"
@@ -265,16 +308,15 @@
                 android:id="@+id/tv_fire13"
                 android:layout_width="80dp"
                 android:layout_height="45dp"
+                android:textAlignment="center"
                 android:layout_marginLeft="8dp"
                 android:gravity="center_vertical"
-                android:textAlignment="center"
-                tools:ignore="RtlCompat"
-                android:text="是"
+                android:text="检测结果"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="RtlCompat" />
         </RelativeLayout>
-
         <RelativeLayout
             android:id="@+id/rl_fire14"
             android:layout_width="match_parent"
@@ -285,44 +327,43 @@
                 android:id="@+id/tv_fire14"
                 android:layout_width="80dp"
                 android:layout_height="45dp"
+                android:textAlignment="center"
                 android:layout_marginLeft="8dp"
                 android:gravity="center_vertical"
-                android:textAlignment="center"
-                tools:ignore="RtlCompat"
-                android:text="是"
+                android:text="检验标签"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="RtlCompat" />
         </RelativeLayout>
-
         <RelativeLayout
             android:id="@+id/rl_fire15"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="45dp"
             android:layout_gravity="center"
             >
             <TextView
                 android:id="@+id/tv_fire15"
-                android:layout_width="80dp"
-                android:layout_height="45dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:textAlignment="center"
-                tools:ignore="RtlCompat"
                 android:layout_marginLeft="8dp"
-                android:gravity="center_vertical"
-                android:text="是"
+                android:background="@mipmap/scene_photos_icon"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:gravity="center_horizontal" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rl_fire16"
-            android:layout_width="90dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             >
             <EditText
-                android:id="@+id/et_fire10"
+                android:id="@+id/et_fire16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -342,59 +383,55 @@
                 tools:ignore="RtlCompat"
                 android:layout_marginLeft="8dp"
                 android:gravity="center_vertical"
-                android:text="是"
+                android:text="隐患描述"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:visibility="gone"/>
-
         </RelativeLayout>
+
 
         <RelativeLayout
             android:id="@+id/rl_fire17"
             android:layout_width="60dp"
             android:layout_height="45dp"
             android:layout_gravity="center"
-            >
+            android:layout_marginLeft="8dp">
 
             <TextView
                 android:id="@+id/tv_fire17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:textAlignment="center"
                 android:layout_marginLeft="8dp"
-                android:background="@mipmap/scene_photos_icon"
+                android:text="生成"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
-                android:textStyle="bold"
-                android:gravity="center_horizontal" />
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rl_fire18"
             android:layout_width="60dp"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:layout_gravity="center"
-            >
+            android:layout_marginLeft="8dp">
 
             <TextView
-                android:id="@+id/tv_fire18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:textAlignment="center"
                 android:layout_marginLeft="8dp"
                 android:background="@mipmap/remove_item"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
-                android:textStyle="bold"
-                android:gravity="center_horizontal" />
+                android:textStyle="bold" />
         </RelativeLayout>
+
     </LinearLayout>
 
-<View
-    android:layout_width="match_parent"
-    android:layout_height="0.8dp"
-    android:background="@color/white_view_line" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="@color/white_view_line" />
 </LinearLayout>

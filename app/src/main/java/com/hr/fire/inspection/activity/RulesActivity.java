@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -73,13 +75,8 @@ public class RulesActivity extends AppCompatActivity {
         });
 
         // 点击返回上一页
-        TextView textView = (TextView) findViewById(R.id.tv_inspection_pro);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        ImageView iv_finish = findViewById(R.id.iv_finish);
+        iv_finish.setOnClickListener(v -> finish());
 
     }
 }

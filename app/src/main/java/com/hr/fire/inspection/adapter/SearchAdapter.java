@@ -39,6 +39,7 @@ public class SearchAdapter<T> extends BaseAdapter implements Filterable {
         this.maxMatch = maxMatch;
     }
 
+
     public SearchAdapter(Context context, int textViewResourceId, List<T> objects, int maxMatch) {
         init(context, textViewResourceId, 0, objects);
         this.pinyinList = getHanziSpellList(objects);

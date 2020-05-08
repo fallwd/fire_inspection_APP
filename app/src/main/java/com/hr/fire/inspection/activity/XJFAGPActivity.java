@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -25,10 +26,12 @@ import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.adapter.XJFireHoseStationContentApapter;
 import com.hr.fire.inspection.adapter.XJFirstColumnApapter;
 import com.hr.fire.inspection.adapter.XJFAGPContentApapter;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
+import com.hr.fire.inspection.utils.TextSpannableUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 import com.hr.fire.inspection.view.tableview.HListViewScrollView;
 
@@ -62,10 +65,12 @@ public class XJFAGPActivity extends AppCompatActivity implements View.OnClickLis
     private InspectionServiceImpl service;
     private XJFirstColumnApapter firstColumnApapter;
     private XJFAGPContentApapter contentApapter;
+    private TextView tvInspectionPro;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final int TAKE_PHOTO = 1;//拍照
     private int imgPostion = -1;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -119,6 +124,10 @@ public class XJFAGPActivity extends AppCompatActivity implements View.OnClickLis
         iv_finish.setOnClickListener(this);
         iv_add_table.setOnClickListener(this);
         iv_save.setOnClickListener(this);
+        tvInspectionPro = findViewById(R.id.tv_inspection_pro);
+        String text = new StringBuilder().append("消防巡检>火气探头及火灾盘").toString();
+        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#00A779", 0, text.length());
+        tvInspectionPro.setText(showTextColor);
     }
 
     @SuppressLint("WrongConstant")
@@ -147,6 +156,13 @@ public class XJFAGPActivity extends AppCompatActivity implements View.OnClickLis
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        });
+        //刷新序号列表
+        contentApapter.setDeleteRefresh(new XJFAGPContentApapter.RemoveXH() {
+            @Override
+            public void deleteRefresh(int postion) {
+                firstColumnApapter.notifyDataSetChanged();
             }
         });
     }
@@ -278,6 +294,7 @@ public class XJFAGPActivity extends AppCompatActivity implements View.OnClickLis
             itemObj.setProfession(itemObj.getProfession());
             itemObj.setCheckPerson(itemObj.getCheckPerson());
             itemObj.setCheckDate(itemObj.getCheckDate());
+            itemObj.setDescription(et_fire10.getText().toString());
             itemObj.setParam1(et_fire1.getText().toString());
             itemObj.setParam2(et_fire2.getText().toString());
             itemObj.setParam3(tv_fire3.getText().toString());

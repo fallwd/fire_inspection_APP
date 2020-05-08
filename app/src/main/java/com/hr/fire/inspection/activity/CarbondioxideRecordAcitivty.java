@@ -165,7 +165,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 intent.setClass(this, HFCActivity.class);
                 break;
             case 17:  //灭火器
-//                intent.setClass(this, CarbonDioxideAcitivty.class);
+                intent.setClass(this, NJFireExtinguisherActivity.class);
                 break;
             case 19:  //火灾自动报警系统
                 intent.setClass(this, AutomaticFireAlarmAcitivty.class);

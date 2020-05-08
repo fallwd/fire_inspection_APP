@@ -1,25 +1,25 @@
 package com.hr.fire.inspection.adapter;
 
-        import android.app.Activity;
-        import android.content.Context;
-        import android.graphics.drawable.BitmapDrawable;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.EditText;
-        import android.widget.RelativeLayout;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
-        import androidx.annotation.NonNull;
-        import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-        import com.hr.fire.inspection.R;
-        import com.hr.fire.inspection.entity.InspectionResult;
-        import com.hr.fire.inspection.service.ServiceFactory;
-        import com.hr.fire.inspection.view.tableview.HrPopup;
+import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.view.tableview.HrPopup;
 
-        import java.util.List;
+import java.util.List;
 
 public class xfspAdapter extends RecyclerView.Adapter {
     Context mContext;
@@ -33,7 +33,7 @@ public class xfspAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.xfbitem, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.xfspitem, parent, false);
         MyViewHolder holder = new MyViewHolder(view);
         return holder;
     }
@@ -46,8 +46,13 @@ public class xfspAdapter extends RecyclerView.Adapter {
         myholder.tv_fire2.setText(result.getParam2());
         myholder.tv_fire3.setText(result.getParam3());
         myholder.tv_fire4.setText(result.getParam4());
-        myholder.rl_fire6.setOnClickListener(new xfspAdapter.MyOnClickListener(myholder, position));
-        myholder.rl_fire7.setOnClickListener(new xfspAdapter.MyOnClickListener(myholder, position));
+        myholder.et_fire10.setText(result.getDescription());
+        myholder.rl_fire1.setOnClickListener(new xfspAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire2.setOnClickListener(new xfspAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire3.setOnClickListener(new xfspAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire4.setOnClickListener(new xfspAdapter.MyOnClickListener(myholder, position));
+        myholder.tv_fire6.setOnClickListener(new xfspAdapter.MyOnClickListener(myholder, position));
+        myholder.tv_fire7.setOnClickListener(new xfspAdapter.MyOnClickListener(myholder, position));
     }
 
     @Override
@@ -111,13 +116,33 @@ public class xfspAdapter extends RecyclerView.Adapter {
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.rl_fire6:
-                    mYCCamera.startCamera(position);
-                    break;
-                case R.id.rl_fire7:
-                    removeData(position);
-                    break;
+            String param26 = null;
+            for (int i = 0; i<mData.size(); i++) {
+                param26 = mData.get(i).getParam26();
+            }
+            if (param26 != "隐患库") {
+                switch (v.getId()) {
+                    case R.id.rl_fire1:
+                        showPopWind(myholder.tv_fire1);
+                        break;
+                    case R.id.rl_fire2:
+                        showPopWind(myholder.tv_fire2);
+                        break;
+                    case R.id.rl_fire3:
+                        showPopWind(myholder.tv_fire3);
+                        break;
+                    case R.id.rl_fire4:
+                        showPopWind(myholder.tv_fire4);
+                        break;
+                    case R.id.rl_fire6:
+                        mYCCamera.startCamera(position);
+                        break;
+                    case R.id.tv_fire7:
+                        removeData(position);
+                        //通知序号列表刷新数据和高度
+                        mRemoveXH.deleteRefresh(position);
+                        break;
+                }
             }
         }
     }
@@ -145,14 +170,23 @@ public class xfspAdapter extends RecyclerView.Adapter {
         private TextView tv_fire2;
         private TextView tv_fire3;
         private TextView tv_fire4;
-        private TextView tv_fire5;
+        private EditText et_fire10;
         private TextView tv_fire6;
         private TextView tv_fire7;
+        private RelativeLayout rl_fire1;
+        private RelativeLayout rl_fire2;
+        private RelativeLayout rl_fire3;
+        private RelativeLayout rl_fire4;
         private RelativeLayout rl_fire6;
         private RelativeLayout rl_fire7;
 
         public MyViewHolder(View view) {
             super(view);
+
+            rl_fire1 = view.findViewById(R.id.rl_fire1);
+            rl_fire2 = view.findViewById(R.id.rl_fire2);
+            rl_fire3 = view.findViewById(R.id.rl_fire3);
+            rl_fire4 = view.findViewById(R.id.rl_fire4);
             rl_fire6 = view.findViewById(R.id.rl_fire6);
             rl_fire7 = view.findViewById(R.id.rl_fire7);
 
@@ -160,20 +194,34 @@ public class xfspAdapter extends RecyclerView.Adapter {
             tv_fire2 = view.findViewById(R.id.tv_fire2);
             tv_fire3 = view.findViewById(R.id.tv_fire3);
             tv_fire4 = view.findViewById(R.id.tv_fire4);
-            tv_fire5 = view.findViewById(R.id.tv_fire5);
+
+            et_fire10 = view.findViewById(R.id.et_fire10);
             tv_fire6 = view.findViewById(R.id.tv_fire6);
             tv_fire7 = view.findViewById(R.id.tv_fire7);
+
+
+
         }
     }
 
-    private YCCamera mYCCamera;
-
+    private xfspAdapter.YCCamera mYCCamera;
+    private xfspAdapter.RemoveXH mRemoveXH;
     //接口回调, 将点击事件传递到activity中,打开相机
-    public void setmYCCamera(YCCamera y) {
+    public void setmYCCamera(xfspAdapter.YCCamera y) {
         this.mYCCamera = y;
     }
 
+    //接口回调, 将点击事件传递到activity中,刷新序号
+    public void setDeleteRefresh(xfspAdapter.RemoveXH xh) {
+        this.mRemoveXH = xh;
+    }
+
+
     public interface YCCamera {
         void startCamera(int postion);
+    }
+
+    public interface RemoveXH {
+        void deleteRefresh(int postion);
     }
 }

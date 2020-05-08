@@ -8,8 +8,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,10 +26,12 @@ import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.adapter.XJFAGMContentApapter;
 import com.hr.fire.inspection.adapter.XJKitchenWetPowderColumnAdapter;
 import com.hr.fire.inspection.adapter.XJKitchenWetPowderContentAdapter;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
+import com.hr.fire.inspection.utils.TextSpannableUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 import com.hr.fire.inspection.view.tableview.HListViewScrollView;
 
@@ -60,6 +64,7 @@ public class XJKitchenWetPowder extends AppCompatActivity implements View.OnClic
     private InspectionServiceImpl service;
     private XJKitchenWetPowderColumnAdapter firstColumnApapter;
     private XJKitchenWetPowderContentAdapter contentApapter;
+    private TextView tvInspectionPro;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final int TAKE_PHOTO = 1;//拍照
@@ -119,6 +124,10 @@ public class XJKitchenWetPowder extends AppCompatActivity implements View.OnClic
         iv_finish.setOnClickListener(this);
         iv_add_table.setOnClickListener(this);
         iv_save.setOnClickListener(this);
+        tvInspectionPro = findViewById(R.id.tv_inspection_pro);
+        String text = new StringBuilder().append("消防巡检>厨房湿粉灭火系统").toString();
+        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#00A779", 0, text.length());
+        tvInspectionPro.setText(showTextColor);
     }
 
     @SuppressLint("WrongConstant")
@@ -148,7 +157,13 @@ public class XJKitchenWetPowder extends AppCompatActivity implements View.OnClic
                     e.printStackTrace();
                 }
             }
-
+        });
+        //刷新序号列表
+        contentApapter.setDeleteRefresh(new XJKitchenWetPowderContentAdapter.RemoveXH() {
+            @Override
+            public void deleteRefresh(int postion) {
+                firstColumnApapter.notifyDataSetChanged();
+            }
         });
     }
 
@@ -272,12 +287,14 @@ public class XJKitchenWetPowder extends AppCompatActivity implements View.OnClic
             TextView tv_gas8 = childAt.findViewById(R.id.tv_gas8);
             TextView tv_gas9 = childAt.findViewById(R.id.tv_gas9);
             TextView tv_gas10 = childAt.findViewById(R.id.tv_gas10);
+            EditText et_fire10 = childAt.findViewById(R.id.et_fire10);
 
 
             InspectionResult itemObj = inspectionResults.get(i);
             itemObj.setProfession(itemObj.getProfession());
             itemObj.setCheckPerson(itemObj.getCheckPerson());
             itemObj.setCheckDate(itemObj.getCheckDate());
+            itemObj.setDescription(et_fire10.getText().toString());
             itemObj.setParam1(tv_gas1.getText().toString());
             itemObj.setParam2(tv_gas2.getText().toString());
             itemObj.setParam3(tv_gas3.getText().toString());
