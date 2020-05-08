@@ -108,7 +108,6 @@ public class CheckReporItemAdapter extends BaseAdapter {
                 e.printStackTrace();
             }
         });
-        // 点击搜索实现模糊查询
         return convertView;
     }
 
@@ -186,15 +185,13 @@ public class CheckReporItemAdapter extends BaseAdapter {
                     workbook.write(stream);// 写入流
                     stream.close();//关闭流
                     Toast.makeText(mContext, "报告生成成功", Toast.LENGTH_SHORT).show();
-
-
-                    if (file.isFile()) {
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        Uri uri = FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".fileProvider", file);
-                        intent.setDataAndType(uri, "application/vnd.ms-excel");
-                        mContext.startActivity(intent);
-                        return;
-                    }
+//                    if (file.isFile()) {
+//                        Intent intent = new Intent(Intent.ACTION_VIEW);
+//                        Uri uri = FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".fileProvider", file);
+//                        intent.setDataAndType(uri, "application/vnd.ms-excel");
+//                        mContext.startActivity(intent);
+//                        return;
+//                    }
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -242,6 +239,9 @@ public class CheckReporItemAdapter extends BaseAdapter {
                     break;
                 case "消防水炮":
                     getXXSPData(sheet,excelList,cellStyle);
+                    break;
+                case "火气监控系统":
+                    getHQJKData(sheet,excelList,cellStyle);
                     break;
             }
         }
@@ -539,8 +539,12 @@ public class CheckReporItemAdapter extends BaseAdapter {
             cell2 = nextRow.createCell(11);cell2.setCellStyle(cellStyle);
             cell2.setCellValue(inspectionResult.getImgPath());
         }
-       //  火气监控系统检查表
-        for(int i=20, j = 0; j<excelList.size(); i++,j++){
+
+    }
+    // 火气监控系统
+    private void getHQJKData(HSSFSheet sheet, List<InspectionResult> excelList, HSSFCellStyle cellStyle){
+        //  火气监控系统检查表
+        for(int i=2, j = 0; j<excelList.size(); i++,j++){
             //创建新的下一行  i为行数
             HSSFRow nextRow = sheet.createRow(i);
             InspectionResult inspectionResult = excelList.get(j);
@@ -565,7 +569,6 @@ public class CheckReporItemAdapter extends BaseAdapter {
             cell2.setCellValue(inspectionResult.getImgPath());
         }
     }
-
     // 消防水龙带
     private void getXFSLDData(HSSFSheet sheet, List<InspectionResult> excelList, HSSFCellStyle cellStyle) {
         for(int i=2, j= 0;j<excelList.size();i++,j++){
