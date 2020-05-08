@@ -89,15 +89,17 @@ public class RuleContentActivity extends AppCompatActivity {
             if (currentFiles[position].isFile()) {
                 // 也可自定义扩展打开这个文件等
                 File stringtofile = currentFiles[position];
+                Log.i("md", "22222222222222222222" + stringtofile);
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 Uri uri = FileProvider.getUriForFile(RuleContentActivity.this, getApplication().getApplicationContext().getPackageName() + ".fileProvider", stringtofile);
+                Log.i("md", "333333333333333" + uri);
                 intent.setDataAndType(uri, "application/pdf");
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 try {
                     startActivity(intent);
                 }
                 catch (ActivityNotFoundException e) {
-                    Log.i("md", "22222222222222222222");
+
                     Toast.makeText(RuleContentActivity.this,
                             "No Application Available to View PDF",
                             Toast.LENGTH_SHORT).show();

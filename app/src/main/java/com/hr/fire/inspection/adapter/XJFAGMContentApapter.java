@@ -131,33 +131,39 @@ public class XJFAGMContentApapter extends RecyclerView.Adapter {
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.rl_fire1:
-                    showPopWind(myholder.tv_fire1);
-                    break;
-                case R.id.rl_fire2:
-                    showPopWind(myholder.tv_fire2);
-                    break;
-                case R.id.rl_fire3:
-                    showPopWind(myholder.tv_fire3);
-                    break;
-                case R.id.rl_fire4:
-                    showPopWind(myholder.tv_fire4);
-                    break;
-                case R.id.rl_fire5:
-                    showPopWind(myholder.tv_fire5);
-                    break;
-                case R.id.rl_fire6:
-                    showPopWind(myholder.tv_fire6);
-                    break;
-                case R.id.rl_fire8:
-                    mYCCamera.startCamera(position);
-                    break;
-                case R.id.rl_fire9:
-                    removeData(position);
-                    //通知序号列表刷新数据和高度
-                    mRemoveXH.deleteRefresh(position);
-                    break;
+            String param26 = null;
+            for (int i = 0; i<mData.size(); i++) {
+                param26 = mData.get(i).getParam26();
+            }
+            if (param26 != "隐患库") {
+                switch (v.getId()) {
+                    case R.id.rl_fire1:
+                        showPopWind(myholder.tv_fire1);
+                        break;
+                    case R.id.rl_fire2:
+                        showPopWind(myholder.tv_fire2);
+                        break;
+                    case R.id.rl_fire3:
+                        showPopWind(myholder.tv_fire3);
+                        break;
+                    case R.id.rl_fire4:
+                        showPopWind(myholder.tv_fire4);
+                        break;
+                    case R.id.rl_fire5:
+                        showPopWind(myholder.tv_fire5);
+                        break;
+                    case R.id.rl_fire6:
+                        showPopWind(myholder.tv_fire6);
+                        break;
+                    case R.id.rl_fire8:
+                        mYCCamera.startCamera(position);
+                        break;
+                    case R.id.rl_fire9:
+                        removeData(position);
+                        //通知序号列表刷新数据和高度
+                        mRemoveXH.deleteRefresh(position);
+                        break;
+                }
             }
         }
     }

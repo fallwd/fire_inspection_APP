@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.webkit.JavascriptInterface;
@@ -17,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -27,7 +29,10 @@ import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.CompanyInfo;
 
+
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.TextSpannableUtil;
+
 
 import org.json.JSONArray;
 
@@ -53,6 +58,7 @@ public class StatiSticsActivity extends AppCompatActivity {
     private List<HashMap> oilChartData;
     private List<HashMap> platformChartData;
     private List<HashMap> systemChartData;
+    private TextView tvInspectionPro;
 
     WebView mWebView;
 
@@ -86,7 +92,6 @@ public class StatiSticsActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     oilName = data;
-                    // 传入公司名称 油田名称
                     platformChartData = ServiceFactory.getAnalysisService().getPlatformCountByYearCheck(selectTime, companyName, oilName);;
                     JSONArray platformChartResult = new JSONArray(platformChartData);
                     mWebView.loadUrl("javascript:runJs('" + true  + "', '" + platformChartResult + "')");
@@ -115,6 +120,7 @@ public class StatiSticsActivity extends AppCompatActivity {
 
         final Spinner spinner_time = findViewById(R.id.spinner_time);
         clear_statisty = findViewById(R.id.clear_statisty);
+        tvInspectionPro = findViewById(R.id.tv_inspection_pro);
 
         // 初始化时间选择器
         timeList.add("2019");
@@ -124,6 +130,9 @@ public class StatiSticsActivity extends AppCompatActivity {
         // 清空事件
         HandelClear();
 
+        String text = new StringBuilder().append("隐患库 > 统计分析").toString();
+        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#00A779", 0, text.length());
+        tvInspectionPro.setText(showTextColor);
 
         // 定位到webview
         mWebView = (WebView) findViewById(R.id.webview);
@@ -179,11 +188,7 @@ public class StatiSticsActivity extends AppCompatActivity {
                 selectTime = (String) parent.getItemAtPosition(position);
                 companyChartData = ServiceFactory.getAnalysisService().getCompanyCountByYearCheck(selectTime);
                 JSONArray companyChartResult = new JSONArray(companyChartData);
-                if(companyChartResult.length()==0){
-                    Toast.makeText(StatiSticsActivity.this, "查询结果为空", Toast.LENGTH_SHORT).show();
-                } else {
-                    mWebView.loadUrl("javascript:runJs('" + true + "', '" + companyChartResult + "')");
-                }
+                mWebView.loadUrl("javascript:runJs('" + true + "', '" + companyChartResult + "')");
             }
 
             @Override

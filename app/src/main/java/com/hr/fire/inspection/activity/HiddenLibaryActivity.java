@@ -71,7 +71,7 @@ public class HiddenLibaryActivity extends AppCompatActivity {
     private ArrayList<String> system_list;
     private List<CheckType> system_dataList;
     private ArrayList<String> platform_list;
-//    platformId没有的话填0，systemId没有的话填0，startDate没有的话填null,endDate没有的话填null
+    //    platformId没有的话填0，systemId没有的话填0，startDate没有的话填null,endDate没有的话填null
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,28 +117,36 @@ public class HiddenLibaryActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
-                // 滚动中监听
+
             }
 
             @Override
             public void onPageSelected(int i) {
                 currentPager = i;
-                init_system_spinner(currentPager);
-                if (i == 1) {
-                    Statistics.setVisibility(View.GONE);
-                } else {
-                    Statistics.setVisibility(View.VISIBLE);
-                }
             }
 
             @Override
             public void onPageScrollStateChanged(int i) {
-                // 滚动结束
+
             }
         });
         //每项只进入一次
-        mViewPager.setAdapter(new myAdapter(getSupportFragmentManager()));
+        mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return fragments.get(position);
+            }
 
+            @Override
+            public int getCount() {
+                return fragments.size();
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return titleList.get(position);
+            }
+        });
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

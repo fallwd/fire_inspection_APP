@@ -166,78 +166,84 @@ public class XJFFESContentApapter extends RecyclerView.Adapter {
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.rl_fire4:
-                    showPopWind(myholder.tv_fire4);
-                    break;
-                case R.id.rl_fire5:
-                    showPopWind(myholder.tv_fire5);
-                    break;
-                case R.id.rl_fire6:
-                    showPopWind(myholder.tv_fire6);
-                    break;
-                case R.id.rl_fire7:
-                    showPopWind(myholder.tv_fire7);
-                    break;
-                case R.id.rl_fire8:
-                    showPopWind(myholder.tv_fire8);
-                    break;
-                case R.id.rl_fire9:
-                    showPopWind(myholder.tv_fire9);
-                    break;
-                case R.id.rl_fire10:
-                    showPopWind(myholder.tv_fire10);
-                    break;
-                case R.id.rl_fire11:
-                    showPopWind(myholder.tv_fire11);
-                    break;
-                case R.id.rl_fire12:
-                    showPopWind(myholder.tv_fire12);
-                    break;
-                case R.id.rl_fire13:
-                    showPopWind(myholder.tv_fire13);
-                    break;
-                case R.id.rl_fire14:
-                    showPopWind(myholder.tv_fire14);
-                    break;
-                case R.id.rl_fire15:
-                    showPopWind(myholder.tv_fire15);
-                    break;
-                case R.id.rl_fire16:
-                    showPopWind(myholder.tv_fire16);
-                    break;
-                case R.id.rl_fire17:
-                    showPopWind(myholder.tv_fire17);
-                    break;
-                case R.id.rl_fire18:
-                    showPopWind(myholder.tv_fire18);
-                    break;
-                case R.id.rl_fire19:
-                    showPopWind(myholder.tv_fire19);
-                    break;
-                case R.id.rl_fire20:
-                    showPopWind(myholder.tv_fire20);
-                    break;
-                case R.id.rl_fire21:
-                    showPopWind(myholder.tv_fire21);
-                    break;
-                case R.id.rl_fire22:
-                    showPopWind(myholder.tv_fire22);
-                    break;
-                case R.id.rl_fire23:
-                    showPopWind(myholder.tv_fire23);
-                    break;
-                case R.id.rl_fire24:
-                    showPopWind(myholder.tv_fire24);
-                    break;
-                case R.id.rl_fire26:
-                    mYCCamera.startCamera(position);
-                    break;
-                case R.id.rl_fire27:
-                    removeData(position);
-                    //通知序号列表刷新数据和高度
-                    mRemoveXH.deleteRefresh(position);
-                    break;
+            String param26 = null;
+            for (int i = 0; i<mData.size(); i++) {
+                param26 = mData.get(i).getParam26();
+            }
+            if (param26 != "隐患库") {
+                switch (v.getId()) {
+                    case R.id.rl_fire4:
+                        showPopWind(myholder.tv_fire4);
+                        break;
+                    case R.id.rl_fire5:
+                        showPopWind(myholder.tv_fire5);
+                        break;
+                    case R.id.rl_fire6:
+                        showPopWind(myholder.tv_fire6);
+                        break;
+                    case R.id.rl_fire7:
+                        showPopWind(myholder.tv_fire7);
+                        break;
+                    case R.id.rl_fire8:
+                        showPopWind(myholder.tv_fire8);
+                        break;
+                    case R.id.rl_fire9:
+                        showPopWind(myholder.tv_fire9);
+                        break;
+                    case R.id.rl_fire10:
+                        showPopWind(myholder.tv_fire10);
+                        break;
+                    case R.id.rl_fire11:
+                        showPopWind(myholder.tv_fire11);
+                        break;
+                    case R.id.rl_fire12:
+                        showPopWind(myholder.tv_fire12);
+                        break;
+                    case R.id.rl_fire13:
+                        showPopWind(myholder.tv_fire13);
+                        break;
+                    case R.id.rl_fire14:
+                        showPopWind(myholder.tv_fire14);
+                        break;
+                    case R.id.rl_fire15:
+                        showPopWind(myholder.tv_fire15);
+                        break;
+                    case R.id.rl_fire16:
+                        showPopWind(myholder.tv_fire16);
+                        break;
+                    case R.id.rl_fire17:
+                        showPopWind(myholder.tv_fire17);
+                        break;
+                    case R.id.rl_fire18:
+                        showPopWind(myholder.tv_fire18);
+                        break;
+                    case R.id.rl_fire19:
+                        showPopWind(myholder.tv_fire19);
+                        break;
+                    case R.id.rl_fire20:
+                        showPopWind(myholder.tv_fire20);
+                        break;
+                    case R.id.rl_fire21:
+                        showPopWind(myholder.tv_fire21);
+                        break;
+                    case R.id.rl_fire22:
+                        showPopWind(myholder.tv_fire22);
+                        break;
+                    case R.id.rl_fire23:
+                        showPopWind(myholder.tv_fire23);
+                        break;
+                    case R.id.rl_fire24:
+                        showPopWind(myholder.tv_fire24);
+                        break;
+                    case R.id.rl_fire26:
+                        mYCCamera.startCamera(position);
+                        break;
+                    case R.id.rl_fire27:
+                        removeData(position);
+                        //通知序号列表刷新数据和高度
+                        mRemoveXH.deleteRefresh(position);
+                        break;
+                }
             }
         }
     }

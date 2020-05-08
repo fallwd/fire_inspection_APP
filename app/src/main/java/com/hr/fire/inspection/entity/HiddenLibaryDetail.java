@@ -13,6 +13,8 @@ public class HiddenLibaryDetail implements Serializable {
     public String checkDate;
     public String systemNumber;
     public String protectArea;
+    public String checkPerson;
+    public String profession;
 
 
     @Override
@@ -23,6 +25,8 @@ public class HiddenLibaryDetail implements Serializable {
                 ", systemNumber='" + systemNumber + '\'' +
                 ", checkDate=" + checkDate +
                 ", protectArea=" + protectArea +
+                ", checkPerson=" + checkPerson +
+                ", profession=" + profession +
                 '}';
     }
 }

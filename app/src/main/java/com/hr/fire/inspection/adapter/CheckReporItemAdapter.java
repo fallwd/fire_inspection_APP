@@ -1,6 +1,8 @@
 package com.hr.fire.inspection.adapter;
 
         import android.content.Context;
+        import android.content.Intent;
+        import android.net.Uri;
         import android.os.Build;
         import android.os.Environment;
         import android.util.Log;
@@ -13,6 +15,8 @@ package com.hr.fire.inspection.adapter;
         import android.widget.Toast;
 
         import androidx.annotation.RequiresApi;
+        import androidx.core.content.FileProvider;
+
         import com.hr.fire.inspection.R;
         import com.hr.fire.inspection.activity.CheckReport;
         import com.hr.fire.inspection.entity.InspectionResult;
@@ -176,12 +180,22 @@ public class CheckReporItemAdapter extends BaseAdapter {
                 checkSystem(sheet, excleList, SheetName,cellStyle);
                 try {
                     //创建一个文件
-                        String path = Environment.getExternalStorageDirectory().getPath();
-                        File file = new File(path + "/" + filename + ".xls");
-                        OutputStream stream = new FileOutputStream(file);//将Excel文件写入创建的file当中
-                        workbook.write(stream);// 写入流
-                        stream.close();//关闭流
+                    String path = Environment.getExternalStorageDirectory().getPath();
+                    File file = new File(path + "/" + filename + ".xls");
+                    OutputStream stream = new FileOutputStream(file);//将Excel文件写入创建的file当中
+                    workbook.write(stream);// 写入流
+                    stream.close();//关闭流
                     Toast.makeText(mContext, "报告生成成功", Toast.LENGTH_SHORT).show();
+
+
+                    if (file.isFile()) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        Uri uri = FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".fileProvider", file);
+                        intent.setDataAndType(uri, "application/vnd.ms-excel");
+                        mContext.startActivity(intent);
+                        return;
+                    }
+
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {

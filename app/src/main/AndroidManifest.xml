@@ -169,7 +169,7 @@
             android:name=".activity.HiddenLibaryActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".activity.HiddenLibaryDetailActivity"
+            android:name=".activity.HiddenLibaryDetailActivity1"
             android:screenOrientation="landscape" />
         <activity
             android:name=".activity.StatiSticsActivity"
@@ -207,5 +207,13 @@
         <activity
             android:name=".activity.XJFireEquipment"
             android:screenOrientation="landscape"/>
+        <activity
+            android:name=".activity.HiddenLibaryDetailActivity2"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".activity.NJFireExtinguisherActivity"
+            android:screenOrientation="landscape"/>
+
+
     </application>
 </manifest>

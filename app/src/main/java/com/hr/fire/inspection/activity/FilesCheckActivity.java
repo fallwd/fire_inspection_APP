@@ -69,7 +69,7 @@ public class FilesCheckActivity extends AppCompatActivity implements View.OnClic
 
     private void initView() {
         if (historyList.size() == 0) {
-            Toast.makeText(this, "没有历史巡检记录,请点击\"下一步\"进行新建", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "没有历史巡检记录,请点击\"新建按钮\"进行新建", Toast.LENGTH_SHORT).show();
         }
         ImageView iv_finish = findViewById(R.id.iv_finish);
         RecyclerView rc_list = findViewById(R.id.rc_list);
