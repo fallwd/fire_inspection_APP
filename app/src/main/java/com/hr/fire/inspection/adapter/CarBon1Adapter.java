@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
 import com.hr.fire.inspection.activity.QRCodeExistenceAcitivty;
+import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.WorkIItemBean;
@@ -77,11 +78,22 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             vh.et_7.setText(new StringBuffer().append(mProdDate).append(""));
             vh.et_8.setText(new StringBuffer().append(mCheckDate).append(""));
             vh.tv_9.setText(new StringBuffer().append("药剂瓶").append(position + 1).append("号表"));
+            String s = info.getIsPass();
+            if (s == null || s.isEmpty()) {
+                vh.tv_10.setText("合格");
+            } else {
+                vh.tv_10.setText(s);
+            }
             vh.tv_11.setText(new StringBuffer().append(info.getTaskNumber()));
+            if (info.getLabelNo() == null) {
+                vh.et_12.setHint("请输入...");
+            } else {
+                vh.et_12.setText(info.getLabelNo());
+            }
 
             //初始化工作表数据
             WorkIItemBean mWorkIItemBean = new WorkIItemBean();
-            List<WorkIItemBean> workSelectData = mWorkIItemBean.getWorkSelectData();
+            List<WorkIItemBean> workSelectData = mWorkIItemBean.getWorkSelectData(1);
             mapSelection.put(position, workSelectData);
         }
         vh.rl_9.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +138,7 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
+                intent.putExtra(ConstantInspection.CHECK_DIVICE,"药剂瓶");
                 intent.setClass(mContext, QRCodeExistenceAcitivty.class);
                 mContext.startActivity(intent);
             }

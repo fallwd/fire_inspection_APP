@@ -119,6 +119,10 @@ public class CarbonFragment2 extends Fragment {
                 itemInfo.setProdFactory(item.getProdFactory());
                 itemInfo.setProdDate(item.getProdDate());
                 itemInfo.setCheckDate(item.getCheckDate());
+                itemInfo.setTaskNumber(item.getTaskNumber());
+                itemInfo.setIsPass(item.getIsPass());
+                itemInfo.setLabelNo(item.getLabelNo());
+
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
                 itemInfo.setVolume("9");
@@ -162,6 +166,9 @@ public class CarbonFragment2 extends Fragment {
             EditText et_7 = childAt.findViewById(R.id.et_7);
             EditText et_8 = childAt.findViewById(R.id.et_8);
             TextView tv_9 = childAt.findViewById(R.id.tv_9);
+            TextView tv_10 = childAt.findViewById(R.id.tv_10);
+            TextView tv_11 = childAt.findViewById(R.id.tv_11);
+            EditText et_12 = childAt.findViewById(R.id.et_12);
 
             ItemInfo itemObj = itemDataList.get(i);
             itemObj.setNo(et_2.getText().toString());
@@ -174,15 +181,10 @@ public class CarbonFragment2 extends Fragment {
             Date date1 = TimeUtil.getInstance().hhmmssTodata(et_8.getText().toString());
             itemObj.setProdDate(date);
             itemObj.setObserveDate(date1);
-            //默认日期参数影响查询结果， 所以不能修改该参数
-//            itemObj.setCheckDate(new Date());
-            //这是里层检查表数据,当前页面没有这个数据,可以不传。
-//            itemObj.setIsPass("是");
-//            itemObj.setLabelNo("BQ0002");
-//            itemObj.setSystemNumber("SD002");
-//            itemObj.setProtectArea("主配电间");
-//            itemObj.setCodePath("检查表图片路径:/src/YJP0002.jpg");
-//            list.add(itemObj);
+            itemObj.setIsPass(tv_10.getText().toString());
+            itemObj.setTaskNumber(tv_11.getText().toString());
+            itemObj.setLabelNo(et_12.getText().toString());
+            ServiceFactory.getYearCheckService().update(itemObj);
             ServiceFactory.getYearCheckService().update(itemObj);
         }
         Toast.makeText(getContext(), "\"氮气瓶\"数据保存成功", Toast.LENGTH_SHORT).show();
