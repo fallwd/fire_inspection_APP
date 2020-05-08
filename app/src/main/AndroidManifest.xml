@@ -210,6 +210,10 @@
         <activity
             android:name=".activity.HiddenLibaryDetailActivity2"
             android:screenOrientation="landscape"/>
+        <activity
+            android:name=".activity.NJFireExtinguisherActivity"
+            android:screenOrientation="landscape"/>
+
 
     </application>
 </manifest>
