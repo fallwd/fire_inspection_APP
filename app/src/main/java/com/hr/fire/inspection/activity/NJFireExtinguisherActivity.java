@@ -220,6 +220,39 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 result.setParam4(item.getParam4());
                 result.setParam5(item.getParam5());
                 result.setParam6(item.getParam6());
+                result.setParam7(item.getParam7());
+                result.setParam8(item.getParam8());
+                result.setParam9(item.getParam9());
+                result.setParam10(item.getParam10());
+                result.setParam11(item.getParam11());
+                result.setParam12(item.getParam12());
+                result.setParam13(item.getParam13());
+                result.setParam14(item.getParam14());
+                result.setParam15(item.getParam15());
+                result.setParam16(item.getParam16());
+                result.setParam17(item.getParam17());
+
+
+
+//    型号 typeNo
+//    灭火剂类型  deviceType
+//    灭火级别	 level
+//    工作代号  taskNumber
+//    生产厂家	prodFactory
+//    生产日期	  date prodDate
+//    型号符合性	 typeConformity
+//    位置符合性	 positionConformity
+//    外观是否良好	 appearance
+//    压力/重量是否合格	 isPressure
+//    药剂有效性	 effectiveness
+//    维修日期	Date observeDate
+//    检测结果   isPass
+//    检验标签	labelNo
+//    照片 imageUrl
+//    隐患描述  description
+//    二维码 codePath
+
+
             } else {
                 //没有数据造一段默认数据
                 Log.d("dong", "默认没有数据吧==");
@@ -228,13 +261,23 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 result.setCheckDate(parse_check_date);
                 result.setDescription("暂无");
                 result.setImgPath("暂无图片");
-                result.setParam1("是");
+                result.setParam1("请输入");
                 result.setParam2("是");
                 result.setParam3("是");
                 result.setParam4("是");
-                result.setParam5("是");
-                result.setParam6("是");
-                result.setParam7("请输入");
+                result.setParam5("请输入");
+                result.setParam6("请输入");
+                result.setParam7("是");
+                result.setParam8("是");
+                result.setParam9("是");
+                result.setParam10("是");
+                result.setParam11("是");
+                result.setParam12("请输入");
+                result.setParam13("是");
+                result.setParam14("是");
+                result.setParam15("是");
+                result.setParam16("请输入");
+                result.setParam17("生成");
             }
             long l = service.insertInspectionData(result, companyInfoId, systemId, parse_check_date);
             //表示数据插入成功,再次查询,拿到最新的数据
@@ -263,26 +306,45 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
         for (int i = 0; i < itemCount; i++) {
             LinearLayout childAt = (LinearLayout) rl_content.getChildAt(i);
 
-            TextView tv_fire1 = childAt.findViewById(R.id.tv_fire1);
+            EditText et_fire1 = childAt.findViewById(R.id.et_fire1);
             TextView tv_fire2 = childAt.findViewById(R.id.tv_fire2);
             TextView tv_fire3 = childAt.findViewById(R.id.tv_fire3);
             TextView tv_fire4 = childAt.findViewById(R.id.tv_fire4);
-            TextView tv_fire5 = childAt.findViewById(R.id.tv_fire5);
-            TextView tv_fire6 = childAt.findViewById(R.id.tv_fire6);
-            EditText et_fire7 = childAt.findViewById(R.id.et_fire7);
+            EditText et_fire5 = childAt.findViewById(R.id.et_fire5);
+            EditText et_fire6 = childAt.findViewById(R.id.et_fire6);
+            TextView tv_fire7 = childAt.findViewById(R.id.tv_fire7);
+            TextView tv_fire8 = childAt.findViewById(R.id.tv_fire8);
+            TextView tv_fire9 = childAt.findViewById(R.id.tv_fire9);
+            TextView tv_fire10 = childAt.findViewById(R.id.tv_fire10);
+            TextView tv_fire11 = childAt.findViewById(R.id.tv_fire11);
+            EditText et_fire12 = childAt.findViewById(R.id.et_fire12);
+            TextView tv_fire13 = childAt.findViewById(R.id.tv_fire13);
+            TextView tv_fire14 = childAt.findViewById(R.id.tv_fire14);
+            TextView tv_fire15 = childAt.findViewById(R.id.tv_fire15);
+            EditText et_fire16 = childAt.findViewById(R.id.et_fire16);
 
 
             InspectionResult itemObj = inspectionResults.get(i);
             itemObj.setProfession(itemObj.getProfession());
             itemObj.setCheckPerson(itemObj.getCheckPerson());
             itemObj.setCheckDate(itemObj.getCheckDate());
-            itemObj.setDescription(et_fire7.getText().toString());
-            itemObj.setParam1(tv_fire1.getText().toString());
+            itemObj.setDescription(et_fire16.getText().toString());
+            itemObj.setParam1(et_fire1.getText().toString());
             itemObj.setParam2(tv_fire2.getText().toString());
             itemObj.setParam3(tv_fire3.getText().toString());
             itemObj.setParam4(tv_fire4.getText().toString());
-            itemObj.setParam5(tv_fire5.getText().toString());
-            itemObj.setParam6(tv_fire6.getText().toString());
+            itemObj.setParam5(et_fire5.getText().toString());
+            itemObj.setParam6(et_fire6.getText().toString());
+            itemObj.setParam7(tv_fire7.getText().toString());
+            itemObj.setParam8(tv_fire8.getText().toString());
+            itemObj.setParam9(tv_fire9.getText().toString());
+            itemObj.setParam10(tv_fire10.getText().toString());
+            itemObj.setParam11(tv_fire11.getText().toString());
+            itemObj.setParam12(et_fire12.getText().toString());
+            itemObj.setParam13(tv_fire13.getText().toString());
+            itemObj.setParam14(tv_fire14.getText().toString());
+            itemObj.setParam15(tv_fire15.getText().toString());
+            itemObj.setParam16(et_fire16.getText().toString());
 
             service.update(itemObj);
         }

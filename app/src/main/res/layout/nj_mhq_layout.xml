@@ -143,7 +143,7 @@
         android:textAlignment="center"
         android:layout_marginLeft="8dp"
         android:gravity="center_vertical"
-        android:text="检测结果"
+        android:text="检测结果是否合格"
         android:textColor="@color/title_black"
         android:textSize="12sp"
         android:textStyle="bold"

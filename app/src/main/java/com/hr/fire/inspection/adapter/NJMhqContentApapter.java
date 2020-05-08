@@ -42,9 +42,9 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myholder = (MyViewHolder) holder;
         InspectionResult result = mData.get(position);
-        myholder.et_fire1.setText(result.getParam1());
-//        myholder.et_fire2.setText(result.getParam2());
-//        myholder.et_fire3.setText(result.getParam3());
+        myholder.tv_fire1.setText(result.getParam1());
+        myholder.tv_fire2.setText(result.getParam2());
+        myholder.tv_fire3.setText(result.getParam3());
         myholder.tv_fire4.setText(result.getParam4());
         myholder.tv_fire5.setText(result.getParam5());
         myholder.tv_fire6.setText(result.getParam6());
@@ -59,21 +59,17 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
         myholder.tv_fire15.setText(result.getParam15());
         myholder.tv_fire16.setText(result.getParam16());
         myholder.tv_fire17.setText(result.getParam17());
-        myholder.tv_fire18.setText(result.getParam18());
 
-
-//        myholder.rl_fire4.setOnClickListener(new MyOnClickListener(myholder, position));
-//        myholder.rl_fire5.setOnClickListener(new MyOnClickListener(myholder, position));
-//        myholder.rl_fire6.setOnClickListener(new MyOnClickListener(myholder, position));
+        myholder.rl_fire2.setOnClickListener(new MyOnClickListener(myholder, position));
+        myholder.rl_fire3.setOnClickListener(new MyOnClickListener(myholder, position));
+        myholder.rl_fire4.setOnClickListener(new MyOnClickListener(myholder, position));
+        myholder.rl_fire7.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire8.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire9.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire10.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire11.setOnClickListener(new MyOnClickListener(myholder, position));
-        myholder.rl_fire12.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire13.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire14.setOnClickListener(new MyOnClickListener(myholder, position));
-        myholder.rl_fire15.setOnClickListener(new MyOnClickListener(myholder, position));
-        myholder.rl_fire16.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire17.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire18.setOnClickListener(new MyOnClickListener(myholder, position));
 
@@ -155,14 +151,14 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
             }
             if (param26 != "隐患库") {
                 switch (v.getId()) {
-                    case R.id.rl_fire4:
-                        showPopWind(myholder.tv_fire4);
-                        break;
-                    case R.id.rl_fire5:
+                    case R.id.rl_fire2:
                         showPopWind(myholder.tv_fire5);
                         break;
-                    case R.id.rl_fire6:
-                        showPopWind(myholder.tv_fire6);
+                    case R.id.rl_fire3:
+                        showPopWind(myholder.tv_fire5);
+                        break;
+                    case R.id.rl_fire4:
+                        showPopWind(myholder.tv_fire4);
                         break;
                     case R.id.rl_fire7:
                         showPopWind(myholder.tv_fire7);
@@ -179,31 +175,16 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
                     case R.id.rl_fire11:
                         showPopWind(myholder.tv_fire11);
                         break;
-                    case R.id.rl_fire12:
-                        showPopWind(myholder.tv_fire12);
-                        break;
                     case R.id.rl_fire13:
                         showPopWind(myholder.tv_fire13);
                         break;
                     case R.id.rl_fire14:
                         showPopWind(myholder.tv_fire14);
                         break;
-                    case R.id.rl_fire15:
-                        showPopWind(myholder.tv_fire15);
-                        break;
-                    case R.id.rl_fire16:
-                        showPopWind(myholder.tv_fire16);
-                        break;
                     case R.id.rl_fire17:
                         showPopWind(myholder.tv_fire17);
                         break;
                     case R.id.rl_fire18:
-                        showPopWind(myholder.tv_fire18);
-                        break;
-                    case R.id.rl_fire26:
-                        mYCCamera.startCamera(position);
-                        break;
-                    case R.id.rl_fire27:
                         removeData(position);
                         //通知序号列表刷新数据和高度
                         mRemoveXH.deleteRefresh(position);
@@ -243,11 +224,11 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
         private RelativeLayout rl_fire9;
         private RelativeLayout rl_fire10;
         private RelativeLayout rl_fire11;
-        private EditText rl_fire12;
+        private EditText et_fire12;
         private RelativeLayout rl_fire13;
         private RelativeLayout rl_fire14;
         private RelativeLayout rl_fire15;
-        private EditText rl_fire16;
+        private EditText et_fire16;
         private RelativeLayout rl_fire17;
         private RelativeLayout rl_fire18;
 
@@ -285,11 +266,11 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
             rl_fire9 = (RelativeLayout) view.findViewById(R.id.rl_fire9);
             rl_fire10 = (RelativeLayout) view.findViewById(R.id.rl_fire10);
             rl_fire11 = (RelativeLayout) view.findViewById(R.id.rl_fire11);
-            rl_fire12 = (EditText) view.findViewById(R.id.et_fire12);
+            et_fire12 = (EditText) view.findViewById(R.id.et_fire12);
             rl_fire13 = (RelativeLayout) view.findViewById(R.id.rl_fire13);
             rl_fire14 = (RelativeLayout) view.findViewById(R.id.rl_fire14);
             rl_fire15 = (RelativeLayout) view.findViewById(R.id.rl_fire15);
-            rl_fire16 = (EditText) view.findViewById(R.id.et_fire16);
+            et_fire16 = (EditText) view.findViewById(R.id.et_fire16);
             rl_fire17 = (RelativeLayout) view.findViewById(R.id.rl_fire17);
             rl_fire18 = (RelativeLayout) view.findViewById(R.id.rl_fire18);
 
