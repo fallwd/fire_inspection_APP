@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
@@ -30,6 +32,8 @@ import com.hr.fire.inspection.utils.StringBitmap;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -55,6 +59,7 @@ public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         return holder;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         final ViewHolder vh = (ViewHolder) holder;
@@ -73,9 +78,14 @@ public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             String imageUrl = ycr.get(position).getImageUrl();
             if (imageUrl != null && imageUrl.endsWith(".jpg")) {
                 //路径  /external_path/Android/data/com.hr.fire.inspection/cache/1587462719699.jpg
-                Uri uri = Uri.fromFile(new File(imageUrl));
+//                Uri uri = Uri.fromFile(new File(imageUrl));
+                Uri uri = Uri.parse(imageUrl);
+                File file = new File(imageUrl);
+                Log.d("dong", "file==adapter==" + file.exists());
+                Log.d("dong", "==adapter==" + uri);
                 vh.iv7.setImageURI(uri);
             }
+
             //在左侧添加图片
             Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
             drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
