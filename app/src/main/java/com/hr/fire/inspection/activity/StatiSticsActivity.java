@@ -81,6 +81,7 @@ public class StatiSticsActivity extends AppCompatActivity {
                     oilChartData = ServiceFactory.getAnalysisService().getOilfieldCountByYearCheck(selectTime, companyName);
                     JSONArray oilChartResult = new JSONArray(oilChartData);
                     mWebView.loadUrl("javascript:runJs('" + true  + "', '" + oilChartResult + "')");
+
                 }
             });
         }
@@ -136,6 +137,7 @@ public class StatiSticsActivity extends AppCompatActivity {
 
         // 定位到webview
         mWebView = (WebView) findViewById(R.id.webview);
+        mWebView.setLayerType(View.LAYER_TYPE_SOFTWARE,null);
         WebSettings webSettings = mWebView.getSettings();
         // 设置与Js交互的权限
         webSettings.setJavaScriptEnabled(true);
