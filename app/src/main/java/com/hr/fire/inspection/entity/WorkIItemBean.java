@@ -27,6 +27,10 @@ public class WorkIItemBean {
             list = initDataHFCA1();
         } else if (index == 4) {
             list = initDataHFCA2();
+        } else if (index == 5) {
+            list = initDataYJP();
+        } else if (index == 6) {
+            list = initDataXFSMH();
         }
         if (list != null) {
             for (int i = 0; i < list.size(); i++) {
@@ -94,6 +98,30 @@ public class WorkIItemBean {
         return titlelist;
     }
 
+    //药剂瓶信息录入
+    private List<String> initDataYJP() {
+        titlelist.clear();
+        titlelist.add("1.气瓶检查");
+        titlelist.add("2.压力检查");
+        titlelist.add("3.重力检查");
+        titlelist.add("4.充装");
+        titlelist.add("5.水压试验");
+        titlelist.add("6.检查日期标签");
+        titlelist.add("7.维修");
+        titlelist.add("8.新气瓶");
+        return titlelist;
+    }
+
+    //消防水灭火信息录入
+    private List<String> initDataXFSMH() {
+        titlelist.clear();
+        titlelist.add("1.消防带和喷枪检查");
+        titlelist.add("2.功能试验");
+        titlelist.add("3.维修");
+        titlelist.add("4.检查日期标签");
+        titlelist.add("5.新消防带和喷枪");
+        return titlelist;
+    }
 
     public WorkIItemBean() {
     }

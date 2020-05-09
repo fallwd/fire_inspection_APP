@@ -5,34 +5,42 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.NjKitchenChecklistAcitivty;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.entity.WorkIItemBean;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<ItemInfo> mData;
     private Long checkid;  //检查表的Id
+    private Map<Integer, List<WorkIItemBean>> mapSelection = new HashMap();
     private IntentTransmit intentTransmit;   //之前页面数据的传参,如系统号\公司id...
     private HrPopup hrPopup; // 下拉框相关的引用
 
@@ -51,6 +59,7 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
         return holder;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         NjKitchenAdapter2.ViewHolder vh = (NjKitchenAdapter2.ViewHolder) holder;
@@ -66,24 +75,22 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
             String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getProdDate());
             vh.et_8.setText(new StringBuffer().append(mProdDate).append(""));
             vh.et_10.setText(new StringBuffer().append(info.getTaskNumber()).append(""));
-            vh.et_11.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (checkid == 0 || intentTransmit == null) {
-                        Toast.makeText(mContext, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    Intent intent = new Intent(mContext, NjKitchenChecklistAcitivty.class);
-                    intent.putExtra(NjKitchenChecklistAcitivty.CHECK_ID, checkid);
-                    intent.putExtra(NjKitchenChecklistAcitivty.CHECK_DIVICE, "驱动瓶  >  检查表");
-                    intent.putExtra("item_id", mData.get(position).getId());
-
-                    if (mData.get(position).getId() != 0) {
-                        intent.putExtra(NjKitchenChecklistAcitivty.CHECK_DIVICE_ID, mData.get(position).getId());
-                    }
-                    intent.putExtra(NjKitchenChecklistAcitivty.CHECK_SYS_DATA, intentTransmit);
-                    mContext.startActivity(intent);
+            vh.et_10.setOnClickListener(v -> showPopWindWork(vh.et_10,mapSelection,position));
+            vh.et_11.setOnClickListener(v -> {
+                if (checkid == 0 || intentTransmit == null) {
+                    Toast.makeText(mContext, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+                Intent intent = new Intent(mContext, NjKitchenChecklistAcitivty.class);
+                intent.putExtra(NjKitchenChecklistAcitivty.CHECK_ID, checkid);
+                intent.putExtra(NjKitchenChecklistAcitivty.CHECK_DIVICE, "驱动瓶  >  检查表");
+                intent.putExtra("item_id", mData.get(position).getId());
+
+                if (mData.get(position).getId() != 0) {
+                    intent.putExtra(NjKitchenChecklistAcitivty.CHECK_DIVICE_ID, mData.get(position).getId());
+                }
+                intent.putExtra(NjKitchenChecklistAcitivty.CHECK_SYS_DATA, intentTransmit);
+                mContext.startActivity(intent);
             });
 
             //下拉框
@@ -94,26 +101,63 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.et_12.setCompoundDrawables(null, null, drawable, null);
             Drawable drawable1 = mContext.getResources().getDrawable(R.drawable.listview_border_margin);
             final ViewHolder finalHolder = vh;
-            vh.et_12.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showPopWind(finalHolder.et_12);
-                }
-            });
+            vh.et_12.setOnClickListener(v -> showPopWind(finalHolder.et_12));
             vh.et_12.setBackground(drawable1);
 
             vh.et_13.setText(new StringBuffer().append(info.getLabelNo()).append(""));
 //            vh.et_14.setText(new StringBuffer().append(info.getCodePath()).append(""));  // 二维码怎么添加
 
+            //初始化工作表数据
+            WorkIItemBean mWorkIItemBean = new WorkIItemBean();
+            List<WorkIItemBean> workSelectData = mWorkIItemBean.getWorkSelectData(5);
+            mapSelection.put(position, workSelectData);
+
         }
-        vh.et_15.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                removeData(position);
-            }
-        });
+        vh.et_15.setOnClickListener(v -> removeData(position));
     }
 
+    private void showPopWindWork(TextView tv_11, Map<Integer, List<WorkIItemBean>> mapSelectData, int position) {
+        View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods_item, null);
+        if (hrPopup == null) {
+            hrPopup = new HrPopup((Activity) mContext);
+        }
+        ListView list_work = PopupRootView.findViewById(R.id.list_work);
+        TextView tv_canl = PopupRootView.findViewById(R.id.tv_canl);
+        TextView tv_confirm = PopupRootView.findViewById(R.id.tv_confirm);
+
+        List<WorkIItemBean> workIItemBeans = mapSelectData.get(position);
+        WorkSheetAdapter workSheetAdapter = new WorkSheetAdapter(mContext, workIItemBeans);
+        list_work.setAdapter(workSheetAdapter);
+        hrPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        hrPopup.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+        hrPopup.setBackgroundDrawable(new BitmapDrawable());
+        hrPopup.setFocusable(false);
+        hrPopup.setOutsideTouchable(false);
+        hrPopup.setContentView(PopupRootView);
+//        hrPopup.showAsDropDown(tv);
+        tv_canl.setOnClickListener(v -> {
+            if (hrPopup.isShowing()) {
+                hrPopup.dismiss();
+            }
+        });
+        tv_confirm.setOnClickListener(v -> {
+            if (hrPopup.isShowing()) {
+                hrPopup.dismiss();
+                List<WorkIItemBean> selection = workSheetAdapter.getSelection();
+                mapSelectData.put(position, selection);
+                //将结果赋值给tv11
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < selection.size(); i++) {
+                    WorkIItemBean mBean = selection.get(i);
+                    if (mBean.isState()) {
+                        builder.append(1 + i).append(",");
+                    }
+                }
+                tv_11.setText(builder.toString().substring(0, builder.length() - 1));
+            }
+        });
+        hrPopup.showAtLocation(hrPopup.getContentView(), Gravity.CENTER, 0, 0);
+    }
     //显示对话框,用户选择是否异常的弹框
     private void showPopWind(final TextView et_12) {
         View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods, null);
@@ -130,31 +174,22 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
         hrPopup.setOutsideTouchable(true);
         hrPopup.setContentView(PopupRootView);
         hrPopup.showAsDropDown(et_12);
-        rl_yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_12.setText("是");
-                if (hrPopup.isShowing()) {
-                    hrPopup.dismiss();
-                }
+        rl_yes.setOnClickListener(v -> {
+            et_12.setText("是");
+            if (hrPopup.isShowing()) {
+                hrPopup.dismiss();
             }
         });
-        rl_no.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_12.setText("否");
-                if (hrPopup.isShowing()) {
-                    hrPopup.dismiss();
-                }
+        rl_no.setOnClickListener(v -> {
+            et_12.setText("否");
+            if (hrPopup.isShowing()) {
+                hrPopup.dismiss();
             }
         });
-        rl_other.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_12.setText("---");
-                if (hrPopup.isShowing()) {
-                    hrPopup.dismiss();
-                }
+        rl_other.setOnClickListener(v -> {
+            et_12.setText("---");
+            if (hrPopup.isShowing()) {
+                hrPopup.dismiss();
             }
         });
     }
@@ -230,7 +265,7 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
         EditText et_4;
         EditText et_7;
         EditText et_8;
-        EditText et_10;
+        TextView et_10;
         TextView et_11;
         TextView et_12;
         EditText et_13;
@@ -245,7 +280,7 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
             et_4 = (EditText) view.findViewById(R.id.et_4);
             et_7 = (EditText) view.findViewById(R.id.et_7);
             et_8 = (EditText) view.findViewById(R.id.et_8);
-            et_10 = (EditText) view.findViewById(R.id.et_10);
+            et_10 = (TextView) view.findViewById(R.id.et_10);
             et_11 = (TextView) view.findViewById(R.id.et_11);
             et_12 = (TextView) view.findViewById(R.id.et_12);
             et_13 = (EditText) view.findViewById(R.id.et_13);

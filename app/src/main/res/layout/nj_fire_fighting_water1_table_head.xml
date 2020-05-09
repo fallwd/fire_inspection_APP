@@ -84,7 +84,8 @@
                 android:text="规格型号"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginLeft="0dp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -107,14 +108,17 @@
             android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
+
             <TextView
+                android:id="@+id/tv_13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:singleLine="true"
+                android:maxLines="1"
                 android:text="工作代号"
                 android:textColor="@color/title_black"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textSize="12sp" />
         </RelativeLayout>
 
 

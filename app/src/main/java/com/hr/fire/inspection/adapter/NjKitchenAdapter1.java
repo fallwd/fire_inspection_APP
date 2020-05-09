@@ -7,11 +7,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,12 +29,15 @@ import com.hr.fire.inspection.activity.QRCodeExistenceAcitivty;
 import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.entity.WorkIItemBean;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
@@ -40,7 +45,7 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
     private Long checkid;  //检查表的Id
     private IntentTransmit intentTransmit;   //之前页面数据的传参,如系统号\公司id...
     private HrPopup hrPopup; // 下拉框相关的引用
-
+    private Map<Integer, List<WorkIItemBean>> mapSelection = new HashMap();
     public NjKitchenAdapter1(Context mContext, List<ItemInfo> mData) {
         this.mContext = mContext;
         this.mData = mData;
@@ -80,7 +85,12 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.et_9.setText(new StringBuffer().append(mCheckDate).append(""));
 
             vh.et_10.setText(new StringBuffer().append(info.getTaskNumber()).append(""));
-
+            vh.et_10.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showPopWindWork(vh.et_10,mapSelection,position);
+                }
+            });
             vh.et_11.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -127,6 +137,11 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
                     mContext.startActivity(intent);
                 }
             });
+
+            //初始化工作表数据
+            WorkIItemBean mWorkIItemBean = new WorkIItemBean();
+            List<WorkIItemBean> workSelectData = mWorkIItemBean.getWorkSelectData(5);
+            mapSelection.put(position, workSelectData);
 
         }
 
@@ -238,6 +253,54 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
+    private void showPopWindWork(TextView tv_11, Map<Integer, List<WorkIItemBean>> mapSelectData, int position) {
+        View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods_item, null);
+        if (hrPopup == null) {
+            hrPopup = new HrPopup((Activity) mContext);
+        }
+        ListView list_work = PopupRootView.findViewById(R.id.list_work);
+        TextView tv_canl = PopupRootView.findViewById(R.id.tv_canl);
+        TextView tv_confirm = PopupRootView.findViewById(R.id.tv_confirm);
+
+        List<WorkIItemBean> workIItemBeans = mapSelectData.get(position);
+        WorkSheetAdapter workSheetAdapter = new WorkSheetAdapter(mContext, workIItemBeans);
+        list_work.setAdapter(workSheetAdapter);
+        hrPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        hrPopup.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+        hrPopup.setBackgroundDrawable(new BitmapDrawable());
+        hrPopup.setFocusable(false);
+        hrPopup.setOutsideTouchable(false);
+        hrPopup.setContentView(PopupRootView);
+//        hrPopup.showAsDropDown(tv);
+        tv_canl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+        tv_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                    List<WorkIItemBean> selection = workSheetAdapter.getSelection();
+                    mapSelectData.put(position, selection);
+                    //将结果赋值给tv11
+                    StringBuilder builder = new StringBuilder();
+                    for (int i = 0; i < selection.size(); i++) {
+                        WorkIItemBean mBean = selection.get(i);
+                        if (mBean.isState()) {
+                            builder.append(1 + i).append(",");
+                        }
+                    }
+                    tv_11.setText(builder.toString().substring(0, builder.length() - 1));
+                }
+            }
+        });
+        hrPopup.showAtLocation(hrPopup.getContentView(), Gravity.CENTER, 0, 0);
+    }
 
     /**
      * @param id
