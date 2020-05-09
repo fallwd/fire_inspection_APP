@@ -229,6 +229,7 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:layout_marginLeft="6dp"
                 android:background="@mipmap/remove_item"
                 android:textSize="12sp" />
         </RelativeLayout>
