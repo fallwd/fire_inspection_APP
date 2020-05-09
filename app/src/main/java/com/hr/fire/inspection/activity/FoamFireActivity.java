@@ -75,6 +75,7 @@ public class FoamFireActivity  extends AppCompatActivity {
         iv_add_table = findViewById(R.id.iv_add_table);
         tvInspectionPro = findViewById(R.id.tv_inspection_pro);
         iv_save = findViewById(R.id.iv_save);
+        iv_add_table.setVisibility(View.GONE);
         String text = "消防巡检维护专用工具";
         SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#E51C23", 0, 3);
         tvInspectionPro.setText(showTextColor);

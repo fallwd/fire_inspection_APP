@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250dp"
+    android:layout_height="match_parent"
+    android:background="@color/dark_translucent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/listview_border_margin"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_canl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="取消"
+                android:textColor="@color/title_green"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="4dp"
+                android:text="确认"
+                android:textColor="@color/title_green"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/list_work"
+            android:layout_width="250dp"
+            android:layout_height="275dp"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
+</RelativeLayout>

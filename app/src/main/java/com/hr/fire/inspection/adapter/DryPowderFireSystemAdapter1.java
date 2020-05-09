@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +23,7 @@ import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.entity.DryPowderFireSysTabSelect1;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
@@ -28,20 +31,21 @@ import com.hr.fire.inspection.view.tableview.HrPopup;
 import org.w3c.dom.Text;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DryPowderFireSystemAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<ItemInfo> mData;
     private Long checkid;  //检查表的Id
     private IntentTransmit intentTransmit;   //之前页面数据的传参,如系统号\公司id...
-
-    public DryPowderFireSystemAdapter1() {
-    }
+    private Map<Integer, List<DryPowderFireSysTabSelect1>> mapSelection = new HashMap();
 
     public DryPowderFireSystemAdapter1(Context mContext, List<ItemInfo> mData) {
         this.mContext = mContext;
         this.mData = mData;
+        mapSelection.clear();
     }
 
 
@@ -72,14 +76,25 @@ public class DryPowderFireSystemAdapter1 extends RecyclerView.Adapter<RecyclerVi
             // 药剂量
             vh.et_5.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));
             // 灌装日期
-            vh.et_6.setText(new StringBuffer().append(info.getFillingDate()).append(""));
+            String mProdDate1 = (String) TimeUtil.getInstance().dataToHHmmss(info.getFillingDate());
+            vh.et_6.setText(new StringBuffer().append(mProdDate1).append(""));
             // 生产厂家
             vh.et_7.setText(new StringBuffer().append(info.getProdFactory()).append(""));
             // 生产日期
-            String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getProdDate());
-            vh.et_8.setText(new StringBuffer().append(mProdDate).append(""));
+            String mProdDate2 = (String) TimeUtil.getInstance().dataToHHmmss(info.getProdDate());
+            vh.et_8.setText(new StringBuffer().append(mProdDate2).append(""));
 
             vh.et_9.setText(new StringBuffer().append(info.getTaskNumber()).append(""));
+            //初始化工作表数据
+            DryPowderFireSysTabSelect1 mWorkIItemBean = new DryPowderFireSysTabSelect1();
+            List<DryPowderFireSysTabSelect1> workSelectData = mWorkIItemBean.getWorkSelectData(1);
+            mapSelection.put(position, workSelectData);
+            vh.et_9.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showPopWindWork(vh.et_9, mapSelection, position);
+                }
+            });
 
             vh.tv_9.setText(new StringBuffer().append("干粉罐").append(position + 1).append("号表"));
 
@@ -96,7 +111,10 @@ public class DryPowderFireSystemAdapter1 extends RecyclerView.Adapter<RecyclerVi
                 }
             });
 
+            vh.et_10.setText(new StringBuffer().append(info.getIsPass()).append(""));
             vh.et_11.setText(new StringBuffer().append(info.getLabelNo()).append(""));
+//            vh.et_12.setImageURI(info.getCodePath()); // 二维码路径？？？
+
 
         }
         vh.tv_9.setOnClickListener(new View.OnClickListener() {
@@ -144,13 +162,18 @@ public class DryPowderFireSystemAdapter1 extends RecyclerView.Adapter<RecyclerVi
             notifyItemInserted(position);
         } else {
             ItemInfo itemInfo = new ItemInfo();
-            itemInfo.setVolume("9");
-            itemInfo.setWeight("3");
-            itemInfo.setGoodsWeight("50");
-            itemInfo.setProdFactory("未知");
+            itemInfo.setTypeNo("请编辑");
+            itemInfo.setNo("请编辑");
+            itemInfo.setVolume("请编辑");
+            itemInfo.setWeight("请编辑");
+            itemInfo.setGoodsWeight("请编辑");
             Date date = new Date();
-            itemInfo.setIsPass("是");
+            itemInfo.setFillingDate(date);
+            itemInfo.setProdFactory("请编辑");
             itemInfo.setProdDate(date);
+            itemInfo.setTaskNumber("请选择");
+            itemInfo.setIsPass("请选择");
+            itemInfo.setLabelNo("请编辑");
             mData.add(itemInfo);
             //添加动画
             notifyItemInserted(position);
@@ -235,6 +258,54 @@ public class DryPowderFireSystemAdapter1 extends RecyclerView.Adapter<RecyclerVi
             }
         });
     }
+    private void showPopWindWork(TextView et_9, Map<Integer, List<DryPowderFireSysTabSelect1>> mapSelectData, int position) {
+        View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods_item_wide, null);
+        if (hrPopup == null) {
+            hrPopup = new HrPopup((Activity) mContext);
+        }
+        ListView list_work = PopupRootView.findViewById(R.id.list_work);
+        TextView tv_canl = PopupRootView.findViewById(R.id.tv_canl);
+        TextView tv_confirm = PopupRootView.findViewById(R.id.tv_confirm);
+
+        List<DryPowderFireSysTabSelect1> workIItemBeans = mapSelectData.get(position);
+        DryWorkSheetAdapter1 workSheetAdapter = new DryWorkSheetAdapter1(mContext, workIItemBeans);
+        list_work.setAdapter(workSheetAdapter);
+        hrPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        hrPopup.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+        hrPopup.setBackgroundDrawable(new BitmapDrawable());
+        hrPopup.setFocusable(false);
+        hrPopup.setOutsideTouchable(false);
+        hrPopup.setContentView(PopupRootView);
+//        hrPopup.showAsDropDown(tv);
+        tv_canl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+        tv_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                    List<DryPowderFireSysTabSelect1> selection = workSheetAdapter.getSelection();
+                    mapSelectData.put(position, selection);
+                    //将结果赋值给tv11
+                    StringBuilder builder = new StringBuilder();
+                    for (int i = 0; i < selection.size(); i++) {
+                        DryPowderFireSysTabSelect1 mBean = selection.get(i);
+                        if (mBean.isState()) {
+                            builder.append(1 + i).append(",");
+                        }
+                    }
+                    et_9.setText(builder.toString().substring(0, builder.length() - 1));
+                }
+            }
+        });
+        hrPopup.showAtLocation(hrPopup.getContentView(), Gravity.CENTER, 0, 0);
+    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_1;
@@ -246,7 +317,7 @@ public class DryPowderFireSystemAdapter1 extends RecyclerView.Adapter<RecyclerVi
         EditText et_6;
         EditText et_7;
         EditText et_8;
-        EditText et_9;
+        TextView et_9;
         TextView tv_9;
         TextView et_10;
         EditText et_11;
@@ -264,7 +335,7 @@ public class DryPowderFireSystemAdapter1 extends RecyclerView.Adapter<RecyclerVi
             et_6 = (EditText) view.findViewById(R.id.et_6);
             et_7 = (EditText) view.findViewById(R.id.et_7);
             et_8 = (EditText) view.findViewById(R.id.et_8);
-            et_9 = (EditText) view.findViewById(R.id.et_9);
+            et_9 = (TextView) view.findViewById(R.id.et_9);
             et_10 = (TextView) view.findViewById(R.id.et_10);
             et_11 = (EditText) view.findViewById(R.id.et_11);
             et_12 = (ImageView) view.findViewById(R.id.et_12);
