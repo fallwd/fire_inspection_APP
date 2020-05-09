@@ -151,7 +151,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-            <EditText
+            <TextView
                 android:id="@+id/et_9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -160,6 +160,7 @@
                 android:singleLine="true"
                 android:maxLines="1"
                 android:text="工作代号"
+                android:textColor="#000"
                 android:textSize="12sp" />
         </RelativeLayout>
 

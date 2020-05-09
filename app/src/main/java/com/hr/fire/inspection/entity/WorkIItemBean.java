@@ -62,7 +62,6 @@ public class WorkIItemBean {
         titlelist.add("5.水压试验");
         titlelist.add("6.检验日期标签");
         titlelist.add("7.维修");
-        titlelist.add("8.维修");
         return titlelist;
     }
 

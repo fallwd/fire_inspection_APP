@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,8 @@ import java.util.List;
 public class StatiSticsActivity extends AppCompatActivity {
 
     private List<String> timeList = new ArrayList<String>();
+
+    private ImageView iv_finish;
 
     private Button clear_statisty;
     // 选中的年份
@@ -118,6 +121,7 @@ public class StatiSticsActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
+        iv_finish = findViewById(R.id.iv_finish);
 
         final Spinner spinner_time = findViewById(R.id.spinner_time);
         clear_statisty = findViewById(R.id.clear_statisty);
@@ -199,6 +203,8 @@ public class StatiSticsActivity extends AppCompatActivity {
                 InitSetSpinner(spinner_time, (ArrayList<String>) timeList);
             }
         });
+
+        initListner();
     }
     private void HandelClear(){
         clear_statisty.setOnClickListener(new View.OnClickListener() {
@@ -216,5 +222,13 @@ public class StatiSticsActivity extends AppCompatActivity {
         arr_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //加载适配器
         spinner.setAdapter(arr_adapter);
+    }
+    private void initListner() {
+        iv_finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }
