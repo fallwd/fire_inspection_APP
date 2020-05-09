@@ -29,25 +29,19 @@ import com.hr.fire.inspection.adapter.AutomaticFireAlarmAdapter;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
-import com.hr.fire.inspection.service.BaseService;
 import com.hr.fire.inspection.service.ServiceFactory;
-import com.hr.fire.inspection.service.impl.YearCheckServiceImpl;
 import com.hr.fire.inspection.utils.FileRoute;
 import com.hr.fire.inspection.utils.HYLogUtil;
-import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class AutomaticFireAlarm1 extends Fragment {
     View rootView;
