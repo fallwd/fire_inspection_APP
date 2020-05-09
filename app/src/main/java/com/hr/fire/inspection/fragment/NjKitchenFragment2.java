@@ -190,7 +190,7 @@ public class NjKitchenFragment2 extends Fragment {
             EditText et_4 = childAt.findViewById(R.id.et_4);
             EditText et_7 = childAt.findViewById(R.id.et_7);
             EditText et_8 = childAt.findViewById(R.id.et_8);
-            EditText et_10 = childAt.findViewById(R.id.et_10);
+            TextView et_10 = childAt.findViewById(R.id.et_10);
             TextView et_12 = childAt.findViewById(R.id.et_12);
             EditText et_13 = childAt.findViewById(R.id.et_13);
             ImageView et_14 = childAt.findViewById(R.id.et_14);
