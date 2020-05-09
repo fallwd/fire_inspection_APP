@@ -25,18 +25,23 @@ import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.adapter.NJMhqCloumnAdapter;
 import com.hr.fire.inspection.adapter.NJMhqContentApapter;
-import com.hr.fire.inspection.adapter.XJFirstColumnApapter;
+import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
+import com.hr.fire.inspection.utils.HYLogUtil;
+import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 import com.hr.fire.inspection.view.tableview.HListViewScrollView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -52,20 +57,22 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
     private RecyclerView rl_content;
     private long systemId;
     private long companyInfoId;
+    private long platform_id;
     private String str_title;
-    private String duty;
-    private String check_name;
-    private String check_date;
-    Date parse_check_date = null;
+
+    Date srt_Date = null;
     private String srt_date;
-    private List<InspectionResult> inspectionResults;
+    private String sys_number;
     private InspectionServiceImpl service;
-    private XJFirstColumnApapter firstColumnApapter;
+    private NJMhqCloumnAdapter firstColumnApapter;
     private NJMhqContentApapter contentApapter;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final int TAKE_PHOTO = 1;//拍照
     private int imgPostion = -1;
+
+    private List<CheckType> checkTypes;
+    private List<ItemInfo> itemDataList = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,32 +86,36 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
     }
 
     private void getIntentData() {
+        //历史中的companyInfoId  ,  systemId和再公司、平台那边传过来的都是一样的ID，使用哪一个都行
         Intent intent = getIntent();
         systemId = intent.getLongExtra("systemId", -1);
         companyInfoId = intent.getLongExtra("platform_id", -1);
+        Date srt_Date1 = (Date) intent.getSerializableExtra("srt_Date");  //传过来的时间
+        srt_Date = srt_Date1;
         str_title = intent.getStringExtra("str_title"); //系统名称 :高压二氧化碳灭火系统
-        duty = intent.getStringExtra("duty");  // 专业
-        check_name = intent.getStringExtra("check_name"); // 检查人
-        check_date = intent.getStringExtra("check_date"); //用户选择的时间
-        //测试用, 因为前面传过来的时间格式有问题
-        check_date = "2020-04-23 18:21";
-        try {
-            //这个解析方式是没有问题的 ,需要保证前面传入的数据是 2020-04-23 18:21 格式
-            parse_check_date = sdf.parse(check_date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        sys_number = intent.getStringExtra("sys_number"); //传过来的名称
+        Log.d("dong", "systemId=" + systemId+ "companyInfoId="+companyInfoId+ "srt_Date="+ srt_Date + "str_title="+str_title+"sys_number= "+sys_number);
 
         srt_date = intent.getStringExtra("srt_Date");   //检查日期,用户没选择,就是表示是新建
     }
 
     private void initData() {
-        service = new InspectionServiceImpl();
-        inspectionResults = service.getInspectionData(companyInfoId, systemId, parse_check_date);
-        Log.d("dong", "inspectionData == " + inspectionResults.size());
-        if (inspectionResults != null && inspectionResults.size() != 0) {
-            Log.d("dong", "inspectionData == -----   " + inspectionResults.get(0).toString());
+
+        List<CheckType> arr = ServiceFactory.getYearCheckService().gettableNameData(systemId);
+        long checkTypeId = arr.get(0).getId();
+
+
+        checkTypes = ServiceFactory.getYearCheckService().gettableNameData(systemId);
+        Log.d("dong", "checkTypeId == -----   " + checkTypeId+ "checkTypes===" +checkTypes);
+        if (checkTypes == null) {
+            Toast.makeText(this, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
         }
+        //参数1:公司id, 参数2:检查表类型对应的id, 参数3:输入的系统位号，如果没有就填"",或者SD002,否则没数据   参数4:日期
+        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(companyInfoId, checkTypes.get(0).getId(), sys_number == null ? "" : sys_number, srt_Date);
+        Log.d("dong", "itemDataList == -----   " + itemDataList);
+        HYLogUtil.getInstance().d("设备表信息,数据查看:" + itemDataList.size() + "  " + itemDataList.toString());
+        // 一级表插入数据insertItemData
+
     }
 
     private void initView() {
@@ -128,7 +139,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
         mLayoutManager.setOrientation(OrientationHelper.VERTICAL);
         //给RecyclerView设置布局管理器
         rl_firstColumn.setLayoutManager(mLayoutManager);
-        firstColumnApapter = new XJFirstColumnApapter(this, inspectionResults);
+        firstColumnApapter = new NJMhqCloumnAdapter(this, itemDataList);
         rl_firstColumn.setAdapter(firstColumnApapter);
 
 
@@ -136,7 +147,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
         mLayoutManager2.setOrientation(OrientationHelper.VERTICAL);
         //给RecyclerView设置布局管理器
         rl_content.setLayoutManager(mLayoutManager2);
-        contentApapter = new NJMhqContentApapter(this, inspectionResults);
+        contentApapter = new NJMhqContentApapter(this, itemDataList);
         rl_content.setAdapter(contentApapter);
         contentApapter.setmYCCamera(new NJMhqContentApapter.YCCamera() {
             @Override
@@ -203,34 +214,29 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
      * 二:增加数据成功后,刷新适配器adapter
      */
     private void addItemView() {
-        if (rl_firstColumn != null && rl_content != null && inspectionResults != null) {
-            InspectionResult result = new InspectionResult();
-            if (inspectionResults.size() != 0) {
-                Log.d("dong", "默认有数据==之后吧");
-                //有数据的时候,拿到最后一条数据进行填充
-                InspectionResult item = inspectionResults.get(inspectionResults.size() - 1);
-                result.setProfession(item.getProfession());
-                result.setCheckPerson(item.getCheckPerson());
-                result.setCheckDate(item.getCheckDate());
-                result.setDescription(item.getDescription());
-                result.setImgPath(item.getImgPath());
-                result.setParam1(item.getParam1());
-                result.setParam2(item.getParam2());
-                result.setParam3(item.getParam3());
-                result.setParam4(item.getParam4());
-                result.setParam5(item.getParam5());
-                result.setParam6(item.getParam6());
-                result.setParam7(item.getParam7());
-                result.setParam8(item.getParam8());
-                result.setParam9(item.getParam9());
-                result.setParam10(item.getParam10());
-                result.setParam11(item.getParam11());
-                result.setParam12(item.getParam12());
-                result.setParam13(item.getParam13());
-                result.setParam14(item.getParam14());
-                result.setParam15(item.getParam15());
-                result.setParam16(item.getParam16());
-                result.setParam17(item.getParam17());
+        if (contentApapter != null) {
+            ItemInfo itemInfo = new ItemInfo();
+            if (itemDataList != null && itemDataList.size() != 0) {
+                //点击新增,有数据,就拿到最后一条数据新增,创建一个新的对象
+                ItemInfo item = itemDataList.get(itemDataList.size() - 1);
+//                Log.d("dong", "item有数据时" + item);
+                itemInfo.setTypeNo(item.getTypeNo());
+                itemInfo.setDeviceType(item.getDeviceType());
+                itemInfo.setLevel(item.getLevel());
+                itemInfo.setTaskNumber(item.getTaskNumber());
+                itemInfo.setProdFactory(item.getProdFactory());
+                itemInfo.setProdDate(item.getProdDate());
+                itemInfo.setTypeConformity(item.getTypeConformity());
+                itemInfo.setPositionConformity(item.getPositionConformity());
+                itemInfo.setAppearance(item.getAppearance());
+                itemInfo.setIsPressure(item.getIsPressure());
+                itemInfo.setEffectiveness(item.getEffectiveness());
+                itemInfo.setObserveDate(item.getObserveDate());
+                itemInfo.setIsPass(item.getIsPass());
+                itemInfo.setLabelNo(item.getLabelNo());
+                itemInfo.setImageUrl(item.getImageUrl());
+                itemInfo.setDescription(item.getDescription());
+                itemInfo.setCodePath(item.getCodePath());
 
 
 
@@ -255,37 +261,36 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
 
             } else {
                 //没有数据造一段默认数据
-                Log.d("dong", "默认没有数据吧==");
-                result.setProfession(duty);
-                result.setCheckPerson(check_name);
-                result.setCheckDate(parse_check_date);
-                result.setDescription("暂无");
-                result.setImgPath("暂无图片");
-                result.setParam1("请输入");
-                result.setParam2("是");
-                result.setParam3("是");
-                result.setParam4("是");
-                result.setParam5("请输入");
-                result.setParam6("请输入");
-                result.setParam7("是");
-                result.setParam8("是");
-                result.setParam9("是");
-                result.setParam10("是");
-                result.setParam11("是");
-                result.setParam12("请输入");
-                result.setParam13("是");
-                result.setParam14("是");
-                result.setParam15("是");
-                result.setParam16("请输入");
-                result.setParam17("生成");
+                itemInfo.setTypeNo("请输入");
+                itemInfo.setDeviceType("请选择");
+                itemInfo.setLevel("请选择");
+                itemInfo.setTaskNumber("请选择");
+                itemInfo.setProdFactory("请输入");
+                Date date = new Date();
+                itemInfo.setProdDate(date);
+                itemInfo.setTypeConformity("请选择");
+                itemInfo.setPositionConformity("请选择");
+                itemInfo.setAppearance("请选择");
+                itemInfo.setIsPressure("请选择");
+                itemInfo.setEffectiveness("请选择");
+                itemInfo.setObserveDate(date);
+                itemInfo.setIsPass("请选择");
+                itemInfo.setLabelNo("请输入");
+//                itemInfo.setImageUrl("请选择");
+                itemInfo.setDescription("请输入");
+                itemInfo.setCodePath("生成");
             }
-            long l = service.insertInspectionData(result, companyInfoId, systemId, parse_check_date);
+
+//            Log.d("dong", "itemInfo增加" + itemInfo);
+//            Log.d("dong", "itemInfo增加" + companyInfoId + checkTypes.get(0).getId() + sys_number + srt_Date );
+
+            long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, companyInfoId, checkTypes.get(0).getId(), sys_number, srt_Date);
             //表示数据插入成功,再次查询,拿到最新的数据
-            if (l == 0) {
-                inspectionResults = service.getInspectionData(companyInfoId, systemId, parse_check_date);
-                Log.d("dong", "inspectionResults=  " + inspectionResults.size() + "  " + inspectionResults.get(0).getParam2());
-                firstColumnApapter.setNewData(inspectionResults);
-                contentApapter.setNewData(inspectionResults);
+            if (l1 == 0) {
+                itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(companyInfoId, checkTypes.get(0).getId(), sys_number == null ? "" : sys_number, srt_Date);
+//                Log.d("dong", "itemDataList增加我要去传给adapter渲染啦啦" + itemDataList);
+                contentApapter.setNewData(itemDataList);
+                firstColumnApapter.setNewData(itemDataList);
             } else {
                 ToastUtil.show(this, "未知错误,新增失败", Toast.LENGTH_SHORT);
             }
@@ -298,11 +303,17 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
      * 我们在Updara的时候先查询,如果没有没有数据就说明无数据更新  , 如果有就进行更新,
      */
     private void saveToUpdara() {
-        if (inspectionResults == null || inspectionResults.size() == 0) {
+        int itemCount = rl_content.getChildCount();
+
+        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(companyInfoId, checkTypes.get(0).getId(), sys_number == null ? "" : sys_number, srt_Date);
+//        Log.d("dong", "itemDataList == -----   " + itemDataList);
+
+//        Log.d("dong", "upData==   " + itemCount + "   新的数据条数   " + itemDataList.size());
+        if (itemCount == 0 || itemDataList.size() == 0 || itemDataList.size() != itemCount) {
             Toast.makeText(this, "暂无数据保存", Toast.LENGTH_SHORT).show();
             return;
         }
-        int itemCount = rl_content.getChildCount();
+
         for (int i = 0; i < itemCount; i++) {
             LinearLayout childAt = (LinearLayout) rl_content.getChildAt(i);
 
@@ -319,34 +330,36 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
             TextView tv_fire11 = childAt.findViewById(R.id.tv_fire11);
             EditText et_fire12 = childAt.findViewById(R.id.et_fire12);
             TextView tv_fire13 = childAt.findViewById(R.id.tv_fire13);
-            TextView tv_fire14 = childAt.findViewById(R.id.tv_fire14);
+            TextView et_fire14 = childAt.findViewById(R.id.et_fire14);
             TextView tv_fire15 = childAt.findViewById(R.id.tv_fire15);
             EditText et_fire16 = childAt.findViewById(R.id.et_fire16);
+            TextView tv_fire17 = childAt.findViewById(R.id.tv_fire17);
 
 
-            InspectionResult itemObj = inspectionResults.get(i);
-            itemObj.setProfession(itemObj.getProfession());
-            itemObj.setCheckPerson(itemObj.getCheckPerson());
-            itemObj.setCheckDate(itemObj.getCheckDate());
+            ItemInfo itemObj = itemDataList.get(i);
+            itemObj.setTypeNo(et_fire1.getText().toString());
+            itemObj.setDeviceType(tv_fire2.getText().toString());
+            itemObj.setLevel(tv_fire3.getText().toString());
+            itemObj.setTaskNumber(tv_fire4.getText().toString());
+            itemObj.setProdFactory(et_fire5.getText().toString());
+            Date date1 = TimeUtil.getInstance().hhmmssTodata(et_fire6.getText().toString());
+            itemObj.setProdDate(date1);
+            itemObj.setTypeConformity(tv_fire7.getText().toString());
+            itemObj.setPositionConformity(tv_fire8.getText().toString());
+            itemObj.setAppearance(tv_fire9.getText().toString());
+            itemObj.setIsPressure(tv_fire10.getText().toString());
+            itemObj.setEffectiveness(tv_fire11.getText().toString());
+            Date date2 = TimeUtil.getInstance().hhmmssTodata(et_fire12.getText().toString());
+            itemObj.setObserveDate(date2);
+            itemObj.setIsPass(tv_fire13.getText().toString());
+            itemObj.setLabelNo(et_fire14.getText().toString());
+            itemObj.setImageUrl(tv_fire15.getText().toString());
             itemObj.setDescription(et_fire16.getText().toString());
-            itemObj.setParam1(et_fire1.getText().toString());
-            itemObj.setParam2(tv_fire2.getText().toString());
-            itemObj.setParam3(tv_fire3.getText().toString());
-            itemObj.setParam4(tv_fire4.getText().toString());
-            itemObj.setParam5(et_fire5.getText().toString());
-            itemObj.setParam6(et_fire6.getText().toString());
-            itemObj.setParam7(tv_fire7.getText().toString());
-            itemObj.setParam8(tv_fire8.getText().toString());
-            itemObj.setParam9(tv_fire9.getText().toString());
-            itemObj.setParam10(tv_fire10.getText().toString());
-            itemObj.setParam11(tv_fire11.getText().toString());
-            itemObj.setParam12(et_fire12.getText().toString());
-            itemObj.setParam13(tv_fire13.getText().toString());
-            itemObj.setParam14(tv_fire14.getText().toString());
-            itemObj.setParam15(tv_fire15.getText().toString());
-            itemObj.setParam16(et_fire16.getText().toString());
+            itemObj.setCodePath(tv_fire17.getText().toString());
 
-            service.update(itemObj);
+            Log.d("dong", "itemObj222222保存==   "+itemObj.getLevel());
+            ServiceFactory.getYearCheckService().update(itemObj);
+            Log.d("dong", "itemObj222222保存==   "+itemObj.getLevel());
         }
         Toast.makeText(this, "数据保存成功", Toast.LENGTH_SHORT).show();
     }
@@ -384,7 +397,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                         // /external_path/Android/data/com.hr.fire.inspection/cache/1587460070369.jpg
                         String path = imgUri.getPath();
                         if (path != null && imgPostion != -1 && contentApapter != null) {
-                            inspectionResults.get(imgPostion).setImgPath(path);
+                            itemDataList.get(imgPostion).setImageUrl(path);
                             //TODO 会崩溃.
 //                            contentApapter.notifyItemChanged(imgPostion);
                         }

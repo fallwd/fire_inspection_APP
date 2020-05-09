@@ -185,13 +185,13 @@ public class CheckReporItemAdapter extends BaseAdapter {
                     workbook.write(stream);// 写入流
                     stream.close();//关闭流
                     Toast.makeText(mContext, "报告生成成功", Toast.LENGTH_SHORT).show();
-//                    if (file.isFile()) {
-//                        Intent intent = new Intent(Intent.ACTION_VIEW);
-//                        Uri uri = FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".fileProvider", file);
-//                        intent.setDataAndType(uri, "application/vnd.ms-excel");
-//                        mContext.startActivity(intent);
-//                        return;
-//                    }
+                    if (file.isFile()) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        Uri uri = FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".fileProvider", file);
+                        intent.setDataAndType(uri, "application/vnd.ms-excel");
+                        mContext.startActivity(intent);
+                        return;
+                    }
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();

@@ -156,20 +156,6 @@
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tv_fire6"
-                android:layout_width="80dp"
-                android:layout_height="45dp"
-                android:textAlignment="center"
-                tools:ignore="RtlCompat"
-                android:layout_marginLeft="8dp"
-                android:gravity="center_vertical"
-                android:text="型号"
-                android:textColor="@color/title_black"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:visibility="gone"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/rl_fire7"
@@ -285,20 +271,6 @@
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tv_fire12"
-                android:layout_width="80dp"
-                android:layout_height="45dp"
-                android:textAlignment="center"
-                tools:ignore="RtlCompat"
-                android:layout_marginLeft="8dp"
-                android:gravity="center_vertical"
-                android:text="维修日期"
-                android:textColor="@color/title_black"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:visibility="gone"/>
         </RelativeLayout>
 
 
@@ -325,9 +297,22 @@
         <RelativeLayout
             android:id="@+id/rl_fire14"
             android:layout_width="80dp"
+            android:layout_marginLeft="15dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             >
+            <EditText
+                android:id="@+id/et_fire14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:hint="请输入"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
             <TextView
                 android:id="@+id/tv_fire14"
                 android:layout_width="80dp"
@@ -335,7 +320,6 @@
                 android:textAlignment="center"
                 android:layout_marginLeft="8dp"
                 android:gravity="center_vertical"
-                android:text="检验标签"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -345,7 +329,7 @@
             android:id="@+id/rl_fire15"
             android:layout_width="80dp"
             android:layout_height="45dp"
-            android:layout_marginLeft="17dp"
+            android:layout_marginLeft="9dp"
             android:layout_gravity="center"
             >
             <TextView
@@ -365,7 +349,7 @@
         <RelativeLayout
             android:id="@+id/rl_fire16"
             android:layout_width="120dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             >
@@ -388,7 +372,6 @@
                 android:layout_height="45dp"
                 android:textAlignment="center"
                 tools:ignore="RtlCompat"
-                android:layout_marginLeft="8dp"
                 android:gravity="center_vertical"
                 android:text="隐患描述"
                 android:textColor="@color/title_black"
@@ -410,7 +393,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_marginLeft="8dp"
                 android:text="生成"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
