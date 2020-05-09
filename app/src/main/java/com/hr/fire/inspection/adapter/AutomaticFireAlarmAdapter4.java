@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
@@ -51,6 +54,7 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
         return holder;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         AutomaticFireAlarmAdapter4.ViewHolder vh = (AutomaticFireAlarmAdapter4.ViewHolder) holder;
@@ -142,12 +146,18 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
 
 
             //         照相机的图片  需要把对应的xml转换为textview
-            vh.et_13.setVisibility(View.GONE);
-            vh.et_13.setVisibility(View.VISIBLE);
+            String imageUrl = info.getImageUrl();
+            if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+                Uri uri = Uri.parse(imageUrl);
+                vh.et_13.setImageURI(uri);
+            } else {
+                vh.et_13.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
+
+            }
             vh.et_13.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mContext.startActivity(new Intent(mContext, PhotoUploadActivity.class));
+                    mYCCamera.startCamera(position);
                 }
             });
             vh.et_15.setText(new StringBuffer().append(info.getDescription()).append(""));
@@ -538,5 +548,17 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
             et_15 = (EditText) view.findViewById(R.id.et_15);
             et_16 = (RelativeLayout) view.findViewById(R.id.et_16);
         }
+    }
+
+
+    private YCCamera mYCCamera;
+
+    //接口回调, 将点击事件传递到activity中,打开相机
+    public void setmYCCamera(YCCamera y) {
+        this.mYCCamera = y;
+    }
+
+    public interface YCCamera {
+        void startCamera(int postion);
     }
 }

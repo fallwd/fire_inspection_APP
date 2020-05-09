@@ -263,8 +263,6 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
     /**
      * 打开系统相机
      */
-
-
     private File fileNew = null;
     private void openSysCamera() {
         // intent用来启动系统自带的Camera

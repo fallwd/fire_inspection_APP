@@ -32,6 +32,7 @@ import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
+import com.hr.fire.inspection.utils.FileRoute;
 import com.hr.fire.inspection.utils.HYLogUtil;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
@@ -153,11 +154,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;
-                try {
-                    camera();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                openSysCamera();
             }
         });
         //刷新序号列表
@@ -365,47 +362,44 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
     }
 
 
-    private Uri imgUri;
-
-    private void camera() throws IOException {
-        //该目录是app应用下面的目录,如果程序被卸载或造成图片丢失. 建议使用: FileRoute.getFilePath();但是需要适配
-        long timeMillis = System.currentTimeMillis();
-        String sPath = new StringBuilder().append(timeMillis).append(".jpg").toString();
-        File outputImage = new File(getExternalCacheDir(), sPath);
-
-        if (Build.VERSION.SDK_INT >= 24) {
-            imgUri = FileProvider
-                    .getUriForFile(this, getApplication().getApplicationContext().getPackageName() + ".fileProvider", outputImage);
-        } else {
-            imgUri = Uri.fromFile(outputImage);
-        }
-        //启动相机
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imgUri);
-        startActivityForResult(intent, TAKE_PHOTO);
-    }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case TAKE_PHOTO:  //拍照的回调
-                if (resultCode == RESULT_OK) {
-                    try {
-                        Bitmap bitmap = BitmapFactory
-                                .decodeStream(getContentResolver().openInputStream(imgUri));
-                        // /external_path/Android/data/com.hr.fire.inspection/cache/1587460070369.jpg
-                        String path = imgUri.getPath();
-                        if (path != null && imgPostion != -1 && contentApapter != null) {
-                            itemDataList.get(imgPostion).setImageUrl(path);
-                            //TODO 会崩溃.
-//                            contentApapter.notifyItemChanged(imgPostion);
-                        }
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+            case FileRoute.CAMERA_RESULT_CODE:
+                //这里目前需要适配
+                if (fileNew.getAbsolutePath() != null && imgPostion != -1 && contentApapter != null) {
+                    itemDataList.get(imgPostion).setImageUrl(fileNew.getAbsolutePath());
+                    contentApapter.notifyItemChanged(imgPostion);
                 }
                 break;
+        }
+    }
+
+    /**
+     * 打开系统相机
+     */
+    private File fileNew = null;
+
+    private void openSysCamera() {
+        // intent用来启动系统自带的Camera
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            fileNew = new FileRoute(this).createOriImageFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Uri imgUriOri = null;
+        if (fileNew != null) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                imgUriOri = Uri.fromFile(fileNew);
+            } else {
+                imgUriOri = FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() + ".fileProvider", fileNew);
+            }
+            // 将系统Camera的拍摄结果写入到文件
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgUriOri);
+            startActivityForResult(cameraIntent, FileRoute.CAMERA_RESULT_CODE);
         }
     }
 }
