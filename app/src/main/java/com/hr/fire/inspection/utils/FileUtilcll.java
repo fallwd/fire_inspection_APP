@@ -1,14 +1,11 @@
 package com.hr.fire.inspection.utils;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Environment;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Field;
 
 /**
  * 图片文件操作

@@ -80,10 +80,10 @@ public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 //路径  /external_path/Android/data/com.hr.fire.inspection/cache/1587462719699.jpg
 //                Uri uri = Uri.fromFile(new File(imageUrl));
                 Uri uri = Uri.parse(imageUrl);
-                File file = new File(imageUrl);
-                Log.d("dong", "file==adapter==" + file.exists());
-                Log.d("dong", "==adapter==" + uri);
                 vh.iv7.setImageURI(uri);
+            } else {
+                Drawable drawable = mContext.getDrawable(R.mipmap.scene_photos_icon);
+                vh.iv7.setImageDrawable(drawable);
             }
 
             //在左侧添加图片

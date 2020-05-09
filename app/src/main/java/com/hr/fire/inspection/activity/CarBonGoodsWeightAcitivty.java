@@ -245,37 +245,33 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
                     }
                 }
                 break;
-            case CAMERA_RESULT_CODE:
+            case FileRoute.CAMERA_RESULT_CODE:
 //                File tempFile = new File(Environment.getExternalStorageDirectory(), imgNameTime);
 //                String absolutePath = tempFile.getAbsolutePath();
 //                String fileName = absolutePath.substring(absolutePath
 //                        .lastIndexOf("/") + 1, absolutePath.length() - 4);
 //                Bitmap bitmap = BitmapFactory.decodeFile(tempFile.getPath());
-
-                if (imgPathOri != null && imgPostion != -1 && goodsAdapter != null) {
-                    yearCheckResults.get(imgPostion).setImageUrl(imgPathOri);
+                //这里目前需要适配
+                if (fileNew.getAbsolutePath() != null && imgPostion != -1 && goodsAdapter != null) {
+                    yearCheckResults.get(imgPostion).setImageUrl(fileNew.getAbsolutePath());
                     goodsAdapter.notifyItemChanged(imgPostion);
                 }
                 break;
         }
     }
 
-    public String imgNameTime = String.valueOf(System.currentTimeMillis());
-    public static final int CAMERA_RESULT_CODE = 101;//拍照
-
-    String imgPathOri;
-
     /**
      * 打开系统相机
      */
 
 
+    private File fileNew = null;
     private void openSysCamera() {
-         File fileNew = null;
         // intent用来启动系统自带的Camera
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         try {
-            fileNew = createOriImageFile();
+            fileNew = new FileRoute(this).createOriImageFile();
+//            String imgPathOri = fileNew.getAbsolutePath();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -288,30 +284,7 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
             }
             // 将系统Camera的拍摄结果写入到文件
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgUriOri);
-            startActivityForResult(cameraIntent, CAMERA_RESULT_CODE);
+            startActivityForResult(cameraIntent, FileRoute.CAMERA_RESULT_CODE);
         }
-
-    }
-
-    /**
-     * 创建原图像保存的文件
-     *
-     * @return
-     * @throws IOException
-     */
-    private File createOriImageFile() throws IOException {
-        File pictureDirOri = new File(getExternalFilesDir(
-                Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/OriPicture");
-        if (!pictureDirOri.exists()) {
-            pictureDirOri.mkdirs();
-        }
-        File image = File.createTempFile(
-                String.valueOf(System.currentTimeMillis()),         /* prefix */
-                ".jpg",             /* suffix */
-                pictureDirOri       /* directory */
-        );
-        imgPathOri = image.getAbsolutePath();
-        Log.d("dong", "----原头像的文件--- " + imgPathOri);
-        return image;
     }
 }
