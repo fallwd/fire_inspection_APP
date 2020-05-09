@@ -120,24 +120,50 @@ public class DryPowderFireSystemFragment1 extends Fragment {
                 //点击新增,有数据,就拿到最后一条数据新增,创建一个新的对象
                 ItemInfo item = itemDataList.get(itemDataList.size() - 1);
                 //如果直接新增会导致后台id冲重复\冲突
+                itemInfo.setTypeNo(item.getTypeNo());
+                itemInfo.setNo(item.getNo());
                 itemInfo.setVolume(item.getVolume());
                 itemInfo.setWeight(item.getWeight());
                 itemInfo.setGoodsWeight(item.getGoodsWeight());
+                itemInfo.setFillingDate(item.getFillingDate());
                 itemInfo.setProdFactory(item.getProdFactory());
                 itemInfo.setProdDate(item.getProdDate());
-                itemInfo.setTypeNo(item.getTypeNo());
-                itemInfo.setNo(item.getNo());
-                itemInfo.setFillingDate(item.getFillingDate());
                 itemInfo.setTaskNumber(item.getTaskNumber());
+                itemInfo.setIsPass(item.getIsPass());
+                itemInfo.setLabelNo(item.getLabelNo());
+                itemInfo.setCodePath(item.getCodePath());
 
             } else {
+
+//                型号 typeNo
+//                瓶号 no
+//                容积/L	 volume
+//                瓶重/kg	 weight
+//                药剂量/kg	  goodsWeight
+//                灌装日期	 fillingDate
+//                生产厂家	 prodFactory
+//                生产日期	 prodDate
+//                工作代号	 taskNumber
+//                检查表
+//                是否合格	 isPass
+//                检验标签	labelNo
+//                二维码 codePath
+
+
                 //点击新增,如果没有数据,就造一条默认数据
-                itemInfo.setVolume("9");
-                itemInfo.setWeight("3");
-                itemInfo.setGoodsWeight("50");
-                itemInfo.setProdFactory("未知");
+                itemInfo.setTypeNo("请编辑");
+                itemInfo.setNo("请编辑");
+                itemInfo.setVolume("请编辑");
+                itemInfo.setWeight("请编辑");
+                itemInfo.setGoodsWeight("请编辑");
                 Date date = new Date();
+                itemInfo.setFillingDate(date);
+                itemInfo.setProdFactory("请编辑");
                 itemInfo.setProdDate(date);
+                Log.i("aaa", "我要第一次渲染了" +itemInfo.getFillingDate() + "setProdDate" + itemInfo.getProdDate());
+                itemInfo.setTaskNumber("请选择");
+                itemInfo.setIsPass("请选择");
+                itemInfo.setLabelNo("请编辑");
 
             }
             long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
@@ -176,7 +202,7 @@ public class DryPowderFireSystemFragment1 extends Fragment {
             EditText et_6 = childAt.findViewById(R.id.et_6);
             EditText et_7 = childAt.findViewById(R.id.et_7);
             EditText et_8 = childAt.findViewById(R.id.et_8);
-            EditText et_9 = childAt.findViewById(R.id.et_9);
+            TextView et_9 = childAt.findViewById(R.id.et_9);
             TextView et_10 = childAt.findViewById(R.id.et_10);
             EditText et_11 = childAt.findViewById(R.id.et_11);
             ImageView et_12 = childAt.findViewById(R.id.et_12);
@@ -195,11 +221,14 @@ public class DryPowderFireSystemFragment1 extends Fragment {
             Date date1 = TimeUtil.getInstance().hhmmssTodata(et_8.getText().toString());
             itemObj.setProdDate(date1);
             itemObj.setTaskNumber(et_9.getText().toString());
+            itemObj.setIsPass(et_10.getText().toString());
+            itemObj.setLabelNo(et_11.getText().toString());
+//            itemObj.setCodePath(et_12.getImageAlpha());
 
             ServiceFactory.getYearCheckService().update(itemObj);
 
         }
-        Toast.makeText(getContext(), "\"干粉罐\"数据保存成功", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "数据保存成功", Toast.LENGTH_SHORT).show();
     }
 
     @Override
