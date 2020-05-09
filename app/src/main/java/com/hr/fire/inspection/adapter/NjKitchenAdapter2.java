@@ -1,10 +1,12 @@
 package com.hr.fire.inspection.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 import android.view.Gravity;
@@ -61,14 +63,13 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
         return holder;
     }
 
+    @SuppressLint("NewApi")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         NjKitchenAdapter2.ViewHolder vh = (NjKitchenAdapter2.ViewHolder) holder;
         if (mData != null && mData.size() != 0) {
             ItemInfo info = mData.get(position);
-            Log.e("dong", "position----:" + position);
-            Log.e("dong", "info----:" + info);
             vh.et_1.setText(new StringBuffer().append(" ").append(position + 1));
             vh.et_2.setText(new StringBuffer().append(info.getNo()).append(""));
             vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
@@ -77,7 +78,7 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
             String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getProdDate());
             vh.et_8.setText(new StringBuffer().append(mProdDate).append(""));
             vh.et_10.setText(new StringBuffer().append(info.getTaskNumber()).append(""));
-            vh.et_10.setOnClickListener(v -> showPopWindWork(vh.et_10,mapSelection,position));
+            vh.et_10.setOnClickListener(v -> showPopWindWork(vh.et_10, mapSelection, position));
             vh.et_11.setOnClickListener(v -> {
                 if (checkid == 0 || intentTransmit == null) {
                     Toast.makeText(mContext, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
@@ -123,7 +124,17 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
             List<WorkIItemBean> workSelectData = mWorkIItemBean.getWorkSelectData(5);
             mapSelection.put(position, workSelectData);
 
+            String imageUrl = info.getImageUrl();
+            if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+                Uri uri = Uri.parse(imageUrl);
+                vh.et_14.setImageURI(uri);
+            } else {
+                vh.et_14.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
+            }
         }
+
+
+        vh.et_14.setOnClickListener(v -> mYCCamera.startCamera(position));
         vh.et_15.setOnClickListener(v -> removeData(position));
     }
 
@@ -169,6 +180,7 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
         });
         hrPopup.showAtLocation(hrPopup.getContentView(), Gravity.CENTER, 0, 0);
     }
+
     //显示对话框,用户选择是否异常的弹框
     private void showPopWind(final TextView et_12) {
         View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods, null);
@@ -269,6 +281,7 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.mData = itemDataList;
         notifyDataSetChanged();
     }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView et_1;
         EditText et_2;
@@ -298,5 +311,16 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
             et_14 = (ImageView) view.findViewById(R.id.et_14);
             et_15 = (RelativeLayout) view.findViewById(R.id.et_15);
         }
+    }
+
+    private YCCamera mYCCamera;
+
+    //接口回调, 将点击事件传递到activity中,打开相机
+    public void setmYCCamera(YCCamera y) {
+        this.mYCCamera = y;
+    }
+
+    public interface YCCamera {
+        void startCamera(int postion);
     }
 }

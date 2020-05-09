@@ -1,7 +1,11 @@
 package com.hr.fire.inspection.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,19 +17,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.adapter.CarBon3Adapter;
 import com.hr.fire.inspection.adapter.HFC3Adapter;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.FileRoute;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +45,7 @@ public class HFCFragment3 extends Fragment {
     private IntentTransmit its;
     private HFC3Adapter adapter;
     private RecyclerView rc_list;
+    private int imgPostion = -1;   //用户点击拍照, 所对应的位置
     private List<YearCheck> checkDataEasy;
     private List<YearCheckResult> yearCheckResults;
 
@@ -109,6 +119,14 @@ public class HFCFragment3 extends Fragment {
         rc_list.setAdapter(adapter);
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
+        adapter.setmYCCamera(new HFC3Adapter.YCCamera() {
+            @Override
+            public void startCamera(int postion) {
+                imgPostion = postion;
+                openSysCamera();
+            }
+        });
+
     }
 
     public void saveData() {
@@ -143,4 +161,42 @@ public class HFCFragment3 extends Fragment {
         super.onDestroyView();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case FileRoute.CAMERA_RESULT_CODE:
+                //这里目前需要适配
+                if (fileNew.getAbsolutePath() != null && imgPostion != -1 && adapter != null) {
+                    yearCheckResults.get(imgPostion).setImageUrl(fileNew.getAbsolutePath());
+                    adapter.notifyItemChanged(imgPostion);
+                }
+                break;
+        }
+    }
+    /**
+     * 打开系统相机
+     */
+    private File fileNew = null;
+
+    private void openSysCamera() {
+        // intent用来启动系统自带的Camera
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            fileNew = new FileRoute(getActivity()).createOriImageFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Uri imgUriOri = null;
+        if (fileNew != null) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                imgUriOri = Uri.fromFile(fileNew);
+            } else {
+                imgUriOri = FileProvider.getUriForFile(getActivity(), getActivity().getApplicationContext().getPackageName() + ".fileProvider", fileNew);
+            }
+            // 将系统Camera的拍摄结果写入到文件
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgUriOri);
+            startActivityForResult(cameraIntent, FileRoute.CAMERA_RESULT_CODE);
+        }
+    }
 }

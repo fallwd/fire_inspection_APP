@@ -1,7 +1,12 @@
 package com.hr.fire.inspection.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,8 +36,11 @@ import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.FileRoute;
 import com.hr.fire.inspection.utils.TimeUtil;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,6 +54,7 @@ public class CarbonFragment3 extends Fragment {
     private IntentTransmit its;
     private CarBon3Adapter adapter;
     private RecyclerView rc_list;
+    private int imgPostion = -1;   //用户点击拍照, 所对应的位置
     private List<YearCheck> checkDataEasy;
     private List<YearCheckResult> yearCheckResults;
 
@@ -117,12 +128,17 @@ public class CarbonFragment3 extends Fragment {
         rc_list.setAdapter(adapter);
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
+        adapter.setmYCCamera(new CarBon3Adapter.YCCamera() {
+            @Override
+            public void startCamera(int postion) {
+                imgPostion = postion;
+                openSysCamera();
+            }
+        });
     }
 
     public void upData() {
         int childCount = rc_list.getChildCount();
-//                Log.d("dong", "childCount==- " + childCount + "    数据条目 " + yearCheckResults.size());
-        //两边的数据条数是一样的.
         if (yearCheckResults.size() == childCount) {
             for (int i = 0; i < childCount; i++) {
                 LinearLayout childAt = (LinearLayout) rc_list.getChildAt(i);
@@ -149,5 +165,45 @@ public class CarbonFragment3 extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case FileRoute.CAMERA_RESULT_CODE:
+                //这里目前需要适配
+                if (fileNew.getAbsolutePath() != null && imgPostion != -1 && adapter != null) {
+                    yearCheckResults.get(imgPostion).setImageUrl(fileNew.getAbsolutePath());
+                    adapter.notifyItemChanged(imgPostion);
+                }
+                break;
+        }
+    }
+
+    /**
+     * 打开系统相机
+     */
+    private File fileNew = null;
+
+    private void openSysCamera() {
+        // intent用来启动系统自带的Camera
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            fileNew = new FileRoute(getActivity()).createOriImageFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Uri imgUriOri = null;
+        if (fileNew != null) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                imgUriOri = Uri.fromFile(fileNew);
+            } else {
+                imgUriOri = FileProvider.getUriForFile(getActivity(), getActivity().getApplicationContext().getPackageName() + ".fileProvider", fileNew);
+            }
+            // 将系统Camera的拍摄结果写入到文件
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgUriOri);
+            startActivityForResult(cameraIntent, FileRoute.CAMERA_RESULT_CODE);
+        }
     }
 }
