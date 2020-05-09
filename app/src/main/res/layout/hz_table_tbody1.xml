@@ -9,8 +9,6 @@
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_marginLeft="11dp"
-        android:layout_marginRight="11dp"
         android:gravity="center_vertical">
 
         <RelativeLayout

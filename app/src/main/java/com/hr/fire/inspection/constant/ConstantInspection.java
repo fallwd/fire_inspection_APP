@@ -10,4 +10,9 @@ public class ConstantInspection {
     public static String YEARLY_ON_SITE_F3 = "Yearly_On_Site_f3";
     public static String YEARLY_ON_SITE_F4 = "Yearly_On_Site_f4";
     public static String YEARLY_ON_SITE_F5 = "Yearly_On_Site_f5";
+
+
+    public static String CHECK_DIVICE = "QRC_title";
+
+
 }
