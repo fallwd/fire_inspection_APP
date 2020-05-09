@@ -21,6 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
+import com.hr.fire.inspection.activity.QRCodeExistenceAcitivty;
+import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.DryPowderFireSysTabSelect1;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
@@ -113,6 +115,16 @@ public class DryPowderFireSystemAdapter2 extends RecyclerView.Adapter<RecyclerVi
 
             vh.et_11.setText(new StringBuffer().append(info.getLabelNo()).append(""));
 //            vh.et_12.setImageURI(info.getCodePath()); // 二维码路径？？？
+            //二维码点击
+            vh.et_12.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.putExtra(ConstantInspection.CHECK_DIVICE, "启动瓶信息");
+                    intent.setClass(mContext, QRCodeExistenceAcitivty.class);
+                    mContext.startActivity(intent);
+                }
+            });
 
         }
         vh.tv_9.setOnClickListener(new View.OnClickListener() {

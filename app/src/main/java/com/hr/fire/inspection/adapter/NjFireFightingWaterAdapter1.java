@@ -23,7 +23,9 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.activity.NjKitchenChecklistAcitivty;
+import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
+import com.hr.fire.inspection.activity.QRCodeExistenceAcitivty;
+import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.WorkIItemBean;
@@ -64,8 +66,6 @@ public class NjFireFightingWaterAdapter1 extends RecyclerView.Adapter<RecyclerVi
         NjFireFightingWaterAdapter1.ViewHolder vh = (NjFireFightingWaterAdapter1.ViewHolder) holder;
         if (mData != null && mData.size() != 0) {
             ItemInfo info = mData.get(position);
-            Log.e("dong", "position----:" + position);
-            Log.e("dong", "info----:" + info);
             vh.et_1.setText(new StringBuffer().append(" ").append(position + 1));
             vh.et_2.setText(new StringBuffer().append(info.getNo()).append(""));
             vh.et_3.setText(new StringBuffer().append(info.getTypeNo()).append(""));
@@ -82,15 +82,15 @@ public class NjFireFightingWaterAdapter1 extends RecyclerView.Adapter<RecyclerVi
                     Toast.makeText(mContext, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Intent intent = new Intent(mContext, NjKitchenChecklistAcitivty.class);
-                intent.putExtra(NjKitchenChecklistAcitivty.CHECK_ID, checkid);
-                intent.putExtra(NjKitchenChecklistAcitivty.CHECK_DIVICE, " 消防软管 >  检查表");
+                Intent intent = new Intent(mContext, CarBonGoodsWeightAcitivty.class);
+                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_ID, checkid);
+                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE, " 消防软管 >  检查表");
                 intent.putExtra("item_id", mData.get(position).getId());
 
                 if (mData.get(position).getId() != 0) {
-                    intent.putExtra(NjKitchenChecklistAcitivty.CHECK_DIVICE_ID, mData.get(position).getId());
+                    intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE_ID, mData.get(position).getId());
                 }
-                intent.putExtra(NjKitchenChecklistAcitivty.CHECK_SYS_DATA, intentTransmit);
+                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_SYS_DATA, intentTransmit);
                 mContext.startActivity(intent);
             });
 
@@ -111,6 +111,16 @@ public class NjFireFightingWaterAdapter1 extends RecyclerView.Adapter<RecyclerVi
             WorkIItemBean mWorkIItemBean = new WorkIItemBean();
             List<WorkIItemBean> workSelectData = mWorkIItemBean.getWorkSelectData(6);
             mapSelection.put(position, workSelectData);
+            // 二维码点击
+            vh.et_10.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.putExtra(ConstantInspection.CHECK_DIVICE, "消防软管信息");
+                    intent.setClass(mContext, QRCodeExistenceAcitivty.class);
+                    mContext.startActivity(intent);
+                }
+            });
         }
 
 
@@ -218,7 +228,7 @@ public class NjFireFightingWaterAdapter1 extends RecyclerView.Adapter<RecyclerVi
             Date date = new Date();
             itemInfo.setProdDate(date);
             itemInfo.setTaskNumber("请编辑");
-            itemInfo.setIsPass("请编辑");
+            itemInfo.setIsPass("请选择");
             itemInfo.setCodePath("请编辑");
             mData.add(itemInfo);
         }

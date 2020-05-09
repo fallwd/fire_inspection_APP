@@ -19,7 +19,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.activity.NjKitchenChecklistAcitivty;
+import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
+import com.hr.fire.inspection.activity.QRCodeExistenceAcitivty;
+import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
@@ -75,15 +77,15 @@ public class NjFireFightingWaterAdapter2 extends RecyclerView.Adapter<RecyclerVi
                         Toast.makeText(mContext, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    Intent intent = new Intent(mContext, NjKitchenChecklistAcitivty.class);
-                    intent.putExtra(NjKitchenChecklistAcitivty.CHECK_ID, checkid);
-                    intent.putExtra(NjKitchenChecklistAcitivty.CHECK_DIVICE, " 消防软管 >  检查表");
+                    Intent intent = new Intent(mContext, CarBonGoodsWeightAcitivty.class);
+                    intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_ID, checkid);
+                    intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE, " 消防软管 >  检查表");
                     intent.putExtra("item_id", mData.get(position).getId());
 
                     if (mData.get(position).getId() != 0) {
-                        intent.putExtra(NjKitchenChecklistAcitivty.CHECK_DIVICE_ID, mData.get(position).getId());
+                        intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE_ID, mData.get(position).getId());
                     }
-                    intent.putExtra(NjKitchenChecklistAcitivty.CHECK_SYS_DATA, intentTransmit);
+                    intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_SYS_DATA, intentTransmit);
                     mContext.startActivity(intent);
                 }
             });
@@ -105,6 +107,16 @@ public class NjFireFightingWaterAdapter2 extends RecyclerView.Adapter<RecyclerVi
             });
             vh.et_9.setBackground(drawable1);
 //            vh.et_10.setText(new StringBuffer().append(info.getCodePath()).append(""));  // 二维码怎么添加
+            // 二维码点击
+            vh.et_10.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.putExtra(ConstantInspection.CHECK_DIVICE, "消防炮信息");
+                    intent.setClass(mContext, QRCodeExistenceAcitivty.class);
+                    mContext.startActivity(intent);
+                }
+            });
 
         }
 
@@ -184,7 +196,7 @@ public class NjFireFightingWaterAdapter2 extends RecyclerView.Adapter<RecyclerVi
             itemInfo.setDeviceType("请编辑");
             Date date = new Date();
             itemInfo.setProdDate(date);
-            itemInfo.setIsPass("请编辑");
+            itemInfo.setIsPass("请选择");
             itemInfo.setCodePath("请编辑");
             mData.add(itemInfo);
         }

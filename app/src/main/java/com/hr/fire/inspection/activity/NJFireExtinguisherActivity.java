@@ -278,7 +278,6 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 itemInfo.setLabelNo("请输入");
 //                itemInfo.setImageUrl("请选择");
                 itemInfo.setDescription("请输入");
-                itemInfo.setCodePath("生成");
             }
 
 //            Log.d("dong", "itemInfo增加" + itemInfo);
@@ -333,7 +332,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
             TextView et_fire14 = childAt.findViewById(R.id.et_fire14);
             TextView tv_fire15 = childAt.findViewById(R.id.tv_fire15);
             EditText et_fire16 = childAt.findViewById(R.id.et_fire16);
-            TextView tv_fire17 = childAt.findViewById(R.id.tv_fire17);
+            ImageView tv_fire17 = childAt.findViewById(R.id.tv_fire17);
 
 
             ItemInfo itemObj = itemDataList.get(i);
@@ -355,7 +354,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
             itemObj.setLabelNo(et_fire14.getText().toString());
             itemObj.setImageUrl(tv_fire15.getText().toString());
             itemObj.setDescription(et_fire16.getText().toString());
-            itemObj.setCodePath(tv_fire17.getText().toString());
+//            itemObj.setCodePath(tv_fire17.getText().toString());  // 二维码路径？？？
 
             Log.d("dong", "itemObj222222保存==   "+itemObj.getLevel());
             ServiceFactory.getYearCheckService().update(itemObj);

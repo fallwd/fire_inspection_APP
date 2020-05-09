@@ -23,7 +23,9 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.activity.NjKitchenChecklistAcitivty;
+import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
+import com.hr.fire.inspection.activity.QRCodeExistenceAcitivty;
+import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.WorkIItemBean;
@@ -81,15 +83,15 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
                     Toast.makeText(mContext, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Intent intent = new Intent(mContext, NjKitchenChecklistAcitivty.class);
-                intent.putExtra(NjKitchenChecklistAcitivty.CHECK_ID, checkid);
-                intent.putExtra(NjKitchenChecklistAcitivty.CHECK_DIVICE, "驱动瓶  >  检查表");
+                Intent intent = new Intent(mContext, CarBonGoodsWeightAcitivty.class);
+                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_ID, checkid);
+                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE, "驱动瓶  >  检查表");
                 intent.putExtra("item_id", mData.get(position).getId());
 
                 if (mData.get(position).getId() != 0) {
-                    intent.putExtra(NjKitchenChecklistAcitivty.CHECK_DIVICE_ID, mData.get(position).getId());
+                    intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE_ID, mData.get(position).getId());
                 }
-                intent.putExtra(NjKitchenChecklistAcitivty.CHECK_SYS_DATA, intentTransmit);
+                intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_SYS_DATA, intentTransmit);
                 mContext.startActivity(intent);
             });
 
@@ -106,6 +108,15 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             vh.et_13.setText(new StringBuffer().append(info.getLabelNo()).append(""));
 //            vh.et_14.setText(new StringBuffer().append(info.getCodePath()).append(""));  // 二维码怎么添加
+            vh.et_14.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.putExtra(ConstantInspection.CHECK_DIVICE, "驱动瓶信息");
+                    intent.setClass(mContext, QRCodeExistenceAcitivty.class);
+                    mContext.startActivity(intent);
+                }
+            });
 
             //初始化工作表数据
             WorkIItemBean mWorkIItemBean = new WorkIItemBean();
@@ -218,7 +229,7 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
             Date date = new Date();
             itemInfo.setProdDate(date);
             itemInfo.setTaskNumber("请编辑");
-            itemInfo.setIsPass("请编辑");
+            itemInfo.setIsPass("请选择");
             itemInfo.setLabelNo("请编辑");
             itemInfo.setCodePath("请编辑");
             mData.add(itemInfo);

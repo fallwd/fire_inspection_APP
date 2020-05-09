@@ -23,6 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
+import com.hr.fire.inspection.activity.QRCodeExistenceAcitivty;
+import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.DryPowderFireSysTabSelect1;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
@@ -108,12 +110,6 @@ public class DFXIAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     mContext.startActivity(intent);
                 }
             });
-
-
-
-
-
-
 //          下拉框
             vh.et_11.setText(new StringBuffer().append(info.getIsPass()).append(""));
             //在左侧添加图片
@@ -132,12 +128,13 @@ public class DFXIAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             vh.et_12.setText(new StringBuffer().append(info.getLabelNo()).append(""));
 
  //         照相机的图片  需要把对应的xml转换为textview
-            vh.et_13.setVisibility(View.GONE);
-            vh.et_13.setVisibility(View.VISIBLE);
             vh.et_13.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mContext.startActivity(new Intent(mContext, PhotoUploadActivity.class));
+                    Intent intent = new Intent();
+                    intent.putExtra(ConstantInspection.CHECK_DIVICE, "SCBA气瓶信息");
+                    intent.setClass(mContext, QRCodeExistenceAcitivty.class);
+                    mContext.startActivity(intent);
                 }
             });
         }

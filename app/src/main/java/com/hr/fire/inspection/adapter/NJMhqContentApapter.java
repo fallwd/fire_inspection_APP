@@ -2,6 +2,7 @@ package com.hr.fire.inspection.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.view.Gravity;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,6 +20,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.activity.QRCodeExistenceAcitivty;
+import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.NJMhqSelectItem1;
 import com.hr.fire.inspection.entity.NJMhqSelectItem2;
@@ -72,7 +76,7 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
             myholder.et_fire14.setText(info.getLabelNo());
             myholder.tv_fire15.setText(info.getImageUrl());
             myholder.et_fire16.setText(info.getDescription());
-            myholder.tv_fire17.setText(info.getCodePath());
+//            myholder.tv_fire17.setText(info.getCodePath());  //二维码路径
 
             //初始化灭火等级
             NJMhqSelectItem1 mWorkIItemBean1 = new NJMhqSelectItem1();
@@ -259,9 +263,11 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
                 case R.id.rl_fire13:
                     showPopWind(myholder.tv_fire13);
                     break;
-
                 case R.id.rl_fire17:
-                    showPopWind(myholder.tv_fire17);
+                    Intent intent = new Intent();
+                    intent.putExtra(ConstantInspection.CHECK_DIVICE, "灭火器信息");
+                    intent.setClass(mContext, QRCodeExistenceAcitivty.class);
+                    mContext.startActivity(intent);
                     break;
                 case R.id.rl_fire18:
                     removeData(position);
@@ -426,7 +432,7 @@ private void showPopWindWork2(TextView tv_fire4, Map<Integer, List<NJMhqSelectIt
         private TextView tv_fire14;
         private TextView tv_fire15;
         private TextView tv_fire16;
-        private TextView tv_fire17;
+        private ImageView tv_fire17;
         private TextView tv_fire18;
 
         public MyViewHolder(View view) {
@@ -466,7 +472,7 @@ private void showPopWindWork2(TextView tv_fire4, Map<Integer, List<NJMhqSelectIt
             tv_fire14 = (TextView) view.findViewById(R.id.tv_fire14);
             tv_fire15 = (TextView) view.findViewById(R.id.tv_fire15);
             tv_fire16 = (TextView) view.findViewById(R.id.tv_fire16);
-            tv_fire17 = (TextView) view.findViewById(R.id.tv_fire17);
+            tv_fire17 = (ImageView) view.findViewById(R.id.tv_fire17);
             tv_fire18 = (TextView) view.findViewById(R.id.tv_fire18);
 
         }

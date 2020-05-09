@@ -169,7 +169,7 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
             itemInfo.setDeviceType("请编辑");
             itemInfo.setTypeNo("请编辑");
             itemInfo.setResponseTime("请编辑");
-            itemInfo.setIsPass("请编辑");
+            itemInfo.setIsPass("请选择");
             itemInfo.setDescription("请编辑");
             itemInfo.setProdFactory("请编辑");
             itemInfo.setResponseTime("请编辑");

@@ -148,7 +148,7 @@ public class NjKitchenFragment1 extends Fragment {
                 itemInfo.setProdDate(date);
                 itemInfo.setFillingDate(date);
                 itemInfo.setTaskNumber("请编辑");
-                itemInfo.setIsPass("请编辑");
+                itemInfo.setIsPass("请选择");
                 itemInfo.setLabelNo("请编辑");
                 itemInfo.setCodePath("请编辑");
 
@@ -205,7 +205,7 @@ public class NjKitchenFragment1 extends Fragment {
             EditText et_7 = childAt.findViewById(R.id.et_7);
             EditText et_8 = childAt.findViewById(R.id.et_8);
             EditText et_9 = childAt.findViewById(R.id.et_9);
-            EditText et_10 = childAt.findViewById(R.id.et_10);
+            TextView et_10 = childAt.findViewById(R.id.et_10);
 
             TextView et_11 = childAt.findViewById(R.id.et_11);
             TextView et_12 = childAt.findViewById(R.id.et_12);

@@ -140,7 +140,7 @@ public class NjKitchenFragment2 extends Fragment {
                 Date date = new Date();
                 itemInfo.setProdDate(date);
                 itemInfo.setTaskNumber("请编辑");
-                itemInfo.setIsPass("请编辑");
+                itemInfo.setIsPass("请选择");
                 itemInfo.setLabelNo("请编辑");
                 itemInfo.setCodePath("请编辑");
 

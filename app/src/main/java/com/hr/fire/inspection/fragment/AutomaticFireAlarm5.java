@@ -151,7 +151,7 @@ public class AutomaticFireAlarm5 extends Fragment {
                 itemInfo.setTestAlarm25("请添加");
                 itemInfo.setTestAlarm50("请添加");
                 itemInfo.setResponseTime("请添加");
-                itemInfo.setIsPass("请添加");
+                itemInfo.setIsPass("请选择");
                 itemInfo.setDescription("请添加");
                 itemInfo.setProdFactory("请添加");
             }

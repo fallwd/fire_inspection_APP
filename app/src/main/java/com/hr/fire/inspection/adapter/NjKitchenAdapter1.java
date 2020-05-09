@@ -23,7 +23,7 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.activity.NjKitchenChecklistAcitivty;
+import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.activity.QRCodeExistenceAcitivty;
 import com.hr.fire.inspection.constant.ConstantInspection;
@@ -98,15 +98,15 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
                         Toast.makeText(mContext, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    Intent intent = new Intent(mContext, NjKitchenChecklistAcitivty.class);
-                    intent.putExtra(NjKitchenChecklistAcitivty.CHECK_ID, checkid);
-                    intent.putExtra(NjKitchenChecklistAcitivty.CHECK_DIVICE, "药剂瓶  >  检查表");
+                    Intent intent = new Intent(mContext, CarBonGoodsWeightAcitivty.class);
+                    intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_ID, checkid);
+                    intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE, "药剂瓶  >  检查表");
                     intent.putExtra("item_id", mData.get(position).getId());
 
                     if (mData.get(position).getId() != 0) {
-                        intent.putExtra(NjKitchenChecklistAcitivty.CHECK_DIVICE_ID, mData.get(position).getId());
+                        intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_DIVICE_ID, mData.get(position).getId());
                     }
-                    intent.putExtra(NjKitchenChecklistAcitivty.CHECK_SYS_DATA, intentTransmit);
+                    intent.putExtra(CarBonGoodsWeightAcitivty.CHECK_SYS_DATA, intentTransmit);
                     mContext.startActivity(intent);
                 }
             });
@@ -132,7 +132,7 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
-                    intent.putExtra(ConstantInspection.CHECK_DIVICE, "驱动瓶信息");
+                    intent.putExtra(ConstantInspection.CHECK_DIVICE, "药剂瓶信息");
                     intent.setClass(mContext, QRCodeExistenceAcitivty.class);
                     mContext.startActivity(intent);
                 }
@@ -225,7 +225,7 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
             itemInfo.setProdDate(date);
             itemInfo.setFillingDate(date);    //灌装日期
             itemInfo.setTaskNumber("请编辑");
-            itemInfo.setIsPass("请编辑");
+            itemInfo.setIsPass("请选择");
             itemInfo.setLabelNo("请编辑");
             itemInfo.setCodePath("请编辑");
             mData.add(itemInfo);
