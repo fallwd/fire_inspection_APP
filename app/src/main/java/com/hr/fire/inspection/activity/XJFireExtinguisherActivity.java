@@ -1,6 +1,8 @@
 package com.hr.fire.inspection.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -9,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -22,6 +25,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentHostCallback;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,7 +36,11 @@ import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.XJFirstColumnApapter;
 import com.hr.fire.inspection.adapter.XJFirstContentApapter;
 import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
+import com.hr.fire.inspection.utils.CamaraUtil;
+import com.hr.fire.inspection.utils.FileRoute;
+import com.hr.fire.inspection.utils.TextSpannableUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 import com.hr.fire.inspection.view.tableview.HListViewScrollView;
 
@@ -64,6 +74,7 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
     private InspectionServiceImpl service;
     private XJFirstColumnApapter firstColumnApapter;
     private XJFirstContentApapter contentApapter;
+    private Context mContent;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final int TAKE_PHOTO = 1;//拍照
@@ -73,11 +84,15 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.xj_fire_extinguisher_activity);
+        mContent = getApplicationContext();
         getIntentData();
         initData();
         initView();
         initAdapter();
         setSlide();
+        String srt = new StringBuffer().append("消防巡检 >").append(str_title).toString();
+        SpannableString textColor = TextSpannableUtil.showTextColor(srt, "#00A779", 6, srt.length());
+        tv_inspection_pro.setText(textColor);
     }
 
     private void getIntentData() {
@@ -139,24 +154,15 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
         rl_content.setLayoutManager(mLayoutManager2);
         contentApapter = new XJFirstContentApapter(this, inspectionResults);
         rl_content.setAdapter(contentApapter);
-        contentApapter.setmYCCamera(new XJFirstContentApapter.YCCamera() {
+        contentApapter.setmYCCamera(new YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;
-                try {
-                    camera();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                openSysCamera(mContent);
             }
         });
         //刷新序号列表
-        contentApapter.setDeleteRefresh(new XJFirstContentApapter.RemoveXH() {
-            @Override
-            public void deleteRefresh(int postion) {
-                firstColumnApapter.notifyDataSetChanged();
-            }
-        });
+        contentApapter.setDeleteRefresh(postion -> firstColumnApapter.notifyDataSetChanged());
     }
 
     //设置同步滑动
@@ -305,45 +311,46 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
     }
 
 
-    private Uri imgUri;
 
-    private void camera() throws IOException {
-        //该目录是app应用下面的目录,如果程序被卸载或造成图片丢失. 建议使用: FileRoute.getFilePath();但是需要适配
-        long timeMillis = System.currentTimeMillis();
-        String sPath = new StringBuilder().append(timeMillis).append(".jpg").toString();
-        File outputImage = new File(getExternalCacheDir(), sPath);
+    private File fileNew = null;
+    /**
+     * 打开系统相机
+     */
+    public void openSysCamera(Context mContent)  {
 
-        if (Build.VERSION.SDK_INT >= 24) {
-            imgUri = FileProvider
-                    .getUriForFile(this, getApplication().getApplicationContext().getPackageName() + ".fileProvider", outputImage);
-        } else {
-            imgUri = Uri.fromFile(outputImage);
+        // intent用来启动系统自带的Camera
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            fileNew = new FileRoute(mContent).createOriImageFile();
+            Log.d("fileNew", fileNew+"");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        //启动相机
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imgUri);
-        startActivityForResult(intent, TAKE_PHOTO);
+        Uri imgUriOri = null;
+        if (fileNew != null) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                imgUriOri = Uri.fromFile(fileNew);
+            } else {
+                imgUriOri = FileProvider.getUriForFile(mContent, mContent.getApplicationContext().getPackageName() + ".fileProvider", fileNew);
+            }
+            // 将系统Camera的拍摄结果写入到文件
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgUriOri);
+            startActivityForResult(cameraIntent, FileRoute.CAMERA_RESULT_CODE);
+        }
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d("inspectionResults", inspectionResults + "");
         switch (requestCode) {
-            case TAKE_PHOTO:  //拍照的回调
-                if (resultCode == RESULT_OK) {
-                    try {
-                        Bitmap bitmap = BitmapFactory
-                                .decodeStream(getContentResolver().openInputStream(imgUri));
-                        // /external_path/Android/data/com.hr.fire.inspection/cache/1587460070369.jpg
-                        String path = imgUri.getPath();
-                        if (path != null && imgPostion != -1 && contentApapter != null) {
-                            inspectionResults.get(imgPostion).setImgPath(path);
-                            //TODO 会崩溃.
-//                            contentApapter.notifyItemChanged(imgPostion);
-                        }
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+            case FileRoute.CAMERA_RESULT_CODE:
+
+                //这里目前需要适配
+                if (fileNew != null && imgPostion != -1 && contentApapter != null) {
+                    inspectionResults.get(imgPostion).setImgPath(fileNew.getAbsolutePath());
+                    Log.d("inspectionResults2", inspectionResults + "");
+                    contentApapter.notifyItemChanged(imgPostion);
                 }
                 break;
         }
