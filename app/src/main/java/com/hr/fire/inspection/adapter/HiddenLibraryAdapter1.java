@@ -2,8 +2,6 @@ package com.hr.fire.inspection.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.activity.HiddenLibaryActivity;
-import com.hr.fire.inspection.activity.HiddenLibaryDetailActivity;
+import com.hr.fire.inspection.activity.HiddenLibaryDetailActivity1;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,7 +63,7 @@ public class HiddenLibraryAdapter1 extends RecyclerView.Adapter<RecyclerView.Vie
             @Override
             public void onClick(View v) {
                 Map<Integer,String> mSelectBallMap = new HashMap<>();
-                Intent intent = new Intent(mContext, HiddenLibaryDetailActivity.class);
+                Intent intent = new Intent(mContext, HiddenLibaryDetailActivity1.class);
                 intent.putExtra("map",mData.get(position));
                 mContext.startActivity(intent);
             }

@@ -74,6 +74,7 @@ public class SeawaterSystemActivity  extends AppCompatActivity {
         iv_add_table = findViewById(R.id.iv_add_table);
         tvInspectionPro = findViewById(R.id.tv_inspection_pro);
         iv_save = findViewById(R.id.iv_save);
+        iv_add_table.setVisibility(View.GONE); //不显示加号按钮
         String text = "消防巡检维护专用工具";
         SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#E51C23", 0, 3);
         tvInspectionPro.setText(showTextColor);
@@ -104,8 +105,7 @@ public class SeawaterSystemActivity  extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int i) {
-                currentPager = i;
-                iv_add_table.setVisibility(View.GONE);
+
             }
 
             @Override

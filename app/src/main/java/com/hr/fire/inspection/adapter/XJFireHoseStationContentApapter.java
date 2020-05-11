@@ -57,8 +57,8 @@ public class XJFireHoseStationContentApapter extends RecyclerView.Adapter {
         myholder.tv_fire13.setText(result.getParam13());
         myholder.tv_fire14.setText(result.getParam14());
         myholder.tv_fire15.setText(result.getParam15());
-        if (result.getParam16() != null) {
-            myholder.et_fire16.setText(result.getParam16());
+        if (result.getDescription() != null) {
+            myholder.et_fire16.setText(result.getDescription());
 //            myholder.tv_fire10.setText(result.getParam10());
         }
 //        myholder.rl_fire1.setOnClickListener(new MyOnClickListener(myholder, position));
@@ -149,50 +149,54 @@ public class XJFireHoseStationContentApapter extends RecyclerView.Adapter {
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()) {
-//                case R.id.rl_fire1:
-//                    showPopWind(myholder.tv_fire1);
-//                    break;
-
-                case R.id.rl_fire5:
-                    showPopWind(myholder.tv_fire5);
-                    break;
-                case R.id.rl_fire6:
-                    showPopWind(myholder.tv_fire6);
-                    break;
-                case R.id.rl_fire7:
-                    showPopWind(myholder.tv_fire7);
-                    break;
-                case R.id.rl_fire8:
-                    showPopWind(myholder.tv_fire8);
-                    break;
-                case R.id.rl_fire9:
-                    showPopWind(myholder.tv_fire9);
-                    break;
-                case R.id.rl_fire10:
-                    showPopWind(myholder.tv_fire10);
-                    break;
-                case R.id.rl_fire11:
-                    showPopWind(myholder.tv_fire11);
-                    break;
-                case R.id.rl_fire12:
-                    showPopWind(myholder.tv_fire12);
-                    break;
-                case R.id.rl_fire13:
-                    showPopWind(myholder.tv_fire13);
-                    break;
-                case R.id.rl_fire14:
-                    showPopWind(myholder.tv_fire14);
-                    break;
-                case R.id.rl_fire15:
-                    showPopWind(myholder.tv_fire15);
-                    break;
-                case R.id.rl_fire17:
-                    mYCCamera.startCamera(position);
-                    break;
-                case R.id.rl_fire18:
-                    removeData(position);
-                    break;
+            String param26 = null;
+            for (int i = 0; i<mData.size(); i++) {
+                param26 = mData.get(i).getParam26();
+            }
+            if (param26 != "隐患库") {
+                switch (v.getId()) {
+                    case R.id.rl_fire5:
+                        showPopWind(myholder.tv_fire5);
+                        break;
+                    case R.id.rl_fire6:
+                        showPopWind(myholder.tv_fire6);
+                        break;
+                    case R.id.rl_fire7:
+                        showPopWind(myholder.tv_fire7);
+                        break;
+                    case R.id.rl_fire8:
+                        showPopWind(myholder.tv_fire8);
+                        break;
+                    case R.id.rl_fire9:
+                        showPopWind(myholder.tv_fire9);
+                        break;
+                    case R.id.rl_fire10:
+                        showPopWind(myholder.tv_fire10);
+                        break;
+                    case R.id.rl_fire11:
+                        showPopWind(myholder.tv_fire11);
+                        break;
+                    case R.id.rl_fire12:
+                        showPopWind(myholder.tv_fire12);
+                        break;
+                    case R.id.rl_fire13:
+                        showPopWind(myholder.tv_fire13);
+                        break;
+                    case R.id.rl_fire14:
+                        showPopWind(myholder.tv_fire14);
+                        break;
+                    case R.id.rl_fire15:
+                        showPopWind(myholder.tv_fire15);
+                        break;
+                    case R.id.rl_fire17:
+                        mYCCamera.startCamera(position);
+                        break;
+                    case R.id.rl_fire18:
+                        removeData(position);
+                        //通知序号列表刷新数据和高度
+                        mRemoveXH.deleteRefresh(position);
+                        break;
+                }
             }
         }
     }
@@ -295,14 +299,24 @@ public class XJFireHoseStationContentApapter extends RecyclerView.Adapter {
         }
     }
 
-    private YCCamera mYCCamera;
-
+    private XJFireHoseStationContentApapter.YCCamera mYCCamera;
+    private XJFireHoseStationContentApapter.RemoveXH mRemoveXH;
     //接口回调, 将点击事件传递到activity中,打开相机
-    public void setmYCCamera(YCCamera y) {
+    public void setmYCCamera(XJFireHoseStationContentApapter.YCCamera y) {
         this.mYCCamera = y;
     }
 
+    //接口回调, 将点击事件传递到activity中,刷新序号
+    public void setDeleteRefresh(XJFireHoseStationContentApapter.RemoveXH xh) {
+        this.mRemoveXH = xh;
+    }
+
+
     public interface YCCamera {
         void startCamera(int postion);
+    }
+
+    public interface RemoveXH {
+        void deleteRefresh(int postion);
     }
 }

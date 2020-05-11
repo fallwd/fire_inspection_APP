@@ -9,12 +9,10 @@
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_marginLeft="11dp"
-        android:layout_marginRight="11dp"
         android:gravity="center_vertical">
 
         <RelativeLayout
-            android:layout_width="16dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -28,10 +26,8 @@
                 android:textStyle="bold" />
         </RelativeLayout>
 
-
-
         <RelativeLayout
-            android:layout_width="30dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <TextView
@@ -45,7 +41,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="28dp"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -60,7 +56,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="32dp"
+            android:layout_width="34dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -83,7 +79,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_marginStart="0dp"
                 android:text="压力/MPa"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
@@ -121,7 +116,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="42dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
@@ -136,7 +131,22 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="40dp"
+            android:layout_width="42dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="工作代号"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="36dp"
             android:layout_height="wrap_content">
 
             <TextView
@@ -150,7 +160,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="32dp"
+            android:layout_width="42dp"
             android:layout_height="wrap_content">
 
             <TextView
@@ -163,7 +173,35 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="42dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="检验标签"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="30dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="二维码"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="20dp"
             android:layout_height="wrap_content">
 
             <TextView
@@ -175,6 +213,5 @@
                 android:textStyle="bold" />
         </RelativeLayout>
     </TableRow>
-
 
 </TableLayout>

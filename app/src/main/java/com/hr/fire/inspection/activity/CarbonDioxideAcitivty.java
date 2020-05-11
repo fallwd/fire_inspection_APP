@@ -181,28 +181,36 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
         iv_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (fragments != null && fragments.size() != 0) {
-                    Fragment fragment = fragments.get(currentPager);
-                    if (fragment instanceof CarbonFragment1) {
-                        carbonFragment1.upData();
-                    } else if (fragment instanceof CarbonFragment2) {
-                        carbonFragment2.upData();
-                    } else if (fragment instanceof CarbonFragment3) {
-                        carbonFragment3.upData();
-                    } else if (fragment instanceof CarbonFragment4) {
-                        carbonFragment4.upData();
-                    } else if (fragment instanceof CarbonFragment5) {
-                        carbonFragment5.upData();
-                    }
-                }
+                upData();
             }
         });
         iv_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //点击关闭页面的时候, 有可能用户已经修改了,需要更新数据。
+                upData();
                 finish();
             }
         });
+    }
+
+    //更新数据
+    private void upData() {
+        if (fragments != null && fragments.size() != 0) {
+            Fragment fragment = fragments.get(currentPager);
+            if (fragment instanceof CarbonFragment1) {
+                carbonFragment1.upData();
+            } else if (fragment instanceof CarbonFragment2) {
+                carbonFragment2.upData();
+            } else if (fragment instanceof CarbonFragment3) {
+                carbonFragment3.upData();
+            } else if (fragment instanceof CarbonFragment4) {
+                carbonFragment4.upData();
+            } else if (fragment instanceof CarbonFragment5) {
+                carbonFragment5.upData();
+            }
+        }
+
     }
 
     @Override
@@ -213,6 +221,5 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
         carbonFragment3 = null;
         carbonFragment4 = null;
         carbonFragment5 = null;
-        finish();
     }
 }

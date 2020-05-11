@@ -156,8 +156,12 @@ public class DFXIAcitivty extends AppCompatActivity {
             @Override
             public void onPageSelected(int i) {
                 currentPager = i;
+                if (i == 0 || i == 1) {
+                    iv_add_table.setVisibility(View.VISIBLE);
+                } else {
+                    iv_add_table.setVisibility(View.GONE);
+                }
             }
-
             @Override
             public void onPageScrollStateChanged(int i) {
 

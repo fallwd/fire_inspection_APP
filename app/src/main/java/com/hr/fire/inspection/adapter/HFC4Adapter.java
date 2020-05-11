@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +17,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
+import com.hr.fire.inspection.impl.YCCamera;
+import com.hr.fire.inspection.utils.PhotoView;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
@@ -47,6 +52,7 @@ public class HFC4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         final HFC4Adapter.ViewHolder vh = (HFC4Adapter.ViewHolder) holder;
@@ -76,11 +82,20 @@ public class HFC4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.tv8.setVisibility(View.GONE);
             vh.ev8.setVisibility(View.VISIBLE);
 
+            String imageUrl = ycr.get(position).getImageUrl();
+            if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+                //路径  /external_path/Android/data/com.hr.fire.inspection/cache/1587462719699.jpg
+//                Uri uri = Uri.fromFile(new File(imageUrl));
+                Uri uri = Uri.parse(imageUrl);
+                vh.iv7.setImageURI(uri);
+            } else {
+                vh.iv7.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
+            }
+
+
             vh.tv6.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Log.d("dong","点击的状post== " + position);
-
                     //如果点击的是最后一个条目, 那么控件的高度需要增加  否则弹框会被挡住
                     showPopWind(vh.tv6);
                 }
@@ -88,7 +103,8 @@ public class HFC4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.iv7.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mContext.startActivity(new Intent(mContext, PhotoUploadActivity.class));
+//                    mYCCamera.startCamera(position);
+                    new PhotoView().showPopWindPic(mContext, position, mYCCamera, ycr);
                 }
             });
         }
@@ -177,4 +193,12 @@ public class HFC4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
         });
     }
+
+    private YCCamera mYCCamera;
+
+    //接口回调, 将点击事件传递到activity中,打开相机
+    public void setmYCCamera(YCCamera y) {
+        this.mYCCamera = y;
+    }
+
 }

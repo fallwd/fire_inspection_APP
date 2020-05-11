@@ -163,7 +163,6 @@ public class HFCActivity extends AppCompatActivity {
             }
         });
         mTabLayout.setupWithViewPager(mViewPager);
-//        mTabLayout.getTabAt(1).select();//设置第一个为选中
     }
 
     private void initListner() {
@@ -171,47 +170,50 @@ public class HFCActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (fragments != null && fragments.size() != 0) {
-                    Log.d("dong", "instanceof CarbonFragment1  onClick");
                     Fragment fragment = fragments.get(currentPager);
                     if (fragment instanceof HFCFragment1) {
-                        Log.d("dong", "instanceof CarbonFragment1");
                         mHFCFragment1.addItemView();
-                    }else if (fragment instanceof HFCFragment2){
+                    } else if (fragment instanceof HFCFragment2) {
                         mHFCFragment2.addItemView();
-                    }else if (fragment instanceof HFCFragment3){
+                    } else if (fragment instanceof HFCFragment3) {
 //                        mHFCFragment3.addItemView();
                     }
                 }
-//                currentPager  拿到当前的页面
             }
         });
         //点击保存时候调用
         iv_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (fragments != null && fragments.size() != 0) {
-                    Fragment fragment = fragments.get(currentPager);
-                    if (fragment instanceof HFCFragment1) {
-                        mHFCFragment1.saveData();
-                    } else if (fragment instanceof HFCFragment2) {
-                        mHFCFragment2.saveData();
-                    } else if (fragment instanceof HFCFragment3) {
-                        mHFCFragment3.saveData();
-                    } else if (fragment instanceof HFCFragment4) {
-                        mHFCFragment4.saveData();
-                    }else if (fragment instanceof HFCFragment4) {
-                        mHFCFragment5.saveData();
-                    }
-
-                }
+                upData();
             }
         });
         iv_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                upData();
                 finish();
             }
         });
+    }
+
+
+    //更新数据
+    private void upData() {
+        if (fragments != null && fragments.size() != 0) {
+            Fragment fragment = fragments.get(currentPager);
+            if (fragment instanceof HFCFragment1) {
+                mHFCFragment1.saveData();
+            } else if (fragment instanceof HFCFragment2) {
+                mHFCFragment2.saveData();
+            } else if (fragment instanceof HFCFragment3) {
+                mHFCFragment3.saveData();
+            } else if (fragment instanceof HFCFragment4) {
+                mHFCFragment4.saveData();
+            } else if (fragment instanceof HFCFragment4) {
+                mHFCFragment5.saveData();
+            }
+        }
     }
 
     @Override

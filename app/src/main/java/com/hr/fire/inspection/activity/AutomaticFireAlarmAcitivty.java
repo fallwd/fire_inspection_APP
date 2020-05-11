@@ -79,18 +79,14 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
         long companyInfoId = intent.getLongExtra("companyInfoId", 0);  //公司ID
         long systemId = intent.getLongExtra("systemId", 0);   //系统Id
         long platform_id = intent.getLongExtra("platform_id", 0);   //系统Id
-        Log.i("md", "intent1111： " + systemId);
-        Log.i("md", "intent2222： " + platform_id);
         Date srt_Date = (Date) intent.getSerializableExtra("srt_Date");  //传过来的时间
         f_title = intent.getStringExtra("f_title"); //传过来的名称
         sys_number = intent.getStringExtra("sys_number"); //传过来的名称
         it = new IntentTransmit();
         it.companyInfoId = platform_id;
         it.systemId = systemId;
-//        it.platform_id = platform_id;
         it.srt_Date = srt_Date;
         it.number = sys_number;
-        Log.d("dong", "sys_id-----" + systemId+ "platform_id-------"+platform_id+ "f_title--------"+f_title + "IT111111"+ it);
     }
 
 

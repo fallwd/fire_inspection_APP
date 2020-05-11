@@ -2,9 +2,9 @@ package com.hr.fire.inspection.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.view.tableview.HrPopup;
@@ -85,13 +84,36 @@ public class SeawaterSystemAdapter1 extends RecyclerView.Adapter<RecyclerView.Vi
                     showPopWind(vh.tv6);
                 }
             });
+
+            //点击事件
+            String imageUrl = ycr.get(position).getImageUrl();
+            if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+                Uri uri = Uri.parse(imageUrl);
+                vh.iv7.setImageURI(uri);
+            } else {
+                Drawable drawable2 = mContext.getDrawable(R.mipmap.scene_photos_icon);
+                vh.iv7.setImageDrawable(drawable2);
+            }
+
             vh.iv7.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mContext.startActivity(new Intent(mContext, PhotoUploadActivity.class));
+                    mYCCamera.startCamera(position);
                 }
             });
+
         }
+    }
+
+    private YCCamera mYCCamera;
+
+    //接口回调, 将点击事件传递到activity中,打开相机
+    public void setmYCCamera(YCCamera y) {
+        this.mYCCamera = y;
+    }
+
+    public interface YCCamera {
+        void startCamera(int postion);
     }
 
     @Override

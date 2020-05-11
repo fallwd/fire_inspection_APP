@@ -1,6 +1,9 @@
 package com.hr.fire.inspection.adapter;
 
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
@@ -13,11 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.content.FileProvider;
 
 import com.deepoove.poi.XWPFTemplate;
-//import com.deepoove.poi.policy.HackLoopTableRenderPolicy;
 import com.deepoove.poi.config.Configure;
-//import com.deepoove.poi.policy.HackLoopTableRenderPolicy;
 import com.deepoove.poi.data.RowRenderData;
 import com.deepoove.poi.data.TextRenderData;
 import com.deepoove.poi.data.style.Style;
@@ -39,6 +41,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+//import com.deepoove.poi.policy.HackLoopTableRenderPolicy;
+//import com.deepoove.poi.policy.HackLoopTableRenderPolicy;
 
 
 public class FireReportItemAdapter extends BaseAdapter {
@@ -806,6 +811,14 @@ public class FireReportItemAdapter extends BaseAdapter {
             out.close();
             template.close();
             Toast.makeText(mContext, "报告生成成功", Toast.LENGTH_SHORT).show();
+
+            if (file.isFile()) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri uri = FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".fileProvider", file);
+                intent.setDataAndType(uri, "application/msword");
+                mContext.startActivity(intent);
+                return;
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
 

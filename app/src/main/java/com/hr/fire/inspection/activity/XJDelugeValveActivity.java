@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -25,10 +26,12 @@ import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.adapter.XJFireDamperContentApapter;
 import com.hr.fire.inspection.adapter.XJFirstColumnApapter;
 import com.hr.fire.inspection.adapter.XJDelugeValveContentApapter;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
+import com.hr.fire.inspection.utils.TextSpannableUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 import com.hr.fire.inspection.view.tableview.HListViewScrollView;
 
@@ -62,6 +65,7 @@ public class XJDelugeValveActivity extends AppCompatActivity implements View.OnC
     private InspectionServiceImpl service;
     private XJFirstColumnApapter firstColumnApapter;
     private XJDelugeValveContentApapter contentApapter;
+    private TextView tvInspectionPro;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final int TAKE_PHOTO = 1;//拍照
@@ -119,6 +123,10 @@ public class XJDelugeValveActivity extends AppCompatActivity implements View.OnC
         iv_finish.setOnClickListener(this);
         iv_add_table.setOnClickListener(this);
         iv_save.setOnClickListener(this);
+        tvInspectionPro = findViewById(R.id.tv_inspection_pro);
+        String text = new StringBuilder().append("消防巡检>雨淋阀").toString();
+        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#00A779", 0, text.length());
+        tvInspectionPro.setText(showTextColor);
     }
 
     @SuppressLint("WrongConstant")
@@ -147,6 +155,13 @@ public class XJDelugeValveActivity extends AppCompatActivity implements View.OnC
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        });
+        //刷新序号列表
+        contentApapter.setDeleteRefresh(new XJDelugeValveContentApapter.RemoveXH() {
+            @Override
+            public void deleteRefresh(int postion) {
+                firstColumnApapter.notifyDataSetChanged();
             }
         });
     }
@@ -308,7 +323,7 @@ public class XJDelugeValveActivity extends AppCompatActivity implements View.OnC
             itemObj.setParam12(tv_fire12.getText().toString());
             itemObj.setParam13(tv_fire13.getText().toString());
             itemObj.setParam14(tv_fire14.getText().toString());
-            itemObj.setParam15(et_fire15.getText().toString());
+            itemObj.setDescription(et_fire15.getText().toString());
             itemObj.setParam16(tv_fire16.getText().toString());
             Log.d("dong", "itemObj == "+itemObj);
             service.update(itemObj);

@@ -1,10 +1,13 @@
 package com.hr.fire.inspection.adapter;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +19,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.PhotoView;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
@@ -53,6 +59,8 @@ public class AutomaticFireAlarmAdapter2 extends RecyclerView.Adapter<RecyclerVie
         return holder;
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         AutomaticFireAlarmAdapter2.ViewHolder vh = (AutomaticFireAlarmAdapter2.ViewHolder) holder;
@@ -123,13 +131,21 @@ public class AutomaticFireAlarmAdapter2 extends RecyclerView.Adapter<RecyclerVie
                 }
             });
             vh.et_12.setBackground(drawable1);
- //         照相机的图片  需要把对应的xml转换为textview
-            vh.et_13.setVisibility(View.GONE);
-            vh.et_13.setVisibility(View.VISIBLE);
+            //         照相机的图片  需要把对应的xml转换为textview
+
+            String imageUrl = info.getImageUrl();
+            if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+                Uri uri = Uri.parse(imageUrl);
+                vh.et_13.setImageURI(uri);
+            } else {
+                vh.et_13.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
+
+            }
             vh.et_13.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mContext.startActivity(new Intent(mContext, PhotoUploadActivity.class));
+//                    mYCCamera.startCamera(position);
+                    new PhotoView().showPopWindPicInfo(mContext, position, mYCCamera, mData);
                 }
             });
             vh.et_14.setText(new StringBuffer().append(info.getDescription()).append(""));
@@ -142,6 +158,7 @@ public class AutomaticFireAlarmAdapter2 extends RecyclerView.Adapter<RecyclerVie
             }
         });
     }
+
     //显示对话框,用户选择是否异常的弹框
     private void showPopWind6(final TextView et_6) {
         View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods, null);
@@ -298,6 +315,7 @@ public class AutomaticFireAlarmAdapter2 extends RecyclerView.Adapter<RecyclerVie
         this.mData = itemDataList;
         notifyDataSetChanged();
     }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_1;
         EditText et_2;
@@ -335,4 +353,12 @@ public class AutomaticFireAlarmAdapter2 extends RecyclerView.Adapter<RecyclerVie
             et_15 = (RelativeLayout) view.findViewById(R.id.et_15);
         }
     }
+
+    private YCCamera mYCCamera;
+
+    //接口回调, 将点击事件传递到activity中,打开相机
+    public void setmYCCamera(YCCamera y) {
+        this.mYCCamera = y;
+    }
+
 }

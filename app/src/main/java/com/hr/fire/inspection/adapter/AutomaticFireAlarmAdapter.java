@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
@@ -23,7 +26,9 @@ import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.PhotoView;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
@@ -54,13 +59,12 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
         return holder;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-        AutomaticFireAlarmAdapter.ViewHolder vh = (AutomaticFireAlarmAdapter.ViewHolder) holder;
+        ViewHolder vh = (ViewHolder) holder;
         if (mData != null && mData.size() != 0) {
             ItemInfo info = mData.get(position);
-            Log.e("dong", "position----:" + position);
-            Log.e("dong", "info----:" + info);
             vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
             vh.et_2.setText(new StringBuffer().append(info.getDeviceType()).append(""));
             vh.et_3.setText(new StringBuffer().append(info.getProdFactory()).append(""));
@@ -77,6 +81,7 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
             drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
             vh.et_8.setCompoundDrawables(null, null, drawable, null);
             Drawable drawable1 = mContext.getResources().getDrawable(R.drawable.listview_border_margin);
+
             final ViewHolder finalHolder = vh;
             vh.et_8.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -86,12 +91,18 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
             });
             vh.et_8.setBackground(drawable1);
 //          照相机的图片  需要把对应的xml转换为textview
-            vh.tv_9.setVisibility(View.GONE);
-            vh.tv_9.setVisibility(View.VISIBLE);
+            String imageUrl = info.getImageUrl();
+            if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+                Uri uri = Uri.parse(imageUrl);
+                vh.tv_9.setImageURI(uri);
+            } else {
+                    vh.tv_9.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
+            }
+
             vh.tv_9.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mContext.startActivity(new Intent(mContext, PhotoUploadActivity.class));
+                    new PhotoView().showPopWindPicInfo(mContext,position,mYCCamera,mData);
                 }
             });
         }
@@ -169,7 +180,7 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
             itemInfo.setDeviceType("请编辑");
             itemInfo.setTypeNo("请编辑");
             itemInfo.setResponseTime("请编辑");
-            itemInfo.setIsPass("请编辑");
+            itemInfo.setIsPass("请选择");
             itemInfo.setDescription("请编辑");
             itemInfo.setProdFactory("请编辑");
             itemInfo.setResponseTime("请编辑");
@@ -212,6 +223,7 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
         this.mData = itemDataList;
         notifyDataSetChanged();
     }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_1;
         EditText et_2;
@@ -242,4 +254,12 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
             rl_11 = (RelativeLayout) view.findViewById(R.id.rl_11);
         }
     }
+
+    private YCCamera mYCCamera;
+
+    //接口回调, 将点击事件传递到activity中,打开相机
+    public void setmYCCamera(YCCamera y) {
+        this.mYCCamera = y;
+    }
+
 }

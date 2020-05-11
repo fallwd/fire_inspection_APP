@@ -141,7 +141,7 @@ public class NjFireFightingWaterFragment1 extends Fragment {
                 Date date = new Date();
                 itemInfo.setProdDate(date);
                 itemInfo.setTaskNumber("请编辑");
-                itemInfo.setIsPass("请编辑");
+                itemInfo.setIsPass("请选择");
                 itemInfo.setCodePath("请编辑");
 
 
@@ -191,7 +191,7 @@ public class NjFireFightingWaterFragment1 extends Fragment {
             EditText et_4 = childAt.findViewById(R.id.et_4);
             EditText et_5 = childAt.findViewById(R.id.et_5);
             EditText et_6 = childAt.findViewById(R.id.et_6);
-            EditText et_7 = childAt.findViewById(R.id.et_7);
+            TextView et_7 = childAt.findViewById(R.id.et_7);
             TextView et_8 = childAt.findViewById(R.id.et_8);
             TextView et_9 = childAt.findViewById(R.id.et_9);
             ImageView et_10 = childAt.findViewById(R.id.et_10);

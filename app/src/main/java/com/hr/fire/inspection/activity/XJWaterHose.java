@@ -8,8 +8,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,10 +26,12 @@ import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.adapter.XJFireHoseStationContentApapter;
 import com.hr.fire.inspection.adapter.XJWaterHoseColumnAdapter;
 import com.hr.fire.inspection.adapter.XJWaterHoseContentAdapter;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
+import com.hr.fire.inspection.utils.TextSpannableUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 import com.hr.fire.inspection.view.tableview.HListViewScrollView;
 
@@ -60,6 +64,7 @@ public class XJWaterHose extends AppCompatActivity implements View.OnClickListen
     private InspectionServiceImpl service;
     private XJWaterHoseColumnAdapter firstColumnApapter;
     private XJWaterHoseContentAdapter contentApapter;
+    private TextView tvInspectionPro;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final int TAKE_PHOTO = 1;//拍照
@@ -119,6 +124,10 @@ public class XJWaterHose extends AppCompatActivity implements View.OnClickListen
         iv_finish.setOnClickListener(this);
         iv_add_table.setOnClickListener(this);
         iv_save.setOnClickListener(this);
+        tvInspectionPro = findViewById(R.id.tv_inspection_pro);
+        String text = new StringBuilder().append("消防巡检>消防水龙带").toString();
+        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#00A779", 0, text.length());
+        tvInspectionPro.setText(showTextColor);
     }
 
     @SuppressLint("WrongConstant")
@@ -148,7 +157,13 @@ public class XJWaterHose extends AppCompatActivity implements View.OnClickListen
                     e.printStackTrace();
                 }
             }
-
+        });
+        //刷新序号列表
+        contentApapter.setDeleteRefresh(new XJWaterHoseContentAdapter.RemoveXH() {
+            @Override
+            public void deleteRefresh(int postion) {
+                firstColumnApapter.notifyDataSetChanged();
+            }
         });
     }
 
@@ -264,6 +279,7 @@ public class XJWaterHose extends AppCompatActivity implements View.OnClickListen
 
             TextView et_gas1 = childAt.findViewById(R.id.et_gas1);
             TextView et_gas2 = childAt.findViewById(R.id.et_gas2);
+            EditText et_fire10 = childAt.findViewById(R.id.et_fire10);
             TextView tv_gas1 = childAt.findViewById(R.id.tv_gas1);
             TextView tv_gas2 = childAt.findViewById(R.id.tv_gas2);
             TextView tv_gas3 = childAt.findViewById(R.id.tv_gas3);
@@ -279,6 +295,7 @@ public class XJWaterHose extends AppCompatActivity implements View.OnClickListen
             itemObj.setProfession(itemObj.getProfession());
             itemObj.setCheckPerson(itemObj.getCheckPerson());
             itemObj.setCheckDate(itemObj.getCheckDate());
+            itemObj.setDescription(et_fire10.getText().toString());
             itemObj.setParam1(et_gas1.getText().toString());
             itemObj.setParam2(et_gas2.getText().toString());
             itemObj.setParam3(tv_gas3.getText().toString());

@@ -1,5 +1,4 @@
 package com.hr.fire.inspection.entity;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,6 +9,9 @@ public class IntentTransmit implements Serializable {
 
     public long companyInfoId;  //公司ID
     public long systemId;  //系统ID
+    public long platformId;// 平台ID
+    public String start_time; //开始时间
+    public String end_time; // 结束时间
     public Date srt_Date;  //巡检时间
     public String number;  //系统位号
 
@@ -22,12 +24,15 @@ public class IntentTransmit implements Serializable {
     @Override
     public String toString() {
         return "IntentTransmit{" +
-                ", companyInfoId=" + companyInfoId +
+                "companyInfoId=" + companyInfoId +
                 ", systemId=" + systemId +
                 ", srt_Date='" + srt_Date + '\'' +
                 ", id=" + id +
+                ", platformId=" + platformId +
                 ", type=" + type +
                 ", parentId=" + parentId +
+                ", start_time=" + start_time +
+                ", end_time=" + end_time +
                 ", name='" + name + '\'' +
                 '}';
     }

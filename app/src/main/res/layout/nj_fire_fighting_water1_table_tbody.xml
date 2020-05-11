@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-            <EditText
+            <TextView
                 android:id="@+id/et_7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -126,6 +126,7 @@
                 android:singleLine="true"
                 android:maxLines="1"
                 android:text="工作代号"
+                android:textColor="#000"
                 android:textSize="12sp" />
         </RelativeLayout>
         <RelativeLayout
@@ -175,9 +176,9 @@
 
             <ImageView
                 android:id="@+id/et_10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/scene_photos_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@mipmap/rc_code"
                 android:gravity="center"
                 android:textSize="12sp" />
         </RelativeLayout>

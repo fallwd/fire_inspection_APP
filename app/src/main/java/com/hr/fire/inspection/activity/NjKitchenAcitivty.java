@@ -70,8 +70,6 @@ public class NjKitchenAcitivty extends AppCompatActivity {
         long companyInfoId = intent.getLongExtra("companyInfoId", 0);  //公司ID
         long systemId = intent.getLongExtra("systemId", 0);   //系统Id
         long platform_id = intent.getLongExtra("platform_id", 0);   //系统Id
-        Log.i("md", "intent1111： " + systemId);
-        Log.i("md", "intent2222： " + platform_id);
         Date srt_Date = (Date) intent.getSerializableExtra("srt_Date");  //传过来的时间
         f_title = intent.getStringExtra("f_title"); //传过来的名称
         sys_number = intent.getStringExtra("sys_number"); //传过来的名称
@@ -92,7 +90,7 @@ public class NjKitchenAcitivty extends AppCompatActivity {
         tvInspectionPro = findViewById(R.id.tv_inspection_pro);
         iv_save = findViewById(R.id.iv_save);
         String text = new StringBuilder().append("消防年检  >  ").append(f_title).toString();
-        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#E51C23", 0, 3);
+        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#00A779", 8, text.length());
         tvInspectionPro.setText(showTextColor);
 
         mTabLayout = findViewById(R.id.tl_tabs);
@@ -130,6 +128,11 @@ public class NjKitchenAcitivty extends AppCompatActivity {
             @Override
             public void onPageSelected(int i) {
                 currentPager = i;
+                if (i == 0 || i == 1) {
+                    iv_add_table.setVisibility(View.VISIBLE);
+                } else {
+                    iv_add_table.setVisibility(View.GONE);
+                }
             }
 
             @Override

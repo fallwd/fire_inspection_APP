@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -27,10 +28,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hr.fire.inspection.R;
 
 
+import com.hr.fire.inspection.adapter.XJFirstContentApapter;
 import com.hr.fire.inspection.adapter.XJGasColumnAdapter;
 import com.hr.fire.inspection.adapter.XJGasContentAdapter;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
+import com.hr.fire.inspection.utils.TextSpannableUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 import com.hr.fire.inspection.view.tableview.HListViewScrollView;
 
@@ -64,6 +67,7 @@ public class XJGasFireSystem extends AppCompatActivity implements View.OnClickLi
     private InspectionServiceImpl service;
     private XJGasColumnAdapter firstColumnApapter;
     private XJGasContentAdapter contentApapter;
+    private TextView tvInspectionPro;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final int TAKE_PHOTO = 1;//拍照
@@ -90,7 +94,6 @@ public class XJGasFireSystem extends AppCompatActivity implements View.OnClickLi
         check_date = intent.getStringExtra("check_date"); //用户选择的时间
         //测试用, 因为前面传过来的时间格式有问题
         check_date = "2020-04-23 18:21";
-
 
         try {
             //这个解析方式是没有问题的 ,需要保证前面传入的数据是 2020-04-23 18:21 格式
@@ -123,6 +126,10 @@ public class XJGasFireSystem extends AppCompatActivity implements View.OnClickLi
         iv_finish.setOnClickListener(this);
         iv_add_table.setOnClickListener(this);
         iv_save.setOnClickListener(this);
+        tvInspectionPro = findViewById(R.id.tv_inspection_pro);
+        String text = new StringBuilder().append("消防巡检>气体灭火系统").toString();
+        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#00A779", 0, text.length());
+        tvInspectionPro.setText(showTextColor);
     }
 
     @SuppressLint("WrongConstant")
@@ -152,7 +159,13 @@ public class XJGasFireSystem extends AppCompatActivity implements View.OnClickLi
                     e.printStackTrace();
                 }
             }
-
+        });
+        //刷新序号列表
+        contentApapter.setDeleteRefresh(new XJGasContentAdapter.RemoveXH() {
+            @Override
+            public void deleteRefresh(int postion) {
+                firstColumnApapter.notifyDataSetChanged();
+            }
         });
     }
 
@@ -297,8 +310,9 @@ public class XJGasFireSystem extends AppCompatActivity implements View.OnClickLi
         for (int i = 0; i < itemCount; i++) {
             LinearLayout childAt = (LinearLayout) rl_content.getChildAt(i);
 
-            TextView et_gas1 = childAt.findViewById(R.id.et_gas1);
-            TextView et_gas2 = childAt.findViewById(R.id.et_gas2);
+            EditText et_gas1 = childAt.findViewById(R.id.et_gas1);
+            EditText et_gas2 = childAt.findViewById(R.id.et_gas2);
+            EditText et_fire10 = childAt.findViewById(R.id.et_fire10);
             TextView tv_gas1 = childAt.findViewById(R.id.tv_gas1);
             TextView tv_gas2 = childAt.findViewById(R.id.tv_gas2);
             TextView tv_gas3 = childAt.findViewById(R.id.tv_gas3);
@@ -329,6 +343,7 @@ public class XJGasFireSystem extends AppCompatActivity implements View.OnClickLi
             itemObj.setProfession(itemObj.getProfession());
             itemObj.setCheckPerson(itemObj.getCheckPerson());
             itemObj.setCheckDate(itemObj.getCheckDate());
+            itemObj.setDescription(et_fire10.getText().toString());
             itemObj.setParam1(et_gas1.getText().toString());
             itemObj.setParam2(et_gas2.getText().toString());
             itemObj.setParam3(tv_gas3.getText().toString());

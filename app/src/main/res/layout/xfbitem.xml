@@ -317,13 +317,26 @@
 
         <RelativeLayout
             android:id="@+id/rl_fire16"
-            android:layout_width="match_parent"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             >
+            <EditText
+                android:id="@+id/et_fire10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:hint="请输入"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tv_fire16"
-                android:layout_width="60dp"
+                android:layout_width="80dp"
                 android:layout_height="45dp"
                 android:textAlignment="center"
                 tools:ignore="RtlCompat"
@@ -332,7 +345,9 @@
                 android:text="是"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone"/>
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -370,7 +385,7 @@
                 android:layout_centerInParent="true"
                 android:textAlignment="center"
                 android:layout_marginLeft="8dp"
-                android:background="@mipmap/detail_icon"
+                android:background="@mipmap/remove_item"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold"

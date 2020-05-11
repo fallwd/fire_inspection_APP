@@ -9,6 +9,7 @@ package com.hr.fire.inspection.activity;
         import android.os.Build;
         import android.os.Bundle;
         import android.provider.MediaStore;
+        import android.text.SpannableString;
         import android.util.Log;
         import android.view.View;
         import android.widget.EditText;
@@ -27,12 +28,14 @@ package com.hr.fire.inspection.activity;
         import androidx.recyclerview.widget.RecyclerView;
 
         import com.hr.fire.inspection.R;
+        import com.hr.fire.inspection.adapter.XJFFESContentApapter;
         import com.hr.fire.inspection.adapter.XJFirstColumnApapter;
         import com.hr.fire.inspection.adapter.XJFirstContentApapter;
         import com.hr.fire.inspection.adapter.XJxfbAdapter;
         import com.hr.fire.inspection.adapter.xfb_contentAdapter;
         import com.hr.fire.inspection.entity.InspectionResult;
         import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
+        import com.hr.fire.inspection.utils.TextSpannableUtil;
         import com.hr.fire.inspection.utils.ToastUtil;
         import com.hr.fire.inspection.view.tableview.HListViewScrollView;
 
@@ -66,6 +69,7 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
     private InspectionServiceImpl service;
     private XJxfbAdapter firstColumnApapter;
     private xfb_contentAdapter contentApapter;
+    private TextView  tvInspectionPro;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final int TAKE_PHOTO = 1;//拍照
@@ -123,6 +127,10 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
         iv_finish.setOnClickListener(this);
         iv_add_table.setOnClickListener(this);
         iv_save.setOnClickListener(this);
+        tvInspectionPro = findViewById(R.id.tv_inspection_pro);
+        String text = new StringBuilder().append("消防巡检>消防泵").toString();
+        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#00A779", 0, text.length());
+        tvInspectionPro.setText(showTextColor);
     }
 
     @SuppressLint("WrongConstant")
@@ -151,6 +159,13 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        });
+        //刷新序号列表
+        contentApapter.setDeleteRefresh(new xfb_contentAdapter.RemoveXH() {
+            @Override
+            public void deleteRefresh(int postion) {
+                firstColumnApapter.notifyDataSetChanged();
             }
         });
     }
@@ -220,6 +235,13 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
                 result.setParam7(item.getParam7());
                 result.setParam8(item.getParam8());
                 result.setParam9(item.getParam9());
+                result.setParam10(item.getParam10());
+                result.setParam11(item.getParam11());
+                result.setParam12(item.getParam12());
+                result.setParam13(item.getParam13());
+                result.setParam14(item.getParam14());
+                result.setParam15(item.getParam15());
+
             } else {
                 //没有数据造一段默认数据
                 Log.d("dong", "默认没有数据吧==");
@@ -238,6 +260,12 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
                 result.setParam8("否");
                 result.setParam9("否");
                 result.setParam10("是");
+                result.setParam11("是");
+                result.setParam12("是");
+                result.setParam13("否");
+                result.setParam14("是");
+                result.setParam15("是");
+                result.setParam16("请输入");
             }
             long l = service.insertInspectionData(result, companyInfoId, systemId, parse_check_date);
             //表示数据插入成功,再次查询,拿到最新的数据
@@ -274,6 +302,7 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
             TextView tv_fire7 = childAt.findViewById(R.id.tv_fire7);
             TextView tv_fire8 = childAt.findViewById(R.id.tv_fire8);
             TextView tv_fire9 = childAt.findViewById(R.id.tv_fire9);
+            EditText et_fire10 = childAt.findViewById(R.id.et_fire10);
             TextView tv_fire10 = childAt.findViewById(R.id.tv_fire10);
             TextView tv_fire11 = childAt.findViewById(R.id.tv_fire11);
             TextView tv_fire12 = childAt.findViewById(R.id.tv_fire12);
@@ -287,6 +316,7 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
             itemObj.setProfession(itemObj.getProfession());
             itemObj.setCheckPerson(itemObj.getCheckPerson());
             itemObj.setCheckDate(itemObj.getCheckDate());
+            itemObj.setDescription(et_fire10.getText().toString());
             itemObj.setParam1(tv_fire1.getText().toString());
             itemObj.setParam2(tv_fire2.getText().toString());
             itemObj.setParam3(tv_fire3.getText().toString());
@@ -303,6 +333,7 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
             itemObj.setParam13(tv_fire14.getText().toString());
             itemObj.setParam14(tv_fire15.getText().toString());
             itemObj.setParam15(tv_fire16.getText().toString());
+//            itemObj.setParam16();
             Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
                     + tv_fire1.getText().toString() + "  " + tv_fire2.getText().toString() + " " + tv_fire3.getText().toString());
             service.update(itemObj);

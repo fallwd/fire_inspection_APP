@@ -119,22 +119,43 @@ public class DryPowderFireSystemFragment2 extends Fragment {
                 //点击新增,有数据,就拿到最后一条数据新增,创建一个新的对象
                 ItemInfo item = itemDataList.get(itemDataList.size() - 1);
                 //如果直接新增会导致后台id冲重复\冲突
+                itemInfo.setNo(item.getNo());
                 itemInfo.setVolume(item.getVolume());
                 itemInfo.setWeight(item.getWeight());
-                itemInfo.setGoodsWeight(item.getGoodsWeight());
+                itemInfo.setPressure(item.getPressure());
                 itemInfo.setProdFactory(item.getProdFactory());
                 itemInfo.setProdDate(item.getProdDate());
-                itemInfo.setNo(item.getNo());
+                itemInfo.setObserveDate(item.getObserveDate());
                 itemInfo.setTaskNumber(item.getTaskNumber());
+                itemInfo.setIsPass(item.getIsPass());
+                itemInfo.setLabelNo(item.getLabelNo());
+                itemInfo.setCodePath(item.getCodePath());
 
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
-                itemInfo.setVolume("9");
-                itemInfo.setWeight("3");
-                itemInfo.setGoodsWeight("50");
-                itemInfo.setProdFactory("未知");
+                itemInfo.setNo("请编辑");
+                itemInfo.setVolume("请编辑");
+                itemInfo.setWeight("请编辑");
+                itemInfo.setPressure("请编辑");
                 Date date = new Date();
+                itemInfo.setProdFactory("请编辑");
                 itemInfo.setProdDate(date);
+                itemInfo.setObserveDate(date);
+                itemInfo.setTaskNumber("请选择");
+                itemInfo.setIsPass("请选择");
+                itemInfo.setLabelNo("请编辑");
+//                瓶号 no
+//                容积/L  volume
+//                瓶重/kg weight
+//                压力/MPa pressure
+//                生产厂家 prodFactory
+//                生产日期 prodDate
+//                水压试验日期 observeDate
+//                工作代号  taskNumber
+//                检查表
+//                是否合格  isPass
+//                标签号  labelNo
+//                二维码 codePath
 
             }
             long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, its.companyInfoId, checkTypes.get(1).getId(), its.number, its.srt_Date);
@@ -172,37 +193,28 @@ public class DryPowderFireSystemFragment2 extends Fragment {
             EditText et_6 = childAt.findViewById(R.id.et_6);
             EditText et_7 = childAt.findViewById(R.id.et_7);
             EditText et_8 = childAt.findViewById(R.id.et_8);
-            EditText et_9 = childAt.findViewById(R.id.et_9);
+            TextView et_9 = childAt.findViewById(R.id.et_9);
             TextView et_10 = childAt.findViewById(R.id.et_10);
             EditText et_11 = childAt.findViewById(R.id.et_11);
             ImageView et_12 = childAt.findViewById(R.id.et_12);
             TextView tv_9 = childAt.findViewById(R.id.tv_9);
 
             ItemInfo itemObj = itemDataList.get(i);
-
-
             itemObj.setNo(et_2.getText().toString());
-
             itemObj.setVolume(et_3.getText().toString());
-
             itemObj.setWeight(et_4.getText().toString());
-
             itemObj.setPressure(et_5.getText().toString());
-
             itemObj.setProdFactory(et_6.getText().toString());
-
             Date date1 = TimeUtil.getInstance().hhmmssTodata(et_7.getText().toString());
             itemObj.setProdDate(date1);
-
-
-            Date date = TimeUtil.getInstance().hhmmssTodata(et_8.getText().toString());
-            itemObj.setObserveDate(date);
-
-
+            Date date2 = TimeUtil.getInstance().hhmmssTodata(et_7.getText().toString());
+            itemObj.setObserveDate(date2);
             itemObj.setTaskNumber(et_9.getText().toString());
+            itemObj.setIsPass(et_10.getText().toString());
+            itemObj.setLabelNo(et_11.getText().toString());
+//            itemObj.setCodePath(et_12.getImageAlpha());  // 二维码路径？？？？？
 
             ServiceFactory.getYearCheckService().update(itemObj);
-
         }
         Toast.makeText(getContext(), "\"启动瓶\"数据保存成功", Toast.LENGTH_SHORT).show();
     }

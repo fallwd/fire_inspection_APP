@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +18,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
+import com.hr.fire.inspection.activity.QRCodeExistenceAcitivty;
+import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.PhotoView;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
@@ -49,6 +56,7 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
         return holder;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         AutomaticFireAlarmAdapter4.ViewHolder vh = (AutomaticFireAlarmAdapter4.ViewHolder) holder;
@@ -139,16 +147,22 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
             vh.et_12.setBackground(drawable1);
 
 
- //         照相机的图片  需要把对应的xml转换为textview
-            vh.et_13.setVisibility(View.GONE);
-            vh.et_13.setVisibility(View.VISIBLE);
+            //         照相机的图片  需要把对应的xml转换为textview
+            String imageUrl = info.getImageUrl();
+            if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+                Uri uri = Uri.parse(imageUrl);
+                vh.et_13.setImageURI(uri);
+            } else {
+                vh.et_13.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
+
+            }
             vh.et_13.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mContext.startActivity(new Intent(mContext, PhotoUploadActivity.class));
+                    mYCCamera.startCamera(position);
+                    new PhotoView().showPopWindPicInfo(mContext, position, mYCCamera, mData);
                 }
             });
-//            vh.et_14.setImageAlpha(new StringBuffer().append(info.getCodePath()).append(""));      // 二维码导入
             vh.et_15.setText(new StringBuffer().append(info.getDescription()).append(""));
         }
 
@@ -156,6 +170,15 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
             @Override
             public void onClick(View v) {
                 removeData(position);
+            }
+        });
+        vh.et_14.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra(ConstantInspection.CHECK_DIVICE, "火灾报警系统控制器");
+                intent.setClass(mContext, QRCodeExistenceAcitivty.class);
+                mContext.startActivity(intent);
             }
         });
     }
@@ -490,6 +513,7 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
         this.mData = itemDataList;
         notifyDataSetChanged();
     }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_1;
         EditText et_2;
@@ -528,4 +552,13 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
             et_16 = (RelativeLayout) view.findViewById(R.id.et_16);
         }
     }
+
+
+    private YCCamera mYCCamera;
+
+    //接口回调, 将点击事件传递到activity中,打开相机
+    public void setmYCCamera(YCCamera y) {
+        this.mYCCamera = y;
+    }
+
 }

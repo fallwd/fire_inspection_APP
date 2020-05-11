@@ -1,7 +1,11 @@
 package com.hr.fire.inspection.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +18,7 @@ import android.widget.Toast;
 
 
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,14 +30,18 @@ import com.hr.fire.inspection.adapter.AutomaticFireAlarmAdapter2;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.BaseService;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.service.impl.YearCheckServiceImpl;
+import com.hr.fire.inspection.utils.FileRoute;
 import com.hr.fire.inspection.utils.HYLogUtil;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -50,6 +59,7 @@ public class AutomaticFireAlarm6 extends Fragment {
     private List<ItemInfo> itemDataList = new ArrayList<>();
     private RecyclerView hz_table_tbody_id2;
     private IntentTransmit it;
+    private int imgPostion = -1;   //用户点击拍照, 所对应的位置
     private List<CheckType> checkTypes;
 
     public static AutomaticFireAlarm6 newInstance(String key, IntentTransmit value) {
@@ -68,7 +78,6 @@ public class AutomaticFireAlarm6 extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             it = (IntentTransmit) getArguments().getSerializable(mKey);
-            Log.e("dong", "f1传参====" + it.toString());
         }
 
     }
@@ -119,6 +128,13 @@ public class AutomaticFireAlarm6 extends Fragment {
         if (checkTypes != null) {
             adapter.setCheckId(checkTypes.get(5).getId(), it);
         }
+        adapter.setmYCCamera(new YCCamera() {
+            @Override
+            public void startCamera(int postion) {
+                imgPostion = postion;
+                openSysCamera();
+            }
+        });
     }
     //动态添加条目
     public void addItemView() {
@@ -267,6 +283,31 @@ public class AutomaticFireAlarm6 extends Fragment {
         super.onDestroyView();
         if (adapter != null) {
             adapter = null;
+        }
+    }
+    /**
+     * 打开系统相机
+     */
+    private File fileNew = null;
+
+    private void openSysCamera() {
+        // intent用来启动系统自带的Camera
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            fileNew = new FileRoute(getActivity()).createOriImageFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Uri imgUriOri = null;
+        if (fileNew != null) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                imgUriOri = Uri.fromFile(fileNew);
+            } else {
+                imgUriOri = FileProvider.getUriForFile(getActivity(), getActivity().getApplicationContext().getPackageName() + ".fileProvider", fileNew);
+            }
+            // 将系统Camera的拍摄结果写入到文件
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgUriOri);
+            startActivityForResult(cameraIntent, FileRoute.CAMERA_RESULT_CODE);
         }
     }
 }

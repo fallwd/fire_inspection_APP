@@ -81,7 +81,7 @@ public class NjFireFightingWaterFragment2 extends Fragment {
     private void initData() {
         List<CheckType> arr = ServiceFactory.getYearCheckService().gettableNameData(it.systemId);
         Log.d("dong", "arr列表   " + arr);
-        long checkTypeId = arr.get(0).getId();
+        long checkTypeId = arr.get(1).getId();
 
 
         checkTypes = ServiceFactory.getYearCheckService().gettableNameData(it.systemId);
@@ -89,7 +89,7 @@ public class NjFireFightingWaterFragment2 extends Fragment {
             Toast.makeText(getActivity(), "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
         }
         //参数1:公司id, 参数2:检查表类型对应的id, 参数3:输入的系统位号，如果没有就填"",或者SD002,否则没数据   参数4:日期
-        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(0).getId(), it.number == null ? "" : it.number, it.srt_Date);
+        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(1).getId(), it.number == null ? "" : it.number, it.srt_Date);
         HYLogUtil.getInstance().d("设备表信息,数据查看:" + itemDataList.size() + "  " + itemDataList.toString());
         // 一级表插入数据insertItemData
 
@@ -109,7 +109,7 @@ public class NjFireFightingWaterFragment2 extends Fragment {
         //添加动画
         table_tbody_id.setItemAnimator(new DefaultItemAnimator());
         if (checkTypes != null) {
-            adapter.setCheckId(checkTypes.get(0).getId(), it);
+            adapter.setCheckId(checkTypes.get(1).getId(), it);
         }
     }
 
@@ -137,7 +137,7 @@ public class NjFireFightingWaterFragment2 extends Fragment {
                 itemInfo.setDeviceType("请编辑");
                 Date date = new Date();
                 itemInfo.setProdDate(date);
-                itemInfo.setIsPass("请编辑");
+                itemInfo.setIsPass("请选择");
                 itemInfo.setCodePath("请编辑");
 
 
@@ -154,10 +154,10 @@ public class NjFireFightingWaterFragment2 extends Fragment {
 //            <!--二维码--> i codePath
 
             }
-            long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, it.companyInfoId, checkTypes.get(0).getId(), it.number, it.srt_Date);
+            long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, it.companyInfoId, checkTypes.get(1).getId(), it.number, it.srt_Date);
             //表示数据插入成功,再次查询,拿到最新的数据
             if (l1 == 0) {
-                itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(0).getId(), it.number == null ? "" : it.number, it.srt_Date);
+                itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(1).getId(), it.number == null ? "" : it.number, it.srt_Date);
                 adapter.setNewData(itemDataList);
             } else {
                 ToastUtil.show(getActivity(), "未知错误,新增失败", Toast.LENGTH_SHORT);
@@ -169,10 +169,10 @@ public class NjFireFightingWaterFragment2 extends Fragment {
     public void upData() {
         int itemCount = table_tbody_id.getChildCount();
         //通知数据库刷新数据， 才能在调用Update();
-        Log.d("dong", "it.companyInfoId111==   " + it.companyInfoId + "   checkTypes.get(0).getId()   " + checkTypes.get(0).getId()+ "ITTTTTTTTTT" + it);
+        Log.d("dong", "it.companyInfoId111==   " + it.companyInfoId + "   checkTypes.get(1).getId()   " + checkTypes.get(1).getId()+ "ITTTTTTTTTT" + it);
 
 
-        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(0).getId(), it.number == null ? "" : it.number, it.srt_Date);
+        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(1).getId(), it.number == null ? "" : it.number, it.srt_Date);
 
         Log.d("dong", "upData==   " + itemCount + "   新的数据条数   " + itemDataList.size());
         if (itemCount == 0 || itemDataList.size() == 0 || itemDataList.size() != itemCount) {

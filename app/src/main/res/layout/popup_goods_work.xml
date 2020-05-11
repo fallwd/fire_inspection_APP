@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlayout_main"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <!--android:background="@mipmap/transparent_bg"-->
+    <!--android:background="@drawable/listview_border_margin"-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/rl_code"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_item"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="1.面罩检查"
+                android:textColor="#000000"
+                android:textSize="13sp" />
+
+            <RelativeLayout
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/iv_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/cb_normal" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!--<RelativeLayout-->
+        <!--android:id="@+id/rl_2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="38dp"-->
+        <!--android:layout_marginLeft="4dp"-->
+        <!--android:layout_marginRight="4dp">-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:text="2.呼吸阀检查"-->
+        <!--android:textColor="#000000"-->
+        <!--android:textSize="13sp" />-->
+        <!--</RelativeLayout>-->
+
+        <!--<RelativeLayout-->
+        <!--android:id="@+id/rl_3"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="38dp"-->
+        <!--android:layout_marginLeft="4dp"-->
+        <!--android:layout_marginRight="4dp">-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:text="3.调节装置检查"-->
+        <!--android:textColor="#000000"-->
+        <!--android:textSize="13sp" />-->
+        <!--</RelativeLayout>-->
+        <!--<RelativeLayout-->
+        <!--android:id="@+id/rl_4"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="38dp"-->
+        <!--android:layout_marginLeft="4dp"-->
+        <!--android:layout_marginRight="4dp">-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:text="4.背带检查"-->
+        <!--android:textColor="#000000"-->
+        <!--android:textSize="13sp" />-->
+        <!--</RelativeLayout>-->
+        <!--<RelativeLayout-->
+        <!--android:id="@+id/rl_5"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="38dp"-->
+        <!--android:layout_marginLeft="4dp"-->
+        <!--android:layout_marginRight="4dp">-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:text="5.功能试验"-->
+        <!--android:textColor="#000000"-->
+        <!--android:textSize="13sp" />-->
+        <!--</RelativeLayout>-->
+        <!--<RelativeLayout-->
+        <!--android:id="@+id/rl_6"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="38dp"-->
+        <!--android:layout_marginLeft="4dp"-->
+        <!--android:layout_marginRight="4dp">-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:text="6.气瓶检查"-->
+        <!--android:textColor="#000000"-->
+        <!--android:textSize="13sp" />-->
+        <!--</RelativeLayout>-->
+        <!--<RelativeLayout-->
+        <!--android:id="@+id/rl_7"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="38dp"-->
+        <!--android:layout_marginLeft="4dp"-->
+        <!--android:layout_marginRight="4dp">-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:text="7.气瓶充气"-->
+        <!--android:textColor="#000000"-->
+        <!--android:textSize="13sp" />-->
+        <!--</RelativeLayout>-->
+        <!--<RelativeLayout-->
+        <!--android:id="@+id/rl_8"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="38dp"-->
+        <!--android:layout_marginLeft="4dp"-->
+        <!--android:layout_marginRight="4dp">-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:text="8.气瓶水压试验"-->
+        <!--android:textColor="#000000"-->
+        <!--android:textSize="13sp" />-->
+        <!--</RelativeLayout>-->
+        <!--<RelativeLayout-->
+        <!--android:id="@+id/rl_9"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="38dp"-->
+        <!--android:layout_marginLeft="4dp"-->
+        <!--android:layout_marginRight="4dp">-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:text="9.检验日期标签"-->
+        <!--android:textColor="#000000"-->
+        <!--android:textSize="13sp" />-->
+        <!--</RelativeLayout>-->
+        <!--<RelativeLayout-->
+        <!--android:id="@+id/rl_10"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="38dp"-->
+        <!--android:layout_marginLeft="4dp"-->
+        <!--android:layout_marginRight="4dp">-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:text="10.新气瓶"-->
+        <!--android:textColor="#000000"-->
+        <!--android:textSize="13sp" />-->
+        <!--</RelativeLayout>-->
+    </LinearLayout>
+</RelativeLayout>
