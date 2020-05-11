@@ -28,8 +28,10 @@ import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
+import com.hr.fire.inspection.utils.PhotoView;
 import com.hr.fire.inspection.utils.StringBitmap;
 import com.hr.fire.inspection.view.tableview.HrPopup;
+import com.hr.fire.inspection.impl.YCCamera;
 
 import java.io.File;
 import java.io.IOException;
@@ -75,16 +77,7 @@ public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.tv5.setText(yearCheck.getStandard());
             vh.tv6.setText(ycr.get(position).getIsPass());
             vh.ev8.setText(ycr.get(position).getDescription());
-            String imageUrl = ycr.get(position).getImageUrl();
-            if (imageUrl != null && imageUrl.endsWith(".jpg")) {
-                //路径  /external_path/Android/data/com.hr.fire.inspection/cache/1587462719699.jpg
-//                Uri uri = Uri.fromFile(new File(imageUrl));
-                Uri uri = Uri.parse(imageUrl);
-                vh.iv7.setImageURI(uri);
-            } else {
-                Drawable drawable = mContext.getDrawable(R.mipmap.scene_photos_icon);
-                vh.iv7.setImageDrawable(drawable);
-            }
+
 
             //在左侧添加图片
             Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
@@ -104,12 +97,22 @@ public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     showPopWind(vh.tv6);
                 }
             });
+
+            String imageUrl = ycr.get(position).getImageUrl();
+            if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+                Uri uri = Uri.parse(imageUrl);
+                vh.iv7.setImageURI(uri);
+            } else {
+                vh.iv7.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
+            }
+
             vh.iv7.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mYCCamera.startCamera(position);
+                    new PhotoView().showPopWindPic(mContext, position, mYCCamera, ycr);
                 }
             });
+
         }
 
     }
@@ -209,7 +212,4 @@ public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.mYCCamera = y;
     }
 
-    public interface YCCamera {
-        void startCamera(int postion);
-    }
 }

@@ -39,6 +39,7 @@ import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.FileRoute;
+import com.hr.fire.inspection.impl.YCCamera;
 
 import java.io.File;
 import java.io.IOException;
@@ -126,7 +127,8 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
         goodsAdapter = new GoodsRecycAdapter(this, checkDataEasy, yearCheckResults);
         listRrcycler.setAdapter(goodsAdapter);
         listRrcycler.setItemAnimator(new DefaultItemAnimator());
-        goodsAdapter.setmYCCamera(new GoodsRecycAdapter.YCCamera() {
+        // 拍照回调
+        goodsAdapter.setmYCCamera(new YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;

@@ -22,7 +22,9 @@ import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
+import com.hr.fire.inspection.utils.PhotoView;
 import com.hr.fire.inspection.view.tableview.HrPopup;
+import com.hr.fire.inspection.impl.YCCamera;
 
 import java.util.List;
 
@@ -87,20 +89,18 @@ public class DryPowderFireSystemAdapter3 extends RecyclerView.Adapter<RecyclerVi
                 }
             });
 
-            //点击事件
             String imageUrl = ycr.get(position).getImageUrl();
             if (imageUrl != null && imageUrl.endsWith(".jpg")) {
                 Uri uri = Uri.parse(imageUrl);
                 vh.iv7.setImageURI(uri);
             } else {
-                Drawable drawable2 = mContext.getDrawable(R.mipmap.scene_photos_icon);
-                vh.iv7.setImageDrawable(drawable2);
+                vh.iv7.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
             }
 
             vh.iv7.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mYCCamera.startCamera(position);
+                    new PhotoView().showPopWindPic(mContext, position, mYCCamera, ycr);
                 }
             });
         }
@@ -195,9 +195,5 @@ public class DryPowderFireSystemAdapter3 extends RecyclerView.Adapter<RecyclerVi
     //接口回调, 将点击事件传递到activity中,打开相机
     public void setmYCCamera(YCCamera y) {
         this.mYCCamera = y;
-    }
-
-    public interface YCCamera {
-        void startCamera(int postion);
     }
 }

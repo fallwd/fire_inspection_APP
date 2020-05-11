@@ -33,6 +33,7 @@ import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.FileRoute;
+import com.hr.fire.inspection.impl.YCCamera;
 
 import java.io.File;
 import java.io.IOException;
@@ -118,8 +119,8 @@ public class SeawaterSystemFragment1  extends Fragment {
         rc_list.setAdapter(adapter);
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
-        // 拍照回显
-        adapter.setmYCCamera(new SeawaterSystemAdapter1.YCCamera() {
+        // 拍照回调
+        adapter.setmYCCamera(new YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;

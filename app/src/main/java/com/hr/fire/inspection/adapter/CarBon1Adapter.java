@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -84,6 +85,20 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             } else {
                 vh.tv_10.setText(s);
             }
+
+
+            //          下拉框
+            vh.tv_10.setText(new StringBuffer().append(info.getIsPass()).append(""));
+            //在左侧添加图片
+            Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+            vh.tv_10.setCompoundDrawables(null, null, drawable, null);
+            Drawable drawable1 = mContext.getResources().getDrawable(R.drawable.listview_border_margin);
+            final CarBon1Adapter.ViewHolder finalHolder = vh;
+            vh.tv_10.setOnClickListener(v -> showPopWind(finalHolder.tv_10));
+            vh.tv_10.setBackground(drawable1);
+
+
             vh.tv_11.setText(new StringBuffer().append(info.getTaskNumber()));
             if (info.getLabelNo() == null) {
                 vh.et_12.setHint("请输入...");

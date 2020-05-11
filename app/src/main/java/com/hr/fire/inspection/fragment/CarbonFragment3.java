@@ -122,15 +122,7 @@ public class CarbonFragment3 extends Fragment {
         rc_list.setAdapter(adapter);
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
-//        adapter.setmYCCamera(new YCCamera() {
-//            @Override
-//            public void startCamera(int postion) {
-//                imgPostion = postion;
-//                openSysCamera();
-//            }
-//        });
-        // 拍照回显
-        adapter.setmYCCamera(new CarBon3Adapter.YCCamera() {
+        adapter.setmYCCamera(new YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;

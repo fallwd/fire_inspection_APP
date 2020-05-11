@@ -74,7 +74,7 @@ public class HFC2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 //            vh.et_2.setText(new StringBuffer().append("").append(position + 1));
             vh.et_2.setText(new StringBuffer().append("BQ00").append(position + 1));
             vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
-            vh.et_4.setText(new StringBuffer().append(info.getWeight()).append(""));
+            vh.et_4.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));
             vh.et_5.setText(new StringBuffer().append(info.getPressure()).append(""));
             vh.et_6.setText(new StringBuffer().append(info.getProdFactory()).append(""));
 
@@ -232,13 +232,16 @@ public class HFC2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else {
             ItemInfo itemInfo = new ItemInfo();
 
-            itemInfo.setVolume("9.1");
-            itemInfo.setWeight("3");
-            itemInfo.setGoodsWeight("50");
-            itemInfo.setProdFactory("未知");
+            itemInfo.setVolume("请编辑");
+            itemInfo.setWeight("请编辑");
+            itemInfo.setGoodsWeight("请编辑");
+            itemInfo.setProdFactory("请编辑");
             Date date = new Date();
             itemInfo.setProdDate(date);
             itemInfo.setCheckDate(date);
+            itemInfo.setTaskNumber("请选择");
+            itemInfo.setIsPass("请选择");
+            itemInfo.setLabelNo("请编辑");
 
             mData.add(itemInfo);
             //添加动画
