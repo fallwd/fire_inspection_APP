@@ -26,14 +26,14 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-
+// /data/data/com.hr.fire.inspection/cache
 //         清空数据库
-//        DBManager cleanObj = new DBManager(this);
-//        cleanObj.deleSQL();
+        DBManager cleanObj = new DBManager(this);
+        cleanObj.deleSQL();
 //        // 初始化数据库
-//        BaseData baseData = new BaseData();
-//        baseData.initData();
-//        baseData.insertTestData();
+        BaseData baseData = new BaseData();
+        baseData.initData();
+        baseData.insertTestData();
         // 调用接口测试
 //        List<CompanyInfo> companyList = ServiceFactory.getCompanyInfoService().getAll();
 //        for(int i=0;i<companyList.size();i++){
