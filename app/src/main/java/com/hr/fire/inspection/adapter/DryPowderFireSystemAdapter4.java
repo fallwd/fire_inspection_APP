@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,10 +86,20 @@ public class DryPowderFireSystemAdapter4 extends RecyclerView.Adapter<RecyclerVi
                     showPopWind(vh.tv6);
                 }
             });
+            //点击事件
+            String imageUrl = ycr.get(position).getImageUrl();
+            if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+                Uri uri = Uri.parse(imageUrl);
+                vh.iv7.setImageURI(uri);
+            } else {
+                Drawable drawable2 = mContext.getDrawable(R.mipmap.scene_photos_icon);
+                vh.iv7.setImageDrawable(drawable2);
+            }
+
             vh.iv7.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mContext.startActivity(new Intent(mContext, PhotoUploadActivity.class));
+                    mYCCamera.startCamera(position);
                 }
             });
         }
@@ -176,5 +187,15 @@ public class DryPowderFireSystemAdapter4 extends RecyclerView.Adapter<RecyclerVi
                 }
             }
         });
+    }
+    private YCCamera mYCCamera;
+
+    //接口回调, 将点击事件传递到activity中,打开相机
+    public void setmYCCamera(YCCamera y) {
+        this.mYCCamera = y;
+    }
+
+    public interface YCCamera {
+        void startCamera(int postion);
     }
 }

@@ -105,16 +105,7 @@ public class SeawaterSystemAdapter1 extends RecyclerView.Adapter<RecyclerView.Vi
         }
     }
 
-    private YCCamera mYCCamera;
 
-    //接口回调, 将点击事件传递到activity中,打开相机
-    public void setmYCCamera(YCCamera y) {
-        this.mYCCamera = y;
-    }
-
-    public interface YCCamera {
-        void startCamera(int postion);
-    }
 
     @Override
     public int getItemCount() {
@@ -198,5 +189,15 @@ public class SeawaterSystemAdapter1 extends RecyclerView.Adapter<RecyclerView.Vi
                 }
             }
         });
+    }
+    private YCCamera mYCCamera;
+
+    //接口回调, 将点击事件传递到activity中,打开相机
+    public void setmYCCamera(YCCamera y) {
+        this.mYCCamera = y;
+    }
+
+    public interface YCCamera {
+        void startCamera(int postion);
     }
 }

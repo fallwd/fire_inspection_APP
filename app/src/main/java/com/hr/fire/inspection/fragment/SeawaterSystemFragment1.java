@@ -163,11 +163,6 @@ public class SeawaterSystemFragment1  extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case FileRoute.CAMERA_RESULT_CODE:
-//                File tempFile = new File(Environment.getExternalStorageDirectory(), imgNameTime);
-//                String absolutePath = tempFile.getAbsolutePath();
-//                String fileName = absolutePath.substring(absolutePath
-//                        .lastIndexOf("/") + 1, absolutePath.length() - 4);
-//                Bitmap bitmap = BitmapFactory.decodeFile(tempFile.getPath());
                 //这里目前需要适配
                 if (fileNew.getAbsolutePath() != null && imgPostion != -1 && adapter != null) {
                     yearCheckResults.get(imgPostion).setImageUrl(fileNew.getAbsolutePath());
@@ -186,7 +181,6 @@ public class SeawaterSystemFragment1  extends Fragment {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         try {
             fileNew = new FileRoute(getActivity()).createOriImageFile();
-//            String imgPathOri = fileNew.getAbsolutePath();
         } catch (IOException e) {
             e.printStackTrace();
         }
