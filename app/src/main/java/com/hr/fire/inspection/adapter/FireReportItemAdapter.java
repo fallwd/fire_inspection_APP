@@ -152,111 +152,8 @@ public class FireReportItemAdapter extends BaseAdapter {
             // 获取ItemInfo对象
             final List<ItemInfo> date = (List) getallmessage.get(0).get("data");
                 assert date != null;
-            ItemInfo itemObj = date.get(0);
-            // 高压二氧化碳灭火系统
-            List<HashMap> co2_system = getallmessage.stream().filter(d -> "高压二氧化碳灭火系统".equals(d.get("systemName"))).collect(Collectors.toList());
-            List<HashMap> PotionBottle_data = co2_system.stream().filter(d -> "药剂瓶".equals(d.get("tableName"))).collect(Collectors.toList());
-            List<ItemInfo> co2_yjp_data  = (List<ItemInfo>) PotionBottle_data.get(0).get("data");
-            List<HashMap> NitrogenCylinder_data= co2_system.stream().filter(d -> "氮气瓶".equals(d.get("tableName"))).collect(Collectors.toList());
-            List<ItemInfo> co2_N2_data  = (List<ItemInfo>) NitrogenCylinder_data.get(0).get("data");
-            //泡沫灭火系统
-            List<HashMap> CAFS_system_data = getallmessage.stream().filter(d -> "泡沫灭火系统".equals(d.get("systemName"))).collect(Collectors.toList());
-            // 七氟丙烷灭火系统
-            List<HashMap> Heliotrope_data = getallmessage.stream().filter(d -> "七氟丙烷钢瓶".equals(d.get("tableName"))).collect(Collectors.toList());
-            List<ItemInfo> Hf_data  = (List<ItemInfo>) Heliotrope_data.get(0).get("data");
-            List<HashMap> NitrogenDriveBottle_data = getallmessage.stream().filter(d -> "氮气驱动瓶".equals(d.get("tableName"))).collect(Collectors.toList());
-            List<ItemInfo> ND_data  = (List<ItemInfo>) NitrogenDriveBottle_data.get(0).get("data");
-            // 固定式干粉灭火系统
-            List<HashMap> DryPowderCans = getallmessage.stream().filter(d -> "干粉罐".equals(d.get("tableName"))).collect(Collectors.toList());
-            List<ItemInfo> gf_data  = (List<ItemInfo>) DryPowderCans.get(0).get("data");
-            List<HashMap> actuationBottle = getallmessage.stream().filter(d -> "启动瓶".equals(d.get("tableName"))).collect(Collectors.toList());
-            // 厨房设备灭火装置
-            List<HashMap> chafing_system = getallmessage.stream().filter(d -> "厨房设备灭火装置".equals(d.get("systemName"))).collect(Collectors.toList());
-            List<HashMap> DrivingBottle = chafing_system.stream().filter(d -> "驱动瓶".equals(d.get("tableName"))).collect(Collectors.toList());
-            List<ItemInfo> qd_data  = (List<ItemInfo>) DrivingBottle.get(0).get("data");
-            List<HashMap> yogi = chafing_system.stream().filter(d -> "药剂瓶".equals(d.get("tableName"))).collect(Collectors.toList());
-            List<ItemInfo> yjp_data  = (List<ItemInfo>) yogi.get(0).get("data");
-            //消防水灭火系统
-            List<HashMap> fireHose = getallmessage.stream().filter(d -> "消防软管".equals(d.get("tableName"))).collect(Collectors.toList());
-            List<ItemInfo> fireHose_data  = (List<ItemInfo>) fireHose.get(0).get("data");
-            List<HashMap> FireMonitor = getallmessage.stream().filter(d -> "消防炮".equals(d.get("tableName"))).collect(Collectors.toList());
-            // 海水雨淋灭火系统
-            List<HashMap> sea_system = getallmessage.stream().filter(d -> "海水雨淋灭火系统".equals(d.get("systemName"))).collect(Collectors.toList());
-            // 消防员装备
-            List<HashMap> EEBDBottle = getallmessage.stream().filter(d -> "EEBD气瓶".equals(d.get("tableName"))).collect(Collectors.toList());
-            List<ItemInfo> EEBDBottle_data  = (List<ItemInfo>) EEBDBottle.get(0).get("data");
-            // 火灾自动报警系统
-            List<HashMap> SmokeDetector= getallmessage.stream().filter(d -> "感烟探测器".equals(d.get("tableName"))).collect(Collectors.toList());
-            List<ItemInfo> SmokeDetector_data  = (List<ItemInfo>) SmokeDetector.get(0).get("data");
-            List<HashMap> HeatDetector = getallmessage.stream().filter(d -> "感温探测器".equals(d.get("tableName"))).collect(Collectors.toList());
-            List<ItemInfo> HeatDetector_data  = (List<ItemInfo>) HeatDetector.get(0).get("data");
-            List<HashMap> FlameDetector= getallmessage.stream().filter(d -> "火焰探测器".equals(d.get("tableName"))).collect(Collectors.toList());
-            List<ItemInfo> FlameDetector_data  = (List<ItemInfo>) FlameDetector.get(0).get("data");
-            List<HashMap> Malformation= getallmessage.stream().filter(d -> "手动报警按钮".equals(d.get("tableName"))).collect(Collectors.toList());
-            List<ItemInfo> Malformation_data  = (List<ItemInfo>) Malformation.get(0).get("data");
-            List<HashMap> TAT= getallmessage.stream().filter(d -> "可燃气体探测器".equals(d.get("tableName"))).collect(Collectors.toList());
-            List<ItemInfo> TGAT_data = (List<ItemInfo>) TAT.get(0).get("data");
-            List<HashMap> hydrogenate= getallmessage.stream().filter(d -> "硫化氢探测器".equals(d.get("tableName"))).collect(Collectors.toList());
-            List<ItemInfo> hydrogenate_data  = (List<ItemInfo>) hydrogenate.get(0).get("data");
-
-            // 传入模板的数据
-            Map<String, Object> tempdatas = new HashMap<String, Object>() {{
-                put("name", stringArrayList.get(position));         // 名称
-                put("Date", getDate(itemObj.getCheckDate()));       // 日期
-                put("nextCheckTime", netCheckTime(itemObj.getCheckDate())); // 下次检验日期
-                put("Facility_name", set_company_name);             // 设施名称Facility Name ->> 公司
-                put("oil_name", set_oil_name);                      // 设施名称Facility Name ->> ** 油田
-                put("platform", set_Platform_name); // 检验地点  ->  ** 平台
-                put("co2_yjp_count", PotionBottle_data.get(0).get("count"));                // 高压二氧化碳灭火系统 药剂瓶数量Quantity×药剂瓶容积
-                put("protectArea", PotionBottle_data.get(0).get("protectArea"));            // 高压二氧化碳灭火系统 覆盖保护区域
-                put("co2_dq_count", NitrogenCylinder_data.get(0).get("count"));             // 高压二氧化碳灭火系统 氮气瓶数量Quantity×氮气瓶容积
-                assert co2_yjp_data != null;
-                put("co2_yjp_Rows", getCo2_yjp_table(co2_yjp_data));                        // 高压二氧化碳灭火系统 药剂瓶 CO2 Fire Extinguishing System
-                assert co2_N2_data != null;
-                put("co2_N2_Rows", getCo2_N2_table(co2_N2_data));                           // 高压二氧化碳灭火系统 氮气瓶  CO2 Fire Extinguishing System
-                put("mhq_table",getMHQ_table());                                            // 灭火器系统
-                put("mhprotectArea",CAFS_system_data.get(0).get("protectArea"));            // 七氟丙烷灭火器系统 覆盖保护区域
-                put("HFCount",Heliotrope_data.get(0).get("count"));                 // 七氟丙烷灭火系统 气瓶数量Quantity×储气瓶容积
-                put("NDCount",NitrogenDriveBottle_data.get(0).get("count"));                // 七氟丙烷灭火系统 气瓶数量Quantity×储气瓶容积
-                assert Hf_data != null;
-                put("HfRows",get_Hf_table(Hf_data));                                       // 七氟丙烷灭火系统  七氟丙烷钢瓶
-                assert ND_data != null;
-                put("NDRows",get_ND_table(ND_data));                                       // 七氟丙烷灭火系统  氮气驱动瓶
-                put("ganfenCount", DryPowderCans.get(0).get("count"));                     // 干粉灭火系统 气瓶数量Quantity×储气瓶容积
-                put("StartCount", actuationBottle.get(0).get("count"));                     // 干粉灭火系统 气瓶数量Quantity×驱动气瓶容积
-                put("gfProtectArea", actuationBottle.get(0).get("protectArea"));            // 干粉灭火系统 保护区域
-                assert gf_data != null;
-                put("gfRows", get_gf_table(gf_data));                                        // 干粉灭火系统 干粉罐
-                put("YJCount", yogi.get(0).get("count"));                                   // 厨房设备灭火装置 药剂瓶数量Quantity×容积
-                put("QDCount", DrivingBottle.get(0).get("count"));                            // 厨房设备灭火装置 气瓶数量Quantity×驱动气瓶容积
-                assert yjp_data != null;
-                put("YJRows", get_champ_table(yjp_data));                                     //厨房设备灭火装置 药剂瓶
-                assert qd_data != null;
-                put("QDRows", get_chqdp_table(qd_data));                                       // 厨房设备灭火装置 驱动瓶
-                put("FireMonitorCount", FireMonitor.get(0).get("count"));                      //消防水灭火系统  消火栓数量
-                put("fireHoseCount", fireHose.get(0).get("count"));                             //消防水灭火系统  消防水软管站数量
-                assert fireHose_data != null;
-                put("firHRows", get_fireH_table(fireHose_data));                                //消防水灭火系统  消防水软管
-                put("seasystemCount", sea_system.get(0).get("count"));                          // 海水雨淋灭火系统 雨淋阀数量
-                put("seaSystemProtectArea", sea_system.get(0).get("protectArea"));              // 海水雨淋灭火系统 覆盖保护区域
-                assert EEBDBottle_data != null;
-                put("EEBDBottleRows", get_EEBDBottle_table(EEBDBottle_data));                   // 消防员装备和EEBD Marine Fireman's Outfit & EEBD
-                assert SmokeDetector_data != null;
-                put("SmokeDRows", get_SmokeDete_table(SmokeDetector_data));                     // 感烟探测器Smoke
-                assert HeatDetector_data != null;
-                put("HeatDRows", get_HeatDetector_table(HeatDetector_data));                      // 感温探测器
-                assert FlameDetector_data != null;
-                put("FlameDeRows", get_FlameDetector_table(FlameDetector_data));                   // 火焰探测器
-                assert TGAT_data != null;
-                put("TGATRows", get_TGA_table(TGAT_data));                                          // 可燃气体探测器
-                assert hydrogenate_data != null;
-                put("hydrogensulRows", get_lhq_table(hydrogenate_data));                // 硫化氢探测器
-                assert Malformation_data != null;
-                put("ManuabtnRows", get_Manuabtn_table(Malformation_data));                    //手动报警按钮
-
-            }
-            };
             try {
+                Map<String, Object> tempdatas = setDate(date, position);
                 initWordTem(stringArrayList.get(position),tempdatas);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -265,6 +162,123 @@ public class FireReportItemAdapter extends BaseAdapter {
         return convertView;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private Map<String, Object> setDate(List<ItemInfo> date, int position){
+        String finalTem_date = null;
+        String finalTem_next_date = null;
+        if (date.size()>0){
+            ItemInfo itemObj = date.get(0);
+            finalTem_date = getDate(itemObj.getCheckDate());
+            finalTem_next_date = netCheckTime(itemObj.getCheckDate());
+        }
+        String systemName = stringArrayList.get(position);
+        // 高压二氧化碳灭火系统
+        List<HashMap> co2_system = getallmessage.stream().filter(d -> "高压二氧化碳灭火系统".equals(d.get("systemName"))).collect(Collectors.toList());
+        List<HashMap> PotionBottle_data = co2_system.stream().filter(d -> "药剂瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+        List<ItemInfo> co2_yjp_data  = (List<ItemInfo>) PotionBottle_data.get(0).get("data");
+        List<HashMap> NitrogenCylinder_data= co2_system.stream().filter(d -> "氮气瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+        List<ItemInfo> co2_N2_data  = (List<ItemInfo>) NitrogenCylinder_data.get(0).get("data");
+        //泡沫灭火系统
+        List<HashMap> CAFS_system_data = getallmessage.stream().filter(d -> "泡沫灭火系统".equals(d.get("systemName"))).collect(Collectors.toList());
+        // 七氟丙烷灭火系统
+        List<HashMap> Heliotrope_data = getallmessage.stream().filter(d -> "七氟丙烷钢瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+        List<ItemInfo> Hf_data  = (List<ItemInfo>) Heliotrope_data.get(0).get("data");
+        List<HashMap> NitrogenDriveBottle_data = getallmessage.stream().filter(d -> "氮气驱动瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+        List<ItemInfo> ND_data  = (List<ItemInfo>) NitrogenDriveBottle_data.get(0).get("data");
+        // 固定式干粉灭火系统
+        List<HashMap> DryPowderCans = getallmessage.stream().filter(d -> "干粉罐".equals(d.get("tableName"))).collect(Collectors.toList());
+        List<ItemInfo> gf_data  = (List<ItemInfo>) DryPowderCans.get(0).get("data");
+        List<HashMap> actuationBottle = getallmessage.stream().filter(d -> "启动瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+        // 厨房设备灭火装置
+        List<HashMap> chafing_system = getallmessage.stream().filter(d -> "厨房设备灭火装置".equals(d.get("systemName"))).collect(Collectors.toList());
+        List<HashMap> DrivingBottle = chafing_system.stream().filter(d -> "驱动瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+        List<ItemInfo> qd_data  = (List<ItemInfo>) DrivingBottle.get(0).get("data");
+        List<HashMap> yogi = chafing_system.stream().filter(d -> "药剂瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+        List<ItemInfo> yjp_data  = (List<ItemInfo>) yogi.get(0).get("data");
+        //消防水灭火系统
+        List<HashMap> fireHose = getallmessage.stream().filter(d -> "消防软管".equals(d.get("tableName"))).collect(Collectors.toList());
+        List<ItemInfo> fireHose_data  = (List<ItemInfo>) fireHose.get(0).get("data");
+        List<HashMap> FireMonitor = getallmessage.stream().filter(d -> "消防炮".equals(d.get("tableName"))).collect(Collectors.toList());
+        // 海水雨淋灭火系统
+        List<HashMap> sea_system = getallmessage.stream().filter(d -> "海水雨淋灭火系统".equals(d.get("systemName"))).collect(Collectors.toList());
+        // 消防员装备
+        List<HashMap> EEBDBottle = getallmessage.stream().filter(d -> "EEBD气瓶".equals(d.get("tableName"))).collect(Collectors.toList());
+        List<ItemInfo> EEBDBottle_data  = (List<ItemInfo>) EEBDBottle.get(0).get("data");
+        // 火灾自动报警系统
+        List<HashMap> SmokeDetector= getallmessage.stream().filter(d -> "感烟探测器".equals(d.get("tableName"))).collect(Collectors.toList());
+        List<ItemInfo> SmokeDetector_data  = (List<ItemInfo>) SmokeDetector.get(0).get("data");
+        List<HashMap> HeatDetector = getallmessage.stream().filter(d -> "感温探测器".equals(d.get("tableName"))).collect(Collectors.toList());
+        List<ItemInfo> HeatDetector_data  = (List<ItemInfo>) HeatDetector.get(0).get("data");
+        List<HashMap> FlameDetector= getallmessage.stream().filter(d -> "火焰探测器".equals(d.get("tableName"))).collect(Collectors.toList());
+        List<ItemInfo> FlameDetector_data  = (List<ItemInfo>) FlameDetector.get(0).get("data");
+        List<HashMap> Malformation= getallmessage.stream().filter(d -> "手动报警按钮".equals(d.get("tableName"))).collect(Collectors.toList());
+        List<ItemInfo> Malformation_data  = (List<ItemInfo>) Malformation.get(0).get("data");
+        List<HashMap> TAT= getallmessage.stream().filter(d -> "可燃气体探测器".equals(d.get("tableName"))).collect(Collectors.toList());
+        List<ItemInfo> TGAT_data = (List<ItemInfo>) TAT.get(0).get("data");
+        List<HashMap> hydrogenate= getallmessage.stream().filter(d -> "硫化氢探测器".equals(d.get("tableName"))).collect(Collectors.toList());
+        List<ItemInfo> hydrogenate_data  = (List<ItemInfo>) hydrogenate.get(0).get("data");
+
+        // 传入模板的数据
+        String finalTem_date1 = finalTem_date;
+        String finalTem_next_date1 = finalTem_next_date;
+        Map<String, Object> tempdatas = new HashMap<String, Object>() {{
+            put("name", systemName);         // 名称
+            put("Date", finalTem_date1);       // 日期
+            put("nextCheckTime", finalTem_next_date1); // 下次检验日期
+            put("Facility_name", set_company_name);             // 设施名称Facility Name ->> 公司
+            put("oil_name", set_oil_name);                      // 设施名称Facility Name ->> ** 油田
+            put("platform", set_Platform_name); // 检验地点  ->  ** 平台
+            put("co2_yjp_count", PotionBottle_data.get(0).get("count"));                // 高压二氧化碳灭火系统 药剂瓶数量Quantity×药剂瓶容积
+            put("protectArea", PotionBottle_data.get(0).get("protectArea"));            // 高压二氧化碳灭火系统 覆盖保护区域
+            put("co2_dq_count", NitrogenCylinder_data.get(0).get("count"));             // 高压二氧化碳灭火系统 氮气瓶数量Quantity×氮气瓶容积
+            assert co2_yjp_data != null;
+            put("co2_yjp_Rows", getCo2_yjp_table(co2_yjp_data));                        // 高压二氧化碳灭火系统 药剂瓶 CO2 Fire Extinguishing System
+            assert co2_N2_data != null;
+            put("co2_N2_Rows", getCo2_N2_table(co2_N2_data));                           // 高压二氧化碳灭火系统 氮气瓶  CO2 Fire Extinguishing System
+            put("mhq_table",getMHQ_table());                                            // 灭火器系统
+            put("mhprotectArea",CAFS_system_data.get(0).get("protectArea"));            // 七氟丙烷灭火器系统 覆盖保护区域
+            put("HFCount",Heliotrope_data.get(0).get("count"));                 // 七氟丙烷灭火系统 气瓶数量Quantity×储气瓶容积
+            put("NDCount",NitrogenDriveBottle_data.get(0).get("count"));                // 七氟丙烷灭火系统 气瓶数量Quantity×储气瓶容积
+            assert Hf_data != null;
+            put("HfRows",get_Hf_table(Hf_data));                                       // 七氟丙烷灭火系统  七氟丙烷钢瓶
+            assert ND_data != null;
+            put("NDRows",get_ND_table(ND_data));                                       // 七氟丙烷灭火系统  氮气驱动瓶
+            put("ganfenCount", DryPowderCans.get(0).get("count"));                     // 干粉灭火系统 气瓶数量Quantity×储气瓶容积
+            put("StartCount", actuationBottle.get(0).get("count"));                     // 干粉灭火系统 气瓶数量Quantity×驱动气瓶容积
+            put("gfProtectArea", actuationBottle.get(0).get("protectArea"));            // 干粉灭火系统 保护区域
+            assert gf_data != null;
+            put("gfRows", get_gf_table(gf_data));                                        // 干粉灭火系统 干粉罐
+            put("YJCount", yogi.get(0).get("count"));                                   // 厨房设备灭火装置 药剂瓶数量Quantity×容积
+            put("QDCount", DrivingBottle.get(0).get("count"));                            // 厨房设备灭火装置 气瓶数量Quantity×驱动气瓶容积
+            assert yjp_data != null;
+            put("YJRows", get_champ_table(yjp_data));                                     //厨房设备灭火装置 药剂瓶
+            assert qd_data != null;
+            put("QDRows", get_chqdp_table(qd_data));                                       // 厨房设备灭火装置 驱动瓶
+            put("FireMonitorCount", FireMonitor.get(0).get("count"));                      //消防水灭火系统  消火栓数量
+            put("fireHoseCount", fireHose.get(0).get("count"));                             //消防水灭火系统  消防水软管站数量
+            assert fireHose_data != null;
+            put("firHRows", get_fireH_table(fireHose_data));                                //消防水灭火系统  消防水软管
+            put("seasystemCount", sea_system.get(0).get("count"));                          // 海水雨淋灭火系统 雨淋阀数量
+            put("seaSystemProtectArea", sea_system.get(0).get("protectArea"));              // 海水雨淋灭火系统 覆盖保护区域
+            assert EEBDBottle_data != null;
+            put("EEBDBottleRows", get_EEBDBottle_table(EEBDBottle_data));                   // 消防员装备和EEBD Marine Fireman's Outfit & EEBD
+            assert SmokeDetector_data != null;
+            put("SmokeDRows", get_SmokeDete_table(SmokeDetector_data));                     // 感烟探测器Smoke
+            assert HeatDetector_data != null;
+            put("HeatDRows", get_HeatDetector_table(HeatDetector_data));                      // 感温探测器
+            assert FlameDetector_data != null;
+            put("FlameDeRows", get_FlameDetector_table(FlameDetector_data));                   // 火焰探测器
+            assert TGAT_data != null;
+            put("TGATRows", get_TGA_table(TGAT_data));                                          // 可燃气体探测器
+            assert hydrogenate_data != null;
+            put("hydrogensulRows", get_lhq_table(hydrogenate_data));                // 硫化氢探测器
+            assert Malformation_data != null;
+            put("ManuabtnRows", get_Manuabtn_table(Malformation_data));                    //手动报警按钮
+
+        }
+        };
+        return tempdatas;
+    }
     public void setData(List<HashMap> mapList) {
         stringArrayList = new ArrayList<>();
         companyInfoId = new ArrayList<>();

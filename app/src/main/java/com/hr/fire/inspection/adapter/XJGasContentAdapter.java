@@ -3,20 +3,26 @@ package com.hr.fire.inspection.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.PhotoView2;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 
@@ -40,6 +46,7 @@ public class XJGasContentAdapter extends RecyclerView.Adapter{
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         XJGasContentAdapter.MyViewHolder myholder = (XJGasContentAdapter.MyViewHolder) holder;
@@ -57,7 +64,13 @@ public class XJGasContentAdapter extends RecyclerView.Adapter{
         myholder.tv_gas9.setText(result.getParam9());
         myholder.tv_gas10.setText(result.getParam10());
         myholder.tv_gas11.setText(result.getParam11());
-
+        String imageUrl = mData.get(position).getImgPath();
+        if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+            Uri uri = Uri.parse(imageUrl);
+            myholder.tv_fire11.setImageURI(uri);
+        }else{
+            myholder.tv_fire11.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
+        }
         myholder.tv_gas12.setText(result.getParam12());
         myholder.tv_gas13.setText(result.getParam13());
         myholder.tv_gas14.setText(result.getParam14());
@@ -258,7 +271,7 @@ public class XJGasContentAdapter extends RecyclerView.Adapter{
                         showPopWind(myholder.tv_gas25);
                         break;
                     case R.id.rl_fire11:
-                        mYCCamera.startCamera(position);
+                        new PhotoView2().showPopWindPic(mContext, position, mYCCamera, mData);
                         break;
                     case R.id.rl_fire12:
                         removeData(position);
@@ -345,6 +358,7 @@ public class XJGasContentAdapter extends RecyclerView.Adapter{
         private TextView tv_gas23;
         private TextView tv_gas24;
         private TextView tv_gas25;
+        private ImageView tv_fire11;
 
         public MyViewHolder(View view) {
             super(view);
@@ -410,29 +424,26 @@ public class XJGasContentAdapter extends RecyclerView.Adapter{
             et_fire10 = (EditText) view.findViewById(R.id.et_fire10);
             rl_fire11 = (RelativeLayout) view.findViewById(R.id.rl_fire11);
             rl_fire12 = (RelativeLayout) view.findViewById(R.id.rl_fire12);
-
+            tv_fire11 = (ImageView) view.findViewById(R.id.tv_fire11);
         }
     }
 
-    private YCCamera mYCCamera;
-    private RemoveXH mRemoveXH;
-    //接口回调, 将点击事件传递到activity中,打开相机
-    public void setmYCCamera(XJGasContentAdapter.YCCamera y) {
-        this.mYCCamera = y;
-    }
 
+    public interface RemoveXH {
+        void deleteRefresh(int postion);
+    }
+    private RemoveXH mRemoveXH;
     //接口回调, 将点击事件传递到activity中,刷新序号
-    public void setDeleteRefresh(XJGasContentAdapter.RemoveXH xh) {
+    public void setDeleteRefresh(RemoveXH xh) {
         this.mRemoveXH = xh;
     }
 
 
-    public interface YCCamera {
-        void startCamera(int postion);
-    }
+    private YCCamera mYCCamera;
 
-    public interface RemoveXH {
-        void deleteRefresh(int postion);
+    //接口回调, 将点击事件传递到activity中,打开相机
+    public void setmYCCamera(YCCamera y) {
+        this.mYCCamera = y;
     }
 
 }

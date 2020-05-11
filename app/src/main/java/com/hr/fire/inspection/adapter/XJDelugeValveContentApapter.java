@@ -3,20 +3,26 @@ package com.hr.fire.inspection.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.PhotoView2;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
@@ -38,6 +44,7 @@ public class XJDelugeValveContentApapter extends RecyclerView.Adapter {
         return holder;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myholder = (MyViewHolder) holder;
@@ -74,6 +81,14 @@ public class XJDelugeValveContentApapter extends RecyclerView.Adapter {
         myholder.rl_fire14.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire16.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire17.setOnClickListener(new MyOnClickListener(myholder, position));
+
+        String imageUrl = mData.get(position).getImgPath();
+        if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+            Uri uri = Uri.parse(imageUrl);
+            myholder.tv_fire16.setImageURI(uri);
+        }else{
+            myholder.tv_fire16.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
+        }
 
     }
 
@@ -190,7 +205,7 @@ public class XJDelugeValveContentApapter extends RecyclerView.Adapter {
                         showPopWind(myholder.tv_fire14);
                         break;
                     case R.id.rl_fire16:
-                        mYCCamera.startCamera(position);
+                        new PhotoView2().showPopWindPic(mContext, position, mYCCamera, mData);
                         break;
                     case R.id.rl_fire17:
                         removeData(position);
@@ -254,7 +269,7 @@ public class XJDelugeValveContentApapter extends RecyclerView.Adapter {
         private TextView tv_fire13;
         private TextView tv_fire14;
         private TextView tv_fire15;
-        private TextView tv_fire16;
+        private ImageView tv_fire16;
 
         public MyViewHolder(View view) {
             super(view);
@@ -291,28 +306,24 @@ public class XJDelugeValveContentApapter extends RecyclerView.Adapter {
             tv_fire13 = (TextView) view.findViewById(R.id.tv_fire13);
             tv_fire14 = (TextView) view.findViewById(R.id.tv_fire14);
             tv_fire15 = (TextView) view.findViewById(R.id.tv_fire15);
-            tv_fire16 = (TextView) view.findViewById(R.id.tv_fire16);
+            tv_fire16 = (ImageView) view.findViewById(R.id.tv_fire16);
         }
-    }
-
-    private XJDelugeValveContentApapter.YCCamera mYCCamera;
-    private XJDelugeValveContentApapter.RemoveXH mRemoveXH;
-    //接口回调, 将点击事件传递到activity中,打开相机
-    public void setmYCCamera(XJDelugeValveContentApapter.YCCamera y) {
-        this.mYCCamera = y;
-    }
-
-    //接口回调, 将点击事件传递到activity中,刷新序号
-    public void setDeleteRefresh(XJDelugeValveContentApapter.RemoveXH xh) {
-        this.mRemoveXH = xh;
-    }
-
-
-    public interface YCCamera {
-        void startCamera(int postion);
     }
 
     public interface RemoveXH {
         void deleteRefresh(int postion);
+    }
+    private RemoveXH mRemoveXH;
+    //接口回调, 将点击事件传递到activity中,刷新序号
+    public void setDeleteRefresh(RemoveXH xh) {
+        this.mRemoveXH = xh;
+    }
+
+
+    private YCCamera mYCCamera;
+
+    //接口回调, 将点击事件传递到activity中,打开相机
+    public void setmYCCamera(YCCamera y) {
+        this.mYCCamera = y;
     }
 }

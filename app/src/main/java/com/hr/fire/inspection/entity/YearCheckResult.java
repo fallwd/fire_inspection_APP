@@ -116,6 +116,9 @@ public void setIsPass(String isPass) {
 public String getImageUrl() {
     return this.imageUrl;
 }
+public String getImgPath() {
+        return this.imageUrl;
+    }
 
 public void setImageUrl(String imageUrl) {
     this.imageUrl = imageUrl;
