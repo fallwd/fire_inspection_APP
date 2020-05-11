@@ -27,7 +27,9 @@ import com.hr.fire.inspection.activity.QRCodeExistenceAcitivty;
 import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.PhotoView;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
@@ -158,6 +160,7 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
                 @Override
                 public void onClick(View v) {
                     mYCCamera.startCamera(position);
+                    new PhotoView().showPopWindPicInfo(mContext, position, mYCCamera, mData);
                 }
             });
             vh.et_15.setText(new StringBuffer().append(info.getDescription()).append(""));
@@ -558,7 +561,4 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
         this.mYCCamera = y;
     }
 
-    public interface YCCamera {
-        void startCamera(int postion);
-    }
 }

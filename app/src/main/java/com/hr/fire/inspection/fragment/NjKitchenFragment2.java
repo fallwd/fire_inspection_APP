@@ -29,6 +29,7 @@ import com.hr.fire.inspection.adapter.NjKitchenAdapter2;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.FileRoute;
 import com.hr.fire.inspection.utils.HYLogUtil;
@@ -68,7 +69,6 @@ public class NjKitchenFragment2 extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             it = (IntentTransmit) getArguments().getSerializable(mKey);
-            Log.e("dong", "f1传参====" + it.toString());
         }
 
     }
@@ -121,7 +121,7 @@ public class NjKitchenFragment2 extends Fragment {
         if (checkTypes != null) {
             adapter.setCheckId(checkTypes.get(1).getId(), it);
         }
-        adapter.setmYCCamera(new NjKitchenAdapter2.YCCamera() {
+        adapter.setmYCCamera(new YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;

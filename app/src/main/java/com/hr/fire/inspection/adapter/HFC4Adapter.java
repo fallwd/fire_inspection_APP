@@ -24,6 +24,8 @@ import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
+import com.hr.fire.inspection.impl.YCCamera;
+import com.hr.fire.inspection.utils.PhotoView;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
@@ -94,8 +96,6 @@ public class HFC4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.tv6.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Log.d("dong","点击的状post== " + position);
-
                     //如果点击的是最后一个条目, 那么控件的高度需要增加  否则弹框会被挡住
                     showPopWind(vh.tv6);
                 }
@@ -103,7 +103,8 @@ public class HFC4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.iv7.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mYCCamera.startCamera(position);
+//                    mYCCamera.startCamera(position);
+                    new PhotoView().showPopWindPic(mContext, position, mYCCamera, ycr);
                 }
             });
         }
@@ -200,7 +201,4 @@ public class HFC4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.mYCCamera = y;
     }
 
-    public interface YCCamera {
-        void startCamera(int postion);
-    }
 }

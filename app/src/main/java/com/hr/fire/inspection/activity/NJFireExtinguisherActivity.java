@@ -30,6 +30,7 @@ import com.hr.fire.inspection.adapter.NJMhqContentApapter;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
 import com.hr.fire.inspection.utils.FileRoute;
@@ -150,7 +151,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
         rl_content.setLayoutManager(mLayoutManager2);
         contentApapter = new NJMhqContentApapter(this, itemDataList);
         rl_content.setAdapter(contentApapter);
-        contentApapter.setmYCCamera(new NJMhqContentApapter.YCCamera() {
+        contentApapter.setmYCCamera(new YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;
@@ -302,8 +303,6 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
         int itemCount = rl_content.getChildCount();
 
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(companyInfoId, checkTypes.get(0).getId(), sys_number == null ? "" : sys_number, srt_Date);
-//        Log.d("dong", "itemDataList == -----   " + itemDataList);
-
 //        Log.d("dong", "upData==   " + itemCount + "   新的数据条数   " + itemDataList.size());
         if (itemCount == 0 || itemDataList.size() == 0 || itemDataList.size() != itemCount) {
             Toast.makeText(this, "暂无数据保存", Toast.LENGTH_SHORT).show();
@@ -352,10 +351,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
             itemObj.setImageUrl(tv_fire15.getText().toString());
             itemObj.setDescription(et_fire16.getText().toString());
 //            itemObj.setCodePath(tv_fire17.getText().toString());  // 二维码路径？？？
-
-            Log.d("dong", "itemObj222222保存==   "+itemObj.getLevel());
             ServiceFactory.getYearCheckService().update(itemObj);
-            Log.d("dong", "itemObj222222保存==   "+itemObj.getLevel());
         }
         Toast.makeText(this, "数据保存成功", Toast.LENGTH_SHORT).show();
     }

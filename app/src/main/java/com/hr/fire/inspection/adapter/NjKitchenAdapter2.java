@@ -31,7 +31,9 @@ import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.WorkIItemBean;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.PhotoView;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
@@ -134,7 +136,7 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
 
 
-        vh.et_14.setOnClickListener(v -> mYCCamera.startCamera(position));
+        vh.et_14.setOnClickListener(v -> new PhotoView().showPopWindPicInfo(mContext, position, mYCCamera, mData));
         vh.et_15.setOnClickListener(v -> removeData(position));
     }
 
@@ -320,7 +322,4 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.mYCCamera = y;
     }
 
-    public interface YCCamera {
-        void startCamera(int postion);
-    }
 }

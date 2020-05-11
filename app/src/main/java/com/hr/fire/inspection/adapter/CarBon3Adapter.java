@@ -209,6 +209,4 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void setmYCCamera(YCCamera y) {
         this.mYCCamera = y;
     }
-
-
 }

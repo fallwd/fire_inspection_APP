@@ -28,7 +28,9 @@ import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.NJMhqSelectItem1;
 import com.hr.fire.inspection.entity.NJMhqSelectItem2;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.PhotoView;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
@@ -83,13 +85,6 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
             myholder.et_fire16.setText(info.getDescription());
 //            myholder.tv_fire17.setText(info.getCodePath());  //二维码路径
 
-//            if (position == 0) {
-//                myholder.tv_fire15.setVisibility(View.VISIBLE);
-//                myholder.iv_fire15.setVisibility(View.GONE);
-//            }else {
-//                myholder.tv_fire15.setVisibility(View.GONE);
-//                myholder.iv_fire15.setVisibility(View.VISIBLE);
-//            }
 
             String imageUrl = info.getImageUrl();
             if (imageUrl != null && imageUrl.endsWith(".jpg")) {
@@ -292,7 +287,8 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
                     showPopWind(myholder.tv_fire13);
                     break;
                 case R.id.rl_fire15:
-                    mYCCamera.startCamera(position);
+//                    mYCCamera.startCamera(position);
+                    new PhotoView().showPopWindPicInfo(mContext, position, mYCCamera, mData);
                     break;
                 case R.id.rl_fire17:
                     Intent intent = new Intent();
@@ -515,7 +511,7 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
     private NJMhqContentApapter.RemoveXH mRemoveXH;
 
     //接口回调, 将点击事件传递到activity中,打开相机
-    public void setmYCCamera(NJMhqContentApapter.YCCamera y) {
+    public void setmYCCamera(YCCamera y) {
         this.mYCCamera = y;
     }
 
@@ -524,10 +520,6 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
         this.mRemoveXH = xh;
     }
 
-
-    public interface YCCamera {
-        void startCamera(int postion);
-    }
 
     public interface RemoveXH {
         void deleteRefresh(int postion);
