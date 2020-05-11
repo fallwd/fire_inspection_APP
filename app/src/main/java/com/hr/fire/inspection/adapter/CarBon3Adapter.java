@@ -9,9 +9,11 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,7 +31,10 @@ import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.PhotoView;
+import com.hr.fire.inspection.utils.ToastUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
@@ -92,17 +97,14 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 vh.iv7.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
             }
 
-
             vh.tv7.setVisibility(View.GONE);
             vh.rl7.setVisibility(View.VISIBLE);
             vh.tv8.setVisibility(View.GONE);
             vh.ev8.setVisibility(View.VISIBLE);
-
-
             vh.iv7.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mYCCamera.startCamera(position);
+                    new PhotoView().showPopWindPic(mContext, position, mYCCamera, ycr);
                 }
             });
             vh.tv6.setOnClickListener(new View.OnClickListener() {
@@ -112,9 +114,7 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     showPopWind(vh.tv6);
                 }
             });
-
         }
-
     }
 
 
@@ -202,6 +202,7 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         });
     }
 
+
     private YCCamera mYCCamera;
 
     //接口回调, 将点击事件传递到activity中,打开相机
@@ -209,7 +210,5 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.mYCCamera = y;
     }
 
-    public interface YCCamera {
-        void startCamera(int postion);
-    }
+
 }
