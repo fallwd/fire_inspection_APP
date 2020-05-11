@@ -99,6 +99,7 @@ public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             });
 
             String imageUrl = ycr.get(position).getImageUrl();
+            Log.i("aaa","ImageURL1111"+imageUrl);
             if (imageUrl != null && imageUrl.endsWith(".jpg")) {
                 Uri uri = Uri.parse(imageUrl);
                 vh.iv7.setImageURI(uri);

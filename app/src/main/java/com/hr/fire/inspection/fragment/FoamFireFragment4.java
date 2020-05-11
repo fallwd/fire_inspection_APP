@@ -95,7 +95,7 @@ public class FoamFireFragment4 extends Fragment {
                 //3.进入系统就给用户默认插入两条数据, 用户点击保存时,就Updata数据库
                 YearCheckResult ycr = new YearCheckResult();
                 ycr.setIsPass(" -- ");
-                ycr.setImageUrl("暂无");  //可以在iv7中获取
+//                ycr.setImageUrl("暂无");  //可以在iv7中获取
                 ycr.setDescription("无描述");
                 ycr.setSystemNumber(its.number);
                 ycr.setProtectArea(" "); // 保护位号
@@ -141,7 +141,7 @@ public class FoamFireFragment4 extends Fragment {
 
                 YearCheckResult yearCheckResult = yearCheckResults.get(i);
                 yearCheckResult.setIsPass(tv6.getText().toString().isEmpty() ? " -- " : tv6.getText().toString());
-                yearCheckResult.setImageUrl("暂无图片链接");  //可以在iv7中获取
+//                yearCheckResult.setImageUrl("暂无图片链接");  //可以在iv7中获取
                 yearCheckResult.setDescription(ev8.getText().toString().isEmpty() ? "无隐患描述" : ev8.getText().toString());
                 yearCheckResult.setSystemNumber(its.number);
                 yearCheckResult.setProtectArea(" "); // 保护位号

@@ -240,7 +240,7 @@ public class XJFireDamperActivity extends AppCompatActivity implements View.OnCl
                 result.setCheckPerson(check_name);
                 result.setCheckDate(parse_check_date);
                 result.setDescription("暂无");
-                result.setImgPath("暂无图片");
+//                result.setImgPath("暂无图片");
                 result.setParam2("请输入");
                 result.setParam3("CEPA-X-6201");
                 result.setParam4("是");
@@ -287,7 +287,7 @@ public class XJFireDamperActivity extends AppCompatActivity implements View.OnCl
             TextView tv_fire8 = childAt.findViewById(R.id.tv_fire8);
             TextView tv_fire9 = childAt.findViewById(R.id.tv_fire9);
             EditText et_fire10 = childAt.findViewById(R.id.et_fire10);
-            TextView tv_fire11 = childAt.findViewById(R.id.tv_fire11);
+            ImageView tv_fire11 = childAt.findViewById(R.id.tv_fire11);
 
 
             InspectionResult itemObj = inspectionResults.get(i);
@@ -305,7 +305,7 @@ public class XJFireDamperActivity extends AppCompatActivity implements View.OnCl
             itemObj.setParam7(tv_fire7.getText().toString());
             itemObj.setParam8(tv_fire8.getText().toString());
             itemObj.setParam9(tv_fire9.getText().toString());
-            itemObj.setParam11(tv_fire11.getText().toString());
+//            itemObj.setParam11(tv_fire11.getText().toString());
 
 //            Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
 //                     + et_fire2.getText().toString() + " " + et_fire2.getText().toString());
@@ -349,7 +349,8 @@ public class XJFireDamperActivity extends AppCompatActivity implements View.OnCl
                 //这里目前需要适配
                 if (fileNew != null && imgPostion != -1 && contentApapter != null) {
                     inspectionResults.get(imgPostion).setImgPath(fileNew.getAbsolutePath());
-                    contentApapter.notifyItemChanged(imgPostion);
+//                    contentApapter.notifyItemChanged(imgPostion);
+                    contentApapter.notifyDataSetChanged();
                 }
                 break;
         }

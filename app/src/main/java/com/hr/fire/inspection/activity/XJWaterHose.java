@@ -346,7 +346,8 @@ public class XJWaterHose extends AppCompatActivity implements View.OnClickListen
                 //这里目前需要适配
                 if (fileNew != null && imgPostion != -1 && contentApapter != null) {
                     inspectionResults.get(imgPostion).setImgPath(fileNew.getAbsolutePath());
-                    contentApapter.notifyItemChanged(imgPostion);
+//                    contentApapter.notifyItemChanged(imgPostion);
+                    contentApapter.notifyDataSetChanged();
                 }
                 break;
         }

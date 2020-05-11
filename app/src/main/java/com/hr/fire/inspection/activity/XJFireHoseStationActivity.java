@@ -296,7 +296,7 @@ public class XJFireHoseStationActivity extends AppCompatActivity implements View
             TextView tv_fire14 = childAt.findViewById(R.id.tv_fire14);
             TextView tv_fire15 = childAt.findViewById(R.id.tv_fire15);
             EditText et_fire16 = childAt.findViewById(R.id.et_fire16);
-            TextView tv_fire17 = childAt.findViewById(R.id.tv_fire17);
+            ImageView tv_fire17 = childAt.findViewById(R.id.tv_fire17);
 
 
             InspectionResult itemObj = inspectionResults.get(i);
@@ -321,7 +321,7 @@ public class XJFireHoseStationActivity extends AppCompatActivity implements View
             itemObj.setParam14(tv_fire14.getText().toString());
             itemObj.setParam15(tv_fire15.getText().toString());
             itemObj.setParam16(et_fire16.getText().toString());
-            itemObj.setParam17(tv_fire17.getText().toString());
+//            itemObj.setParam17(tv_fire17.getText().toString());
             Log.i("bbb","我保存的数据"+itemObj);
 //            Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
 //                     + et_fire2.getText().toString() + " " + et_fire2.getText().toString());
@@ -365,7 +365,8 @@ public class XJFireHoseStationActivity extends AppCompatActivity implements View
                 //这里目前需要适配
                 if (fileNew != null && imgPostion != -1 && contentApapter != null) {
                     inspectionResults.get(imgPostion).setImgPath(fileNew.getAbsolutePath());
-                    contentApapter.notifyItemChanged(imgPostion);
+//                    contentApapter.notifyItemChanged(imgPostion);
+                    contentApapter.notifyDataSetChanged();
                 }
                 break;
         }

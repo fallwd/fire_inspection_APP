@@ -248,7 +248,9 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
 //                Bitmap bitmap = BitmapFactory.decodeFile(tempFile.getPath());
                 //这里目前需要适配
                 if (fileNew.getAbsolutePath() != null && imgPostion != -1 && goodsAdapter != null) {
+                    Log.i("aaa", "保存咯111"+ yearCheckResults.get(imgPostion));
                     yearCheckResults.get(imgPostion).setImageUrl(fileNew.getAbsolutePath());
+                    Log.i("aaa", "保存咯222"+ yearCheckResults.get(imgPostion).getImageUrl());
                     goodsAdapter.notifyItemChanged(imgPostion);
                 }
                 break;

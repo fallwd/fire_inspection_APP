@@ -110,15 +110,15 @@
 
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/insert_but"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
-                    android:background="@drawable/listview_border_margin"
-                    android:text="@string/daoru"
-                    android:translationX="-10dp" />
+                <!--<Button-->
+                    <!--android:id="@+id/insert_but"-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:background="@drawable/listview_border_margin"-->
+                    <!--android:text="@string/daoru"-->
+                    <!--android:translationX="-10dp" />-->
 
             </RelativeLayout>
 

@@ -237,7 +237,7 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 result.setCheckPerson(check_name);
                 result.setCheckDate(parse_check_date);
                 result.setDescription("暂无");
-                result.setImgPath("暂无图片");
+//                result.setImgPath("暂无图片");
                 result.setParam1("MFZ/ABC5");
                 result.setParam2("请填写.");
                 result.setParam3("0");
@@ -285,7 +285,7 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
             TextView tv_fire8 = childAt.findViewById(R.id.tv_fire8);
             TextView tv_fire9 = childAt.findViewById(R.id.tv_fire9);
             EditText et_fire10 = childAt.findViewById(R.id.et_fire10);
-            TextView tv_fire11 = childAt.findViewById(R.id.tv_fire11);
+            ImageView tv_fire11 = childAt.findViewById(R.id.tv_fire11);
 
 
             InspectionResult itemObj = inspectionResults.get(i);
@@ -302,7 +302,7 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
             itemObj.setParam8(tv_fire8.getText().toString());
             itemObj.setParam9(tv_fire9.getText().toString());
             itemObj.setParam10(et_fire10.getText().toString());
-            itemObj.setParam11(tv_fire11.getText().toString());
+//            itemObj.setParam11(tv_fire11.getText().toString());
             Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
                     + tv_fire1.getText().toString() + "  " + et_fire2.getText().toString() + " " + et_fire2.getText().toString());
             service.update(itemObj);
@@ -350,9 +350,11 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 if (fileNew != null && imgPostion != -1 && contentApapter != null) {
                     inspectionResults.get(imgPostion).setImgPath(fileNew.getAbsolutePath());
                     Log.d("inspectionResults2", inspectionResults + "");
-                    contentApapter.notifyItemChanged(imgPostion);
+                    // contentApapter.notifyItemChanged(imgPostion);
+                    contentApapter.notifyDataSetChanged();
                 }
                 break;
         }
     }
+
 }

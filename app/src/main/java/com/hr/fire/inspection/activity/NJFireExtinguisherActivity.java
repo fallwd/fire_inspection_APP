@@ -348,7 +348,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
             itemObj.setObserveDate(date2);
             itemObj.setIsPass(tv_fire13.getText().toString());
             itemObj.setLabelNo(et_fire14.getText().toString());
-            itemObj.setImageUrl(tv_fire15.getText().toString());
+//            itemObj.setImageUrl(tv_fire15.getText().toString());
             itemObj.setDescription(et_fire16.getText().toString());
 //            itemObj.setCodePath(tv_fire17.getText().toString());  // 二维码路径？？？
             ServiceFactory.getYearCheckService().update(itemObj);
@@ -366,7 +366,9 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 //这里目前需要适配
                 if (fileNew.getAbsolutePath() != null && imgPostion != -1 && contentApapter != null) {
                     itemDataList.get(imgPostion).setImageUrl(fileNew.getAbsolutePath());
-                    contentApapter.notifyItemChanged(imgPostion);
+//                    contentApapter.notifyItemChanged(imgPostion);
+                    Log.i("AAA","itemDataList111"+itemDataList.get(imgPostion));
+                    contentApapter.notifyDataSetChanged();
                 }
                 break;
         }
