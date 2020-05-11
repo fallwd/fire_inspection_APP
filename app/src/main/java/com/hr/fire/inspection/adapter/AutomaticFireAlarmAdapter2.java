@@ -26,7 +26,9 @@ import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.PhotoView;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
@@ -142,7 +144,8 @@ public class AutomaticFireAlarmAdapter2 extends RecyclerView.Adapter<RecyclerVie
             vh.et_13.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mYCCamera.startCamera(position);
+//                    mYCCamera.startCamera(position);
+                    new PhotoView().showPopWindPicInfo(mContext, position, mYCCamera, mData);
                 }
             });
             vh.et_14.setText(new StringBuffer().append(info.getDescription()).append(""));
@@ -358,7 +361,4 @@ public class AutomaticFireAlarmAdapter2 extends RecyclerView.Adapter<RecyclerVie
         this.mYCCamera = y;
     }
 
-    public interface YCCamera {
-        void startCamera(int postion);
-    }
 }

@@ -30,6 +30,7 @@ import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.FileRoute;
 
@@ -119,7 +120,7 @@ public class CarbonFragment5 extends Fragment {
         rc_list.setAdapter(adapter);
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
-        adapter.setmYCCamera(new CarBon5Adapter.YCCamera() {
+        adapter.setmYCCamera(new YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;

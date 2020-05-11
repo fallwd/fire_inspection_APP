@@ -25,6 +25,8 @@ import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
+import com.hr.fire.inspection.impl.YCCamera;
+import com.hr.fire.inspection.utils.PhotoView;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
@@ -101,7 +103,7 @@ public class CarBon5Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             vh.iv7.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mYCCamera.startCamera(position);
+                    new PhotoView().showPopWindPic(mContext, position, mYCCamera, ycr);
                 }
             });
 
@@ -201,7 +203,4 @@ public class CarBon5Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.mYCCamera = y;
     }
 
-    public interface YCCamera {
-        void startCamera(int postion);
-    }
 }

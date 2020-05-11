@@ -29,6 +29,7 @@ import com.hr.fire.inspection.adapter.AutomaticFireAlarmAdapter;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.FileRoute;
 import com.hr.fire.inspection.utils.HYLogUtil;
@@ -121,7 +122,7 @@ public class AutomaticFireAlarm1 extends Fragment {
         if (checkTypes != null) {
             adapter.setCheckId(checkTypes.get(0).getId(), it);
         }
-        adapter.setmYCCamera(new AutomaticFireAlarmAdapter.YCCamera() {
+        adapter.setmYCCamera(new YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;
