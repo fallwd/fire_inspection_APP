@@ -87,31 +87,48 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             Drawable drawable1 = mContext.getResources().getDrawable(R.drawable.listview_border_margin);
             vh.tv6.setBackground(drawable1);
 
-            String imageUrl = ycr.get(position).getImageUrl();
-            if (imageUrl != null && imageUrl.endsWith(".jpg")) {
-                //路径  /external_path/Android/data/com.hr.fire.inspection/cache/1587462719699.jpg
-//                Uri uri = Uri.fromFile(new File(imageUrl));
-                Uri uri = Uri.parse(imageUrl);
-                vh.iv7.setImageURI(uri);
-            } else {
-                vh.iv7.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
-            }
+//            String imageUrl = ycr.get(position).getImageUrl();
+//            if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+//                //路径  /external_path/Android/data/com.hr.fire.inspection/cache/1587462719699.jpg
+////                Uri uri = Uri.fromFile(new File(imageUrl));
+//                Uri uri = Uri.parse(imageUrl);
+//                vh.iv7.setImageURI(uri);
+//            } else {
+//                vh.iv7.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
+//            }
 
             vh.tv7.setVisibility(View.GONE);
             vh.rl7.setVisibility(View.VISIBLE);
             vh.tv8.setVisibility(View.GONE);
             vh.ev8.setVisibility(View.VISIBLE);
-            vh.iv7.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    new PhotoView().showPopWindPic(mContext, position, mYCCamera, ycr);
-                }
-            });
+//            vh.iv7.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    new PhotoView().showPopWindPic(mContext, position, mYCCamera, ycr);
+//                }
+//            });
             vh.tv6.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //如果点击的是最后一个条目, 那么控件的高度需要增加  否则弹框会被挡住
                     showPopWind(vh.tv6);
+                }
+            });
+
+            //点击事件
+            String imageUrl = ycr.get(position).getImageUrl();
+            if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+                Uri uri = Uri.parse(imageUrl);
+                vh.iv7.setImageURI(uri);
+            } else {
+                Drawable drawable2 = mContext.getDrawable(R.mipmap.scene_photos_icon);
+                vh.iv7.setImageDrawable(drawable2);
+            }
+
+            vh.iv7.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mYCCamera.startCamera(position);
                 }
             });
         }
@@ -208,5 +225,9 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     //接口回调, 将点击事件传递到activity中,打开相机
     public void setmYCCamera(YCCamera y) {
         this.mYCCamera = y;
+    }
+
+    public interface YCCamera {
+        void startCamera(int postion);
     }
 }

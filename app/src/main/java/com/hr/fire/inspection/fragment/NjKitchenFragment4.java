@@ -120,7 +120,8 @@ public class NjKitchenFragment4 extends Fragment {
         rc_list.setAdapter(adapter);
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
-        adapter.setmYCCamera(new YCCamera() {
+        // 拍照回显
+        adapter.setmYCCamera(new CarBon3Adapter.YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;
