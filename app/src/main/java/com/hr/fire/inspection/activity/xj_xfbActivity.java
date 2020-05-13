@@ -35,6 +35,7 @@ package com.hr.fire.inspection.activity;
         import com.hr.fire.inspection.adapter.XJxfbAdapter;
         import com.hr.fire.inspection.adapter.xfb_contentAdapter;
         import com.hr.fire.inspection.entity.InspectionResult;
+        import com.hr.fire.inspection.impl.YCCamera;
         import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
         import com.hr.fire.inspection.utils.FileRoute;
         import com.hr.fire.inspection.utils.TextSpannableUtil;
@@ -153,11 +154,11 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
         rl_content.setLayoutManager(mLayoutManager2);
         contentApapter = new xfb_contentAdapter(this, inspectionResults);
         rl_content.setAdapter(contentApapter);
-        contentApapter.setmYCCamera(new xfb_contentAdapter.YCCamera() {
+        contentApapter.setmYCCamera(new YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;
-                openSysCamera(fileNew, mContent);
+                openSysCamera(mContent);
             }
         });
         //刷新序号列表
@@ -327,14 +328,12 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
             itemObj.setParam9(tv_fire9.getText().toString());
             itemObj.setParam10(tv_fire10.getText().toString());
             itemObj.setParam11(tv_fire11.getText().toString());
-            itemObj.setParam10(tv_fire12.getText().toString());
-            itemObj.setParam12(tv_fire13.getText().toString());
-            itemObj.setParam13(tv_fire14.getText().toString());
-            itemObj.setParam14(tv_fire15.getText().toString());
-            itemObj.setParam15(tv_fire16.getText().toString());
+            itemObj.setParam12(tv_fire12.getText().toString());
+            itemObj.setParam13(tv_fire13.getText().toString());
+            itemObj.setParam14(tv_fire14.getText().toString());
+            itemObj.setParam15(tv_fire15.getText().toString());
+            itemObj.setParam16(tv_fire16.getText().toString());
 //            itemObj.setParam16();
-            Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
-                    + tv_fire1.getText().toString() + "  " + tv_fire2.getText().toString() + " " + tv_fire3.getText().toString());
             service.update(itemObj);
         }
         Toast.makeText(this, "数据保存成功", Toast.LENGTH_SHORT).show();
@@ -345,7 +344,7 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
     /**
      * 打开系统相机
      */
-    public void openSysCamera(File fileNew, Context mContent)  {
+    public void openSysCamera(Context mContent)  {
 
         // intent用来启动系统自带的Camera
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -372,10 +371,11 @@ public class xj_xfbActivity extends AppCompatActivity implements View.OnClickLis
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case FileRoute.CAMERA_RESULT_CODE:
+
                 //这里目前需要适配
                 if (fileNew != null && imgPostion != -1 && contentApapter != null) {
                     inspectionResults.get(imgPostion).setImgPath(fileNew.getAbsolutePath());
-                    contentApapter.notifyItemChanged(imgPostion);
+                    contentApapter.notifyDataSetChanged();
                 }
                 break;
         }

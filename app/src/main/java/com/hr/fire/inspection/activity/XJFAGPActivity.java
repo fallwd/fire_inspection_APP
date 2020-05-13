@@ -31,6 +31,7 @@ import com.hr.fire.inspection.adapter.XJFireHoseStationContentApapter;
 import com.hr.fire.inspection.adapter.XJFirstColumnApapter;
 import com.hr.fire.inspection.adapter.XJFAGPContentApapter;
 import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
 import com.hr.fire.inspection.utils.FileRoute;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
@@ -150,11 +151,11 @@ public class XJFAGPActivity extends AppCompatActivity implements View.OnClickLis
         rl_content.setLayoutManager(mLayoutManager2);
         contentApapter = new XJFAGPContentApapter(this, inspectionResults);
         rl_content.setAdapter(contentApapter);
-        contentApapter.setmYCCamera(new XJFAGPContentApapter.YCCamera() {
+        contentApapter.setmYCCamera(new YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;
-                openSysCamera(fileNew, mContent);
+                openSysCamera(mContent);
             }
         });
         //刷新序号列表
@@ -286,7 +287,7 @@ public class XJFAGPActivity extends AppCompatActivity implements View.OnClickLis
             TextView tv_fire8 = childAt.findViewById(R.id.tv_fire8);
             TextView tv_fire9 = childAt.findViewById(R.id.tv_fire9);
             EditText et_fire10 = childAt.findViewById(R.id.et_fire10);
-            TextView tv_fire11 = childAt.findViewById(R.id.tv_fire11);
+            ImageView tv_fire11 = childAt.findViewById(R.id.tv_fire11);
 
 
             InspectionResult itemObj = inspectionResults.get(i);
@@ -304,7 +305,6 @@ public class XJFAGPActivity extends AppCompatActivity implements View.OnClickLis
             itemObj.setParam8(tv_fire8.getText().toString());
             itemObj.setParam9(tv_fire9.getText().toString());
             itemObj.setParam10(et_fire10.getText().toString());
-            itemObj.setParam11(tv_fire11.getText().toString());
             Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
                     + "  " + et_fire2.getText().toString() + " " + et_fire2.getText().toString());
             service.update(itemObj);
@@ -317,8 +317,7 @@ public class XJFAGPActivity extends AppCompatActivity implements View.OnClickLis
     /**
      * 打开系统相机
      */
-    public void openSysCamera(File fileNew, Context mContent)  {
-
+    public void openSysCamera(Context mContent)  {
         // intent用来启动系统自带的Camera
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         try {
@@ -347,7 +346,6 @@ public class XJFAGPActivity extends AppCompatActivity implements View.OnClickLis
                 //这里目前需要适配
                 if (fileNew != null && imgPostion != -1 && contentApapter != null) {
                     inspectionResults.get(imgPostion).setImgPath(fileNew.getAbsolutePath());
-//                    contentApapter.notifyItemChanged(imgPostion);
                     contentApapter.notifyDataSetChanged();
                 }
                 break;

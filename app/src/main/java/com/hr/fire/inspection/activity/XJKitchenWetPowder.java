@@ -31,6 +31,7 @@ import com.hr.fire.inspection.adapter.XJFAGMContentApapter;
 import com.hr.fire.inspection.adapter.XJKitchenWetPowderColumnAdapter;
 import com.hr.fire.inspection.adapter.XJKitchenWetPowderContentAdapter;
 import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
 import com.hr.fire.inspection.utils.FileRoute;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
@@ -150,11 +151,11 @@ public class XJKitchenWetPowder extends AppCompatActivity implements View.OnClic
         rl_content.setLayoutManager(mLayoutManager2);
         contentApapter = new XJKitchenWetPowderContentAdapter(this, inspectionResults);
         rl_content.setAdapter(contentApapter);
-        contentApapter.setmYCCamera(new XJKitchenWetPowderContentAdapter.YCCamera() {
+        contentApapter.setmYCCamera(new YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;
-                openSysCamera(fileNew, mContent);
+                openSysCamera(mContent);
             }
         });
         //刷新序号列表
@@ -315,7 +316,7 @@ public class XJKitchenWetPowder extends AppCompatActivity implements View.OnClic
     /**
      * 打开系统相机
      */
-    public void openSysCamera(File fileNew, Context mContent)  {
+    public void openSysCamera(Context mContent)  {
 
         // intent用来启动系统自带的Camera
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -345,7 +346,7 @@ public class XJKitchenWetPowder extends AppCompatActivity implements View.OnClic
                 //这里目前需要适配
                 if (fileNew != null && imgPostion != -1 && contentApapter != null) {
                     inspectionResults.get(imgPostion).setImgPath(fileNew.getAbsolutePath());
-                    contentApapter.notifyItemChanged(imgPostion);
+                    contentApapter.notifyDataSetChanged();
                 }
                 break;
         }

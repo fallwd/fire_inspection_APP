@@ -37,6 +37,8 @@ import com.hr.fire.inspection.utils.TextSpannableUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 import com.hr.fire.inspection.view.tableview.HListViewScrollView;
 
+import com.hr.fire.inspection.impl.YCCamera;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -150,11 +152,11 @@ public class XJWaterHose extends AppCompatActivity implements View.OnClickListen
         rl_content.setLayoutManager(mLayoutManager2);
         contentApapter = new XJWaterHoseContentAdapter(this, inspectionResults);
         rl_content.setAdapter(contentApapter);
-        contentApapter.setmYCCamera(new XJWaterHoseContentAdapter.YCCamera() {
+        contentApapter.setmYCCamera(new YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;
-                openSysCamera(fileNew, mContent);
+                openSysCamera(mContent);
             }
         });
         //刷新序号列表
@@ -316,12 +318,13 @@ public class XJWaterHose extends AppCompatActivity implements View.OnClickListen
     /**
      * 打开系统相机
      */
-    public void openSysCamera(File fileNew, Context mContent)  {
+    public void openSysCamera(Context mContent)  {
 
         // intent用来启动系统自带的Camera
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         try {
             fileNew = new FileRoute(mContent).createOriImageFile();
+            Log.d("fileNew", fileNew+"");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -341,12 +344,14 @@ public class XJWaterHose extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d("inspectionResults", inspectionResults + "");
         switch (requestCode) {
             case FileRoute.CAMERA_RESULT_CODE:
+
                 //这里目前需要适配
                 if (fileNew != null && imgPostion != -1 && contentApapter != null) {
                     inspectionResults.get(imgPostion).setImgPath(fileNew.getAbsolutePath());
-//                    contentApapter.notifyItemChanged(imgPostion);
+                    Log.d("inspectionResults2", inspectionResults + "");
                     contentApapter.notifyDataSetChanged();
                 }
                 break;

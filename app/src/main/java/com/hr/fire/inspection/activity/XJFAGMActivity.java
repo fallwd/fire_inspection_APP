@@ -31,6 +31,7 @@ import com.hr.fire.inspection.adapter.XJFAGMContentApapter;
 import com.hr.fire.inspection.adapter.XJFAGPContentApapter;
 import com.hr.fire.inspection.adapter.XJFirstColumnApapter;
 import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
 import com.hr.fire.inspection.utils.FileRoute;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
@@ -149,11 +150,11 @@ public class XJFAGMActivity extends AppCompatActivity implements View.OnClickLis
         rl_content.setLayoutManager(mLayoutManager2);
         contentApapter = new XJFAGMContentApapter(this, inspectionResults);
         rl_content.setAdapter(contentApapter);
-        contentApapter.setmYCCamera(new XJFAGMContentApapter.YCCamera() {
+        contentApapter.setmYCCamera(new YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;
-                openSysCamera(fileNew, mContent);
+                openSysCamera(mContent);
             }
         });
         //刷新序号列表
@@ -301,8 +302,7 @@ public class XJFAGMActivity extends AppCompatActivity implements View.OnClickLis
     /**
      * 打开系统相机
      */
-    public void openSysCamera(File fileNew, Context mContent)  {
-
+    public void openSysCamera(Context mContent)  {
         // intent用来启动系统自带的Camera
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         try {
@@ -328,10 +328,11 @@ public class XJFAGMActivity extends AppCompatActivity implements View.OnClickLis
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case FileRoute.CAMERA_RESULT_CODE:
+
                 //这里目前需要适配
                 if (fileNew != null && imgPostion != -1 && contentApapter != null) {
                     inspectionResults.get(imgPostion).setImgPath(fileNew.getAbsolutePath());
-                    contentApapter.notifyItemChanged(imgPostion);
+                    contentApapter.notifyDataSetChanged();
                 }
                 break;
         }

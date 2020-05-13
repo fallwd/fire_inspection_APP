@@ -31,6 +31,7 @@ import com.hr.fire.inspection.adapter.XJFireEquipmentCloumnAdapter;
 import com.hr.fire.inspection.adapter.XJFireEquipmentContentAdapter;
 import com.hr.fire.inspection.adapter.XJKitchenWetPowderContentAdapter;
 import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
 import com.hr.fire.inspection.utils.FileRoute;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
@@ -151,11 +152,11 @@ public class XJFireEquipment extends AppCompatActivity  implements View.OnClickL
         rl_content.setLayoutManager(mLayoutManager2);
         contentApapter = new XJFireEquipmentContentAdapter(this, inspectionResults);
         rl_content.setAdapter(contentApapter);
-        contentApapter.setmYCCamera(new XJFireEquipmentContentAdapter.YCCamera() {
+        contentApapter.setmYCCamera(new YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;
-                openSysCamera(fileNew, mContent);
+                openSysCamera(mContent);
             }
         });
         //刷新序号列表
@@ -380,7 +381,7 @@ public class XJFireEquipment extends AppCompatActivity  implements View.OnClickL
     /**
      * 打开系统相机
      */
-    public void openSysCamera(File fileNew, Context mContent)  {
+    public void openSysCamera(Context mContent)  {
 
         // intent用来启动系统自带的Camera
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -407,10 +408,11 @@ public class XJFireEquipment extends AppCompatActivity  implements View.OnClickL
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case FileRoute.CAMERA_RESULT_CODE:
+
                 //这里目前需要适配
                 if (fileNew != null && imgPostion != -1 && contentApapter != null) {
                     inspectionResults.get(imgPostion).setImgPath(fileNew.getAbsolutePath());
-                    contentApapter.notifyItemChanged(imgPostion);
+                    contentApapter.notifyDataSetChanged();
                 }
                 break;
         }

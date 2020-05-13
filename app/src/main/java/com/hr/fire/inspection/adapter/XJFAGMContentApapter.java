@@ -3,10 +3,12 @@ package com.hr.fire.inspection.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.PhotoView2;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
@@ -50,6 +54,13 @@ public class XJFAGMContentApapter extends RecyclerView.Adapter {
         myholder.tv_fire6.setText(result.getParam6());
         if (result.getDescription() != null) {
             myholder.et_fire7.setText(result.getDescription());
+        }
+        String imageUrl = mData.get(position).getImgPath();
+        if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+            Uri uri = Uri.parse(imageUrl);
+            myholder.tv_fire8.setImageURI(uri);
+        }else{
+            myholder.tv_fire8.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
         }
         myholder.rl_fire1.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire2.setOnClickListener(new MyOnClickListener(myholder, position));
@@ -156,7 +167,7 @@ public class XJFAGMContentApapter extends RecyclerView.Adapter {
                         showPopWind(myholder.tv_fire6);
                         break;
                     case R.id.rl_fire8:
-                        mYCCamera.startCamera(position);
+                        new PhotoView2().showPopWindPic(mContext, position, mYCCamera, mData);
                         break;
                     case R.id.rl_fire9:
                         removeData(position);
@@ -205,7 +216,7 @@ public class XJFAGMContentApapter extends RecyclerView.Adapter {
         private TextView tv_fire5;
         private TextView tv_fire6;
         private TextView tv_fire7;
-        private TextView tv_fire8;
+        private ImageView tv_fire8;
 
         public MyViewHolder(View view) {
             super(view);
@@ -226,28 +237,25 @@ public class XJFAGMContentApapter extends RecyclerView.Adapter {
             tv_fire5 = (TextView) view.findViewById(R.id.tv_fire5);
             tv_fire6 = (TextView) view.findViewById(R.id.tv_fire6);
             tv_fire7 = (TextView) view.findViewById(R.id.tv_fire7);
-            tv_fire8 = (TextView) view.findViewById(R.id.tv_fire8);
+            tv_fire8 = (ImageView) view.findViewById(R.id.tv_fire8);
         }
     }
 
-    private XJFAGMContentApapter.YCCamera mYCCamera;
     private XJFAGMContentApapter.RemoveXH mRemoveXH;
-    //接口回调, 将点击事件传递到activity中,打开相机
-    public void setmYCCamera(XJFAGMContentApapter.YCCamera y) {
-        this.mYCCamera = y;
-    }
-
     //接口回调, 将点击事件传递到activity中,刷新序号
     public void setDeleteRefresh(XJFAGMContentApapter.RemoveXH xh) {
         this.mRemoveXH = xh;
     }
-
-
-    public interface YCCamera {
-        void startCamera(int postion);
-    }
-
     public interface RemoveXH {
         void deleteRefresh(int postion);
     }
+
+    private YCCamera mYCCamera;
+
+    //接口回调, 将点击事件传递到activity中,打开相机
+    public void setmYCCamera(YCCamera y) {
+        this.mYCCamera = y;
+    }
+
+
 }

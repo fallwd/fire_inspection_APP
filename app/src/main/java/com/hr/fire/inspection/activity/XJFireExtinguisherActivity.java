@@ -349,8 +349,6 @@ public class XJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 //这里目前需要适配
                 if (fileNew != null && imgPostion != -1 && contentApapter != null) {
                     inspectionResults.get(imgPostion).setImgPath(fileNew.getAbsolutePath());
-                    Log.d("inspectionResults2", inspectionResults + "");
-                    // contentApapter.notifyItemChanged(imgPostion);
                     contentApapter.notifyDataSetChanged();
                 }
                 break;

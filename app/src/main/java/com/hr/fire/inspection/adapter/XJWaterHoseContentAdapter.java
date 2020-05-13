@@ -3,10 +3,12 @@ package com.hr.fire.inspection.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.PhotoView2;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
@@ -53,7 +57,13 @@ public class XJWaterHoseContentAdapter extends RecyclerView.Adapter{
         myholder.tv_gas8.setText(result.getParam8());
         myholder.tv_gas9.setText(result.getParam9());
 
-
+        String imageUrl = mData.get(position).getImgPath();
+        if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+            Uri uri = Uri.parse(imageUrl);
+            myholder.tv_fire11.setImageURI(uri);
+        }else{
+            myholder.tv_fire11.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
+        }
 
         if (result.getDescription() != null) {
             myholder.et_fire10.setText(result.getDescription());
@@ -171,7 +181,7 @@ public class XJWaterHoseContentAdapter extends RecyclerView.Adapter{
                         showPopWind(myholder.tv_gas9);
                         break;
                     case R.id.rl_fire11:
-                        mYCCamera.startCamera(position);
+                        new PhotoView2().showPopWindPic(mContext, position, mYCCamera, mData);
                         break;
                     case R.id.rl_fire12:
                         removeData(position);
@@ -227,6 +237,7 @@ public class XJWaterHoseContentAdapter extends RecyclerView.Adapter{
         private TextView tv_gas7;
         private TextView tv_gas8;
         private TextView tv_gas9;
+        private ImageView tv_fire11;
 
 
         public MyViewHolder(View view) {
@@ -253,6 +264,7 @@ public class XJWaterHoseContentAdapter extends RecyclerView.Adapter{
             tv_gas7 = view.findViewById(R.id.tv_gas7);
             tv_gas8 = view.findViewById(R.id.tv_gas8);
             tv_gas9 = view.findViewById(R.id.tv_gas9);
+            tv_fire11 = (ImageView) view.findViewById(R.id.tv_fire11);
 
 
             et_fire10 = (EditText) view.findViewById(R.id.et_fire10);
@@ -262,12 +274,8 @@ public class XJWaterHoseContentAdapter extends RecyclerView.Adapter{
         }
     }
 
-    private XJWaterHoseContentAdapter.YCCamera mYCCamera;
+
     private XJWaterHoseContentAdapter.RemoveXH mRemoveXH;
-    //接口回调, 将点击事件传递到activity中,打开相机
-    public void setmYCCamera(XJWaterHoseContentAdapter.YCCamera y) {
-        this.mYCCamera = y;
-    }
 
     //接口回调, 将点击事件传递到activity中,刷新序号
     public void setDeleteRefresh(XJWaterHoseContentAdapter.RemoveXH xh) {
@@ -275,8 +283,11 @@ public class XJWaterHoseContentAdapter extends RecyclerView.Adapter{
     }
 
 
-    public interface YCCamera {
-        void startCamera(int postion);
+    private YCCamera mYCCamera;
+
+    //接口回调, 将点击事件传递到activity中,打开相机
+    public void setmYCCamera(YCCamera y) {
+        this.mYCCamera = y;
     }
 
     public interface RemoveXH {

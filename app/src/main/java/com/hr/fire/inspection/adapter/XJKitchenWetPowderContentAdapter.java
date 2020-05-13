@@ -3,10 +3,12 @@ package com.hr.fire.inspection.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.PhotoView2;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
@@ -60,6 +64,14 @@ public class XJKitchenWetPowderContentAdapter  extends RecyclerView.Adapter{
 
         if (result.getDescription() != null) {
             myholder.et_fire10.setText(result.getDescription());
+        }
+
+        String imageUrl = mData.get(position).getImgPath();
+        if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+            Uri uri = Uri.parse(imageUrl);
+            myholder.tv_fire11.setImageURI(uri);
+        }else{
+            myholder.tv_fire11.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
         }
 
         myholder.gas1.setOnClickListener(new XJKitchenWetPowderContentAdapter.MyOnClickListener(myholder, position));
@@ -184,7 +196,7 @@ public class XJKitchenWetPowderContentAdapter  extends RecyclerView.Adapter{
                         showPopWind(myholder.tv_gas10);
                         break;
                     case R.id.rl_fire11:
-                        mYCCamera.startCamera(position);
+                        new PhotoView2().showPopWindPic(mContext, position, mYCCamera, mData);
                         break;
                     case R.id.rl_fire12:
                         removeData(position);
@@ -240,6 +252,7 @@ public class XJKitchenWetPowderContentAdapter  extends RecyclerView.Adapter{
         private TextView tv_gas8;
         private TextView tv_gas9;
         private TextView tv_gas10;
+        private ImageView tv_fire11;
 
 
         public MyViewHolder(View view) {
@@ -254,6 +267,7 @@ public class XJKitchenWetPowderContentAdapter  extends RecyclerView.Adapter{
             gas8 = view.findViewById(R.id.gas8);
             gas9 = view.findViewById(R.id.gas9);
             gas10 = view.findViewById(R.id.gas10);
+            tv_fire11 = view.findViewById(R.id.tv_fire11);
 
             tv_gas1 = view.findViewById(R.id.tv_gas1);
             tv_gas2 = view.findViewById(R.id.tv_gas2);
@@ -272,26 +286,19 @@ public class XJKitchenWetPowderContentAdapter  extends RecyclerView.Adapter{
 
         }
     }
-
-    private XJKitchenWetPowderContentAdapter.YCCamera mYCCamera;
     private XJKitchenWetPowderContentAdapter.RemoveXH mRemoveXH;
-    //接口回调, 将点击事件传递到activity中,打开相机
-    public void setmYCCamera(XJKitchenWetPowderContentAdapter.YCCamera y) {
-        this.mYCCamera = y;
-    }
-
     //接口回调, 将点击事件传递到activity中,刷新序号
     public void setDeleteRefresh(XJKitchenWetPowderContentAdapter.RemoveXH xh) {
         this.mRemoveXH = xh;
     }
-
-
-    public interface YCCamera {
-        void startCamera(int postion);
-    }
-
     public interface RemoveXH {
         void deleteRefresh(int postion);
     }
 
+    private YCCamera mYCCamera;
+
+    //接口回调, 将点击事件传递到activity中,打开相机
+    public void setmYCCamera(YCCamera y) {
+        this.mYCCamera = y;
+    }
 }

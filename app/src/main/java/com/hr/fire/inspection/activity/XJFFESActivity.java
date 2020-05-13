@@ -31,6 +31,7 @@ import com.hr.fire.inspection.adapter.XJFFESContentApapter;
 import com.hr.fire.inspection.adapter.XJFFESColumnApapter;
 import com.hr.fire.inspection.adapter.XJKitchenWetPowderContentAdapter;
 import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
 import com.hr.fire.inspection.utils.FileRoute;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
@@ -94,7 +95,6 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
         duty = intent.getStringExtra("duty");  // 专业
         check_name = intent.getStringExtra("check_name"); // 检查人
         check_date = intent.getStringExtra("check_date"); //用户选择的时间
-        Log.i("aaaa","传参获取的数据"+systemId+"--------"+ companyInfoId+"--------" + str_title);
         try {
             //这个解析方式是没有问题的 ,需要保证前面传入的数据是 2020-04-23 18:21 格式
             parse_check_date = sdf.parse(check_date);
@@ -149,11 +149,11 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
         rl_content.setLayoutManager(mLayoutManager2);
         contentApapter = new XJFFESContentApapter(this, inspectionResults);
         rl_content.setAdapter(contentApapter);
-        contentApapter.setmYCCamera(new XJFFESContentApapter.YCCamera() {
+        contentApapter.setmYCCamera(new YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;
-                openSysCamera(fileNew, mContent);
+                openSysCamera(mContent);
             }
         });
         //刷新序号列表
@@ -248,7 +248,6 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
 
             } else {
                 //没有数据造一段默认数据
-                Log.d("dong", "我有数据不走这里");
                 result.setProfession(duty);
                 result.setCheckPerson(check_name);
                 result.setCheckDate(parse_check_date);
@@ -284,7 +283,6 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
             //表示数据插入成功,再次查询,拿到最新的数据
             if (l == 0) {
                 inspectionResults = service.getInspectionData(companyInfoId, systemId, parse_check_date);
-                Log.d("dong", "inspectionResults=  " + inspectionResults.size() + "  " + inspectionResults.get(0).getParam2());
                 firstColumnApapter.setNewData(inspectionResults);
                 contentApapter.setNewData(inspectionResults);
             } else {
@@ -331,11 +329,9 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
             TextView tv_fire23 = childAt.findViewById(R.id.tv_fire23);
             TextView tv_fire24 = childAt.findViewById(R.id.tv_fire24);
             EditText et_fire25 = childAt.findViewById(R.id.et_fire25);
-            TextView tv_fire26 = childAt.findViewById(R.id.tv_fire26);
 
 
             InspectionResult itemObj = inspectionResults.get(i);
-            Log.i("aaa", "传的对象111"+inspectionResults.get(i));
             itemObj.setProfession(itemObj.getProfession());
             itemObj.setCheckPerson(itemObj.getCheckPerson());
             itemObj.setCheckDate(itemObj.getCheckDate());
@@ -364,11 +360,7 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
             itemObj.setParam22(tv_fire22.getText().toString());
             itemObj.setParam23(tv_fire23.getText().toString());
             itemObj.setParam24(tv_fire24.getText().toString());
-//            itemObj.setParam25();
             itemObj.setDescription(et_fire25.getText().toString());
-
-//            Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
-//                     + et_fire2.getText().toString() + " " + et_fire2.getText().toString());
             service.update(itemObj);
         }
         Toast.makeText(this, "数据保存成功", Toast.LENGTH_SHORT).show();
@@ -379,8 +371,7 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
     /**
      * 打开系统相机
      */
-    public void openSysCamera(File fileNew, Context mContent)  {
-
+    public void openSysCamera(Context mContent)  {
         // intent用来启动系统自带的Camera
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         try {
@@ -409,7 +400,7 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
                 //这里目前需要适配
                 if (fileNew != null && imgPostion != -1 && contentApapter != null) {
                     inspectionResults.get(imgPostion).setImgPath(fileNew.getAbsolutePath());
-                    contentApapter.notifyItemChanged(imgPostion);
+                    contentApapter.notifyDataSetChanged();
                 }
                 break;
         }

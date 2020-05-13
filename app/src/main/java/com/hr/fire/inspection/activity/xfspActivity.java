@@ -33,6 +33,7 @@ import com.hr.fire.inspection.adapter.XJFirstContentApapter;
 import com.hr.fire.inspection.adapter.xfspAdapter;
 import com.hr.fire.inspection.adapter.xfspFistcolumn;
 import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
 import com.hr.fire.inspection.utils.FileRoute;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
@@ -148,9 +149,12 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
         rl_content.setLayoutManager(mLayoutManager2);
         contentApapter = new xfspAdapter(this, inspectionResults);
         rl_content.setAdapter(contentApapter);
-        contentApapter.setmYCCamera(postion -> {
-            imgPostion = postion;
-            openSysCamera(fileNew, mContent);
+        contentApapter.setmYCCamera(new YCCamera() {
+            @Override
+            public void startCamera(int postion) {
+                imgPostion = postion;
+                openSysCamera(mContent);
+            }
         });
         //刷新序号列表
         contentApapter.setDeleteRefresh(new xfspAdapter.RemoveXH() {
@@ -219,6 +223,7 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
                 result.setCheckPerson(item.getCheckPerson());
                 result.setCheckDate(item.getCheckDate());
                 result.setDescription(item.getDescription());
+                result.setImgPath(item.getImgPath());
                 result.setParam1(item.getParam1());
                 result.setParam2(item.getParam2());
                 result.setParam3(item.getParam3());
@@ -279,19 +284,18 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
             itemObj.setParam4(tv_fire4.getText().toString());
             itemObj.setDescription(et_fire10.getText().toString());
 
-            Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
-                    + tv_fire1.getText().toString() + "  " + tv_fire2.getText().toString() + " " + tv_fire2.getText().toString());
             service.update(itemObj);
         }
         Toast.makeText(this, "数据保存成功", Toast.LENGTH_SHORT).show();
     }
 
 
+
     private File fileNew = null;
     /**
      * 打开系统相机
      */
-    public void openSysCamera(File fileNew, Context mContent)  {
+    public void openSysCamera(Context mContent)  {
 
         // intent用来启动系统自带的Camera
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -312,16 +316,16 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
             startActivityForResult(cameraIntent, FileRoute.CAMERA_RESULT_CODE);
         }
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case FileRoute.CAMERA_RESULT_CODE:
+
                 //这里目前需要适配
                 if (fileNew != null && imgPostion != -1 && contentApapter != null) {
                     inspectionResults.get(imgPostion).setImgPath(fileNew.getAbsolutePath());
-                    contentApapter.notifyItemChanged(imgPostion);
+                    contentApapter.notifyDataSetChanged();
                 }
                 break;
         }
