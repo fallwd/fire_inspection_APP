@@ -39,6 +39,14 @@ public interface YearCheckService extends BaseService<Object>{
     List<HashMap> getHistoryList(long companyId, long systemId);
 
     /**
+     * 删除历史数据
+     * @param
+     * @return
+     */
+    void deleteHistoryData(long companyId, String number, long systemId, Date checkDate);
+
+
+    /**
      * 获取设备信息表信息
      * @param
      * @return
@@ -103,6 +111,7 @@ public interface YearCheckService extends BaseService<Object>{
      * data是设备检查数据，是一个List，里面每一条都是一个ItemInfo对象，这个对象包含了这条数据的所有信息
      * @return
      */
+//    List<HashMap> getOutputItemData(long companyInfoId, String year);
     List<HashMap> getOutputItemData(long companyInfoId, Date checkDate);
 
 }

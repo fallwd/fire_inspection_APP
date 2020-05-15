@@ -2011,6 +2011,18 @@ public class BaseData {
         yearCheck1.setStandard(standard1);
         yearCheck1.setCheckType(checkTypeQB.list().get(0));
         daoSession.insert(yearCheck1);
+        yearCheck1 = new YearCheck();
+        project1 = "保护处所变更检查";
+        content1 = "受保护处所内所保护的物质是否发生变更";
+        requirement1 = "保护处所内所保护的物质不应发生变更";
+        standard1 = "中国船级社《船用消防系统检测机构服务指南》4.10.2";
+        yearCheck1.setProject(project1);
+        yearCheck1.setContent(content1);
+        yearCheck1.setRequirement(requirement1);
+        yearCheck1.setStandard(standard1);
+        yearCheck1.setCheckType(checkTypeQB.list().get(0));
+        daoSession.insert(yearCheck1);
+
 
         checkTypeQB = daoSession.queryBuilder(CheckType.class).
                 where(
@@ -2173,6 +2185,17 @@ public class BaseData {
         project1 = "保护处所变更检查";
         content1 = "受保护处所的边界应进行目视检查，确认未对围壁进行产生不可关闭开口的改装并从而使系统失效";
         requirement1 = "保护处所不应更改，如有更改，应进行变更";
+        standard1 = "中国船级社《船用消防系统检测机构服务指南》4.10.2";
+        yearCheck1.setProject(project1);
+        yearCheck1.setContent(content1);
+        yearCheck1.setRequirement(requirement1);
+        yearCheck1.setStandard(standard1);
+        yearCheck1.setCheckType(checkTypeQB.list().get(0));
+        daoSession.insert(yearCheck1);
+        yearCheck1 = new YearCheck();
+        project1 = "保护处所变更检查";
+        content1 = "受保护处所内所保护的物质是否发生变更";
+        requirement1 = "保护处所内所保护的物质不应发生变更";
         standard1 = "中国船级社《船用消防系统检测机构服务指南》4.10.2";
         yearCheck1.setProject(project1);
         yearCheck1.setContent(content1);
@@ -3568,10 +3591,10 @@ public class BaseData {
         // number 区号 SD002
         String number = "SD001";
         // checkDate 检查日期
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date checkDate = null;
         try {
-            checkDate = format.parse("2019-08-03 10:10");
+            checkDate = format.parse("2019-08-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -3582,16 +3605,16 @@ public class BaseData {
         String weight = "3";
         String goodsWeight = "8";
         String prodFactory = "红日药业";
-        SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM");
         Date prodDate = null;
         try {
-            prodDate = format2.parse("2018-08-03 09:08:07");
+            prodDate = format2.parse("2018-08");
         } catch (ParseException e) {
             e.printStackTrace();
         }
         Date observeDate = null;
         try {
-            observeDate = format2.parse("2019-03-09 09:08:07");
+            observeDate = format2.parse("2019-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -3623,10 +3646,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-08-03 10:10");
+            checkDate = format.parse("2019-08-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -3637,16 +3660,16 @@ public class BaseData {
         weight = "3";
         goodsWeight = "8";
         prodFactory = "红日药业";
-        format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        format2 = new SimpleDateFormat("yyyy-MM");
         prodDate = null;
         try {
-            prodDate = format2.parse("2018-08-03 09:08:07");
+            prodDate = format2.parse("2018-08");
         } catch (ParseException e) {
             e.printStackTrace();
         }
         observeDate = null;
         try {
-            observeDate = format2.parse("2019-03-09 09:08:07");
+            observeDate = format2.parse("2019-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -3678,10 +3701,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-08-03 10:10");
+            checkDate = format.parse("2019-08-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -3692,16 +3715,16 @@ public class BaseData {
         weight = "3";
         goodsWeight = "8";
         prodFactory = "红日药业";
-        format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        format2 = new SimpleDateFormat("yyyy-MM");
         prodDate = null;
         try {
-            prodDate = format2.parse("2018-08-03 09:08:07");
+            prodDate = format2.parse("2018-08");
         } catch (ParseException e) {
             e.printStackTrace();
         }
         observeDate = null;
         try {
-            observeDate = format2.parse("2019-03-09 09:08:07");
+            observeDate = format2.parse("2019-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -3733,10 +3756,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-08-03 10:10");
+            checkDate = format.parse("2019-08-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -3747,16 +3770,16 @@ public class BaseData {
         weight = "3";
         goodsWeight = "8";
         prodFactory = "红日药业";
-        format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        format2 = new SimpleDateFormat("yyyy-MM");
         prodDate = null;
         try {
-            prodDate = format2.parse("2018-08-03 09:08:07");
+            prodDate = format2.parse("2018-08");
         } catch (ParseException e) {
             e.printStackTrace();
         }
         observeDate = null;
         try {
-            observeDate = format2.parse("2019-03-09 09:08:07");
+            observeDate = format2.parse("2019-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -3787,10 +3810,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-08-03 10:10");
+            checkDate = format.parse("2019-6-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -3801,16 +3824,16 @@ public class BaseData {
         weight = "10";
         goodsWeight = "8";
         prodFactory = "红日药业";
-        format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        format2 = new SimpleDateFormat("yyyy-MM");
         prodDate = null;
         try {
-            prodDate = format2.parse("2018-08-03 09:08:07");
+            prodDate = format2.parse("2018-08");
         } catch (ParseException e) {
             e.printStackTrace();
         }
         observeDate = null;
         try {
-            observeDate = format2.parse("2019-03-09 09:08:07");
+            observeDate = format2.parse("2019-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -3841,10 +3864,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-08-03 10:10");
+            checkDate = format.parse("2019-08-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -3855,16 +3878,16 @@ public class BaseData {
         weight = "10";
         goodsWeight = "8";
         prodFactory = "红日药业";
-        format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        format2 = new SimpleDateFormat("yyyy-MM");
         prodDate = null;
         try {
-            prodDate = format2.parse("2018-08-03 09:08:07");
+            prodDate = format2.parse("2018-08");
         } catch (ParseException e) {
             e.printStackTrace();
         }
         observeDate = null;
         try {
-            observeDate = format2.parse("2019-03-09 09:08:07");
+            observeDate = format2.parse("2019-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -3897,10 +3920,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-10-03 10:10");
+            checkDate = format.parse("2019-10-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -3911,16 +3934,16 @@ public class BaseData {
         weight = "3";
         goodsWeight = "8";
         prodFactory = "红日药业";
-        format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        format2 = new SimpleDateFormat("yyyy-MM");
         prodDate = null;
         try {
-            prodDate = format2.parse("2018-08-03 09:08:07");
+            prodDate = format2.parse("2018-08");
         } catch (ParseException e) {
             e.printStackTrace();
         }
         observeDate = null;
         try {
-            observeDate = format2.parse("2019-03-09 09:08:07");
+            observeDate = format2.parse("2019-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -3951,10 +3974,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -3981,10 +4004,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4011,10 +4034,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-10-03 10:10");
+            checkDate = format.parse("2020-10-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4041,10 +4064,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-10-03 10:10");
+            checkDate = format.parse("2019-10-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4072,10 +4095,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4105,10 +4128,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4138,10 +4161,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4171,10 +4194,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4204,10 +4227,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4237,10 +4260,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4275,10 +4298,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4313,10 +4336,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4351,10 +4374,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4389,10 +4412,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4427,10 +4450,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4456,10 +4479,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4485,10 +4508,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4514,10 +4537,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4543,10 +4566,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4572,10 +4595,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4601,10 +4624,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4630,10 +4653,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4659,10 +4682,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4688,10 +4711,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4717,10 +4740,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4747,10 +4770,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4780,10 +4803,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4813,10 +4836,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4846,10 +4869,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4880,10 +4903,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4913,10 +4936,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4946,10 +4969,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -4979,10 +5002,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5012,10 +5035,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5045,10 +5068,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5079,10 +5102,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5115,10 +5138,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5145,10 +5168,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5175,10 +5198,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5201,7 +5224,7 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
             checkDate = format.parse("2019-07-03 09:10");
@@ -5227,10 +5250,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5254,10 +5277,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5281,10 +5304,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5309,10 +5332,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5337,10 +5360,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5367,10 +5390,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5397,10 +5420,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5426,10 +5449,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5455,10 +5478,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5484,10 +5507,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5513,10 +5536,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5542,10 +5565,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5571,10 +5594,10 @@ public class BaseData {
         // number 区号 SD002
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5601,10 +5624,10 @@ public class BaseData {
 
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5781,10 +5804,10 @@ public class BaseData {
 
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2020-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -5960,10 +5983,10 @@ public class BaseData {
 
         number = "SD002";
         // checkDate 检查日期
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-07-03 09:10");
+            checkDate = format.parse("2019-07-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -6136,10 +6159,10 @@ public class BaseData {
         //灭火器
         String checkPerson = "张三";
         String profession = "安全";
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-08-03 10:10");
+            checkDate = format.parse("2019-08-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -6241,10 +6264,10 @@ public class BaseData {
         //灭火器
         checkPerson = "张三";
         profession = "安全";
-        format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format = new SimpleDateFormat("yyyy-MM-dd");
         checkDate = null;
         try {
-            checkDate = format.parse("2019-08-03 10:10");
+            checkDate = format.parse("2019-08-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }
