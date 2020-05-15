@@ -58,8 +58,6 @@ public class NjFireFightingWaterAdapter2 extends RecyclerView.Adapter<RecyclerVi
         NjFireFightingWaterAdapter2.ViewHolder vh = (NjFireFightingWaterAdapter2.ViewHolder) holder;
         if (mData != null && mData.size() != 0) {
             ItemInfo info = mData.get(position);
-            Log.e("dong", "position----:" + position);
-            Log.e("dong", "info----:" + info);
             vh.et_1.setText(new StringBuffer().append(" ").append(position + 1));
             vh.et_2.setText(new StringBuffer().append(info.getNo()).append(""));
             vh.et_3.setText(new StringBuffer().append(info.getTypeNo()).append(""));
@@ -179,28 +177,6 @@ public class NjFireFightingWaterAdapter2 extends RecyclerView.Adapter<RecyclerVi
         return mData.size();
     }
 
-
-    //  添加数据
-    public void addData(int position) {
-//      在list中添加数据，并通知条目加入一条
-        if (mData != null && mData.size() != 0) {
-            //添加最后一条数据
-            mData.add(mData.get(mData.size() - 1));
-            //添加动画
-            notifyItemInserted(position);
-        } else {
-            ItemInfo itemInfo = new ItemInfo();
-            itemInfo.setTypeNo("请编辑");
-            itemInfo.setNo("请编辑");
-            itemInfo.setProdFactory("请编辑");
-            itemInfo.setDeviceType("请编辑");
-            Date date = new Date();
-            itemInfo.setProdDate(date);
-            itemInfo.setIsPass("请选择");
-            itemInfo.setCodePath("请编辑");
-            mData.add(itemInfo);
-        }
-    }
 
     //  删除数据
     public void removeData(int position) {

@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Button;
 import com.hr.fire.inspection.R;
@@ -49,6 +50,10 @@ public class FireActivity extends AppCompatActivity {
         oil_name = b.getString("oil_name");
         Platform_name = b.getString("Platform_name");
         company_name = b.getString("company_name");
+
+        //隐藏顶部位号、保护区域、及检查时间
+        LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
+        isShowTopText.setVisibility(View.GONE);
         initData();
     }
     private void initData() {
@@ -76,8 +81,8 @@ public class FireActivity extends AppCompatActivity {
                 intent.setClass(FireActivity.this, SystemTagProtectionAreaActivity.class);
                 String f_title = systemNameData.get(position).getName();
                 //跳转详情
-                if (f_title.equals("高压二氧化碳灭火系统") || f_title.equals("七氟丙烷气体灭火系统")
-                        || f_title.equals("海水雨淋灭火系统") || f_title.equals("干粉灭火系统")
+                if (f_title.equals("高压二氧化碳灭火系统") || f_title.equals("七氟丙烷灭火系统")
+                        || f_title.equals("海水雨淋灭火系统") || f_title.equals("固定式干粉灭火系统")
                         || f_title.equals("泡沫灭火系统")) {
                     intent.setClass(FireActivity.this, SystemTagProtectionAreaActivity.class);
                 } else {

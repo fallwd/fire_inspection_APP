@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +46,10 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
         // 获取Bundle的信息 公司名称  油田名称    若从消防巡检点过来   则需要获取其他参数
         oil_name = b.getString("oil_name");
         company_name = b.getString("company_name");
+
+        //隐藏顶部位号、保护区域、及检查时间
+        LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
+        isShowTopText.setVisibility(View.GONE);
 
         f_title = b.getString("f_title");
         if (f_title.equals("xunjian")) {

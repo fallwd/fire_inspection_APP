@@ -43,7 +43,8 @@
         <RelativeLayout
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -64,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="瓶量/kg"
+                android:text="瓶重/kg"
                 android:textColor="@color/title_black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -160,7 +161,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="42dp"
+            android:layout_width="30dp"
             android:layout_height="wrap_content">
 
             <TextView
@@ -173,7 +174,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="42dp"
+            android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 

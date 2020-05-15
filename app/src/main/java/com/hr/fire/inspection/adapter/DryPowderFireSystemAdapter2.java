@@ -66,7 +66,7 @@ public class DryPowderFireSystemAdapter2 extends RecyclerView.Adapter<RecyclerVi
             ItemInfo info = mData.get(position);
             vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
             // 瓶号
-            vh.et_2.setText(new StringBuffer().append(info.getNo()).append(position + 1));
+            vh.et_2.setText(new StringBuffer().append(info.getNo()).append(""));
             // 容积
             vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
             // 瓶量
@@ -113,7 +113,7 @@ public class DryPowderFireSystemAdapter2 extends RecyclerView.Adapter<RecyclerVi
                 }
             });
 
-            vh.et_11.setText(new StringBuffer().append(info.getLabelNo()).append(""));
+            vh.et_11.setText(new StringBuffer().append(info.getLabelNo()+ (position + 1)));
 //            vh.et_12.setImageURI(info.getCodePath()); // 二维码路径？？？
             //二维码点击
             vh.et_12.setOnClickListener(new View.OnClickListener() {
@@ -309,7 +309,11 @@ public class DryPowderFireSystemAdapter2 extends RecyclerView.Adapter<RecyclerVi
                             builder.append(1 + i).append(",");
                         }
                     }
-                    et_9.setText(builder.toString().substring(0, builder.length() - 1));
+                    if (builder.length() == 0) {
+                        et_9.setText("请选择");
+                    } else {
+                        et_9.setText(builder.toString().substring(0, builder.length() - 1));
+                    }
                 }
             }
         });

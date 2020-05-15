@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,10 @@ public class PlatformInsertActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_platform_insert);
 
+        //隐藏顶部位号、保护区域、及检查时间
+        LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
+        isShowTopText.setVisibility(View.GONE);
+
         Bundle b = getIntent().getExtras();
         //获取Bundle的信息  公司名称  和平台名称
         oil_name = b.getString("oil_name");
@@ -32,7 +37,7 @@ public class PlatformInsertActivity extends AppCompatActivity {
         Button submit_btn = (Button) this.findViewById(R.id.submit_btn);
         ImageView iv_finish = (ImageView) this.findViewById(R.id.iv_finish);
         TextView tv_inspection_pro = (TextView) this.findViewById(R.id.tv_inspection_pro);
-        tv_inspection_pro.setText("请添加油田");
+        tv_inspection_pro.setText("请添加平台");
         iv_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

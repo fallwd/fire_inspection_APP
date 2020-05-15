@@ -156,10 +156,9 @@ public class NjKitchenFragment2 extends Fragment {
                 itemInfo.setProdFactory("请编辑");
                 Date date = new Date();
                 itemInfo.setProdDate(date);
-                itemInfo.setTaskNumber("请编辑");
+                itemInfo.setTaskNumber("请选择");
                 itemInfo.setIsPass("请选择");
                 itemInfo.setLabelNo("请编辑");
-                itemInfo.setCodePath("请编辑");
 
             }
             long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, it.companyInfoId, checkTypes.get(1).getId(), it.number, it.srt_Date);
@@ -172,7 +171,6 @@ public class NjKitchenFragment2 extends Fragment {
             }
         }
     }
-
 
 //    序号 1  t
 //    瓶号 2  e  no

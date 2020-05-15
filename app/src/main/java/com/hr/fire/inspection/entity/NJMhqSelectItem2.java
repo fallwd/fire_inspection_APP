@@ -21,16 +21,14 @@ public class NJMhqSelectItem2 {
 
     private List<String> initData() {
         titlelist.clear();
-        titlelist.add("1.1A222");
-        titlelist.add("2.2A33");
-        titlelist.add("3.3A");
-        titlelist.add("4.4A44");
-        titlelist.add("5.5A");
-        titlelist.add("6.6A");
-        titlelist.add("7.7rrA");
-        titlelist.add("8.8A");
-        titlelist.add("8.10A");
-        titlelist.add("9.21B");
+        titlelist.add("1.灭火器外观检查");
+        titlelist.add("2.重量检查");
+        titlelist.add("3.充装");
+        titlelist.add("4.检验日期标签");
+        titlelist.add("5.压力检查");
+        titlelist.add("6.维修");
+        titlelist.add("7.水压试验");
+        titlelist.add("8.新灭火器");
 
 
         return titlelist;

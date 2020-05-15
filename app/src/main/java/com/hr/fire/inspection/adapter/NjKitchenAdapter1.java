@@ -127,7 +127,7 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
             });
             vh.et_12.setBackground(drawable1);
 
-            vh.et_13.setText(new StringBuffer().append(info.getLabelNo()).append(""));
+            vh.et_13.setText(new StringBuffer().append(info.getLabelNo()+ (position + 1)));
             vh.et_14.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -295,7 +295,11 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
                             builder.append(1 + i).append(",");
                         }
                     }
-                    tv_11.setText(builder.toString().substring(0, builder.length() - 1));
+                    if (builder.length() == 0) {
+                        tv_11.setText("请选择");
+                    } else {
+                        tv_11.setText(builder.toString().substring(0, builder.length() - 1));
+                    }
                 }
             }
         });

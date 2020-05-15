@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +45,10 @@ public class OilFieldActivity extends AppCompatActivity implements View.OnClickL
         //获取Bundle的信息
         Bundle b1 = getIntent().getExtras();
         infocontcompanyName = b1.getString("company_name");
+
+        //隐藏顶部位号、保护区域、及检查时间
+        LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
+        isShowTopText.setVisibility(View.GONE);
 
         f_title = b1.getString("f_title");
         if(f_title.equals("xunjian")){

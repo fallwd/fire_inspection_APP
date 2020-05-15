@@ -117,6 +117,7 @@ public class CarbonFragment1 extends Fragment {
                 //点击新增,有数据,就拿到最后一条数据新增,创建一个新的对象
                 ItemInfo item = itemDataList.get(itemDataList.size() - 1);
                 //如果直接新增会导致后台id冲重复\冲突
+                itemInfo.setNo(item.getNo());
                 itemInfo.setVolume(item.getVolume());
                 itemInfo.setWeight(item.getWeight());
                 itemInfo.setGoodsWeight(item.getGoodsWeight());
@@ -128,6 +129,7 @@ public class CarbonFragment1 extends Fragment {
                 itemInfo.setLabelNo(item.getLabelNo());
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
+                itemInfo.setNo("请编辑");
                 itemInfo.setVolume("请编辑");
                 itemInfo.setWeight("请编辑");
                 itemInfo.setGoodsWeight("请编辑");

@@ -147,10 +147,9 @@ public class NjKitchenFragment1 extends Fragment {
                 Date date = new Date();
                 itemInfo.setProdDate(date);
                 itemInfo.setFillingDate(date);
-                itemInfo.setTaskNumber("请编辑");
+                itemInfo.setTaskNumber("请选择");
                 itemInfo.setIsPass("请选择");
                 itemInfo.setLabelNo("请编辑");
-                itemInfo.setCodePath("请编辑");
 
             }
             long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, it.companyInfoId, checkTypes.get(0).getId(), it.number, it.srt_Date);

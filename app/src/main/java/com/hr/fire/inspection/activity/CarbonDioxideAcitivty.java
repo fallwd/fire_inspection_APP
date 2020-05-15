@@ -6,6 +6,7 @@ import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -24,6 +25,7 @@ import com.hr.fire.inspection.fragment.CarbonFragment3;
 import com.hr.fire.inspection.fragment.CarbonFragment4;
 import com.hr.fire.inspection.fragment.CarbonFragment5;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
+import com.hr.fire.inspection.utils.TimeUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,6 +49,8 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
     private CarbonFragment5 carbonFragment5;
     private String f_title;
     private String sys_number;  //系统位号
+    private String protect_area;  //保护区域
+    private Date check_date; // 检查时间
     private IntentTransmit it;
 
     @Override
@@ -66,6 +70,8 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
         Date srt_Date = (Date) intent.getSerializableExtra("srt_Date");  //传过来的时间
         f_title = intent.getStringExtra("f_title"); //传过来的名称
         sys_number = intent.getStringExtra("sys_number"); //传过来的名称
+        protect_area = intent.getStringExtra("protect_area"); //传过来的保护区域
+        check_date = srt_Date;
         it = new IntentTransmit();
         it.companyInfoId = platform_id;
         it.systemId = systemId;
@@ -81,6 +87,34 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
         String text = new StringBuilder().append("消防年检  >  ").append(f_title).toString();
         SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#00A779", 8, text.length());
         tvInspectionPro.setText(showTextColor);
+
+        //显示顶部展示系统位号、保护区域、检查时间的LinearLayout
+        LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
+        isShowTopText.setVisibility(View.VISIBLE);
+        // 系统位号文字显示
+        TextView sys_number_text = (TextView) this.findViewById(R.id.sys_number_text);
+        if (sys_number == null || sys_number == "" || sys_number.isEmpty()) {
+            sys_number_text.setText("系统位号为空");
+        } else {
+            sys_number_text.setText(sys_number);
+        }
+
+        // 保护区域文字显示
+        TextView protect_area_text = (TextView) this.findViewById(R.id.protect_area_text);
+        if (protect_area == null || protect_area == "" || protect_area.isEmpty()) {
+            protect_area_text.setText("保护区域为空");
+        } else {
+            protect_area_text.setText(protect_area);
+        }
+
+        // 检查时间文字显示
+        TextView check_date_text = (TextView) this.findViewById(R.id.check_date_text);
+        if (check_date == null) {
+            check_date_text.setText("保护区域为空");
+        } else {
+            String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(check_date);
+            check_date_text.setText(mProdDate);
+        }
 
         mTabLayout = findViewById(R.id.tl_tabs);
         mViewPager = findViewById(R.id.vp_content);

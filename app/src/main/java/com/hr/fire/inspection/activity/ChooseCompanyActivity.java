@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +46,10 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
         insert_btn = (ImageView) this.findViewById(R.id.insert_btn);
         ImageView iv_finish = (ImageView) this.findViewById(R.id.iv_finish);
         TextView tv_inspection_pro = (TextView) this.findViewById(R.id.tv_inspection_pro);
+
+        //隐藏顶部位号、保护区域、及检查时间
+        LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
+        isShowTopText.setVisibility(View.GONE);
 
         iv_finish.setOnClickListener(new View.OnClickListener() {
             @Override

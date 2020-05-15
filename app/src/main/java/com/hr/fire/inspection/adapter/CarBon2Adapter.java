@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -67,7 +68,7 @@ public class CarBon2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (mData != null && mData.size() != 0) {
             ItemInfo info = mData.get(position);
             vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
-            vh.et_2.setText(new StringBuffer().append("DQP00").append(position + 1));
+            vh.et_2.setText(new StringBuffer().append(info.getNo()).append(""));
             vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
             vh.et_4.setText(new StringBuffer().append(info.getWeight()).append(""));
 //            vh.et_5.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));//pressure
@@ -99,7 +100,7 @@ public class CarBon2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             if (info.getLabelNo() == null) {
                 vh.et_12.setHint("请输入...");
             } else {
-                vh.et_12.setText(info.getLabelNo());
+                vh.et_12.setText(info.getLabelNo()+ (position + 1));
             }
             //初始化工作表数据
             WorkIItemBean mWorkIItemBean = new WorkIItemBean();
@@ -208,7 +209,7 @@ public class CarBon2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         RelativeLayout rl_9;
         RelativeLayout rl_11;
         TextView tv_11;
-        TextView tv_12;
+        ImageView tv_12;
         EditText et_12;
 
         ViewHolder(View view) {
@@ -226,7 +227,7 @@ public class CarBon2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             rl_9 = (RelativeLayout) view.findViewById(R.id.rl_9);
             rl_11 = (RelativeLayout) view.findViewById(R.id.rl_11);
             tv_11 = (TextView) view.findViewById(R.id.tv_11);
-            tv_12 = (TextView) view.findViewById(R.id.tv_12);
+            tv_12 = (ImageView) view.findViewById(R.id.tv_12);
             et_12 = (EditText) view.findViewById(R.id.et_12);
         }
     }
@@ -320,7 +321,11 @@ public class CarBon2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                             builder.append(1 + i).append(",");
                         }
                     }
-                    tv_11.setText(builder.toString().substring(0, builder.length() - 1));
+                    if (builder.length() == 0) {
+                        tv_11.setText("请选择");
+                    } else {
+                        tv_11.setText(builder.toString().substring(0, builder.length() - 1));
+                    }
                 }
             }
         });

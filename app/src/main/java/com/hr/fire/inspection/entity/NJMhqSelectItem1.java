@@ -14,6 +14,7 @@ public class NJMhqSelectItem1 {
     public List<NJMhqSelectItem1> getWorkSelectData() {
         List<String> list = initData();
         for (int i = 0; i < list.size(); i++) {
+
             workItemList.add(new NJMhqSelectItem1(list.get(i), false));
         }
         return workItemList;
@@ -21,22 +22,21 @@ public class NJMhqSelectItem1 {
 
     private List<String> initData() {
         titlelist.clear();
-        titlelist.add("1.1A");
-        titlelist.add("2.2A");
-        titlelist.add("3.3A");
-        titlelist.add("4.4A");
-        titlelist.add("5.5A");
-        titlelist.add("6.6A");
-        titlelist.add("7.7A");
-        titlelist.add("8.8A");
-        titlelist.add("8.10A");
-        titlelist.add("9.21B");
-        titlelist.add("10.34B");
-        titlelist.add("11.55B");
-        titlelist.add("12.89B");
-        titlelist.add("13.144B");
-        titlelist.add("14.183B");
-        titlelist.add("15.297B");
+        titlelist.add("1A");
+        titlelist.add("2A");
+        titlelist.add("3A");
+        titlelist.add("4A");
+        titlelist.add("5A");
+        titlelist.add("6A");
+        titlelist.add("8A");
+        titlelist.add("10A");
+        titlelist.add("21B");
+        titlelist.add("34B");
+        titlelist.add("55B");
+        titlelist.add("89B");
+        titlelist.add("144B");
+        titlelist.add("183B");
+        titlelist.add("297B");
 
         return titlelist;
     }

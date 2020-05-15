@@ -61,6 +61,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
     private long companyInfoId;
     private long platform_id;
     private String str_title;
+    private Date check_date; // 检查时间
 
     Date srt_Date = null;
     private String srt_date;
@@ -99,6 +100,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
         Log.d("dong", "systemId=" + systemId+ "companyInfoId="+companyInfoId+ "srt_Date="+ srt_Date + "str_title="+str_title+"sys_number= "+sys_number);
 
         srt_date = intent.getStringExtra("srt_Date");   //检查日期,用户没选择,就是表示是新建
+        check_date = srt_Date;
     }
 
     private void initData() {
@@ -114,7 +116,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
         }
         //参数1:公司id, 参数2:检查表类型对应的id, 参数3:输入的系统位号，如果没有就填"",或者SD002,否则没数据   参数4:日期
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(companyInfoId, checkTypes.get(0).getId(), sys_number == null ? "" : sys_number, srt_Date);
-        Log.d("dong", "itemDataList == -----   " + itemDataList);
+
         HYLogUtil.getInstance().d("设备表信息,数据查看:" + itemDataList.size() + "  " + itemDataList.toString());
         // 一级表插入数据insertItemData
 
@@ -132,6 +134,28 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
         iv_finish.setOnClickListener(this);
         iv_add_table.setOnClickListener(this);
         iv_save.setOnClickListener(this);
+
+
+        //显示顶部展示系统位号、保护区域、检查时间的LinearLayout
+        LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
+        isShowTopText.setVisibility(View.VISIBLE);
+        // 系统位号文字显示
+        LinearLayout sys_numberCode = (LinearLayout) this.findViewById(R.id.sys_number);
+        sys_numberCode.setVisibility(View.GONE);
+        // 保护区域文字显示
+        LinearLayout protect_areaCode = (LinearLayout) this.findViewById(R.id.protect_area);
+        protect_areaCode.setVisibility(View.GONE);
+        // 检查时间文字显示
+        LinearLayout check_dateCode = (LinearLayout) this.findViewById(R.id.check_date);
+        check_dateCode.setVisibility(View.VISIBLE);
+        TextView check_date_text = (TextView) this.findViewById(R.id.check_date_text);
+        if (check_date == null) {
+            check_date_text.setText("检查时间为空");
+        } else {
+            String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(check_date);
+            check_date_text.setText(mProdDate);
+        }
+
     }
 
     @SuppressLint("WrongConstant")
@@ -271,7 +295,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 itemInfo.setAppearance("请选择");
                 itemInfo.setIsPressure("请选择");
                 itemInfo.setEffectiveness("请选择");
-                itemInfo.setObserveDate(date);
+//                itemInfo.setObserveDate(date);  // 甲方要求默认为空
                 itemInfo.setIsPass("请选择");
                 itemInfo.setLabelNo("请输入");
 //                itemInfo.setImageUrl("请选择");
@@ -325,9 +349,9 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
             TextView tv_fire11 = childAt.findViewById(R.id.tv_fire11);
             EditText et_fire12 = childAt.findViewById(R.id.et_fire12);
             TextView tv_fire13 = childAt.findViewById(R.id.tv_fire13);
-            TextView et_fire14 = childAt.findViewById(R.id.et_fire14);
             TextView tv_fire15 = childAt.findViewById(R.id.tv_fire15);
             EditText et_fire16 = childAt.findViewById(R.id.et_fire16);
+            TextView et_fire14 = childAt.findViewById(R.id.et_fire14);
             ImageView tv_fire17 = childAt.findViewById(R.id.tv_fire17);
 
 
@@ -351,6 +375,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
 //            itemObj.setImageUrl(tv_fire15.getText().toString());
             itemObj.setDescription(et_fire16.getText().toString());
 //            itemObj.setCodePath(tv_fire17.getText().toString());  // 二维码路径？？？
+            Log.i("AAA","itemObj"+itemObj);
             ServiceFactory.getYearCheckService().update(itemObj);
         }
         Toast.makeText(this, "数据保存成功", Toast.LENGTH_SHORT).show();
@@ -367,7 +392,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 if (fileNew.getAbsolutePath() != null && imgPostion != -1 && contentApapter != null) {
                     itemDataList.get(imgPostion).setImageUrl(fileNew.getAbsolutePath());
 //                    contentApapter.notifyItemChanged(imgPostion);
-                    Log.i("AAA","itemDataList111"+itemDataList.get(imgPostion));
+
                     contentApapter.notifyDataSetChanged();
                 }
                 break;

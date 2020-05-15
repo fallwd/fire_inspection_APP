@@ -77,10 +77,13 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
             myholder.tv_fire9.setText(info.getAppearance());
             myholder.tv_fire10.setText(info.getIsPressure());
             myholder.tv_fire11.setText(info.getEffectiveness());
-            String mCheckDate2 = (String) TimeUtil.getInstance().dataToHHmmss(info.getObserveDate());
-            myholder.et_fire12.setText(mCheckDate2);
+            if (info.getObserveDate() != null) {
+                String mCheckDate2 = (String) TimeUtil.getInstance().dataToHHmmss(info.getObserveDate());
+                myholder.et_fire12.setText(mCheckDate2); //甲方要求维修日期默认为空
+            }
+
             myholder.tv_fire13.setText(info.getIsPass());
-            myholder.et_fire14.setText(info.getLabelNo());
+            myholder.et_fire14.setText(info.getLabelNo()+ (position + 1));
 //            myholder.tv_fire15.setText(info.getImageUrl());
             myholder.et_fire16.setText(info.getDescription());
 //            myholder.tv_fire17.setText(info.getCodePath());  //二维码路径
@@ -192,6 +195,10 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
         RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
         RelativeLayout ff = PopupRootView.findViewById(R.id.ff);
         RelativeLayout jj = PopupRootView.findViewById(R.id.jj);
+        RelativeLayout AFFF = PopupRootView.findViewById(R.id.AFFF);
+        RelativeLayout CO2 = PopupRootView.findViewById(R.id.CO2);
+        RelativeLayout DCP = PopupRootView.findViewById(R.id.DCP);
+
         hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
         hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         hrPopup.setBackgroundDrawable(new BitmapDrawable());
@@ -244,6 +251,34 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
                 }
             }
         });
+        AFFF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv.setText("AFFF");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+        CO2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv.setText("CO2");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+        DCP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv.setText("DCP");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+
     }
 
     //点击事件写在外层
@@ -287,7 +322,6 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
                     showPopWind(myholder.tv_fire13);
                     break;
                 case R.id.rl_fire15:
-//                    mYCCamera.startCamera(position);
                     new PhotoView().showPopWindPicInfo(mContext, position, mYCCamera, mData);
                     break;
                 case R.id.rl_fire17:
@@ -345,10 +379,15 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
                     for (int i = 0; i < selection.size(); i++) {
                         NJMhqSelectItem1 mBean = selection.get(i);
                         if (mBean.isState()) {
-                            builder.append(1 + i).append(",");
+                            Log.i("aaa", "打印了" + selection.get(i) + "下标等于=" +i);
+                            builder.append(selection.get(i).getTitle());
                         }
                     }
-                    tv_fire3.setText(builder.toString().substring(0, builder.length() - 1));
+                    if (builder.length() == 0) {
+                        tv_fire3.setText("请选择");
+                    } else {
+                        tv_fire3.setText(builder.toString());
+                    }
                 }
             }
         });
@@ -398,7 +437,11 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
                             builder.append(1 + i).append(",");
                         }
                     }
-                    tv_fire4.setText(builder.toString().substring(0, builder.length() - 1));
+                    if (builder.length() == 0) {
+                        tv_fire4.setText("请选择");
+                    } else {
+                        tv_fire4.setText(builder.toString().substring(0, builder.length() - 1));
+                    }
                 }
             }
         });

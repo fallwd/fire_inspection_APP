@@ -7,6 +7,7 @@ import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -30,6 +31,7 @@ import com.hr.fire.inspection.fragment.AutomaticFireAlarm8;
 import com.hr.fire.inspection.fragment.AutomaticFireAlarm9;
 import com.hr.fire.inspection.fragment.CarbonFragment1;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
+import com.hr.fire.inspection.utils.TimeUtil;
 
 //import org.apache.poi.util.NullLogger;
 
@@ -62,6 +64,7 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
     private String f_title;
     private String sys_number;  //系统位号
     private IntentTransmit it;
+    private Date check_date; // 检查时间
 
 
     @Override
@@ -87,6 +90,7 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
         it.systemId = systemId;
         it.srt_Date = srt_Date;
         it.number = sys_number;
+        check_date = srt_Date;
     }
 
 
@@ -99,6 +103,26 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
         String text = new StringBuilder().append("消防年检  >  ").append(f_title).toString();
         SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#E51C23", 0, 3);
         tvInspectionPro.setText(showTextColor);
+
+        //显示顶部展示系统位号、保护区域、检查时间的LinearLayout
+        LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
+        isShowTopText.setVisibility(View.VISIBLE);
+        // 系统位号文字显示
+        LinearLayout sys_numberCode = (LinearLayout) this.findViewById(R.id.sys_number);
+        sys_numberCode.setVisibility(View.GONE);
+        // 保护区域文字显示
+        LinearLayout protect_areaCode = (LinearLayout) this.findViewById(R.id.protect_area);
+        protect_areaCode.setVisibility(View.GONE);
+        // 检查时间文字显示
+        LinearLayout check_dateCode = (LinearLayout) this.findViewById(R.id.check_date);
+        check_dateCode.setVisibility(View.VISIBLE);
+        TextView check_date_text = (TextView) this.findViewById(R.id.check_date_text);
+        if (check_date == null) {
+            check_date_text.setText("检查时间为空");
+        } else {
+            String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(check_date);
+            check_date_text.setText(mProdDate);
+        }
 
         mTabLayout = findViewById(R.id.tl_tabs);
         mViewPager = findViewById(R.id.vp_content);

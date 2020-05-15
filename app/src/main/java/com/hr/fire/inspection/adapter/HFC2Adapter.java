@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -71,15 +72,15 @@ public class HFC2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (mData != null && mData.size() != 0) {
             ItemInfo info = mData.get(position);
             vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
-//            vh.et_2.setText(new StringBuffer().append("").append(position + 1));
-            vh.et_2.setText(new StringBuffer().append("BQ00").append(position + 1));
+            vh.et_2.setText(new StringBuffer().append(info.getNo()).append(""));
             vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
-            vh.et_4.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));
-            vh.et_5.setText(new StringBuffer().append(info.getPressure()).append(""));
+            vh.et_4.setText(new StringBuffer().append(info.getWeight()).append(""));
+            vh.et_5.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));
             vh.et_6.setText(new StringBuffer().append(info.getProdFactory()).append(""));
 
+
             String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getProdDate());
-            String mCheckDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getCheckDate());
+            String mCheckDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getObserveDate());
             vh.et_7.setText(new StringBuffer().append(mProdDate).append(""));
             vh.et_8.setText(new StringBuffer().append(mCheckDate).append(""));
 
@@ -106,7 +107,7 @@ public class HFC2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             if (info.getLabelNo() == null || info.getLabelNo().isEmpty()) {
                 vh.et_10.setHint("请输入...");
             } else {
-                vh.et_10.setText(info.getLabelNo());
+                vh.et_10.setText(info.getLabelNo()+ (position + 1));
             }
             //初始化工作表数据
             WorkIItemBean mWorkIItemBean = new WorkIItemBean();
@@ -220,35 +221,12 @@ public class HFC2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public int getItemCount() {
         return mData.size();
     }
-
-    //  添加数据
-    public void addData(int position) {
-//      在list中添加数据，并通知条目加入一条
-        if (mData != null && mData.size() != 0) {
-            //添加最后一条数据
-            mData.add(mData.get(mData.size() - 1));
-            //添加动画
-            notifyItemInserted(position);
-        } else {
-            ItemInfo itemInfo = new ItemInfo();
-
-            itemInfo.setVolume("请编辑");
-            itemInfo.setWeight("请编辑");
-            itemInfo.setGoodsWeight("请编辑");
-            itemInfo.setProdFactory("请编辑");
-            Date date = new Date();
-            itemInfo.setProdDate(date);
-            itemInfo.setCheckDate(date);
-            itemInfo.setTaskNumber("请选择");
-            itemInfo.setIsPass("请选择");
-            itemInfo.setLabelNo("请编辑");
-
-            mData.add(itemInfo);
-            //添加动画
-            notifyItemInserted(position);
-        }
+    public void setNewData(List<ItemInfo> itemDataList) {
+        this.mData = itemDataList;
         notifyDataSetChanged();
     }
+
+
 
     //  删除数据
     public void removeData(int position) {
@@ -293,7 +271,7 @@ public class HFC2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         RelativeLayout rl_9;
         RelativeLayout rl_11;
         TextView tv_11;
-        TextView tv_12;
+        ImageView tv_12;
 
         ViewHolder(View view) {
             super(view);
@@ -311,7 +289,7 @@ public class HFC2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             rl_9 = (RelativeLayout) view.findViewById(R.id.rl_9);
             rl_11 = (RelativeLayout) view.findViewById(R.id.rl_11);
             tv_11 = (TextView) view.findViewById(R.id.tv_11);
-            tv_12 = (TextView) view.findViewById(R.id.tv_12);
+            tv_12 = (ImageView) view.findViewById(R.id.tv_12);
         }
     }
 
@@ -357,7 +335,11 @@ public class HFC2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             builder.append(1 + i).append(",");
                         }
                     }
-                    tv_11.setText(builder.toString().substring(0, builder.length() - 1));
+                    if (builder.length() == 0) {
+                        tv_11.setText("请选择");
+                    } else {
+                        tv_11.setText(builder.toString().substring(0, builder.length() - 1));
+                    }
                 }
             }
         });

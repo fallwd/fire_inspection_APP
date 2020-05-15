@@ -31,6 +31,8 @@ public class WorkIItemBean {
             list = initDataYJP();
         } else if (index == 6) {
             list = initDataXFSMH();
+        } else if (index == 7) {
+            list = initDataXfyzb();
         }
         if (list != null) {
             for (int i = 0; i < list.size(); i++) {
@@ -42,17 +44,14 @@ public class WorkIItemBean {
 
     private List<String> initDataCar() {
         titlelist.clear();
-        titlelist.add("1.面罩检查");
-        titlelist.add("2.呼吸阀检查");
-        titlelist.add("3.调节装置检查");
-        titlelist.add("4.背带检查");
-        titlelist.add("5.功能试验");
-        titlelist.add("6.气瓶检查");
-        titlelist.add("7.气瓶充气");
-        titlelist.add("8.气瓶水压试验");
-        titlelist.add("8.气瓶水压试验");
-        titlelist.add("9.检验日期标签");
-        titlelist.add("10.新气瓶");
+        titlelist.add("1.外观检查");
+        titlelist.add("2.重量检查");
+        titlelist.add("3.液位检查");
+        titlelist.add("4.充装");
+        titlelist.add("5.压力检查");
+        titlelist.add("6.维修");
+        titlelist.add("7.水压试验");
+        titlelist.add("8.检验日期标签");
         return titlelist;
     }
 
@@ -66,6 +65,7 @@ public class WorkIItemBean {
         titlelist.add("5.水压试验");
         titlelist.add("6.检验日期标签");
         titlelist.add("7.维修");
+        titlelist.add("8.新气瓶");
         return titlelist;
     }
 
@@ -102,7 +102,7 @@ public class WorkIItemBean {
         titlelist.clear();
         titlelist.add("1.气瓶检查");
         titlelist.add("2.压力检查");
-        titlelist.add("3.重力检查");
+        titlelist.add("3.重量检查");
         titlelist.add("4.充装");
         titlelist.add("5.水压试验");
         titlelist.add("6.检查日期标签");
@@ -119,6 +119,23 @@ public class WorkIItemBean {
         titlelist.add("3.维修");
         titlelist.add("4.检查日期标签");
         titlelist.add("5.新消防带和喷枪");
+        return titlelist;
+    }
+
+    // 消防员装备
+    private List<String> initDataXfyzb() {
+        titlelist.clear();
+        titlelist.add("1.面罩检查");
+        titlelist.add("2.呼吸阀检查");
+        titlelist.add("3.调节装置检查");
+        titlelist.add("4.背带检查");
+        titlelist.add("5.功能试验");
+        titlelist.add("6.气瓶检查");
+        titlelist.add("7.气瓶充气");
+        titlelist.add("8.气瓶水压试验");
+        titlelist.add("8.气瓶水压试验");
+        titlelist.add("9.检验日期标签");
+        titlelist.add("10.新气瓶");
         return titlelist;
     }
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,6 +58,7 @@ public class SystemTagProtectionAreaActivity extends AppCompatActivity {
                 intent.putExtra("platform_id", platform_id);
                 intent.putExtra("f_title", f_title);
                 intent.putExtra("sys_number", systemTagText.getText().toString());
+                intent.putExtra("protect_area", protectAreaText.getText().toString());
                 intent.setClass(SystemTagProtectionAreaActivity.this, CarbondioxideRecordAcitivty.class);
                 startActivity(intent);
                 finish();

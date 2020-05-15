@@ -81,7 +81,6 @@ public class NjFireFightingWaterFragment1 extends Fragment {
 
     private void initData() {
         List<CheckType> arr = ServiceFactory.getYearCheckService().gettableNameData(it.systemId);
-        Log.d("dong", "arr列表   " + arr);
         long checkTypeId = arr.get(0).getId();
 
 
@@ -142,7 +141,6 @@ public class NjFireFightingWaterFragment1 extends Fragment {
                 itemInfo.setProdDate(date);
                 itemInfo.setTaskNumber("请编辑");
                 itemInfo.setIsPass("请选择");
-                itemInfo.setCodePath("请编辑");
 
 
 
@@ -173,12 +171,8 @@ public class NjFireFightingWaterFragment1 extends Fragment {
     public void upData() {
         int itemCount = table_tbody_id.getChildCount();
         //通知数据库刷新数据， 才能在调用Update();
-        Log.d("dong", "it.companyInfoId111==   " + it.companyInfoId + "   checkTypes.get(0).getId()   " + checkTypes.get(0).getId()+ "ITTTTTTTTTT" + it);
-
-
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(0).getId(), it.number == null ? "" : it.number, it.srt_Date);
 
-        Log.d("dong", "upData==   " + itemCount + "   新的数据条数   " + itemDataList.size());
         if (itemCount == 0 || itemDataList.size() == 0 || itemDataList.size() != itemCount) {
             Toast.makeText(getActivity(), "暂无数据保存", Toast.LENGTH_SHORT).show();
             return;
@@ -207,9 +201,6 @@ public class NjFireFightingWaterFragment1 extends Fragment {
             itemObj.setProdDate(date);
             itemObj.setTaskNumber(et_7.getText().toString());
             itemObj.setIsPass(et_9.getText().toString());
-//          itemObj.setCodePath(et_10.getImageAlpha());                  // 图片路径怎么填
-
-            Log.d("dong", "itemObj222222保存==   "+itemObj);
             ServiceFactory.getYearCheckService().update(itemObj);
             Toast.makeText(getContext(), "数据保存成功", Toast.LENGTH_SHORT).show();
         }

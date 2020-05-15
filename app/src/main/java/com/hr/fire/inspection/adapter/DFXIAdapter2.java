@@ -120,7 +120,7 @@ public class DFXIAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 }
             });
             vh.et_11.setBackground(drawable1);
-            vh.et_12.setText(new StringBuffer().append(info.getLabelNo()).append(""));
+            vh.et_12.setText(new StringBuffer().append(info.getLabelNo()+ (position + 1)));
         }
 
         vh.et_14.setOnClickListener(new View.OnClickListener() {
@@ -216,7 +216,11 @@ public class DFXIAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                             builder.append(1 + i).append(",");
                         }
                     }
-                    et_9.setText(builder.toString().substring(0, builder.length() - 1));
+                    if (builder.length() == 0) {
+                        et_9.setText("请选择");
+                    } else {
+                        et_9.setText(builder.toString().substring(0, builder.length() - 1));
+                    }
                 }
             }
         });
@@ -228,31 +232,6 @@ public class DFXIAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return mData.size();
     }
 
-
-    //  添加数据
-    public void addData(int position) {
-//      在list中添加数据，并通知条目加入一条
-        if (mData != null && mData.size() != 0) {
-            //添加最后一条数据
-            mData.add(mData.get(mData.size() - 1));
-            //添加动画
-            notifyItemInserted(position);
-        } else {
-            ItemInfo itemInfo = new ItemInfo();
-            itemInfo.setNo("请编辑");
-            itemInfo.setVolume("请编辑");
-            itemInfo.setWeight("请编辑");
-            itemInfo.setPressure("请编辑");
-            itemInfo.setProdFactory("请编辑");
-            Date date = new Date();
-            itemInfo.setProdDate(date);
-            itemInfo.setObserveDate(date);
-            itemInfo.setTaskNumber("请编辑");
-            itemInfo.setIsPass("请选择");
-            itemInfo.setLabelNo("请编辑");
-            mData.add(itemInfo);
-        }
-    }
 
     //  删除数据
     public void removeData(int position) {

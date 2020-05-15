@@ -70,7 +70,7 @@ public class DryPowderFireSystemAdapter1 extends RecyclerView.Adapter<RecyclerVi
             // 型号
             vh.et_1.setText(new StringBuffer().append(info.getTypeNo()).append(""));
             // 瓶号
-            vh.et_2.setText(new StringBuffer().append(info.getNo()).append(position + 1));
+            vh.et_2.setText(new StringBuffer().append(info.getNo()).append(""));
             // 容积
             vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
             // 瓶量
@@ -114,7 +114,7 @@ public class DryPowderFireSystemAdapter1 extends RecyclerView.Adapter<RecyclerVi
             });
 
             vh.et_10.setText(new StringBuffer().append(info.getIsPass()).append(""));
-            vh.et_11.setText(new StringBuffer().append(info.getLabelNo()).append(""));
+            vh.et_11.setText(new StringBuffer().append(info.getLabelNo()+ (position + 1)));
 //            vh.et_12.setImageURI(info.getCodePath()); // 二维码路径？？？
             //二维码点击
             vh.et_12.setOnClickListener(new View.OnClickListener() {
@@ -163,33 +163,6 @@ public class DryPowderFireSystemAdapter1 extends RecyclerView.Adapter<RecyclerVi
         return mData.size();
     }
 
-    //  添加数据
-    public void addData(int position) {
-//      在list中添加数据，并通知条目加入一条
-        if (mData != null && mData.size() != 0) {
-            //添加最后一条数据
-            mData.add(mData.get(mData.size() - 1));
-            //添加动画
-            notifyItemInserted(position);
-        } else {
-            ItemInfo itemInfo = new ItemInfo();
-            itemInfo.setTypeNo("请编辑");
-            itemInfo.setNo("请编辑");
-            itemInfo.setVolume("请编辑");
-            itemInfo.setWeight("请编辑");
-            itemInfo.setGoodsWeight("请编辑");
-            Date date = new Date();
-            itemInfo.setFillingDate(date);
-            itemInfo.setProdFactory("请编辑");
-            itemInfo.setProdDate(date);
-            itemInfo.setTaskNumber("请选择");
-            itemInfo.setIsPass("请选择");
-            itemInfo.setLabelNo("请编辑");
-            mData.add(itemInfo);
-            //添加动画
-            notifyItemInserted(position);
-        }
-    }
 
     //  删除数据
     public void removeData(int position) {
@@ -311,7 +284,11 @@ public class DryPowderFireSystemAdapter1 extends RecyclerView.Adapter<RecyclerVi
                             builder.append(1 + i).append(",");
                         }
                     }
-                    et_9.setText(builder.toString().substring(0, builder.length() - 1));
+                    if (builder.length() == 0) {
+                        et_9.setText("请选择");
+                    } else {
+                        et_9.setText(builder.toString().substring(0, builder.length() - 1));
+                    }
                 }
             }
         });
