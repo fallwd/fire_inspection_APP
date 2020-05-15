@@ -86,6 +86,20 @@ public class InspectionServiceImpl extends BaseServiceImpl<InspectionResult> imp
     }
 
     @Override
+    public void deleteHistoryData(long companyId, long systemId, Date checkDate) {
+        QueryBuilder<InspectionResult> queryBuilder = daoSession.queryBuilder(InspectionResult.class).
+                where(
+                        InspectionResultDao.Properties.CompanyInfoId.eq(companyId),
+                        InspectionResultDao.Properties.CheckDate.eq(checkDate),
+                        InspectionResultDao.Properties.CheckTypeId.eq(systemId)
+                );
+        List<InspectionResult> dataList = queryBuilder.list();
+        for(int i = 0;i < dataList.size();i++){
+            InspectionResult result = dataList.get(i);
+            daoSession.delete(result);
+        }
+    }
+    @Override
 //    public List<InspectionResult> getInspectionData(long companyInfoId, long checkTypeId, Date checkDate) {
     public List<InspectionResult> getInspectionData(long companyInfoId, long systemId, Date checkDate) {
         QueryBuilder<InspectionResult> queryBuilder = daoSession.queryBuilder(InspectionResult.class).

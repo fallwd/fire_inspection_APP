@@ -154,6 +154,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
             YearCheckResult result = resultDataList.get(i);
             daoSession.delete(result);
         }
+//        return 1;
     }
     @Override
     public List<ItemInfo> getItemData(String companyName, String oilfieldName, String platformName, String systemName, String tableName, String number) {

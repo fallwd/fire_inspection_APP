@@ -31,6 +31,14 @@ public interface InspectionService extends BaseService<InspectionResult>{
     List<HashMap> getHistoryList(long companyId, long systemId);
 
     /**
+     * 删除历史数据
+     * @param
+     * @return
+     */
+    void deleteHistoryData(long companyId, long systemId, Date checkDate);
+
+
+    /**
      * 获取巡检信息表信息
      * @param
      * @return

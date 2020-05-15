@@ -156,7 +156,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //            Log.i("gettableNameData",dataList.get(i).getName());
 //            Log.i("gettableNameData",dataList.get(i).getId().toString());
 //        }
-        ServiceFactory.getYearCheckService().getHistoryList(3,1);
+//        ServiceFactory.getYearCheckService().getHistoryList(3,1);
 //        for(int i=0;i<dataList.size();i++){
 //            Log.i("getHistoryList:::",""+dataList.get(i));
 //            HashMap has = dataList.get(i);
@@ -174,7 +174,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //        }
 //        ServiceFactory.getYearC
 //         测试历史数据接口
-//        List<HashMap> dataList =heckService().deleteHistoryData(3,"SD002",1,checkDate);
+//        List<HashMap> dataList =ServiceFactory.getYearCheckService().deleteHistoryData(3,"SD002",1,checkDate);
 
 //        // 测试导出数据接口
 

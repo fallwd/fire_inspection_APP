@@ -39,7 +39,7 @@ public interface YearCheckService extends BaseService<Object>{
     List<HashMap> getHistoryList(long companyId, long systemId);
 
     /**
-     * 获取历史数据
+     * 删除历史数据
      * @param
      * @return
      */
