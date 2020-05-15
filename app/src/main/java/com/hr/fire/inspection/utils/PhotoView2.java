@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,7 @@ import java.util.List;
 /**
  * 年检, 巡检页面拍照、查看大图的弹框
  */
-public class PhotoView {
+public class PhotoView2 {
 
     private boolean isDismiss = false;
     private HrPopup hrPopup;
@@ -43,7 +44,7 @@ public class PhotoView {
      * @param mYCCamera 拍照回调的接口
      * @param ycr       注意注意:原始数据:这里有两种数据,根据
      */
-    public void showPopWindPic(Context mContext, int postion, YCCamera mYCCamera, List<YearCheckResult> ycr) {
+    public void showPopWindPic(Context mContext, int postion, YCCamera mYCCamera, List<InspectionResult> ycr) {
         View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods_pic_see, null);
         if (hrPopup == null) {
             hrPopup = new HrPopup((Activity) mContext);
@@ -74,7 +75,7 @@ public class PhotoView {
         bt_see.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String imageUrl = ycr.get(postion).getImageUrl();
+                String imageUrl = ycr.get(postion).getImgPath();
                 if (imageUrl != null && imageUrl.endsWith(".jpg")) {
                     isDismiss = true;
                     ll_pop_item.setVisibility(View.GONE);

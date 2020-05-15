@@ -1,6 +1,7 @@
 package com.hr.fire.inspection.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -31,9 +32,12 @@ import com.hr.fire.inspection.adapter.XJWaterHoseColumnAdapter;
 import com.hr.fire.inspection.adapter.XJWaterHoseContentAdapter;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
+import com.hr.fire.inspection.utils.FileRoute;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 import com.hr.fire.inspection.view.tableview.HListViewScrollView;
+
+import com.hr.fire.inspection.impl.YCCamera;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -65,7 +69,7 @@ public class XJWaterHose extends AppCompatActivity implements View.OnClickListen
     private XJWaterHoseColumnAdapter firstColumnApapter;
     private XJWaterHoseContentAdapter contentApapter;
     private TextView tvInspectionPro;
-
+    private Context mContent;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final int TAKE_PHOTO = 1;//拍照
     private int imgPostion = -1;
@@ -74,6 +78,7 @@ public class XJWaterHose extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.xj_water_hose);
+        mContent = getApplicationContext();
         getIntentData();
         initData();
         initView();
@@ -147,15 +152,11 @@ public class XJWaterHose extends AppCompatActivity implements View.OnClickListen
         rl_content.setLayoutManager(mLayoutManager2);
         contentApapter = new XJWaterHoseContentAdapter(this, inspectionResults);
         rl_content.setAdapter(contentApapter);
-        contentApapter.setmYCCamera(new XJWaterHoseContentAdapter.YCCamera() {
+        contentApapter.setmYCCamera(new YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;
-                try {
-                    camera();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                openSysCamera(mContent);
             }
         });
         //刷新序号列表
@@ -313,45 +314,45 @@ public class XJWaterHose extends AppCompatActivity implements View.OnClickListen
     }
 
 
-    private Uri imgUri;
+    private File fileNew = null;
+    /**
+     * 打开系统相机
+     */
+    public void openSysCamera(Context mContent)  {
 
-    private void camera() throws IOException {
-        //该目录是app应用下面的目录,如果程序被卸载或造成图片丢失. 建议使用: FileRoute.getFilePath();但是需要适配
-        long timeMillis = System.currentTimeMillis();
-        String sPath = new StringBuilder().append(timeMillis).append(".jpg").toString();
-        File outputImage = new File(getExternalCacheDir(), sPath);
-
-        if (Build.VERSION.SDK_INT >= 24) {
-            imgUri = FileProvider
-                    .getUriForFile(this, getApplication().getApplicationContext().getPackageName() + ".fileProvider", outputImage);
-        } else {
-            imgUri = Uri.fromFile(outputImage);
+        // intent用来启动系统自带的Camera
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            fileNew = new FileRoute(mContent).createOriImageFile();
+            Log.d("fileNew", fileNew+"");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        //启动相机
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imgUri);
-        startActivityForResult(intent, TAKE_PHOTO);
+        Uri imgUriOri = null;
+        if (fileNew != null) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                imgUriOri = Uri.fromFile(fileNew);
+            } else {
+                imgUriOri = FileProvider.getUriForFile(mContent, mContent.getApplicationContext().getPackageName() + ".fileProvider", fileNew);
+            }
+            // 将系统Camera的拍摄结果写入到文件
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgUriOri);
+            startActivityForResult(cameraIntent, FileRoute.CAMERA_RESULT_CODE);
+        }
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d("inspectionResults", inspectionResults + "");
         switch (requestCode) {
-            case TAKE_PHOTO:  //拍照的回调
-                if (resultCode == RESULT_OK) {
-                    try {
-                        Bitmap bitmap = BitmapFactory
-                                .decodeStream(getContentResolver().openInputStream(imgUri));
-                        // /external_path/Android/data/com.hr.fire.inspection/cache/1587460070369.jpg
-                        String path = imgUri.getPath();
-                        if (path != null && imgPostion != -1 && contentApapter != null) {
-                            inspectionResults.get(imgPostion).setImgPath(path);
-                            //TODO 会崩溃.
-//                            contentApapter.notifyItemChanged(imgPostion);
-                        }
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+            case FileRoute.CAMERA_RESULT_CODE:
+
+                //这里目前需要适配
+                if (fileNew != null && imgPostion != -1 && contentApapter != null) {
+                    inspectionResults.get(imgPostion).setImgPath(fileNew.getAbsolutePath());
+                    Log.d("inspectionResults2", inspectionResults + "");
+                    contentApapter.notifyDataSetChanged();
                 }
                 break;
         }

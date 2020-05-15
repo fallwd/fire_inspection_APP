@@ -158,6 +158,7 @@ public class AutomaticFireAlarm7 extends Fragment {
                 itemInfo.setIsPass(item.getIsPass());
                 itemInfo.setDescription(item.getDescription());
                 itemInfo.setProdFactory(item.getProdFactory());
+                itemInfo.setImageUrl(item.getImageUrl());
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
                 itemInfo.setNo("请添加");

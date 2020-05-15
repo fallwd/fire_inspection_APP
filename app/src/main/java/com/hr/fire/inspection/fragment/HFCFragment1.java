@@ -122,14 +122,15 @@ public class HFCFragment1 extends Fragment {
             itemInfo.setLabelNo(item.getLabelNo());
         } else {
             //点击新增,如果没有数据,就造一条默认数据
-            itemInfo.setVolume("9");
-            itemInfo.setWeight("3");
-            itemInfo.setGoodsWeight("50");
-            itemInfo.setProdFactory("未知");
+            itemInfo.setVolume("请编辑");
+            itemInfo.setWeight("请编辑");
+            itemInfo.setGoodsWeight("请编辑");
+            itemInfo.setProdFactory("请编辑");
             Date date = new Date();
             itemInfo.setProdDate(date);
             itemInfo.setCheckDate(date);
-            itemInfo.setTaskNumber("---");
+            itemInfo.setTaskNumber("请选择");
+            itemInfo.setIsPass("请选择");
         }
         long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, it.companyInfoId, checkTypes.get(0).getId(), it.number, it.srt_Date);
         if (l1 != 0) {

@@ -233,13 +233,15 @@ public class HFC1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else {
             ItemInfo itemInfo = new ItemInfo();
 
-            itemInfo.setVolume("9.1");
-            itemInfo.setWeight("3");
-            itemInfo.setGoodsWeight("50");
-            itemInfo.setProdFactory("未知");
+            itemInfo.setVolume("请编辑");
+            itemInfo.setWeight("请编辑");
+            itemInfo.setGoodsWeight("请编辑");
+            itemInfo.setProdFactory("请编辑");
             Date date = new Date();
             itemInfo.setProdDate(date);
             itemInfo.setCheckDate(date);
+            itemInfo.setTaskNumber("请选择");
+            itemInfo.setIsPass("请选择");
 
 
             mData.add(itemInfo);

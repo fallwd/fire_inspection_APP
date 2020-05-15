@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -32,7 +33,9 @@ import com.hr.fire.inspection.adapter.XJFirstContentApapter;
 import com.hr.fire.inspection.adapter.xfspAdapter;
 import com.hr.fire.inspection.adapter.xfspFistcolumn;
 import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
+import com.hr.fire.inspection.utils.FileRoute;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 import com.hr.fire.inspection.view.tableview.HListViewScrollView;
@@ -67,7 +70,7 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
     private xfspFistcolumn firstColumnApapter;
     private xfspAdapter contentApapter;
     private TextView tvInspectionPro;
-
+    private Context mContent;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final int TAKE_PHOTO = 1;//拍照
     private int imgPostion = -1;
@@ -76,6 +79,7 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(@Nullable Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xfsp);
+        mContent = getApplicationContext();
         getIntentData();
         initData();
         initView();
@@ -145,12 +149,11 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
         rl_content.setLayoutManager(mLayoutManager2);
         contentApapter = new xfspAdapter(this, inspectionResults);
         rl_content.setAdapter(contentApapter);
-        contentApapter.setmYCCamera(postion -> {
-            imgPostion = postion;
-            try {
-                camera();
-            } catch (IOException e) {
-                e.printStackTrace();
+        contentApapter.setmYCCamera(new YCCamera() {
+            @Override
+            public void startCamera(int postion) {
+                imgPostion = postion;
+                openSysCamera(mContent);
             }
         });
         //刷新序号列表
@@ -220,6 +223,7 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
                 result.setCheckPerson(item.getCheckPerson());
                 result.setCheckDate(item.getCheckDate());
                 result.setDescription(item.getDescription());
+                result.setImgPath(item.getImgPath());
                 result.setParam1(item.getParam1());
                 result.setParam2(item.getParam2());
                 result.setParam3(item.getParam3());
@@ -280,53 +284,48 @@ public class xfspActivity extends AppCompatActivity implements View.OnClickListe
             itemObj.setParam4(tv_fire4.getText().toString());
             itemObj.setDescription(et_fire10.getText().toString());
 
-            Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
-                    + tv_fire1.getText().toString() + "  " + tv_fire2.getText().toString() + " " + tv_fire2.getText().toString());
             service.update(itemObj);
         }
         Toast.makeText(this, "数据保存成功", Toast.LENGTH_SHORT).show();
     }
 
 
-    private Uri imgUri;
 
-    private void camera() throws IOException {
-        //该目录是app应用下面的目录,如果程序被卸载或造成图片丢失. 建议使用: FileRoute.getFilePath();但是需要适配
-        long timeMillis = System.currentTimeMillis();
-        String sPath = new StringBuilder().append(timeMillis).append(".jpg").toString();
-        File outputImage = new File(getExternalCacheDir(), sPath);
+    private File fileNew = null;
+    /**
+     * 打开系统相机
+     */
+    public void openSysCamera(Context mContent)  {
 
-        if (Build.VERSION.SDK_INT >= 24) {
-            imgUri = FileProvider
-                    .getUriForFile(this, getApplication().getApplicationContext().getPackageName() + ".fileProvider", outputImage);
-        } else {
-            imgUri = Uri.fromFile(outputImage);
+        // intent用来启动系统自带的Camera
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            fileNew = new FileRoute(mContent).createOriImageFile();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        //启动相机
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imgUri);
-        startActivityForResult(intent, TAKE_PHOTO);
+        Uri imgUriOri = null;
+        if (fileNew != null) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                imgUriOri = Uri.fromFile(fileNew);
+            } else {
+                imgUriOri = FileProvider.getUriForFile(mContent, mContent.getApplicationContext().getPackageName() + ".fileProvider", fileNew);
+            }
+            // 将系统Camera的拍摄结果写入到文件
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgUriOri);
+            startActivityForResult(cameraIntent, FileRoute.CAMERA_RESULT_CODE);
+        }
     }
-
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case TAKE_PHOTO:  //拍照的回调
-                if (resultCode == RESULT_OK) {
-                    try {
-                        Bitmap bitmap = BitmapFactory
-                                .decodeStream(getContentResolver().openInputStream(imgUri));
-                        // /external_path/Android/data/com.hr.fire.inspection/cache/1587460070369.jpg
-                        String path = imgUri.getPath();
-                        if (path != null && imgPostion != -1 && contentApapter != null) {
-                            inspectionResults.get(imgPostion).setImgPath(path);
-                            //TODO 会崩溃.
-//                            contentApapter.notifyItemChanged(imgPostion);
-                        }
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+            case FileRoute.CAMERA_RESULT_CODE:
+
+                //这里目前需要适配
+                if (fileNew != null && imgPostion != -1 && contentApapter != null) {
+                    inspectionResults.get(imgPostion).setImgPath(fileNew.getAbsolutePath());
+                    contentApapter.notifyDataSetChanged();
                 }
                 break;
         }

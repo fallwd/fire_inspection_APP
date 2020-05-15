@@ -131,6 +131,7 @@ public class DFXIFragment1 extends Fragment {
                 itemInfo.setIsPass(item.getIsPass());
                 itemInfo.setLabelNo(item.getLabelNo());
                 itemInfo.setCodePath(item.getCodePath());
+                itemInfo.setImageUrl(item.getImageUrl());
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
                 itemInfo.setNo("请编辑");

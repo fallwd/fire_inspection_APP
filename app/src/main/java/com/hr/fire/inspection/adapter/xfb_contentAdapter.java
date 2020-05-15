@@ -3,10 +3,12 @@ package com.hr.fire.inspection.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.PhotoView2;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
@@ -61,6 +65,14 @@ public class xfb_contentAdapter extends RecyclerView.Adapter {
             myholder.et_fire10.setText(result.getDescription());
         }
 
+        String imageUrl = mData.get(position).getImgPath();
+        if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+            Uri uri = Uri.parse(imageUrl);
+            myholder.tv_fire17.setImageURI(uri);
+        }else{
+            myholder.tv_fire17.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
+        }
+
         myholder.rl_fire1.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
         myholder.rl_fire2.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
         myholder.rl_fire3.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
@@ -76,6 +88,7 @@ public class xfb_contentAdapter extends RecyclerView.Adapter {
         myholder.rl_fire13.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
         myholder.rl_fire14.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
         myholder.rl_fire15.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
+        myholder.rl_fire17.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
         myholder.rl_fire18.setOnClickListener(new xfb_contentAdapter.MyOnClickListener(myholder, position));
     }
 
@@ -191,8 +204,8 @@ public class xfb_contentAdapter extends RecyclerView.Adapter {
                     case R.id.rl_fire15:
                         showPopWind(myholder.tv_fire15);
                         break;
-                    case R.id.tv_fire17:
-                        mYCCamera.startCamera(position);
+                    case R.id.rl_fire17:
+                        new PhotoView2().showPopWindPic(mContext, position, mYCCamera, mData);
                         break;
                     case R.id.rl_fire18:
                         removeData(position);
@@ -239,7 +252,7 @@ public class xfb_contentAdapter extends RecyclerView.Adapter {
         private TextView tv_fire14;
         private TextView tv_fire15;
         private EditText et_fire10;
-        private TextView tv_fire17;
+        private ImageView tv_fire17;
         private TextView tv_fire18;
         private RelativeLayout rl_fire1;
         private RelativeLayout rl_fire2;
@@ -257,6 +270,7 @@ public class xfb_contentAdapter extends RecyclerView.Adapter {
         private RelativeLayout rl_fire14;
         private RelativeLayout rl_fire15;
         private RelativeLayout rl_fire16;
+        private RelativeLayout rl_fire17;
         private RelativeLayout rl_fire18;
 
         public MyViewHolder(View view) {
@@ -276,6 +290,7 @@ public class xfb_contentAdapter extends RecyclerView.Adapter {
             rl_fire13 = view.findViewById(R.id.rl_fire13);
             rl_fire14 = view.findViewById(R.id.rl_fire14);
             rl_fire15 = view.findViewById(R.id.rl_fire15);
+            rl_fire17 = view.findViewById(R.id.rl_fire17);
             rl_fire18 = view.findViewById(R.id.rl_fire18);
 
 
@@ -301,24 +316,19 @@ public class xfb_contentAdapter extends RecyclerView.Adapter {
         }
     }
 
-    private xfb_contentAdapter.YCCamera mYCCamera;
-    private xfb_contentAdapter.RemoveXH mRemoveXH;
-    //接口回调, 将点击事件传递到activity中,打开相机
-    public void setmYCCamera(xfb_contentAdapter.YCCamera y) {
-        this.mYCCamera = y;
-    }
 
+    private xfb_contentAdapter.RemoveXH mRemoveXH;
     //接口回调, 将点击事件传递到activity中,刷新序号
     public void setDeleteRefresh(xfb_contentAdapter.RemoveXH xh) {
         this.mRemoveXH = xh;
     }
-
-
-    public interface YCCamera {
-        void startCamera(int postion);
-    }
-
     public interface RemoveXH {
         void deleteRefresh(int postion);
+    }
+
+    private YCCamera mYCCamera;
+    //接口回调, 将点击事件传递到activity中,打开相机
+    public void setmYCCamera(YCCamera y) {
+        this.mYCCamera = y;
     }
 }

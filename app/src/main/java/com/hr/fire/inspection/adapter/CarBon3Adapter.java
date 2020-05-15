@@ -87,7 +87,7 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             Drawable drawable1 = mContext.getResources().getDrawable(R.drawable.listview_border_margin);
             vh.tv6.setBackground(drawable1);
 
-            String imageUrl = ycr.get(position).getImageUrl();
+            String imageUrl = ycr.get(position).getImageUrl();;
             if (imageUrl != null && imageUrl.endsWith(".jpg")) {
                 //路径  /external_path/Android/data/com.hr.fire.inspection/cache/1587462719699.jpg
 //                Uri uri = Uri.fromFile(new File(imageUrl));

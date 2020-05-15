@@ -125,14 +125,16 @@ public class CarbonFragment2 extends Fragment {
 
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
-                itemInfo.setVolume("9");
-                itemInfo.setWeight("3");
+                itemInfo.setVolume("请编辑");
+                itemInfo.setWeight("请编辑");
 //                itemInfo.setGoodsWeight("50");
                 itemInfo.setPressure("请编辑");
-                itemInfo.setProdFactory("未知");
+                itemInfo.setProdFactory("请编辑");
                 Date date = new Date();
                 itemInfo.setProdDate(date);
                 itemInfo.setCheckDate(date);
+                itemInfo.setTaskNumber("请选择");
+                itemInfo.setIsPass("请选择");
             }
             long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, its.companyInfoId, checkTypes.get(1).getId(), its.number, its.srt_Date);
             //表示数据插入成功,再次查询,拿到最新的数据

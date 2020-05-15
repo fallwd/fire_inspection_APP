@@ -57,12 +57,19 @@ public class HiddenLibraryDetailAdapter1 extends RecyclerView.Adapter<RecyclerVi
             vh.tv7.setText(new StringBuffer().append(mProdDate).append(""));
             vh.tv8.setText(yearCheckResult.getIsPass());
             String imageUrl = yearCheckResult.getImageUrl();
-//            String imageUrl = "/external_path/Android/data/com.hr.fire.inspection/cache/1587462719699.jpg";
+
+
+
             if (imageUrl != null && imageUrl.endsWith(".jpg")) {
                 //路径  /external_path/Android/data/com.hr.fire.inspection/cache/1587462719699.jpg
-                Uri uri = Uri.fromFile(new File(imageUrl));
+//                Uri uri = Uri.fromFile(new File(imageUrl));
+                Uri uri = Uri.parse(imageUrl);
                 vh.iv9.setImageURI(uri);
+            } else {
+                vh.iv9.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
             }
+
+
             vh.tv10.setText(yearCheckResult.getDescription());
         }
 

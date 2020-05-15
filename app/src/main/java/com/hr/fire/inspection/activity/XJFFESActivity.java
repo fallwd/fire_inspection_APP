@@ -1,6 +1,7 @@
 package com.hr.fire.inspection.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -30,7 +31,9 @@ import com.hr.fire.inspection.adapter.XJFFESContentApapter;
 import com.hr.fire.inspection.adapter.XJFFESColumnApapter;
 import com.hr.fire.inspection.adapter.XJKitchenWetPowderContentAdapter;
 import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
+import com.hr.fire.inspection.utils.FileRoute;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 import com.hr.fire.inspection.view.tableview.HListViewScrollView;
@@ -65,7 +68,7 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
     private InspectionServiceImpl service;
     private XJFFESColumnApapter firstColumnApapter;
     private XJFFESContentApapter contentApapter;
-
+    private Context mContent;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final int TAKE_PHOTO = 1;//拍照
     private int imgPostion = -1;
@@ -75,6 +78,7 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.xj_ffes_activity);
+        mContent = getApplicationContext();
         getIntentData();
         initData();
         initView();
@@ -91,7 +95,6 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
         duty = intent.getStringExtra("duty");  // 专业
         check_name = intent.getStringExtra("check_name"); // 检查人
         check_date = intent.getStringExtra("check_date"); //用户选择的时间
-        Log.i("aaaa","传参获取的数据"+systemId+"--------"+ companyInfoId+"--------" + str_title);
         try {
             //这个解析方式是没有问题的 ,需要保证前面传入的数据是 2020-04-23 18:21 格式
             parse_check_date = sdf.parse(check_date);
@@ -146,15 +149,11 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
         rl_content.setLayoutManager(mLayoutManager2);
         contentApapter = new XJFFESContentApapter(this, inspectionResults);
         rl_content.setAdapter(contentApapter);
-        contentApapter.setmYCCamera(new XJFFESContentApapter.YCCamera() {
+        contentApapter.setmYCCamera(new YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;
-                try {
-                    camera();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                openSysCamera(mContent);
             }
         });
         //刷新序号列表
@@ -249,7 +248,6 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
 
             } else {
                 //没有数据造一段默认数据
-                Log.d("dong", "我有数据不走这里");
                 result.setProfession(duty);
                 result.setCheckPerson(check_name);
                 result.setCheckDate(parse_check_date);
@@ -285,7 +283,6 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
             //表示数据插入成功,再次查询,拿到最新的数据
             if (l == 0) {
                 inspectionResults = service.getInspectionData(companyInfoId, systemId, parse_check_date);
-                Log.d("dong", "inspectionResults=  " + inspectionResults.size() + "  " + inspectionResults.get(0).getParam2());
                 firstColumnApapter.setNewData(inspectionResults);
                 contentApapter.setNewData(inspectionResults);
             } else {
@@ -332,11 +329,9 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
             TextView tv_fire23 = childAt.findViewById(R.id.tv_fire23);
             TextView tv_fire24 = childAt.findViewById(R.id.tv_fire24);
             EditText et_fire25 = childAt.findViewById(R.id.et_fire25);
-            TextView tv_fire26 = childAt.findViewById(R.id.tv_fire26);
 
 
             InspectionResult itemObj = inspectionResults.get(i);
-            Log.i("aaa", "传的对象111"+inspectionResults.get(i));
             itemObj.setProfession(itemObj.getProfession());
             itemObj.setCheckPerson(itemObj.getCheckPerson());
             itemObj.setCheckDate(itemObj.getCheckDate());
@@ -365,56 +360,47 @@ public class XJFFESActivity extends AppCompatActivity implements View.OnClickLis
             itemObj.setParam22(tv_fire22.getText().toString());
             itemObj.setParam23(tv_fire23.getText().toString());
             itemObj.setParam24(tv_fire24.getText().toString());
-//            itemObj.setParam25();
             itemObj.setDescription(et_fire25.getText().toString());
-
-//            Log.d("dong", "itemObj == " + itemObj.getProfession() + "  " + itemObj.getCheckPerson() + "  " + itemObj.getCheckDate() + " "
-//                     + et_fire2.getText().toString() + " " + et_fire2.getText().toString());
             service.update(itemObj);
         }
         Toast.makeText(this, "数据保存成功", Toast.LENGTH_SHORT).show();
     }
 
 
-    private Uri imgUri;
-
-    private void camera() throws IOException {
-        //该目录是app应用下面的目录,如果程序被卸载或造成图片丢失. 建议使用: FileRoute.getFilePath();但是需要适配
-        long timeMillis = System.currentTimeMillis();
-        String sPath = new StringBuilder().append(timeMillis).append(".jpg").toString();
-        File outputImage = new File(getExternalCacheDir(), sPath);
-
-        if (Build.VERSION.SDK_INT >= 24) {
-            imgUri = FileProvider
-                    .getUriForFile(this, getApplication().getApplicationContext().getPackageName() + ".fileProvider", outputImage);
-        } else {
-            imgUri = Uri.fromFile(outputImage);
+    private File fileNew = null;
+    /**
+     * 打开系统相机
+     */
+    public void openSysCamera(Context mContent)  {
+        // intent用来启动系统自带的Camera
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            fileNew = new FileRoute(mContent).createOriImageFile();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        //启动相机
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imgUri);
-        startActivityForResult(intent, TAKE_PHOTO);
+        Uri imgUriOri = null;
+        if (fileNew != null) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                imgUriOri = Uri.fromFile(fileNew);
+            } else {
+                imgUriOri = FileProvider.getUriForFile(mContent, mContent.getApplicationContext().getPackageName() + ".fileProvider", fileNew);
+            }
+            // 将系统Camera的拍摄结果写入到文件
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgUriOri);
+            startActivityForResult(cameraIntent, FileRoute.CAMERA_RESULT_CODE);
+        }
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case TAKE_PHOTO:  //拍照的回调
-                if (resultCode == RESULT_OK) {
-                    try {
-                        Bitmap bitmap = BitmapFactory
-                                .decodeStream(getContentResolver().openInputStream(imgUri));
-                        // /external_path/Android/data/com.hr.fire.inspection/cache/1587460070369.jpg
-                        String path = imgUri.getPath();
-                        if (path != null && imgPostion != -1 && contentApapter != null) {
-                            inspectionResults.get(imgPostion).setImgPath(path);
-                            //TODO 会崩溃.
-//                            contentApapter.notifyItemChanged(imgPostion);
-                        }
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+            case FileRoute.CAMERA_RESULT_CODE:
+                //这里目前需要适配
+                if (fileNew != null && imgPostion != -1 && contentApapter != null) {
+                    inspectionResults.get(imgPostion).setImgPath(fileNew.getAbsolutePath());
+                    contentApapter.notifyDataSetChanged();
                 }
                 break;
         }

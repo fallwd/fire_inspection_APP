@@ -158,10 +158,12 @@
                 android:textSize="12sp" />
         </RelativeLayout>
 
+
         <RelativeLayout
             android:id="@+id/rl_9"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
             android:layout_gravity="center">
 
             <TextView
@@ -169,23 +171,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
                 android:background="@drawable/tab_background_selected"
                 android:maxLines="1"
                 android:text="检查表"
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                android:textColor="#fff"/>
         </RelativeLayout>
 
+
         <RelativeLayout
-            android:layout_width="30dp"
+            android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
             <TextView
                 android:id="@+id/tv_10"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="合格"
+                android:background="@null"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:text="是否合格"
                 android:textSize="12sp" />
         </RelativeLayout>
 

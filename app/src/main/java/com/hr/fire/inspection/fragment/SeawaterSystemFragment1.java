@@ -33,6 +33,7 @@ import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.FileRoute;
+import com.hr.fire.inspection.impl.YCCamera;
 
 import java.io.File;
 import java.io.IOException;
@@ -96,7 +97,7 @@ public class SeawaterSystemFragment1  extends Fragment {
                 //3.进入系统就给用户默认插入两条数据, 用户点击保存时,就Updata数据库
                 YearCheckResult ycr = new YearCheckResult();
                 ycr.setIsPass(" -- ");
-                ycr.setImageUrl("暂无");  //可以在iv7中获取
+//                ycr.setImageUrl("暂无");  //可以在iv7中获取
                 ycr.setDescription("无描述");
                 ycr.setSystemNumber(its.number);
                 ycr.setProtectArea(" "); // 保护位号
@@ -118,8 +119,8 @@ public class SeawaterSystemFragment1  extends Fragment {
         rc_list.setAdapter(adapter);
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
-        // 拍照回显
-        adapter.setmYCCamera(new SeawaterSystemAdapter1.YCCamera() {
+        // 拍照回调
+        adapter.setmYCCamera(new YCCamera() {
             @Override
             public void startCamera(int postion) {
                 imgPostion = postion;
@@ -143,7 +144,7 @@ public class SeawaterSystemFragment1  extends Fragment {
 
                 YearCheckResult yearCheckResult = yearCheckResults.get(i);
                 yearCheckResult.setIsPass(tv6.getText().toString().isEmpty() ? " -- " : tv6.getText().toString());
-                yearCheckResult.setImageUrl("暂无图片链接");  //可以在iv7中获取
+//                yearCheckResult.setImageUrl("暂无图片链接");  //可以在iv7中获取
                 yearCheckResult.setDescription(ev8.getText().toString().isEmpty() ? "无隐患描述" : ev8.getText().toString());
                 yearCheckResult.setSystemNumber(its.number);
                 yearCheckResult.setProtectArea(" "); // 保护位号
@@ -163,11 +164,6 @@ public class SeawaterSystemFragment1  extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case FileRoute.CAMERA_RESULT_CODE:
-//                File tempFile = new File(Environment.getExternalStorageDirectory(), imgNameTime);
-//                String absolutePath = tempFile.getAbsolutePath();
-//                String fileName = absolutePath.substring(absolutePath
-//                        .lastIndexOf("/") + 1, absolutePath.length() - 4);
-//                Bitmap bitmap = BitmapFactory.decodeFile(tempFile.getPath());
                 //这里目前需要适配
                 if (fileNew.getAbsolutePath() != null && imgPostion != -1 && adapter != null) {
                     yearCheckResults.get(imgPostion).setImageUrl(fileNew.getAbsolutePath());
@@ -186,7 +182,6 @@ public class SeawaterSystemFragment1  extends Fragment {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         try {
             fileNew = new FileRoute(getActivity()).createOriImageFile();
-//            String imgPathOri = fileNew.getAbsolutePath();
         } catch (IOException e) {
             e.printStackTrace();
         }

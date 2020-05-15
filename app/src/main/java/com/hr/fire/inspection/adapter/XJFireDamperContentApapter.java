@@ -3,20 +3,26 @@ package com.hr.fire.inspection.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.PhotoView2;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
@@ -38,6 +44,7 @@ public class XJFireDamperContentApapter extends RecyclerView.Adapter {
         return holder;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myholder = (MyViewHolder) holder;
@@ -54,7 +61,6 @@ public class XJFireDamperContentApapter extends RecyclerView.Adapter {
         if (result.getDescription() != null) {
             myholder.et_fire10.setText(result.getDescription());
         }
-//        myholder.rl_fire1.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire4.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire5.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire6.setOnClickListener(new MyOnClickListener(myholder, position));
@@ -63,6 +69,13 @@ public class XJFireDamperContentApapter extends RecyclerView.Adapter {
         myholder.rl_fire9.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire11.setOnClickListener(new MyOnClickListener(myholder, position));
         myholder.rl_fire12.setOnClickListener(new MyOnClickListener(myholder, position));
+        String imageUrl = mData.get(position).getImgPath();
+        if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+            Uri uri = Uri.parse(imageUrl);
+            myholder.tv_fire11.setImageURI(uri);
+        }else{
+            myholder.tv_fire11.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
+        }
     }
 
     @Override
@@ -163,7 +176,7 @@ public class XJFireDamperContentApapter extends RecyclerView.Adapter {
                         showPopWind(myholder.tv_fire9);
                         break;
                     case R.id.rl_fire11:
-                        mYCCamera.startCamera(position);
+                        new PhotoView2().showPopWindPic(mContext, position, mYCCamera, mData);
                         break;
                     case R.id.rl_fire12:
                         removeData(position);
@@ -217,7 +230,7 @@ public class XJFireDamperContentApapter extends RecyclerView.Adapter {
         private TextView tv_fire8;
         private TextView tv_fire9;
         private TextView tv_fire10;
-        private TextView tv_fire11;
+        private ImageView tv_fire11;
 
         public MyViewHolder(View view) {
             super(view);
@@ -244,28 +257,24 @@ public class XJFireDamperContentApapter extends RecyclerView.Adapter {
             tv_fire8 = (TextView) view.findViewById(R.id.tv_fire8);
             tv_fire9 = (TextView) view.findViewById(R.id.tv_fire9);
             tv_fire10 = (TextView) view.findViewById(R.id.tv_fire10);
-            tv_fire11 = (TextView) view.findViewById(R.id.tv_fire11);
+            tv_fire11 = (ImageView) view.findViewById(R.id.tv_fire11);
         }
-    }
-
-    private XJFireDamperContentApapter.YCCamera mYCCamera;
-    private XJFireDamperContentApapter.RemoveXH mRemoveXH;
-    //接口回调, 将点击事件传递到activity中,打开相机
-    public void setmYCCamera(XJFireDamperContentApapter.YCCamera y) {
-        this.mYCCamera = y;
-    }
-
-    //接口回调, 将点击事件传递到activity中,刷新序号
-    public void setDeleteRefresh(XJFireDamperContentApapter.RemoveXH xh) {
-        this.mRemoveXH = xh;
-    }
-
-
-    public interface YCCamera {
-        void startCamera(int postion);
     }
 
     public interface RemoveXH {
         void deleteRefresh(int postion);
+    }
+    private RemoveXH mRemoveXH;
+    //接口回调, 将点击事件传递到activity中,刷新序号
+    public void setDeleteRefresh(RemoveXH xh) {
+        this.mRemoveXH = xh;
+    }
+
+
+    private YCCamera mYCCamera;
+
+    //接口回调, 将点击事件传递到activity中,打开相机
+    public void setmYCCamera(YCCamera y) {
+        this.mYCCamera = y;
     }
 }
