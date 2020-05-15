@@ -156,14 +156,25 @@ public class WelcomeActivity extends AppCompatActivity {
 //            Log.i("gettableNameData",dataList.get(i).getName());
 //            Log.i("gettableNameData",dataList.get(i).getId().toString());
 //        }
-
-//         测试历史数据接口
-//        List<HashMap> dataList = ServiceFactory.getYearCheckService().getHistoryList(165,1);
+        ServiceFactory.getYearCheckService().getHistoryList(3,1);
 //        for(int i=0;i<dataList.size();i++){
 //            Log.i("getHistoryList:::",""+dataList.get(i));
 //            HashMap has = dataList.get(i);
 //            Log.i("getHistoryList:::",""+ has.get("ret"));
 //        }
+//        // 测试删除历史数据接口
+//        // Sat Aug 03 10:10:00 GMT+00:00 2019  SD002
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//        Date checkDate = null;
+//        try {
+////            checkDate = format.parse("2019-08-03 10:10");
+//            checkDate = format.parse("2019-08-03");
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        ServiceFactory.getYearC
+//         测试历史数据接口
+//        List<HashMap> dataList =heckService().deleteHistoryData(3,"SD002",1,checkDate);
 
 //        // 测试导出数据接口
 
@@ -171,6 +182,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //        Log.i("getOutputList",""+allList);
 ////
         // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
+//        long companyInfoId = 165;
 //        long companyInfoId = 165;
 //        // checkDate 检查日期
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -181,6 +193,8 @@ public class WelcomeActivity extends AppCompatActivity {
 //        } catch (ParseException e) {
 //            e.printStackTrace();
 //        }
+////        String year = "2019";
+////        List<HashMap> retList = ServiceFactory.getYearCheckService().getOutputItemData(companyInfoId,year);
 //        List<HashMap> retList = ServiceFactory.getYearCheckService().getOutputItemData(companyInfoId,checkDate);
 //        for(int i=0;i<retList.size();i++){
 //            Log.i("retList:::",""+retList.get(i));

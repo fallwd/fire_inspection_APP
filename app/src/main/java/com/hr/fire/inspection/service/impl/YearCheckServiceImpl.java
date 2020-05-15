@@ -19,6 +19,7 @@ import org.greenrobot.greendao.query.Join;
 import org.greenrobot.greendao.query.QueryBuilder;
 import org.greenrobot.greendao.query.WhereCondition;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -75,7 +76,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         QueryBuilder<ItemInfo> queryBuilder = daoSession.queryBuilder(ItemInfo.class).
                 where(new WhereCondition.StringCondition(
 //                        String.format("COMPANY_INFO_ID=%s GROUP BY CHECK_DATE", companyId)));
-                        String.format("COMPANY_INFO_ID=%s GROUP BY CHECK_DATE", companyId)));
+                        String.format("COMPANY_INFO_ID=%s GROUP BY CHECK_DATE,SYSTEM_NUMBER", companyId)));
 //        Join checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
 //                where(CheckTypeDao.Properties.ParentId.eq(systemId));
 
@@ -92,9 +93,10 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
             String companyName = ret.getCompanyInfo().getCompanyName();
             String oilfieldName = ret.getCompanyInfo().getOilfieldName();
             String platformName = ret.getCompanyInfo().getPlatformName();
+            String systemNumber = ret.getSystemNumber();
             Date checkDate = ret.getCheckDate();
 //            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmm");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
             String checkDateStr;
             if(checkDate!=null){
                 checkDateStr = formatter.format(checkDate);
@@ -102,20 +104,57 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
             else {
                 checkDateStr = "noDate";
             }
-            String comboData = companyName + "_" + oilfieldName + "_" + platformName + "_" + systemName + "_" + checkDateStr;
+            String comboData;
+            if(systemNumber !="" && systemNumber != null) {
+
+                comboData = companyName + "_" + oilfieldName + "_" + platformName + "_" + systemName + "_" + systemNumber +"_" + checkDateStr;
 //            Log.i("getHistoryList:::",comboData);
+            }
+            else{
+                comboData = companyName + "_" + oilfieldName + "_" + platformName + "_" + systemName + "_" + checkDateStr;
+            }
             if(systemId==DBsystemId){
                 HashMap obj = new HashMap();
                 obj.put("ret",comboData);
                 obj.put("companyInfoId",companyId);
                 obj.put("systemId",systemId);
                 obj.put("checkDate",checkDate);
+                obj.put("systemNumber",systemNumber);
                 resultList.add(obj);
             }
         }
         return resultList;
     }
 
+    @Override
+    public void deleteHistoryData(long companyId, String number, long systemId, Date checkDate) {
+        QueryBuilder<ItemInfo> queryBuilder = daoSession.queryBuilder(ItemInfo.class).
+                where(
+                        ItemInfoDao.Properties.CompanyInfoId.eq(companyId),
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        ItemInfoDao.Properties.SystemNumber.eq(number)
+                ).orderAsc(ItemInfoDao.Properties.CheckDate);
+        Join checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
+                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+        List<ItemInfo> dataList = queryBuilder.list();
+        for(int i = 0;i < dataList.size();i++){
+            ItemInfo item = dataList.get(i);
+            daoSession.delete(item);
+        }
+        QueryBuilder<YearCheckResult> queryBuilder2 = daoSession.queryBuilder(YearCheckResult.class).
+                where(
+                        YearCheckResultDao.Properties.CompanyInfoId.eq(companyId),
+                        YearCheckResultDao.Properties.CheckDate.eq(checkDate),
+                        YearCheckResultDao.Properties.SystemNumber.eq(number)
+                ).orderAsc(YearCheckResultDao.Properties.CheckDate);
+        Join checkTypeJoin2 = queryBuilder2.join(YearCheckResultDao.Properties.CheckTypeId, CheckType.class).
+                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+        List<YearCheckResult> resultDataList = queryBuilder2.list();
+        for(int i = 0;i < resultDataList.size();i++){
+            YearCheckResult result = resultDataList.get(i);
+            daoSession.delete(result);
+        }
+    }
     @Override
     public List<ItemInfo> getItemData(String companyName, String oilfieldName, String platformName, String systemName, String tableName, String number) {
 //    public List<ItemInfo> getItemData(long companyInfoId, long checkTypeId, String number, Date checkDate) {
@@ -491,12 +530,15 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         /*
         * new WhereCondition.StringCondition("1 GROUP BY COMPANY_NAME" )
         * */
+        String companyData;
         QueryBuilder<ItemInfo> queryBuilder = daoSession.queryBuilder(ItemInfo.class).
                 where(new WhereCondition.StringCondition(
 //                        String.format("l GROUP BY COMPANY_INFO_ID,CHECK_DATE")));
                         "1 GROUP BY COMPANY_INFO_ID,CHECK_DATE"));
+//                        "1 GROUP BY COMPANY_INFO_ID,DATE_FORMAT(CHECK_DATE,'%Y')"));
         List<ItemInfo> dataList = queryBuilder.list();
-        ArrayList resultList = new ArrayList();
+        ArrayList<HashMap> resultList = new ArrayList();
+        HashMap<String,Date> keyList = new HashMap();
         for(int i=0;i<dataList.size();i++){
             ItemInfo ret = dataList.get(i);
             String companyName = ret.getCompanyInfo().getCompanyName();
@@ -505,25 +547,63 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
             Date checkDate = ret.getCheckDate();
 //            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmm");
+            SimpleDateFormat formatterYear = new SimpleDateFormat("yyyy");
             String checkDateStr;
+            String checkDateStrYear;
             if(checkDate!=null){
                 checkDateStr = formatter.format(checkDate);
+                checkDateStrYear = formatterYear.format(checkDate);
+//                String companyData = companyName + "_" + oilfieldName + "_" + platformName;
+                companyData = companyName + "_" + oilfieldName + "_" + platformName;
+                if(keyList.get(companyData)==null){
+                    keyList.put(companyData, checkDate);
+                }
+                else {
+                    Long time2 = keyList.get(companyData).getTime();
+                    Long time1 = checkDate.getTime();
+                    if(time1 < time2){
+                        keyList.put(companyData, checkDate);
+                    }
+                }
+//                Log.i("ttttttttt",""+keyList);
                 String comboData = companyName + "_" + oilfieldName + "_" + platformName + "_"  + checkDateStr;
-//            Log.i("getHistoryList:::",comboData);
-
                 HashMap obj = new HashMap();
                 obj.put("ret",comboData);
                 obj.put("companyInfoId",ret.getCompanyInfoId());
                 obj.put("checkDate",checkDate);
+                obj.put("company",companyData);
+                obj.put("year",checkDateStrYear);
 
                 resultList.add(obj);
             }
 
         }
-        return resultList;
+
+        ArrayList cutResultList = new ArrayList();
+//        Log.i("ttttttttt",""+keyList);
+        for(int i=0;i<resultList.size();i++){
+            HashMap tmp = resultList.get(i);
+            companyData = String.valueOf(tmp.get("company"));
+            String checkDateString = String.valueOf(tmp.get("checkDate"));
+//            Log.i("ttttttttt","checkDateString"+checkDateString);
+//            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//            Date checkDate = null;
+//            try {
+//                checkDate = format.parse(checkDateString);
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//            Log.i("ttttttttt","checkDate"+checkDate);
+//            Log.i("ttttttttt","checkDateString2"+String.valueOf(keyList.get(companyData)));
+            if(String.valueOf(keyList.get(companyData)).equals(checkDateString)){
+                cutResultList.add(tmp);
+            }
+
+        }
+        return cutResultList;
     }
 
-    public HashMap getResultBySystem(long companyInfoId, Date checkDate, String systemName, String tableName) {
+    public HashMap getResultBySystem(long companyInfoId, Date startDate, Date endDate, String systemName, String tableName) {
         HashMap systemMap;
         QueryBuilder<CheckType> checkTypeQueryBuilder = daoSession.queryBuilder(CheckType.class).
                 where(
@@ -542,9 +622,10 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         QueryBuilder<ItemInfo> queryBuilder = daoSession.queryBuilder(ItemInfo.class).
                 where(
                         ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
-                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        ItemInfoDao.Properties.CheckDate.ge(startDate),
+                        ItemInfoDao.Properties.CheckDate.le(endDate),
                         ItemInfoDao.Properties.CheckTypeId.eq(checkTypeId)
-                );
+                ).orderAsc(ItemInfoDao.Properties.CheckDate);
 //        Join checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
 //                        where(CheckTypeDao.Properties.ParentId.eq(systemId));
         List<ItemInfo> dataList = queryBuilder.list();
@@ -555,17 +636,26 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 //        else {
 //            weight = "0";
 //        }
+        Date checkDate;
+        if(dataList.size() > 0){
+            checkDate = dataList.get(0).getCheckDate();
+        }
+        else {
+            checkDate = null;
+        }
         systemMap = new HashMap();
         systemMap.put("systemName",systemName);
         systemMap.put("tableName",tableName);
         systemMap.put("data",dataList);
+        systemMap.put("checkDate",checkDate);
 //        systemMap.put("count",dataList.size());
 //        systemMap.put("weight",weight);
         // 获取区域和位号
 //        String dateString = "2019-08-03 10:10";
         QueryBuilder<ItemInfo> secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
                 where(
-                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        ItemInfoDao.Properties.CheckDate.ge(startDate),
+                        ItemInfoDao.Properties.CheckDate.le(endDate),
                         new WhereCondition.StringCondition(
                                 String.format("COMPANY_INFO_ID=%s AND CHECK_TYPE_ID=%s GROUP BY SYSTEM_NUMBER", companyInfoId,checkTypeId))
                 );
@@ -588,7 +678,8 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         systemMap.put("systemNumber",systemNumberCombo);
         secondQueryBuilder = daoSession.queryBuilder(ItemInfo.class).
                 where(
-                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        ItemInfoDao.Properties.CheckDate.ge(startDate),
+                        ItemInfoDao.Properties.CheckDate.le(endDate),
                         new WhereCondition.StringCondition(
                                 String.format("COMPANY_INFO_ID=%s AND CHECK_TYPE_ID=%s GROUP BY PROTECT_AREA", companyInfoId,checkTypeId))
                 );
@@ -609,14 +700,15 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
             }
         }
         systemMap.put("protectArea",protectAreaCombo);
-        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT COUNT(%s) AS C,%s FROM %s WHERE COMPANY_INFO_ID=%s AND CHECK_TYPE_ID=%s AND CAST(CHECK_DATE AS TEXT)='%s' GROUP BY VOLUME",
+        Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT COUNT(%s) AS C,%s FROM %s WHERE COMPANY_INFO_ID=%s AND CHECK_TYPE_ID=%s AND CAST(CHECK_DATE AS INT)>%s AND CAST(CHECK_DATE AS INT)<%s GROUP BY VOLUME",
 
                 ItemInfoDao.Properties.Volume.columnName,
                 ItemInfoDao.Properties.Volume.columnName,
                 ItemInfoDao.TABLENAME,
                 companyInfoId,
                 checkTypeId,
-                checkDate.getTime()
+                startDate.getTime(),
+                endDate.getTime()
         ), new String []{});
         String count = "";
         while (cursor.moveToNext()) {
@@ -636,89 +728,106 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
     }
 
     @Override
+//    public List<HashMap> getOutputItemData(long companyInfoId, String year) {
     public List<HashMap> getOutputItemData(long companyInfoId, Date checkDate) {
         // Join checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
         //                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+//        String year = "2020";
+        String year = "2019";
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date startDate = null;
+        try {
+            startDate = format.parse(year + "-01-01 00:00:00");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Date endDate = null;
+        try {
+            endDate = format.parse(year + "-12-31 00:00:00");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         HashMap systemMap;
         ArrayList<HashMap> retList = new ArrayList();
         String systemName = "高压二氧化碳灭火系统";
         String tableName = "药剂瓶";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         systemName = "高压二氧化碳灭火系统";
         tableName = "氮气瓶";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         systemName = "七氟丙烷灭火系统";
         tableName = "七氟丙烷钢瓶";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         systemName = "七氟丙烷灭火系统";
         tableName = "氮气驱动瓶";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         systemName = "灭火器";
         tableName = "灭火器";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         systemName = "火灾自动报警系统";
         tableName = "感烟探测器";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         systemName = "火灾自动报警系统";
         tableName = "感温探测器";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         systemName = "火灾自动报警系统";
         tableName = "火焰探测器";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         systemName = "火灾自动报警系统";
         tableName = "手动报警按钮";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         systemName = "火灾自动报警系统";
         tableName = "可燃气体探测器";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         systemName = "火灾自动报警系统";
         tableName = "氢气探测器";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         systemName = "火灾自动报警系统";
         tableName = "硫化氢探测器";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         systemName = "火灾自动报警系统";
         tableName = "CO探测器";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         systemName = "火灾自动报警系统";
         tableName = "火灾报警控制器";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         systemName = "厨房设备灭火装置";
         tableName = "药剂瓶";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         systemName = "厨房设备灭火装置";
         tableName = "驱动瓶";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         // 专门处理
@@ -732,7 +841,8 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         QueryBuilder<YearCheckResult> queryBuilder = daoSession.queryBuilder(YearCheckResult.class).
                 where(
                         YearCheckResultDao.Properties.CompanyInfoId.eq(companyInfoId),
-                        YearCheckResultDao.Properties.CheckDate.eq(checkDate)
+                        YearCheckResultDao.Properties.CheckDate.ge(startDate),
+                        YearCheckResultDao.Properties.CheckDate.le(endDate)
                 );
         Join checkTypeJoin = queryBuilder.join(YearCheckResultDao.Properties.CheckTypeId, CheckType.class).
                         where(CheckTypeDao.Properties.ParentId.eq(systemId));
@@ -747,7 +857,8 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 //        String dateString = "2019-08-03 10:10";
         QueryBuilder<YearCheckResult> secondQueryBuilder = daoSession.queryBuilder(YearCheckResult.class).
                 where(
-                        YearCheckResultDao.Properties.CheckDate.eq(checkDate),
+                        YearCheckResultDao.Properties.CheckDate.ge(startDate),
+                        YearCheckResultDao.Properties.CheckDate.le(endDate),
                         new WhereCondition.StringCondition(
                                 String.format("COMPANY_INFO_ID=%s GROUP BY SYSTEM_NUMBER", companyInfoId))
                 );
@@ -770,7 +881,8 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         systemMap.put("systemNumber",systemNumberCombo);
         secondQueryBuilder = daoSession.queryBuilder(YearCheckResult.class).
                 where(
-                        YearCheckResultDao.Properties.CheckDate.eq(checkDate),
+                        YearCheckResultDao.Properties.CheckDate.ge(startDate),
+                        YearCheckResultDao.Properties.CheckDate.le(endDate),
                         new WhereCondition.StringCondition(
                                 String.format("COMPANY_INFO_ID=%s GROUP BY PROTECT_AREA", companyInfoId))
                 );
@@ -795,32 +907,32 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 
         systemName = "消防水灭火系统";
         tableName = "消防软管";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         systemName = "消防水灭火系统";
         tableName = "消防炮";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         systemName = "固定式干粉灭火系统";
         tableName = "干粉罐";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         systemName = "固定式干粉灭火系统";
         tableName = "启动瓶";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         systemName = "消防员装备";
         tableName = "SCBA气瓶";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         systemName = "消防员装备";
         tableName = "EEBD气瓶";
-        systemMap = this.getResultBySystem(companyInfoId, checkDate, systemName, tableName);
+        systemMap = this.getResultBySystem(companyInfoId, startDate,endDate, systemName, tableName);
         retList.add(systemMap);
 
         // 泡沫灭火系统
@@ -833,7 +945,8 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         queryBuilder = daoSession.queryBuilder(YearCheckResult.class).
                 where(
                         YearCheckResultDao.Properties.CompanyInfoId.eq(companyInfoId),
-                        YearCheckResultDao.Properties.CheckDate.eq(checkDate)
+                        YearCheckResultDao.Properties.CheckDate.ge(startDate),
+                        YearCheckResultDao.Properties.CheckDate.le(endDate)
                 );
         checkTypeJoin = queryBuilder.join(YearCheckResultDao.Properties.CheckTypeId, CheckType.class).
                         where(CheckTypeDao.Properties.ParentId.eq(systemId));
@@ -848,7 +961,8 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 //        String dateString = "2019-08-03 10:10";
         secondQueryBuilder = daoSession.queryBuilder(YearCheckResult.class).
                 where(
-                        YearCheckResultDao.Properties.CheckDate.eq(checkDate),
+                        YearCheckResultDao.Properties.CheckDate.ge(startDate),
+                        YearCheckResultDao.Properties.CheckDate.le(endDate),
                         new WhereCondition.StringCondition(
                                 String.format("COMPANY_INFO_ID=%s GROUP BY SYSTEM_NUMBER", companyInfoId))
                 );
@@ -871,7 +985,8 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         systemMap.put("systemNumber",systemNumberCombo);
         secondQueryBuilder = daoSession.queryBuilder(YearCheckResult.class).
                 where(
-                        YearCheckResultDao.Properties.CheckDate.eq(checkDate),
+                        YearCheckResultDao.Properties.CheckDate.ge(startDate),
+                        YearCheckResultDao.Properties.CheckDate.le(endDate),
                         new WhereCondition.StringCondition(
                                 String.format("COMPANY_INFO_ID=%s GROUP BY PROTECT_AREA", companyInfoId))
                 );
