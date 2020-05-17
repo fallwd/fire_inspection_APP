@@ -68,6 +68,7 @@ public class PlatformOperationActivity extends AppCompatActivity {
                     if (ret == 0) {
                         Toast.makeText(PlatformOperationActivity.this, "修改名称成功", Toast.LENGTH_SHORT).show();
                         finish();
+
                     } else {
                         Toast.makeText(PlatformOperationActivity.this, "修改名称失败", Toast.LENGTH_SHORT).show();
                     }

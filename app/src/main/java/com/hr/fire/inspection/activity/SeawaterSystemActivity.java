@@ -25,6 +25,10 @@ import com.hr.fire.inspection.fragment.SeawaterSystemFragment3;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 import com.hr.fire.inspection.utils.TimeUtil;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -69,7 +73,14 @@ public class SeawaterSystemActivity  extends AppCompatActivity {
         it = new IntentTransmit();
         it.companyInfoId = platform_id;
         it.systemId = systemId;
-        it.srt_Date = srt_Date;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        long nowTime = srt_Date.getTime();
+        String d = format.format(nowTime);
+        try {
+            it.srt_Date = format.parse(d);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         it.number = sys_number;
         protect_area = intent.getStringExtra("protect_area"); //传过来的保护区域
         check_date = srt_Date;
@@ -107,9 +118,9 @@ public class SeawaterSystemActivity  extends AppCompatActivity {
         // 检查时间文字显示
         TextView check_date_text = (TextView) this.findViewById(R.id.check_date_text);
         if (check_date == null) {
-            check_date_text.setText("保护区域为空");
+            check_date_text.setText("检查时间为空");
         } else {
-            String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(check_date);
+            String mProdDate = DateFormatUtils.format(check_date,"yyyy-MM-dd");
             check_date_text.setText(mProdDate);
         }
 

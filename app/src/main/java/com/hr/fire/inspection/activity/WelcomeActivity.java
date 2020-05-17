@@ -34,6 +34,7 @@ public class WelcomeActivity extends AppCompatActivity {
         BaseData baseData = new BaseData();
         baseData.initData();
         baseData.insertTestData();
+
         // 调用接口测试
 //        List<CompanyInfo> companyList = ServiceFactory.getCompanyInfoService().getAll();
 //        for(int i=0;i<companyList.size();i++){

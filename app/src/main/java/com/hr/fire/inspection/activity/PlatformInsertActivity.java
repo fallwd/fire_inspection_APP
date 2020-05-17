@@ -2,6 +2,7 @@ package com.hr.fire.inspection.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +32,7 @@ public class PlatformInsertActivity extends AppCompatActivity {
         //获取Bundle的信息  公司名称  和平台名称
         oil_name = b.getString("oil_name");
         final String companyName = b.getString("company_name");
+        final String f_title = b.getString("f_title");
 
         // 获取btn元素
         Button cancel_btn = (Button) this.findViewById(R.id.cancel_btn);
@@ -63,6 +65,8 @@ public class PlatformInsertActivity extends AppCompatActivity {
                         Toast.makeText(PlatformInsertActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(PlatformInsertActivity.this, PlatformActivity.class);
                         intent.putExtra("oil_name", oil_name);
+                        intent.putExtra("f_title", f_title);
+                        intent.putExtra("company_name", companyName);
                         startActivity(intent);
                         finish();
                     } else {

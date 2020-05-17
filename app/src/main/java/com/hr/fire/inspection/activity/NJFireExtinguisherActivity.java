@@ -39,9 +39,12 @@ import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 import com.hr.fire.inspection.view.tableview.HListViewScrollView;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -99,7 +102,14 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
         sys_number = intent.getStringExtra("sys_number"); //传过来的名称
         Log.d("dong", "systemId=" + systemId+ "companyInfoId="+companyInfoId+ "srt_Date="+ srt_Date + "str_title="+str_title+"sys_number= "+sys_number);
 
-        srt_date = intent.getStringExtra("srt_Date");   //检查日期,用户没选择,就是表示是新建
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        long nowTime = srt_Date.getTime();
+        String d = format.format(nowTime);
+        try {
+            srt_Date = format.parse(d);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         check_date = srt_Date;
     }
 
@@ -152,7 +162,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
         if (check_date == null) {
             check_date_text.setText("检查时间为空");
         } else {
-            String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(check_date);
+            String mProdDate = DateFormatUtils.format(check_date,"yyyy-MM-dd");
             check_date_text.setText(mProdDate);
         }
 

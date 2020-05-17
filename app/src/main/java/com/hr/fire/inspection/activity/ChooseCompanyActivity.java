@@ -112,6 +112,11 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
                         Intent intent = new Intent(ChooseCompanyActivity.this, OilFieldActivity.class);
                         intent.putExtra("company_name", str);
                         intent.putExtra("f_title", f_title);
+                        Log.i("aaaa", "f_title11111="+f_title);
+
+
+
+
                         // 如果是消防巡检  点进去需要传这几个参数
                         if(f_title.equals("xunjian")){
                             intent.putExtra("duty", duty);
@@ -123,21 +128,8 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
         });
         insert_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                AlertDialog.Builder insert_builder = new AlertDialog.Builder(ChooseCompanyActivity.this);
-                insert_builder.setTitle("将要前往添加页面，确认离开?");
-                insert_builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                insert_builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(ChooseCompanyActivity.this, CompanyInsertActivity.class);
-                        startActivity(intent);
-                    }
-                });
-                insert_builder.show();
+                Intent intent = new Intent(ChooseCompanyActivity.this, CompanyInsertActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -187,25 +179,11 @@ public class ChooseCompanyActivity extends AppCompatActivity implements View.OnC
             case R.id.edit_btn:   //lv条目中 iv_del
                 final int edit_position = (int) v.getTag(); //获取被点击的控件所在item 的位置，setTag 存储的object，所以此处要强转
 
-                //点击编辑按钮之后，给出dialog提示
-                AlertDialog.Builder edit_builder = new AlertDialog.Builder(ChooseCompanyActivity.this);
-                edit_builder.setTitle("将要前往编辑页面，确认离开么?");
-                edit_builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                edit_builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String NameItem = list.get(edit_position);
-                        Intent intent = new Intent(ChooseCompanyActivity.this, CompanyOperationActivity.class);
-                        // 跳转携带参数
-                        intent.putExtra("company_name", NameItem);
-                        startActivity(intent);
-                    }
-                });
-                edit_builder.show();
+                String NameItem = list.get(edit_position);
+                Intent intent = new Intent(ChooseCompanyActivity.this, CompanyOperationActivity.class);
+                // 跳转携带参数
+                intent.putExtra("company_name", NameItem);
+                startActivity(intent);
                 break;
         }
     }

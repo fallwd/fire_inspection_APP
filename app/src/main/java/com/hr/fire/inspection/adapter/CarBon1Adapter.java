@@ -32,6 +32,8 @@ import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -75,8 +77,8 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             vh.et_4.setText(new StringBuffer().append(info.getWeight()).append(""));
             vh.et_5.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));
             vh.et_6.setText(new StringBuffer().append(info.getProdFactory()).append(""));
-            String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getProdDate());
-            String mCheckDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getCheckDate());
+            String mProdDate = DateFormatUtils.format(info.getProdDate(),"yyyy-MM");
+            String mCheckDate = DateFormatUtils.format(info.getObserveDate(),"yyyy-MM");
             vh.et_7.setText(new StringBuffer().append(mProdDate).append(""));
             vh.et_8.setText(new StringBuffer().append(mCheckDate).append(""));
             vh.tv_9.setText(new StringBuffer().append("药剂瓶").append(position + 1).append("号表"));
@@ -167,28 +169,6 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return mData.size();
     }
 
-    //  添加数据
-    public void addData(int position) {
-//      在list中添加数据，并通知条目加入一条
-        if (mData != null && mData.size() != 0) {
-            //添加最后一条数据
-            mData.add(mData.get(mData.size() - 1));
-            //添加动画
-            notifyItemInserted(position);
-        } else {
-            ItemInfo itemInfo = new ItemInfo();
-            itemInfo.setVolume("9");
-            itemInfo.setWeight("3");
-            itemInfo.setGoodsWeight("50");
-            itemInfo.setProdFactory("未知");
-            Date date = new Date();
-            itemInfo.setProdDate(date);
-            itemInfo.setCheckDate(date);
-            mData.add(itemInfo);
-            //添加动画
-            notifyItemInserted(position);
-        }
-    }
 
     //  删除数据
     public void removeData(int position) {

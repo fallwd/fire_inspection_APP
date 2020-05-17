@@ -180,8 +180,8 @@ public class CarbonFragment2 extends Fragment {
 //            itemObj.setGoodsWeight(et_5.getText().toString());
             itemObj.setPressure(et_5.getText().toString());
             itemObj.setProdFactory(et_6.getText().toString());
-            Date date = TimeUtil.getInstance().hhmmssTodata(et_7.getText().toString());
-            Date date1 = TimeUtil.getInstance().hhmmssTodata(et_8.getText().toString());
+            Date date = TimeUtil.parse(et_7.getText().toString(),"yyyy-MM");
+            Date date1 = TimeUtil.parse(et_8.getText().toString(),"yyyy-MM");
             itemObj.setProdDate(date);
             itemObj.setObserveDate(date1);
             itemObj.setIsPass(tv_10.getText().toString());

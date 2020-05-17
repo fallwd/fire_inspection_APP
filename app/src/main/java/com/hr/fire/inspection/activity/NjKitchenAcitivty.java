@@ -28,6 +28,10 @@ import com.hr.fire.inspection.fragment.NjKitchenFragment4;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 import com.hr.fire.inspection.utils.TimeUtil;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -80,8 +84,14 @@ public class NjKitchenAcitivty extends AppCompatActivity {
         it = new IntentTransmit();
         it.companyInfoId = platform_id;
         it.systemId = systemId;
-//        it.platform_id = platform_id;
-        it.srt_Date = srt_Date;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        long nowTime = srt_Date.getTime();
+        String d = format.format(nowTime);
+        try {
+            it.srt_Date = format.parse(d);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         it.number = sys_number;
         check_date = srt_Date;
     }
@@ -113,7 +123,7 @@ public class NjKitchenAcitivty extends AppCompatActivity {
         if (check_date == null) {
             check_date_text.setText("检查时间为空");
         } else {
-            String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(check_date);
+            String mProdDate = DateFormatUtils.format(check_date,"yyyy-MM-dd");
             check_date_text.setText(mProdDate);
         }
 
