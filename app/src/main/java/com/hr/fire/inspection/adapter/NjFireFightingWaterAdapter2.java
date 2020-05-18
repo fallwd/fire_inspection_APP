@@ -28,6 +28,8 @@ import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 import java.util.Date;
 import java.util.List;
 
@@ -63,9 +65,7 @@ public class NjFireFightingWaterAdapter2 extends RecyclerView.Adapter<RecyclerVi
             vh.et_3.setText(new StringBuffer().append(info.getTypeNo()).append(""));
             vh.et_4.setText(new StringBuffer().append(info.getProdFactory()).append(""));
             vh.et_5.setText(new StringBuffer().append(info.getDeviceType()).append(""));
-
-
-            String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getProdDate());
+            String mProdDate = DateFormatUtils.format(info.getProdDate(),"yyyy-MM");
             vh.et_6.setText(new StringBuffer().append(mProdDate).append(""));
 
             vh.et_8.setOnClickListener(new View.OnClickListener() {

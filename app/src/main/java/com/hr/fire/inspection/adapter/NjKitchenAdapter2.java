@@ -37,6 +37,8 @@ import com.hr.fire.inspection.utils.PhotoView;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -77,7 +79,7 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
             vh.et_4.setText(new StringBuffer().append(info.getPressure()).append(""));
             vh.et_7.setText(new StringBuffer().append(info.getProdFactory()).append(""));
-            String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getProdDate());
+            String mProdDate = DateFormatUtils.format(info.getProdDate(),"yyyy-MM");
             vh.et_8.setText(new StringBuffer().append(mProdDate).append(""));
             vh.et_10.setText(new StringBuffer().append(info.getTaskNumber()).append(""));
             vh.et_10.setOnClickListener(v -> showPopWindWork(vh.et_10, mapSelection, position));
@@ -125,18 +127,8 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
             WorkIItemBean mWorkIItemBean = new WorkIItemBean();
             List<WorkIItemBean> workSelectData = mWorkIItemBean.getWorkSelectData(5);
             mapSelection.put(position, workSelectData);
-
-            String imageUrl = info.getImageUrl();
-            if (imageUrl != null && imageUrl.endsWith(".jpg")) {
-                Uri uri = Uri.parse(imageUrl);
-                vh.et_14.setImageURI(uri);
-            } else {
-                vh.et_14.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
-            }
         }
 
-
-        vh.et_14.setOnClickListener(v -> new PhotoView().showPopWindPicInfo(mContext, position, mYCCamera, mData));
         vh.et_15.setOnClickListener(v -> removeData(position));
     }
 
@@ -229,30 +221,6 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
-    //  添加数据
-    public void addData(int position) {
-        //在list中添加数据，并通知条目加入一条
-        if (mData != null && mData.size() != 0) {
-            //添加最后一条数据
-            mData.add(mData.get(mData.size() - 1));
-            //添加动画
-            notifyItemInserted(position);
-        } else {
-            ItemInfo itemInfo = new ItemInfo();
-            //点击新增,如果没有数据,就造一条默认数据
-            itemInfo.setNo("请编辑");
-            itemInfo.setVolume("请编辑");
-            itemInfo.setPressure("请编辑");
-            itemInfo.setProdFactory("请编辑");
-            Date date = new Date();
-            itemInfo.setProdDate(date);
-            itemInfo.setTaskNumber("请编辑");
-            itemInfo.setIsPass("请选择");
-            itemInfo.setLabelNo("请编辑");
-            itemInfo.setCodePath("请编辑");
-            mData.add(itemInfo);
-        }
-    }
 
     //  删除数据
     public void removeData(int position) {
@@ -319,11 +287,5 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
-    private YCCamera mYCCamera;
-
-    //接口回调, 将点击事件传递到activity中,打开相机
-    public void setmYCCamera(YCCamera y) {
-        this.mYCCamera = y;
-    }
 
 }

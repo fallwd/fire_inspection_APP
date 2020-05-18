@@ -34,6 +34,8 @@ import com.hr.fire.inspection.utils.PhotoView;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,7 +72,7 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
             myholder.tv_fire3.setText(info.getLevel());
             myholder.tv_fire4.setText(info.getTaskNumber());
             myholder.et_fire5.setText(info.getProdFactory());
-            String mCheckDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getProdDate());
+            String mCheckDate = DateFormatUtils.format(info.getProdDate(),"yyyy-MM");
             myholder.et_fire6.setText(mCheckDate);
             myholder.tv_fire7.setText(info.getTypeConformity());
             myholder.tv_fire8.setText(info.getPositionConformity());
@@ -78,7 +80,7 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
             myholder.tv_fire10.setText(info.getIsPressure());
             myholder.tv_fire11.setText(info.getEffectiveness());
             if (info.getObserveDate() != null) {
-                String mCheckDate2 = (String) TimeUtil.getInstance().dataToHHmmss(info.getObserveDate());
+                String mCheckDate2 = DateFormatUtils.format(info.getObserveDate(),"yyyy-MM");
                 myholder.et_fire12.setText(mCheckDate2); //甲方要求维修日期默认为空
             }
 

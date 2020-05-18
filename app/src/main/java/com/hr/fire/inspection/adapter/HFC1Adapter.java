@@ -34,6 +34,8 @@ import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -81,8 +83,8 @@ public class HFC1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.et_5.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));
             vh.et_6.setText(new StringBuffer().append(info.getProdFactory()).append(""));
 
-            String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getProdDate());
-            String mCheckDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getObserveDate());
+            String mProdDate = DateFormatUtils.format(info.getProdDate(),"yyyy-MM");
+            String mCheckDate = DateFormatUtils.format(info.getObserveDate(),"yyyy-MM");
             vh.et_7.setText(new StringBuffer().append(mProdDate).append(""));
             vh.et_8.setText(new StringBuffer().append(mCheckDate).append(""));
 //            vh.et_9.setText(new StringBuffer().append("").append(""));
@@ -339,7 +341,11 @@ public class HFC1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             builder.append(1 + i).append(",");
                         }
                     }
-                    tv_11.setText(builder.toString().substring(0, builder.length() - 1));
+                    if (builder.length() == 0) {
+                        tv_11.setText("请选择");
+                    } else {
+                        tv_11.setText(builder.toString().substring(0, builder.length() - 1));
+                    }
                 }
             }
         });

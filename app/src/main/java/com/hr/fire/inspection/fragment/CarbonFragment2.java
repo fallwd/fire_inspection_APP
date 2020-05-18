@@ -26,6 +26,8 @@ import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -119,11 +121,10 @@ public class CarbonFragment2 extends Fragment {
                 itemInfo.setPressure(item.getPressure());
                 itemInfo.setProdFactory(item.getProdFactory());
                 itemInfo.setProdDate(item.getProdDate());
-                itemInfo.setCheckDate(item.getCheckDate());
+                itemInfo.setObserveDate(item.getObserveDate());
                 itemInfo.setTaskNumber(item.getTaskNumber());
                 itemInfo.setIsPass(item.getIsPass());
                 itemInfo.setLabelNo(item.getLabelNo());
-
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
                 itemInfo.setNo("请编辑");
@@ -132,8 +133,16 @@ public class CarbonFragment2 extends Fragment {
                 itemInfo.setPressure("请编辑");
                 itemInfo.setProdFactory("请编辑");
                 Date date = new Date();
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+                long nowTime = date.getTime();
+                String d = format.format(nowTime);
+                try {
+                    date = format.parse(d);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 itemInfo.setProdDate(date);
-                itemInfo.setCheckDate(date);
+                itemInfo.setObserveDate(date);
                 itemInfo.setTaskNumber("请选择");
                 itemInfo.setIsPass("请选择");
             }
@@ -187,7 +196,6 @@ public class CarbonFragment2 extends Fragment {
             itemObj.setIsPass(tv_10.getText().toString());
             itemObj.setTaskNumber(tv_11.getText().toString());
             itemObj.setLabelNo(et_12.getText().toString());
-            ServiceFactory.getYearCheckService().update(itemObj);
             ServiceFactory.getYearCheckService().update(itemObj);
         }
         Toast.makeText(getContext(), "\"氮气瓶\"数据保存成功", Toast.LENGTH_SHORT).show();

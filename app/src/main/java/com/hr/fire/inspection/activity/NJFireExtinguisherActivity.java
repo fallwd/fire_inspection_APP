@@ -299,6 +299,14 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 itemInfo.setTaskNumber("请选择");
                 itemInfo.setProdFactory("请输入");
                 Date date = new Date();
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+                long nowTime = date.getTime();
+                String d = format.format(nowTime);
+                try {
+                    date = format.parse(d);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 itemInfo.setProdDate(date);
                 itemInfo.setTypeConformity("请选择");
                 itemInfo.setPositionConformity("请选择");
@@ -308,7 +316,6 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
 //                itemInfo.setObserveDate(date);  // 甲方要求默认为空
                 itemInfo.setIsPass("请选择");
                 itemInfo.setLabelNo("请输入");
-//                itemInfo.setImageUrl("请选择");
                 itemInfo.setDescription("请输入");
             }
 
@@ -371,14 +378,14 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
             itemObj.setLevel(tv_fire3.getText().toString());
             itemObj.setTaskNumber(tv_fire4.getText().toString());
             itemObj.setProdFactory(et_fire5.getText().toString());
-            Date date1 = TimeUtil.getInstance().hhmmssTodata(et_fire6.getText().toString());
+            Date date1 = TimeUtil.parse(et_fire6.getText().toString(),"yyyy-MM");
             itemObj.setProdDate(date1);
             itemObj.setTypeConformity(tv_fire7.getText().toString());
             itemObj.setPositionConformity(tv_fire8.getText().toString());
             itemObj.setAppearance(tv_fire9.getText().toString());
             itemObj.setIsPressure(tv_fire10.getText().toString());
             itemObj.setEffectiveness(tv_fire11.getText().toString());
-            Date date2 = TimeUtil.getInstance().hhmmssTodata(et_fire12.getText().toString());
+            Date date2 = TimeUtil.parse(et_fire12.getText().toString(),"yyyy-MM");
             itemObj.setObserveDate(date2);
             itemObj.setIsPass(tv_fire13.getText().toString());
             itemObj.setLabelNo(et_fire14.getText().toString());

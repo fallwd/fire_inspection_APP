@@ -32,6 +32,8 @@ import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -72,8 +74,9 @@ public class DFXIAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             vh.et_4.setText(new StringBuffer().append(info.getWeight()).append(""));
             vh.et_5.setText(new StringBuffer().append(info.getPressure()).append(""));
             vh.et_6.setText(new StringBuffer().append(info.getProdFactory()).append(""));
-            String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getProdDate());
-            String ObserveDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getObserveDate());
+            String mProdDate = DateFormatUtils.format(info.getProdDate(),"yyyy-MM");
+            String ObserveDate = DateFormatUtils.format(info.getObserveDate(),"yyyy-MM");
+
             vh.et_7.setText(new StringBuffer().append(mProdDate).append(""));
             vh.et_8.setText(new StringBuffer().append(ObserveDate).append(""));
             vh.et_9.setText(new StringBuffer().append(info.getTaskNumber()).append(""));

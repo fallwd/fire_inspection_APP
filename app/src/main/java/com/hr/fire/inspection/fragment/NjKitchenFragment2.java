@@ -38,6 +38,8 @@ import com.hr.fire.inspection.utils.ToastUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -121,13 +123,6 @@ public class NjKitchenFragment2 extends Fragment {
         if (checkTypes != null) {
             adapter.setCheckId(checkTypes.get(1).getId(), it);
         }
-        adapter.setmYCCamera(new YCCamera() {
-            @Override
-            public void startCamera(int postion) {
-                imgPostion = postion;
-                openSysCamera();
-            }
-        });
 
     }
 
@@ -155,6 +150,14 @@ public class NjKitchenFragment2 extends Fragment {
                 itemInfo.setPressure("请编辑");
                 itemInfo.setProdFactory("请编辑");
                 Date date = new Date();
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+                long nowTime = date.getTime();
+                String d = format.format(nowTime);
+                try {
+                    date = format.parse(d);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 itemInfo.setProdDate(date);
                 itemInfo.setTaskNumber("请选择");
                 itemInfo.setIsPass("请选择");
@@ -216,7 +219,7 @@ public class NjKitchenFragment2 extends Fragment {
             itemObj.setVolume(et_3.getText().toString());
             itemObj.setPressure(et_4.getText().toString());
             itemObj.setProdFactory(et_7.getText().toString());
-            Date date = TimeUtil.getInstance().hhmmssTodata(et_8.getText().toString());
+            Date date = TimeUtil.parse(et_8.getText().toString(),"yyyy-MM");
             itemObj.setProdDate(date);
             itemObj.setTaskNumber(et_10.getText().toString());
             itemObj.setIsPass(et_12.getText().toString());
@@ -234,46 +237,6 @@ public class NjKitchenFragment2 extends Fragment {
         super.onDestroyView();
         if (adapter != null) {
             adapter = null;
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case FileRoute.CAMERA_RESULT_CODE:
-                //这里目前需要适配
-                if (fileNew.getAbsolutePath() != null && imgPostion != -1 && adapter != null) {
-                    itemDataList.get(imgPostion).setImageUrl(fileNew.getAbsolutePath());
-                    adapter.notifyItemChanged(imgPostion);
-                }
-                break;
-        }
-    }
-
-    /**
-     * 打开系统相机
-     */
-    private File fileNew = null;
-
-    private void openSysCamera() {
-        // intent用来启动系统自带的Camera
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        try {
-            fileNew = new FileRoute(getActivity()).createOriImageFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Uri imgUriOri = null;
-        if (fileNew != null) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-                imgUriOri = Uri.fromFile(fileNew);
-            } else {
-                imgUriOri = FileProvider.getUriForFile(getActivity(), getActivity().getApplicationContext().getPackageName() + ".fileProvider", fileNew);
-            }
-            // 将系统Camera的拍摄结果写入到文件
-            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgUriOri);
-            startActivityForResult(cameraIntent, FileRoute.CAMERA_RESULT_CODE);
         }
     }
 }

@@ -223,7 +223,7 @@ public class AutomaticFireAlarm5 extends Fragment {
 
         long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj, it.companyInfoId, checkTypes.get(4).getId(), it.number, it.srt_Date);
         if (l1 == 0) {
-            Toast.makeText(getContext(), "药剂瓶数据保存成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "数据保存成功", Toast.LENGTH_SHORT).show();
         }
     }
 

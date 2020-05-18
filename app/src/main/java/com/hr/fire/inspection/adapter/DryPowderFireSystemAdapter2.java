@@ -30,6 +30,8 @@ import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -77,10 +79,11 @@ public class DryPowderFireSystemAdapter2 extends RecyclerView.Adapter<RecyclerVi
             vh.et_6.setText(new StringBuffer().append(info.getProdFactory()).append(""));
 
             // 生产日期
-            String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getProdDate());
+            String mProdDate = DateFormatUtils.format(info.getProdDate(),"yyyy-MM");
+
             vh.et_7.setText(new StringBuffer().append(mProdDate).append(""));
             // 试验日期
-            String ObserveDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getObserveDate());
+            String ObserveDate = DateFormatUtils.format(info.getObserveDate(),"yyyy-MM");
             vh.et_8.setText(new StringBuffer().append(ObserveDate).append(""));
 
 

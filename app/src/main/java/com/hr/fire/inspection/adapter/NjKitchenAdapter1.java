@@ -34,6 +34,8 @@ import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -77,9 +79,9 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.et_6.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));
             vh.et_7.setText(new StringBuffer().append(info.getProdFactory()).append(""));
 
+            String mProdDate = DateFormatUtils.format(info.getProdDate(),"yyyy-MM");
+            String mCheckDate = DateFormatUtils.format(info.getFillingDate(),"yyyy-MM");
 
-            String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getProdDate());
-            String mCheckDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getFillingDate());
 
             vh.et_8.setText(new StringBuffer().append(mProdDate).append(""));
             vh.et_9.setText(new StringBuffer().append(mCheckDate).append(""));
@@ -205,34 +207,7 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
-    //  添加数据
-    public void addData(int position) {
-//      在list中添加数据，并通知条目加入一条
-        if (mData != null && mData.size() != 0) {
-            //添加最后一条数据
-            mData.add(mData.get(mData.size() - 1));
-            //添加动画
-            notifyItemInserted(position);
-        } else {
-            ItemInfo itemInfo = new ItemInfo();
-            itemInfo.setAgentsType("请编辑");   // 介质类型
-            itemInfo.setNo("请编辑");
-            itemInfo.setVolume("请编辑");
-            itemInfo.setWeight("请编辑");
-            itemInfo.setGoodsWeight("请编辑");
-            itemInfo.setProdFactory("请编辑");
-            Date date = new Date();
-            itemInfo.setProdDate(date);
-            itemInfo.setFillingDate(date);    //灌装日期
-            itemInfo.setTaskNumber("请编辑");
-            itemInfo.setIsPass("请选择");
-            itemInfo.setLabelNo("请编辑");
-            itemInfo.setCodePath("请编辑");
-            mData.add(itemInfo);
-            //添加动画
-//            notifyItemInserted(position);
-        }
-    }
+
 
     //  删除数据
     public void removeData(int position) {

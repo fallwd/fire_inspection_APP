@@ -68,6 +68,7 @@ public class CarbonFragment3 extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             its = (IntentTransmit) getArguments().getSerializable(mKey);
+            Log.i("aaaaaa","aaaaa获取数据拉=" +its);
         }
     }
 
@@ -149,6 +150,7 @@ public class CarbonFragment3 extends Fragment {
                 yearCheckResult.setSystemNumber(its.number);
                 yearCheckResult.setProtectArea(" "); // 保护位号
                 yearCheckResult.setCheckDate(its.srt_Date);  //检查日期
+                Log.i("aaaaaa","保存数据拉=" +yearCheckResult);
                 ServiceFactory.getYearCheckService().update(yearCheckResult);
             }
         }

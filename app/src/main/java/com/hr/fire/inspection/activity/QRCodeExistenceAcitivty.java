@@ -3,6 +3,7 @@ package com.hr.fire.inspection.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -16,6 +17,9 @@ public class QRCodeExistenceAcitivty extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivty_qrcode_existence);
+        //隐藏顶部位号、保护区域、及检查时间
+        LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
+        isShowTopText.setVisibility(View.GONE);
         String title = getIntent().getStringExtra(ConstantInspection.CHECK_DIVICE);
         ImageView iv_finish = findViewById(R.id.iv_finish);
         TextView tv_inspection_pro = findViewById(R.id.tv_inspection_pro);

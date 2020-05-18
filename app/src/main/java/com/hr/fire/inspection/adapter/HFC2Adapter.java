@@ -33,6 +33,8 @@ import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -79,8 +81,8 @@ public class HFC2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.et_6.setText(new StringBuffer().append(info.getProdFactory()).append(""));
 
 
-            String mProdDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getProdDate());
-            String mCheckDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getObserveDate());
+            String mProdDate = DateFormatUtils.format(info.getProdDate(),"yyyy-MM");
+            String mCheckDate = DateFormatUtils.format(info.getObserveDate(),"yyyy-MM");
             vh.et_7.setText(new StringBuffer().append(mProdDate).append(""));
             vh.et_8.setText(new StringBuffer().append(mCheckDate).append(""));
 

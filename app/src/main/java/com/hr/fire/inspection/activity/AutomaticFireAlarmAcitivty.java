@@ -112,7 +112,7 @@ public class AutomaticFireAlarmAcitivty extends AppCompatActivity {
         tvInspectionPro = findViewById(R.id.tv_inspection_pro);
         iv_save = findViewById(R.id.iv_save);
         String text = new StringBuilder().append("消防年检  >  ").append(f_title).toString();
-        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#E51C23", 0, 3);
+        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#00A779", 8, text.length());
         tvInspectionPro.setText(showTextColor);
 
         //显示顶部展示系统位号、保护区域、检查时间的LinearLayout

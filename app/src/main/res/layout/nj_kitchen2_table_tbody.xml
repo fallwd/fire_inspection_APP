@@ -193,8 +193,9 @@
 
             <ImageView
                 android:id="@+id/et_14"
-                android:layout_width="25dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@mipmap/rc_code"
                 android:gravity="center"
                 android:textSize="12sp" />
         </RelativeLayout>

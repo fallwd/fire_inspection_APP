@@ -27,6 +27,7 @@ import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -138,6 +139,14 @@ public class DryPowderFireSystemFragment2 extends Fragment {
                 itemInfo.setWeight("请编辑");
                 itemInfo.setPressure("请编辑");
                 Date date = new Date();
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+                long nowTime = date.getTime();
+                String d = format.format(nowTime);
+                try {
+                    date = format.parse(d);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 itemInfo.setProdFactory("请编辑");
                 itemInfo.setProdDate(date);
                 itemInfo.setObserveDate(date);
@@ -205,10 +214,10 @@ public class DryPowderFireSystemFragment2 extends Fragment {
             itemObj.setWeight(et_4.getText().toString());
             itemObj.setPressure(et_5.getText().toString());
             itemObj.setProdFactory(et_6.getText().toString());
-            Date date1 = TimeUtil.getInstance().hhmmssTodata(et_7.getText().toString());
-            itemObj.setProdDate(date1);
-            Date date2 = TimeUtil.getInstance().hhmmssTodata(et_7.getText().toString());
-            itemObj.setObserveDate(date2);
+            Date date = TimeUtil.parse(et_7.getText().toString(),"yyyy-MM");
+            Date date1 = TimeUtil.parse(et_8.getText().toString(),"yyyy-MM");
+            itemObj.setProdDate(date);
+            itemObj.setObserveDate(date1);
             itemObj.setTaskNumber(et_9.getText().toString());
             itemObj.setIsPass(et_10.getText().toString());
             itemObj.setLabelNo(et_11.getText().toString());
@@ -216,7 +225,7 @@ public class DryPowderFireSystemFragment2 extends Fragment {
 
             ServiceFactory.getYearCheckService().update(itemObj);
         }
-        Toast.makeText(getContext(), "\"启动瓶\"数据保存成功", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "数据保存成功", Toast.LENGTH_SHORT).show();
     }
 
     @Override
