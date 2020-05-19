@@ -75,7 +75,9 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
         Date srt_Date = (Date) intent.getSerializableExtra("srt_Date");  //传过来的时间
         f_title = intent.getStringExtra("f_title"); //传过来的名称
         sys_number = intent.getStringExtra("sys_number"); //传过来的名称
+
         protect_area = intent.getStringExtra("protect_area"); //传过来的保护区域
+        Log.i("aaa","保护区域二氧化碳=" + protect_area);
         check_date = srt_Date;
         it = new IntentTransmit();
         it.companyInfoId = platform_id;
