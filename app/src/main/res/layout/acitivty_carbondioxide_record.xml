@@ -6,11 +6,23 @@
 
     <include layout="@layout/currency_title" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:id="@+id/deleteHistoryData"
+        android:fontFamily="PingFangSC-Regular"
+        android:background="@drawable/listview_border_margin"
+        android:layout_gravity="top|right"
+        android:text="删除"
+        android:textColor="#000000"
+        android:textSize="16dp" />
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="25dp"
         android:background="@drawable/listview_border_margin">
@@ -22,14 +34,44 @@
             android:layout_marginBottom="45dp"
             android:background="@color/white" />
 
-        <Button
-            android:id="@+id/bt_next"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_alignParentBottom="true"
-            android:background="@color/bg_f1f1f1"
-            android:text=" 新      建 "
-            android:textSize="16sp" />
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <Button
+                android:id="@+id/edit"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:layout_alignParentBottom="true"
+                android:background="@color/bg_f1f1f1"
+                android:text=" 编       辑 "
+                android:textSize="16sp" />
+            <Button
+                android:id="@+id/newNext"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/bg_f1f1f1"
+                android:text=" 新      建 "
+                android:textSize="16sp" />
+            <Button
+                android:id="@+id/oldDataNext"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:layout_alignParentBottom="true"
+                android:background="@color/bg_f1f1f1"
+                android:text=" 基于历史数据新建 "
+                android:textSize="16sp" />
+        </LinearLayout>
 
     </RelativeLayout>
 </LinearLayout>

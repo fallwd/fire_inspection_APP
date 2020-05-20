@@ -77,12 +77,10 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
         sys_number = intent.getStringExtra("sys_number"); //传过来的名称
 
         protect_area = intent.getStringExtra("protect_area"); //传过来的保护区域
-        Log.i("aaa","保护区域二氧化碳=" + protect_area);
         check_date = srt_Date;
         it = new IntentTransmit();
         it.companyInfoId = platform_id;
         it.systemId = systemId;
-//        it.srt_Date = TimeUtil.parse(Sampler.Value.valueOf(srt_Date),"yyyy-MM-dd");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         long nowTime = srt_Date.getTime();
         String d = format.format(nowTime);
@@ -92,6 +90,8 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
             e.printStackTrace();
         }
         it.number = sys_number;
+        String oldDataNext = intent.getStringExtra("oldDataNext"); //基于历史数据新建
+        it.name = oldDataNext;
     }
 
     public void initView() {

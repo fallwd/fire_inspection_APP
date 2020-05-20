@@ -59,8 +59,19 @@ public class NjFireFightingWaterFragment2 extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            it = (IntentTransmit) getArguments().getSerializable(mKey);
-            Log.e("dong", "f1传参====" + it.toString());
+            // 建立当前页面的IntentTransmit，为了不影响其他页面的it
+            it = new IntentTransmit();
+            IntentTransmit its = (IntentTransmit) getArguments().getSerializable(mKey);
+            it.srt_Date = its.srt_Date;
+            it.systemId = its.systemId;
+            it.companyInfoId = its.companyInfoId;
+            it.id = its.id;
+            it.platformId = its.platformId;
+            it.type = its.type;
+            it.start_time = its.start_time;
+            it.end_time = its.end_time;
+            it.name = its.name;
+            it.number = its.number;
         }
 
     }
@@ -94,6 +105,34 @@ public class NjFireFightingWaterFragment2 extends Fragment {
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(1).getId(), it.number == null ? "" : it.number, it.srt_Date);
         HYLogUtil.getInstance().d("设备表信息,数据查看:" + itemDataList.size() + "  " + itemDataList.toString());
         // 一级表插入数据insertItemData
+        // 判断是否是基于历史数据新建，是的话，某些字段做空的处理
+        if (it.name != null || it.name == "基于历史数据新建") {
+            if (itemDataList != null && itemDataList.size() != 0) {
+                //点击新增,有数据,就拿到最后一条数据新增,创建一个新的对象
+                for (int i = 0; i<itemDataList.size(); i++) {
+                    ItemInfo itemInfo = new ItemInfo();
+                    ItemInfo item = itemDataList.get(i);
+                    //如果直接新增会导致后台id冲重复\冲突
+                    itemInfo.setTypeNo(item.getTypeNo());
+                    itemInfo.setNo(item.getNo());
+                    itemInfo.setProdFactory(item.getProdFactory());
+                    itemInfo.setDeviceType(item.getDeviceType());
+                    itemInfo.setProdDate(item.getProdDate());
+                    itemInfo.setCodePath(item.getCodePath());
+                    itemInfo.setIsPass("请选择");
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                    long nowTime = new Date().getTime();
+                    String d = format.format(nowTime);
+                    try {
+                        it.srt_Date = format.parse(d);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, it.companyInfoId, checkTypes.get(1).getId(), it.number, it.srt_Date);
+                }
+            }
+            itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(1).getId(), it.number == null ? "" : it.number, it.srt_Date);
+        }
 
 
     }
