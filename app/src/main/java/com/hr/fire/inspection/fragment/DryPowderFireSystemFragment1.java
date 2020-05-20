@@ -28,6 +28,7 @@ import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -157,10 +158,17 @@ public class DryPowderFireSystemFragment1 extends Fragment {
                 itemInfo.setWeight("请编辑");
                 itemInfo.setGoodsWeight("请编辑");
                 Date date = new Date();
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+                long nowTime = date.getTime();
+                String d = format.format(nowTime);
+                try {
+                    date = format.parse(d);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 itemInfo.setFillingDate(date);
                 itemInfo.setProdFactory("请编辑");
                 itemInfo.setProdDate(date);
-                Log.i("aaa", "我要第一次渲染了" +itemInfo.getFillingDate() + "setProdDate" + itemInfo.getProdDate());
                 itemInfo.setTaskNumber("请选择");
                 itemInfo.setIsPass("请选择");
                 itemInfo.setLabelNo("请编辑");
@@ -215,10 +223,10 @@ public class DryPowderFireSystemFragment1 extends Fragment {
             itemObj.setVolume(et_3.getText().toString());
             itemObj.setWeight(et_4.getText().toString());
             itemObj.setGoodsWeight(et_5.getText().toString());
-            Date date = TimeUtil.getInstance().hhmmssTodata(et_6.getText().toString());
+            Date date = TimeUtil.parse(et_6.getText().toString(),"yyyy-MM");
             itemObj.setFillingDate(date);
             itemObj.setProdFactory(et_7.getText().toString());
-            Date date1 = TimeUtil.getInstance().hhmmssTodata(et_8.getText().toString());
+            Date date1 = TimeUtil.parse(et_8.getText().toString(),"yyyy-MM");
             itemObj.setProdDate(date1);
             itemObj.setTaskNumber(et_9.getText().toString());
             itemObj.setIsPass(et_10.getText().toString());

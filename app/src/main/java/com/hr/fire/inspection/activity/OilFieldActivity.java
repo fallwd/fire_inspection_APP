@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +45,11 @@ public class OilFieldActivity extends AppCompatActivity implements View.OnClickL
         //获取Bundle的信息
         Bundle b1 = getIntent().getExtras();
         infocontcompanyName = b1.getString("company_name");
+        Log.i("aaaa", "infocontcompanyName = " + infocontcompanyName);
+
+        //隐藏顶部位号、保护区域、及检查时间
+        LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
+        isShowTopText.setVisibility(View.GONE);
 
         f_title = b1.getString("f_title");
         if(f_title.equals("xunjian")){
@@ -74,6 +80,9 @@ public class OilFieldActivity extends AppCompatActivity implements View.OnClickL
 
     private void initData() {
         dataList = ServiceFactory.getCompanyInfoService().getOilfieldList(infocontcompanyName);
+        Log.i("aaaa", "dataList = " + dataList);
+
+
         list = new ArrayList<>();
 
         for (int i = 0; i < dataList.size(); i++) {
@@ -110,23 +119,29 @@ public class OilFieldActivity extends AppCompatActivity implements View.OnClickL
         });
         insert_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                AlertDialog.Builder insert_builder = new AlertDialog.Builder(OilFieldActivity.this);
-                insert_builder.setTitle("将要前往添加页面，确认离开?");
-                insert_builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                insert_builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(OilFieldActivity.this, OilInsertActivity.class);
-                        intent.putExtra("company_name", infocontcompanyName);
-                        startActivity(intent);
+//                AlertDialog.Builder insert_builder = new AlertDialog.Builder(OilFieldActivity.this);
+//                insert_builder.setTitle("将要前往添加页面，确认离开?");
+//                insert_builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                    }
+//                });
+//                insert_builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        Intent intent = new Intent(OilFieldActivity.this, OilInsertActivity.class);
+//                        intent.putExtra("company_name", infocontcompanyName);
+//                        intent.putExtra("f_title", f_title);
+//                        startActivity(intent);
+//
+//                    }
+//                });
+//                insert_builder.show();
+                Intent intent = new Intent(OilFieldActivity.this, OilInsertActivity.class);
+                intent.putExtra("company_name", infocontcompanyName);
+                intent.putExtra("f_title", f_title);
+                startActivity(intent);
 
-                    }
-                });
-                insert_builder.show();
             }
         });
     }
@@ -185,26 +200,11 @@ public class OilFieldActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.edit_btn:   //lv条目中 iv_del
                 final int edit_position = (int) v.getTag(); //获取被点击的控件所在item 的位置，setTag 存储的object，所以此处要强转
-
-                //点击编辑按钮之后，给出dialog提示
-                AlertDialog.Builder edit_builder = new AlertDialog.Builder(OilFieldActivity.this);
-                edit_builder.setTitle("将要前往编辑页面，确认离开么?");
-                edit_builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                edit_builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String NameItem = list.get(edit_position);
-                        Intent intent = new Intent(OilFieldActivity.this, OilOperationActivity.class);
-                        intent.putExtra("company_name", infocontcompanyName);
-                        intent.putExtra("oil_name", NameItem);
-                        startActivity(intent);
-                    }
-                });
-                edit_builder.show();
+                String NameItem = list.get(edit_position);
+                Intent intent = new Intent(OilFieldActivity.this, OilOperationActivity.class);
+                intent.putExtra("company_name", infocontcompanyName);
+                intent.putExtra("oil_name", NameItem);
+                startActivity(intent);
                 break;
 
         }

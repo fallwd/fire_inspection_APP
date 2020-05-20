@@ -9,5 +9,12 @@
         android:layout_height="1dp"
         android:background="@color/white_view_line" />
     <include layout="@layout/item_patrol_form_input" />
+    <ImageView
+        android:id="@+id/iv_rc_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="10dp"
+        android:src="@mipmap/ic_launcher"/>
 
 </LinearLayout>

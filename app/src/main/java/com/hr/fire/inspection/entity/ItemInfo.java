@@ -1,5 +1,8 @@
 package com.hr.fire.inspection.entity;
 
+import android.util.Log;
+
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToMany;
@@ -680,4 +683,150 @@ public void __setDaoSession(DaoSession daoSession) {
         this.isPressure = isPressure;
     }
 
+    public String toEnCodeString() {
+        StringBuilder sb = new StringBuilder();
+
+        if (this.SystemNumber != null || this.SystemNumber != "") {
+            sb.append("系统位号：").append(this.SystemNumber).append("\n");
+        }
+        if (this.ProtectArea != null || this.SystemNumber != "") {
+            sb.append("保护区域：").append(this.ProtectArea).append("\n");
+        }
+
+        if (this.checkDate != null || this.SystemNumber != "") {
+            sb.append("检查时间：").append(DateFormatUtils.format(this.checkDate,"yyyy-MM-dd")).append("\n");
+        }
+
+        if (this.typeNo != null) {
+            sb.append("型号：").append(this.typeNo).append("\n");
+        }
+
+        if (this.deviceType != null) {
+            sb.append("设备类型/规格型号：").append(this.deviceType).append("\n");
+        }
+
+        if (this.agentsType != null) {
+            sb.append("介质类型：").append(this.agentsType).append("\n");
+        }
+
+        if (this.fillingDate != null) {
+            sb.append("灌装日期：").append(DateFormatUtils.format(this.fillingDate,"yyyy-MM")).append("\n");
+        }
+
+        if (this.no != null) {
+            sb.append("编号/瓶号/位号：").append(this.no).append("\n");
+        }
+
+
+        if (this.level != null) {
+            sb.append("等级：").append(this.level).append("\n");
+        }
+
+        if (this.volume != null) {
+            sb.append("容积：").append(this.volume).append("\n");
+        }
+
+        if (this.weight != null) {
+            sb.append("瓶重：").append(this.weight).append("\n");
+        }
+
+        if (this.goodsWeight != null) {
+            sb.append("物品重量/药剂重量：").append(this.goodsWeight).append("\n");
+        }
+
+        if (this.pressure != null) {
+            sb.append("压力：").append(this.pressure).append("\n");
+        }
+
+        if (this.prodFactory != null) {
+            sb.append("生产厂家：").append(this.prodFactory).append("\n");
+        }
+
+        if (this.prodDate != null) {
+            sb.append("生产日期：").append(DateFormatUtils.format(this.prodDate,"yyyy-MM")).append("\n");
+        }
+
+        if (this.typeConformity != null) {
+            sb.append("型号符合性：").append(this.typeConformity).append("\n");
+        }
+
+        if (this.positionConformity != null) {
+            sb.append("位置符合性：").append(this.positionConformity).append("\n");
+        }
+
+        if (this.appearance != null) {
+            sb.append("外观是否良好：").append(this.appearance).append("\n");
+        }
+
+        if (this.isPressure != null) {
+            sb.append("压力/重量是否合格：").append(this.isPressure).append("\n");
+        }
+
+        if (this.check != null) {
+            sb.append("自检是否良好：").append(this.check).append("\n");
+        }
+
+        if (this.slience != null) {
+            sb.append("消音是否良好：").append(this.slience).append("\n");
+        }
+
+        if (this.reset != null) {
+            sb.append("复位功能是否良好：").append(this.reset).append("\n");
+        }
+
+        if (this.powerAlarmFunction != null) {
+            sb.append("电源线故障报警是否正常：").append(this.powerAlarmFunction).append("\n");
+        }
+
+        if (this.alarmFunction != null) {
+            sb.append("报警功能是否正常：").append(this.alarmFunction).append("\n");
+        }
+
+        if (this.effectiveness != null) {
+            sb.append("有效性：").append(this.effectiveness).append("\n");
+        }
+
+        if (this.responseTime != null) {
+            sb.append("响应时间：").append(this.responseTime).append("\n");
+        }
+
+        if (this.description != null) {
+            sb.append("隐患描述：").append(this.description).append("\n");
+        }
+
+        if (this.setAlarm25 != null) {
+            sb.append("设置高报值25LEL：").append(this.setAlarm25).append("\n");
+        }
+
+        if (this.setAlarm50 != null) {
+            sb.append("设置高报值50LEL：").append(this.setAlarm50).append("\n");
+        }
+
+        if (this.testAlarm25 != null) {
+            sb.append("测试高报值25LEL：").append(this.testAlarm25).append("\n");
+        }
+
+        if (this.testAlarm50 != null) {
+            sb.append("测试高报值50LEL：").append(this.testAlarm50).append("\n");
+        }
+
+        if (this.observeDate != null) {
+            sb.append("检测日期/试验日期/水压实验日期：").append(DateFormatUtils.format(this.observeDate,"yyyy-MM")).append("\n");
+        }
+
+        if (this.taskNumber != null) {
+            sb.append("工作代号：").append(this.taskNumber).append("\n");
+        }
+
+        if (this.isPass != null) {
+            sb.append("是否合格：").append(this.isPass).append("\n");
+        }
+
+        if (this.labelNo != null) {
+            sb.append("标签号：").append(this.labelNo).append("\n");
+        }
+
+        return sb.toString();
+
+    }
 }

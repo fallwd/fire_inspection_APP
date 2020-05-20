@@ -39,9 +39,12 @@ import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 import com.hr.fire.inspection.view.tableview.HListViewScrollView;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -61,6 +64,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
     private long companyInfoId;
     private long platform_id;
     private String str_title;
+    private Date check_date; // 检查时间
 
     Date srt_Date = null;
     private String srt_date;
@@ -98,7 +102,15 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
         sys_number = intent.getStringExtra("sys_number"); //传过来的名称
         Log.d("dong", "systemId=" + systemId+ "companyInfoId="+companyInfoId+ "srt_Date="+ srt_Date + "str_title="+str_title+"sys_number= "+sys_number);
 
-        srt_date = intent.getStringExtra("srt_Date");   //检查日期,用户没选择,就是表示是新建
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        long nowTime = srt_Date.getTime();
+        String d = format.format(nowTime);
+        try {
+            srt_Date = format.parse(d);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        check_date = srt_Date;
     }
 
     private void initData() {
@@ -114,7 +126,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
         }
         //参数1:公司id, 参数2:检查表类型对应的id, 参数3:输入的系统位号，如果没有就填"",或者SD002,否则没数据   参数4:日期
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(companyInfoId, checkTypes.get(0).getId(), sys_number == null ? "" : sys_number, srt_Date);
-        Log.d("dong", "itemDataList == -----   " + itemDataList);
+
         HYLogUtil.getInstance().d("设备表信息,数据查看:" + itemDataList.size() + "  " + itemDataList.toString());
         // 一级表插入数据insertItemData
 
@@ -132,6 +144,28 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
         iv_finish.setOnClickListener(this);
         iv_add_table.setOnClickListener(this);
         iv_save.setOnClickListener(this);
+
+
+        //显示顶部展示系统位号、保护区域、检查时间的LinearLayout
+        LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
+        isShowTopText.setVisibility(View.VISIBLE);
+        // 系统位号文字显示
+        LinearLayout sys_numberCode = (LinearLayout) this.findViewById(R.id.sys_number);
+        sys_numberCode.setVisibility(View.GONE);
+        // 保护区域文字显示
+        LinearLayout protect_areaCode = (LinearLayout) this.findViewById(R.id.protect_area);
+        protect_areaCode.setVisibility(View.GONE);
+        // 检查时间文字显示
+        LinearLayout check_dateCode = (LinearLayout) this.findViewById(R.id.check_date);
+        check_dateCode.setVisibility(View.VISIBLE);
+        TextView check_date_text = (TextView) this.findViewById(R.id.check_date_text);
+        if (check_date == null) {
+            check_date_text.setText("检查时间为空");
+        } else {
+            String mProdDate = DateFormatUtils.format(check_date,"yyyy-MM-dd");
+            check_date_text.setText(mProdDate);
+        }
+
     }
 
     @SuppressLint("WrongConstant")
@@ -265,16 +299,23 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 itemInfo.setTaskNumber("请选择");
                 itemInfo.setProdFactory("请输入");
                 Date date = new Date();
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+                long nowTime = date.getTime();
+                String d = format.format(nowTime);
+                try {
+                    date = format.parse(d);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 itemInfo.setProdDate(date);
                 itemInfo.setTypeConformity("请选择");
                 itemInfo.setPositionConformity("请选择");
                 itemInfo.setAppearance("请选择");
                 itemInfo.setIsPressure("请选择");
                 itemInfo.setEffectiveness("请选择");
-                itemInfo.setObserveDate(date);
+//                itemInfo.setObserveDate(date);  // 甲方要求默认为空
                 itemInfo.setIsPass("请选择");
                 itemInfo.setLabelNo("请输入");
-//                itemInfo.setImageUrl("请选择");
                 itemInfo.setDescription("请输入");
             }
 
@@ -325,9 +366,9 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
             TextView tv_fire11 = childAt.findViewById(R.id.tv_fire11);
             EditText et_fire12 = childAt.findViewById(R.id.et_fire12);
             TextView tv_fire13 = childAt.findViewById(R.id.tv_fire13);
-            TextView et_fire14 = childAt.findViewById(R.id.et_fire14);
             TextView tv_fire15 = childAt.findViewById(R.id.tv_fire15);
             EditText et_fire16 = childAt.findViewById(R.id.et_fire16);
+            TextView et_fire14 = childAt.findViewById(R.id.et_fire14);
             ImageView tv_fire17 = childAt.findViewById(R.id.tv_fire17);
 
 
@@ -337,20 +378,21 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
             itemObj.setLevel(tv_fire3.getText().toString());
             itemObj.setTaskNumber(tv_fire4.getText().toString());
             itemObj.setProdFactory(et_fire5.getText().toString());
-            Date date1 = TimeUtil.getInstance().hhmmssTodata(et_fire6.getText().toString());
+            Date date1 = TimeUtil.parse(et_fire6.getText().toString(),"yyyy-MM");
             itemObj.setProdDate(date1);
             itemObj.setTypeConformity(tv_fire7.getText().toString());
             itemObj.setPositionConformity(tv_fire8.getText().toString());
             itemObj.setAppearance(tv_fire9.getText().toString());
             itemObj.setIsPressure(tv_fire10.getText().toString());
             itemObj.setEffectiveness(tv_fire11.getText().toString());
-            Date date2 = TimeUtil.getInstance().hhmmssTodata(et_fire12.getText().toString());
+            Date date2 = TimeUtil.parse(et_fire12.getText().toString(),"yyyy-MM");
             itemObj.setObserveDate(date2);
             itemObj.setIsPass(tv_fire13.getText().toString());
             itemObj.setLabelNo(et_fire14.getText().toString());
 //            itemObj.setImageUrl(tv_fire15.getText().toString());
             itemObj.setDescription(et_fire16.getText().toString());
 //            itemObj.setCodePath(tv_fire17.getText().toString());  // 二维码路径？？？
+            Log.i("AAA","itemObj"+itemObj);
             ServiceFactory.getYearCheckService().update(itemObj);
         }
         Toast.makeText(this, "数据保存成功", Toast.LENGTH_SHORT).show();
@@ -367,7 +409,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 if (fileNew.getAbsolutePath() != null && imgPostion != -1 && contentApapter != null) {
                     itemDataList.get(imgPostion).setImageUrl(fileNew.getAbsolutePath());
 //                    contentApapter.notifyItemChanged(imgPostion);
-                    Log.i("AAA","itemDataList111"+itemDataList.get(imgPostion));
+
                     contentApapter.notifyDataSetChanged();
                 }
                 break;

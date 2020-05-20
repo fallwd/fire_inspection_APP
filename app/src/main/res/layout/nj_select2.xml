@@ -92,7 +92,51 @@
                 android:textColor="#000000"
                 android:textSize="13sp" />
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/AFFF"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="AFFF"
+                android:textColor="#000000"
+                android:textSize="13sp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/CO2"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="CO2"
+                android:textColor="#000000"
+                android:textSize="13sp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/DCP"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="DCP"
+                android:textColor="#000000"
+                android:textSize="13sp" />
+        </RelativeLayout>
 
     </LinearLayout>
 </RelativeLayout>

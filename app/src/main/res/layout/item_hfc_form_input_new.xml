@@ -146,7 +146,6 @@
                 android:text="水压日期"
                 android:textSize="12sp" />
         </RelativeLayout>
-        <!--#######################-->
         <RelativeLayout
             android:layout_width="42dp"
             android:layout_height="wrap_content"
@@ -220,17 +219,17 @@
                 android:textSize="12sp" />
         </RelativeLayout>
 
+
         <RelativeLayout
             android:layout_width="30dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
 
-            <TextView
+            <ImageView
                 android:id="@+id/tv_12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:text="生成"
-                android:textColor="@color/title_black"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@mipmap/rc_code"
                 android:textSize="12sp" />
         </RelativeLayout>
 

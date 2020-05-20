@@ -25,4 +25,74 @@
         android:textColor="@color/title_black"
         android:textSize="16sp"
         android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/isShowTopText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp">
+        <LinearLayout
+            android:id="@+id/sys_number"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="系统位号："
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/sys_number_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="位号显示区"
+                android:textColor="@color/title_black"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/protect_area"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="保护区域："
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/protect_area_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="保护区域显示区"
+                android:textColor="@color/title_black"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/check_date"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="检查时间："
+                android:textColor="@color/title_black"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/check_date_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="检查时间显示区"
+                android:textColor="@color/title_black"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
 </LinearLayout>

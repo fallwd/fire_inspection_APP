@@ -6,7 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.MainActivity">
-
+    <ImageView
+        android:id="@+id/scan"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="top|right"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:src="@mipmap/saoyisao" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,7 +23,6 @@
         android:text="@string/home_special_tools"
         android:textColor="#000000"
         android:textSize="35sp" />
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -131,4 +137,14 @@
                 android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/resData"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:fontFamily="PingFangSC-Regular"
+        android:text="@string/home_legal_library"
+        android:textColor="#000000"
+        android:textSize="20sp" />
 </LinearLayout>

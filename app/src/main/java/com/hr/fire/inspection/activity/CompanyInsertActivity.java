@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +21,9 @@ public class CompanyInsertActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_insert);
-
+        //隐藏顶部位号、保护区域、及检查时间
+        LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
+        isShowTopText.setVisibility(View.GONE);
         // 获取btn元素
         Button cancel_btn = (Button) this.findViewById(R.id.cancel_btn);
         Button submit_btn = (Button) this.findViewById(R.id.submit_btn);

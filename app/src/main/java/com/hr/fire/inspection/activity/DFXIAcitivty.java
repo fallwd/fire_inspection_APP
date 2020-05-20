@@ -7,6 +7,7 @@ import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -30,7 +31,12 @@ import com.hr.fire.inspection.fragment.DFXIFragment8;
 import com.hr.fire.inspection.fragment.DFXIFragment9;
 import com.hr.fire.inspection.fragment.DFXIFragment10;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
+import com.hr.fire.inspection.utils.TimeUtil;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -63,6 +69,7 @@ public class DFXIAcitivty extends AppCompatActivity {
     private String f_title;
     private String sys_number;  //系统位号
     private IntentTransmit it;
+    private Date check_date; // 检查时间
 
 
     @Override
@@ -80,18 +87,22 @@ public class DFXIAcitivty extends AppCompatActivity {
         long companyInfoId = intent.getLongExtra("companyInfoId", 0);  //公司ID
         long systemId = intent.getLongExtra("systemId", 0);   //系统Id
         long platform_id = intent.getLongExtra("platform_id", 0);   //系统Id
-        Log.i("md", "intent1111： " + systemId);
-        Log.i("md", "intent2222： " + platform_id);
         Date srt_Date = (Date) intent.getSerializableExtra("srt_Date");  //传过来的时间
         f_title = intent.getStringExtra("f_title"); //传过来的名称
         sys_number = intent.getStringExtra("sys_number"); //传过来的名称
         it = new IntentTransmit();
         it.companyInfoId = platform_id;
         it.systemId = systemId;
-//        it.platform_id = platform_id;
-        it.srt_Date = srt_Date;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        long nowTime = srt_Date.getTime();
+        String d = format.format(nowTime);
+        try {
+            it.srt_Date = format.parse(d);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         it.number = sys_number;
-        Log.d("dong", "sys_id-----" + systemId+ "platform_id-------"+platform_id+ "f_title--------"+f_title + "IT111111"+ it);
+        check_date = srt_Date;
     }
 
 
@@ -102,8 +113,28 @@ public class DFXIAcitivty extends AppCompatActivity {
         tvInspectionPro = findViewById(R.id.tv_inspection_pro);
         iv_save = findViewById(R.id.iv_save);
         String text = new StringBuilder().append("消防年检  >  ").append(f_title).toString();
-        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#E51C23", 0, 3);
+        SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#00A779", 8, text.length());
         tvInspectionPro.setText(showTextColor);
+
+        //显示顶部展示系统位号、保护区域、检查时间的LinearLayout
+        LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
+        isShowTopText.setVisibility(View.VISIBLE);
+        // 系统位号文字显示
+        LinearLayout sys_numberCode = (LinearLayout) this.findViewById(R.id.sys_number);
+        sys_numberCode.setVisibility(View.GONE);
+        // 保护区域文字显示
+        LinearLayout protect_areaCode = (LinearLayout) this.findViewById(R.id.protect_area);
+        protect_areaCode.setVisibility(View.GONE);
+        // 检查时间文字显示
+        LinearLayout check_dateCode = (LinearLayout) this.findViewById(R.id.check_date);
+        check_dateCode.setVisibility(View.VISIBLE);
+        TextView check_date_text = (TextView) this.findViewById(R.id.check_date_text);
+        if (check_date == null) {
+            check_date_text.setText("检查时间为空");
+        } else {
+            String mProdDate = DateFormatUtils.format(check_date,"yyyy-MM-dd");
+            check_date_text.setText(mProdDate);
+        }
 
         mTabLayout = findViewById(R.id.tl_tabs);
         mViewPager = findViewById(R.id.vp_content);

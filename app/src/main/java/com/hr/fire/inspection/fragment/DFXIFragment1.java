@@ -29,6 +29,7 @@ import com.hr.fire.inspection.utils.HYLogUtil;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -140,6 +141,14 @@ public class DFXIFragment1 extends Fragment {
                 itemInfo.setPressure("请编辑");
                 itemInfo.setProdFactory("请编辑");
                 Date date = new Date();
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+                long nowTime = date.getTime();
+                String d = format.format(nowTime);
+                try {
+                    date = format.parse(d);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 itemInfo.setProdDate(date);
                 itemInfo.setObserveDate(date);
                 itemInfo.setTaskNumber("请编辑");
@@ -215,8 +224,8 @@ public class DFXIFragment1 extends Fragment {
             itemObj.setWeight(et_4.getText().toString());
             itemObj.setPressure(et_5.getText().toString());
             itemObj.setProdFactory(et_6.getText().toString());
-            Date date = TimeUtil.getInstance().hhmmssTodata(et_7.getText().toString());
-            Date date1 = TimeUtil.getInstance().hhmmssTodata(et_8.getText().toString());
+            Date date = TimeUtil.parse(et_7.getText().toString(),"yyyy-MM");
+            Date date1 = TimeUtil.parse(et_8.getText().toString(),"yyyy-MM");
             itemObj.setProdDate(date);
             itemObj.setObserveDate(date1);
             itemObj.setTaskNumber(et_9.getText().toString());

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -51,6 +52,10 @@ public class HiddenLibaryDetailActivity1 extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hidden_library_detail1);
+        //隐藏顶部位号、保护区域、及检查时间
+        LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
+        isShowTopText.setVisibility(View.GONE);
+
         getIntentParameter();
         initView();
         initListner();

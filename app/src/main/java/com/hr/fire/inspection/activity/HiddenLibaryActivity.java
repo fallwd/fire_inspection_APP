@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -77,6 +78,10 @@ public class HiddenLibaryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hidden_library);
 
+        //隐藏顶部位号、保护区域、及检查时间
+        LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
+        isShowTopText.setVisibility(View.GONE);
+
         spinner_buss = findViewById(R.id.spinner_bussy);
         spinner_yt = findViewById(R.id.spinner_yt);
         spinner_pt = findViewById(R.id.spinner_pt);
@@ -93,7 +98,6 @@ public class HiddenLibaryActivity extends AppCompatActivity {
     }
 
     public void initView() {
-        Log.d("intentTransmit===", intentTransmit+"");
         String text = new StringBuilder().append("隐患库").toString();
         SpannableString showTextColor = TextSpannableUtil.showTextColor(text, "#00A779", 0, text.length());
         tvInspectionPro.setText(showTextColor);

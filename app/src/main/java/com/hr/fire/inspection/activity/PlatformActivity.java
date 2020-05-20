@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
     private String check_name;
     private String check_date;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +47,10 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
         // 获取Bundle的信息 公司名称  油田名称    若从消防巡检点过来   则需要获取其他参数
         oil_name = b.getString("oil_name");
         company_name = b.getString("company_name");
+
+        //隐藏顶部位号、保护区域、及检查时间
+        LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
+        isShowTopText.setVisibility(View.GONE);
 
         f_title = b.getString("f_title");
         if (f_title.equals("xunjian")) {
@@ -57,6 +63,10 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
         ImageView iv_finish = (ImageView) this.findViewById(R.id.iv_finish);
         TextView tv_inspection_pro = (TextView) this.findViewById(R.id.tv_inspection_pro);
         dataList = ServiceFactory.getCompanyInfoService().getPlatformList(oil_name);
+        Log.i("AAAAAAA", "这是平台的列表数据"+ dataList);
+
+
+
         idlist = new ArrayList<>();
         list = new ArrayList<>();
         for (int i = 0; i < dataList.size(); i++) {
@@ -119,25 +129,39 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
 
         insert_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                AlertDialog.Builder insert_builder = new AlertDialog.Builder(PlatformActivity.this);
-                insert_builder.setTitle("将要前往添加页面，确认离开?");
-                insert_builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                insert_builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(PlatformActivity.this, PlatformInsertActivity.class);
-                        intent.putExtra("company_name", company_name);
-                        intent.putExtra("oil_name", oil_name);
-                        startActivity(intent);
-                    }
-                });
-                insert_builder.show();
+                Intent intent = new Intent(PlatformActivity.this, PlatformInsertActivity.class);
+                Log.i("aaaa", "点击加号拉company_name= " + company_name);
+                intent.putExtra("company_name", company_name);
+                intent.putExtra("oil_name", oil_name);
+                intent.putExtra("f_title", f_title);
+                startActivity(intent);
             }
         });
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        dataList = ServiceFactory.getCompanyInfoService().getPlatformList(oil_name);
+        Log.i("AAAAAAA", "这是平台的列表数据"+ dataList);
+
+
+
+        idlist = new ArrayList<>();
+        list = new ArrayList<>();
+        for (int i = 0; i < dataList.size(); i++) {
+            CompanyInfo CompanyListItem = dataList.get(i);
+            String companyName = CompanyListItem.getPlatformName();
+            long id = CompanyListItem.getId();
+            if (companyName != null && companyName != "") {
+                list.add(companyName);
+                idlist.add(id);
+            }
+        }
+        ListView platform_list_item = findViewById(R.id.platform_list_item);
+        PlatformAdapter platformAdapter = new PlatformAdapter(PlatformActivity.this, PlatformActivity.this);
+        platformAdapter.setData(list);
+        platform_list_item.setAdapter(platformAdapter);
+
     }
 
     private void getIntentInfo() {
@@ -192,27 +216,13 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
             case R.id.edit_btn:   //lv条目中 iv_del
                 final int edit_position = (int) v.getTag(); //获取被点击的控件所在item 的位置，setTag 存储的object，所以此处要强转
 
-                //点击编辑按钮之后，给出dialog提示
-                AlertDialog.Builder edit_builder = new AlertDialog.Builder(PlatformActivity.this);
-                edit_builder.setTitle("将要前往编辑页面，确认离开么?");
-                edit_builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                edit_builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String NameItem = list.get(edit_position);
-                        Intent intent = new Intent(PlatformActivity.this, PlatformOperationActivity.class);
-                        // 跳转携带参数
-                        intent.putExtra("platform_name", NameItem);
-                        intent.putExtra("company_name", company_name);
-                        intent.putExtra("oil_name", oil_name);
-                        startActivity(intent);
-                    }
-                });
-                edit_builder.show();
+                String NameItem = list.get(edit_position);
+                Intent intent = new Intent(PlatformActivity.this, PlatformOperationActivity.class);
+                // 跳转携带参数
+                intent.putExtra("platform_name", NameItem);
+                intent.putExtra("company_name", company_name);
+                intent.putExtra("oil_name", oil_name);
+                startActivity(intent);
                 break;
         }
     }

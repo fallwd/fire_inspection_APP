@@ -329,7 +329,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@null"
-                android:hint="请输入"
+                android:hint="2020-01"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/title_black"

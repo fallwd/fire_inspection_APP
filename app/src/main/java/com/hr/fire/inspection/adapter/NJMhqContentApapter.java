@@ -3,6 +3,7 @@ package com.hr.fire.inspection.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -22,6 +23,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.QRCodeExistenceAcitivty;
 import com.hr.fire.inspection.constant.ConstantInspection;
@@ -34,7 +41,11 @@ import com.hr.fire.inspection.utils.PhotoView;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -70,17 +81,20 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
             myholder.tv_fire3.setText(info.getLevel());
             myholder.tv_fire4.setText(info.getTaskNumber());
             myholder.et_fire5.setText(info.getProdFactory());
-            String mCheckDate = (String) TimeUtil.getInstance().dataToHHmmss(info.getProdDate());
+            String mCheckDate = DateFormatUtils.format(info.getProdDate(),"yyyy-MM");
             myholder.et_fire6.setText(mCheckDate);
             myholder.tv_fire7.setText(info.getTypeConformity());
             myholder.tv_fire8.setText(info.getPositionConformity());
             myholder.tv_fire9.setText(info.getAppearance());
             myholder.tv_fire10.setText(info.getIsPressure());
             myholder.tv_fire11.setText(info.getEffectiveness());
-            String mCheckDate2 = (String) TimeUtil.getInstance().dataToHHmmss(info.getObserveDate());
-            myholder.et_fire12.setText(mCheckDate2);
+            if (info.getObserveDate() != null) {
+                String mCheckDate2 = DateFormatUtils.format(info.getObserveDate(),"yyyy-MM");
+                myholder.et_fire12.setText(mCheckDate2); //甲方要求维修日期默认为空
+            }
+
             myholder.tv_fire13.setText(info.getIsPass());
-            myholder.et_fire14.setText(info.getLabelNo());
+            myholder.et_fire14.setText(info.getLabelNo()+ (position + 1));
 //            myholder.tv_fire15.setText(info.getImageUrl());
             myholder.et_fire16.setText(info.getDescription());
 //            myholder.tv_fire17.setText(info.getCodePath());  //二维码路径
@@ -192,6 +206,10 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
         RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
         RelativeLayout ff = PopupRootView.findViewById(R.id.ff);
         RelativeLayout jj = PopupRootView.findViewById(R.id.jj);
+        RelativeLayout AFFF = PopupRootView.findViewById(R.id.AFFF);
+        RelativeLayout CO2 = PopupRootView.findViewById(R.id.CO2);
+        RelativeLayout DCP = PopupRootView.findViewById(R.id.DCP);
+
         hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
         hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         hrPopup.setBackgroundDrawable(new BitmapDrawable());
@@ -244,6 +262,34 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
                 }
             }
         });
+        AFFF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv.setText("AFFF");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+        CO2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv.setText("CO2");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+        DCP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv.setText("DCP");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+
     }
 
     //点击事件写在外层
@@ -287,13 +333,19 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
                     showPopWind(myholder.tv_fire13);
                     break;
                 case R.id.rl_fire15:
-//                    mYCCamera.startCamera(position);
                     new PhotoView().showPopWindPicInfo(mContext, position, mYCCamera, mData);
                     break;
                 case R.id.rl_fire17:
                     Intent intent = new Intent();
                     intent.putExtra(ConstantInspection.CHECK_DIVICE, "灭火器信息");
                     intent.setClass(mContext, QRCodeExistenceAcitivty.class);
+                    // 调用生成函数，处理扫描后显示的数据
+                    ItemInfo itemInfo = mData.get(position);
+                    Bitmap dCode = create2DCode(itemInfo.toEnCodeString());
+                    intent.putExtra("titleValue", mData.get(position).getTypeNo()); // 传某个设备的具体名称
+                    byte buf[] = new byte[1024*1024];
+                    buf = Bitmap2Bytes(dCode);
+                    intent.putExtra("photo_bmp", buf);
                     mContext.startActivity(intent);
                     break;
                 case R.id.rl_fire18:
@@ -303,6 +355,58 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
                     break;
             }
         }
+    }
+
+    // 调用生成二维码事件
+    public static Bitmap create2DCode(String string) {
+        return Create2DCode(string, 0, 0);
+    }
+    /**
+     * @param str 用字符串生成二维码
+     */
+    public static Bitmap Create2DCode(String str, int codeWidth, int codeHeight) {
+        // 用于设置QR二维码参数
+        Hashtable<EncodeHintType, Object> qrParam = new Hashtable<EncodeHintType, Object>();
+        // 设置QR二维码的纠错级别——这里选择最高H级别
+        qrParam.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
+        // 设置编码方式
+        qrParam.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+        //判断用户指定的二维码大小
+        if (codeWidth < 100 || codeHeight < 100 || codeWidth > 1200 || codeHeight > 1200) {
+            codeWidth = 400;
+            codeHeight = 400;
+        }
+        //生成二维矩阵,编码时指定大小,不要生成了图片以后再进行缩放,这样会模糊导致识别失败
+        BitMatrix matrix = null;
+        try {
+            matrix = new MultiFormatWriter().encode(str, BarcodeFormat.QR_CODE, codeWidth, codeHeight,qrParam);
+        } catch (WriterException e) {
+            e.printStackTrace();
+            return null;
+        }
+        int width = matrix.getWidth();
+        int height = matrix.getHeight();
+        //二维矩阵转为一维像素数组,也就是一直横着排了
+        int[] pixels = new int[width * height];
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (matrix.get(x, y)) {
+                    pixels[y * width + x] = 0xff000000;
+                }else{//这个else要加上去，否者保存的二维码全黑
+                    pixels[y * width + x] = 0xffffffff;
+                }
+            }
+        }
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        //通过像素数组生成bitmap,具体参考api
+        bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
+        return bitmap;
+    }
+    // Bitmap传参转码处理
+    private byte[] Bitmap2Bytes(Bitmap bm){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        return baos.toByteArray();
     }
 
     //    灭火级别下拉多选
@@ -345,10 +449,15 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
                     for (int i = 0; i < selection.size(); i++) {
                         NJMhqSelectItem1 mBean = selection.get(i);
                         if (mBean.isState()) {
-                            builder.append(1 + i).append(",");
+                            Log.i("aaa", "打印了" + selection.get(i) + "下标等于=" +i);
+                            builder.append(selection.get(i).getTitle());
                         }
                     }
-                    tv_fire3.setText(builder.toString().substring(0, builder.length() - 1));
+                    if (builder.length() == 0) {
+                        tv_fire3.setText("请选择");
+                    } else {
+                        tv_fire3.setText(builder.toString());
+                    }
                 }
             }
         });
@@ -398,7 +507,11 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
                             builder.append(1 + i).append(",");
                         }
                     }
-                    tv_fire4.setText(builder.toString().substring(0, builder.length() - 1));
+                    if (builder.length() == 0) {
+                        tv_fire4.setText("请选择");
+                    } else {
+                        tv_fire4.setText(builder.toString().substring(0, builder.length() - 1));
+                    }
                 }
             }
         });

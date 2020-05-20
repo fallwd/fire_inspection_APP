@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,14 +17,21 @@ import com.hr.fire.inspection.service.ServiceFactory;
 
 public class OilInsertActivity extends AppCompatActivity {
     private String companyName;
+    private String f_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oil_insert);
+
+        //隐藏顶部位号、保护区域、及检查时间
+        LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
+        isShowTopText.setVisibility(View.GONE);
+
         Bundle b = getIntent().getExtras();
 
         companyName = b.getString("company_name");
+        f_title = b.getString("f_title");
 
         // 获取btn元素
         Button cancel_btn = (Button) this.findViewById(R.id.cancel_btn);
@@ -63,6 +71,7 @@ public class OilInsertActivity extends AppCompatActivity {
                         Toast.makeText(OilInsertActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(OilInsertActivity.this, OilFieldActivity.class);
                         intent.putExtra("company_name", companyName);
+                        intent.putExtra("f_title", f_title);
                         startActivity(intent);
                         finish();
                     } else {

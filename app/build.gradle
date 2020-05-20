@@ -74,6 +74,8 @@ dependencies {
     }
     implementation files('libs/poishadow-all.jar')
     implementation 'com.android.support:multidex:1.0.3'
+    //ZXing
+    compile 'com.google.zxing:core:3.3.0'
 }
 
 greendao {

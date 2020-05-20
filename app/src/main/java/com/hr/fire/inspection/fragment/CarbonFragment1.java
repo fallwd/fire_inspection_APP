@@ -26,6 +26,10 @@ import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateUtils;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -90,7 +94,6 @@ public class CarbonFragment1 extends Fragment {
         }
         //参数1:公司id, 参数2:检查表类型对应的id, 参数3:输入的系统位号，如果没有就填"",或者SD002,否则没数据   参数4:日期
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(0).getId(), its.number == null ? "" : its.number, its.srt_Date);
-        Log.d("dong", "itemDataList默认服务器数据== " + itemDataList.toString());
     }
 
     private void initView() {
@@ -117,24 +120,34 @@ public class CarbonFragment1 extends Fragment {
                 //点击新增,有数据,就拿到最后一条数据新增,创建一个新的对象
                 ItemInfo item = itemDataList.get(itemDataList.size() - 1);
                 //如果直接新增会导致后台id冲重复\冲突
+                itemInfo.setNo(item.getNo());
                 itemInfo.setVolume(item.getVolume());
                 itemInfo.setWeight(item.getWeight());
                 itemInfo.setGoodsWeight(item.getGoodsWeight());
                 itemInfo.setProdFactory(item.getProdFactory());
                 itemInfo.setProdDate(item.getProdDate());
-                itemInfo.setCheckDate(item.getCheckDate());
+                itemInfo.setObserveDate(item.getObserveDate());
                 itemInfo.setTaskNumber(item.getTaskNumber());
                 itemInfo.setIsPass(item.getIsPass());
                 itemInfo.setLabelNo(item.getLabelNo());
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
+                itemInfo.setNo("请编辑");
                 itemInfo.setVolume("请编辑");
                 itemInfo.setWeight("请编辑");
                 itemInfo.setGoodsWeight("请编辑");
                 itemInfo.setProdFactory("请编辑");
                 Date date = new Date();
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+                long nowTime = date.getTime();
+                String d = format.format(nowTime);
+                try {
+                    date = format.parse(d);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 itemInfo.setProdDate(date);
-                itemInfo.setCheckDate(date);
+                itemInfo.setObserveDate(date);
                 itemInfo.setTaskNumber("请选择");
                 itemInfo.setIsPass("请选择");
             }
@@ -182,8 +195,8 @@ public class CarbonFragment1 extends Fragment {
             itemObj.setWeight(et_4.getText().toString());
             itemObj.setGoodsWeight(et_5.getText().toString());
             itemObj.setProdFactory(et_6.getText().toString());
-            Date date = TimeUtil.getInstance().hhmmssTodata(et_7.getText().toString());
-            Date date1 = TimeUtil.getInstance().hhmmssTodata(et_8.getText().toString());
+            Date date = TimeUtil.parse(et_7.getText().toString(),"yyyy-MM");
+            Date date1 = TimeUtil.parse(et_8.getText().toString(),"yyyy-MM");
             itemObj.setProdDate(date);
             itemObj.setObserveDate(date1);
             itemObj.setIsPass(tv_10.getText().toString());

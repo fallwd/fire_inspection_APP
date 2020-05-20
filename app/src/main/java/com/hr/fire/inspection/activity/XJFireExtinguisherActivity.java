@@ -41,6 +41,7 @@ import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
 import com.hr.fire.inspection.utils.CamaraUtil;
 import com.hr.fire.inspection.utils.FileRoute;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
+import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 import com.hr.fire.inspection.view.tableview.HListViewScrollView;
 

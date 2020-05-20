@@ -25,7 +25,10 @@ import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.HYLogUtil;
 import com.hr.fire.inspection.utils.TimeUtil;
+import com.hr.fire.inspection.utils.ToastUtil;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -88,6 +91,9 @@ public class HFCFragment1 extends Fragment {
     }
 
     private void initView() {
+        if (itemDataList.size() == 0) {
+            Toast.makeText(getActivity(), "暂无数据", Toast.LENGTH_SHORT).show();
+        }
         rc_list = rootView.findViewById(R.id.rc_list);
         @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rc_list.setLayoutManager(layoutManager);
@@ -95,62 +101,61 @@ public class HFCFragment1 extends Fragment {
         rc_list.setAdapter(adapter);
         //添加动画
         rc_list.setItemAnimator(new DefaultItemAnimator());
-
         if (checkTypes != null) {
             adapter.setCheckId(checkTypes.get(0).getId(), it);
         }
     }
 
-    public void addData() {
-        int childCount = rc_list.getChildCount();
-        if (childCount == 0) {
-            return;
-        }
-        ItemInfo itemInfo = new ItemInfo();
-        if (itemDataList != null && itemDataList.size() != 0) {
-            //点击新增,有数据,就拿到最后一条数据新增,创建一个新的对象
-            ItemInfo item = itemDataList.get(itemDataList.size() - 1);
-            //如果直接新增会导致后台id冲重复\冲突
-            itemInfo.setVolume(item.getVolume());
-            itemInfo.setWeight(item.getWeight());
-            itemInfo.setGoodsWeight(item.getGoodsWeight());
-            itemInfo.setProdFactory(item.getProdFactory());
-            itemInfo.setProdDate(item.getProdDate());
-            itemInfo.setCheckDate(item.getCheckDate());
-            itemInfo.setTaskNumber(item.getTaskNumber());
-            itemInfo.setIsPass(item.getIsPass());
-            itemInfo.setLabelNo(item.getLabelNo());
-        } else {
-            //点击新增,如果没有数据,就造一条默认数据
-            itemInfo.setVolume("请编辑");
-            itemInfo.setWeight("请编辑");
-            itemInfo.setGoodsWeight("请编辑");
-            itemInfo.setProdFactory("请编辑");
-            Date date = new Date();
-            itemInfo.setProdDate(date);
-            itemInfo.setCheckDate(date);
-            itemInfo.setTaskNumber("请选择");
-            itemInfo.setIsPass("请选择");
-        }
-        long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, it.companyInfoId, checkTypes.get(0).getId(), it.number, it.srt_Date);
-        if (l1 != 0) {
-            Toast.makeText(getContext(), "数据保存成功失败", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
     //动态添加条目
     public void addItemView() {
         if (adapter != null) {
-            adapter.addData(itemDataList.size());
-            rc_list.post(new Runnable() {
-                @Override
-                public void run() {
-                    addData();
+            ItemInfo itemInfo = new ItemInfo();
+            if (itemDataList != null && itemDataList.size() != 0) {
+                //点击新增,有数据,就拿到最后一条数据新增,创建一个新的对象
+                ItemInfo item = itemDataList.get(itemDataList.size() - 1);
+                //如果直接新增会导致后台id冲重复\冲突
+                itemInfo.setNo(item.getNo());
+                itemInfo.setVolume(item.getVolume());
+                itemInfo.setWeight(item.getWeight());
+                itemInfo.setGoodsWeight(item.getGoodsWeight());
+                itemInfo.setProdFactory(item.getProdFactory());
+                itemInfo.setProdDate(item.getProdDate());
+                itemInfo.setObserveDate(item.getObserveDate());
+                itemInfo.setTaskNumber(item.getTaskNumber());
+                itemInfo.setIsPass(item.getIsPass());
+                itemInfo.setLabelNo(item.getLabelNo());
+            } else {
+                //点击新增,如果没有数据,就造一条默认数据
+                itemInfo.setNo("请编辑");
+                itemInfo.setVolume("请编辑");
+                itemInfo.setWeight("请编辑");
+                itemInfo.setGoodsWeight("请编辑");
+                itemInfo.setProdFactory("请编辑");
+                Date date = new Date();
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+                long nowTime = date.getTime();
+                String d = format.format(nowTime);
+                try {
+                    date = format.parse(d);
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
-            });
+                itemInfo.setProdDate(date);
+                itemInfo.setObserveDate(date);
+                itemInfo.setTaskNumber("请选择");
+                itemInfo.setIsPass("请选择");
+            }
+            long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, it.companyInfoId, checkTypes.get(0).getId(), it.number, it.srt_Date);
+            //表示数据插入成功,再次查询,拿到最新的数据
+            if (l1 == 0) {
+                itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(0).getId(), it.number == null ? "" : it.number, it.srt_Date);
+                adapter.setNewData(itemDataList);
+            } else {
+                ToastUtil.show(getActivity(), "未知错误,新增失败", Toast.LENGTH_SHORT);
+            }
         }
     }
+
 
     public void saveData() {
         int itemCount = rc_list.getChildCount();
@@ -179,20 +184,20 @@ public class HFCFragment1 extends Fragment {
             ItemInfo itemObj = itemDataList.get(i);
             itemObj.setNo(et_2.getText().toString());
             itemObj.setVolume(et_3.getText().toString());
-            itemObj.setGoodsWeight(et_4.getText().toString());
-            itemObj.setPressure(et_5.getText().toString());
+            itemObj.setWeight(et_4.getText().toString());
+            itemObj.setGoodsWeight(et_5.getText().toString());
             itemObj.setProdFactory(et_6.getText().toString());
-
-            Date date = TimeUtil.getInstance().hhmmssTodata(et_7.getText().toString());
-            Date date1 = TimeUtil.getInstance().hhmmssTodata(et_8.getText().toString());
-//            itemObj.setTaskNumber(et_9.getText().toString());
+            Date date = TimeUtil.parse(et_7.getText().toString(),"yyyy-MM");
+            Date date1 = TimeUtil.parse(et_8.getText().toString(),"yyyy-MM");
             itemObj.setProdDate(date);
             itemObj.setObserveDate(date1);
             itemObj.setIsPass(tv_10.getText().toString());
             itemObj.setTaskNumber(tv_11.getText().toString());
             itemObj.setLabelNo(et_10.getText().toString());
+            Log.i("aaaa", "保存数据啦啦啦" + itemObj);
             ServiceFactory.getYearCheckService().update(itemObj);
         }
+
         Toast.makeText(getActivity(), "七氟丙烷钢瓶信息采集,保存成功", Toast.LENGTH_SHORT).show();
     }
 }

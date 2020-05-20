@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +42,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
     private long platform_id;
     private String f_title;
     private String sys_number = "";  //有几个系统是没有这个数据的,
+    private String protect_area = "";  //有几个系统是没有这个数据的,
     private List<HashMap> historyList;
     private int selected_tag = -1;  //用户选中的条目
 
@@ -49,11 +51,15 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivty_carbondioxide_record);
         Intent intent = getIntent();
+        //隐藏顶部位号、保护区域、及检查时间
+        LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
+        isShowTopText.setVisibility(View.GONE);
         //CarbonDioxideAcitivty
         sys_id = intent.getLongExtra("sys_id", 0); //系统ID
         platform_id = intent.getLongExtra("platform_id", 0);  //平台ID
         f_title = intent.getStringExtra("f_title");  //传过来的系统名称
         sys_number = intent.getStringExtra("sys_number");  //系统位号
+        protect_area = intent.getStringExtra("protect_area");  //保护区域
     }
 
     @Override
@@ -117,6 +123,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         intent.putExtra("platform_id", platform_id);    //公司ID
         intent.putExtra("f_title", f_title); //系统名称 :高压二氧化碳灭火系统
         intent.putExtra("sys_number", sys_number); //系统位号 ：SD002(用户自己填写的)
+        intent.putExtra("protect_area", protect_area); //系统位号 ：SD002(用户自己填写的)
         HashMap hashMap = historyList.get(selected_tag);
         //拿到历史数据中的记录, 并修改历史记录
         Date checkDate = (Date) hashMap.get("checkDate"); //时间
@@ -138,6 +145,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 intent.putExtra("platform_id", platform_id);    //公司ID
                 intent.putExtra("f_title", f_title); //系统名称 :高压二氧化碳灭火系统
                 intent.putExtra("sys_number", sys_number); //系统位号 ：SD002(用户自己填写的)
+                intent.putExtra("protect_area", protect_area); //系统位号 ：SD002(用户自己填写的)
 //                if (selected_tag == -1) {
                     Date curDateHHmm = TimeUtil.getCurDateHHmm();
                     //selected_tag=-1时,表示用户没有选择任何记录,  新建一个巡检记录,新建记录是根据date来判断的.
