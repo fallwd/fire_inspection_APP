@@ -84,7 +84,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         List<ItemInfo> dataList = queryBuilder.list();
         ArrayList<HashMap> resultList = new ArrayList();
         Log.i("getHistoryList:::","查询完成");
-
+        ArrayList<String> disList = new ArrayList<>();
         for(int i=0;i<dataList.size();i++){
             ItemInfo ret = dataList.get(i);
 //            Log.i("getHistoryList:::",ret.toString());
@@ -120,7 +120,59 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 obj.put("systemId",systemId);
                 obj.put("checkDate",checkDate);
                 obj.put("systemNumber",systemNumber);
+                disList.add(comboData);
                 resultList.add(obj);
+            }
+        }
+
+        QueryBuilder<YearCheckResult> queryBuilder2 = daoSession.queryBuilder(YearCheckResult.class).
+                where(new WhereCondition.StringCondition(
+//                        String.format("COMPANY_INFO_ID=%s GROUP BY CHECK_DATE", companyId)));
+                        String.format("COMPANY_INFO_ID=%s GROUP BY CHECK_DATE,SYSTEM_NUMBER", companyId)));
+//        Join checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
+//                where(CheckTypeDao.Properties.ParentId.eq(systemId));
+
+//        Log.i("getHistoryList:::",""+queryBuilder.toString());
+        List<YearCheckResult> dataList2 = queryBuilder2.list();
+        for(int i=0;i<dataList2.size();i++){
+            YearCheckResult ret = dataList2.get(i);
+//            Log.i("getHistoryList:::",ret.toString());
+            long DBsystemId = ret.getCheckType().getParent().getId();
+            String systemName = ret.getCheckType().getParent().getName();
+            String companyName = ret.getCompanyInfo().getCompanyName();
+            String oilfieldName = ret.getCompanyInfo().getOilfieldName();
+            String platformName = ret.getCompanyInfo().getPlatformName();
+            String systemNumber = ret.getSystemNumber();
+            Date checkDate = ret.getCheckDate();
+//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+            String checkDateStr;
+            if(checkDate!=null){
+                checkDateStr = formatter.format(checkDate);
+            }
+            else {
+                checkDateStr = "noDate";
+            }
+            String comboData;
+            if(systemNumber !="" && systemNumber != null) {
+
+                comboData = companyName + "_" + oilfieldName + "_" + platformName + "_" + systemName + "_" + systemNumber +"_" + checkDateStr;
+//            Log.i("getHistoryList:::",comboData);
+            }
+            else{
+                comboData = companyName + "_" + oilfieldName + "_" + platformName + "_" + systemName + "_" + checkDateStr;
+            }
+            if(systemId==DBsystemId){
+                HashMap obj = new HashMap();
+                obj.put("ret",comboData);
+                obj.put("companyInfoId",companyId);
+                obj.put("systemId",systemId);
+                obj.put("checkDate",checkDate);
+                obj.put("systemNumber",systemNumber);
+                if (!resultList.contains(comboData)){
+                    disList.add(comboData);
+                    resultList.add(obj);
+                }
             }
         }
         return resultList;
