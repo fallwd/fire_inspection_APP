@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements YearCheckService {
@@ -84,7 +85,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         List<ItemInfo> dataList = queryBuilder.list();
         ArrayList<HashMap> resultList = new ArrayList();
         Log.i("getHistoryList:::","查询完成");
-        ArrayList<String> disList = new ArrayList<>();
+        ArrayList<String> disList = new ArrayList();
         for(int i=0;i<dataList.size();i++){
             ItemInfo ret = dataList.get(i);
 //            Log.i("getHistoryList:::",ret.toString());
@@ -120,8 +121,10 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 obj.put("systemId",systemId);
                 obj.put("checkDate",checkDate);
                 obj.put("systemNumber",systemNumber);
-                disList.add(comboData);
-                resultList.add(obj);
+                if (!resultList.contains(comboData)) {
+                    disList.add(comboData);
+                    resultList.add(obj);
+                }
             }
         }
 
@@ -171,10 +174,12 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 obj.put("systemNumber",systemNumber);
                 if (!resultList.contains(comboData)){
                     disList.add(comboData);
+
                     resultList.add(obj);
                 }
             }
         }
+        resultList = new ArrayList<HashMap>(new HashSet<HashMap>(resultList));
         return resultList;
     }
 
