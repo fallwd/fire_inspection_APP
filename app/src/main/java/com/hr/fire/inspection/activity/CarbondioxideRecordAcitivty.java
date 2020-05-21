@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //二氧化碳年检记录
 public class CarbondioxideRecordAcitivty extends AppCompatActivity implements View.OnClickListener {
@@ -93,10 +94,15 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         Button oldDataNext = findViewById(R.id.oldDataNext);
         Button newNext = findViewById(R.id.newNext);
         TextView deleteHistoryData = findViewById(R.id.deleteHistoryData);
+        TextView importData = findViewById(R.id.importData);
+        TextView exportData = findViewById(R.id.exportData);
+
         iv_finish.setOnClickListener(this);
         edit.setOnClickListener(this);
         oldDataNext.setOnClickListener(this);
         newNext.setOnClickListener(this);
+        importData.setOnClickListener(this);
+        exportData.setOnClickListener(this);
         deleteHistoryData.setOnClickListener(this);
         hot.clear();
 
@@ -214,7 +220,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 }
                 break;
             case R.id.deleteHistoryData:
-                //
+
                 if (selected_tag == -1) {
                     Toast.makeText(CarbondioxideRecordAcitivty.this, "请先选择历史数据", Toast.LENGTH_SHORT).show();
                 } else {
@@ -242,6 +248,33 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                     });
                     builder.show();
                 }
+                break;
+            case R.id.exportData:
+//                @GetMapping("excel");
+//                public void exportExcel(HttpServletResponse response) {
+//                    String [][] columnNames = {
+//                            {"表头1","表头2","表头3","表头4","表头5"},
+//                            {"header1","header2","header3","header4","header5"}
+//                    };
+//                    String [] columnWidth ={"30","20","20","10","15"};
+//                    String title = "测试";
+//
+//                    //数据
+//                    List<Map<String,Object>> list = new ArrayList<>();
+//                    Map<String,Object> map1 = new HashMap<>();
+//                    map1.put("header1",new Date());
+//                    map1.put("header2",1);
+//                    map1.put("header3","测试");
+//                    map1.put("header4","test");
+//                    map1.put("header5",1.5);
+//
+//                    list.add(map1);
+//                    list.add(map1);
+//
+//                    util.ExcelUtils excelUtils = new util.ExcelUtils();
+//                    excelUtils.genSheet("温度",columnNames,columnWidth,list,title);
+//                    excelUtils.exportExcel(response,"测试");
+//                }
                 break;
         }
     }
