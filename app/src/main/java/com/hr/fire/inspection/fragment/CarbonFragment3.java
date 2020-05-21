@@ -31,6 +31,7 @@ import com.hr.fire.inspection.adapter.CarBon3Adapter;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
+import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.impl.YCCamera;
@@ -39,6 +40,9 @@ import com.hr.fire.inspection.utils.FileRoute;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class CarbonFragment3 extends Fragment {
@@ -67,8 +71,18 @@ public class CarbonFragment3 extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            its = (IntentTransmit) getArguments().getSerializable(mKey);
-            Log.i("aaaaaa","aaaaa获取数据拉=" +its);
+            its = new IntentTransmit();
+            IntentTransmit it = (IntentTransmit) getArguments().getSerializable(mKey);
+            its.srt_Date = it.srt_Date;
+            its.systemId = it.systemId;
+            its.companyInfoId = it.companyInfoId;
+            its.id = it.id;
+            its.platformId = it.platformId;
+            its.type = it.type;
+            its.start_time = it.start_time;
+            its.end_time = it.end_time;
+            its.name = it.name;
+            its.number = it.number;
         }
     }
 
@@ -95,20 +109,45 @@ public class CarbonFragment3 extends Fragment {
         checkDataEasy = ServiceFactory.getYearCheckService().getCheckDataEasy(checkTypes.get(2).getId());
         //获取用户需要填写的数据,如果没有数据,就需要插入的默认数据（流程4）。如果有数据就
         yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(2).getId(), its.number, its.srt_Date);
-        if (yearCheckResults == null || yearCheckResults.size() == 0) {
-            for (int i = 0; i < checkDataEasy.size(); i++) {
-//                Log.d("dong", "第一次加载数据 = ");
-                //3.进入系统就给用户默认插入两条数据, 用户点击保存时,就Updata数据库
-                YearCheckResult ycr = new YearCheckResult();
-                ycr.setIsPass(" -- ");
+        if (its.name != null || its.name == "基于历史数据新建") {
+            if (yearCheckResults != null && yearCheckResults.size() != 0) {
+                //点击新增,有数据,就拿到最后一条数据新增,创建一个新的对象
+                for (int i = 0; i<yearCheckResults.size(); i++) {
+                    YearCheckResult ycr = new YearCheckResult();
+                    ycr.setIsPass(" -- ");
+                    ycr.setDescription("无描述");
+                    ycr.setImageUrl("暂无图片");
+                    ycr.setSystemNumber(its.number);
+                    ycr.setProtectArea(" "); // 保护位号
+                    ycr.setCheckDate(its.srt_Date);  //检查日期
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                    long nowTime = new Date().getTime();
+                    String d = format.format(nowTime);
+                    try {
+                        its.srt_Date = format.parse(d);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, checkDataEasy.get(i).getId(), its.companyInfoId,
+                            checkTypes.get(2).getId(), its.number, its.srt_Date);
+                }
+            }
+            yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(2).getId(), its.number, its.srt_Date);
+        } else {
+            if (yearCheckResults == null || yearCheckResults.size() == 0) {
+                for (int i = 0; i < checkDataEasy.size(); i++) {
+                    //3.进入系统就给用户默认插入两条数据, 用户点击保存时,就Updata数据库
+                    YearCheckResult ycr = new YearCheckResult();
+                    ycr.setIsPass(" -- ");
 //                ycr.setImageUrl("暂无图片");  //可以在iv7中获取
-                ycr.setDescription("无描述");
-                ycr.setSystemNumber(its.number);
-                ycr.setProtectArea(" "); // 保护位号
-                ycr.setCheckDate(its.srt_Date);  //检查日期
-                ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, checkDataEasy.get(i).getId(), its.companyInfoId,
-                        checkTypes.get(2).getId(), its.number, its.srt_Date);
-                yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(2).getId(), its.number, its.srt_Date);
+                    ycr.setDescription("无描述");
+                    ycr.setSystemNumber(its.number);
+                    ycr.setProtectArea(" "); // 保护位号
+                    ycr.setCheckDate(its.srt_Date);  //检查日期
+                    ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, checkDataEasy.get(i).getId(), its.companyInfoId,
+                            checkTypes.get(2).getId(), its.number, its.srt_Date);
+                    yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(2).getId(), its.number, its.srt_Date);
+                }
             }
         }
         initView();
@@ -150,7 +189,6 @@ public class CarbonFragment3 extends Fragment {
                 yearCheckResult.setSystemNumber(its.number);
                 yearCheckResult.setProtectArea(" "); // 保护位号
                 yearCheckResult.setCheckDate(its.srt_Date);  //检查日期
-                Log.i("aaaaaa","保存数据拉=" +yearCheckResult);
                 ServiceFactory.getYearCheckService().update(yearCheckResult);
             }
         }

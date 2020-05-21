@@ -28,6 +28,7 @@ import com.hr.fire.inspection.utils.ToastUtil;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.apache.poi.util.NullLogger;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -55,12 +56,23 @@ public class CarbonFragment1 extends Fragment {
         fragment1.setArguments(args);
         return fragment1;
     }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            its = (IntentTransmit) getArguments().getSerializable(mKey);
+            // 建立当前页面的IntentTransmit，为了不影响其他页面的its
+            its = new IntentTransmit();
+            IntentTransmit it = (IntentTransmit) getArguments().getSerializable(mKey);
+            its.srt_Date = it.srt_Date;
+            its.systemId = it.systemId;
+            its.companyInfoId = it.companyInfoId;
+            its.id = it.id;
+            its.platformId = it.platformId;
+            its.type = it.type;
+            its.start_time = it.start_time;
+            its.end_time = it.end_time;
+            its.name = it.name;
+            its.number = it.number;
         }
     }
 
@@ -94,6 +106,38 @@ public class CarbonFragment1 extends Fragment {
         }
         //参数1:公司id, 参数2:检查表类型对应的id, 参数3:输入的系统位号，如果没有就填"",或者SD002,否则没数据   参数4:日期
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(0).getId(), its.number == null ? "" : its.number, its.srt_Date);
+        // 判断是否是基于历史数据新建，是的话，某些字段做空的处理
+        if (its.name != null || its.name == "基于历史数据新建") {
+            if (itemDataList != null && itemDataList.size() != 0) {
+                //点击新增,有数据,就拿到最后一条数据新增,创建一个新的对象
+                for (int i = 0; i<itemDataList.size(); i++) {
+                    ItemInfo itemInfo = new ItemInfo();
+                    ItemInfo item = itemDataList.get(i);
+                    //如果直接新增会导致后台id冲重复\冲突
+                    itemInfo.setNo(item.getNo());
+                    itemInfo.setVolume(item.getVolume());
+                    itemInfo.setWeight(item.getWeight());
+                    itemInfo.setGoodsWeight(item.getGoodsWeight());
+                    itemInfo.setProdFactory(item.getProdFactory());
+                    itemInfo.setProdDate(item.getProdDate());
+                    itemInfo.setObserveDate(item.getObserveDate());
+                    itemInfo.setTaskNumber(item.getTaskNumber());
+                    itemInfo.setIsPass("请选择");
+                    itemInfo.setLabelNo("请编辑");
+
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                    long nowTime = new Date().getTime();
+                    String d = format.format(nowTime);
+                    try {
+                        its.srt_Date = format.parse(d);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
+                }
+            }
+            itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(0).getId(), its.number == null ? "" : its.number, its.srt_Date);
+        }
     }
 
     private void initView() {
@@ -168,7 +212,6 @@ public class CarbonFragment1 extends Fragment {
 
     public void upData() {
         int itemCount = rc_list.getChildCount();
-        //通知数据库刷新数据， 才能在调用Update();
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(0).getId(), its.number == null ? "" : its.number, its.srt_Date);
         if (itemCount == 0 || itemDataList.size() == 0 || itemDataList.size() != itemCount) {
             Toast.makeText(getActivity(), "暂无数据保存", Toast.LENGTH_SHORT).show();
