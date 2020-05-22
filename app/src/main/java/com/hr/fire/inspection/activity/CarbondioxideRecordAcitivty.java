@@ -2,7 +2,9 @@ package com.hr.fire.inspection.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,14 +26,30 @@ import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.CompanyAdapter;
 import com.hr.fire.inspection.adapter.GridRecordAdapter;
 import com.hr.fire.inspection.adapter.HFC1Adapter;
+import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.CompanyInfo;
 import com.hr.fire.inspection.entity.Function;
+import com.hr.fire.inspection.entity.InspectionResult;
+import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.Class2Map;
+import com.hr.fire.inspection.utils.ExcelUtils;
+import com.hr.fire.inspection.utils.SystemConstant;
 import com.hr.fire.inspection.utils.TimeUtil;
 
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,6 +57,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.hr.fire.inspection.adapter.CheckReporItemAdapter.removeModelSheet;
 
 //二氧化碳年检记录
 public class CarbondioxideRecordAcitivty extends AppCompatActivity implements View.OnClickListener {
@@ -54,6 +75,11 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
     private String company_name;
     private String oil_name;
     private String Platform_name;
+    private List<CheckType> checkTypes;
+    private List<ItemInfo> itemDataList = new ArrayList<>();
+    private List<YearCheckResult> yearCheckResults;
+    private List<String> columnNames;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -250,31 +276,71 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 }
                 break;
             case R.id.exportData:
-//                @GetMapping("excel");
-//                public void exportExcel(HttpServletResponse response) {
-//                    String [][] columnNames = {
-//                            {"表头1","表头2","表头3","表头4","表头5"},
-//                            {"header1","header2","header3","header4","header5"}
-//                    };
-//                    String [] columnWidth ={"30","20","20","10","15"};
-//                    String title = "测试";
+                if (selected_tag == -1) {
+                    Toast.makeText(CarbondioxideRecordAcitivty.this, "请先选择历史数据", Toast.LENGTH_SHORT).show();
+                } else {
+                    HashMap hashMap = historyList.get(selected_tag);
+                    long companyId = (long) hashMap.get("companyInfoId");
+                    String number = (String) hashMap.get("systemNumber");
+                    long systemId = (long) hashMap.get("systemId");
+                    Date checkDate = (Date) hashMap.get("checkDate"); //时间
+
+                    checkTypes = ServiceFactory.getYearCheckService().gettableNameData(systemId);
+                    if (checkTypes == null) {
+                        Toast.makeText(this, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
+                    }
+                    Log.i("获取checkTypes","checkTypes:"+ checkTypes);
+
+
+//                    columnNames = new ArrayList<>();
+
+//                    for (int i = 0; i< checkTypes.size(); i++) {
+//                        ((ArrayList) columnNames).add(checkTypes.get(i).getName());
+//                        //参数1:公司id, 参数2:检查表类型对应的id, 参数3:输入的系统位号，如果没有就填"",或者SD002,否则没数据   参数4:日期
+//                        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(companyId, checkTypes.get(i).getId(), number == null ? "" : number, checkDate);
+//                        Log.i("获取itemDataList","itemDataList:"+ itemDataList);
+//                        Log.i("分割线=================","分割线==================================");
+//                        if (itemDataList.isEmpty()) {
+//                            yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, companyId, checkTypes.get(2).getId(), number, checkDate);
+//                            Log.i("获取yearCheckResults","yearCheckResults:"+ yearCheckResults);
+//                        }
 //
-//                    //数据
-//                    List<Map<String,Object>> list = new ArrayList<>();
-//                    Map<String,Object> map1 = new HashMap<>();
-//                    map1.put("header1",new Date());
-//                    map1.put("header2",1);
-//                    map1.put("header3","测试");
-//                    map1.put("header4","test");
-//                    map1.put("header5",1.5);
+//                    }
+//                    Log.i("获取columnNames","columnNames:"+ columnNames);
+//                    JSONObject headers = new JSONObject();
+//                    if (sys_id == 1) {
+//                        headers = {"序号","瓶号","容积/L","瓶重/kg","药剂量/kg","生产厂家","生产日期","水压试验日期","工作代号","是否合格","检验标签"}
 //
-//                    list.add(map1);
-//                    list.add(map1);
-//
-//                    util.ExcelUtils excelUtils = new util.ExcelUtils();
-//                    excelUtils.genSheet("温度",columnNames,columnWidth,list,title);
-//                    excelUtils.exportExcel(response,"测试");
-//                }
+//                    }
+
+                    ExcelUtils excelUtils = new ExcelUtils();
+
+                    for (CheckType checkType : checkTypes) {
+                        Log.i("aaaa","获取检查的id" + checkType);
+                        Map<String, Object> system = SystemConstant.getInstance().getSystem(checkType.getId());
+
+                        String[][] columns = (String[][]) system.get("columns");
+                        String title = (String) system.get("title");
+                        String[] columnWidth = new String[columns[0].length];
+
+                        for (int i = 0; i < columnWidth.length; i++) {
+                            columnWidth[i] = "30";
+                        }
+
+                        List<ItemInfo> itemDataEasy = ServiceFactory.getYearCheckService().getItemDataEasy(companyId, checkType.getId(), number == null ? "" : number, checkDate);
+
+
+                        List<Map<String,Object>> items = new ArrayList<>();
+                        for (ItemInfo itemInfo : itemDataEasy) {
+                            items.add(Class2Map.getMapParams(itemInfo));
+                        }
+
+                        excelUtils.genSheet(title,columns,columnWidth,items,title);
+
+                        excelUtils.exportExcel(CarbondioxideRecordAcitivty.this, "我的第一个导出文件");
+
+                    }
+                }
                 break;
         }
     }

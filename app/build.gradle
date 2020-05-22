@@ -76,6 +76,7 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     //ZXing
     compile 'com.google.zxing:core:3.3.0'
+    implementation group: 'net.sourceforge.jexcelapi', name: 'jxl', version: '2.6.12'
 }
 
 greendao {
