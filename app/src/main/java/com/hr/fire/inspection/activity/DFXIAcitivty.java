@@ -103,6 +103,8 @@ public class DFXIAcitivty extends AppCompatActivity {
         }
         it.number = sys_number;
         check_date = srt_Date;
+        String oldDataNext = intent.getStringExtra("oldDataNext"); //基于历史数据新建
+        it.name = oldDataNext;
     }
 
 

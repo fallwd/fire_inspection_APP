@@ -26,6 +26,10 @@ import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.TimeUtil;
 import com.hr.fire.inspection.utils.ToastUtil;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateUtils;
+import org.apache.poi.util.NullLogger;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -58,7 +62,18 @@ public class CarbonFragment2 extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            its = (IntentTransmit) getArguments().getSerializable(mKey);
+            its = new IntentTransmit();
+            IntentTransmit it = (IntentTransmit) getArguments().getSerializable(mKey);
+            its.srt_Date = it.srt_Date;
+            its.systemId = it.systemId;
+            its.companyInfoId = it.companyInfoId;
+            its.id = it.id;
+            its.platformId = it.platformId;
+            its.type = it.type;
+            its.start_time = it.start_time;
+            its.end_time = it.end_time;
+            its.name = it.name;
+            its.number = it.number;
         }
     }
 
@@ -66,6 +81,8 @@ public class CarbonFragment2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (rootView == null) {
+            Log.i("AAA", "onCreateView氮气瓶接收的参数11111111111" + its);
+//            companyInfoId=131, systemId=1, srt_Date='Wed May 20 00:00:00 GMT+00:00 2020', id=0, platformId=0, type=0, parentId=0, start_time=null, end_time=null, name='基于历史数据新建'
             rootView = inflater.inflate(R.layout.fragment_carbon2, container, false);
         }
         return rootView;
@@ -74,6 +91,7 @@ public class CarbonFragment2 extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.i("AAA", "onActivityCreated氮气瓶接收的参数22222222222" + its);
         initData();
         initView();
     }
@@ -86,12 +104,46 @@ public class CarbonFragment2 extends Fragment {
         }
         //参数1:公司id, 参数2:检查表类型对应的id, 参数3:输入的系统位号，如果没有就填"",或者SD002,否则没数据   参数4:日期
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(1).getId(), its.number == null ? "" : its.number, its.srt_Date);
+        Log.i("AAA", "我要渲染插入的数据了111" + itemDataList);
+        if (its.name != null || its.name == "基于历史数据新建") {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            long nowTime = new Date().getTime();
+            String d = format.format(nowTime);
+            try {
+                its.srt_Date = format.parse(d);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            if (itemDataList != null && itemDataList.size() != 0) {
+                //点击新增,有数据,就拿到最后一条数据新增,创建一个新的对象
+                for (int i = 0; i<itemDataList.size(); i++) {
+                    ItemInfo itemInfo = new ItemInfo();
+                    ItemInfo item = itemDataList.get(i);
+                    //如果直接新增会导致后台id冲重复\冲突
+                    itemInfo.setNo(item.getNo());
+                    itemInfo.setVolume(item.getVolume());
+                    itemInfo.setWeight(item.getWeight());
+                    itemInfo.setPressure(item.getPressure());
+                    itemInfo.setProdFactory(item.getProdFactory());
+                    itemInfo.setProdDate(item.getProdDate());
+                    itemInfo.setObserveDate(item.getObserveDate());
+                    itemInfo.setTaskNumber(item.getTaskNumber());
+                    itemInfo.setIsPass("请选择");
+                    itemInfo.setLabelNo("请编辑");
+                    ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, its.companyInfoId, checkTypes.get(1).getId(), its.number, its.srt_Date);
+                }
+            }
+            itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(1).getId(), its.number == null ? "" : its.number, its.srt_Date);
+        }
     }
 
+
     private void initView() {
-//        if (itemDataList.size() == 0) {
-//            Toast.makeText(getActivity(), "暂无数据2", Toast.LENGTH_SHORT).show();
-//        }
+        if (itemDataList.size() == 0) {
+            Toast.makeText(getActivity(), "暂无数据", Toast.LENGTH_SHORT).show();
+        }
 
         rc_list2 = rootView.findViewById(R.id.rc_list2);
         @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -157,6 +209,9 @@ public class CarbonFragment2 extends Fragment {
         }
     }
 
+
+    @SuppressLint("SimpleDateFormat")
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public void upData() {
         int itemCount = rc_list2.getChildCount();

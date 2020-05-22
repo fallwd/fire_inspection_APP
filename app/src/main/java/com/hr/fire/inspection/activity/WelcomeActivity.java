@@ -157,7 +157,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //            Log.i("gettableNameData",dataList.get(i).getName());
 //            Log.i("gettableNameData",dataList.get(i).getId().toString());
 //        }
-//        ServiceFactory.getYearCheckService().getHistoryList(3,1);
+//        List<HashMap> dataList = ServiceFactory.getYearCheckService().getHistoryList(3,1);
 //        for(int i=0;i<dataList.size();i++){
 //            Log.i("getHistoryList:::",""+dataList.get(i));
 //            HashMap has = dataList.get(i);
@@ -339,6 +339,20 @@ public class WelcomeActivity extends AppCompatActivity {
 
 //        ServiceFactory.getInspectionService().
         //////////////////////////银魂库预览接口///////////////////////////////////////////////
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+//
+//        Date now = new Date();
+//        long nowTime = now.getTime();
+//        String d = format.format(nowTime);
+//        Date prodDate = null;
+//        try {
+//            prodDate = format.parse(d);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        Log.i("ttttt",""+prodDate);
+
+        ///////
 
 
         Toast.makeText(WelcomeActivity.this, "系统将在2秒后为您自动跳转到首页", Toast.LENGTH_SHORT).show();

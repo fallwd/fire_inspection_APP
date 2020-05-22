@@ -84,6 +84,8 @@ public class SeawaterSystemActivity  extends AppCompatActivity {
         it.number = sys_number;
         protect_area = intent.getStringExtra("protect_area"); //传过来的保护区域
         check_date = srt_Date;
+        String oldDataNext = intent.getStringExtra("oldDataNext"); //基于历史数据新建
+        it.name = oldDataNext;
     }
 
     public void initView() {

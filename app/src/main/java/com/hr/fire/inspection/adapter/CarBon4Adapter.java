@@ -97,7 +97,6 @@ public class CarBon4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             vh.tv6.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("dong", "点击的状post== " + position);
 
                     //如果点击的是最后一个条目, 那么控件的高度需要增加  否则弹框会被挡住
                     showPopWind(vh.tv6);
