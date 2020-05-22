@@ -50,9 +50,9 @@ public class FireReportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fire_report);
 
-        //隐藏顶部位号、保护区域、及检查时间
-        LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
-        isShowTopText.setVisibility(View.GONE);
+//        //隐藏顶部位号、保护区域、及检查时间
+//        LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
+//        isShowTopText.setVisibility(View.GONE);
 
         // 获取Bundle的信息
         // 获得公司名称  油田名称

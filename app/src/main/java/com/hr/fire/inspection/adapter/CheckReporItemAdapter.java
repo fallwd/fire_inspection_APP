@@ -202,7 +202,6 @@ public class CheckReporItemAdapter extends BaseAdapter {
             }
         // 选择系统
         private void checkSystem(HSSFSheet sheet, List<InspectionResult> excelList, String sheetName, HSSFCellStyle cellStyle) {
-        Log.d("sheet表名", sheetName);
             switch (sheetName){
                 case "灭火器":
                     getMHQData(sheet,excelList,cellStyle);
