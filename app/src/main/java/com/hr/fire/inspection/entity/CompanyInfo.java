@@ -4,6 +4,7 @@ package com.hr.fire.inspection.entity;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Unique;
 
 @Entity(
         nameInDb = "t_company_info"
@@ -21,14 +22,18 @@ public class CompanyInfo {
 
     private int isNecessary;//是否必要
 
-@Generated(hash = 1798061312)
+    @Unique
+    private String uuid;
+
+@Generated(hash = 130895209)
 public CompanyInfo(Long id, String companyName, String oilfieldName,
-        String platformName, int isNecessary) {
+        String platformName, int isNecessary, String uuid) {
     this.id = id;
     this.companyName = companyName;
     this.oilfieldName = oilfieldName;
     this.platformName = platformName;
     this.isNecessary = isNecessary;
+    this.uuid = uuid;
 }
 
 @Generated(hash = 1062273323)
@@ -83,6 +88,15 @@ public void setIsNecessary(int isNecessary) {
                 ", oilfieldName='" + oilfieldName + '\'' +
                 ", platformName='" + platformName + '\'' +
                 ", isNecessary=" + isNecessary +
+                ", uuid='" + uuid + '\'' +
                 '}';
     }
+
+    public String getUuid() {
+    return this.uuid;
+}
+
+public void setUuid(String uuid) {
+    this.uuid = uuid;
+}
 }
