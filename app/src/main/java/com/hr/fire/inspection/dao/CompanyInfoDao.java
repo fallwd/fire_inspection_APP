@@ -29,6 +29,7 @@ public class CompanyInfoDao extends AbstractDao<CompanyInfo, Long> {
         public final static Property OilfieldName = new Property(2, String.class, "oilfieldName", false, "OILFIELD_NAME");
         public final static Property PlatformName = new Property(3, String.class, "platformName", false, "PLATFORM_NAME");
         public final static Property IsNecessary = new Property(4, int.class, "isNecessary", false, "IS_NECESSARY");
+        public final static Property Uuid = new Property(5, String.class, "uuid", false, "UUID");
     }
 
 
@@ -48,7 +49,8 @@ public class CompanyInfoDao extends AbstractDao<CompanyInfo, Long> {
                 "\"COMPANY_NAME\" TEXT," + // 1: companyName
                 "\"OILFIELD_NAME\" TEXT," + // 2: oilfieldName
                 "\"PLATFORM_NAME\" TEXT," + // 3: platformName
-                "\"IS_NECESSARY\" INTEGER NOT NULL );"); // 4: isNecessary
+                "\"IS_NECESSARY\" INTEGER NOT NULL ," + // 4: isNecessary
+                "\"UUID\" TEXT UNIQUE );"); // 5: uuid
     }
 
     /** Drops the underlying database table. */
@@ -81,6 +83,11 @@ public class CompanyInfoDao extends AbstractDao<CompanyInfo, Long> {
             stmt.bindString(4, platformName);
         }
         stmt.bindLong(5, entity.getIsNecessary());
+ 
+        String uuid = entity.getUuid();
+        if (uuid != null) {
+            stmt.bindString(6, uuid);
+        }
     }
 
     @Override
@@ -107,6 +114,11 @@ public class CompanyInfoDao extends AbstractDao<CompanyInfo, Long> {
             stmt.bindString(4, platformName);
         }
         stmt.bindLong(5, entity.getIsNecessary());
+ 
+        String uuid = entity.getUuid();
+        if (uuid != null) {
+            stmt.bindString(6, uuid);
+        }
     }
 
     @Override
@@ -121,7 +133,8 @@ public class CompanyInfoDao extends AbstractDao<CompanyInfo, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // companyName
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // oilfieldName
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // platformName
-            cursor.getInt(offset + 4) // isNecessary
+            cursor.getInt(offset + 4), // isNecessary
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // uuid
         );
         return entity;
     }
@@ -133,6 +146,7 @@ public class CompanyInfoDao extends AbstractDao<CompanyInfo, Long> {
         entity.setOilfieldName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setPlatformName(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setIsNecessary(cursor.getInt(offset + 4));
+        entity.setUuid(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
      }
     
     @Override

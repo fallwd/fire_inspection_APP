@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
+import org.greenrobot.greendao.annotation.Unique;
 
 import com.hr.fire.inspection.dao.DaoSession;
 import com.hr.fire.inspection.dao.YearCheckResultDao;
@@ -26,6 +27,9 @@ public class ItemInfo   {
 
     @Id(autoincrement = true)
     private Long id;
+
+    @Unique
+    private String uuid;
 
     private Long checkTypeId;
 
@@ -121,18 +125,16 @@ private transient DaoSession daoSession;
 @Generated(hash = 547138643)
 private transient ItemInfoDao myDao;
 
-@Generated(hash = 355893341)
-public ItemInfo(Long id, Long checkTypeId, Long companyInfoId, String typeNo,
-        String deviceType, String agentsType, Date fillingDate, String no, String level,
-        String volume, String weight, String goodsWeight, String pressure,
-        String prodFactory, Date prodDate, String typeConformity,
-        String positionConformity, String appearance, String isPressure, String check,
-        String slience, String reset, String powerAlarmFunction, String alarmFunction,
-        String effectiveness, String responseTime, String description, String setAlarm25,
-        String setAlarm50, String testAlarm25, String testAlarm50, Date observeDate,
-        String taskNumber, String isPass, String labelNo, String imageUrl,
-        String codePath, String SystemNumber, String ProtectArea, Date checkDate) {
+@Generated(hash = 1336836104)
+public ItemInfo(Long id, String uuid, Long checkTypeId, Long companyInfoId, String typeNo, String deviceType,
+        String agentsType, Date fillingDate, String no, String level, String volume, String weight, String goodsWeight,
+        String pressure, String prodFactory, Date prodDate, String typeConformity, String positionConformity,
+        String appearance, String isPressure, String check, String slience, String reset, String powerAlarmFunction,
+        String alarmFunction, String effectiveness, String responseTime, String description, String setAlarm25,
+        String setAlarm50, String testAlarm25, String testAlarm50, Date observeDate, String taskNumber, String isPass,
+        String labelNo, String imageUrl, String codePath, String SystemNumber, String ProtectArea, Date checkDate) {
     this.id = id;
+    this.uuid = uuid;
     this.checkTypeId = checkTypeId;
     this.companyInfoId = companyInfoId;
     this.typeNo = typeNo;
@@ -600,6 +602,7 @@ public void __setDaoSession(DaoSession daoSession) {
     public String toString() {
         return "ItemInfo{" +
                 "id=" + id +
+                ", uuid='" + uuid + '\'' +
                 ", checkTypeId=" + checkTypeId +
                 ", checkType=" + checkType +
                 ", companyInfoId=" + companyInfoId +
@@ -609,6 +612,7 @@ public void __setDaoSession(DaoSession daoSession) {
                 ", agentsType='" + agentsType + '\'' +
                 ", fillingDate=" + fillingDate +
                 ", no='" + no + '\'' +
+                ", level='" + level + '\'' +
                 ", volume='" + volume + '\'' +
                 ", weight='" + weight + '\'' +
                 ", goodsWeight='" + goodsWeight + '\'' +
@@ -618,6 +622,7 @@ public void __setDaoSession(DaoSession daoSession) {
                 ", typeConformity='" + typeConformity + '\'' +
                 ", positionConformity='" + positionConformity + '\'' +
                 ", appearance='" + appearance + '\'' +
+                ", isPressure='" + isPressure + '\'' +
                 ", check='" + check + '\'' +
                 ", slience='" + slience + '\'' +
                 ", reset='" + reset + '\'' +
@@ -828,5 +833,13 @@ public void __setDaoSession(DaoSession daoSession) {
 
         return sb.toString();
 
+    }
+
+    public String getUuid() {
+        return this.uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }

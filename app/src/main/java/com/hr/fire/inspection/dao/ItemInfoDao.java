@@ -31,45 +31,46 @@ public class ItemInfoDao extends AbstractDao<ItemInfo, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property CheckTypeId = new Property(1, Long.class, "checkTypeId", false, "CHECK_TYPE_ID");
-        public final static Property CompanyInfoId = new Property(2, Long.class, "companyInfoId", false, "COMPANY_INFO_ID");
-        public final static Property TypeNo = new Property(3, String.class, "typeNo", false, "TYPE_NO");
-        public final static Property DeviceType = new Property(4, String.class, "deviceType", false, "DEVICE_TYPE");
-        public final static Property AgentsType = new Property(5, String.class, "agentsType", false, "AGENTS_TYPE");
-        public final static Property FillingDate = new Property(6, java.util.Date.class, "fillingDate", false, "FILLING_DATE");
-        public final static Property No = new Property(7, String.class, "no", false, "NO");
-        public final static Property Level = new Property(8, String.class, "level", false, "LEVEL");
-        public final static Property Volume = new Property(9, String.class, "volume", false, "VOLUME");
-        public final static Property Weight = new Property(10, String.class, "weight", false, "WEIGHT");
-        public final static Property GoodsWeight = new Property(11, String.class, "goodsWeight", false, "GOODS_WEIGHT");
-        public final static Property Pressure = new Property(12, String.class, "pressure", false, "PRESSURE");
-        public final static Property ProdFactory = new Property(13, String.class, "prodFactory", false, "PROD_FACTORY");
-        public final static Property ProdDate = new Property(14, java.util.Date.class, "prodDate", false, "PROD_DATE");
-        public final static Property TypeConformity = new Property(15, String.class, "typeConformity", false, "TYPE_CONFORMITY");
-        public final static Property PositionConformity = new Property(16, String.class, "positionConformity", false, "POSITION_CONFORMITY");
-        public final static Property Appearance = new Property(17, String.class, "appearance", false, "APPEARANCE");
-        public final static Property IsPressure = new Property(18, String.class, "isPressure", false, "IS_PRESSURE");
-        public final static Property Check = new Property(19, String.class, "check", false, "CHECK");
-        public final static Property Slience = new Property(20, String.class, "slience", false, "SLIENCE");
-        public final static Property Reset = new Property(21, String.class, "reset", false, "RESET");
-        public final static Property PowerAlarmFunction = new Property(22, String.class, "powerAlarmFunction", false, "POWER_ALARM_FUNCTION");
-        public final static Property AlarmFunction = new Property(23, String.class, "alarmFunction", false, "ALARM_FUNCTION");
-        public final static Property Effectiveness = new Property(24, String.class, "effectiveness", false, "EFFECTIVENESS");
-        public final static Property ResponseTime = new Property(25, String.class, "responseTime", false, "RESPONSE_TIME");
-        public final static Property Description = new Property(26, String.class, "description", false, "DESCRIPTION");
-        public final static Property SetAlarm25 = new Property(27, String.class, "setAlarm25", false, "SET_ALARM25");
-        public final static Property SetAlarm50 = new Property(28, String.class, "setAlarm50", false, "SET_ALARM50");
-        public final static Property TestAlarm25 = new Property(29, String.class, "testAlarm25", false, "TEST_ALARM25");
-        public final static Property TestAlarm50 = new Property(30, String.class, "testAlarm50", false, "TEST_ALARM50");
-        public final static Property ObserveDate = new Property(31, java.util.Date.class, "observeDate", false, "OBSERVE_DATE");
-        public final static Property TaskNumber = new Property(32, String.class, "taskNumber", false, "TASK_NUMBER");
-        public final static Property IsPass = new Property(33, String.class, "isPass", false, "IS_PASS");
-        public final static Property LabelNo = new Property(34, String.class, "labelNo", false, "LABEL_NO");
-        public final static Property ImageUrl = new Property(35, String.class, "imageUrl", false, "IMAGE_URL");
-        public final static Property CodePath = new Property(36, String.class, "codePath", false, "CODE_PATH");
-        public final static Property SystemNumber = new Property(37, String.class, "SystemNumber", false, "SYSTEM_NUMBER");
-        public final static Property ProtectArea = new Property(38, String.class, "ProtectArea", false, "PROTECT_AREA");
-        public final static Property CheckDate = new Property(39, java.util.Date.class, "checkDate", false, "CHECK_DATE");
+        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
+        public final static Property CheckTypeId = new Property(2, Long.class, "checkTypeId", false, "CHECK_TYPE_ID");
+        public final static Property CompanyInfoId = new Property(3, Long.class, "companyInfoId", false, "COMPANY_INFO_ID");
+        public final static Property TypeNo = new Property(4, String.class, "typeNo", false, "TYPE_NO");
+        public final static Property DeviceType = new Property(5, String.class, "deviceType", false, "DEVICE_TYPE");
+        public final static Property AgentsType = new Property(6, String.class, "agentsType", false, "AGENTS_TYPE");
+        public final static Property FillingDate = new Property(7, java.util.Date.class, "fillingDate", false, "FILLING_DATE");
+        public final static Property No = new Property(8, String.class, "no", false, "NO");
+        public final static Property Level = new Property(9, String.class, "level", false, "LEVEL");
+        public final static Property Volume = new Property(10, String.class, "volume", false, "VOLUME");
+        public final static Property Weight = new Property(11, String.class, "weight", false, "WEIGHT");
+        public final static Property GoodsWeight = new Property(12, String.class, "goodsWeight", false, "GOODS_WEIGHT");
+        public final static Property Pressure = new Property(13, String.class, "pressure", false, "PRESSURE");
+        public final static Property ProdFactory = new Property(14, String.class, "prodFactory", false, "PROD_FACTORY");
+        public final static Property ProdDate = new Property(15, java.util.Date.class, "prodDate", false, "PROD_DATE");
+        public final static Property TypeConformity = new Property(16, String.class, "typeConformity", false, "TYPE_CONFORMITY");
+        public final static Property PositionConformity = new Property(17, String.class, "positionConformity", false, "POSITION_CONFORMITY");
+        public final static Property Appearance = new Property(18, String.class, "appearance", false, "APPEARANCE");
+        public final static Property IsPressure = new Property(19, String.class, "isPressure", false, "IS_PRESSURE");
+        public final static Property Check = new Property(20, String.class, "check", false, "CHECK");
+        public final static Property Slience = new Property(21, String.class, "slience", false, "SLIENCE");
+        public final static Property Reset = new Property(22, String.class, "reset", false, "RESET");
+        public final static Property PowerAlarmFunction = new Property(23, String.class, "powerAlarmFunction", false, "POWER_ALARM_FUNCTION");
+        public final static Property AlarmFunction = new Property(24, String.class, "alarmFunction", false, "ALARM_FUNCTION");
+        public final static Property Effectiveness = new Property(25, String.class, "effectiveness", false, "EFFECTIVENESS");
+        public final static Property ResponseTime = new Property(26, String.class, "responseTime", false, "RESPONSE_TIME");
+        public final static Property Description = new Property(27, String.class, "description", false, "DESCRIPTION");
+        public final static Property SetAlarm25 = new Property(28, String.class, "setAlarm25", false, "SET_ALARM25");
+        public final static Property SetAlarm50 = new Property(29, String.class, "setAlarm50", false, "SET_ALARM50");
+        public final static Property TestAlarm25 = new Property(30, String.class, "testAlarm25", false, "TEST_ALARM25");
+        public final static Property TestAlarm50 = new Property(31, String.class, "testAlarm50", false, "TEST_ALARM50");
+        public final static Property ObserveDate = new Property(32, java.util.Date.class, "observeDate", false, "OBSERVE_DATE");
+        public final static Property TaskNumber = new Property(33, String.class, "taskNumber", false, "TASK_NUMBER");
+        public final static Property IsPass = new Property(34, String.class, "isPass", false, "IS_PASS");
+        public final static Property LabelNo = new Property(35, String.class, "labelNo", false, "LABEL_NO");
+        public final static Property ImageUrl = new Property(36, String.class, "imageUrl", false, "IMAGE_URL");
+        public final static Property CodePath = new Property(37, String.class, "codePath", false, "CODE_PATH");
+        public final static Property SystemNumber = new Property(38, String.class, "SystemNumber", false, "SYSTEM_NUMBER");
+        public final static Property ProtectArea = new Property(39, String.class, "ProtectArea", false, "PROTECT_AREA");
+        public final static Property CheckDate = new Property(40, java.util.Date.class, "checkDate", false, "CHECK_DATE");
     }
 
     private DaoSession daoSession;
@@ -89,45 +90,46 @@ public class ItemInfoDao extends AbstractDao<ItemInfo, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"t_item_info\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
-                "\"CHECK_TYPE_ID\" INTEGER," + // 1: checkTypeId
-                "\"COMPANY_INFO_ID\" INTEGER," + // 2: companyInfoId
-                "\"TYPE_NO\" TEXT," + // 3: typeNo
-                "\"DEVICE_TYPE\" TEXT," + // 4: deviceType
-                "\"AGENTS_TYPE\" TEXT," + // 5: agentsType
-                "\"FILLING_DATE\" INTEGER," + // 6: fillingDate
-                "\"NO\" TEXT," + // 7: no
-                "\"LEVEL\" TEXT," + // 8: level
-                "\"VOLUME\" TEXT," + // 9: volume
-                "\"WEIGHT\" TEXT," + // 10: weight
-                "\"GOODS_WEIGHT\" TEXT," + // 11: goodsWeight
-                "\"PRESSURE\" TEXT," + // 12: pressure
-                "\"PROD_FACTORY\" TEXT," + // 13: prodFactory
-                "\"PROD_DATE\" INTEGER," + // 14: prodDate
-                "\"TYPE_CONFORMITY\" TEXT," + // 15: typeConformity
-                "\"POSITION_CONFORMITY\" TEXT," + // 16: positionConformity
-                "\"APPEARANCE\" TEXT," + // 17: appearance
-                "\"IS_PRESSURE\" TEXT," + // 18: isPressure
-                "\"CHECK\" TEXT," + // 19: check
-                "\"SLIENCE\" TEXT," + // 20: slience
-                "\"RESET\" TEXT," + // 21: reset
-                "\"POWER_ALARM_FUNCTION\" TEXT," + // 22: powerAlarmFunction
-                "\"ALARM_FUNCTION\" TEXT," + // 23: alarmFunction
-                "\"EFFECTIVENESS\" TEXT," + // 24: effectiveness
-                "\"RESPONSE_TIME\" TEXT," + // 25: responseTime
-                "\"DESCRIPTION\" TEXT," + // 26: description
-                "\"SET_ALARM25\" TEXT," + // 27: setAlarm25
-                "\"SET_ALARM50\" TEXT," + // 28: setAlarm50
-                "\"TEST_ALARM25\" TEXT," + // 29: testAlarm25
-                "\"TEST_ALARM50\" TEXT," + // 30: testAlarm50
-                "\"OBSERVE_DATE\" INTEGER," + // 31: observeDate
-                "\"TASK_NUMBER\" TEXT," + // 32: taskNumber
-                "\"IS_PASS\" TEXT," + // 33: isPass
-                "\"LABEL_NO\" TEXT," + // 34: labelNo
-                "\"IMAGE_URL\" TEXT," + // 35: imageUrl
-                "\"CODE_PATH\" TEXT," + // 36: codePath
-                "\"SYSTEM_NUMBER\" TEXT," + // 37: SystemNumber
-                "\"PROTECT_AREA\" TEXT," + // 38: ProtectArea
-                "\"CHECK_DATE\" INTEGER);"); // 39: checkDate
+                "\"UUID\" TEXT UNIQUE ," + // 1: uuid
+                "\"CHECK_TYPE_ID\" INTEGER," + // 2: checkTypeId
+                "\"COMPANY_INFO_ID\" INTEGER," + // 3: companyInfoId
+                "\"TYPE_NO\" TEXT," + // 4: typeNo
+                "\"DEVICE_TYPE\" TEXT," + // 5: deviceType
+                "\"AGENTS_TYPE\" TEXT," + // 6: agentsType
+                "\"FILLING_DATE\" INTEGER," + // 7: fillingDate
+                "\"NO\" TEXT," + // 8: no
+                "\"LEVEL\" TEXT," + // 9: level
+                "\"VOLUME\" TEXT," + // 10: volume
+                "\"WEIGHT\" TEXT," + // 11: weight
+                "\"GOODS_WEIGHT\" TEXT," + // 12: goodsWeight
+                "\"PRESSURE\" TEXT," + // 13: pressure
+                "\"PROD_FACTORY\" TEXT," + // 14: prodFactory
+                "\"PROD_DATE\" INTEGER," + // 15: prodDate
+                "\"TYPE_CONFORMITY\" TEXT," + // 16: typeConformity
+                "\"POSITION_CONFORMITY\" TEXT," + // 17: positionConformity
+                "\"APPEARANCE\" TEXT," + // 18: appearance
+                "\"IS_PRESSURE\" TEXT," + // 19: isPressure
+                "\"CHECK\" TEXT," + // 20: check
+                "\"SLIENCE\" TEXT," + // 21: slience
+                "\"RESET\" TEXT," + // 22: reset
+                "\"POWER_ALARM_FUNCTION\" TEXT," + // 23: powerAlarmFunction
+                "\"ALARM_FUNCTION\" TEXT," + // 24: alarmFunction
+                "\"EFFECTIVENESS\" TEXT," + // 25: effectiveness
+                "\"RESPONSE_TIME\" TEXT," + // 26: responseTime
+                "\"DESCRIPTION\" TEXT," + // 27: description
+                "\"SET_ALARM25\" TEXT," + // 28: setAlarm25
+                "\"SET_ALARM50\" TEXT," + // 29: setAlarm50
+                "\"TEST_ALARM25\" TEXT," + // 30: testAlarm25
+                "\"TEST_ALARM50\" TEXT," + // 31: testAlarm50
+                "\"OBSERVE_DATE\" INTEGER," + // 32: observeDate
+                "\"TASK_NUMBER\" TEXT," + // 33: taskNumber
+                "\"IS_PASS\" TEXT," + // 34: isPass
+                "\"LABEL_NO\" TEXT," + // 35: labelNo
+                "\"IMAGE_URL\" TEXT," + // 36: imageUrl
+                "\"CODE_PATH\" TEXT," + // 37: codePath
+                "\"SYSTEM_NUMBER\" TEXT," + // 38: SystemNumber
+                "\"PROTECT_AREA\" TEXT," + // 39: ProtectArea
+                "\"CHECK_DATE\" INTEGER);"); // 40: checkDate
     }
 
     /** Drops the underlying database table. */
@@ -145,199 +147,204 @@ public class ItemInfoDao extends AbstractDao<ItemInfo, Long> {
             stmt.bindLong(1, id);
         }
  
+        String uuid = entity.getUuid();
+        if (uuid != null) {
+            stmt.bindString(2, uuid);
+        }
+ 
         Long checkTypeId = entity.getCheckTypeId();
         if (checkTypeId != null) {
-            stmt.bindLong(2, checkTypeId);
+            stmt.bindLong(3, checkTypeId);
         }
  
         Long companyInfoId = entity.getCompanyInfoId();
         if (companyInfoId != null) {
-            stmt.bindLong(3, companyInfoId);
+            stmt.bindLong(4, companyInfoId);
         }
  
         String typeNo = entity.getTypeNo();
         if (typeNo != null) {
-            stmt.bindString(4, typeNo);
+            stmt.bindString(5, typeNo);
         }
  
         String deviceType = entity.getDeviceType();
         if (deviceType != null) {
-            stmt.bindString(5, deviceType);
+            stmt.bindString(6, deviceType);
         }
  
         String agentsType = entity.getAgentsType();
         if (agentsType != null) {
-            stmt.bindString(6, agentsType);
+            stmt.bindString(7, agentsType);
         }
  
         java.util.Date fillingDate = entity.getFillingDate();
         if (fillingDate != null) {
-            stmt.bindLong(7, fillingDate.getTime());
+            stmt.bindLong(8, fillingDate.getTime());
         }
  
         String no = entity.getNo();
         if (no != null) {
-            stmt.bindString(8, no);
+            stmt.bindString(9, no);
         }
  
         String level = entity.getLevel();
         if (level != null) {
-            stmt.bindString(9, level);
+            stmt.bindString(10, level);
         }
  
         String volume = entity.getVolume();
         if (volume != null) {
-            stmt.bindString(10, volume);
+            stmt.bindString(11, volume);
         }
  
         String weight = entity.getWeight();
         if (weight != null) {
-            stmt.bindString(11, weight);
+            stmt.bindString(12, weight);
         }
  
         String goodsWeight = entity.getGoodsWeight();
         if (goodsWeight != null) {
-            stmt.bindString(12, goodsWeight);
+            stmt.bindString(13, goodsWeight);
         }
  
         String pressure = entity.getPressure();
         if (pressure != null) {
-            stmt.bindString(13, pressure);
+            stmt.bindString(14, pressure);
         }
  
         String prodFactory = entity.getProdFactory();
         if (prodFactory != null) {
-            stmt.bindString(14, prodFactory);
+            stmt.bindString(15, prodFactory);
         }
  
         java.util.Date prodDate = entity.getProdDate();
         if (prodDate != null) {
-            stmt.bindLong(15, prodDate.getTime());
+            stmt.bindLong(16, prodDate.getTime());
         }
  
         String typeConformity = entity.getTypeConformity();
         if (typeConformity != null) {
-            stmt.bindString(16, typeConformity);
+            stmt.bindString(17, typeConformity);
         }
  
         String positionConformity = entity.getPositionConformity();
         if (positionConformity != null) {
-            stmt.bindString(17, positionConformity);
+            stmt.bindString(18, positionConformity);
         }
  
         String appearance = entity.getAppearance();
         if (appearance != null) {
-            stmt.bindString(18, appearance);
+            stmt.bindString(19, appearance);
         }
  
         String isPressure = entity.getIsPressure();
         if (isPressure != null) {
-            stmt.bindString(19, isPressure);
+            stmt.bindString(20, isPressure);
         }
  
         String check = entity.getCheck();
         if (check != null) {
-            stmt.bindString(20, check);
+            stmt.bindString(21, check);
         }
  
         String slience = entity.getSlience();
         if (slience != null) {
-            stmt.bindString(21, slience);
+            stmt.bindString(22, slience);
         }
  
         String reset = entity.getReset();
         if (reset != null) {
-            stmt.bindString(22, reset);
+            stmt.bindString(23, reset);
         }
  
         String powerAlarmFunction = entity.getPowerAlarmFunction();
         if (powerAlarmFunction != null) {
-            stmt.bindString(23, powerAlarmFunction);
+            stmt.bindString(24, powerAlarmFunction);
         }
  
         String alarmFunction = entity.getAlarmFunction();
         if (alarmFunction != null) {
-            stmt.bindString(24, alarmFunction);
+            stmt.bindString(25, alarmFunction);
         }
  
         String effectiveness = entity.getEffectiveness();
         if (effectiveness != null) {
-            stmt.bindString(25, effectiveness);
+            stmt.bindString(26, effectiveness);
         }
  
         String responseTime = entity.getResponseTime();
         if (responseTime != null) {
-            stmt.bindString(26, responseTime);
+            stmt.bindString(27, responseTime);
         }
  
         String description = entity.getDescription();
         if (description != null) {
-            stmt.bindString(27, description);
+            stmt.bindString(28, description);
         }
  
         String setAlarm25 = entity.getSetAlarm25();
         if (setAlarm25 != null) {
-            stmt.bindString(28, setAlarm25);
+            stmt.bindString(29, setAlarm25);
         }
  
         String setAlarm50 = entity.getSetAlarm50();
         if (setAlarm50 != null) {
-            stmt.bindString(29, setAlarm50);
+            stmt.bindString(30, setAlarm50);
         }
  
         String testAlarm25 = entity.getTestAlarm25();
         if (testAlarm25 != null) {
-            stmt.bindString(30, testAlarm25);
+            stmt.bindString(31, testAlarm25);
         }
  
         String testAlarm50 = entity.getTestAlarm50();
         if (testAlarm50 != null) {
-            stmt.bindString(31, testAlarm50);
+            stmt.bindString(32, testAlarm50);
         }
  
         java.util.Date observeDate = entity.getObserveDate();
         if (observeDate != null) {
-            stmt.bindLong(32, observeDate.getTime());
+            stmt.bindLong(33, observeDate.getTime());
         }
  
         String taskNumber = entity.getTaskNumber();
         if (taskNumber != null) {
-            stmt.bindString(33, taskNumber);
+            stmt.bindString(34, taskNumber);
         }
  
         String isPass = entity.getIsPass();
         if (isPass != null) {
-            stmt.bindString(34, isPass);
+            stmt.bindString(35, isPass);
         }
  
         String labelNo = entity.getLabelNo();
         if (labelNo != null) {
-            stmt.bindString(35, labelNo);
+            stmt.bindString(36, labelNo);
         }
  
         String imageUrl = entity.getImageUrl();
         if (imageUrl != null) {
-            stmt.bindString(36, imageUrl);
+            stmt.bindString(37, imageUrl);
         }
  
         String codePath = entity.getCodePath();
         if (codePath != null) {
-            stmt.bindString(37, codePath);
+            stmt.bindString(38, codePath);
         }
  
         String SystemNumber = entity.getSystemNumber();
         if (SystemNumber != null) {
-            stmt.bindString(38, SystemNumber);
+            stmt.bindString(39, SystemNumber);
         }
  
         String ProtectArea = entity.getProtectArea();
         if (ProtectArea != null) {
-            stmt.bindString(39, ProtectArea);
+            stmt.bindString(40, ProtectArea);
         }
  
         java.util.Date checkDate = entity.getCheckDate();
         if (checkDate != null) {
-            stmt.bindLong(40, checkDate.getTime());
+            stmt.bindLong(41, checkDate.getTime());
         }
     }
 
@@ -350,199 +357,204 @@ public class ItemInfoDao extends AbstractDao<ItemInfo, Long> {
             stmt.bindLong(1, id);
         }
  
+        String uuid = entity.getUuid();
+        if (uuid != null) {
+            stmt.bindString(2, uuid);
+        }
+ 
         Long checkTypeId = entity.getCheckTypeId();
         if (checkTypeId != null) {
-            stmt.bindLong(2, checkTypeId);
+            stmt.bindLong(3, checkTypeId);
         }
  
         Long companyInfoId = entity.getCompanyInfoId();
         if (companyInfoId != null) {
-            stmt.bindLong(3, companyInfoId);
+            stmt.bindLong(4, companyInfoId);
         }
  
         String typeNo = entity.getTypeNo();
         if (typeNo != null) {
-            stmt.bindString(4, typeNo);
+            stmt.bindString(5, typeNo);
         }
  
         String deviceType = entity.getDeviceType();
         if (deviceType != null) {
-            stmt.bindString(5, deviceType);
+            stmt.bindString(6, deviceType);
         }
  
         String agentsType = entity.getAgentsType();
         if (agentsType != null) {
-            stmt.bindString(6, agentsType);
+            stmt.bindString(7, agentsType);
         }
  
         java.util.Date fillingDate = entity.getFillingDate();
         if (fillingDate != null) {
-            stmt.bindLong(7, fillingDate.getTime());
+            stmt.bindLong(8, fillingDate.getTime());
         }
  
         String no = entity.getNo();
         if (no != null) {
-            stmt.bindString(8, no);
+            stmt.bindString(9, no);
         }
  
         String level = entity.getLevel();
         if (level != null) {
-            stmt.bindString(9, level);
+            stmt.bindString(10, level);
         }
  
         String volume = entity.getVolume();
         if (volume != null) {
-            stmt.bindString(10, volume);
+            stmt.bindString(11, volume);
         }
  
         String weight = entity.getWeight();
         if (weight != null) {
-            stmt.bindString(11, weight);
+            stmt.bindString(12, weight);
         }
  
         String goodsWeight = entity.getGoodsWeight();
         if (goodsWeight != null) {
-            stmt.bindString(12, goodsWeight);
+            stmt.bindString(13, goodsWeight);
         }
  
         String pressure = entity.getPressure();
         if (pressure != null) {
-            stmt.bindString(13, pressure);
+            stmt.bindString(14, pressure);
         }
  
         String prodFactory = entity.getProdFactory();
         if (prodFactory != null) {
-            stmt.bindString(14, prodFactory);
+            stmt.bindString(15, prodFactory);
         }
  
         java.util.Date prodDate = entity.getProdDate();
         if (prodDate != null) {
-            stmt.bindLong(15, prodDate.getTime());
+            stmt.bindLong(16, prodDate.getTime());
         }
  
         String typeConformity = entity.getTypeConformity();
         if (typeConformity != null) {
-            stmt.bindString(16, typeConformity);
+            stmt.bindString(17, typeConformity);
         }
  
         String positionConformity = entity.getPositionConformity();
         if (positionConformity != null) {
-            stmt.bindString(17, positionConformity);
+            stmt.bindString(18, positionConformity);
         }
  
         String appearance = entity.getAppearance();
         if (appearance != null) {
-            stmt.bindString(18, appearance);
+            stmt.bindString(19, appearance);
         }
  
         String isPressure = entity.getIsPressure();
         if (isPressure != null) {
-            stmt.bindString(19, isPressure);
+            stmt.bindString(20, isPressure);
         }
  
         String check = entity.getCheck();
         if (check != null) {
-            stmt.bindString(20, check);
+            stmt.bindString(21, check);
         }
  
         String slience = entity.getSlience();
         if (slience != null) {
-            stmt.bindString(21, slience);
+            stmt.bindString(22, slience);
         }
  
         String reset = entity.getReset();
         if (reset != null) {
-            stmt.bindString(22, reset);
+            stmt.bindString(23, reset);
         }
  
         String powerAlarmFunction = entity.getPowerAlarmFunction();
         if (powerAlarmFunction != null) {
-            stmt.bindString(23, powerAlarmFunction);
+            stmt.bindString(24, powerAlarmFunction);
         }
  
         String alarmFunction = entity.getAlarmFunction();
         if (alarmFunction != null) {
-            stmt.bindString(24, alarmFunction);
+            stmt.bindString(25, alarmFunction);
         }
  
         String effectiveness = entity.getEffectiveness();
         if (effectiveness != null) {
-            stmt.bindString(25, effectiveness);
+            stmt.bindString(26, effectiveness);
         }
  
         String responseTime = entity.getResponseTime();
         if (responseTime != null) {
-            stmt.bindString(26, responseTime);
+            stmt.bindString(27, responseTime);
         }
  
         String description = entity.getDescription();
         if (description != null) {
-            stmt.bindString(27, description);
+            stmt.bindString(28, description);
         }
  
         String setAlarm25 = entity.getSetAlarm25();
         if (setAlarm25 != null) {
-            stmt.bindString(28, setAlarm25);
+            stmt.bindString(29, setAlarm25);
         }
  
         String setAlarm50 = entity.getSetAlarm50();
         if (setAlarm50 != null) {
-            stmt.bindString(29, setAlarm50);
+            stmt.bindString(30, setAlarm50);
         }
  
         String testAlarm25 = entity.getTestAlarm25();
         if (testAlarm25 != null) {
-            stmt.bindString(30, testAlarm25);
+            stmt.bindString(31, testAlarm25);
         }
  
         String testAlarm50 = entity.getTestAlarm50();
         if (testAlarm50 != null) {
-            stmt.bindString(31, testAlarm50);
+            stmt.bindString(32, testAlarm50);
         }
  
         java.util.Date observeDate = entity.getObserveDate();
         if (observeDate != null) {
-            stmt.bindLong(32, observeDate.getTime());
+            stmt.bindLong(33, observeDate.getTime());
         }
  
         String taskNumber = entity.getTaskNumber();
         if (taskNumber != null) {
-            stmt.bindString(33, taskNumber);
+            stmt.bindString(34, taskNumber);
         }
  
         String isPass = entity.getIsPass();
         if (isPass != null) {
-            stmt.bindString(34, isPass);
+            stmt.bindString(35, isPass);
         }
  
         String labelNo = entity.getLabelNo();
         if (labelNo != null) {
-            stmt.bindString(35, labelNo);
+            stmt.bindString(36, labelNo);
         }
  
         String imageUrl = entity.getImageUrl();
         if (imageUrl != null) {
-            stmt.bindString(36, imageUrl);
+            stmt.bindString(37, imageUrl);
         }
  
         String codePath = entity.getCodePath();
         if (codePath != null) {
-            stmt.bindString(37, codePath);
+            stmt.bindString(38, codePath);
         }
  
         String SystemNumber = entity.getSystemNumber();
         if (SystemNumber != null) {
-            stmt.bindString(38, SystemNumber);
+            stmt.bindString(39, SystemNumber);
         }
  
         String ProtectArea = entity.getProtectArea();
         if (ProtectArea != null) {
-            stmt.bindString(39, ProtectArea);
+            stmt.bindString(40, ProtectArea);
         }
  
         java.util.Date checkDate = entity.getCheckDate();
         if (checkDate != null) {
-            stmt.bindLong(40, checkDate.getTime());
+            stmt.bindLong(41, checkDate.getTime());
         }
     }
 
@@ -561,45 +573,46 @@ public class ItemInfoDao extends AbstractDao<ItemInfo, Long> {
     public ItemInfo readEntity(Cursor cursor, int offset) {
         ItemInfo entity = new ItemInfo( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // checkTypeId
-            cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2), // companyInfoId
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // typeNo
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // deviceType
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // agentsType
-            cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)), // fillingDate
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // no
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // level
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // volume
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // weight
-            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // goodsWeight
-            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // pressure
-            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // prodFactory
-            cursor.isNull(offset + 14) ? null : new java.util.Date(cursor.getLong(offset + 14)), // prodDate
-            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // typeConformity
-            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // positionConformity
-            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // appearance
-            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // isPressure
-            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19), // check
-            cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // slience
-            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // reset
-            cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // powerAlarmFunction
-            cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // alarmFunction
-            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // effectiveness
-            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25), // responseTime
-            cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26), // description
-            cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27), // setAlarm25
-            cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28), // setAlarm50
-            cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29), // testAlarm25
-            cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30), // testAlarm50
-            cursor.isNull(offset + 31) ? null : new java.util.Date(cursor.getLong(offset + 31)), // observeDate
-            cursor.isNull(offset + 32) ? null : cursor.getString(offset + 32), // taskNumber
-            cursor.isNull(offset + 33) ? null : cursor.getString(offset + 33), // isPass
-            cursor.isNull(offset + 34) ? null : cursor.getString(offset + 34), // labelNo
-            cursor.isNull(offset + 35) ? null : cursor.getString(offset + 35), // imageUrl
-            cursor.isNull(offset + 36) ? null : cursor.getString(offset + 36), // codePath
-            cursor.isNull(offset + 37) ? null : cursor.getString(offset + 37), // SystemNumber
-            cursor.isNull(offset + 38) ? null : cursor.getString(offset + 38), // ProtectArea
-            cursor.isNull(offset + 39) ? null : new java.util.Date(cursor.getLong(offset + 39)) // checkDate
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // uuid
+            cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2), // checkTypeId
+            cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3), // companyInfoId
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // typeNo
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // deviceType
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // agentsType
+            cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)), // fillingDate
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // no
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // level
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // volume
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // weight
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // goodsWeight
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // pressure
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // prodFactory
+            cursor.isNull(offset + 15) ? null : new java.util.Date(cursor.getLong(offset + 15)), // prodDate
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // typeConformity
+            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // positionConformity
+            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // appearance
+            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19), // isPressure
+            cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // check
+            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // slience
+            cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // reset
+            cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // powerAlarmFunction
+            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // alarmFunction
+            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25), // effectiveness
+            cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26), // responseTime
+            cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27), // description
+            cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28), // setAlarm25
+            cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29), // setAlarm50
+            cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30), // testAlarm25
+            cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31), // testAlarm50
+            cursor.isNull(offset + 32) ? null : new java.util.Date(cursor.getLong(offset + 32)), // observeDate
+            cursor.isNull(offset + 33) ? null : cursor.getString(offset + 33), // taskNumber
+            cursor.isNull(offset + 34) ? null : cursor.getString(offset + 34), // isPass
+            cursor.isNull(offset + 35) ? null : cursor.getString(offset + 35), // labelNo
+            cursor.isNull(offset + 36) ? null : cursor.getString(offset + 36), // imageUrl
+            cursor.isNull(offset + 37) ? null : cursor.getString(offset + 37), // codePath
+            cursor.isNull(offset + 38) ? null : cursor.getString(offset + 38), // SystemNumber
+            cursor.isNull(offset + 39) ? null : cursor.getString(offset + 39), // ProtectArea
+            cursor.isNull(offset + 40) ? null : new java.util.Date(cursor.getLong(offset + 40)) // checkDate
         );
         return entity;
     }
@@ -607,45 +620,46 @@ public class ItemInfoDao extends AbstractDao<ItemInfo, Long> {
     @Override
     public void readEntity(Cursor cursor, ItemInfo entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setCheckTypeId(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
-        entity.setCompanyInfoId(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
-        entity.setTypeNo(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setDeviceType(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setAgentsType(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setFillingDate(cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)));
-        entity.setNo(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setLevel(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setVolume(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setWeight(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
-        entity.setGoodsWeight(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
-        entity.setPressure(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
-        entity.setProdFactory(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
-        entity.setProdDate(cursor.isNull(offset + 14) ? null : new java.util.Date(cursor.getLong(offset + 14)));
-        entity.setTypeConformity(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
-        entity.setPositionConformity(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
-        entity.setAppearance(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
-        entity.setIsPressure(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
-        entity.setCheck(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
-        entity.setSlience(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
-        entity.setReset(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
-        entity.setPowerAlarmFunction(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
-        entity.setAlarmFunction(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
-        entity.setEffectiveness(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
-        entity.setResponseTime(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
-        entity.setDescription(cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26));
-        entity.setSetAlarm25(cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27));
-        entity.setSetAlarm50(cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28));
-        entity.setTestAlarm25(cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29));
-        entity.setTestAlarm50(cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30));
-        entity.setObserveDate(cursor.isNull(offset + 31) ? null : new java.util.Date(cursor.getLong(offset + 31)));
-        entity.setTaskNumber(cursor.isNull(offset + 32) ? null : cursor.getString(offset + 32));
-        entity.setIsPass(cursor.isNull(offset + 33) ? null : cursor.getString(offset + 33));
-        entity.setLabelNo(cursor.isNull(offset + 34) ? null : cursor.getString(offset + 34));
-        entity.setImageUrl(cursor.isNull(offset + 35) ? null : cursor.getString(offset + 35));
-        entity.setCodePath(cursor.isNull(offset + 36) ? null : cursor.getString(offset + 36));
-        entity.setSystemNumber(cursor.isNull(offset + 37) ? null : cursor.getString(offset + 37));
-        entity.setProtectArea(cursor.isNull(offset + 38) ? null : cursor.getString(offset + 38));
-        entity.setCheckDate(cursor.isNull(offset + 39) ? null : new java.util.Date(cursor.getLong(offset + 39)));
+        entity.setUuid(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setCheckTypeId(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
+        entity.setCompanyInfoId(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
+        entity.setTypeNo(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setDeviceType(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setAgentsType(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setFillingDate(cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)));
+        entity.setNo(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setLevel(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setVolume(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setWeight(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setGoodsWeight(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setPressure(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setProdFactory(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setProdDate(cursor.isNull(offset + 15) ? null : new java.util.Date(cursor.getLong(offset + 15)));
+        entity.setTypeConformity(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
+        entity.setPositionConformity(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
+        entity.setAppearance(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
+        entity.setIsPressure(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
+        entity.setCheck(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
+        entity.setSlience(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
+        entity.setReset(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
+        entity.setPowerAlarmFunction(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
+        entity.setAlarmFunction(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
+        entity.setEffectiveness(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
+        entity.setResponseTime(cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26));
+        entity.setDescription(cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27));
+        entity.setSetAlarm25(cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28));
+        entity.setSetAlarm50(cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29));
+        entity.setTestAlarm25(cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30));
+        entity.setTestAlarm50(cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31));
+        entity.setObserveDate(cursor.isNull(offset + 32) ? null : new java.util.Date(cursor.getLong(offset + 32)));
+        entity.setTaskNumber(cursor.isNull(offset + 33) ? null : cursor.getString(offset + 33));
+        entity.setIsPass(cursor.isNull(offset + 34) ? null : cursor.getString(offset + 34));
+        entity.setLabelNo(cursor.isNull(offset + 35) ? null : cursor.getString(offset + 35));
+        entity.setImageUrl(cursor.isNull(offset + 36) ? null : cursor.getString(offset + 36));
+        entity.setCodePath(cursor.isNull(offset + 37) ? null : cursor.getString(offset + 37));
+        entity.setSystemNumber(cursor.isNull(offset + 38) ? null : cursor.getString(offset + 38));
+        entity.setProtectArea(cursor.isNull(offset + 39) ? null : cursor.getString(offset + 39));
+        entity.setCheckDate(cursor.isNull(offset + 40) ? null : new java.util.Date(cursor.getLong(offset + 40)));
      }
     
     @Override
