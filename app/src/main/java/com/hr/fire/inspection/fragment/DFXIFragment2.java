@@ -34,6 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class DFXIFragment2 extends Fragment {
     View rootView;
@@ -123,6 +124,7 @@ public class DFXIFragment2 extends Fragment {
                     itemInfo.setTaskNumber(item.getTaskNumber());
                     itemInfo.setIsPass("请选择");
                     itemInfo.setLabelNo("请编辑");
+                    itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
 
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                     long nowTime = new Date().getTime();
@@ -176,6 +178,7 @@ public class DFXIFragment2 extends Fragment {
                 itemInfo.setIsPass(item.getIsPass());
                 itemInfo.setLabelNo(item.getLabelNo());
                 itemInfo.setImageUrl(item.getImageUrl());
+                itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
                 itemInfo.setNo("请编辑");
@@ -197,6 +200,7 @@ public class DFXIFragment2 extends Fragment {
                 itemInfo.setTaskNumber("请编辑");
                 itemInfo.setIsPass("请选择");
                 itemInfo.setLabelNo("请编辑");
+                itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
 
 
                 //            <!--序号 1 -->  t
@@ -271,7 +275,7 @@ public class DFXIFragment2 extends Fragment {
             itemObj.setTaskNumber(et_9.getText().toString());
             itemObj.setIsPass(et_11.getText().toString());
             itemObj.setLabelNo(et_12.getText().toString());
-            Log.d("dong", "itemObj222222保存==   "+itemObj);
+            itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
             ServiceFactory.getYearCheckService().update(itemObj);
             Toast.makeText(getContext(), "数据保存成功", Toast.LENGTH_SHORT).show();
         }

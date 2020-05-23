@@ -47,6 +47,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -155,6 +156,7 @@ public class AutomaticFireAlarm3 extends Fragment {
                 itemInfo.setDescription(item.getDescription());
                 itemInfo.setProdFactory(item.getProdFactory());
                 itemInfo.setImageUrl(item.getImageUrl());
+                itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
                 itemInfo.setNo("请编辑");
@@ -165,6 +167,7 @@ public class AutomaticFireAlarm3 extends Fragment {
                 itemInfo.setDescription("请编辑");
                 itemInfo.setProdFactory("请编辑");
                 itemInfo.setAppearance("请编辑");
+                itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
             }
             long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, it.companyInfoId, checkTypes.get(2).getId(), it.number, it.srt_Date);
             //表示数据插入成功,再次查询,拿到最新的数据
@@ -180,42 +183,7 @@ public class AutomaticFireAlarm3 extends Fragment {
 
     @SuppressLint("SimpleDateFormat")
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    //点击"＋", 就像数据库中插入一条数据, 点"保存"就更新所有数据
-    public void addData() {
-        int childCount = hz_table_tbody_id.getChildCount();
-        if (childCount == 0) {
-            return;
-        }
-        //这些数据需要从上层传参过来
-        ItemInfo itemObj = new ItemInfo();
-        LinearLayout childAt = (LinearLayout) hz_table_tbody_id.getChildAt(childCount - 1);
-        TextView tv_1 = childAt.findViewById(R.id.tv_1);
-        EditText et_2 = childAt.findViewById(R.id.et_2);
-        EditText et_3 = childAt.findViewById(R.id.et_3);
-        EditText et_4 = childAt.findViewById(R.id.et_4);
-        EditText et_5 = childAt.findViewById(R.id.et_5);
-        EditText et_6 = childAt.findViewById(R.id.et_6);
-        EditText et_7 = childAt.findViewById(R.id.et_7);
-        TextView et_8 = childAt.findViewById(R.id.et_8);
-        ImageView tv_9 = childAt.findViewById(R.id.tv_9);
-        EditText tv_10 = childAt.findViewById(R.id.tv_10);
 
-
-        itemObj.setDeviceType(et_2.getText().toString());
-        itemObj.setProdFactory(et_3.getText().toString());
-        itemObj.setTypeNo(et_4.getText().toString());
-        itemObj.setNo(et_5.getText().toString());
-        itemObj.setAppearance(et_6.getText().toString());
-        itemObj.setResponseTime(et_7.getText().toString());
-        itemObj.setIsPass(et_8.getText().toString());
-        itemObj.setDescription(tv_10.getText().toString());
-        itemObj.setCheckDate(new Date());
-
-        long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj, it.companyInfoId, checkTypes.get(2).getId(), it.number, it.srt_Date);
-        if (l1 == 0) {
-            Toast.makeText(getContext(), "数据保存成功", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     public void upData() {
         int itemCount = hz_table_tbody_id.getChildCount();
@@ -252,6 +220,7 @@ public class AutomaticFireAlarm3 extends Fragment {
             itemObj.setResponseTime(et_7.getText().toString());
             itemObj.setIsPass(et_8.getText().toString());
             itemObj.setDescription(tv_10.getText().toString());
+            itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
 
 //            itemObj.setCheckDate(new Date());
 //            序号  tv_1  瓶号 et_2     生产厂家et_6  生产时间et_7  合格et_8  拍照rl_9  隐患描述tv_10

@@ -44,6 +44,7 @@ import com.hr.fire.inspection.impl.YCCamera;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
     public static String CHECK_ID = "checklist_num";
@@ -101,6 +102,7 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
                 ycr.setSystemNumber(its.number);
                 ycr.setProtectArea(" "); // 保护位号
                 ycr.setCheckDate(its.srt_Date);  //检查日期
+                ycr.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
                 ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, item_id, checkDataEasy.get(i).getId(), its.companyInfoId, check_id, its.number, its.srt_Date);
                 yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(divice_id, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
             }
@@ -157,6 +159,7 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
                         yearCheckResult.setSystemNumber(its.number);
                         yearCheckResult.setProtectArea(" "); // 保护位号
                         yearCheckResult.setCheckDate(its.srt_Date);  //检查日期
+                        yearCheckResult.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
                         ServiceFactory.getYearCheckService().update(yearCheckResult);
                     }
                     Toast.makeText(CarBonGoodsWeightAcitivty.this, "数据保存成功", Toast.LENGTH_SHORT).show();
@@ -248,9 +251,7 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
 //                Bitmap bitmap = BitmapFactory.decodeFile(tempFile.getPath());
                 //这里目前需要适配
                 if (fileNew.getAbsolutePath() != null && imgPostion != -1 && goodsAdapter != null) {
-                    Log.i("aaa", "保存咯111"+ yearCheckResults.get(imgPostion));
                     yearCheckResults.get(imgPostion).setImageUrl(fileNew.getAbsolutePath());
-                    Log.i("aaa", "保存咯222"+ yearCheckResults.get(imgPostion).getImageUrl());
                     goodsAdapter.notifyItemChanged(imgPostion);
                 }
                 break;

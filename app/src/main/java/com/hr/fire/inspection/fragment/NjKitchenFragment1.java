@@ -34,6 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class NjKitchenFragment1 extends Fragment {
     View rootView;
@@ -126,6 +127,7 @@ public class NjKitchenFragment1 extends Fragment {
                     itemInfo.setCodePath(item.getCodePath());
                     itemInfo.setIsPass("请选择");
                     itemInfo.setLabelNo("请编辑");
+                    itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
 
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                     long nowTime = new Date().getTime();
@@ -182,7 +184,7 @@ public class NjKitchenFragment1 extends Fragment {
                 itemInfo.setIsPass(item.getIsPass());
                 itemInfo.setLabelNo(item.getLabelNo());
                 itemInfo.setCodePath(item.getCodePath());
-//
+                itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
                 itemInfo.setAgentsType("请编辑");
@@ -205,6 +207,7 @@ public class NjKitchenFragment1 extends Fragment {
                 itemInfo.setTaskNumber("请选择");
                 itemInfo.setIsPass("请选择");
                 itemInfo.setLabelNo("请编辑");
+                itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
 
             }
             long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, it.companyInfoId, checkTypes.get(0).getId(), it.number, it.srt_Date);

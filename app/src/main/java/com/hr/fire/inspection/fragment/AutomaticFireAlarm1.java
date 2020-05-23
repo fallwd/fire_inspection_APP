@@ -214,6 +214,7 @@ public class AutomaticFireAlarm1 extends Fragment {
             itemObj.setResponseTime(et_7.getText().toString());
             itemObj.setIsPass(et_8.getText().toString());
             itemObj.setDescription(tv_10.getText().toString());
+            itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
 
 //            itemObj.setCheckDate(new Date());
 //            序号  tv_1  瓶号 et_2     生产厂家et_6  生产时间et_7  合格et_8  拍照rl_9  隐患描述tv_10

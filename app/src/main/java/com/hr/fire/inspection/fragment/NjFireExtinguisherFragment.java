@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class NjFireExtinguisherFragment extends Fragment {
     View rootView;
@@ -156,6 +157,7 @@ public class NjFireExtinguisherFragment extends Fragment {
         itemObj.setSystemNumber("SD002");
         itemObj.setProtectArea("主配电间");
         itemObj.setCodePath("检查表图片路径:/src/YJP0002.jpg");
+        itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
         Log.d("dong", "一直遍历吗兄弟?" + date1 + "  " + et_5.getText().toString());
 //        }
         long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj, 201, 1, "HZ001", it.srt_Date);
@@ -194,6 +196,7 @@ public class NjFireExtinguisherFragment extends Fragment {
             itemObj.setSystemNumber("SD002");
             itemObj.setProtectArea("主配电间");
             itemObj.setCodePath("检查表图片路径:/src/YJP0002.jpg");
+            itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
             list.add(itemObj);
         }
         Log.d("dong", "itemCount" + itemCount + "   " + hz_table_tbody_id.getChildCount() + "   list  + " + list.size());
