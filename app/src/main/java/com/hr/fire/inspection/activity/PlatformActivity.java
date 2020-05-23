@@ -142,7 +142,6 @@ public class PlatformActivity extends AppCompatActivity implements View.OnClickL
     protected void onStart() {
         super.onStart();
         dataList = ServiceFactory.getCompanyInfoService().getPlatformList(oil_name);
-        Log.i("AAAAAAA", "这是平台的列表数据"+ dataList);
 
 
 

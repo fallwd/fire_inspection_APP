@@ -1,8 +1,12 @@
 package com.hr.fire.inspection.utils;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Environment;
 import android.widget.Toast;
+
+import androidx.core.content.FileProvider;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
@@ -35,13 +39,21 @@ public class ExcelUtils {
 
     public void exportExcel(Context mContext , String filename) {
         try {
-            //创建一个文件
-            String path = Environment.getExternalStorageDirectory().getPath();
+            //保存到ExportData这个文件夹下
+            File path = Environment.getExternalStorageDirectory();
+            path = Environment.getExternalStoragePublicDirectory("ExportData");
             File file = new File(path + "/" + filename + ".xls");
             OutputStream stream = new FileOutputStream(file);//将Excel文件写入创建的file当中
             workbook.write(stream);// 写入流
             stream.close();//关闭流
             Toast.makeText(mContext, "报告生成成功", Toast.LENGTH_SHORT).show();
+            if (file.isFile()) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri uri = FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".fileProvider", file);
+                intent.setDataAndType(uri, "application/vnd.ms-excel");
+                mContext.startActivity(intent);
+                return;
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -130,10 +142,10 @@ public class ExcelUtils {
      */
     private CellStyle createTitleCellStyle(HSSFWorkbook wb) {
         CellStyle cellStyle = wb.createCellStyle();
-        cellStyle.setAlignment(HorizontalAlignment.CENTER);//水平居中
+        cellStyle.setAlignment(HorizontalAlignment.LEFT);//水平居中
         cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);//垂直对齐
         cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-        cellStyle.setFillForegroundColor(IndexedColors.GREY_40_PERCENT.getIndex());//背景颜色
+//        cellStyle.setFillForegroundColor(IndexedColors.GREY_40_PERCENT.getIndex());//背景颜色
 
         cellStyle.setBottomBorderColor(IndexedColors.BLACK.index);
         cellStyle.setBorderBottom(BorderStyle.THIN); //下边框
@@ -160,7 +172,7 @@ public class ExcelUtils {
         cellStyle.setAlignment(HorizontalAlignment.CENTER);//水平居中
         cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);//垂直对齐
         cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-        cellStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());//背景颜色
+//        cellStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());//背景颜色
 
         cellStyle.setBottomBorderColor(IndexedColors.BLACK.index);
         cellStyle.setBorderBottom(BorderStyle.THIN); //下边框

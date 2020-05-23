@@ -258,7 +258,7 @@ public class HFCActivity extends AppCompatActivity {
                 mHFCFragment3.saveData();
             } else if (fragment instanceof HFCFragment4) {
                 mHFCFragment4.saveData();
-            } else if (fragment instanceof HFCFragment4) {
+            } else if (fragment instanceof HFCFragment5) {
                 mHFCFragment5.saveData();
             }
         }

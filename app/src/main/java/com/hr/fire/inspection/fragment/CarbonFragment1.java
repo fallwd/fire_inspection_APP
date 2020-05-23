@@ -35,6 +35,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class CarbonFragment1 extends Fragment {
     View rootView;
@@ -98,6 +99,7 @@ public class CarbonFragment1 extends Fragment {
      * 3. 用gettableNameData返回的数据ID,  填充到getItemDataEasy第三个参数
      */
     private void initData() {
+        Log.i("aaa","UUID:"+UUID.randomUUID().toString().replace("-",""));
         //历史中的companyInfoId  ,  systemId和在公司、平台那边传过来的都是一样的ID，使用哪一个都行
 
         checkTypes = ServiceFactory.getYearCheckService().gettableNameData(its.systemId);
@@ -124,6 +126,7 @@ public class CarbonFragment1 extends Fragment {
                     itemInfo.setTaskNumber(item.getTaskNumber());
                     itemInfo.setIsPass("请选择");
                     itemInfo.setLabelNo("请编辑");
+                    itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
 
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                     long nowTime = new Date().getTime();
@@ -174,6 +177,7 @@ public class CarbonFragment1 extends Fragment {
                 itemInfo.setTaskNumber(item.getTaskNumber());
                 itemInfo.setIsPass(item.getIsPass());
                 itemInfo.setLabelNo(item.getLabelNo());
+                itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
                 itemInfo.setNo("请编辑");
@@ -194,6 +198,7 @@ public class CarbonFragment1 extends Fragment {
                 itemInfo.setObserveDate(date);
                 itemInfo.setTaskNumber("请选择");
                 itemInfo.setIsPass("请选择");
+                itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
             }
             long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
             //表示数据插入成功,再次查询,拿到最新的数据
@@ -245,6 +250,7 @@ public class CarbonFragment1 extends Fragment {
             itemObj.setIsPass(tv_10.getText().toString());
             itemObj.setTaskNumber(tv_11.getText().toString());
             itemObj.setLabelNo(et_12.getText().toString());
+            itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
             ServiceFactory.getYearCheckService().update(itemObj);
         }
         Toast.makeText(getContext(), "\"药剂瓶\"数据保存成功", Toast.LENGTH_SHORT).show();

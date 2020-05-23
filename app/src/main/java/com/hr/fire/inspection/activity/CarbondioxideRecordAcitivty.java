@@ -2,34 +2,25 @@ package com.hr.fire.inspection.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.adapter.CompanyAdapter;
 import com.hr.fire.inspection.adapter.GridRecordAdapter;
-import com.hr.fire.inspection.adapter.HFC1Adapter;
 import com.hr.fire.inspection.entity.CheckType;
-import com.hr.fire.inspection.entity.CompanyInfo;
 import com.hr.fire.inspection.entity.Function;
-import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.ServiceFactory;
@@ -38,27 +29,11 @@ import com.hr.fire.inspection.utils.ExcelUtils;
 import com.hr.fire.inspection.utils.SystemConstant;
 import com.hr.fire.inspection.utils.TimeUtil;
 
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.hr.fire.inspection.adapter.CheckReporItemAdapter.removeModelSheet;
 
 //二氧化碳年检记录
 public class CarbondioxideRecordAcitivty extends AppCompatActivity implements View.OnClickListener {
@@ -77,8 +52,6 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
     private String Platform_name;
     private List<CheckType> checkTypes;
     private List<ItemInfo> itemDataList = new ArrayList<>();
-    private List<YearCheckResult> yearCheckResults;
-    private List<String> columnNames;
 
 
     @Override
@@ -96,6 +69,12 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         sys_number = intent.getStringExtra("sys_number");  //系统位号
         protect_area = intent.getStringExtra("protect_area");  //保护区域
         selected_tag = -1;
+
+        checkTypes = ServiceFactory.getYearCheckService().gettableNameData(sys_id);
+        if (checkTypes == null) {
+            Toast.makeText(this, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
+        }
+        Log.i("获取checkTypes","checkTypes:"+ checkTypes);
     }
 
     @Override
@@ -280,6 +259,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                     Toast.makeText(CarbondioxideRecordAcitivty.this, "请先选择历史数据", Toast.LENGTH_SHORT).show();
                 } else {
                     HashMap hashMap = historyList.get(selected_tag);
+                    Log.i("aaa","hasmap="+ hashMap);
                     long companyId = (long) hashMap.get("companyInfoId");
                     String number = (String) hashMap.get("systemNumber");
                     long systemId = (long) hashMap.get("systemId");
@@ -289,56 +269,54 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                     if (checkTypes == null) {
                         Toast.makeText(this, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
                     }
-                    Log.i("获取checkTypes","checkTypes:"+ checkTypes);
 
-
-//                    columnNames = new ArrayList<>();
-
-//                    for (int i = 0; i< checkTypes.size(); i++) {
-//                        ((ArrayList) columnNames).add(checkTypes.get(i).getName());
-//                        //参数1:公司id, 参数2:检查表类型对应的id, 参数3:输入的系统位号，如果没有就填"",或者SD002,否则没数据   参数4:日期
-//                        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(companyId, checkTypes.get(i).getId(), number == null ? "" : number, checkDate);
-//                        Log.i("获取itemDataList","itemDataList:"+ itemDataList);
-//                        Log.i("分割线=================","分割线==================================");
-//                        if (itemDataList.isEmpty()) {
-//                            yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, companyId, checkTypes.get(2).getId(), number, checkDate);
-//                            Log.i("获取yearCheckResults","yearCheckResults:"+ yearCheckResults);
-//                        }
-//
-//                    }
-//                    Log.i("获取columnNames","columnNames:"+ columnNames);
-//                    JSONObject headers = new JSONObject();
-//                    if (sys_id == 1) {
-//                        headers = {"序号","瓶号","容积/L","瓶重/kg","药剂量/kg","生产厂家","生产日期","水压试验日期","工作代号","是否合格","检验标签"}
-//
-//                    }
 
                     ExcelUtils excelUtils = new ExcelUtils();
+                    int checkResultIndex = SystemConstant.getInstance().getCheckReusltIndexBySystemId(sys_id);
 
-                    for (CheckType checkType : checkTypes) {
-                        Log.i("aaaa","获取检查的id" + checkType);
+                    for (int i=0;i<checkTypes.size();i++) {
+                        CheckType checkType = checkTypes.get(i);
                         Map<String, Object> system = SystemConstant.getInstance().getSystem(checkType.getId());
 
                         String[][] columns = (String[][]) system.get("columns");
                         String title = (String) system.get("title");
-                        String[] columnWidth = new String[columns[0].length];
+                        if (columns != null) {
+                            String[] columnWidth = new String[columns[0].length];
 
-                        for (int i = 0; i < columnWidth.length; i++) {
-                            columnWidth[i] = "30";
+                            for (int j = 0; j < columnWidth.length; j++) {
+                                columnWidth[j] = "30";
+                            }
+
+                            List<Map<String, Object>> items = new ArrayList<>();
+                            if (i < checkResultIndex) {
+
+                                List<ItemInfo> itemDataEasy = ServiceFactory.getYearCheckService().getItemDataEasy(companyId, checkType.getId(), number == null ? "" : number, checkDate);
+
+                                for (ItemInfo itemInfo : itemDataEasy) {
+                                    items.add(Class2Map.getMapParams(itemInfo));
+                                }
+                            } else {
+
+                                List<YearCheckResult> checkResultDataEasy = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, companyId, checkType.getId(), number, checkDate);
+
+                                for (YearCheckResult yearCheckResult : checkResultDataEasy) {
+                                    Map<String,Object> yearcheck = Class2Map.getMapParams(yearCheckResult.getYearCheck());
+                                    Map<String, Object> mapParams = Class2Map.getMapParams(yearCheckResult);
+
+                                    for (Map.Entry entry : yearcheck.entrySet()) {
+                                        mapParams.put("yearCheck." + entry.getKey(), entry.getValue());
+                                    }
+
+                                    items.add(mapParams);
+                                }
+                            }
+
+                            excelUtils.genSheet(title, columns, columnWidth, items, title);
+
+
+                            String ret = (String) hashMap.get("ret");
+                            excelUtils.exportExcel(CarbondioxideRecordAcitivty.this, ret);
                         }
-
-                        List<ItemInfo> itemDataEasy = ServiceFactory.getYearCheckService().getItemDataEasy(companyId, checkType.getId(), number == null ? "" : number, checkDate);
-
-
-                        List<Map<String,Object>> items = new ArrayList<>();
-                        for (ItemInfo itemInfo : itemDataEasy) {
-                            items.add(Class2Map.getMapParams(itemInfo));
-                        }
-
-                        excelUtils.genSheet(title,columns,columnWidth,items,title);
-
-                        excelUtils.exportExcel(CarbondioxideRecordAcitivty.this, "我的第一个导出文件");
-
                     }
                 }
                 break;

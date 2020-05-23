@@ -89,7 +89,7 @@ public class HFC1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.et_2.setText(new StringBuffer().append(info.getNo()).append(""));
             vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
             vh.et_4.setText(new StringBuffer().append(info.getWeight()).append(""));
-            vh.et_5.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));
+            vh.et_5.setText(new StringBuffer().append(info.getPressure()).append(""));
             vh.et_6.setText(new StringBuffer().append(info.getProdFactory()).append(""));
 
             String mProdDate = DateFormatUtils.format(info.getProdDate(),"yyyy-MM");

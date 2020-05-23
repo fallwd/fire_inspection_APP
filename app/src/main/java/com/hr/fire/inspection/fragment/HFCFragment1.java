@@ -109,7 +109,7 @@ public class HFCFragment1 extends Fragment {
                     itemInfo.setNo(item.getNo());
                     itemInfo.setVolume(item.getVolume());
                     itemInfo.setWeight(item.getWeight());
-                    itemInfo.setGoodsWeight(item.getGoodsWeight());
+                    itemInfo.setPressure(item.getPressure());
                     itemInfo.setProdFactory(item.getProdFactory());
                     itemInfo.setProdDate(item.getProdDate());
                     itemInfo.setObserveDate(item.getObserveDate());
@@ -159,7 +159,7 @@ public class HFCFragment1 extends Fragment {
                 itemInfo.setNo(item.getNo());
                 itemInfo.setVolume(item.getVolume());
                 itemInfo.setWeight(item.getWeight());
-                itemInfo.setGoodsWeight(item.getGoodsWeight());
+                itemInfo.setPressure(item.getPressure());
                 itemInfo.setProdFactory(item.getProdFactory());
                 itemInfo.setProdDate(item.getProdDate());
                 itemInfo.setObserveDate(item.getObserveDate());
@@ -171,7 +171,7 @@ public class HFCFragment1 extends Fragment {
                 itemInfo.setNo("请编辑");
                 itemInfo.setVolume("请编辑");
                 itemInfo.setWeight("请编辑");
-                itemInfo.setGoodsWeight("请编辑");
+                itemInfo.setPressure("请编辑");
                 itemInfo.setProdFactory("请编辑");
                 Date date = new Date();
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");

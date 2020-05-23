@@ -72,6 +72,15 @@ public class FireActivity extends AppCompatActivity {
         fireItemAdapter.setData(systemNameData);
         main_list.setAdapter(fireItemAdapter);
 
+        Button importData = findViewById(R.id.importData);
+
+        importData.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(FireActivity.this, importDataActicity.class);
+                startActivity(intent);
+            }
+        });
+
         //点击跳转详情页
         main_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

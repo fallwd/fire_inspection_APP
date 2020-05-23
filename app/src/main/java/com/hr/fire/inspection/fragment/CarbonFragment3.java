@@ -192,7 +192,7 @@ public class CarbonFragment3 extends Fragment {
                 ServiceFactory.getYearCheckService().update(yearCheckResult);
             }
         }
-        Toast.makeText(getContext(), "\"管线管件\"数据保存成功", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "数据保存成功", Toast.LENGTH_SHORT).show();
     }
 
 
