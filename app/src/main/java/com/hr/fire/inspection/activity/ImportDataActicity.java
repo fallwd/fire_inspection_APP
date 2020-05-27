@@ -292,13 +292,6 @@ public class ImportDataActicity extends AppCompatActivity {
 
                                 Log.i("AAAA","我的ycr : "+ ycr);
                                 try {
-//                                    Log.i("AAAA","我的二级表右侧数据1:"+ ycr);
-//                                    Log.i("AAAA","我的二级表右侧数据2:"+ itemInfo.getId());
-//                                    Log.i("AAAA","我的二级表右侧数据3:"+ yearChecks.get(i).getId());
-//                                    Log.i("AAAA","我的二级表右侧数据4:"+ companyInfoId);
-//                                    Log.i("AAAA","我的二级表右侧数据5:"+ checkTypes.get(i).getId());
-//                                    Log.i("AAAA","我的二级表右侧数据6:"+ number);
-//                                    Log.i("AAAA","我的二级表右侧数据7:"+ srt_Date);
                                     // ToDo
                                     long yearcheckId = parseLong(MapUtils.getString(map,"yearCheckId"));
                                     Log.i("AAAA","yearcheckIdyearcheckIdyearcheckId:"+ yearcheckId);
@@ -311,75 +304,7 @@ public class ImportDataActicity extends AppCompatActivity {
                                     Log.i("AAAA","updateupdateupdateupdateupdateupdate : "+ ycr);
                                     ServiceFactory.getYearCheckService().update(ycr);
                                 }
-
-//                                String checkDataEasy = MapUtils.getString(map, "checkDataEasy");
-//                                List<YearCheck> yearChecks = new Gson().fromJson(checkDataEasy,new TypeToken<List<YearCheck>>(){}.getType());
-//
-//                                String yearCheckResults = MapUtils.getString(map, "yearCheckResults");
-//                                List<YearCheckResult> YearCheckResult = new Gson().fromJson(yearCheckResults,new TypeToken<List<YearCheckResult>>(){}.getType());
-//                                Log.i("AAAA","YearCheckResult : "+ YearCheckResult);
-//                                if (YearCheckResult != null) {
-//                                    for (int y = 0; y < YearCheckResult.size(); y++) {
-//                                        YearCheckResult ycr = YearCheckResult.get(y);
-//                                    /*YearCheckResult ycr = new YearCheckResult();
-//                                    ycr.setIsPass(YearCheckResult.get(y).getIsPass());
-//                                    ycr.setImageUrl(YearCheckResult.get(y).getImageUrl());
-//                                    ycr.setDescription(YearCheckResult.get(y).getDescription());
-//                                    ycr.setSystemNumber(number=="" ? null : number);
-//                                    ycr.setProtectArea(" "); // 保护位号
-//                                    ycr.setCheckDate(srt_Date);  //检查日期
-//                                    ycr.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断*/
-//                                        Log.i("AAAA","我的二级表右侧数据1:"+ ycr);
-//                                        Log.i("AAAA","我的二级表右侧数据2:"+ itemInfo.getId());
-//                                        Log.i("AAAA","我的二级表右侧数据3:"+ yearChecks.get(y).getId());
-//                                        Log.i("AAAA","我的二级表右侧数据4:"+ companyInfoId);
-//                                        Log.i("AAAA","我的二级表右侧数据5:"+ checkTypes.get(y).getId());
-//                                        Log.i("AAAA","我的二级表右侧数据6:"+ number);
-//                                        Log.i("AAAA","我的二级表右侧数据7:"+ srt_Date);
-//                                        try {
-//                                            ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, itemInfo.getId(), yearChecks.get(y).getId(), companyInfoId, checkTypes.get(y).getId(), number == "" ? null : number, srt_Date);
-//                                        } catch (Exception e) {
-//                                            ServiceFactory.getYearCheckService().update(ycr);
-//                                        }
-//                                    }
-//                                }
                             }
-
-
-
-
-//                            try {
-//
-////                                ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, companyInfoId, checkTypes.get(i).getId(), number=="" ? null : number, srt_Date);
-//
-//                                String checkDataEasy = MapUtils.getString(map, "checkDataEasy");
-//                                List<YearCheck> yearChecks = new Gson().fromJson(checkDataEasy,new TypeToken<List<YearCheck>>(){}.getType());
-////                                    Log.i("AAAA","yearChecks : "+ yearChecks);
-//
-//                                YearCheckResult ycr = new YearCheckResult();
-//                                YearCheck yearCheck = new YearCheck();
-//
-//                                yearCheck.setRequirement(MapUtils.getString(map,"yearCheck.requirement"));
-//                                yearCheck.setProject(MapUtils.getString(map,"yearCheck.project"));
-//                                yearCheck.setRequirement(MapUtils.getString(map,"yearCheck.requirement"));
-//                                yearCheck.setContent(MapUtils.getString(map,"yearCheck.content"));
-//                                yearCheck.setStandard(MapUtils.getString(map,"yearCheck.standard"));
-//
-//                                ycr.setYearCheck(yearCheck);
-//                                ycr.setImageUrl(MapUtils.getString(map,"imageUrl"));
-//                                ycr.setDescription(MapUtils.getString(map,"description"));
-//                                ycr.setIsPass(MapUtils.getString(map,"isPass"));
-//
-//                                ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, itemInfo.getId(), yearChecks.get(i).getId(), companyInfoId, checkTypes.get(i).getId(), number == "" ? null : number, srt_Date);
-//                            } catch (Exception e) {
-//                                ServiceFactory.getYearCheckService().update(itemInfo);
-//                            }
-
-
-
-
-
-
                         }
                     }
                     for (List<Map<String,Object>> list : result) {
@@ -387,7 +312,7 @@ public class ImportDataActicity extends AppCompatActivity {
                             System.out.println(new Gson().toJson(map));
                         }
                     }
-                    Toast.makeText(this, "导入数据成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "导入数据成功，请到对应的历史数据页面查看", Toast.LENGTH_SHORT).show();
 
                 } catch (Exception e) {
                     e.printStackTrace();

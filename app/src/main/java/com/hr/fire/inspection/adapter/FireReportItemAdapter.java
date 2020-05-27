@@ -99,6 +99,7 @@ public class FireReportItemAdapter extends BaseAdapter {
         holder.sayTextView.setText(stringArrayList.get(position));
         // 点击导出按钮 生成报告
         holder.viewBtn.setOnClickListener(v -> {
+
             Toast.makeText(mContext, "正在生成报告，请稍后...", Toast.LENGTH_SHORT).show();
             fileName = stringArrayList.get(position);
             String year = DateFormatUtils.format(checkDate.get(position),"yyyy");
