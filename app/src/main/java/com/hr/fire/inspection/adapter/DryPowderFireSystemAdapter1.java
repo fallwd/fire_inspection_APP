@@ -108,7 +108,7 @@ public class DryPowderFireSystemAdapter1 extends RecyclerView.Adapter<RecyclerVi
                 }
             });
 
-            vh.tv_9.setText(new StringBuffer().append("干粉罐").append(position + 1).append("号表"));
+            vh.tv_9.setText(new StringBuffer().append("干粉罐"));
 
             Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
             drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
@@ -124,7 +124,7 @@ public class DryPowderFireSystemAdapter1 extends RecyclerView.Adapter<RecyclerVi
             });
 
             vh.et_10.setText(new StringBuffer().append(info.getIsPass()).append(""));
-            vh.et_11.setText(new StringBuffer().append(info.getLabelNo()+ (position + 1)));
+            vh.et_11.setText(new StringBuffer().append(info.getLabelNo()));
 //            vh.et_12.setImageURI(info.getCodePath()); // 二维码路径？？？
             //二维码点击
             vh.et_12.setOnClickListener(new View.OnClickListener() {

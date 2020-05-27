@@ -48,6 +48,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -158,6 +159,7 @@ public class AutomaticFireAlarm8 extends Fragment {
                 itemInfo.setDescription(item.getDescription());
                 itemInfo.setProdFactory(item.getProdFactory());
                 itemInfo.setImageUrl(item.getImageUrl());
+                itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
                 itemInfo.setNo("请添加");
@@ -172,6 +174,7 @@ public class AutomaticFireAlarm8 extends Fragment {
                 itemInfo.setIsPass("请添加");
                 itemInfo.setDescription("请添加");
                 itemInfo.setProdFactory("请添加");
+                itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
             }
             long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, it.companyInfoId, checkTypes.get(7).getId(), it.number, it.srt_Date);
             //表示数据插入成功,再次查询,拿到最新的数据
@@ -187,52 +190,7 @@ public class AutomaticFireAlarm8 extends Fragment {
 
     @SuppressLint("SimpleDateFormat")
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    //点击"＋", 就像数据库中插入一条数据, 点"保存"就更新所有数据
-    public void addData() {
-        int childCount = hz_table_tbody_id2.getChildCount();
-        if (childCount == 0) {
-            return;
-        }
-        //这些数据需要从上层传参过来
-        ItemInfo itemObj = new ItemInfo();
-        LinearLayout childAt = (LinearLayout) hz_table_tbody_id2.getChildAt(childCount - 1);
-        TextView tv_1 = childAt.findViewById(R.id.tv_1);
-        EditText et_2 = childAt.findViewById(R.id.et_2);
-        EditText et_3 = childAt.findViewById(R.id.et_3);
-        EditText et_4 = childAt.findViewById(R.id.et_4);
-        EditText et_5 = childAt.findViewById(R.id.et_5);
-        TextView et_6 = childAt.findViewById(R.id.et_6);
-        EditText et_7 = childAt.findViewById(R.id.et_7);
-        EditText et_8 = childAt.findViewById(R.id.et_8);
-        EditText et_9 = childAt.findViewById(R.id.et_9);
-        EditText et_10 = childAt.findViewById(R.id.et_10);
-        EditText et_11= childAt.findViewById(R.id.et_11);
-        TextView et_12 = childAt.findViewById(R.id.et_12);
-        ImageView et_13 = childAt.findViewById(R.id.et_13);
-        EditText et_14 = childAt.findViewById(R.id.et_14);
 
-
-
-        itemObj.setDeviceType(et_2.getText().toString());
-        itemObj.setProdFactory(et_3.getText().toString());
-        itemObj.setTypeNo(et_4.getText().toString());
-        itemObj.setNo(et_5.getText().toString());
-        itemObj.setAppearance(et_6.getText().toString());
-        itemObj.setSetAlarm25(et_7.getText().toString());
-        itemObj.setSetAlarm50(et_8.getText().toString());
-        itemObj.setTestAlarm25(et_9.getText().toString());
-        itemObj.setTestAlarm50(et_10.getText().toString());
-        itemObj.setResponseTime(et_11.getText().toString());
-        itemObj.setIsPass(et_12.getText().toString());
-//        照片怎么上传 怎么获取
-        itemObj.setDescription(et_14.getText().toString());
-        itemObj.setCheckDate(new Date());
-
-        long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj, it.companyInfoId, checkTypes.get(7).getId(), it.number, it.srt_Date);
-        if (l1 == 0) {
-            Toast.makeText(getContext(), "药剂瓶数据保存成功", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     public void upData() {
         int itemCount = hz_table_tbody_id2.getChildCount();
@@ -274,7 +232,8 @@ public class AutomaticFireAlarm8 extends Fragment {
             itemObj.setIsPass(et_12.getText().toString());
             //      et_13 照片怎么上传 怎么获取
             itemObj.setDescription(et_14.getText().toString());
-            Log.d("dong", "itemObj222222保存==   "+itemObj);
+
+            itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
             ServiceFactory.getYearCheckService().update(itemObj);
             Toast.makeText(getActivity(), "数据保存成功", Toast.LENGTH_SHORT).show();
         }

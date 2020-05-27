@@ -38,6 +38,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class FoamFireFragment1 extends Fragment {
     View rootView;
@@ -115,6 +116,7 @@ public class FoamFireFragment1 extends Fragment {
                     ycr.setSystemNumber(its.number);
                     ycr.setProtectArea(" "); // 保护位号
                     ycr.setCheckDate(its.srt_Date);  //检查日期
+                    ycr.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                     long nowTime = new Date().getTime();
                     String d = format.format(nowTime);

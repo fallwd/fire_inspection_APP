@@ -255,33 +255,6 @@ public class AutomaticFireAlarmAdapter2 extends RecyclerView.Adapter<RecyclerVie
     }
 
 
-    //  添加数据
-    public void addData(int position) {
-//      在list中添加数据，并通知条目加入一条
-        if (mData != null && mData.size() != 0) {
-            //添加最后一条数据
-            mData.add(mData.get(mData.size() - 1));
-            //添加动画
-            notifyItemInserted(position);
-        } else {
-            ItemInfo itemInfo = new ItemInfo();
-            itemInfo.setDeviceType("请添加");
-            itemInfo.setProdFactory("请添加");
-            itemInfo.setTypeNo("请添加");
-            itemInfo.setNo("请添加");
-            itemInfo.setAppearance("请添加");
-            itemInfo.setSetAlarm25("请添加");
-            itemInfo.setSetAlarm50("请添加");
-            itemInfo.setTestAlarm25("请添加");
-            itemInfo.setTestAlarm50("请添加");
-            itemInfo.setResponseTime("请添加");
-            itemInfo.setIsPass("请添加");
-            itemInfo.setDescription("请添加");
-            mData.add(itemInfo);
-        }
-//        notifyDataSetChanged();
-    }
-
     //  删除数据
     public void removeData(int position) {
         if (mData != null && mData.size() == 1) {

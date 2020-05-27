@@ -43,6 +43,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class NjKitchenFragment2 extends Fragment {
     View rootView;
@@ -134,6 +135,7 @@ public class NjKitchenFragment2 extends Fragment {
                     itemInfo.setCodePath(item.getCodePath());
                     itemInfo.setIsPass("请选择");
                     itemInfo.setLabelNo("请编辑");
+                    itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
 
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                     long nowTime = new Date().getTime();
@@ -187,6 +189,7 @@ public class NjKitchenFragment2 extends Fragment {
                 itemInfo.setIsPass(item.getIsPass());
                 itemInfo.setLabelNo(item.getLabelNo());
                 itemInfo.setCodePath(item.getCodePath());
+                itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
                 itemInfo.setNo("请编辑");
@@ -206,6 +209,7 @@ public class NjKitchenFragment2 extends Fragment {
                 itemInfo.setTaskNumber("请选择");
                 itemInfo.setIsPass("请选择");
                 itemInfo.setLabelNo("请编辑");
+                itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
 
             }
             long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, it.companyInfoId, checkTypes.get(1).getId(), it.number, it.srt_Date);
@@ -270,7 +274,7 @@ public class NjKitchenFragment2 extends Fragment {
             itemObj.setLabelNo(et_13.getText().toString());
 //          itemObj.setCodePath(et_14.getImageAlpha());                  // 图片路径怎么填
 
-            Log.d("dong", "itemObj222222保存==   "+itemObj);
+            itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
             ServiceFactory.getYearCheckService().update(itemObj);
             Toast.makeText(getContext(), "数据保存成功", Toast.LENGTH_SHORT).show();
         }

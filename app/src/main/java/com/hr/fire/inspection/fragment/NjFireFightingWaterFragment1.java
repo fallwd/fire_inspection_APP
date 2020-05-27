@@ -34,6 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class NjFireFightingWaterFragment1 extends Fragment {
     View rootView;
@@ -121,6 +122,7 @@ public class NjFireFightingWaterFragment1 extends Fragment {
                     itemInfo.setTaskNumber(item.getTaskNumber());
                     itemInfo.setCodePath(item.getCodePath());
                     itemInfo.setIsPass("请选择");
+                    itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                     long nowTime = new Date().getTime();
                     String d = format.format(nowTime);
@@ -171,6 +173,7 @@ public class NjFireFightingWaterFragment1 extends Fragment {
                 itemInfo.setTaskNumber(item.getTaskNumber());
                 itemInfo.setIsPass(item.getIsPass());
                 itemInfo.setCodePath(item.getCodePath());
+                itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
 //
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
@@ -190,6 +193,7 @@ public class NjFireFightingWaterFragment1 extends Fragment {
                 itemInfo.setProdDate(date);
                 itemInfo.setTaskNumber("请编辑");
                 itemInfo.setIsPass("请选择");
+                itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
 
 
 
@@ -250,6 +254,7 @@ public class NjFireFightingWaterFragment1 extends Fragment {
             itemObj.setProdDate(date);
             itemObj.setTaskNumber(et_7.getText().toString());
             itemObj.setIsPass(et_9.getText().toString());
+            itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
             ServiceFactory.getYearCheckService().update(itemObj);
             Toast.makeText(getContext(), "数据保存成功", Toast.LENGTH_SHORT).show();
         }

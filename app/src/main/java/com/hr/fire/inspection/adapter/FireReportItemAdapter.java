@@ -27,6 +27,7 @@ import com.hr.fire.inspection.activity.FireReportActivity;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.service.ServiceFactory;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xwpf.usermodel.Document;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -60,6 +61,7 @@ public class FireReportItemAdapter extends BaseAdapter {
     private String set_oil_name;
     private String set_Platform_name;
     private List<HashMap> getallmessage;
+    private String fileName;
 
     // ————————————————————————————————————————————————————————
     public FireReportItemAdapter(FireReportActivity mContext) {
@@ -97,8 +99,12 @@ public class FireReportItemAdapter extends BaseAdapter {
         holder.sayTextView.setText(stringArrayList.get(position));
         // 点击导出按钮 生成报告
         holder.viewBtn.setOnClickListener(v -> {
+
             Toast.makeText(mContext, "正在生成报告，请稍后...", Toast.LENGTH_SHORT).show();
-            getallmessage = ServiceFactory.getYearCheckService().getOutputItemData(companyInfoId.get(position), checkDate.get(position));// 获取后台参数
+            fileName = stringArrayList.get(position);
+            String year = DateFormatUtils.format(checkDate.get(position),"yyyy");
+
+            getallmessage = ServiceFactory.getYearCheckService().getOutputItemData(companyInfoId.get(position), year);// 获取后台参数
             final List templateData = (List) getallmessage.get(0).get("data"); // 获取ItemInfo对象
                 assert templateData != null;
             try {
@@ -344,8 +350,9 @@ public class FireReportItemAdapter extends BaseAdapter {
             XWPFTemplate template = XWPFTemplate.compile(url,configs).render(templates);
 
             try {
-                String path = Environment.getExternalStorageDirectory().getPath();
-                File file = new File(path + "/" + "outputRender" + ".docx");
+                //保存到ExportData这个文件夹下
+                File path = Environment.getExternalStorageDirectory();
+                File file = new File(path + "/年检报告/" + fileName + ".docx");
                 OutputStream out = new FileOutputStream(file);
                 template.write(out);
                 out.flush();
@@ -400,6 +407,7 @@ public class FireReportItemAdapter extends BaseAdapter {
             FM200FireFightingSystem(templateData, src1Document);
             PowderExtinguishingSystems(templateData, src1Document);
             RestaurantFireSuppressionDevice(templateData, src1Document);
+//            paomomiehuoSystems(templateData, src1Document);
             FireFightingWaterSystem(templateData, src1Document);
             MarineFiremansOutfitEEBD(templateData, src1Document);
             SmokeDetectors(templateData, src1Document);
@@ -481,6 +489,19 @@ public class FireReportItemAdapter extends BaseAdapter {
                 new MergeDoc().appendBody(src1Document, src2Document);
             }
         }
+//        //泡沫灭火系统
+//        private void paomomiehuoSystems(Map<String, Object> templateData, XWPFDocument src1Document) throws Exception {
+//            // 干粉罐
+//            List gfRows = (List) templateData.get("gfRows");
+//            assert gfRows != null;
+//            if(gfRows.size() != 0) {
+//                OPCPackage src2Package;
+//                InputStream open = mContext.getAssets().open("report/泡沫灭火系统.docx");
+//                src2Package = OPCPackage.open(open);
+//                XWPFDocument src2Document = new XWPFDocument(src2Package);
+//                new MergeDoc().appendBody(src1Document, src2Document);
+//            }
+//        }
         //厨房设备灭火装置
         private void RestaurantFireSuppressionDevice(Map<String, Object> templateData, XWPFDocument src1Document) throws Exception{
             // 药剂瓶
@@ -498,7 +519,7 @@ public class FireReportItemAdapter extends BaseAdapter {
             assert QDRows != null;
             if(QDRows.size() != 0) {
                 OPCPackage src2Package;
-                InputStream open = mContext.getAssets().open("report/驱动瓶.docx");
+                InputStream open = mContext.getAssets().open("report/厨房驱动瓶1.docx");
                 src2Package = OPCPackage.open(open);
                 XWPFDocument src2Document = new XWPFDocument(src2Package);
                 new MergeDoc().appendBody(src1Document, src2Document);
@@ -517,6 +538,11 @@ public class FireReportItemAdapter extends BaseAdapter {
                 new MergeDoc().appendBody(src1Document, src2Document);
             }
         }
+        // 海水雨林系统
+
+
+
+
         //消防员装备和EEBD
         private void MarineFiremansOutfitEEBD(Map<String, Object> templateData, XWPFDocument src1Document) throws Exception{
             List EEBDBottleRows = (List) templateData.get("EEBDBottleRows");

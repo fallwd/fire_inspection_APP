@@ -39,6 +39,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class DFXIFragment4 extends Fragment {
     View rootView;
@@ -117,6 +118,7 @@ public class DFXIFragment4 extends Fragment {
                     ycr.setSystemNumber(its.number);
                     ycr.setProtectArea(" "); // 保护位号
                     ycr.setCheckDate(its.srt_Date);  //检查日期
+                    ycr.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                     long nowTime = new Date().getTime();
                     String d = format.format(nowTime);
@@ -141,6 +143,7 @@ public class DFXIFragment4 extends Fragment {
                     ycr.setSystemNumber(its.number);
                     ycr.setProtectArea(" "); // 保护位号
                     ycr.setCheckDate(its.srt_Date);  //检查日期
+                    ycr.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
                     ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, checkDataEasy.get(i).getId(), its.companyInfoId,
                             checkTypes.get(3).getId(), its.number, its.srt_Date);
                     yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(3).getId(), its.number, its.srt_Date);
@@ -190,6 +193,7 @@ public class DFXIFragment4 extends Fragment {
                 yearCheckResult.setSystemNumber(its.number);
                 yearCheckResult.setProtectArea(" "); // 保护位号
                 yearCheckResult.setCheckDate(its.srt_Date);  //检查日期
+                yearCheckResult.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
                 ServiceFactory.getYearCheckService().update(yearCheckResult);
             }
         }

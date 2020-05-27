@@ -32,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class DryPowderFireSystemFragment2 extends Fragment {
 
@@ -123,6 +124,7 @@ public class DryPowderFireSystemFragment2 extends Fragment {
                     itemInfo.setCodePath(item.getCodePath());
                     itemInfo.setIsPass("请选择");
                     itemInfo.setLabelNo("请编辑");
+                    itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
 
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                     long nowTime = new Date().getTime();
@@ -175,6 +177,7 @@ public class DryPowderFireSystemFragment2 extends Fragment {
                 itemInfo.setIsPass(item.getIsPass());
                 itemInfo.setLabelNo(item.getLabelNo());
                 itemInfo.setCodePath(item.getCodePath());
+                itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
 
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
@@ -197,6 +200,7 @@ public class DryPowderFireSystemFragment2 extends Fragment {
                 itemInfo.setTaskNumber("请选择");
                 itemInfo.setIsPass("请选择");
                 itemInfo.setLabelNo("请编辑");
+                itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
 //                瓶号 no
 //                容积/L  volume
 //                瓶重/kg weight
@@ -266,6 +270,7 @@ public class DryPowderFireSystemFragment2 extends Fragment {
             itemObj.setIsPass(et_10.getText().toString());
             itemObj.setLabelNo(et_11.getText().toString());
 //            itemObj.setCodePath(et_12.getImageAlpha());  // 二维码路径？？？？？
+            itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
 
             ServiceFactory.getYearCheckService().update(itemObj);
         }

@@ -49,6 +49,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 //巡检: 灭火器页面
 public class NJFireExtinguisherActivity extends AppCompatActivity implements View.OnClickListener {
@@ -269,6 +270,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 itemInfo.setImageUrl(item.getImageUrl());
                 itemInfo.setDescription(item.getDescription());
                 itemInfo.setCodePath(item.getCodePath());
+                itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
 
 
 
@@ -317,6 +319,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 itemInfo.setIsPass("请选择");
                 itemInfo.setLabelNo("请输入");
                 itemInfo.setDescription("请输入");
+                itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
             }
 
 //            Log.d("dong", "itemInfo增加" + itemInfo);
@@ -392,7 +395,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
 //            itemObj.setImageUrl(tv_fire15.getText().toString());
             itemObj.setDescription(et_fire16.getText().toString());
 //            itemObj.setCodePath(tv_fire17.getText().toString());  // 二维码路径？？？
-            Log.i("AAA","itemObj"+itemObj);
+            itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
             ServiceFactory.getYearCheckService().update(itemObj);
         }
         Toast.makeText(this, "数据保存成功", Toast.LENGTH_SHORT).show();

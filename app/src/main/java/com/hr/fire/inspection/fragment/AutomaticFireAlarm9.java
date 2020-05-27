@@ -48,6 +48,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -157,6 +158,7 @@ public class AutomaticFireAlarm9 extends Fragment {
                 itemInfo.setImageUrl(item.getImageUrl());
                 itemInfo.setCodePath(item.getCodePath());
                 itemInfo.setDescription(item.getDescription());
+                itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
 
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
@@ -175,6 +177,7 @@ public class AutomaticFireAlarm9 extends Fragment {
                 itemInfo.setImageUrl("请添加");
                 itemInfo.setCodePath("请添加");
                 itemInfo.setDescription("请添加");
+                itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
 
 
 
@@ -272,7 +275,7 @@ public class AutomaticFireAlarm9 extends Fragment {
 //          itemObj.setImageUrl(et_13.get);
 //          itemObj.setCodePath(et_14.getText().toString());
             itemObj.setDescription(et_15.getText().toString());
-            Log.d("dong", "itemObj222222保存==   "+itemObj);
+            itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
             ServiceFactory.getYearCheckService().update(itemObj);
             Toast.makeText(getActivity(), "数据保存成功", Toast.LENGTH_SHORT).show();
         }

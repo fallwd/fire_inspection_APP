@@ -86,7 +86,7 @@ public class HFC2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.et_2.setText(new StringBuffer().append(info.getNo()).append(""));
             vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
             vh.et_4.setText(new StringBuffer().append(info.getWeight()).append(""));
-            vh.et_5.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));
+            vh.et_5.setText(new StringBuffer().append(info.getPressure()).append(""));
             vh.et_6.setText(new StringBuffer().append(info.getProdFactory()).append(""));
 
 
@@ -95,7 +95,7 @@ public class HFC2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.et_7.setText(new StringBuffer().append(mProdDate).append(""));
             vh.et_8.setText(new StringBuffer().append(mCheckDate).append(""));
 
-            vh.tv_9.setText(new StringBuffer().append("氮气驱动瓶信息采集瓶").append(position + 1).append("号表"));
+            vh.tv_9.setText(new StringBuffer().append("检查表"));
 
             //在左侧添加图片
             Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
@@ -118,7 +118,7 @@ public class HFC2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             if (info.getLabelNo() == null || info.getLabelNo().isEmpty()) {
                 vh.et_10.setHint("请输入...");
             } else {
-                vh.et_10.setText(info.getLabelNo()+ (position + 1));
+                vh.et_10.setText(info.getLabelNo());
             }
             //初始化工作表数据
             WorkIItemBean mWorkIItemBean = new WorkIItemBean();

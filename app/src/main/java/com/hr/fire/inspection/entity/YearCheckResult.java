@@ -5,6 +5,8 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
+import org.greenrobot.greendao.annotation.Unique;
+
 import com.hr.fire.inspection.dao.DaoSession;
 import com.hr.fire.inspection.dao.YearCheckDao;
 import com.hr.fire.inspection.dao.YearCheckResultDao;
@@ -21,6 +23,9 @@ public class YearCheckResult   {
 
     @Id(autoincrement = true)
     private Long id;
+
+    @Unique
+    private String uuid;
 
     private Long yearCheckId; //外键
 
@@ -65,12 +70,13 @@ private transient DaoSession daoSession;
 @Generated(hash = 232162975)
 private transient YearCheckResultDao myDao;
 
-@Generated(hash = 19132713)
-public YearCheckResult(Long id, Long yearCheckId, String isPass,
+@Generated(hash = 1836137900)
+public YearCheckResult(Long id, String uuid, Long yearCheckId, String isPass,
         String imageUrl, String videoUrl, String description,
         String SystemNumber, String ProtectArea, Date checkDate,
         Long itemInfoId, Long companyInfoId, Long checkTypeId, Long targetId) {
     this.id = id;
+    this.uuid = uuid;
     this.yearCheckId = yearCheckId;
     this.isPass = isPass;
     this.imageUrl = imageUrl;
@@ -376,6 +382,7 @@ public void __setDaoSession(DaoSession daoSession) {
     public String toString() {
         return "YearCheckResult{" +
                 "id=" + id +
+                ", uuid='" + uuid + '\'' +
                 ", yearCheckId=" + yearCheckId +
                 ", yearCheck=" + yearCheck +
                 ", isPass='" + isPass + '\'' +
@@ -393,5 +400,13 @@ public void __setDaoSession(DaoSession daoSession) {
                 ", checkType=" + checkType +
                 ", targetId=" + targetId +
                 '}';
+    }
+
+    public String getUuid() {
+        return this.uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }

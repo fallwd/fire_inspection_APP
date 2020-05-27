@@ -6,10 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,24 +17,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.adapter.CompanyAdapter;
 import com.hr.fire.inspection.adapter.GridRecordAdapter;
-import com.hr.fire.inspection.adapter.HFC1Adapter;
-import com.hr.fire.inspection.entity.CompanyInfo;
+import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.Function;
+import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.entity.YearCheck;
+import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.ServiceFactory;
+import com.hr.fire.inspection.utils.Class2Map;
+import com.hr.fire.inspection.utils.ExcelUtils;
+import com.hr.fire.inspection.utils.SystemConstant;
 import com.hr.fire.inspection.utils.TimeUtil;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //二氧化碳年检记录
 public class CarbondioxideRecordAcitivty extends AppCompatActivity implements View.OnClickListener {
@@ -53,6 +52,11 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
     private String company_name;
     private String oil_name;
     private String Platform_name;
+    private List<CheckType> checkTypes;
+    private List<ItemInfo> itemDataList = new ArrayList<>();
+    private List<YearCheck> checkDataEasy;   //左侧需要检查的内容
+    private List<YearCheckResult> yearCheckResults; //右侧需要用户填写的内容
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,6 +73,12 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         sys_number = intent.getStringExtra("sys_number");  //系统位号
         protect_area = intent.getStringExtra("protect_area");  //保护区域
         selected_tag = -1;
+
+        checkTypes = ServiceFactory.getYearCheckService().gettableNameData(sys_id);
+        if (checkTypes == null) {
+            Toast.makeText(this, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
+        }
+        Log.i("获取checkTypes","checkTypes:"+ checkTypes);
     }
 
     @Override
@@ -93,10 +103,13 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         Button oldDataNext = findViewById(R.id.oldDataNext);
         Button newNext = findViewById(R.id.newNext);
         TextView deleteHistoryData = findViewById(R.id.deleteHistoryData);
+        TextView exportData = findViewById(R.id.exportData);
+
         iv_finish.setOnClickListener(this);
         edit.setOnClickListener(this);
         oldDataNext.setOnClickListener(this);
         newNext.setOnClickListener(this);
+        exportData.setOnClickListener(this);
         deleteHistoryData.setOnClickListener(this);
         hot.clear();
 
@@ -214,7 +227,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                 }
                 break;
             case R.id.deleteHistoryData:
-                //
+
                 if (selected_tag == -1) {
                     Toast.makeText(CarbondioxideRecordAcitivty.this, "请先选择历史数据", Toast.LENGTH_SHORT).show();
                 } else {
@@ -241,6 +254,88 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                         }
                     });
                     builder.show();
+                }
+                break;
+            case R.id.exportData:
+                if (selected_tag == -1) {
+                    Toast.makeText(CarbondioxideRecordAcitivty.this, "请先选择历史数据", Toast.LENGTH_SHORT).show();
+                } else {
+                    HashMap hashMap = historyList.get(selected_tag);
+                    Log.i("aaa","hasmap="+ hashMap);
+                    long companyId = (long) hashMap.get("companyInfoId");
+                    String number = (String) hashMap.get("systemNumber");
+                    long systemId = (long) hashMap.get("systemId");
+                    Date checkDate = (Date) hashMap.get("checkDate"); //时间
+
+                    checkTypes = ServiceFactory.getYearCheckService().gettableNameData(systemId);
+                    if (checkTypes == null) {
+                        Toast.makeText(this, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                    ExcelUtils excelUtils = new ExcelUtils();
+                    int checkResultIndex = SystemConstant.getInstance().getCheckReusltIndexBySystemId(sys_id);
+
+                    for (int i=0;i<checkTypes.size();i++) {
+                        CheckType checkType = checkTypes.get(i);
+                        Map<String, Object> system = SystemConstant.getInstance().getSystem(checkType.getId());
+
+                        String[][] columns = (String[][]) system.get("columns");
+                        String title = (String) system.get("title");
+                        if (columns != null) {
+                            String[] columnWidth = new String[columns[0].length];
+
+                            for (int j = 0; j < columnWidth.length; j++) {
+                                columnWidth[j] = "30";
+                            }
+
+                            List<Map<String, Object>> items = new ArrayList<>();
+                            if (i < checkResultIndex) {
+                                Log.i("checkType.getId()checkType.getId()" ,"checkType.getId()checkType.getId()" + checkType.getId());
+                                List<ItemInfo> itemDataEasy = ServiceFactory.getYearCheckService().getItemDataEasy(companyId, checkType.getId(), number == null ? "" : number, checkDate);
+                                Log.i("itemDataEasyitemDataEasy" ,"itemDataEasy" + itemDataEasy);
+                                for (ItemInfo itemInfo : itemDataEasy) {
+
+                                    Map<String, Object> mapParams = Class2Map.getMapParams(itemInfo);
+                                    items.add(mapParams);
+
+                                    List<CheckType> checkTypes = ServiceFactory.getYearCheckService().gettableNameData(checkType.getId());
+                                    Log.i("checkTypescheckTypescheckTypescheckTypes" ,"aaa" + checkTypes);
+                                    //2.获取检查条目的数据,主要用于展示
+                                    checkDataEasy = ServiceFactory.getYearCheckService().getCheckDataEasy(checkTypes.get(0).getId());
+                                    Log.i("checkDataEasy",new Gson().toJson(checkDataEasy));
+                                    //3.获取用户需要填写的数据,如果没有数据,就需要插入的默认数据（流程4）。如果有数据就
+                                    yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(itemInfo.getId(), companyId, checkTypes.get(0).getId(), number, checkDate);
+
+                                    mapParams.put("checkDataEasy",new Gson().toJson(checkDataEasy));
+                                    mapParams.put("yearCheckResults",new Gson().toJson(yearCheckResults));
+
+                                }
+
+
+
+                            } else {
+
+                                List<YearCheckResult> checkResultDataEasy = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, companyId, checkType.getId(), number, checkDate);
+
+                                for (YearCheckResult yearCheckResult : checkResultDataEasy) {
+                                    Map<String,Object> yearcheck = Class2Map.getMapParams(yearCheckResult.getYearCheck());
+                                    Map<String, Object> mapParams = Class2Map.getMapParams(yearCheckResult);
+
+                                    for (Map.Entry entry : yearcheck.entrySet()) {
+                                        mapParams.put("yearCheck." + entry.getKey(), entry.getValue());
+                                    }
+
+                                    items.add(mapParams);
+                                }
+                            }
+
+                            excelUtils.genSheet(title, columns, columnWidth, items, title);
+
+                            String ret = (String) hashMap.get("ret");
+                            excelUtils.exportExcel(CarbondioxideRecordAcitivty.this, ret);
+                        }
+                    }
                 }
                 break;
         }

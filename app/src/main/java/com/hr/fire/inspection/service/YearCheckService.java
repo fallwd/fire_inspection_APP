@@ -111,7 +111,7 @@ public interface YearCheckService extends BaseService<Object>{
      * data是设备检查数据，是一个List，里面每一条都是一个ItemInfo对象，这个对象包含了这条数据的所有信息
      * @return
      */
-//    List<HashMap> getOutputItemData(long companyInfoId, String year);
-    List<HashMap> getOutputItemData(long companyInfoId, Date checkDate);
+    List<HashMap> getOutputItemData(long companyInfoId, String year);
+//    List<HashMap> getOutputItemData(long companyInfoId, Date checkDate);
 
 }

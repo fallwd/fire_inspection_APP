@@ -82,7 +82,6 @@ public class XJFAGMContentApapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-
     private HrPopup hrPopup;
 
     //显示对话框,用户选择是否异常的弹框
