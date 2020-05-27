@@ -225,7 +225,7 @@
             android:name=".activity.ScanResActivity"
             android:screenOrientation="landscape"/>
         <activity
-            android:name=".activity.importDataActicity"
+            android:name=".activity.ImportDataActicity"
             android:screenOrientation="landscape"/>
 
     </application>

@@ -138,7 +138,7 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
             });
             vh.et_12.setBackground(drawable1);
 
-            vh.et_13.setText(new StringBuffer().append(info.getLabelNo()+ (position + 1)));
+            vh.et_13.setText(new StringBuffer().append(info.getLabelNo()));
             vh.et_14.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

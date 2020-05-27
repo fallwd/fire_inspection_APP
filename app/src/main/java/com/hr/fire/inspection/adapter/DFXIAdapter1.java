@@ -135,7 +135,7 @@ public class DFXIAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 }
             });
             vh.et_11.setBackground(drawable1);
-            vh.et_12.setText(new StringBuffer().append(info.getLabelNo()+ (position + 1)));
+            vh.et_12.setText(new StringBuffer().append(info.getLabelNo()));
 
  //         照相机的图片  需要把对应的xml转换为textview
             vh.et_13.setOnClickListener(new View.OnClickListener() {

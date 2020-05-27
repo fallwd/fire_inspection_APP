@@ -113,14 +113,14 @@ public class NjFireExtinguisherFragment extends Fragment {
         }
     }
 
-    //动态添加条目
-    public void addItemView() {
-        if (adapter != null) {
-            adapter.addData(itemDataList.size());
-            //点击"＋", 就像数据库中插入一条数据, 点"保存"就更新所有数据
-            addData();
-        }
-    }
+//    //动态添加条目
+//    public void addItemView() {
+//        if (adapter != null) {
+//            adapter.addData(itemDataList.size());
+//            //点击"＋", 就像数据库中插入一条数据, 点"保存"就更新所有数据
+//            addData();
+//        }
+//    }
 
     @SuppressLint("SimpleDateFormat")
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

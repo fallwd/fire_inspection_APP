@@ -17,11 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.adapter.GridRecordAdapter;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.Function;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.Class2Map;
@@ -52,6 +54,8 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
     private String Platform_name;
     private List<CheckType> checkTypes;
     private List<ItemInfo> itemDataList = new ArrayList<>();
+    private List<YearCheck> checkDataEasy;   //左侧需要检查的内容
+    private List<YearCheckResult> yearCheckResults; //右侧需要用户填写的内容
 
 
     @Override
@@ -99,14 +103,12 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
         Button oldDataNext = findViewById(R.id.oldDataNext);
         Button newNext = findViewById(R.id.newNext);
         TextView deleteHistoryData = findViewById(R.id.deleteHistoryData);
-        TextView importData = findViewById(R.id.importData);
         TextView exportData = findViewById(R.id.exportData);
 
         iv_finish.setOnClickListener(this);
         edit.setOnClickListener(this);
         oldDataNext.setOnClickListener(this);
         newNext.setOnClickListener(this);
-        importData.setOnClickListener(this);
         exportData.setOnClickListener(this);
         deleteHistoryData.setOnClickListener(this);
         hot.clear();
@@ -289,12 +291,29 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
 
                             List<Map<String, Object>> items = new ArrayList<>();
                             if (i < checkResultIndex) {
-
+                                Log.i("checkType.getId()checkType.getId()" ,"checkType.getId()checkType.getId()" + checkType.getId());
                                 List<ItemInfo> itemDataEasy = ServiceFactory.getYearCheckService().getItemDataEasy(companyId, checkType.getId(), number == null ? "" : number, checkDate);
-
+                                Log.i("itemDataEasyitemDataEasy" ,"itemDataEasy" + itemDataEasy);
                                 for (ItemInfo itemInfo : itemDataEasy) {
-                                    items.add(Class2Map.getMapParams(itemInfo));
+
+                                    Map<String, Object> mapParams = Class2Map.getMapParams(itemInfo);
+                                    items.add(mapParams);
+
+                                    List<CheckType> checkTypes = ServiceFactory.getYearCheckService().gettableNameData(checkType.getId());
+                                    Log.i("checkTypescheckTypescheckTypescheckTypes" ,"aaa" + checkTypes);
+                                    //2.获取检查条目的数据,主要用于展示
+                                    checkDataEasy = ServiceFactory.getYearCheckService().getCheckDataEasy(checkTypes.get(0).getId());
+                                    Log.i("checkDataEasy",new Gson().toJson(checkDataEasy));
+                                    //3.获取用户需要填写的数据,如果没有数据,就需要插入的默认数据（流程4）。如果有数据就
+                                    yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(itemInfo.getId(), companyId, checkTypes.get(0).getId(), number, checkDate);
+
+                                    mapParams.put("checkDataEasy",new Gson().toJson(checkDataEasy));
+                                    mapParams.put("yearCheckResults",new Gson().toJson(yearCheckResults));
+
                                 }
+
+
+
                             } else {
 
                                 List<YearCheckResult> checkResultDataEasy = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, companyId, checkType.getId(), number, checkDate);
@@ -312,7 +331,6 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                             }
 
                             excelUtils.genSheet(title, columns, columnWidth, items, title);
-
 
                             String ret = (String) hashMap.get("ret");
                             excelUtils.exportExcel(CarbondioxideRecordAcitivty.this, ret);

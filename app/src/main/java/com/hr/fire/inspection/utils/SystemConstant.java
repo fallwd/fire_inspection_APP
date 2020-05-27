@@ -1,55 +1,49 @@
 package com.hr.fire.inspection.utils;
 
-import com.hr.fire.inspection.fragment.AutomaticFireAlarm2;
-import com.hr.fire.inspection.fragment.AutomaticFireAlarm5;
-import com.hr.fire.inspection.fragment.AutomaticFireAlarm6;
-import com.hr.fire.inspection.fragment.AutomaticFireAlarm7;
-import com.hr.fire.inspection.fragment.AutomaticFireAlarm8;
-import com.hr.fire.inspection.fragment.AutomaticFireAlarm9;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class SystemConstant {
     static String carbon1Title = "药剂瓶";
     static String [][] carbon1 = {
-            {"瓶号","容积/L","瓶重/kg","药剂量/kg","生产厂家","生产日期","水压试验日期","工作代号","是否合格","检验标签"},
-            {"no","volume","weight", "goodsWeight", "prodFactory", "prodDate", "observeDate", "taskNumber", "isPass", "labelNo"}
+            {"瓶号","容积/L","瓶重/kg","药剂量/kg","生产厂家","生产日期","水压试验日期","工作代号","是否合格","检验标签","二级表左侧检查的内容", "二级表右侧填写的内容", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"},
+            {"no","volume","weight", "goodsWeight", "prodFactory", "prodDate", "observeDate", "taskNumber", "isPass", "labelNo", "checkDataEasy", "yearCheckResults", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"}
     };
 
     static String carbon2Title = "氮气瓶";
     String [][] carbon2 = {
-            {"瓶号","容积/L","瓶重/kg","压力/MPa","生产厂家","生产日期","水压试验日期","工作代号","是否合格","检验标签"},
-            {"no","volume","weight", "pressure", "prodFactory", "prodDate", "observeDate", "taskNumber", "isPass", "labelNo"}
+            {"瓶号","容积/L","瓶重/kg","压力/MPa","生产厂家","生产日期","水压试验日期","工作代号","是否合格","检验标签","二级表左侧检查的内容", "二级表右侧填写的内容", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"},
+            {"no","volume","weight", "pressure", "prodFactory", "prodDate", "observeDate", "taskNumber", "isPass", "labelNo", "checkDataEasy", "yearCheckResults", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"}
     };
 
     static String carbon3Title = "管线管件";
     String [][] yearCheckData = {
-            {"检查项目","检查内容","合格要求","检查标准","是否合格","现场照片/录像","隐患描述"},
-            {"yearCheck.project","yearCheck.content","yearCheck.requirement", "yearCheck.standard", "isPass", "imageUrl", "description"}
+            {"检查项目","检查内容","合格要求","检查标准","是否合格","现场照片/录像","隐患描述","id", "uuid","yearCheckId"},
+            {"yearCheck.project","yearCheck.content","yearCheck.requirement", "yearCheck.standard", "isPass", "imageUrl", "description","id", "uuid","yearCheckId"}
     };
+
     static String reserve = "保护区";
     static String functionalTest = "功能性试验";
 
     static String HFC1Title = "七氟丙烷钢瓶";
     String [][] HFC1 = {
-            {"瓶号","容积/L","瓶重/kg","压力/MPa","生产厂家","生产日期","水压试验日期","工作代号","是否合格","检验标签"},
-            {"no","volume","weight", "pressure", "prodFactory", "prodDate", "observeDate", "taskNumber", "isPass", "labelNo"}
+            {"瓶号","容积/L","瓶重/kg","压力/MPa","生产厂家","生产日期","水压试验日期","工作代号","是否合格","检验标签","二级表左侧检查的内容", "二级表右侧填写的内容", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"},
+            {"no","volume","weight", "pressure", "prodFactory", "prodDate", "observeDate", "taskNumber", "isPass", "labelNo", "checkDataEasy", "yearCheckResults", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"}
     };
 
 
     static String HFC2Title = "氮气驱动瓶";
     String [][] HFC2 = {
-            {"瓶号","容积/L","瓶重/kg","压力/MPa","生产厂家","生产日期","水压试验日期","工作代号","是否合格","检验标签"},
-            {"no","volume","weight", "pressure", "prodFactory", "prodDate", "observeDate", "taskNumber", "isPass", "labelNo"}
+            {"瓶号","容积/L","瓶重/kg","压力/MPa","生产厂家","生产日期","水压试验日期","工作代号","是否合格","检验标签","二级表左侧检查的内容", "二级表右侧填写的内容", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"},
+            {"no","volume","weight", "pressure", "prodFactory", "prodDate", "observeDate", "taskNumber", "isPass", "labelNo", "checkDataEasy", "yearCheckResults", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"}
     };
 
     static String MHQTitle = "灭火器";
     String [][] MHQ = {
-            {"型号","灭火剂类型","灭火级别","工作代号","生产厂家","生产日期","型号符合性","位置符合性","外观是否良好","压力/重量是否合格","药剂有效性","维修日期","检测结果","检验标签","照片", "隐患描述"},
+            {"型号","灭火剂类型","灭火级别","工作代号","生产厂家","生产日期","型号符合性","位置符合性","外观是否良好","压力/重量是否合格",
+                    "药剂有效性","维修日期","检测结果","检验标签","照片", "隐患描述", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"},
             {"typeNo","deviceType","level", "taskNumber", "prodFactory", "prodDate", "typeConformity", "positionConformity",
-                    "appearance", "isPressure", "effectiveness", "observeDate", "isPass", "labelNo", "imageUrl", "description"}
+                    "appearance", "isPressure", "effectiveness", "observeDate", "isPass", "labelNo", "imageUrl", "description", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"}
     };
 
 
@@ -63,20 +57,20 @@ public class SystemConstant {
     static String AutomaticFireAlarm8Title = "CO探测器";
     static String AutomaticFireAlarm9Title = "火灾报警控制器";
     String [][] AutomaticFireAlarm1 = {
-            {"设备类型","生产厂家","型号","外观是否良好","响应时间/s","是否合格","照片","隐患描述"},
-            {"deviceType","prodFactory","no", "appearance", "responseTime", "isPass", "imageUrl", "description"}
+            {"设备类型","生产厂家","型号","外观是否良好","响应时间/s","是否合格","照片","隐患描述", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"},
+            {"deviceType","prodFactory","no", "appearance", "responseTime", "isPass", "imageUrl", "description", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"}
     };
     String [][] AutomaticFireAlarm2 = {
-            {"设备类型","生产厂家","型号","编号", "外观是否良好","设定高报值/25%LEL","设定高高报值/50%LEL","测试高报值/25%LEL","测试高高报值/50%LEL","响应时间","是否合格","照片","隐患描述"},
-            {"deviceType","prodFactory","no","typeNo", "appearance", "setAlarm25","setAlarm50","testAlarm25","testAlarm50","responseTime", "isPass", "imageUrl", "description"}
+            {"设备类型","生产厂家","型号","编号", "外观是否良好","设定高报值/25%LEL","设定高高报值/50%LEL","测试高报值/25%LEL","测试高高报值/50%LEL","响应时间","是否合格","照片","隐患描述", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"},
+            {"deviceType","prodFactory","no","typeNo", "appearance", "setAlarm25","setAlarm50","testAlarm25","testAlarm50","responseTime", "isPass", "imageUrl", "description", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"}
     };
     String [][] AutomaticFireAlarm3 = {
-            {"设备类型","生产厂家","型号","编号", "外观是否良好","设定高报值/25ppm","设定高高报值/50ppm","测试高报值25ppm","测试高高报值/50ppm","响应时间","是否合格","照片","隐患描述"},
-            {"deviceType","prodFactory","no","typeNo", "appearance", "setAlarm25","setAlarm50","testAlarm25","testAlarm50","responseTime", "isPass", "imageUrl", "description"}
+            {"设备类型","生产厂家","型号","编号", "外观是否良好","设定高报值/25ppm","设定高高报值/50ppm","测试高报值25ppm","测试高高报值/50ppm","响应时间","是否合格","照片","隐患描述", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"},
+            {"deviceType","prodFactory","no","typeNo", "appearance", "setAlarm25","setAlarm50","testAlarm25","testAlarm50","responseTime", "isPass", "imageUrl", "description", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"}
     };
     String [][] AutomaticFireAlarm4 = {
-            {"设备位号","设备类型","生产厂家","型号","位置", "外观是否良好","自检功能是否良好","消音功能是否良好","复位功能是否良好","主/备电源连线故障报警功能","报警功能是否正常","照片","隐患描述"},
-            {"no","deviceType","prodFactory","typeNo","positionConformity", "appearance", "check","slience","reset","powerAlarmFunction","alarmFunction", "imageUrl", "description"}
+            {"设备位号","设备类型","生产厂家","型号","位置", "外观是否良好","自检功能是否良好","消音功能是否良好","复位功能是否良好","主/备电源连线故障报警功能","报警功能是否正常","照片","隐患描述", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"},
+            {"no","deviceType","prodFactory","typeNo","positionConformity", "appearance", "check","slience","reset","powerAlarmFunction","alarmFunction", "imageUrl", "description", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"}
     };
 
 
@@ -84,12 +78,12 @@ public class SystemConstant {
     static String NjKitchen2Title = "驱动瓶";
     static String NjKitchen3Title = "管线吹通";
     static String [][] NjKitchen1 = {
-            {"介质类型", "瓶号","容积/L","瓶重/kg","药剂量/kg","生产厂家","生产日期","灌装日期","工作代号","是否合格","检验标签"},
-            {"agentsType","no","volume","weight", "goodsWeight", "prodFactory", "prodDate", "fillingDate", "taskNumber", "isPass", "labelNo"}
+            {"介质类型", "瓶号","容积/L","瓶重/kg","药剂量/kg","生产厂家","生产日期","灌装日期","工作代号","是否合格","检验标签","二级表左侧检查的内容", "二级表右侧填写的内容", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"},
+            {"agentsType","no","volume","weight", "goodsWeight", "prodFactory", "prodDate", "fillingDate", "taskNumber", "isPass", "labelNo", "checkDataEasy", "yearCheckResults", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"}
     };
     String [][] NjKitchen2 = {
-            {"瓶号","容积/L","压力/MPa","生产厂家","生产日期","工作代号","是否合格","检验标签"},
-            {"no","volume", "pressure", "prodFactory", "prodDate", "taskNumber", "isPass", "labelNo"}
+            {"瓶号","容积/L","压力/MPa","生产厂家","生产日期","工作代号","是否合格","检验标签","二级表左侧检查的内容", "二级表右侧填写的内容","二级表左侧检查的内容", "二级表右侧填写的内容", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"},
+            {"no","volume", "pressure", "prodFactory", "prodDate", "taskNumber", "isPass", "labelNo", "checkDataEasy", "yearCheckResults", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"}
     };
 
 
@@ -101,12 +95,12 @@ public class SystemConstant {
     static String NjFireFightingWater2Title = "消防炮";
     static String NjFireFightingWater3Title = "其他部件";
     String [][] NjFireFightingWater1 = {
-            {"类型","编号/位置","生产厂家","规格型号","生产日期","工作代号","是否合格"},
-            {"typeNo","no", "prodFactory", "deviceType", "prodDate", "taskNumber", "isPass"}
+            {"类型","编号/位置","生产厂家","规格型号","生产日期","工作代号","是否合格","二级表左侧检查的内容", "二级表右侧填写的内容", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"},
+            {"typeNo","no", "prodFactory", "deviceType", "prodDate", "taskNumber", "isPass", "checkDataEasy", "yearCheckResults", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"}
     };
     String [][] NjFireFightingWater2 = {
-            {"类型","编号/位置","生产厂家","规格型号","生产日期","是否合格"},
-            {"typeNo","no", "prodFactory", "deviceType", "prodDate", "isPass"}
+            {"类型","编号/位置","生产厂家","规格型号","生产日期","是否合格","二级表左侧检查的内容", "二级表右侧填写的内容", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"},
+            {"typeNo","no", "prodFactory", "deviceType", "prodDate", "isPass", "checkDataEasy", "yearCheckResults", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"}
     };
 
     static String DryPowderFireSystem1Title = "干粉罐";
@@ -114,12 +108,12 @@ public class SystemConstant {
     static String DryPowderFireSystem3Title = "管线管件";
 
     static String [][] DryPowderFireSystem1 = {
-            {"型号", "瓶号","容积/L","瓶重/kg","药剂量/kg","生产厂家","生产日期","灌装日期","工作代号","是否合格","检验标签"},
-            {"typeNo","no","volume","weight", "goodsWeight", "prodFactory", "prodDate", "fillingDate", "taskNumber", "isPass", "labelNo"}
+            {"型号", "瓶号","容积/L","瓶重/kg","药剂量/kg","生产厂家","生产日期","灌装日期","工作代号","是否合格","检验标签","二级表左侧检查的内容", "二级表右侧填写的内容", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"},
+            {"typeNo","no","volume","weight", "goodsWeight", "prodFactory", "prodDate", "fillingDate", "taskNumber", "isPass", "labelNo", "checkDataEasy", "yearCheckResults", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"}
     };
     static String [][] DryPowderFireSystem2 = {
-            {"瓶号","容积/L","瓶重/kg","压力/MPa","生产厂家","生产日期","水压试验日期","工作代号","是否合格","检验标签"},
-            {"no","volume","weight", "pressure", "prodFactory", "prodDate", "observeDate", "taskNumber", "isPass", "labelNo"}
+            {"瓶号","容积/L","瓶重/kg","压力/MPa","生产厂家","生产日期","水压试验日期","工作代号","是否合格","检验标签","二级表左侧检查的内容", "二级表右侧填写的内容", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"},
+            {"no","volume","weight", "pressure", "prodFactory", "prodDate", "observeDate", "taskNumber", "isPass", "labelNo", "checkDataEasy", "yearCheckResults", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"}
     };
 
 
@@ -140,8 +134,8 @@ public class SystemConstant {
     static String DFXI9Title = "太平斧";
     static String DFXI10Title = "其他";
     static String [][] DFXI1 = {
-            {"瓶号","容积/L","瓶重/kg","压力/MPa","生产厂家","生产日期","水压试验日期","工作代号","是否合格","检验标签"},
-            {"no","volume","weight", "pressure", "prodFactory", "prodDate", "observeDate", "taskNumber", "isPass", "labelNo"}
+            {"瓶号","容积/L","瓶重/kg","压力/MPa","生产厂家","生产日期","水压试验日期","工作代号","是否合格","检验标签","二级表左侧检查的内容", "二级表右侧填写的内容", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"},
+            {"no","volume","weight", "pressure", "prodFactory", "prodDate", "observeDate", "taskNumber", "isPass", "labelNo", "checkDataEasy", "yearCheckResults", "id", "uuid", "checkTypeId", "companyInfoId", "companyInfo"}
     };
 
 

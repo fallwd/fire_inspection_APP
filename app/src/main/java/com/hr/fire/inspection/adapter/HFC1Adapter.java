@@ -113,7 +113,7 @@ public class HFC1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
             });
 
-            vh.tv_9.setText(new StringBuffer().append("七氟丙烷钢瓶信息采集瓶").append(position + 1).append("号表"));
+            vh.tv_9.setText(new StringBuffer().append("检查表"));
             String s = info.getIsPass();
             if (s == null || s.isEmpty()) {
                 vh.tv_10.setText("合格");
@@ -128,7 +128,7 @@ public class HFC1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             if (info.getLabelNo() == null) {
                 vh.et_10.setHint("请输入...");
             } else {
-                vh.et_10.setText(info.getLabelNo()+ (position + 1));
+                vh.et_10.setText(info.getLabelNo());
             }
             //初始化工作表数据
             WorkIItemBean mWorkIItemBean = new WorkIItemBean();

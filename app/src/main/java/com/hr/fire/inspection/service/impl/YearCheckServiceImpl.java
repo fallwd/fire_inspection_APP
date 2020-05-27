@@ -786,12 +786,12 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
     }
 
     @Override
-//    public List<HashMap> getOutputItemData(long companyInfoId, String year) {
-    public List<HashMap> getOutputItemData(long companyInfoId, Date checkDate) {
+    public List<HashMap> getOutputItemData(long companyInfoId, String year) {
+//    public List<HashMap> getOutputItemData(long companyInfoId, Date checkDate) {
         // Join checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
         //                where(CheckTypeDao.Properties.ParentId.eq(systemId));
 //        String year = "2020";
-        String year = "2019";
+//        String year = "2019";
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date startDate = null;
         try {

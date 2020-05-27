@@ -92,7 +92,7 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             String mCheckDate = DateFormatUtils.format(info.getObserveDate(),"yyyy-MM");
             vh.et_7.setText(new StringBuffer().append(mProdDate).append(""));
             vh.et_8.setText(new StringBuffer().append(mCheckDate).append(""));
-            vh.tv_9.setText(new StringBuffer().append("药剂瓶").append(position + 1).append("号表"));
+            vh.tv_9.setText(new StringBuffer().append("药剂瓶"));
             String s = info.getIsPass();
             if (s == null || s.isEmpty()) {
                 vh.tv_10.setText("合格");
@@ -117,7 +117,7 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             if (info.getLabelNo() == null) {
                 vh.et_12.setHint("请输入...");
             } else {
-                vh.et_12.setText(info.getLabelNo()+ (position + 1));
+                vh.et_12.setText(info.getLabelNo());
             }
 
             //初始化工作表数据

@@ -94,7 +94,7 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
             }
 
             myholder.tv_fire13.setText(info.getIsPass());
-            myholder.et_fire14.setText(info.getLabelNo()+ (position + 1));
+            myholder.et_fire14.setText(info.getLabelNo());
 //            myholder.tv_fire15.setText(info.getImageUrl());
             myholder.et_fire16.setText(info.getDescription());
 //            myholder.tv_fire17.setText(info.getCodePath());  //二维码路径

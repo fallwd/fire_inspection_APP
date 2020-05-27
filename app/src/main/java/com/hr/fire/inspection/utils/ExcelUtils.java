@@ -44,9 +44,11 @@ public class ExcelUtils {
             path = Environment.getExternalStoragePublicDirectory("ExportData");
             File file = new File(path + "/" + filename + ".xls");
             OutputStream stream = new FileOutputStream(file);//将Excel文件写入创建的file当中
+
             workbook.write(stream);// 写入流
             stream.close();//关闭流
-            Toast.makeText(mContext, "报告生成成功", Toast.LENGTH_SHORT).show();
+            stream.flush();
+            Toast.makeText(mContext, "导出数据成功", Toast.LENGTH_SHORT).show();
             if (file.isFile()) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 Uri uri = FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".fileProvider", file);
@@ -54,9 +56,9 @@ public class ExcelUtils {
                 mContext.startActivity(intent);
                 return;
             }
-
         } catch (Exception e) {
             e.printStackTrace();
+            Toast.makeText(mContext, "导出数据失败", Toast.LENGTH_SHORT).show();
         }
     }
 
