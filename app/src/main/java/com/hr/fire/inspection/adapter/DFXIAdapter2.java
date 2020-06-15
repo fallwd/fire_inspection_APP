@@ -67,11 +67,42 @@ public class DFXIAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         if (mData != null && mData.size() != 0) {
             ItemInfo info = mData.get(position);
             vh.et_1.setText(new StringBuffer().append(" ").append(position + 1));
-            vh.et_2.setText(new StringBuffer().append(info.getNo()).append(""));
-            vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
-            vh.et_4.setText(new StringBuffer().append(info.getWeight()).append(""));
-            vh.et_5.setText(new StringBuffer().append(info.getPressure()).append(""));
-            vh.et_6.setText(new StringBuffer().append(info.getProdFactory()).append(""));
+//            vh.et_2.setText(new StringBuffer().append(info.getNo()).append(""));
+//            vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
+//            vh.et_4.setText(new StringBuffer().append(info.getWeight()).append(""));
+//            vh.et_5.setText(new StringBuffer().append(info.getPressure()).append(""));
+//            vh.et_6.setText(new StringBuffer().append(info.getProdFactory()).append(""));
+
+            if (info.getNo() == null) {
+                vh.et_2.setHint("请输入");
+            } else {
+                vh.et_2.setText(info.getNo());
+            }
+
+            if (info.getVolume() == null) {
+                vh.et_3.setHint("请输入");
+            } else {
+                vh.et_3.setText(info.getVolume());
+            }
+
+            if (info.getWeight() == null) {
+                vh.et_4.setHint("请输入");
+            } else {
+                vh.et_4.setText(info.getWeight());
+            }
+
+            if (info.getPressure() == null) {
+                vh.et_5.setHint("请输入");
+            } else {
+                vh.et_5.setText(info.getPressure());
+            }
+
+            if (info.getProdFactory() == null) {
+                vh.et_6.setHint("请输入");
+            } else {
+                vh.et_6.setText(info.getProdFactory());
+            }
+
             String mProdDate = DateFormatUtils.format(info.getProdDate(),"yyyy-MM");
             String ObserveDate = DateFormatUtils.format(info.getObserveDate(),"yyyy-MM");
             vh.et_7.setText(new StringBuffer().append(mProdDate).append(""));
@@ -122,7 +153,12 @@ public class DFXIAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 }
             });
             vh.et_11.setBackground(drawable1);
-            vh.et_12.setText(new StringBuffer().append(info.getLabelNo()));
+//            vh.et_12.setText(new StringBuffer().append(info.getLabelNo()));
+            if (info.getLabelNo() == null) {
+                vh.et_12.setHint("请输入");
+            } else {
+                vh.et_12.setText(info.getLabelNo());
+            }
         }
 
         vh.et_14.setOnClickListener(new View.OnClickListener() {

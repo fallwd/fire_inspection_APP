@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,6 +36,8 @@ import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.impl.YCCamera;
+
+import com.hr.fire.inspection.impl.YCCCameraForVideo;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.FileRoute;
 
@@ -46,6 +49,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 public class CarbonFragment3 extends Fragment {
     View rootView;
     private static CarbonFragment3 fragment3;
@@ -54,6 +59,7 @@ public class CarbonFragment3 extends Fragment {
     private CarBon3Adapter adapter;
     private RecyclerView rc_list;
     private int imgPostion = -1;   //用户点击拍照, 所对应的位置
+    private int videoPostion = -1;   //用户点击录像, 所对应的位置
     private List<YearCheck> checkDataEasy;
     private List<YearCheckResult> yearCheckResults;
 
@@ -116,7 +122,7 @@ public class CarbonFragment3 extends Fragment {
                 for (int i = 0; i<yearCheckResults.size(); i++) {
                     YearCheckResult ycr = new YearCheckResult();
                     ycr.setIsPass(" -- ");
-                    ycr.setDescription("无描述");
+//                    ycr.setDescription("无描述");
                     ycr.setImageUrl("暂无图片");
                     ycr.setSystemNumber(its.number);
                     ycr.setProtectArea(" "); // 保护位号
@@ -142,7 +148,7 @@ public class CarbonFragment3 extends Fragment {
                     YearCheckResult ycr = new YearCheckResult();
                     ycr.setIsPass(" -- ");
 //                ycr.setImageUrl("暂无图片");  //可以在iv7中获取
-                    ycr.setDescription("无描述");
+//                    ycr.setDescription("无描述");
                     ycr.setSystemNumber(its.number);
                     ycr.setProtectArea(" "); // 保护位号
                     ycr.setCheckDate(its.srt_Date);  //检查日期
@@ -170,6 +176,13 @@ public class CarbonFragment3 extends Fragment {
             public void startCamera(int postion) {
                 imgPostion = postion;
                 openSysCamera();
+            }
+        });
+        adapter.setdoOpenCameraForVideo(new YCCCameraForVideo() {
+            @Override
+            public void startCamera(int postion) {
+                videoPostion = postion;
+                openVideo();
             }
         });
     }
@@ -216,6 +229,13 @@ public class CarbonFragment3 extends Fragment {
                     adapter.notifyItemChanged(imgPostion);
                 }
                 break;
+            case 0:
+                if (videoNew.getAbsolutePath() != null && videoPostion != -1 && adapter != null) {
+                    yearCheckResults.get(videoPostion).setVideoUrl(videoNew.getAbsolutePath());
+                    adapter.notifyItemChanged(videoPostion);
+                }
+                Toast.makeText(this.getContext(), "录像数据保存成功，请点击拍照图标进行录像观看", Toast.LENGTH_SHORT).show();
+                break;
         }
     }
 
@@ -223,6 +243,7 @@ public class CarbonFragment3 extends Fragment {
      * 打开系统相机
      */
     private File fileNew = null;
+    private File videoNew = null;
 
     private void openSysCamera() {
         // intent用来启动系统自带的Camera
@@ -242,6 +263,29 @@ public class CarbonFragment3 extends Fragment {
             // 将系统Camera的拍摄结果写入到文件
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgUriOri);
             startActivityForResult(cameraIntent, FileRoute.CAMERA_RESULT_CODE);
+        }
+    }
+
+    private void openVideo() {
+        // intent用来启动系统自带的Camera
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            videoNew = new FileRoute(getActivity()).createOriVideoFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Uri imgUriOri = null;
+        if (videoNew != null) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                imgUriOri = Uri.fromFile(videoNew);
+            } else {
+                imgUriOri = FileProvider.getUriForFile(getActivity(), getActivity().getApplicationContext().getPackageName() + ".fileProvider", videoNew);
+            }
+            // 将系统Camera的拍摄结果写入到文件
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgUriOri);
+            cameraIntent.setAction("android.media.action.VIDEO_CAPTURE");
+            cameraIntent.addCategory("android.intent.category.DEFAULT");
+            startActivityForResult(cameraIntent, 0);
         }
     }
 }

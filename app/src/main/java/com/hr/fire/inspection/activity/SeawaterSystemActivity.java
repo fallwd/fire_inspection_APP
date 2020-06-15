@@ -44,9 +44,9 @@ public class SeawaterSystemActivity  extends AppCompatActivity {
     private ImageView iv_add_table;
     private TextView tvInspectionPro;
     private int currentPager;
-    private SeawaterSystemFragment1 SeawaterSystemFragment1;
-    private SeawaterSystemFragment2 SeawaterSystemFragment2;
-    private SeawaterSystemFragment3 SeawaterSystemFragment3;
+    private SeawaterSystemFragment1 seawaterSystemFragment1;
+    private SeawaterSystemFragment2 seawaterSystemFragment2;
+    private SeawaterSystemFragment3 seawaterSystemFragment3;
     private String f_title;
     private String sys_number;  //系统位号
     private IntentTransmit it;
@@ -132,13 +132,13 @@ public class SeawaterSystemActivity  extends AppCompatActivity {
         titleList.add("关键控制性阀门");
         titleList.add("功能性试验");
 
-        SeawaterSystemFragment1 = SeawaterSystemFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
-        SeawaterSystemFragment2 = SeawaterSystemFragment2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
-        SeawaterSystemFragment3 = SeawaterSystemFragment3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
+        seawaterSystemFragment1 = SeawaterSystemFragment1.newInstance(ConstantInspection.YEARLY_ON_SITE_F1, it);
+        seawaterSystemFragment2 = SeawaterSystemFragment2.newInstance(ConstantInspection.YEARLY_ON_SITE_F2, it);
+        seawaterSystemFragment3 = SeawaterSystemFragment3.newInstance(ConstantInspection.YEARLY_ON_SITE_F3, it);
 
-        fragments.add(SeawaterSystemFragment1);
-        fragments.add(SeawaterSystemFragment2);
-        fragments.add(SeawaterSystemFragment3);
+        fragments.add(seawaterSystemFragment1);
+        fragments.add(seawaterSystemFragment2);
+        fragments.add(seawaterSystemFragment3);
 
         //设置缓存的页面数据
         mViewPager.setOffscreenPageLimit(fragments.size());
@@ -152,7 +152,7 @@ public class SeawaterSystemActivity  extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int i) {
-
+                currentPager = i;
             }
 
             @Override
@@ -216,20 +216,10 @@ public class SeawaterSystemActivity  extends AppCompatActivity {
 //                currentPager  拿到当前的页面
             }
         });
-        //点击保存时候调用
         iv_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (fragments != null && fragments.size() != 0) {
-                    Fragment fragment = fragments.get(currentPager);
-                    if (fragment instanceof SeawaterSystemFragment1) {
-                        SeawaterSystemFragment1.saveData();
-                    }else if(fragment instanceof SeawaterSystemFragment2){
-                        SeawaterSystemFragment2.saveData();
-                    }else if(fragment instanceof SeawaterSystemFragment3){
-                        SeawaterSystemFragment3.saveData();
-                    }
-                }
+                upData();
             }
         });
         iv_finish.setOnClickListener(new View.OnClickListener() {
@@ -238,6 +228,20 @@ public class SeawaterSystemActivity  extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    //更新数据
+    private void upData() {
+        if (fragments != null && fragments.size() != 0) {
+            Fragment fragment = fragments.get(currentPager);
+            if (fragment instanceof SeawaterSystemFragment1) {
+                seawaterSystemFragment1.saveData();
+            }else if(fragment instanceof SeawaterSystemFragment2){
+                seawaterSystemFragment2.saveData();
+            }else if(fragment instanceof SeawaterSystemFragment3){
+                seawaterSystemFragment3.saveData();
+            }
+        }
     }
 
     @Override

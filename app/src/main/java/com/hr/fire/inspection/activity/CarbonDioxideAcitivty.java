@@ -6,9 +6,11 @@ import android.renderscript.Sampler;
 import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +29,7 @@ import com.hr.fire.inspection.fragment.CarbonFragment4;
 import com.hr.fire.inspection.fragment.CarbonFragment5;
 import com.hr.fire.inspection.utils.TextSpannableUtil;
 import com.hr.fire.inspection.utils.TimeUtil;
+import com.hr.fire.inspection.utils.ToastUtil;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 
@@ -68,7 +71,7 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
     }
 
     private void getIntentParameter() {
-        //历史中的companyInfoId  ,  systemId和再公司、平台那边传过来的都是一样的ID，使用哪一个都行
+        //  历史中的companyInfoId  ,  systemId和再公司、平台那边传过来的都是一样的ID，使用哪一个都行
         Intent intent = getIntent();
         long systemId = intent.getLongExtra("systemId", 0);   //系统Id
         long platform_id = intent.getLongExtra("platform_id", 0);   //系统Id
@@ -259,7 +262,6 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
                 carbonFragment5.upData();
             }
         }
-
     }
 
     @Override

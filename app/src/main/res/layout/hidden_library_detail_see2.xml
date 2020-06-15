@@ -13,13 +13,6 @@
         android:layout_centerInParent="true"
         android:visibility="gone" />
 
-    <VideoView
-        android:id="@+id/video_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone" />
-
     <LinearLayout
         android:id="@+id/ll_pop_item"
         android:layout_width="match_parent"
@@ -27,15 +20,6 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/listview_border_margin"
         android:orientation="vertical">
-
-        <Button
-            android:id="@+id/bt_photograph"
-            android:layout_width="260dp"
-            android:layout_height="45dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:text="拍        照"
-            android:textColor="@color/title_green" />
 
         <Button
             android:id="@+id/bt_see"
@@ -46,23 +30,6 @@
             android:text="查看大图"
             android:textColor="@color/title_green" />
 
-        <Button
-            android:id="@+id/bt_video"
-            android:layout_width="260dp"
-            android:layout_height="45dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:text="录        像"
-            android:textColor="@color/title_green" />
-
-        <Button
-            android:id="@+id/bt_seevideo"
-            android:layout_width="260dp"
-            android:layout_height="45dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:text="观看录像"
-            android:textColor="@color/title_green" />
 
 
         <Button

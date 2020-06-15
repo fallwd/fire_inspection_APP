@@ -81,12 +81,44 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
             Log.e("dong", "position----:" + position);
             Log.e("dong", "info----:" + info);
             vh.et_1.setText(new StringBuffer().append(" ").append(position + 1));
-            vh.et_2.setText(new StringBuffer().append(info.getAgentsType()).append(""));
-            vh.et_3.setText(new StringBuffer().append(info.getNo()).append(""));
-            vh.et_4.setText(new StringBuffer().append(info.getVolume()).append(""));
-            vh.et_5.setText(new StringBuffer().append(info.getWeight()).append(""));
-            vh.et_6.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));
-            vh.et_7.setText(new StringBuffer().append(info.getProdFactory()).append(""));
+//            vh.et_2.setText(new StringBuffer().append(info.getAgentsType()).append(""));
+//            vh.et_3.setText(new StringBuffer().append(info.getNo()).append(""));
+//            vh.et_4.setText(new StringBuffer().append(info.getVolume()).append(""));
+//            vh.et_5.setText(new StringBuffer().append(info.getWeight()).append(""));
+//            vh.et_6.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));
+//            vh.et_7.setText(new StringBuffer().append(info.getProdFactory()).append(""));
+
+
+            if (info.getAgentsType() == null) {
+                vh.et_2.setHint("请输入");
+            } else {
+                vh.et_2.setText(info.getAgentsType());
+            }
+            if (info.getNo() == null) {
+                vh.et_3.setHint("请输入");
+            } else {
+                vh.et_3.setText(info.getNo());
+            }
+            if (info.getVolume() == null) {
+                vh.et_4.setHint("请输入");
+            } else {
+                vh.et_4.setText(info.getVolume());
+            }
+            if (info.getWeight() == null) {
+                vh.et_5.setHint("请输入");
+            } else {
+                vh.et_5.setText(info.getWeight());
+            }
+            if (info.getGoodsWeight() == null) {
+                vh.et_6.setHint("请输入");
+            } else {
+                vh.et_6.setText(info.getGoodsWeight());
+            }
+            if (info.getProdFactory() == null) {
+                vh.et_7.setHint("请输入");
+            } else {
+                vh.et_7.setText(info.getProdFactory());
+            }
 
             String mProdDate = DateFormatUtils.format(info.getProdDate(),"yyyy-MM");
             String mCheckDate = DateFormatUtils.format(info.getFillingDate(),"yyyy-MM");
@@ -138,21 +170,30 @@ public class NjKitchenAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHol
             });
             vh.et_12.setBackground(drawable1);
 
-            vh.et_13.setText(new StringBuffer().append(info.getLabelNo()));
+//            vh.et_13.setText(new StringBuffer().append(info.getLabelNo()));
+            if (info.getLabelNo() == null) {
+                vh.et_13.setHint("请输入");
+            } else {
+                vh.et_13.setText(info.getLabelNo());
+            }
             vh.et_14.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent();
-                    intent.putExtra(ConstantInspection.CHECK_DIVICE, "药剂瓶信息");
-                    intent.setClass(mContext, QRCodeExistenceAcitivty.class);
-                    // 调用生成函数，处理扫描后显示的数据
-                    ItemInfo itemInfo = mData.get(position);
-                    Bitmap dCode = create2DCode(itemInfo.toEnCodeString());
-                    intent.putExtra("titleValue", mData.get(position).getNo()); // 传某个设备的具体名称
-                    byte buf[] = new byte[1024*1024];
-                    buf = Bitmap2Bytes(dCode);
-                    intent.putExtra("photo_bmp", buf);
-                    mContext.startActivity(intent);
+                    if (mData.get(position).getNo() == null) {
+                        Toast.makeText(mContext, "二维码是跟据瓶号生成的，请填写瓶号,填写完成后请点击保存按钮", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent intent = new Intent();
+                        intent.putExtra(ConstantInspection.CHECK_DIVICE, "药剂瓶信息");
+                        intent.setClass(mContext, QRCodeExistenceAcitivty.class);
+                        // 调用生成函数，处理扫描后显示的数据
+                        ItemInfo itemInfo = mData.get(position);
+                        Bitmap dCode = create2DCode(itemInfo.toEnCodeString());
+                        intent.putExtra("titleValue", mData.get(position).getNo()); // 传某个设备的具体名称
+                        byte buf[] = new byte[1024 * 1024];
+                        buf = Bitmap2Bytes(dCode);
+                        intent.putExtra("photo_bmp", buf);
+                        mContext.startActivity(intent);
+                    }
                 }
             });
 

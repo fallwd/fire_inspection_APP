@@ -158,6 +158,7 @@ public class NjFireFightingWaterFragment1 extends Fragment {
 
     //动态添加条目
     public void addItemView() {
+        upData(); // 点击加号前，执行保存函数，将最新数据提交到数据库
         if (adapter != null) {
             ItemInfo itemInfo = new ItemInfo();
             if (itemDataList != null && itemDataList.size() != 0) {
@@ -177,10 +178,10 @@ public class NjFireFightingWaterFragment1 extends Fragment {
 //
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
-                itemInfo.setTypeNo("请编辑");
-                itemInfo.setNo("请编辑");
-                itemInfo.setProdFactory("请编辑");
-                itemInfo.setDeviceType("请编辑");
+//                itemInfo.setTypeNo("请编辑");
+//                itemInfo.setNo("请编辑");
+//                itemInfo.setProdFactory("请编辑");
+//                itemInfo.setDeviceType("请编辑");
                 Date date = new Date();
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
                 long nowTime = date.getTime();
@@ -191,7 +192,7 @@ public class NjFireFightingWaterFragment1 extends Fragment {
                     e.printStackTrace();
                 }
                 itemInfo.setProdDate(date);
-                itemInfo.setTaskNumber("请编辑");
+                itemInfo.setTaskNumber("请选择");
                 itemInfo.setIsPass("请选择");
                 itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
 

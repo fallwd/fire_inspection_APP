@@ -41,4 +41,23 @@ public class FileRoute {
 //        imgPathOri = image.getAbsolutePath();
         return image;
     }
+
+    /**
+     * 创建原图像保存的文件
+     *
+     * @return
+     * @throws IOException
+     */
+    public File createOriVideoFile() throws IOException {
+        File pictureDirOri = new File(mContext.getExternalFilesDir(
+                Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/OriPicture");
+//        File pictureDirOri = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Haiyou/checkPic");
+        if (!pictureDirOri.exists()) {
+            pictureDirOri.mkdirs();
+
+        }
+        File video = File.createTempFile(String.valueOf(System.currentTimeMillis()), ".mp4", pictureDirOri);
+//        imgPathOri = image.getAbsolutePath();
+        return video;
+    }
 }

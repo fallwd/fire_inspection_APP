@@ -35,6 +35,7 @@ import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.NJMhqSelectItem1;
 import com.hr.fire.inspection.entity.NJMhqSelectItem2;
+import com.hr.fire.inspection.impl.YCCCameraForVideo;
 import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.PhotoView;
@@ -76,11 +77,24 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
         NJMhqContentApapter.MyViewHolder myholder = (NJMhqContentApapter.MyViewHolder) holder;
         if (mData != null && mData.size() != 0) {
             ItemInfo info = mData.get(position);
-            myholder.et_fire1.setText(info.getTypeNo());
+
+            if (info.getTypeNo() == null) {
+                myholder.et_fire1.setHint("请输入");
+            } else {
+                myholder.et_fire1.setText(info.getTypeNo());
+            }
+
+
+//            myholder.et_fire1.setText(info.getTypeNo());
             myholder.tv_fire2.setText(info.getDeviceType());
             myholder.tv_fire3.setText(info.getLevel());
             myholder.tv_fire4.setText(info.getTaskNumber());
-            myholder.et_fire5.setText(info.getProdFactory());
+//            myholder.et_fire5.setText(info.getProdFactory());
+            if (info.getProdFactory() == null) {
+                myholder.et_fire5.setHint("请输入");
+            } else {
+                myholder.et_fire5.setText(info.getProdFactory());
+            }
             String mCheckDate = DateFormatUtils.format(info.getProdDate(),"yyyy-MM");
             myholder.et_fire6.setText(mCheckDate);
             myholder.tv_fire7.setText(info.getTypeConformity());
@@ -94,9 +108,19 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
             }
 
             myholder.tv_fire13.setText(info.getIsPass());
-            myholder.et_fire14.setText(info.getLabelNo());
+//            myholder.et_fire14.setText(info.getLabelNo());
+            if (info.getLabelNo() == null) {
+                myholder.et_fire14.setHint("请输入");
+            } else {
+                myholder.et_fire14.setText(info.getLabelNo());
+            }
 //            myholder.tv_fire15.setText(info.getImageUrl());
-            myholder.et_fire16.setText(info.getDescription());
+//            myholder.et_fire16.setText(info.getDescription());
+            if (info.getDescription() == null) {
+                myholder.et_fire16.setHint("请输入");
+            } else {
+                myholder.et_fire16.setText(info.getDescription());
+            }
 //            myholder.tv_fire17.setText(info.getCodePath());  //二维码路径
 
 
@@ -333,20 +357,24 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
                     showPopWind(myholder.tv_fire13);
                     break;
                 case R.id.rl_fire15:
-                    new PhotoView().showPopWindPicInfo(mContext, position, mYCCamera, mData);
+                    new PhotoView().showPopWindPicInfo(mContext, position, mYCCamera, doOpenCameraForVideo, mData);
                     break;
                 case R.id.rl_fire17:
-                    Intent intent = new Intent();
-                    intent.putExtra(ConstantInspection.CHECK_DIVICE, "灭火器信息");
-                    intent.setClass(mContext, QRCodeExistenceAcitivty.class);
-                    // 调用生成函数，处理扫描后显示的数据
-                    ItemInfo itemInfo = mData.get(position);
-                    Bitmap dCode = create2DCode(itemInfo.toEnCodeString());
-                    intent.putExtra("titleValue", mData.get(position).getTypeNo()); // 传某个设备的具体名称
-                    byte buf[] = new byte[1024*1024];
-                    buf = Bitmap2Bytes(dCode);
-                    intent.putExtra("photo_bmp", buf);
-                    mContext.startActivity(intent);
+                    if (mData.get(position).getTypeNo() == null) {
+                        Toast.makeText(mContext, "二维码是跟据瓶号生成的，请填写瓶号,填写完成后请点击保存按钮", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent intent = new Intent();
+                        intent.putExtra(ConstantInspection.CHECK_DIVICE, "灭火器信息");
+                        intent.setClass(mContext, QRCodeExistenceAcitivty.class);
+                        // 调用生成函数，处理扫描后显示的数据
+                        ItemInfo itemInfo = mData.get(position);
+                        Bitmap dCode = create2DCode(itemInfo.toEnCodeString());
+                        intent.putExtra("titleValue", mData.get(position).getTypeNo()); // 传某个设备的具体名称
+                        byte buf[] = new byte[1024 * 1024];
+                        buf = Bitmap2Bytes(dCode);
+                        intent.putExtra("photo_bmp", buf);
+                        mContext.startActivity(intent);
+                    }
                     break;
                 case R.id.rl_fire18:
                     removeData(position);
@@ -636,5 +664,11 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
 
     public interface RemoveXH {
         void deleteRefresh(int postion);
+    }
+
+    private YCCCameraForVideo doOpenCameraForVideo;
+    //接口回调, 将点击事件传递到activity中,打开相机录像
+    public void setdoOpenCameraForVideo(YCCCameraForVideo y) {
+        this.doOpenCameraForVideo = y;
     }
 }

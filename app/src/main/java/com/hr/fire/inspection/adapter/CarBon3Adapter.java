@@ -3,38 +3,29 @@ package com.hr.fire.inspection.adapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.activity.CarBonGoodsWeightAcitivty;
-import com.hr.fire.inspection.activity.PhotoUploadActivity;
-import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
+import com.hr.fire.inspection.impl.YCCCameraForVideo;
 import com.hr.fire.inspection.impl.YCCamera;
-import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.PhotoView;
-import com.hr.fire.inspection.utils.ToastUtil;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
 import java.util.List;
@@ -78,7 +69,13 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             vh.tv5.setText(yearCheck.getStandard());
 
             vh.tv6.setText(ycr.get(position).getIsPass());
-            vh.ev8.setText(ycr.get(position).getDescription());
+//            vh.ev8.setText(ycr.get(position).getDescription());
+
+            if (ycr.get(position).getDescription() == null) {
+                vh.ev8.setHint("无描述");
+            } else {
+                vh.ev8.setText(ycr.get(position).getDescription());
+            }
 
             //在左侧添加图片
             Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
@@ -87,12 +84,19 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             Drawable drawable1 = mContext.getResources().getDrawable(R.drawable.listview_border_margin);
             vh.tv6.setBackground(drawable1);
 
-            String imageUrl = ycr.get(position).getImageUrl();;
+            String imageUrl = ycr.get(position).getImageUrl();
             if (imageUrl != null && imageUrl.endsWith(".jpg")) {
                 //路径  /external_path/Android/data/com.hr.fire.inspection/cache/1587462719699.jpg
 //                Uri uri = Uri.fromFile(new File(imageUrl));
                 Uri uri = Uri.parse(imageUrl);
                 vh.iv7.setImageURI(uri);
+            } else {
+                vh.iv7.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
+            }
+
+            String videoUrl = ycr.get(position).getVideoUrl();
+            if (videoUrl != null && videoUrl.endsWith(".mp4")) {
+                vh.iv7.setImageDrawable(mContext.getDrawable(R.mipmap.video_icon));
             } else {
                 vh.iv7.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
             }
@@ -104,7 +108,7 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             vh.iv7.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new PhotoView().showPopWindPic(mContext, position, mYCCamera, ycr);
+                    new PhotoView().showPopWindPic2(mContext, position, mYCCamera, doOpenCameraForVideo, ycr);
                 }
             });
             vh.tv6.setOnClickListener(new View.OnClickListener() {
@@ -208,5 +212,11 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     //接口回调, 将点击事件传递到activity中,打开相机
     public void setmYCCamera(YCCamera y) {
         this.mYCCamera = y;
+    }
+
+    private YCCCameraForVideo doOpenCameraForVideo;
+    //接口回调, 将点击事件传递到activity中,打开相机录像
+    public void setdoOpenCameraForVideo(YCCCameraForVideo y) {
+        this.doOpenCameraForVideo = y;
     }
 }

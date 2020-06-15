@@ -28,6 +28,7 @@ import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
+import com.hr.fire.inspection.impl.YCCCameraForVideo;
 import com.hr.fire.inspection.utils.PhotoView;
 import com.hr.fire.inspection.utils.StringBitmap;
 import com.hr.fire.inspection.view.tableview.HrPopup;
@@ -76,7 +77,13 @@ public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.tv4.setText(yearCheck.getRequirement());
             vh.tv5.setText(yearCheck.getStandard());
             vh.tv6.setText(ycr.get(position).getIsPass());
-            vh.ev8.setText(ycr.get(position).getDescription());
+
+            if (ycr.get(position).getDescription() == null) {
+                vh.ev8.setHint("无描述");
+            } else {
+                vh.ev8.setText(ycr.get(position).getDescription());
+            }
+//            vh.ev8.setText(ycr.get(position).getDescription());
 
 
             //在左侧添加图片
@@ -110,7 +117,7 @@ public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.iv7.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new PhotoView().showPopWindPic(mContext, position, mYCCamera, ycr);
+                    new PhotoView().showPopWindPic2(mContext, position, mYCCamera, doOpenCameraForVideo, ycr);
                 }
             });
 
@@ -211,6 +218,12 @@ public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     //接口回调, 将点击事件传递到activity中,打开相机
     public void setmYCCamera(YCCamera y) {
         this.mYCCamera = y;
+    }
+
+    private YCCCameraForVideo doOpenCameraForVideo;
+    //接口回调, 将点击事件传递到activity中,打开相机录像
+    public void setdoOpenCameraForVideo(YCCCameraForVideo y) {
+        this.doOpenCameraForVideo = y;
     }
 
 }

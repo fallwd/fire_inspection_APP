@@ -41,7 +41,7 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="型号"
+                android:hint="请输入"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -57,7 +57,7 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="瓶号"
+                android:hint="请输入"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -75,7 +75,7 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="9.1"
+                android:hint="请输入"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -93,7 +93,7 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="3"
+                android:hint="请输入"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -110,7 +110,7 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="50"
+                android:hint="请输入"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -146,7 +146,7 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="生产厂家"
+                android:hint="请输入"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -238,7 +238,7 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="检验标签"
+                android:hint="请输入"
                 android:textSize="12sp" />
         </RelativeLayout>
 

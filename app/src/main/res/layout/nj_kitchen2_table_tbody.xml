@@ -39,7 +39,7 @@
                 android:background="@null"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="瓶号"
+                android:hint="请输入"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -56,7 +56,7 @@
                 android:background="@null"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="容积/L"
+                android:hint="请输入"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -73,7 +73,7 @@
                 android:background="@null"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="压力/MPa"
+                android:hint="请输入"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -91,7 +91,7 @@
                 android:background="@null"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="生产厂家"
+                android:hint="请输入"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -181,7 +181,7 @@
                 android:background="@null"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="标签号"
+                android:hint="请输入"
                 android:textSize="12sp" />
         </RelativeLayout>
 

@@ -154,6 +154,12 @@ public class xfspAdapter extends RecyclerView.Adapter {
                         mRemoveXH.deleteRefresh(position);
                         break;
                 }
+            } else {
+                switch (v.getId()) {
+                    case R.id.rl_fire6:
+                        new PhotoView2().showHiddenLibaryDetail(mContext, position, mData);
+                        break;
+                }
             }
         }
     }

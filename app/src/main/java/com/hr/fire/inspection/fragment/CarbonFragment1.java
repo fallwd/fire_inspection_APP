@@ -2,6 +2,8 @@ package com.hr.fire.inspection.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,7 +101,6 @@ public class CarbonFragment1 extends Fragment {
      * 3. 用gettableNameData返回的数据ID,  填充到getItemDataEasy第三个参数
      */
     private void initData() {
-        Log.i("aaa","UUID:"+UUID.randomUUID().toString().replace("-",""));
         //历史中的companyInfoId  ,  systemId和在公司、平台那边传过来的都是一样的ID，使用哪一个都行
 
         checkTypes = ServiceFactory.getYearCheckService().gettableNameData(its.systemId);
@@ -125,7 +126,7 @@ public class CarbonFragment1 extends Fragment {
                     itemInfo.setObserveDate(item.getObserveDate());
                     itemInfo.setTaskNumber(item.getTaskNumber());
                     itemInfo.setIsPass("请选择");
-                    itemInfo.setLabelNo("请编辑");
+//                    itemInfo.setLabelNo("请编辑");
                     itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
 
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -161,6 +162,7 @@ public class CarbonFragment1 extends Fragment {
 
     //动态添加条目
     public void addItemView() {
+        upData(); // 点击加号前，执行保存函数，将最新数据提交到数据库
         if (adapter != null) {
             ItemInfo itemInfo = new ItemInfo();
             if (itemDataList != null && itemDataList.size() != 0) {
@@ -180,11 +182,11 @@ public class CarbonFragment1 extends Fragment {
                 itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
-                itemInfo.setNo("请编辑");
-                itemInfo.setVolume("请编辑");
-                itemInfo.setWeight("请编辑");
-                itemInfo.setGoodsWeight("请编辑");
-                itemInfo.setProdFactory("请编辑");
+//                    itemInfo.setNo("请编辑");
+//                    itemInfo.setVolume("请编辑");
+//                    itemInfo.setWeight("请编辑");
+//                    itemInfo.setGoodsWeight("请编辑");
+//                    itemInfo.setProdFactory("请编辑");
                 Date date = new Date();
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
                 long nowTime = date.getTime();

@@ -27,6 +27,7 @@ import com.hr.fire.inspection.activity.QRCodeExistenceAcitivty;
 import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.impl.YCCCameraForVideo;
 import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.PhotoView;
@@ -64,11 +65,43 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
             ItemInfo info = mData.get(position);
 
             vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
-            vh.et_2.setText(new StringBuffer().append(info.getDeviceType()).append(""));
-            vh.et_3.setText(new StringBuffer().append(info.getProdFactory()).append(""));
-            vh.et_4.setText(new StringBuffer().append(info.getTypeNo()).append(""));
-            vh.et_5.setText(new StringBuffer().append(info.getNo()).append(""));
-            vh.et_6.setText(new StringBuffer().append(info.getPositionConformity()).append(""));
+//            vh.et_2.setText(new StringBuffer().append(info.getDeviceType()).append(""));
+//            vh.et_3.setText(new StringBuffer().append(info.getProdFactory()).append(""));
+//            vh.et_4.setText(new StringBuffer().append(info.getTypeNo()).append(""));
+//            vh.et_5.setText(new StringBuffer().append(info.getNo()).append(""));
+//            vh.et_6.setText(new StringBuffer().append(info.getPositionConformity()).append(""));
+
+            if (info.getDeviceType() == null) {
+                vh.et_2.setHint("请输入");
+            } else {
+                vh.et_2.setText(info.getDeviceType());
+            }
+
+            if (info.getProdFactory() == null) {
+                vh.et_3.setHint("请输入");
+            } else {
+                vh.et_3.setText(info.getProdFactory());
+            }
+
+            if (info.getTypeNo() == null) {
+                vh.et_4.setHint("请输入");
+            } else {
+                vh.et_4.setText(info.getTypeNo());
+            }
+
+            if (info.getNo() == null) {
+                vh.et_5.setHint("请输入");
+            } else {
+                vh.et_5.setText(info.getNo());
+            }
+
+            if (info.getPositionConformity() == null) {
+                vh.et_6.setHint("请输入");
+            } else {
+                vh.et_6.setText(info.getPositionConformity());
+            }
+
+
 
 //          下拉框
             vh.et_7.setText(new StringBuffer().append(info.getAppearance()).append(""));
@@ -156,15 +189,28 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
                 vh.et_13.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
 
             }
+
+            String videoUrl = info.getVideoUrl();
+            if (videoUrl != null && videoUrl.endsWith(".mp4")) {
+                vh.et_13.setImageDrawable(mContext.getDrawable(R.mipmap.video_icon));
+            } else {
+                vh.et_13.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
+            }
             vh.et_13.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mYCCamera.startCamera(position);
-                    new PhotoView().showPopWindPicInfo(mContext, position, mYCCamera, mData);
+                    new PhotoView().showPopWindPicInfo(mContext, position, mYCCamera, doOpenCameraForVideo, mData);
                 }
             });
-            vh.et_15.setText(new StringBuffer().append(info.getDescription()).append(""));
+//            vh.et_15.setText(new StringBuffer().append(info.getDescription()).append(""));
+
+            if (info.getDescription() == null) {
+                vh.et_15.setHint("请输入");
+            } else {
+                vh.et_15.setText(info.getDescription());
+            }
         }
+
 
         vh.et_16.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -530,6 +576,13 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
     //接口回调, 将点击事件传递到activity中,打开相机
     public void setmYCCamera(YCCamera y) {
         this.mYCCamera = y;
+    }
+
+
+    private YCCCameraForVideo doOpenCameraForVideo;
+    //接口回调, 将点击事件传递到activity中,打开相机录像
+    public void setdoOpenCameraForVideo(YCCCameraForVideo y) {
+        this.doOpenCameraForVideo = y;
     }
 
 }

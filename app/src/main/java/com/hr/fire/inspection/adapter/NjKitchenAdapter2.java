@@ -84,10 +84,31 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
         if (mData != null && mData.size() != 0) {
             ItemInfo info = mData.get(position);
             vh.et_1.setText(new StringBuffer().append(" ").append(position + 1));
-            vh.et_2.setText(new StringBuffer().append(info.getNo()).append(""));
-            vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
-            vh.et_4.setText(new StringBuffer().append(info.getPressure()).append(""));
-            vh.et_7.setText(new StringBuffer().append(info.getProdFactory()).append(""));
+//            vh.et_2.setText(new StringBuffer().append(info.getNo()).append(""));
+//            vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
+//            vh.et_4.setText(new StringBuffer().append(info.getPressure()).append(""));
+//            vh.et_7.setText(new StringBuffer().append(info.getProdFactory()).append(""));
+
+            if (info.getNo() == null) {
+                vh.et_2.setHint("请输入");
+            } else {
+                vh.et_2.setText(info.getNo());
+            }
+            if (info.getVolume() == null) {
+                vh.et_3.setHint("请输入");
+            } else {
+                vh.et_3.setText(info.getVolume());
+            }
+            if (info.getPressure() == null) {
+                vh.et_4.setHint("请输入");
+            } else {
+                vh.et_4.setText(info.getPressure());
+            }
+            if (info.getProdFactory() == null) {
+                vh.et_7.setHint("请输入");
+            } else {
+                vh.et_7.setText(info.getProdFactory());
+            }
             String mProdDate = DateFormatUtils.format(info.getProdDate(),"yyyy-MM");
             vh.et_8.setText(new StringBuffer().append(mProdDate).append(""));
             vh.et_10.setText(new StringBuffer().append(info.getTaskNumber()).append(""));
@@ -120,22 +141,31 @@ public class NjKitchenAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.et_12.setOnClickListener(v -> showPopWind(finalHolder.et_12));
             vh.et_12.setBackground(drawable1);
 
-            vh.et_13.setText(new StringBuffer().append(info.getLabelNo()));
+//            vh.et_13.setText(new StringBuffer().append(info.getLabelNo()));
+            if (info.getLabelNo() == null) {
+                vh.et_13.setHint("请输入");
+            } else {
+                vh.et_13.setText(info.getLabelNo());
+            }
 //            vh.et_14.setText(new StringBuffer().append(info.getCodePath()).append(""));  // 二维码怎么添加
             vh.et_14.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent();
-                    intent.putExtra(ConstantInspection.CHECK_DIVICE, "驱动瓶信息");
-                    intent.setClass(mContext, QRCodeExistenceAcitivty.class);
-                    // 调用生成函数，处理扫描后显示的数据
-                    ItemInfo itemInfo = mData.get(position);
-                    Bitmap dCode = create2DCode(itemInfo.toEnCodeString());
-                    intent.putExtra("titleValue", mData.get(position).getNo()); // 传某个设备的具体名称
-                    byte buf[] = new byte[1024*1024];
-                    buf = Bitmap2Bytes(dCode);
-                    intent.putExtra("photo_bmp", buf);
-                    mContext.startActivity(intent);
+                    if (mData.get(position).getNo() == null) {
+                        Toast.makeText(mContext, "二维码是跟据瓶号生成的，请填写瓶号,填写完成后请点击保存按钮", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent intent = new Intent();
+                        intent.putExtra(ConstantInspection.CHECK_DIVICE, "驱动瓶信息");
+                        intent.setClass(mContext, QRCodeExistenceAcitivty.class);
+                        // 调用生成函数，处理扫描后显示的数据
+                        ItemInfo itemInfo = mData.get(position);
+                        Bitmap dCode = create2DCode(itemInfo.toEnCodeString());
+                        intent.putExtra("titleValue", mData.get(position).getNo()); // 传某个设备的具体名称
+                        byte buf[] = new byte[1024 * 1024];
+                        buf = Bitmap2Bytes(dCode);
+                        intent.putExtra("photo_bmp", buf);
+                        mContext.startActivity(intent);
+                    }
                 }
             });
 

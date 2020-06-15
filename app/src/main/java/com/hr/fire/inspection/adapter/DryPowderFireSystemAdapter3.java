@@ -22,6 +22,7 @@ import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
+import com.hr.fire.inspection.impl.YCCCameraForVideo;
 import com.hr.fire.inspection.utils.PhotoView;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 import com.hr.fire.inspection.impl.YCCamera;
@@ -65,7 +66,12 @@ public class DryPowderFireSystemAdapter3 extends RecyclerView.Adapter<RecyclerVi
             vh.tv5.setText(yearCheck.getStandard());
 
             vh.tv6.setText(ycr.get(position).getIsPass());
-            vh.ev8.setText(ycr.get(position).getDescription());
+            //            vh.ev8.setText(ycr.get(position).getDescription());
+            if (ycr.get(position).getDescription() == null) {
+                vh.ev8.setHint("无描述");
+            } else {
+                vh.ev8.setText(ycr.get(position).getDescription());
+            }
 
             //在左侧添加图片
             Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
@@ -97,10 +103,17 @@ public class DryPowderFireSystemAdapter3 extends RecyclerView.Adapter<RecyclerVi
                 vh.iv7.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
             }
 
+            String videoUrl = ycr.get(position).getVideoUrl();
+            if (videoUrl != null && videoUrl.endsWith(".mp4")) {
+                vh.iv7.setImageDrawable(mContext.getDrawable(R.mipmap.video_icon));
+            } else {
+                vh.iv7.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
+            }
+
             vh.iv7.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new PhotoView().showPopWindPic(mContext, position, mYCCamera, ycr);
+                    new PhotoView().showPopWindPic2(mContext, position, mYCCamera, doOpenCameraForVideo, ycr);
                 }
             });
         }
@@ -195,5 +208,11 @@ public class DryPowderFireSystemAdapter3 extends RecyclerView.Adapter<RecyclerVi
     //接口回调, 将点击事件传递到activity中,打开相机
     public void setmYCCamera(YCCamera y) {
         this.mYCCamera = y;
+    }
+
+    private YCCCameraForVideo doOpenCameraForVideo;
+    //接口回调, 将点击事件传递到activity中,打开相机录像
+    public void setdoOpenCameraForVideo(YCCCameraForVideo y) {
+        this.doOpenCameraForVideo = y;
     }
 }

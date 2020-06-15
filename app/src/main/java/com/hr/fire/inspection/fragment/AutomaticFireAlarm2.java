@@ -29,6 +29,7 @@ import com.hr.fire.inspection.adapter.AutomaticFireAlarmAdapter;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.impl.YCCCameraForVideo;
 import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.BaseService;
 import com.hr.fire.inspection.service.ServiceFactory;
@@ -60,6 +61,7 @@ public class AutomaticFireAlarm2 extends Fragment {
     private RecyclerView hz_table_tbody_id;
     private IntentTransmit it;
     private int imgPostion = -1;   //用户点击拍照, 所对应的位置
+    private int videoPostion = -1;   //用户点击录像, 所对应的位置
     private List<CheckType> checkTypes;
 
     public static AutomaticFireAlarm2 newInstance(String key, IntentTransmit value) {
@@ -136,10 +138,19 @@ public class AutomaticFireAlarm2 extends Fragment {
                 openSysCamera();
             }
         });
+        adapter.setdoOpenCameraForVideo(new YCCCameraForVideo() {
+            @Override
+            public void startCamera(int postion) {
+                videoPostion = postion;
+                openVideo();
+            }
+        });
+
     }
 
     //动态添加条目
     public void addItemView() {
+        upData(); // 点击加号前，执行保存函数，将最新数据提交到数据库
         if (adapter != null) {
             ItemInfo itemInfo = new ItemInfo();
             if (itemDataList != null && itemDataList.size() != 0) {
@@ -158,14 +169,14 @@ public class AutomaticFireAlarm2 extends Fragment {
                 itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
-                itemInfo.setNo("请编辑");
-                itemInfo.setDeviceType("请编辑");
-                itemInfo.setTypeNo("请编辑");
-                itemInfo.setResponseTime("请编辑");
+//                itemInfo.setNo("请编辑");
+//                itemInfo.setDeviceType("请编辑");
+//                itemInfo.setTypeNo("请编辑");
+//                itemInfo.setResponseTime("请编辑");
                 itemInfo.setIsPass("请选择");
-                itemInfo.setDescription("请编辑");
-                itemInfo.setProdFactory("请编辑");
-                itemInfo.setAppearance("请编辑");
+//                itemInfo.setDescription("请编辑");
+//                itemInfo.setProdFactory("请编辑");
+//                itemInfo.setAppearance("请编辑");
                 itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
             }
             long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, it.companyInfoId, checkTypes.get(1).getId(), it.number, it.srt_Date);
@@ -245,6 +256,13 @@ public class AutomaticFireAlarm2 extends Fragment {
                     adapter.notifyItemChanged(imgPostion);
                 }
                 break;
+            case 0:
+                if (videoNew.getAbsolutePath() != null && videoPostion != -1 && adapter != null) {
+                    itemDataList.get(videoPostion).setVideoUrl(videoNew.getAbsolutePath());
+                    adapter.notifyItemChanged(videoPostion);
+                }
+                Toast.makeText(this.getContext(), "录像数据保存成功，请点击拍照图标进行录像观看", Toast.LENGTH_SHORT).show();
+                break;
         }
     }
 
@@ -271,6 +289,31 @@ public class AutomaticFireAlarm2 extends Fragment {
             // 将系统Camera的拍摄结果写入到文件
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgUriOri);
             startActivityForResult(cameraIntent, FileRoute.CAMERA_RESULT_CODE);
+        }
+    }
+
+
+    private File videoNew = null;
+    private void openVideo() {
+        // intent用来启动系统自带的Camera
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            videoNew = new FileRoute(getActivity()).createOriVideoFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Uri imgUriOri = null;
+        if (videoNew != null) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                imgUriOri = Uri.fromFile(videoNew);
+            } else {
+                imgUriOri = FileProvider.getUriForFile(getActivity(), getActivity().getApplicationContext().getPackageName() + ".fileProvider", videoNew);
+            }
+            // 将系统Camera的拍摄结果写入到文件
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgUriOri);
+            cameraIntent.setAction("android.media.action.VIDEO_CAPTURE");
+            cameraIntent.addCategory("android.intent.category.DEFAULT");
+            startActivityForResult(cameraIntent, 0);
         }
     }
 }

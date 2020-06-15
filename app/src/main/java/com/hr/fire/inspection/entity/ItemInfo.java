@@ -106,6 +106,8 @@ public class ItemInfo   {
 
     private String imageUrl; //图片路径
 
+    private String videoUrl; //视频路径
+
     private String codePath;//二维码路径
 
     private String SystemNumber;//系统位号
@@ -117,7 +119,59 @@ public class ItemInfo   {
     @ToMany(referencedJoinProperty = "targetId")
     private List<YearCheckResult> checkResultList;
 
-/** Used to resolve relations */
+
+    @Override
+    public String toString() {
+        return "ItemInfo{" +
+                "id=" + id +
+                ", uuid='" + uuid + '\'' +
+                ", checkTypeId=" + checkTypeId +
+                ", checkType=" + checkType +
+                ", companyInfoId=" + companyInfoId +
+                ", companyInfo=" + companyInfo +
+                ", typeNo='" + typeNo + '\'' +
+                ", deviceType='" + deviceType + '\'' +
+                ", agentsType='" + agentsType + '\'' +
+                ", fillingDate=" + fillingDate +
+                ", no='" + no + '\'' +
+                ", level='" + level + '\'' +
+                ", volume='" + volume + '\'' +
+                ", weight='" + weight + '\'' +
+                ", goodsWeight='" + goodsWeight + '\'' +
+                ", pressure='" + pressure + '\'' +
+                ", prodFactory='" + prodFactory + '\'' +
+                ", prodDate=" + prodDate +
+                ", typeConformity='" + typeConformity + '\'' +
+                ", positionConformity='" + positionConformity + '\'' +
+                ", appearance='" + appearance + '\'' +
+                ", isPressure='" + isPressure + '\'' +
+                ", check='" + check + '\'' +
+                ", slience='" + slience + '\'' +
+                ", reset='" + reset + '\'' +
+                ", powerAlarmFunction='" + powerAlarmFunction + '\'' +
+                ", alarmFunction='" + alarmFunction + '\'' +
+                ", effectiveness='" + effectiveness + '\'' +
+                ", responseTime='" + responseTime + '\'' +
+                ", description='" + description + '\'' +
+                ", setAlarm25='" + setAlarm25 + '\'' +
+                ", setAlarm50='" + setAlarm50 + '\'' +
+                ", testAlarm25='" + testAlarm25 + '\'' +
+                ", testAlarm50='" + testAlarm50 + '\'' +
+                ", observeDate=" + observeDate +
+                ", taskNumber='" + taskNumber + '\'' +
+                ", isPass='" + isPass + '\'' +
+                ", labelNo='" + labelNo + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", videoUrl='" + videoUrl + '\'' +
+                ", codePath='" + codePath + '\'' +
+                ", SystemNumber='" + SystemNumber + '\'' +
+                ", ProtectArea='" + ProtectArea + '\'' +
+                ", checkDate=" + checkDate +
+                ", checkResultList=" + checkResultList +
+                '}';
+    }
+
+    /** Used to resolve relations */
 @Generated(hash = 2040040024)
 private transient DaoSession daoSession;
 
@@ -125,14 +179,19 @@ private transient DaoSession daoSession;
 @Generated(hash = 547138643)
 private transient ItemInfoDao myDao;
 
-@Generated(hash = 1336836104)
-public ItemInfo(Long id, String uuid, Long checkTypeId, Long companyInfoId, String typeNo, String deviceType,
-        String agentsType, Date fillingDate, String no, String level, String volume, String weight, String goodsWeight,
-        String pressure, String prodFactory, Date prodDate, String typeConformity, String positionConformity,
-        String appearance, String isPressure, String check, String slience, String reset, String powerAlarmFunction,
-        String alarmFunction, String effectiveness, String responseTime, String description, String setAlarm25,
-        String setAlarm50, String testAlarm25, String testAlarm50, Date observeDate, String taskNumber, String isPass,
-        String labelNo, String imageUrl, String codePath, String SystemNumber, String ProtectArea, Date checkDate) {
+@Generated(hash = 180279690)
+public ItemInfo(Long id, String uuid, Long checkTypeId, Long companyInfoId,
+        String typeNo, String deviceType, String agentsType, Date fillingDate,
+        String no, String level, String volume, String weight,
+        String goodsWeight, String pressure, String prodFactory, Date prodDate,
+        String typeConformity, String positionConformity, String appearance,
+        String isPressure, String check, String slience, String reset,
+        String powerAlarmFunction, String alarmFunction, String effectiveness,
+        String responseTime, String description, String setAlarm25,
+        String setAlarm50, String testAlarm25, String testAlarm50,
+        Date observeDate, String taskNumber, String isPass, String labelNo,
+        String imageUrl, String videoUrl, String codePath, String SystemNumber,
+        String ProtectArea, Date checkDate) {
     this.id = id;
     this.uuid = uuid;
     this.checkTypeId = checkTypeId;
@@ -170,6 +229,7 @@ public ItemInfo(Long id, String uuid, Long checkTypeId, Long companyInfoId, Stri
     this.isPass = isPass;
     this.labelNo = labelNo;
     this.imageUrl = imageUrl;
+    this.videoUrl = videoUrl;
     this.codePath = codePath;
     this.SystemNumber = SystemNumber;
     this.ProtectArea = ProtectArea;
@@ -186,6 +246,14 @@ public Long getId() {
 
 public void setId(Long id) {
     this.id = id;
+}
+
+public String getUuid() {
+    return this.uuid;
+}
+
+public void setUuid(String uuid) {
+    this.uuid = uuid;
 }
 
 public Long getCheckTypeId() {
@@ -212,12 +280,44 @@ public void setTypeNo(String typeNo) {
     this.typeNo = typeNo;
 }
 
+public String getDeviceType() {
+    return this.deviceType;
+}
+
+public void setDeviceType(String deviceType) {
+    this.deviceType = deviceType;
+}
+
+public String getAgentsType() {
+    return this.agentsType;
+}
+
+public void setAgentsType(String agentsType) {
+    this.agentsType = agentsType;
+}
+
+public Date getFillingDate() {
+    return this.fillingDate;
+}
+
+public void setFillingDate(Date fillingDate) {
+    this.fillingDate = fillingDate;
+}
+
 public String getNo() {
     return this.no;
 }
 
 public void setNo(String no) {
     this.no = no;
+}
+
+public String getLevel() {
+    return this.level;
+}
+
+public void setLevel(String level) {
+    this.level = level;
 }
 
 public String getVolume() {
@@ -290,6 +390,14 @@ public String getAppearance() {
 
 public void setAppearance(String appearance) {
     this.appearance = appearance;
+}
+
+public String getIsPressure() {
+    return this.isPressure;
+}
+
+public void setIsPressure(String isPressure) {
+    this.isPressure = isPressure;
 }
 
 public String getCheck() {
@@ -426,6 +534,14 @@ public String getImageUrl() {
 
 public void setImageUrl(String imageUrl) {
     this.imageUrl = imageUrl;
+}
+
+public String getVideoUrl() {
+    return this.videoUrl;
+}
+
+public void setVideoUrl(String videoUrl) {
+    this.videoUrl = videoUrl;
 }
 
 public String getCodePath() {
@@ -598,96 +714,6 @@ public void __setDaoSession(DaoSession daoSession) {
     myDao = daoSession != null ? daoSession.getItemInfoDao() : null;
 }
 
-    @Override
-    public String toString() {
-        return "ItemInfo{" +
-                "id=" + id +
-                ", uuid='" + uuid + '\'' +
-                ", checkTypeId=" + checkTypeId +
-                ", checkType=" + checkType +
-                ", companyInfoId=" + companyInfoId +
-                ", companyInfo=" + companyInfo +
-                ", typeNo='" + typeNo + '\'' +
-                ", deviceType='" + deviceType + '\'' +
-                ", agentsType='" + agentsType + '\'' +
-                ", fillingDate=" + fillingDate +
-                ", no='" + no + '\'' +
-                ", level='" + level + '\'' +
-                ", volume='" + volume + '\'' +
-                ", weight='" + weight + '\'' +
-                ", goodsWeight='" + goodsWeight + '\'' +
-                ", pressure='" + pressure + '\'' +
-                ", prodFactory='" + prodFactory + '\'' +
-                ", prodDate=" + prodDate +
-                ", typeConformity='" + typeConformity + '\'' +
-                ", positionConformity='" + positionConformity + '\'' +
-                ", appearance='" + appearance + '\'' +
-                ", isPressure='" + isPressure + '\'' +
-                ", check='" + check + '\'' +
-                ", slience='" + slience + '\'' +
-                ", reset='" + reset + '\'' +
-                ", powerAlarmFunction='" + powerAlarmFunction + '\'' +
-                ", alarmFunction='" + alarmFunction + '\'' +
-                ", effectiveness='" + effectiveness + '\'' +
-                ", responseTime='" + responseTime + '\'' +
-                ", description='" + description + '\'' +
-                ", setAlarm25='" + setAlarm25 + '\'' +
-                ", setAlarm50='" + setAlarm50 + '\'' +
-                ", testAlarm25='" + testAlarm25 + '\'' +
-                ", testAlarm50='" + testAlarm50 + '\'' +
-                ", observeDate=" + observeDate +
-                ", taskNumber='" + taskNumber + '\'' +
-                ", isPass='" + isPass + '\'' +
-                ", labelNo='" + labelNo + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", codePath='" + codePath + '\'' +
-                ", SystemNumber='" + SystemNumber + '\'' +
-                ", ProtectArea='" + ProtectArea + '\'' +
-                ", checkDate=" + checkDate +
-                ", checkResultList=" + checkResultList +
-                '}';
-    }
-
-    public String getDeviceType() {
-        return this.deviceType;
-    }
-
-    public void setDeviceType(String deviceType) {
-        this.deviceType = deviceType;
-    }
-
-    public String getAgentsType() {
-        return this.agentsType;
-    }
-
-    public void setAgentsType(String agentsType) {
-        this.agentsType = agentsType;
-    }
-
-    public Date getFillingDate() {
-        return this.fillingDate;
-    }
-
-    public void setFillingDate(Date fillingDate) {
-        this.fillingDate = fillingDate;
-    }
-
-    public String getLevel() {
-        return this.level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public String getIsPressure() {
-        return this.isPressure;
-    }
-
-    public void setIsPressure(String isPressure) {
-        this.isPressure = isPressure;
-    }
-
     public String toEnCodeString() {
         StringBuilder sb = new StringBuilder();
 
@@ -835,11 +861,4 @@ public void __setDaoSession(DaoSession daoSession) {
 
     }
 
-    public String getUuid() {
-        return this.uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
 }

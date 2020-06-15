@@ -39,7 +39,7 @@
                 android:background="@null"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="瓶号"
+                android:hint="瓶号"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -57,7 +57,7 @@
                 android:background="@null"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="9.1"
+                android:hint="容积"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -74,7 +74,7 @@
                 android:background="@null"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="3"
+                android:hint="瓶量"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -91,7 +91,7 @@
                 android:background="@null"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="50"
+                android:hint="药剂量"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -109,7 +109,7 @@
                 android:background="@null"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="生产厂家"
+                android:hint="生产厂家"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -216,7 +216,7 @@
                 android:background="@null"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="标签"
+                android:hint="标签"
                 android:textSize="12sp" />
         </RelativeLayout>
 

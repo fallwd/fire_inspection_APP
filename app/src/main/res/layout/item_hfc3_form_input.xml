@@ -142,7 +142,7 @@
             android:background="@null"
             android:gravity="center"
             android:singleLine="true"
-            android:text="@string/hidden_danger"
+            android:hint="隐患描述"
             android:textColor="@color/title_black"
             android:textSize="12sp"
             android:visibility="gone" />

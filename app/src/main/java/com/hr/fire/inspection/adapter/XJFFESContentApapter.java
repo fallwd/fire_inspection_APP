@@ -255,6 +255,12 @@ public class XJFFESContentApapter extends RecyclerView.Adapter {
                         mRemoveXH.deleteRefresh(position);
                         break;
                 }
+            } else {
+                switch (v.getId()) {
+                    case R.id.rl_fire26:
+                        new PhotoView2().showHiddenLibaryDetail(mContext, position, mData);
+                        break;
+                }
             }
         }
     }

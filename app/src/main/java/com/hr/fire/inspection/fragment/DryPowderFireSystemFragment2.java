@@ -123,7 +123,7 @@ public class DryPowderFireSystemFragment2 extends Fragment {
                     itemInfo.setTaskNumber(item.getTaskNumber());
                     itemInfo.setCodePath(item.getCodePath());
                     itemInfo.setIsPass("请选择");
-                    itemInfo.setLabelNo("请编辑");
+//                    itemInfo.setLabelNo("请编辑");
                     itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
 
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -159,6 +159,7 @@ public class DryPowderFireSystemFragment2 extends Fragment {
 
     //动态添加条目
     public void addItemView() {
+        saveData(); // 点击加号前，执行保存函数，将最新数据提交到数据库
         if (adapter != null) {
             ItemInfo itemInfo = new ItemInfo();
             if (itemDataList != null && itemDataList.size() != 0) {
@@ -181,10 +182,10 @@ public class DryPowderFireSystemFragment2 extends Fragment {
 
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
-                itemInfo.setNo("请编辑");
-                itemInfo.setVolume("请编辑");
-                itemInfo.setWeight("请编辑");
-                itemInfo.setPressure("请编辑");
+//                itemInfo.setNo("请编辑");
+//                itemInfo.setVolume("请编辑");
+//                itemInfo.setWeight("请编辑");
+//                itemInfo.setPressure("请编辑");
                 Date date = new Date();
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
                 long nowTime = date.getTime();
@@ -194,12 +195,12 @@ public class DryPowderFireSystemFragment2 extends Fragment {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                itemInfo.setProdFactory("请编辑");
+//                itemInfo.setProdFactory("请编辑");
                 itemInfo.setProdDate(date);
                 itemInfo.setObserveDate(date);
                 itemInfo.setTaskNumber("请选择");
                 itemInfo.setIsPass("请选择");
-                itemInfo.setLabelNo("请编辑");
+//                itemInfo.setLabelNo("请编辑");
                 itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
 //                瓶号 no
 //                容积/L  volume

@@ -39,7 +39,7 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="类型"
+                android:hint="请输入"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -56,7 +56,7 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="编号"
+                android:hint="请输入"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -73,7 +73,7 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="生产厂家"
+                android:hint="请输入"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -90,7 +90,7 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:text="规格型号"
+                android:hint="请输入"
                 android:textSize="12sp" />
         </RelativeLayout>
         <RelativeLayout

@@ -111,13 +111,13 @@ public class HFCFragment2 extends Fragment {
                     itemInfo.setNo(item.getNo());
                     itemInfo.setVolume(item.getVolume());
                     itemInfo.setWeight(item.getWeight());
-                    itemInfo.setPressure(item.getPressure());
+                    itemInfo.setGoodsWeight(item.getGoodsWeight());
                     itemInfo.setProdFactory(item.getProdFactory());
                     itemInfo.setProdDate(item.getProdDate());
                     itemInfo.setObserveDate(item.getObserveDate());
                     itemInfo.setTaskNumber(item.getTaskNumber());
                     itemInfo.setIsPass("请选择");
-                    itemInfo.setLabelNo("请编辑");
+//                    itemInfo.setLabelNo("请编辑");
                     itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
 
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -151,6 +151,7 @@ public class HFCFragment2 extends Fragment {
 
     //动态添加条目
     public void addItemView() {
+        saveData(); // 点击加号前，执行保存函数，将最新数据提交到数据库
         if (adapter != null) {
             ItemInfo itemInfo = new ItemInfo();
             if (itemDataList != null && itemDataList.size() != 0) {
@@ -160,7 +161,7 @@ public class HFCFragment2 extends Fragment {
                 itemInfo.setNo(item.getNo());
                 itemInfo.setVolume(item.getVolume());
                 itemInfo.setWeight(item.getWeight());
-                itemInfo.setPressure(item.getPressure());
+                itemInfo.setGoodsWeight(item.getGoodsWeight());
                 itemInfo.setProdFactory(item.getProdFactory());
                 itemInfo.setProdDate(item.getProdDate());
                 itemInfo.setObserveDate(item.getObserveDate());
@@ -170,11 +171,11 @@ public class HFCFragment2 extends Fragment {
                 itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
             } else {
                 //点击新增,如果没有数据,就造一条默认数据
-                itemInfo.setNo("请编辑");
-                itemInfo.setVolume("请编辑");
-                itemInfo.setWeight("请编辑");
-                itemInfo.setPressure("请编辑");
-                itemInfo.setProdFactory("请编辑");
+//                itemInfo.setNo("请编辑");
+//                itemInfo.setVolume("请编辑");
+//                itemInfo.setWeight("请编辑");
+//                itemInfo.setGoodsWeight("请编辑");
+//                itemInfo.setProdFactory("请编辑");
                 Date date = new Date();
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
                 long nowTime = date.getTime();

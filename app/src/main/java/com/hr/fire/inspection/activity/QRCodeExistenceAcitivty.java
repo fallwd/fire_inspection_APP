@@ -62,7 +62,9 @@ public class QRCodeExistenceAcitivty extends AppCompatActivity {
         tv_inspection_pro.setText(new StringBuffer(title).append("二维码"));
         Bundle Intent = getIntent().getExtras();
         String titleValue =  Intent.getString("titleValue");
+
         detailText.setText("瓶号：“"+ new StringBuffer(titleValue).append("”的二维码， 长按图片保存至pad相册"));
+
 
 
         iv_rc_code.setOnLongClickListener(new View.OnLongClickListener() {
@@ -105,7 +107,6 @@ public class QRCodeExistenceAcitivty extends AppCompatActivity {
             fos.flush();
             fos.close();
         } catch (Exception e) {
-            Log.e("111",e.getMessage());
             e.printStackTrace();
         }
 
@@ -114,7 +115,6 @@ public class QRCodeExistenceAcitivty extends AppCompatActivity {
         try {
             MediaStore.Images.Media.insertImage(context.getContentResolver(), path, fileName, null);
         } catch (FileNotFoundException e) {
-            Log.e("333",e.getMessage());
             e.printStackTrace();
         }
         // 最后通知图库更新

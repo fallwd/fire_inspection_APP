@@ -39,7 +39,7 @@ public class ExcelUtils {
 
     public void exportExcel(Context mContext , String filename) {
         try {
-            //保存到ExportData这个文件夹下
+            //保存到年ExportData这个文件夹下
             File path = Environment.getExternalStorageDirectory();
             path = Environment.getExternalStoragePublicDirectory("ExportData");
             File file = new File(path + "/" + filename + ".xls");

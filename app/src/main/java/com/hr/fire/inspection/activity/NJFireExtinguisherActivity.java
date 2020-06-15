@@ -30,6 +30,7 @@ import com.hr.fire.inspection.adapter.NJMhqContentApapter;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.impl.YCCCameraForVideo;
 import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.service.impl.InspectionServiceImpl;
@@ -77,6 +78,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final int TAKE_PHOTO = 1;//拍照
     private int imgPostion = -1;
+    private int videoPostion = -1;   //用户点击录像, 所对应的位置
 
     private List<CheckType> checkTypes;
     private List<ItemInfo> itemDataList = new ArrayList<>();
@@ -193,6 +195,13 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 openSysCamera();
             }
         });
+        contentApapter.setdoOpenCameraForVideo(new YCCCameraForVideo() {
+            @Override
+            public void startCamera(int postion) {
+                videoPostion = postion;
+                openVideo();
+            }
+        });
         //刷新序号列表
         contentApapter.setDeleteRefresh(new NJMhqContentApapter.RemoveXH() {
             @Override
@@ -247,6 +256,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
      * 二:增加数据成功后,刷新适配器adapter
      */
     private void addItemView() {
+        saveToUpdara(); // 点击加号前，执行保存函数，将最新数据提交到数据库
         if (contentApapter != null) {
             ItemInfo itemInfo = new ItemInfo();
             if (itemDataList != null && itemDataList.size() != 0) {
@@ -295,11 +305,11 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
 
             } else {
                 //没有数据造一段默认数据
-                itemInfo.setTypeNo("请输入");
+//                itemInfo.setTypeNo("请输入");
                 itemInfo.setDeviceType("请选择");
                 itemInfo.setLevel("请选择");
                 itemInfo.setTaskNumber("请选择");
-                itemInfo.setProdFactory("请输入");
+//                itemInfo.setProdFactory("请输入");
                 Date date = new Date();
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
                 long nowTime = date.getTime();
@@ -317,8 +327,8 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 itemInfo.setEffectiveness("请选择");
 //                itemInfo.setObserveDate(date);  // 甲方要求默认为空
                 itemInfo.setIsPass("请选择");
-                itemInfo.setLabelNo("请输入");
-                itemInfo.setDescription("请输入");
+//                itemInfo.setLabelNo("请输入");
+//                itemInfo.setDescription("请输入");
                 itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
             }
 
@@ -416,6 +426,13 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                     contentApapter.notifyDataSetChanged();
                 }
                 break;
+            case 0:
+                if (videoNew.getAbsolutePath() != null && videoPostion != -1 && contentApapter != null) {
+                    itemDataList.get(videoPostion).setVideoUrl(videoNew.getAbsolutePath());
+                    contentApapter.notifyDataSetChanged();
+                }
+                Toast.makeText(this, "录像数据保存成功，请点击拍照图标进行录像观看", Toast.LENGTH_SHORT).show();
+                break;
         }
     }
 
@@ -442,6 +459,30 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
             // 将系统Camera的拍摄结果写入到文件
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgUriOri);
             startActivityForResult(cameraIntent, FileRoute.CAMERA_RESULT_CODE);
+        }
+    }
+
+    private File videoNew = null;
+    private void openVideo() {
+        // intent用来启动系统自带的Camera
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            videoNew = new FileRoute(this).createOriVideoFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Uri imgUriOri = null;
+        if (videoNew != null) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                imgUriOri = Uri.fromFile(videoNew);
+            } else {
+                imgUriOri = FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() + ".fileProvider", videoNew);
+            }
+            // 将系统Camera的拍摄结果写入到文件
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgUriOri);
+            cameraIntent.setAction("android.media.action.VIDEO_CAPTURE");
+            cameraIntent.addCategory("android.intent.category.DEFAULT");
+            startActivityForResult(cameraIntent, 0);
         }
     }
 }

@@ -78,20 +78,58 @@ public class DryPowderFireSystemAdapter1 extends RecyclerView.Adapter<RecyclerVi
             ItemInfo info = mData.get(position);
             vh.tv_1.setText(new StringBuffer().append(" ").append(position + 1));
             // 型号
-            vh.et_1.setText(new StringBuffer().append(info.getTypeNo()).append(""));
-            // 瓶号
-            vh.et_2.setText(new StringBuffer().append(info.getNo()).append(""));
-            // 容积
-            vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
-            // 瓶量
-            vh.et_4.setText(new StringBuffer().append(info.getWeight()).append(""));
-            // 药剂量
-            vh.et_5.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));
+//            vh.et_1.setText(new StringBuffer().append(info.getTypeNo()).append(""));
+//            // 瓶号
+//            vh.et_2.setText(new StringBuffer().append(info.getNo()).append(""));
+//            // 容积
+//            vh.et_3.setText(new StringBuffer().append(info.getVolume()).append(""));
+//            // 瓶量
+//            vh.et_4.setText(new StringBuffer().append(info.getWeight()).append(""));
+//            // 药剂量
+//            vh.et_5.setText(new StringBuffer().append(info.getGoodsWeight()).append(""));
+            if (info.getTypeNo() == null) {
+                vh.et_1.setHint("请输入");
+            } else {
+                vh.et_1.setText(info.getTypeNo());
+            }
+
+            if (info.getNo() == null) {
+                vh.et_2.setHint("请输入");
+            } else {
+                vh.et_2.setText(info.getNo());
+            }
+
+            if (info.getVolume() == null) {
+                vh.et_3.setHint("请输入");
+            } else {
+                vh.et_3.setText(info.getVolume());
+            }
+
+            if (info.getWeight() == null) {
+                vh.et_4.setHint("请输入");
+            } else {
+                vh.et_4.setText(info.getWeight());
+            }
+
+            if (info.getGoodsWeight() == null) {
+                vh.et_5.setHint("请输入");
+            } else {
+                vh.et_5.setText(info.getGoodsWeight());
+            }
+
+
+
+
             // 灌装日期
             String mProdDate1 = DateFormatUtils.format(info.getFillingDate(),"yyyy-MM");
             vh.et_6.setText(new StringBuffer().append(mProdDate1).append(""));
             // 生产厂家
-            vh.et_7.setText(new StringBuffer().append(info.getProdFactory()).append(""));
+//            vh.et_7.setText(new StringBuffer().append(info.getProdFactory()).append(""));
+            if (info.getProdFactory() == null) {
+                vh.et_7.setHint("请输入");
+            } else {
+                vh.et_7.setText(info.getProdFactory());
+            }
             // 生产日期
             String mProdDate2 = DateFormatUtils.format(info.getProdDate(),"yyyy-MM");
             vh.et_8.setText(new StringBuffer().append(mProdDate2).append(""));
@@ -124,23 +162,32 @@ public class DryPowderFireSystemAdapter1 extends RecyclerView.Adapter<RecyclerVi
             });
 
             vh.et_10.setText(new StringBuffer().append(info.getIsPass()).append(""));
-            vh.et_11.setText(new StringBuffer().append(info.getLabelNo()));
+//            vh.et_11.setText(new StringBuffer().append(info.getLabelNo()));
+            if (info.getLabelNo() == null) {
+                vh.et_11.setHint("请输入");
+            } else {
+                vh.et_11.setText(info.getLabelNo());
+            }
 //            vh.et_12.setImageURI(info.getCodePath()); // 二维码路径？？？
             //二维码点击
             vh.et_12.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent();
-                    intent.putExtra(ConstantInspection.CHECK_DIVICE, "干粉罐信息");
-                    intent.setClass(mContext, QRCodeExistenceAcitivty.class);
-                    // 调用生成函数，处理扫描后显示的数据
-                    ItemInfo itemInfo = mData.get(position);
-                    Bitmap dCode = create2DCode(itemInfo.toEnCodeString());
-                    intent.putExtra("titleValue", mData.get(position).getNo()); // 传某个设备的具体名称
-                    byte buf[] = new byte[1024*1024];
-                    buf = Bitmap2Bytes(dCode);
-                    intent.putExtra("photo_bmp", buf);
-                    mContext.startActivity(intent);
+                    if (mData.get(position).getNo() == null) {
+                        Toast.makeText(mContext, "二维码是跟据瓶号生成的，请填写瓶号,填写完成后请点击保存按钮", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent intent = new Intent();
+                        intent.putExtra(ConstantInspection.CHECK_DIVICE, "干粉罐信息");
+                        intent.setClass(mContext, QRCodeExistenceAcitivty.class);
+                        // 调用生成函数，处理扫描后显示的数据
+                        ItemInfo itemInfo = mData.get(position);
+                        Bitmap dCode = create2DCode(itemInfo.toEnCodeString());
+                        intent.putExtra("titleValue", mData.get(position).getNo()); // 传某个设备的具体名称
+                        byte buf[] = new byte[1024 * 1024];
+                        buf = Bitmap2Bytes(dCode);
+                        intent.putExtra("photo_bmp", buf);
+                        mContext.startActivity(intent);
+                    }
                 }
             });
 

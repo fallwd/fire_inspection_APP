@@ -29,30 +29,12 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/bt_photograph"
-            android:layout_width="260dp"
-            android:layout_height="45dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:text="拍        照"
-            android:textColor="@color/title_green" />
-
-        <Button
             android:id="@+id/bt_see"
             android:layout_width="260dp"
             android:layout_height="45dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:text="查看大图"
-            android:textColor="@color/title_green" />
-
-        <Button
-            android:id="@+id/bt_video"
-            android:layout_width="260dp"
-            android:layout_height="45dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:text="录        像"
             android:textColor="@color/title_green" />
 
         <Button

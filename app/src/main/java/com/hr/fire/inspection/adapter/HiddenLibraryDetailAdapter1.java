@@ -11,19 +11,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.entity.YearCheckResult;
+import com.hr.fire.inspection.utils.PhotoView;
 import com.hr.fire.inspection.utils.TimeUtil;
+import com.hr.fire.inspection.utils.ToastUtil;
 
 import java.io.File;
 import java.util.List;
 public class HiddenLibraryDetailAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<YearCheckResult> ycr;
+    private LinearLayout ll_item;
+    private ImageView iv_pic_see;
     public HiddenLibraryDetailAdapter1(Activity rulesActivity, List<YearCheckResult> yearCheckResults) {
         this.mContext = rulesActivity;
         this.ycr = yearCheckResults;
@@ -35,6 +40,9 @@ public class HiddenLibraryDetailAdapter1 extends RecyclerView.Adapter<RecyclerVi
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.activity_hidden_library_detail_layout_tbody, parent, false);
         ViewHolder holder = new ViewHolder(view);
+
+        ll_item = view.findViewById(R.id.ll_item);
+        iv_pic_see = view.findViewById(R.id.iv_pic_see);
         return holder;
     }
 
@@ -69,6 +77,12 @@ public class HiddenLibraryDetailAdapter1 extends RecyclerView.Adapter<RecyclerVi
                 vh.iv9.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
             }
 
+            vh.iv9.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new PhotoView().showHiddenLibaryDetail(mContext, position, ycr);
+                }
+            });
 
             vh.tv10.setText(yearCheckResult.getDescription());
         }

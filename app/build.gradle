@@ -81,7 +81,7 @@ dependencies {
 }
 
 greendao {
-    schemaVersion 10 //数据库版本号
+    schemaVersion 11 //数据库版本号
     daoPackage 'com.hr.fire.inspection.dao' //代表GreenDao自动生成的有关数据库操作工具类所要存放的包名
     targetGenDir 'src/main/java' //路径
 }

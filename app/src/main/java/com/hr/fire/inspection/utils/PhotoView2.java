@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +13,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.hr.fire.inspection.R;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.entity.ItemInfo;
-import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.view.tableview.HrPopup;
 
@@ -45,7 +44,7 @@ public class PhotoView2 {
      * @param ycr       注意注意:原始数据:这里有两种数据,根据
      */
     public void showPopWindPic(Context mContext, int postion, YCCamera mYCCamera, List<InspectionResult> ycr) {
-        View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods_pic_see, null);
+        View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.xj_popup_goods_pic_see, null);
         if (hrPopup == null) {
             hrPopup = new HrPopup((Activity) mContext);
         }
@@ -107,14 +106,12 @@ public class PhotoView2 {
             }
         });
     }
-
-
-    public void showPopWindPicInfo(Context mContext, int postion, YCCamera mYCCamera, List<ItemInfo> mData) {
-        View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods_pic_see, null);
+    //隐患库查看大图的功能
+    public void showHiddenLibaryDetail(Context mContext, int postion, List<InspectionResult> ycr) {
+        View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.hidden_library_detail_see2, null);
         if (hrPopup == null) {
             hrPopup = new HrPopup((Activity) mContext);
         }
-        Button bt_photograph = PopupRootView.findViewById(R.id.bt_photograph);
         Button bt_see = PopupRootView.findViewById(R.id.bt_see);
         Button bt_cancel = PopupRootView.findViewById(R.id.bt_cancel);
         ImageView iv_pic_see = PopupRootView.findViewById(R.id.iv_pic_see);
@@ -127,20 +124,11 @@ public class PhotoView2 {
         hrPopup.setOutsideTouchable(false);
         hrPopup.setContentView(PopupRootView);
         hrPopup.showAtLocation(hrPopup.getContentView(), Gravity.CENTER, 0, 0);
-        bt_photograph.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (hrPopup != null || hrPopup.isShowing()) {
-                    hrPopup.dismiss();
-                }
-                mYCCamera.startCamera(postion);
-            }
-        });
 
         bt_see.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String imageUrl = mData.get(postion).getImageUrl();
+                String imageUrl = ycr.get(postion).getImgPath();
                 if (imageUrl != null && imageUrl.endsWith(".jpg")) {
                     isDismiss = true;
                     ll_pop_item.setVisibility(View.GONE);
@@ -148,10 +136,11 @@ public class PhotoView2 {
                     Uri uri = Uri.parse(imageUrl);
                     iv_pic_see.setImageURI(uri);
                 } else {
-                    ToastUtil.show(mContext, "没有采集图片", Toast.LENGTH_SHORT);
+                    ToastUtil.show(mContext, "没有获取图片", Toast.LENGTH_SHORT);
                 }
             }
         });
+
         bt_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
