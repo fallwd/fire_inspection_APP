@@ -9,31 +9,40 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hr.fire.inspection.R;
+import com.hr.fire.inspection.constant.ConstantInspection;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.sqlHelpers.BaseData;
 import com.hr.fire.inspection.utils.DBManager;
+import com.hr.fire.inspection.utils.SharedPreferencesUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
 // /data/data/com.hr.fire.inspection/cache
 //         清空数据库
 //        DBManager cleanObj = new DBManager(this);
 //        cleanObj.deleSQL();
-////        // 初始化数据库
-//        BaseData baseData = new BaseData();
-//        baseData.initData();
-//        baseData.insertTestData();
+////        // 初始化数据库,只初始化一次
+        String isOpen = SharedPreferencesUtils.getString(this, ConstantInspection.FIRST_OPEN, "-1");
+        if (isOpen.equals("-1")) {
+            BaseData baseData = new BaseData();
+            baseData.initData();
+            baseData.insertTestData();
+            SharedPreferencesUtils.putString(this, ConstantInspection.FIRST_OPEN, "100");
+        }
+
 
         // 调用接口测试
 //        List<CompanyInfo> companyList = ServiceFactory.getCompanyInfoService().getAll();
@@ -317,7 +326,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //            Log.i("retList:::","getYearCheckDetail:::"+retList.get(i));
 //
 //        }
-            // systemId 72
+        // systemId 72
 //        List<HashMap> retData = ServiceFactory.getAnalysisService().getInspectionView(0,0,startDate,endDate);
 ////        List<HashMap> retData = ServiceFactory.getAnalysisService().getInspectionView(165,72,startDate,endDate);
 ////        List<HashMap> retData = ServiceFactory.getAnalysisService().getInspectionView(0,0,null,null);
