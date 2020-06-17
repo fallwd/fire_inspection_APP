@@ -1,6 +1,8 @@
 package com.hr.fire.inspection.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -22,12 +24,29 @@ import java.util.HashMap;
 import java.util.List;
 
 public class WelcomeActivity extends AppCompatActivity {
+    boolean valid = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-// /data/data/com.hr.fire.inspection/cache
-//         清空数据库
+
+//        SharedPreferences sharedPreferences = getSharedPreferences("LoginInfo", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putBoolean("save",false);	  //以键值对的形式存储boolean类型数据
+//        editor.commit();	//需要调用commit提交后才成功存储
+//
+//        Boolean flag= sharedPreferences.getBoolean("save",true);	//第二个参数固定为false
+
+//        if(flag == false){
+//            //清空数据库
+            DBManager cleanObj = new DBManager(this);
+            cleanObj.deleSQL();
+            // 初始化数据库
+            BaseData baseData = new BaseData();
+            baseData.initData();
+            baseData.insertTestData();
+//        }
+
 //        DBManager cleanObj = new DBManager(this);
 //        cleanObj.deleSQL();
 ////        // 初始化数据库

@@ -502,6 +502,8 @@ public class FireReportItemAdapter extends BaseAdapter {
 //                new MergeDoc().appendBody(src1Document, src2Document);
 //            }
 //        }
+
+
         //厨房设备灭火装置
         private void RestaurantFireSuppressionDevice(Map<String, Object> templateData, XWPFDocument src1Document) throws Exception{
             // 药剂瓶
