@@ -43,6 +43,14 @@ public class WelcomeActivity extends AppCompatActivity {
             SharedPreferencesUtils.putString(this, ConstantInspection.FIRST_OPEN, "100");
         }
 
+//        DBManager cleanObj = new DBManager(this);
+//        cleanObj.deleSQL();
+////        // 初始化数据库
+//        BaseData baseData = new BaseData();
+//        baseData.initData();
+//        baseData.insertTestData();
+
+
 
         // 调用接口测试
 //        List<CompanyInfo> companyList = ServiceFactory.getCompanyInfoService().getAll();

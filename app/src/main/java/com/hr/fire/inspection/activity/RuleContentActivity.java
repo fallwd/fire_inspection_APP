@@ -14,11 +14,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -31,7 +28,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import com.hr.fire.inspection.R;
-import com.hr.fire.inspection.adapter.FireReportItemAdapter;
 import com.hr.fire.inspection.adapter.SearchAdapter;
 
 import java.io.File;
@@ -41,7 +37,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class RuleContentActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter;
