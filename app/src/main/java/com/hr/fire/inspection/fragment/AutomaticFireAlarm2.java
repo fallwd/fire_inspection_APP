@@ -173,6 +173,7 @@ public class AutomaticFireAlarm2 extends Fragment {
 //                itemInfo.setDeviceType("请编辑");
 //                itemInfo.setTypeNo("请编辑");
 //                itemInfo.setResponseTime("请编辑");
+                itemInfo.setAppearance("请选择");
                 itemInfo.setIsPass("请选择");
 //                itemInfo.setDescription("请编辑");
 //                itemInfo.setProdFactory("请编辑");
@@ -212,7 +213,7 @@ public class AutomaticFireAlarm2 extends Fragment {
             EditText et_3 = childAt.findViewById(R.id.et_3);
             EditText et_4 = childAt.findViewById(R.id.et_4);
             EditText et_5 = childAt.findViewById(R.id.et_5);
-            EditText et_6 = childAt.findViewById(R.id.et_6);
+            TextView et_6 = childAt.findViewById(R.id.et_6);
             EditText et_7 = childAt.findViewById(R.id.et_7);
             TextView et_8 = childAt.findViewById(R.id.et_8);
             ImageView tv_9 = childAt.findViewById(R.id.tv_9);

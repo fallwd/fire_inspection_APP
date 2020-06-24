@@ -44,6 +44,9 @@ public class HiddenLibaryFragment1 extends Fragment {
 
         Bundle args = new Bundle();
         args.putSerializable(key, value);
+        Log.e("aaaa", "获取数据1"+ args);
+        Log.e("aaaa", "获取数据1"+ key);
+        Log.e("aaaa", "获取数据1"+ value);
         fragment1.setArguments(args);
         return fragment1;
     }
@@ -77,14 +80,18 @@ public class HiddenLibaryFragment1 extends Fragment {
         }
     }
     private void initData() throws ParseException {
-        DateFormat format2= new SimpleDateFormat("yyyy-MM-dd HH:mm");
-
-        if (its != null && its.end_time != "" && its.start_time != ""){
+        DateFormat format2= new SimpleDateFormat("yyyy-MM-dd");
+        Log.e("aaa", "参数:" + its);
+        if (its != null && its.end_time != null && its.start_time != null){
             Date starTime = format2.parse(its.start_time);
             Date endTime = format2.parse(its.end_time);
             Log.d("time==========", "开始时间======"+starTime+"\n结束时间====="+endTime +"\n系统ID==="+its.systemId+"\n平台ID====="+its.platformId);
-            retData = ServiceFactory.getAnalysisService().getYearCheckView(its.platformId,its.systemId,starTime, endTime);
-            HYLogUtil.getInstance().d("获取隐患库年检格数据,数据更新查看:" + retData.size() + "  " + retData.toString());
+
+
+//          companyInfoId=131, systemId=1, srt_Date='Mon Jun 22 00:00:00 GMT+00:00 2020', id=0, platformId=0, type=0, parentId=0, start_time=null, end_time=null, name='null'
+
+            retData = ServiceFactory.getAnalysisService().getYearCheckView(its.platformId, its.systemId, starTime, endTime);
+            HYLogUtil.getInstance().d("获取隐患库年检格数据,数据更新查看1111:" + retData.size() + "  " + retData.toString());
         }else{
             Toast.makeText(getActivity(), "为了方便查询精确数据，建议选择时间范围", Toast.LENGTH_SHORT).show();
             retData = ServiceFactory.getAnalysisService().getYearCheckView(0,0,null, null);

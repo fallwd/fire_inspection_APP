@@ -50,6 +50,7 @@ public class HiddenLibaryActivity extends AppCompatActivity {
     private ImageView iv_finish;
     private TextView tvInspectionPro;
     private Button Statistics;
+//    private Button Reset;
     private int currentPager;
 
     private HiddenLibaryFragment1 hiddenLibaryFragment1;
@@ -72,6 +73,7 @@ public class HiddenLibaryActivity extends AppCompatActivity {
     private ArrayList<String> system_list;
     private List<CheckType> system_dataList;
     private ArrayList<String> platform_list;
+    private @Nullable Bundle savedInstanceState;
     //    platformId没有的话填0，systemId没有的话填0，startDate没有的话填null,endDate没有的话填null
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,11 +90,11 @@ public class HiddenLibaryActivity extends AppCompatActivity {
         spinner_sys = findViewById(R.id.spinner_sys);
         mTabLayout = findViewById(R.id.tl_tabs);
         mViewPager = findViewById(R.id.vp_content);
-        Statistics = findViewById(R.id.Statistics);
         end_time = findViewById(R.id.end_time);
         start_time = findViewById(R.id.start_time);
         tvInspectionPro = findViewById(R.id.tv_inspection_pro);
         Statistics = findViewById(R.id.Statistics);//  统计跳转
+//        Reset = findViewById(R.id.Reset); // 重置
         initView();
         initListner();
     }
@@ -192,6 +194,12 @@ public class HiddenLibaryActivity extends AppCompatActivity {
             return titleList.get(position);
         }
     }
+
+    public void refresh() {
+        super.onResume();
+        onCreate(savedInstanceState);
+    }
+
     private void initListner() {
         iv_finish = findViewById(R.id.iv_finish);
         iv_finish.setOnClickListener(v -> finish());
@@ -201,6 +209,13 @@ public class HiddenLibaryActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+//        Reset.setOnClickListener(v -> {
+//            intentTransmit.end_time = null;
+//            intentTransmit.start_time = null;
+//            intentTransmit = null;
+//            initView();
+//            refresh(savedInstanceState);
+//        });
         // 选择公司 搜索油田数据
         spinner_buss.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

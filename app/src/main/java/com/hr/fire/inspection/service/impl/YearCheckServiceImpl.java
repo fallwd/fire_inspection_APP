@@ -106,13 +106,15 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 checkDateStr = "noDate";
             }
             String comboData;
-            if(systemNumber !="" && systemNumber != null) {
+            Log.e("aaaaaa", "getHistoryList系统位号：" + systemNumber);
+            if(systemNumber =="" || systemNumber == null || systemNumber.isEmpty()) {
 
-                comboData = companyName + "_" + oilfieldName + "_" + platformName + "_" + systemName + "_" + systemNumber +"_" + checkDateStr;
+
+                comboData = companyName + "_" + oilfieldName + "_" + platformName + "_" + systemName + "_" + checkDateStr;
 //            Log.i("getHistoryList:::",comboData);
             }
             else{
-                comboData = companyName + "_" + oilfieldName + "_" + platformName + "_" + systemName + "_" + checkDateStr;
+                comboData = companyName + "_" + oilfieldName + "_" + platformName + "_" + systemName + "_" + systemNumber +"_" + checkDateStr;
             }
             if(systemId==DBsystemId){
                 HashMap obj = new HashMap();
@@ -157,13 +159,16 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 checkDateStr = "noDate";
             }
             String comboData;
-            if(systemNumber !="" && systemNumber != null) {
+            Log.e("bbbbbbbbb", "getHistoryList系统位号：" + systemNumber);
 
-                comboData = companyName + "_" + oilfieldName + "_" + platformName + "_" + systemName + "_" + systemNumber +"_" + checkDateStr;
+            if(systemNumber =="" || systemNumber == null || systemNumber.isEmpty()) {
+
+                comboData = companyName + "_" + oilfieldName + "_" + platformName + "_" + systemName + "_" + checkDateStr;
 //            Log.i("getHistoryList:::",comboData);
             }
             else{
-                comboData = companyName + "_" + oilfieldName + "_" + platformName + "_" + systemName + "_" + checkDateStr;
+
+                comboData = companyName + "_" + oilfieldName + "_" + platformName + "_" + systemName + "_" + systemNumber +"_" + checkDateStr;
             }
             if(systemId==DBsystemId){
                 HashMap obj = new HashMap();
@@ -180,6 +185,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
             }
         }
         resultList = new ArrayList<HashMap>(new HashSet<HashMap>(resultList));
+        Log.e("bbbbbbbbb", "getHistoryList返回结果值：" + resultList);
         return resultList;
     }
 
@@ -317,13 +323,11 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                     where(ItemInfoDao.Properties.Id.eq(itemId));
 
             dataList = queryBuilder.list();
-            Log.i("info", "查询完成02-------------------------------------------");
-            for (int i = 0; i < dataList.size(); i++) {
-                YearCheckResult result = dataList.get(i);
-                Log.i("result", result.toString());
-                Log.i("result", result.getYearCheck().toString());
-            }
-            Log.i("info", "查询完成02-------------------------------------------");
+//            for (int i = 0; i < dataList.size(); i++) {
+//                YearCheckResult result = dataList.get(i);
+//                Log.i("result", result.toString());
+//                Log.i("result", result.getYearCheck().toString());
+//            }
 
         }
         else {
@@ -353,13 +357,13 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 //                    YearCheckResultDao.Properties.CheckDate.eq(checkDate)
 //            );
             dataList = queryBuilder.list();
-            Log.i("info", "查询完成02-------------------------------------------");
-            for (int i = 0; i < dataList.size(); i++) {
-                YearCheckResult result = dataList.get(i);
-                Log.i("result", result.toString());
-                Log.i("result", result.getYearCheck().toString());
-            }
-            Log.i("info", "查询完成02-------------------------------------------");
+//            Log.i("info", "查询完成02-------------------------------------------");
+//            for (int i = 0; i < dataList.size(); i++) {
+//                YearCheckResult result = dataList.get(i);
+//                Log.i("result", result.toString());
+//                Log.i("result", result.getYearCheck().toString());
+//            }
+//            Log.i("info", "查询完成02-------------------------------------------");
         }
         return dataList;
     }
@@ -400,14 +404,14 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 );
             }
             dataList = queryBuilder.list();
-            Log.i("info", "查询完成02-------------------------------------------");
-            for (int i = 0; i < dataList.size(); i++) {
-                YearCheckResult result = dataList.get(i);
-                Log.i("result", result.toString());
-                Log.i(
-                        "result", result.getYearCheck().toString());
-            }
-            Log.i("info", "查询完成02-------------------------------------------");
+//            Log.i("info", "查询完成02-------------------------------------------");
+//            for (int i = 0; i < dataList.size(); i++) {
+//                YearCheckResult result = dataList.get(i);
+//                Log.i("result", result.toString());
+//                Log.i(
+//                        "result", result.getYearCheck().toString());
+//            }
+//            Log.i("info", "查询完成02-------------------------------------------");
         }
         return dataList;
     }

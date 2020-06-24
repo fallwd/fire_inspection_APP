@@ -37,6 +37,7 @@ public class FireActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fire);
         //上一个页面传入的平台ID, 公司名，平台名
         platform_id = (long) getIntent().getLongExtra("Platform_ID", 0);
+//        Log.e("AAAAAA", "平台id:" + platform_id);
         Bundle b = getIntent().getExtras();
         // 获取Bundle的信息
         // 获得公司名称  油田名称

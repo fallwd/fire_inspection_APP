@@ -98,15 +98,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-            <EditText
+            <TextView
                 android:id="@+id/et_6"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@null"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:hint="请输入"
+                android:text="外观是否良好"
                 android:textSize="12sp" />
         </RelativeLayout>
 

@@ -76,6 +76,7 @@ public class CarbonFragment1 extends Fragment {
             its.end_time = it.end_time;
             its.name = it.name;
             its.number = it.number;
+            Log.e("aaa", "获取数据its==" + its);
         }
     }
 

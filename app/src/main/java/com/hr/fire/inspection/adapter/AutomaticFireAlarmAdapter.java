@@ -93,18 +93,32 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
                 vh.et_5.setText(info.getNo());
             }
 
-            if (info.getAppearance() == null) {
-                vh.et_6.setHint("请输入");
-            } else {
-                vh.et_6.setText(info.getAppearance());
-            }
+
+
+//          下拉框
+            vh.et_6.setText(new StringBuffer().append(info.getAppearance()).append(""));
+            //在左侧添加图片
+            Drawable drawable11 = mContext.getResources().getDrawable(R.mipmap.goods_down);
+            drawable11.setBounds(0, 0, drawable11.getMinimumWidth(), drawable11.getMinimumHeight());
+            vh.et_6.setCompoundDrawables(null, null, drawable11, null);
+            Drawable drawable1 = mContext.getResources().getDrawable(R.drawable.listview_border_margin);
+            final ViewHolder finalHolder1 = vh;
+            vh.et_6.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showPopWind6(finalHolder1.et_6);
+                }
+            });
+            vh.et_6.setBackground(drawable1);
+
+
+
 
             if (info.getResponseTime() == null) {
                 vh.et_7.setHint("请输入");
             } else {
                 vh.et_7.setText(info.getResponseTime());
             }
-
             if (info.getDescription() == null) {
                 vh.tv_10.setHint("请输入");
             } else {
@@ -126,16 +140,16 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
             Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
             drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
             vh.et_8.setCompoundDrawables(null, null, drawable, null);
-            Drawable drawable1 = mContext.getResources().getDrawable(R.drawable.listview_border_margin);
+            Drawable drawable2 = mContext.getResources().getDrawable(R.drawable.listview_border_margin);
 
-            final ViewHolder finalHolder = vh;
+            final ViewHolder finalHolder2 = vh;
             vh.et_8.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showPopWind(finalHolder.et_8);
+                    showPopWind(finalHolder2.et_8);
                 }
             });
-            vh.et_8.setBackground(drawable1);
+            vh.et_8.setBackground(drawable2);
 //          照相机的图片  需要把对应的xml转换为textview
             String imageUrl = info.getImageUrl();
             if (imageUrl != null && imageUrl.endsWith(".jpg")) {
@@ -213,6 +227,52 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
         });
     }
 
+    //显示对话框,用户选择是否异常的弹框
+    private void showPopWind6(final TextView et_6) {
+        View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods, null);
+        if (hrPopup == null) {
+            hrPopup = new HrPopup((Activity) mContext);
+        }
+        RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
+        RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
+        RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
+        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setBackgroundDrawable(new BitmapDrawable());
+        hrPopup.setFocusable(true);
+        hrPopup.setOutsideTouchable(true);
+        hrPopup.setContentView(PopupRootView);
+        hrPopup.showAsDropDown(et_6);
+        rl_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                et_6.setText("是");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+        rl_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                et_6.setText("否");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+        rl_other.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                et_6.setText("---");
+                if (hrPopup.isShowing()) {
+                    hrPopup.dismiss();
+                }
+            }
+        });
+    }
+
+
     @Override
     public int getItemCount() {
         return mData.size();
@@ -260,7 +320,7 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
         EditText et_3;
         EditText et_4;
         EditText et_5;
-        EditText et_6;
+        TextView et_6;
         EditText et_7;
         TextView et_8;
         ImageView tv_9;
@@ -275,7 +335,7 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
             et_3 = (EditText) view.findViewById(R.id.et_3);
             et_4 = (EditText) view.findViewById(R.id.et_4);
             et_5 = (EditText) view.findViewById(R.id.et_5);
-            et_6 = (EditText) view.findViewById(R.id.et_6);
+            et_6 = (TextView) view.findViewById(R.id.et_6);
             et_7 = (EditText) view.findViewById(R.id.et_7);
             et_8 = (TextView) view.findViewById(R.id.et_8);
             tv_9 = (ImageView) view.findViewById(R.id.tv_9);

@@ -117,6 +117,17 @@
                                 android:entries="@array/spingarr4" />
 
                         </LinearLayout>
+                        <!--<Button-->
+                            <!--android:id="@+id/Reset"-->
+                            <!--android:layout_width="60dp"-->
+                            <!--android:layout_height="35dp"-->
+                            <!--android:layout_marginRight="70dp"-->
+                            <!--android:layout_alignParentTop="true"-->
+                            <!--android:layout_alignParentRight="true"-->
+                            <!--android:background="@drawable/listview_border_margin"-->
+                            <!--android:text="重置" />-->
+
+
                         <!-- 统计-->
                         <Button
                             android:id="@+id/Statistics"

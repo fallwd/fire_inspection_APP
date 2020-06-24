@@ -53,6 +53,7 @@ public class CarbonFragment4 extends Fragment {
     private int videoPostion = -1;   //用户点击录像, 所对应的位置
     private List<YearCheck> checkDataEasy;
     private List<YearCheckResult> yearCheckResults;
+    private RecyclerView listRrcycler;
 
     public static CarbonFragment4 newInstance(String key, IntentTransmit value) {
         if (fragment4 == null) {
@@ -194,7 +195,7 @@ public class CarbonFragment4 extends Fragment {
                 YearCheckResult yearCheckResult = yearCheckResults.get(i);
                 yearCheckResult.setIsPass(tv6.getText().toString().isEmpty() ? " -- " : tv6.getText().toString());
 //                yearCheckResult.setImageUrl("暂无图片链接");  //可以在iv7中获取
-                yearCheckResult.setDescription(ev8.getText().toString().isEmpty() ? "无隐患描述" : ev8.getText().toString());
+                yearCheckResult.setDescription(ev8.getText().toString().isEmpty() ? null : ev8.getText().toString());
                 yearCheckResult.setSystemNumber(its.number);
                 yearCheckResult.setProtectArea(" "); // 保护位号
                 yearCheckResult.setCheckDate(its.srt_Date);  //检查日期
@@ -203,6 +204,31 @@ public class CarbonFragment4 extends Fragment {
             }
         }
         Toast.makeText(getContext(), " \"保护区\" 数据保存成功", Toast.LENGTH_SHORT).show();
+    }
+
+    // 拍照回调后触发update接口 使是否合格选项不被清空
+    public void photoCallbackUpdate() {
+        int childCount = rc_list.getChildCount();
+        if (yearCheckResults.size() == childCount) {
+            for (int i = 0; i < childCount; i++) {
+                LinearLayout childAt = (LinearLayout) rc_list.getChildAt(i);
+                TextView tv6 = childAt.findViewById(R.id.tv6);
+                //图片参数
+                TextView tv7 = childAt.findViewById(R.id.tv7);
+                ImageView iv7 = childAt.findViewById(R.id.iv7);
+                EditText ev8 = childAt.findViewById(R.id.ev8);
+
+                YearCheckResult yearCheckResult = yearCheckResults.get(i);
+                yearCheckResult.setIsPass(tv6.getText().toString().isEmpty() ? " -- " : tv6.getText().toString());
+//                yearCheckResult.setImageUrl("暂无图片链接");  //可以在iv7中获取
+                yearCheckResult.setDescription(ev8.getText().toString().isEmpty() ? null : ev8.getText().toString());
+                yearCheckResult.setSystemNumber(its.number);
+                yearCheckResult.setProtectArea(" "); // 保护位号
+                yearCheckResult.setCheckDate(its.srt_Date);  //检查日期
+                yearCheckResult.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
+                ServiceFactory.getYearCheckService().update(yearCheckResult);
+            }
+        }
     }
 
 
@@ -219,12 +245,14 @@ public class CarbonFragment4 extends Fragment {
                 //这里目前需要适配
                 if (fileNew.getAbsolutePath() != null && imgPostion != -1 && adapter != null) {
                     yearCheckResults.get(imgPostion).setImageUrl(fileNew.getAbsolutePath());
+                    photoCallbackUpdate(); // 先提交下填写的数据，不然会被清空
                     adapter.notifyItemChanged(imgPostion);
                 }
                 break;
             case 0:
                 if (videoNew.getAbsolutePath() != null && videoPostion != -1 && adapter != null) {
                     yearCheckResults.get(videoPostion).setVideoUrl(videoNew.getAbsolutePath());
+                    photoCallbackUpdate(); // 先提交下填写的数据，不然会被清空
                     adapter.notifyItemChanged(videoPostion);
                 }
                 Toast.makeText(this.getContext(), "录像数据保存成功，请点击拍照图标进行录像观看", Toast.LENGTH_SHORT).show();

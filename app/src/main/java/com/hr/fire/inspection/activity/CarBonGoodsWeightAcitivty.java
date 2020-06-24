@@ -65,6 +65,7 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
     private int videoPostion = -1;   //用户点击录像, 所对应的位置
     private GoodsRecycAdapter goodsAdapter;
     private File file;
+    private RecyclerView listRrcycler;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,6 +84,7 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
         title = intent.getStringExtra(CHECK_DIVICE);
         //之前页面传过来的数据
         its = (IntentTransmit) intent.getSerializableExtra(CHECK_SYS_DATA); //系统数据对象
+        Log.e("aaaa", "参数its:" + its);
         //1.药剂瓶和氮气瓶这种设备表，需要再请求一次这个方法，获取检查表id，然后带到getCheckDataEasy就行了
         List<CheckType> checkTypes = ServiceFactory.getYearCheckService().gettableNameData(check_id);
         if (checkTypes == null) {
@@ -125,7 +127,7 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
         });
         Button submit_btn = findViewById(R.id.submit_btn);
 
-        final RecyclerView listRrcycler = findViewById(R.id.list);
+        listRrcycler = findViewById(R.id.list);
         @SuppressLint("WrongConstant") RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         listRrcycler.setLayoutManager(layoutManager);
         goodsAdapter = new GoodsRecycAdapter(this, checkDataEasy, yearCheckResults);
@@ -164,8 +166,9 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
                         YearCheckResult yearCheckResult = yearCheckResults.get(i);
                         yearCheckResult.setIsPass(tv6.getText().toString().isEmpty() ? " -- " : tv6.getText().toString());
 //                        yearCheckResult.setImageUrl("暂无图片链接");  //可以在iv7中获取
-                        yearCheckResult.setDescription(ev8.getText().toString().isEmpty() ? "无隐患描述" : ev8.getText().toString());
+                        yearCheckResult.setDescription(ev8.getText().toString().isEmpty() ? null : ev8.getText().toString());
                         yearCheckResult.setSystemNumber(its.number);
+                        Log.e("哈哈哈", "系统位号：" + its.number);
                         yearCheckResult.setProtectArea(" "); // 保护位号
                         yearCheckResult.setCheckDate(its.srt_Date);  //检查日期
                         yearCheckResult.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
@@ -176,6 +179,30 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void photoCallbackUpdate() {
+        int childCount = listRrcycler.getChildCount();
+        if (yearCheckResults.size() == childCount) {
+            for (int i = 0; i < childCount; i++) {
+                LinearLayout childAt = (LinearLayout) listRrcycler.getChildAt(i);
+                TextView tv6 = childAt.findViewById(R.id.tv6);
+                //图片参数
+                TextView tv7 = childAt.findViewById(R.id.tv7);
+                ImageView iv7 = childAt.findViewById(R.id.iv7);
+                EditText ev8 = childAt.findViewById(R.id.ev8);
+
+                YearCheckResult yearCheckResult = yearCheckResults.get(i);
+                yearCheckResult.setIsPass(tv6.getText().toString().isEmpty() ? " -- " : tv6.getText().toString());
+                // yearCheckResult.setImageUrl("暂无图片链接");  //可以在iv7中获取
+                yearCheckResult.setDescription(ev8.getText().toString().isEmpty() ? null : ev8.getText().toString());
+                yearCheckResult.setSystemNumber(its.number);
+                yearCheckResult.setProtectArea(" "); // 保护位号
+                yearCheckResult.setCheckDate(its.srt_Date);  //检查日期
+                yearCheckResult.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
+                ServiceFactory.getYearCheckService().update(yearCheckResult);
+            }
+        }
     }
 
 
@@ -261,12 +288,14 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
                 //这里目前需要适配
                 if (fileNew.getAbsolutePath() != null && imgPostion != -1 && goodsAdapter != null) {
                     yearCheckResults.get(imgPostion).setImageUrl(fileNew.getAbsolutePath());
+                    photoCallbackUpdate();
                     goodsAdapter.notifyItemChanged(imgPostion);
                 }
                 break;
             case 0:
                 if (videoNew.getAbsolutePath() != null && videoPostion != -1 && goodsAdapter != null) {
                     yearCheckResults.get(videoPostion).setVideoUrl(videoNew.getAbsolutePath());
+                    photoCallbackUpdate();
                     goodsAdapter.notifyItemChanged(videoPostion);
                 }
                 Toast.makeText(this, "录像数据保存成功，请点击拍照图标进行录像观看", Toast.LENGTH_SHORT).show();

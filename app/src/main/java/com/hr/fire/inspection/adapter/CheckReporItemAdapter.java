@@ -2,6 +2,7 @@ package com.hr.fire.inspection.adapter;
 
         import android.content.Context;
         import android.content.Intent;
+        import android.media.MediaScannerConnection;
         import android.net.Uri;
         import android.os.Build;
         import android.os.Environment;
@@ -189,6 +190,8 @@ public class CheckReporItemAdapter extends BaseAdapter {
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         Uri uri = FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".fileProvider", file);
                         intent.setDataAndType(uri, "application/vnd.ms-excel");
+                        file.mkdirs(); // 通知系统文件夹刷新  获取最新文件
+                        MediaScannerConnection.scanFile(mContext, new String[] { file.getAbsolutePath() }, null, null); // 通知系统文件夹刷新  获取最新文件
                         mContext.startActivity(intent);
                         return;
                     }

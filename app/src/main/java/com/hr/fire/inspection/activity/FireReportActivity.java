@@ -63,41 +63,41 @@ public class FireReportActivity extends AppCompatActivity {
         // 点击返回上一页
         ImageButton imageButton = findViewById(R.id.backHome);
         imageButton.setOnClickListener(v -> finish());
-        // 设置起止时间
-        Button start_time = findViewById(R.id.start_time);
-        Button end_time = findViewById(R.id.end_time);
-        start_time.setText(getData());
-        end_time.setText(netCheckTime());
-        final Spinner spinner_buss = findViewById(R.id.spinner_bussy);
-        final Spinner spinner_yt = findViewById(R.id.spinner_yt);
-        // 选择公司 搜索油田数据
-        spinner_buss.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String sectName = (String) parent.getItemAtPosition(position);
-                init_yt_spinner(sectName);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                bessy_list.clear();
-                bessy_list.add("请选择公司");
-                InitSetSpinner(spinner_buss, bessy_list);
-            }
-        });
-        // 选择油田 搜索油田平台
-        spinner_yt.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String sectName = (String) parent.getItemAtPosition(position);
-                init_platform_spinner(sectName);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                yt_list.clear();
-                yt_list.add("请选择油田");
-                InitSetSpinner(spinner_yt, yt_list);
-            }
-        });
+//        // 设置起止时间
+//        Button start_time = findViewById(R.id.start_time);
+//        Button end_time = findViewById(R.id.end_time);
+//        start_time.setText(getData());
+//        end_time.setText(netCheckTime());
+//        final Spinner spinner_buss = findViewById(R.id.spinner_bussy);
+//        final Spinner spinner_yt = findViewById(R.id.spinner_yt);
+//        // 选择公司 搜索油田数据
+//        spinner_buss.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                String sectName = (String) parent.getItemAtPosition(position);
+//                init_yt_spinner(sectName);
+//            }
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//                bessy_list.clear();
+//                bessy_list.add("请选择公司");
+//                InitSetSpinner(spinner_buss, bessy_list);
+//            }
+//        });
+//        // 选择油田 搜索油田平台
+//        spinner_yt.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                String sectName = (String) parent.getItemAtPosition(position);
+//                init_platform_spinner(sectName);
+//            }
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//                yt_list.clear();
+//                yt_list.add("请选择油田");
+//                InitSetSpinner(spinner_yt, yt_list);
+//            }
+//        });
         // 模糊查询
         empty = findViewById(R.id.empty);
         search = findViewById(R.id.search);
@@ -148,7 +148,7 @@ public class FireReportActivity extends AppCompatActivity {
             String ret = (String) hashMap.get("ret");
             stringArrayList.add(ret);
         }
-        init_company_spinner(); // 初始化公司列表
+//        init_company_spinner(); // 初始化公司列表
 
     }
     private void init_company_spinner (){

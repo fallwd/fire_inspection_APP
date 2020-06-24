@@ -2,11 +2,15 @@ package com.hr.fire.inspection.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
+
+import com.deepoove.poi.XWPFTemplate;
+import com.deepoove.poi.config.Configure;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
@@ -44,6 +48,8 @@ public class ExcelUtils {
             path = Environment.getExternalStoragePublicDirectory("ExportData");
             File file = new File(path + "/" + filename + ".xls");
             OutputStream stream = new FileOutputStream(file);//将Excel文件写入创建的file当中
+            Configure configs=Configure.createDefault();
+
 
             workbook.write(stream);// 写入流
             stream.close();//关闭流
@@ -53,8 +59,9 @@ public class ExcelUtils {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 Uri uri = FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".fileProvider", file);
                 intent.setDataAndType(uri, "application/vnd.ms-excel");
+                file.mkdirs(); // 通知系统文件夹刷新  获取最新文件
+                MediaScannerConnection.scanFile(mContext, new String[] { file.getAbsolutePath() }, null, null); // 通知系统文件夹刷新  获取最新文件
                 mContext.startActivity(intent);
-                return;
             }
         } catch (Exception e) {
             e.printStackTrace();

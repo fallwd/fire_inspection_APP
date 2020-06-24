@@ -78,7 +78,7 @@ public class QRCodeExistenceAcitivty extends AppCompatActivity {
                         switch (which) {
                             case 0:
                                 if (bmap != null) {
-                                    saveImageToGallery(QRCodeExistenceAcitivty.this, bmap);
+                                    saveImageToGallery(QRCodeExistenceAcitivty.this, bmap, titleValue);
                                 } else {
                                     Toast.makeText(QRCodeExistenceAcitivty.this, "bitmap为空", Toast.LENGTH_SHORT).show();
                                 }
@@ -92,14 +92,15 @@ public class QRCodeExistenceAcitivty extends AppCompatActivity {
     }
 
 
-    public static void saveImageToGallery(Context context, Bitmap bmp) {
+    public static void saveImageToGallery(Context context, Bitmap bmp, String titleValue) {
         // 首先保存图片 创建文件夹
-        File appDir = new File(Environment.getExternalStorageDirectory(), "shy");
+        File appDir = new File(Environment.getExternalStorageDirectory(), "二维码图片");
         if (!appDir.exists()) {
             appDir.mkdir();
         }
         //图片文件名称
-        String fileName = "shy_"+System.currentTimeMillis() + ".jpg";
+
+        String fileName = "二维码图片_瓶号"+ titleValue +"_"+ System.currentTimeMillis() + ".jpg";
         File file = new File(appDir, fileName);
         try {
             FileOutputStream fos = new FileOutputStream(file);

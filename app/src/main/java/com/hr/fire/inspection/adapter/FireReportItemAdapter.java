@@ -3,6 +3,7 @@ package com.hr.fire.inspection.adapter;
 import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -830,7 +831,7 @@ public class FireReportItemAdapter extends BaseAdapter {
 //            File file = new File(path  +"/"+ itemCon + ".docx");
 //                Log.e("aaa", "路径1:" + path);
             Log.e("aaa", "路径2:" + file);
-            Log.d("生成的文件路径名：", String.valueOf(file));
+//            Log.d("生成的文件路径名：", String.valueOf(file));
             out = new FileOutputStream(file);
             template.write(out);
             out.flush();
@@ -842,6 +843,8 @@ public class FireReportItemAdapter extends BaseAdapter {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 Uri uri = FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".fileProvider", file);
                 intent.setDataAndType(uri, "application/msword");
+                file.mkdirs(); // 通知系统文件夹刷新  获取最新文件
+                MediaScannerConnection.scanFile(mContext, new String[] { file.getAbsolutePath() }, null, null); // 通知系统文件夹刷新  获取最新文件
                 mContext.startActivity(intent);
             }
 

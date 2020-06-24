@@ -46,87 +46,85 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/border"
-            android:orientation="vertical"
-            android:paddingTop="10dp">
+            android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:ignore="MissingConstraints">
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--tools:ignore="MissingConstraints">-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    tools:ignore="MissingConstraints">
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentStart="true"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--tools:ignore="MissingConstraints">-->
 
-                    <Button
-                        android:id="@+id/start_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35sp"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/button_border"
-                        android:drawableRight="@mipmap/cmander"
-                        android:textSize="12sp">
+                    <!--<Button-->
+                        <!--android:id="@+id/start_time"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="35sp"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:background="@drawable/button_border"-->
+                        <!--android:drawableRight="@mipmap/cmander"-->
+                        <!--android:textSize="12sp">-->
 
-                    </Button>
+                    <!--</Button>-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="--" />
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:text="&#45;&#45;" />-->
 
-                    <Button
-                        android:id="@+id/end_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35sp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/button_border"
-                        android:drawableRight="@mipmap/cmander"
-                        android:textSize="12sp" />
-                    <!--请选择公司-->
-                    <Spinner
-                        android:id="@+id/spinner_bussy"
-                        style="@style/spinner_style"
-                        android:background="@drawable/spriner_style"
-                        android:entries="@array/spingarr" />
-                    <!--请选择油田-->
-                    <Spinner
-                        android:id="@+id/spinner_yt"
-                        style="@style/spinner_style"
-                        android:background="@drawable/spriner_style"
-                        android:entries="@array/spingarr1" />
-                    <!--请选择平台-->
-                    <Spinner
-                        android:id="@+id/spinner_pt"
-                        style="@style/spinner_style"
-                        android:background="@drawable/spriner_style"
-                        android:entries="@array/spingarr3" />
+                    <!--<Button-->
+                        <!--android:id="@+id/end_time"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="35sp"-->
+                        <!--android:layout_marginStart="10dp"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:background="@drawable/button_border"-->
+                        <!--android:drawableRight="@mipmap/cmander"-->
+                        <!--android:textSize="12sp" />-->
+                    <!--&lt;!&ndash;请选择公司&ndash;&gt;-->
+                    <!--<Spinner-->
+                        <!--android:id="@+id/spinner_bussy"-->
+                        <!--style="@style/spinner_style"-->
+                        <!--android:background="@drawable/spriner_style"-->
+                        <!--android:entries="@array/spingarr" />-->
+                    <!--&lt;!&ndash;请选择油田&ndash;&gt;-->
+                    <!--<Spinner-->
+                        <!--android:id="@+id/spinner_yt"-->
+                        <!--style="@style/spinner_style"-->
+                        <!--android:background="@drawable/spriner_style"-->
+                        <!--android:entries="@array/spingarr1" />-->
+                    <!--&lt;!&ndash;请选择平台&ndash;&gt;-->
+                    <!--<Spinner-->
+                        <!--android:id="@+id/spinner_pt"-->
+                        <!--style="@style/spinner_style"-->
+                        <!--android:background="@drawable/spriner_style"-->
+                        <!--android:entries="@array/spingarr3" />-->
 
-                </LinearLayout>
+                <!--</LinearLayout>-->
 
-                <!--<Button-->
-                    <!--android:id="@+id/insert_but"-->
-                    <!--android:layout_width="50dp"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_alignParentTop="true"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--android:background="@drawable/listview_border_margin"-->
-                    <!--android:text="@string/daoru"-->
-                    <!--android:translationX="-10dp" />-->
+                <!--&lt;!&ndash;<Button&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/insert_but"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="50dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="30dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_alignParentTop="true"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_alignParentRight="true"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:background="@drawable/listview_border_margin"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:text="@string/daoru"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:translationX="-10dp" />&ndash;&gt;-->
 
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
 
             <LinearLayout
                 android:id="@+id/empty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:background="@drawable/border"
                 android:orientation="horizontal"
                 android:padding="10dp">

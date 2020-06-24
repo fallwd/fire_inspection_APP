@@ -787,6 +787,10 @@ public class AnalysisServiceImpl extends BaseServiceImpl implements AnalysisServ
             }
         }
         else if(platformId!=0 && systemId!=0) {
+            Log.e("aaaaaa", "开始时间："+ startDate.getTime());
+            Log.e("aaaaaa", "结束时间："+ endDate.getTime());
+            Log.e("aaaaaa", "platformId："+ platformId);
+            Log.e("aaaaaa", "systemId："+ systemId);
             if (startDate != null && endDate != null) {
                 Cursor cursor = daoSession.getDatabase().rawQuery(String.format("SELECT Q.%s AS PROTECT_AREA,Q.%s AS SYSTEM_NUMBER,Q.%s AS CHECK_DATE,W.%s AS COMPANY,W.%s AS OILFIELD,W.%s AS PLATFORM,R.PARENT_NAME AS SYSTEM,W.%s AS COMPANY_ID,R.PARENT_ID AS PARENT_ID FROM %s AS Q INNER JOIN %s AS W ON Q.COMPANY_INFO_ID=W._id " +
                                 "INNER JOIN (SELECT E3._id AS ID,E3.NAME AS NAME,E3.PARENT_ID AS PARENT_ID,E4.NAME AS PARENT_NAME FROM %s AS E3 INNER JOIN %s AS E4 ON E3.PARENT_ID=E4._id WHERE E3.TYPE=1 AND E4.PARENT_ID=0 UNION SELECT E1._id AS ID,E1.NAME AS NAME,E5._id AS PARENT_ID,E5.NAME AS PARENT_NAME FROM %s AS E1 INNER JOIN %s AS E2 ON E1.PARENT_ID=E2._id INNER JOIN %s AS E5 ON E2.PARENT_ID=E5._id WHERE E1.TYPE=1 AND E2.PARENT_ID!=0 AND E5.PARENT_ID=0) AS R ON Q.CHECK_TYPE_ID=R.ID " +
