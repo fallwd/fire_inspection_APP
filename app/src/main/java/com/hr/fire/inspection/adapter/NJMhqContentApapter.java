@@ -36,6 +36,7 @@ import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.entity.NJMhqSelectItem1;
 import com.hr.fire.inspection.entity.NJMhqSelectItem2;
 import com.hr.fire.inspection.impl.YCCCameraForVideo;
+import com.hr.fire.inspection.impl.YCCPhotoAlbum;
 import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.PhotoView;
@@ -125,7 +126,7 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
 
 
             String imageUrl = info.getImageUrl();
-            if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+            if (imageUrl != null /*&& imageUrl.endsWith(".jpg")*/) {
                 myholder.tv_fire15.setVisibility(View.GONE);
                 myholder.iv_fire15.setVisibility(View.VISIBLE);
 
@@ -357,7 +358,8 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
                     showPopWind(myholder.tv_fire13);
                     break;
                 case R.id.rl_fire15:
-                    new PhotoView().showPopWindPicInfo(mContext, position, mYCCamera, doOpenCameraForVideo, mData);
+//                    new PhotoView().showPopWindPicInfo(mContext, position, mYCCamera, doOpenCameraForVideo, mData);
+                    new PhotoView().showPopWindPicInfoAlbum(mContext, position, photoAlbumListener,mYCCamera, doOpenCameraForVideo, mData);
                     break;
                 case R.id.rl_fire17:
                     if (mData.get(position).getTypeNo() == null) {
@@ -649,11 +651,15 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
     }
 
     private YCCamera mYCCamera;
+    private YCCPhotoAlbum photoAlbumListener;
     private NJMhqContentApapter.RemoveXH mRemoveXH;
 
     //接口回调, 将点击事件传递到activity中,打开相机
     public void setmYCCamera(YCCamera y) {
         this.mYCCamera = y;
+    }
+    public void setAlbumListener(YCCPhotoAlbum listener) {
+        this.photoAlbumListener = listener;
     }
 
     //接口回调, 将点击事件传递到activity中,刷新序号

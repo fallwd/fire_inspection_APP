@@ -30,6 +30,8 @@ import com.hr.fire.inspection.adapter.NJMhqContentApapter;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.InspectionResult;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.fragment.DFXIFragment10;
+import com.hr.fire.inspection.helper.TakePhotoHelper;
 import com.hr.fire.inspection.impl.YCCCameraForVideo;
 import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
@@ -194,6 +196,10 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 imgPostion = postion;
                 openSysCamera();
             }
+        });
+        contentApapter.setAlbumListener(postion -> {
+            imgPostion = postion;
+            TakePhotoHelper.openPhotoAlbum(NJFireExtinguisherActivity.this);
         });
         contentApapter.setdoOpenCameraForVideo(new YCCCameraForVideo() {
             @Override
@@ -432,6 +438,18 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                     contentApapter.notifyDataSetChanged();
                 }
                 Toast.makeText(this, "录像数据保存成功，请点击拍照图标进行录像观看", Toast.LENGTH_SHORT).show();
+                break;
+            case FileRoute.PHOTO_ALBUM_RESULT_CODE:
+                if (imgPostion != -1 && contentApapter != null) {
+                    Uri uri = data.getData();
+                    try {
+                        itemDataList.get(imgPostion).setImageUrl(uri.toString());
+//                    contentApapter.notifyItemChanged(imgPostion);
+                        contentApapter.notifyDataSetChanged();
+                    } catch (Exception e) {
+                        Log.e("Exception", e.getMessage(), e);
+                }
+                }
                 break;
         }
     }

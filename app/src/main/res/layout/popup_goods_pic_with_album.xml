@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_pop_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_translucent">
+
+    <ImageView
+        android:id="@+id/iv_pic_see"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <VideoView
+        android:id="@+id/video_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/ll_pop_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/listview_border_margin"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/bt_photograph"
+            android:layout_width="260dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="拍        照"
+            android:textColor="@color/title_green" />
+        <Button
+            android:id="@+id/bt_photo_album"
+            android:layout_width="260dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="从相册选择"
+            android:textColor="@color/title_green" />
+
+        <Button
+            android:id="@+id/bt_see"
+            android:layout_width="260dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="查看大图"
+            android:textColor="@color/title_green" />
+
+        <Button
+            android:id="@+id/bt_video"
+            android:layout_width="260dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="录        像"
+            android:textColor="@color/title_green" />
+
+        <Button
+            android:id="@+id/bt_seevideo"
+            android:layout_width="260dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="观看录像"
+            android:textColor="@color/title_green" />
+
+
+        <Button
+            android:id="@+id/bt_cancel"
+            android:layout_width="260dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="取        消"
+            android:textColor="@color/title_green" />
+
+    </LinearLayout>
+</RelativeLayout>

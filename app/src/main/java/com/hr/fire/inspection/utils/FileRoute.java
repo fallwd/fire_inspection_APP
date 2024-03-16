@@ -8,6 +8,7 @@ import java.io.IOException;
 
 public class FileRoute {
     public static final int CAMERA_RESULT_CODE = 101;//拍照
+    public static final int PHOTO_ALBUM_RESULT_CODE = 102;//从相册中选择
     private final Context mContext;
 
     public FileRoute(Context context) {

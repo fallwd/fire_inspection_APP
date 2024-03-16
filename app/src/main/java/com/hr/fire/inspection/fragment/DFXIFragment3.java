@@ -29,7 +29,9 @@ import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
+import com.hr.fire.inspection.helper.TakePhotoHelper;
 import com.hr.fire.inspection.impl.YCCCameraForVideo;
+import com.hr.fire.inspection.impl.YCCPhotoAlbum;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.utils.FileRoute;
@@ -41,6 +43,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
+import static android.app.Activity.RESULT_OK;
 
 public class DFXIFragment3 extends Fragment {
     View rootView;
@@ -172,6 +176,11 @@ public class DFXIFragment3 extends Fragment {
                 imgPostion = postion;
                 openSysCamera();
             }
+
+        });
+        adapter.setAlbumListener(postion -> {
+            imgPostion = postion;
+            TakePhotoHelper.openPhotoAlbum(DFXIFragment3.this);
         });
         adapter.setdoOpenCameraForVideo(new YCCCameraForVideo() {
             @Override
@@ -260,6 +269,20 @@ public class DFXIFragment3 extends Fragment {
                     adapter.notifyItemChanged(videoPostion);
                 }
                 Toast.makeText(this.getContext(), "录像数据保存成功，请点击拍照图标进行录像观看", Toast.LENGTH_SHORT).show();
+                break;
+            case FileRoute.PHOTO_ALBUM_RESULT_CODE:
+                if (resultCode == RESULT_OK) {
+                    if (imgPostion != -1 && adapter != null) {
+                        Uri uri = data.getData();
+                        try {
+                            yearCheckResults.get(imgPostion).setImageUrl(uri.toString());
+                            photoCallbackUpdate(); // 拍照回调前先提交下填写的数据，不然会被清空
+                            adapter.notifyItemChanged(imgPostion);
+                        } catch (Exception e) {
+                            Log.e("Exception", e.getMessage(), e);
+                        }
+                    }
+                }
                 break;
         }
     }
