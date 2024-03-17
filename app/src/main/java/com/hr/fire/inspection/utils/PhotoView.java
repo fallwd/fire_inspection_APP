@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -181,7 +182,7 @@ public class PhotoView {
             @Override
             public void onClick(View v) {
                 String imageUrl = ycr.get(postion).getImageUrl();
-                if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+                if (!TextUtils.isEmpty(imageUrl) /*&& imageUrl.endsWith(".jpg")*/) {
                     isDismiss = true;
                     ll_pop_item.setVisibility(View.GONE);
                     iv_pic_see.setVisibility(View.VISIBLE);
@@ -634,7 +635,7 @@ public class PhotoView {
             @Override
             public void onClick(View v) {
                 String imageUrl = mData.get(postion).getImageUrl();
-                if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+                if (!TextUtils.isEmpty(imageUrl)/* && imageUrl.endsWith(".jpg")*/) {
                     isDismiss = true;
                     ll_pop_item.setVisibility(View.GONE);
                     iv_pic_see.setVisibility(View.VISIBLE);
