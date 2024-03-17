@@ -302,13 +302,14 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                                     List<CheckType> checkTypes = ServiceFactory.getYearCheckService().gettableNameData(checkType.getId());
                                     Log.i("checkTypescheckTypescheckTypescheckTypes" ,"aaa" + checkTypes);
                                     //2.获取检查条目的数据,主要用于展示
-                                    checkDataEasy = ServiceFactory.getYearCheckService().getCheckDataEasy(checkTypes.get(0).getId());
-                                    Log.i("checkDataEasy",new Gson().toJson(checkDataEasy));
-                                    //3.获取用户需要填写的数据,如果没有数据,就需要插入的默认数据（流程4）。如果有数据就
-                                    yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(itemInfo.getId(), companyId, checkTypes.get(0).getId(), number, checkDate);
-
-                                    mapParams.put("checkDataEasy",new Gson().toJson(checkDataEasy));
-                                    mapParams.put("yearCheckResults",new Gson().toJson(yearCheckResults));
+                                    if(checkTypes != null && checkTypes.size() > 0){
+                                        checkDataEasy = ServiceFactory.getYearCheckService().getCheckDataEasy(checkTypes.get(0).getId());
+                                        Log.i("checkDataEasy",new Gson().toJson(checkDataEasy));
+                                        mapParams.put("checkDataEasy",new Gson().toJson(checkDataEasy));
+                                        //3.获取用户需要填写的数据,如果没有数据,就需要插入的默认数据（流程4）。如果有数据就
+                                        yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(itemInfo.getId(), companyId, checkTypes.get(0).getId(), number, checkDate);
+                                        mapParams.put("yearCheckResults",new Gson().toJson(yearCheckResults));
+                                    }
 
                                 }
 
