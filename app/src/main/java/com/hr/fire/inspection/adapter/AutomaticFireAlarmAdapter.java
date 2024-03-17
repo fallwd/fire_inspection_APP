@@ -27,6 +27,7 @@ import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
 import com.hr.fire.inspection.impl.YCCCameraForVideo;
+import com.hr.fire.inspection.impl.YCCPhotoAlbum;
 import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.PhotoView;
@@ -152,7 +153,7 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
             vh.et_8.setBackground(drawable2);
 //          照相机的图片  需要把对应的xml转换为textview
             String imageUrl = info.getImageUrl();
-            if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+            if (imageUrl != null /*&& imageUrl.endsWith(".jpg")*/) {
                 Uri uri = Uri.parse(imageUrl);
                 vh.tv_9.setImageURI(uri);
             } else {
@@ -163,13 +164,15 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
             if (videoUrl != null && videoUrl.endsWith(".mp4")) {
                 vh.tv_9.setImageDrawable(mContext.getDrawable(R.mipmap.video_icon));
             } else {
-                vh.tv_9.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
+//                vh.tv_9.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
             }
 
             vh.tv_9.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new PhotoView().showPopWindPicInfo(mContext, position, mYCCamera, doOpenCameraForVideo, mData);
+//                    new PhotoView().showPopWindPicInfo(mContext, position, mYCCamera, doOpenCameraForVideo, mData);
+                    new PhotoView().showPopWindPicInfoAlbum(mContext, position, photoAlbumListener,mYCCamera, doOpenCameraForVideo, mData);
+
                 }
             });
         }
@@ -346,12 +349,15 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     private YCCamera mYCCamera;
+    private YCCPhotoAlbum photoAlbumListener;
 
     //接口回调, 将点击事件传递到activity中,打开相机
     public void setmYCCamera(YCCamera y) {
         this.mYCCamera = y;
     }
-
+    public void setAlbumListener(YCCPhotoAlbum listener) {
+        this.photoAlbumListener = listener;
+    }
     private YCCCameraForVideo doOpenCameraForVideo;
     //接口回调, 将点击事件传递到activity中,打开相机录像
     public void setdoOpenCameraForVideo(YCCCameraForVideo y) {

@@ -29,7 +29,9 @@ import com.hr.fire.inspection.adapter.AutomaticFireAlarmAdapter2;
 import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.ItemInfo;
+import com.hr.fire.inspection.helper.TakePhotoHelper;
 import com.hr.fire.inspection.impl.YCCCameraForVideo;
+import com.hr.fire.inspection.impl.YCCPhotoAlbum;
 import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.FileRoute;
@@ -131,6 +133,10 @@ public class AutomaticFireAlarm5 extends Fragment {
                 imgPostion = postion;
                 openSysCamera();
             }
+        });
+        adapter.setAlbumListener(postion -> {
+            imgPostion = postion;
+            TakePhotoHelper.openPhotoAlbum(AutomaticFireAlarm5.this);
         });
 
         adapter.setdoOpenCameraForVideo(new YCCCameraForVideo() {
@@ -267,6 +273,13 @@ public class AutomaticFireAlarm5 extends Fragment {
                     adapter.notifyItemChanged(videoPostion);
                 }
                 Toast.makeText(this.getContext(), "录像数据保存成功，请点击拍照图标进行录像观看", Toast.LENGTH_SHORT).show();
+                break;
+            case FileRoute.PHOTO_ALBUM_RESULT_CODE:
+                if (imgPostion != -1 && adapter != null) {
+                    Uri uri = data.getData();
+                    itemDataList.get(imgPostion).setImageUrl(uri.toString());
+                    adapter.notifyItemChanged(imgPostion);
+                }
                 break;
         }
     }
