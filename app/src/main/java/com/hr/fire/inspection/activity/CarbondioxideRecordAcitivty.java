@@ -331,7 +331,7 @@ public class CarbondioxideRecordAcitivty extends AppCompatActivity implements Vi
                                 }
                             }
 
-                            excelUtils.genSheet(title, columns, columnWidth, items, title);
+                            excelUtils.genSheet(CarbondioxideRecordAcitivty.this,title, columns, columnWidth, items, title);
 
                             String ret = (String) hashMap.get("ret");
                             excelUtils.exportExcel(CarbondioxideRecordAcitivty.this, ret);
