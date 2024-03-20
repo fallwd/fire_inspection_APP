@@ -71,7 +71,7 @@ dependencies {
         exclude group: 'org.apache.poi', module: 'poi-ooxml-schemas'
         exclude group: 'org.apache.poi', module: 'poi'
     }
-    implementation files('libs/poishadow-all.jar')
+    implementation 'commons-codec:commons-codec:1.15'
     implementation 'com.android.support:multidex:1.0.3'
     //ZXing
     implementation group: 'net.sourceforge.jexcelapi', name: 'jxl', version: '2.6.12'

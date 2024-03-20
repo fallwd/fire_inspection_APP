@@ -2,23 +2,32 @@ package com.hr.fire.inspection.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
+import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
 
-import com.deepoove.poi.XWPFTemplate;
 import com.deepoove.poi.config.Configure;
+import com.hr.fire.inspection.activity.CarbondioxideRecordAcitivty;
 
+import org.apache.poi.hssf.usermodel.HSSFClientAnchor;
+import org.apache.poi.hssf.usermodel.HSSFPatriarch;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.RegionUtil;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -70,8 +79,10 @@ public class ExcelUtils {
     }
 
 
-    public Sheet genSheet(String sheetName,String[][] columnNames, String[] columnWidth, List<Map<String,Object>> rows, String title){
+    public Sheet genSheet(Context context, String sheetName, String[][] columnNames, String[] columnWidth, List<Map<String,Object>> rows, String title){
         Sheet sheet = workbook.createSheet(sheetName);
+        //画图的顶级管理器，一个sheet只能获取一个（一定要注意这点）
+        HSSFPatriarch patriarch = (HSSFPatriarch) sheet.createDrawingPatriarch();
         CellStyle titleStyle = createTitleCellStyle(workbook);
         CellStyle headerStyle = createHeaderCellStyle(workbook);
         CellStyle dataStyle = createDataCellStyle(workbook);
@@ -119,18 +130,73 @@ public class ExcelUtils {
         for (int i = 0; i < rows.size(); i++) {
             Row dataRow = sheet.createRow(columnNames.length+1+ i);
             Map<String,Object> project = rows.get(i);
+            int pictureIndex = -1;
+            String imageUrl = "";
             for (int j = 0; j <names.length; j++) {
                 Cell dataCell = dataRow.createCell(j);
                 dataCell.setCellStyle(dataStyle);
                 obj = project.get(names[j]);
                 dataCell.setCellValue(obj==null ? "" :
                                         obj instanceof java.util.Date ? sdf.format(obj) : obj.toString());
+                Log.d("tzw","name: " +names[j]);
+                if(TextUtils.equals(names[j],"imageUrl") && obj != null){
+                    imageUrl = (String) obj;
+                    pictureIndex = j;
+                }
+            }
+
+            if(pictureIndex >= 0){
+                dataRow.setHeight((short) (10 * 256));
+                Uri uri = Uri.parse(imageUrl);
+                Log.d("tzw","pictureIndex: " +pictureIndex);
+                Log.d("tzw","imageUrl: " +imageUrl);
+                Log.d("tzw","index: " +i);
+                byte[] byteArrayOut = UriToByte(uri,context);
+                HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0, 0, 0,(short) (pictureIndex), (i+3),(short) (pictureIndex+1), (i+4));
+                //插入图片
+                int pictureId = workbook.addPicture(byteArrayOut, HSSFWorkbook.PICTURE_TYPE_PNG);
+                Log.d("tzw","pictureId: " +pictureId);
+                patriarch.createPicture(anchor, pictureId);
             }
         }
         return sheet;
     }
+    public byte[] UriToByte(Uri uri,Context context){
+        Bitmap bitmap1 = null;
+        try {
+            bitmap1 = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        int size = bitmap1.getWidth() * bitmap1.getHeight() * 4;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream(size);
+        bitmap1.compress(Bitmap.CompressFormat.PNG, 10, baos);
+        byte[] imagedata1 = baos.toByteArray();
 
+        return  imagedata1;
+    }
+    private ByteArrayOutputStream convertToByteArrayOutputStream(String imagePath)  {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        try (FileInputStream fis = new FileInputStream(imagePath)) {
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = fis.read(buffer)) != -1) {
+                baos.write(buffer, 0, len);
+            }
+            baos.flush();
+
+            // 现在baos包含图片的字节数据
+            byte[] imageBytes = baos.toByteArray();
+
+            // 处理imageBytes...
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return baos;
+    }
     /**
      * 给合并后的单元格加边框
      * @param border
