@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,7 +90,7 @@ public class CarBon3Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             vh.tv6.setBackground(drawable1);
 
             String imageUrl = ycr.get(position).getImageUrl();
-            if (imageUrl != null/* && imageUrl.endsWith(".jpg")*/) {
+            if (!TextUtils.isEmpty(imageUrl)/* && imageUrl.endsWith(".jpg")*/) {
                 //路径  /external_path/Android/data/com.hr.fire.inspection/cache/1587462719699.jpg
 //                Uri uri = Uri.fromFile(new File(imageUrl));
                 Uri uri = Uri.parse(imageUrl);

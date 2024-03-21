@@ -255,7 +255,6 @@ public class PhotoView {
             hrPopup = new HrPopup((Activity) mContext);
         }
         Button bt_photograph = PopupRootView.findViewById(R.id.bt_photograph);
-        Button bt_photo_album = PopupRootView.findViewById(R.id.bt_photo_album);
         Button bt_see = PopupRootView.findViewById(R.id.bt_see);
         Button bt_video = PopupRootView.findViewById(R.id.bt_video);
         Button bt_cancel = PopupRootView.findViewById(R.id.bt_cancel);
@@ -272,15 +271,6 @@ public class PhotoView {
         hrPopup.setContentView(PopupRootView);
         hrPopup.showAtLocation(hrPopup.getContentView(), Gravity.CENTER, 0, 0);
         bt_photograph.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (hrPopup != null || hrPopup.isShowing()) {
-                    hrPopup.dismiss();
-                }
-                mYCCamera.startCamera(postion);
-            }
-        });
-        bt_photo_album.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (hrPopup != null || hrPopup.isShowing()) {
