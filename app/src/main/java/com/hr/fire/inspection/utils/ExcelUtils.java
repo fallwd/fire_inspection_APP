@@ -152,11 +152,13 @@ public class ExcelUtils {
                 Log.d("tzw","imageUrl: " +imageUrl);
                 Log.d("tzw","index: " +i);
                 byte[] byteArrayOut = UriToByte(uri,context);
-                HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0, 0, 0,(short) (pictureIndex), (i+3),(short) (pictureIndex+1), (i+4));
-                //插入图片
-                int pictureId = workbook.addPicture(byteArrayOut, HSSFWorkbook.PICTURE_TYPE_PNG);
-                Log.d("tzw","pictureId: " +pictureId);
-                patriarch.createPicture(anchor, pictureId);
+                if(byteArrayOut != null){
+                    HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0, 0, 0,(short) (pictureIndex), (i+3),(short) (pictureIndex+1), (i+4));
+                    //插入图片
+                    int pictureId = workbook.addPicture(byteArrayOut, HSSFWorkbook.PICTURE_TYPE_PNG);
+                    Log.d("tzw","pictureId: " +pictureId);
+                    patriarch.createPicture(anchor, pictureId);
+                }
             }
         }
         return sheet;
@@ -165,16 +167,16 @@ public class ExcelUtils {
         Bitmap bitmap1 = null;
         try {
             bitmap1 = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
+            int size = bitmap1.getWidth() * bitmap1.getHeight() * 4;
+            ByteArrayOutputStream baos = new ByteArrayOutputStream(size);
+            bitmap1.compress(Bitmap.CompressFormat.PNG, 10, baos);
+            byte[] imagedata1 = baos.toByteArray();
+            return  imagedata1;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
 
-        int size = bitmap1.getWidth() * bitmap1.getHeight() * 4;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream(size);
-        bitmap1.compress(Bitmap.CompressFormat.PNG, 10, baos);
-        byte[] imagedata1 = baos.toByteArray();
-
-        return  imagedata1;
     }
     private ByteArrayOutputStream convertToByteArrayOutputStream(String imagePath)  {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

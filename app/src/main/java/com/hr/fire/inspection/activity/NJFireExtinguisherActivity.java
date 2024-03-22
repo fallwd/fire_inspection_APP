@@ -441,8 +441,8 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                 break;
             case FileRoute.PHOTO_ALBUM_RESULT_CODE:
                 if (imgPostion != -1 && contentApapter != null) {
-                    Uri uri = data.getData();
                     try {
+                        Uri uri = data.getData();
                         itemDataList.get(imgPostion).setImageUrl(uri.toString());
 //                    contentApapter.notifyItemChanged(imgPostion);
                         contentApapter.notifyDataSetChanged();
