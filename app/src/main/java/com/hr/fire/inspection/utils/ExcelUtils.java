@@ -26,6 +26,7 @@ import org.apache.poi.ss.util.RegionUtil;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -79,7 +80,7 @@ public class ExcelUtils {
     }
 
 
-    public Sheet genSheet(Context context, String sheetName, String[][] columnNames, String[] columnWidth, List<Map<String,Object>> rows, String title){
+    public Sheet genSheet(Context context, String sheetName, String[][] columnNames, String[] columnWidth, List<Map<String,Object>> rows, String title) {
         Sheet sheet = workbook.createSheet(sheetName);
         //画图的顶级管理器，一个sheet只能获取一个（一定要注意这点）
         HSSFPatriarch patriarch = (HSSFPatriarch) sheet.createDrawingPatriarch();
@@ -163,20 +164,47 @@ public class ExcelUtils {
         }
         return sheet;
     }
-    public byte[] UriToByte(Uri uri,Context context){
+    public byte[] UriToByte(Uri uri,Context context) {
+        String uriType = getUriType(uri);
         Bitmap bitmap1 = null;
-        try {
-            bitmap1 = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
-            int size = bitmap1.getWidth() * bitmap1.getHeight() * 4;
-            ByteArrayOutputStream baos = new ByteArrayOutputStream(size);
-            bitmap1.compress(Bitmap.CompressFormat.PNG, 10, baos);
-            byte[] imagedata1 = baos.toByteArray();
-            return  imagedata1;
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (uriType.equals("Content")) {
+            try {
+                bitmap1 = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
+                int size = bitmap1.getWidth() * bitmap1.getHeight() * 4;
+                ByteArrayOutputStream baos = new ByteArrayOutputStream(size);
+                bitmap1.compress(Bitmap.CompressFormat.PNG, 10, baos);
+                byte[] imagedata1 = baos.toByteArray();
+                return  imagedata1;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (uriType.equals("File")) {
+            File file = new File(uri.toString());
+            FileInputStream fis = null;
+            ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+
+            try {
+                fis = new FileInputStream(file);
+                int bufferSize = 1024;
+                byte[] buffer = new byte[bufferSize];
+                int len;
+                while ((len = fis.read(buffer)) != -1) {
+                    byteBuffer.write(buffer, 0, len);
+                }
+                return byteBuffer.toByteArray();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (fis != null) {
+                        fis.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return null;
-
     }
     private ByteArrayOutputStream convertToByteArrayOutputStream(String imagePath)  {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -198,6 +226,27 @@ public class ExcelUtils {
             e.printStackTrace();
         }
         return baos;
+    }
+
+    /*
+    判断图片来源
+     */
+    public static String getUriType(Uri uri) {
+        String scheme = uri.getScheme();
+
+        if (uri.toString().startsWith("/storage")) {
+            return "File";
+        }
+        if (scheme != null) {
+            if (scheme.equals("file")) {
+                return "File";
+            } else if (scheme.equals("content")) {
+                return "Content";
+            } else {
+                return "Other";
+            }
+        }
+        return "Unknown";
     }
     /**
      * 给合并后的单元格加边框
