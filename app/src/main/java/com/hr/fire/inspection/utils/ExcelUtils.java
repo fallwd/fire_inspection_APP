@@ -137,21 +137,22 @@ public class ExcelUtils {
                 Cell dataCell = dataRow.createCell(j);
                 dataCell.setCellStyle(dataStyle);
                 obj = project.get(names[j]);
-                dataCell.setCellValue(obj==null ? "" :
-                                        obj instanceof java.util.Date ? sdf.format(obj) : obj.toString());
-                Log.d("tzw","name: " +names[j]);
+                Log.d("tzw","name: " +names[j]+" obj:"+obj);
                 if(TextUtils.equals(names[j],"imageUrl") && obj != null){
                     imageUrl = (String) obj;
                     pictureIndex = j;
                 }
+
+                if(pictureIndex < 0){
+                    dataCell.setCellValue(obj==null ? "" :
+                            obj instanceof java.util.Date ? sdf.format(obj) : obj.toString());
+                }
+
             }
 
             if(pictureIndex >= 0){
                 dataRow.setHeight((short) (10 * 256));
                 Uri uri = Uri.parse(imageUrl);
-                Log.d("tzw","pictureIndex: " +pictureIndex);
-                Log.d("tzw","imageUrl: " +imageUrl);
-                Log.d("tzw","index: " +i);
                 byte[] byteArrayOut = UriToByte(uri,context);
                 if(byteArrayOut != null){
                     HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0, 0, 0,(short) (pictureIndex), (i+3),(short) (pictureIndex+1), (i+4));
