@@ -37,7 +37,9 @@ import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
+import com.hr.fire.inspection.helper.TakePhotoHelper;
 import com.hr.fire.inspection.impl.YCCCameraForVideo;
+import com.hr.fire.inspection.impl.YCCPhotoAlbum;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.FileRoute;
 import com.hr.fire.inspection.impl.YCCamera;
@@ -101,7 +103,7 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
                 //3.进入系统就给用户默认插入两条数据, 用户点击保存时,就Updata数据库
                 YearCheckResult ycr = new YearCheckResult();
                 ycr.setIsPass(" -- ");
-                ycr.setImageUrl("暂无");  //可以在iv7中获取
+//                ycr.setImageUrl("暂无");  //可以在iv7中获取
 //                ycr.setDescription("无描述");
                 ycr.setSystemNumber(its.number);
                 ycr.setProtectArea(" "); // 保护位号
@@ -139,6 +141,13 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
             public void startCamera(int postion) {
                 imgPostion = postion;
                 openSysCamera();
+            }
+        });
+        goodsAdapter.setYCCPhotoAlbum(new YCCPhotoAlbum() {
+            @Override
+            public void openAlbum(int postion) {
+                imgPostion = postion;
+                TakePhotoHelper.openPhotoAlbum(CarBonGoodsWeightAcitivty.this);
             }
         });
         goodsAdapter.setdoOpenCameraForVideo(new YCCCameraForVideo() {
@@ -299,6 +308,14 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
                     goodsAdapter.notifyItemChanged(videoPostion);
                 }
                 Toast.makeText(this, "录像数据保存成功，请点击拍照图标进行录像观看", Toast.LENGTH_SHORT).show();
+                break;
+            case FileRoute.PHOTO_ALBUM_RESULT_CODE:
+                if (imgPostion != -1 && goodsAdapter != null) {
+                    Uri uri = data.getData();
+                    yearCheckResults.get(imgPostion).setImageUrl(uri.toString());
+                    photoCallbackUpdate();
+                    goodsAdapter.notifyItemChanged(imgPostion);
+                }
                 break;
         }
     }

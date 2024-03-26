@@ -29,6 +29,7 @@ import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.impl.YCCCameraForVideo;
+import com.hr.fire.inspection.impl.YCCPhotoAlbum;
 import com.hr.fire.inspection.utils.PhotoView;
 import com.hr.fire.inspection.utils.StringBitmap;
 import com.hr.fire.inspection.view.tableview.HrPopup;
@@ -107,7 +108,7 @@ public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             String imageUrl = ycr.get(position).getImageUrl();
             Log.i("aaa","ImageURL1111"+imageUrl);
-            if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+            if (imageUrl != null /*&& imageUrl.endsWith(".jpg")*/) {
                 Uri uri = Uri.parse(imageUrl);
                 vh.iv7.setImageURI(uri);
             } else {
@@ -117,7 +118,8 @@ public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.iv7.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new PhotoView().showPopWindPic2(mContext, position, mYCCamera, doOpenCameraForVideo, ycr);
+//                    new PhotoView().showPopWindPic2(mContext, position, mYCCamera, doOpenCameraForVideo, ycr);
+                    new PhotoView().showPopWindPicAlbum(mContext, position,mYCCPhotoAlbum, mYCCamera, doOpenCameraForVideo, ycr);
                 }
             });
 
@@ -214,10 +216,14 @@ public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     private YCCamera mYCCamera;
+    private YCCPhotoAlbum mYCCPhotoAlbum;
 
     //接口回调, 将点击事件传递到activity中,打开相机
     public void setmYCCamera(YCCamera y) {
         this.mYCCamera = y;
+    }
+    public void setYCCPhotoAlbum(YCCPhotoAlbum y) {
+        this.mYCCPhotoAlbum = y;
     }
 
     private YCCCameraForVideo doOpenCameraForVideo;
