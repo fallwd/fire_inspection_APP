@@ -23,6 +23,7 @@ import com.hr.fire.inspection.activity.PhotoUploadActivity;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
 import com.hr.fire.inspection.impl.YCCCameraForVideo;
+import com.hr.fire.inspection.impl.YCCPhotoAlbum;
 import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.utils.PhotoView;
 import com.hr.fire.inspection.view.tableview.HrPopup;
@@ -94,7 +95,7 @@ public class SeawaterSystemAdapter2 extends RecyclerView.Adapter<RecyclerView.Vi
                 }
             });
             String imageUrl = ycr.get(position).getImageUrl();
-            if (imageUrl != null && imageUrl.endsWith(".jpg")) {
+            if (imageUrl != null /*&& imageUrl.endsWith(".jpg")*/) {
                 //路径  /external_path/Android/data/com.hr.fire.inspection/cache/1587462719699.jpg
 //                Uri uri = Uri.fromFile(new File(imageUrl));
                 Uri uri = Uri.parse(imageUrl);
@@ -107,13 +108,13 @@ public class SeawaterSystemAdapter2 extends RecyclerView.Adapter<RecyclerView.Vi
             if (videoUrl != null && videoUrl.endsWith(".mp4")) {
                 vh.iv7.setImageDrawable(mContext.getDrawable(R.mipmap.video_icon));
             } else {
-                vh.iv7.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
+//                vh.iv7.setImageDrawable(mContext.getDrawable(R.mipmap.scene_photos_icon));
             }
 
             vh.iv7.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new PhotoView().showPopWindPic2(mContext, position, mYCCamera, doOpenCameraForVideo, ycr);
+                    new PhotoView().showPopWindPicAlbum(mContext, position,photoAlbumListener, mYCCamera, doOpenCameraForVideo, ycr);
                 }
             });
         }
@@ -203,10 +204,13 @@ public class SeawaterSystemAdapter2 extends RecyclerView.Adapter<RecyclerView.Vi
         });
     }
     private YCCamera mYCCamera;
-
+    private YCCPhotoAlbum photoAlbumListener;
     //接口回调, 将点击事件传递到activity中,打开相机
     public void setmYCCamera(YCCamera y) {
         this.mYCCamera = y;
+    }
+    public void setAlbumListener(YCCPhotoAlbum listener) {
+        this.photoAlbumListener = listener;
     }
 
     private YCCCameraForVideo doOpenCameraForVideo;
