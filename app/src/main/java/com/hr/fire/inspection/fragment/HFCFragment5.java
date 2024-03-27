@@ -28,7 +28,9 @@ import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
+import com.hr.fire.inspection.helper.TakePhotoHelper;
 import com.hr.fire.inspection.impl.YCCCameraForVideo;
+import com.hr.fire.inspection.impl.YCCPhotoAlbum;
 import com.hr.fire.inspection.impl.YCCamera;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.FileRoute;
@@ -170,6 +172,13 @@ public class HFCFragment5 extends Fragment {
                 openSysCamera();
             }
         });
+        adapter.setAlbumListener(new YCCPhotoAlbum() {
+            @Override
+            public void openAlbum(int postion) {
+                imgPostion = postion;
+                TakePhotoHelper.openPhotoAlbum(HFCFragment5.this);
+            }
+        });
         adapter.setdoOpenCameraForVideo(new YCCCameraForVideo() {
             @Override
             public void startCamera(int postion) {
@@ -196,7 +205,7 @@ public class HFCFragment5 extends Fragment {
 
                 YearCheckResult yearCheckResult = yearCheckResults.get(i);
                 yearCheckResult.setIsPass(tv6.getText().toString().isEmpty() ? " -- " : tv6.getText().toString());
-                yearCheckResult.setImageUrl("暂无图片链接");  //可以在iv7中获取
+//                yearCheckResult.setImageUrl("暂无图片链接");  //可以在iv7中获取
                 yearCheckResult.setDescription(ev8.getText().toString().isEmpty() ? null : ev8.getText().toString());
                 yearCheckResult.setSystemNumber(its.number);
                 yearCheckResult.setProtectArea(" "); // 保护位号
@@ -259,6 +268,15 @@ public class HFCFragment5 extends Fragment {
                     adapter.notifyItemChanged(videoPostion);
                 }
                 Toast.makeText(this.getContext(), "录像数据保存成功，请点击拍照图标进行录像观看", Toast.LENGTH_SHORT).show();
+                break;
+            case FileRoute.PHOTO_ALBUM_RESULT_CODE:
+                //这里目前需要适配
+                if (imgPostion != -1 && adapter != null && data != null) {
+                    Uri uri = data.getData();
+                    yearCheckResults.get(imgPostion).setImageUrl(uri.toString());
+                    photoCallbackUpdate(); // 先提交下填写的数据，不然会被清空
+                    adapter.notifyItemChanged(imgPostion);
+                }
                 break;
         }
     }
