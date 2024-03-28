@@ -28,6 +28,7 @@ import com.hr.fire.inspection.entity.CheckType;
 import com.hr.fire.inspection.entity.IntentTransmit;
 import com.hr.fire.inspection.entity.YearCheck;
 import com.hr.fire.inspection.entity.YearCheckResult;
+import com.hr.fire.inspection.helper.TakePhotoHelper;
 import com.hr.fire.inspection.impl.YCCCameraForVideo;
 import com.hr.fire.inspection.service.ServiceFactory;
 import com.hr.fire.inspection.utils.FileRoute;
@@ -169,6 +170,10 @@ public class DryPowderFireSystemFragment3  extends Fragment {
                 openSysCamera();
             }
         });
+        adapter.setAlbumListener(postion -> {
+            imgPostion = postion;
+            TakePhotoHelper.openPhotoAlbum(DryPowderFireSystemFragment3.this);
+        });
         adapter.setdoOpenCameraForVideo(new YCCCameraForVideo() {
             @Override
             public void startCamera(int postion) {
@@ -255,6 +260,13 @@ public class DryPowderFireSystemFragment3  extends Fragment {
                     adapter.notifyItemChanged(videoPostion);
                 }
                 Toast.makeText(this.getContext(), "录像数据保存成功，请点击拍照图标进行录像观看", Toast.LENGTH_SHORT).show();
+                break;
+            case FileRoute.PHOTO_ALBUM_RESULT_CODE:
+                if ( imgPostion != -1 && adapter != null) {
+                    Uri uri = data.getData();
+                    yearCheckResults.get(imgPostion).setImageUrl(uri.toString());
+                    adapter.notifyItemChanged(imgPostion);
+                }
                 break;
         }
     }
