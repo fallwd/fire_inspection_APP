@@ -47,7 +47,7 @@ public class SeawaterSystemFragment2 extends Fragment {
     View rootView;
     private static SeawaterSystemFragment2 fragment3;
     private static String mKey;
-    private IntentTransmit its;
+    public IntentTransmit its;
     private SeawaterSystemAdapter2 adapter;
     private RecyclerView rc_list;
     private List<YearCheck> checkDataEasy;

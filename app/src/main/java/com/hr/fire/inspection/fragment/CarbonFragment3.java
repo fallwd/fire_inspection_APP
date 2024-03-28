@@ -56,7 +56,7 @@ public class CarbonFragment3 extends Fragment {
     View rootView;
     private static CarbonFragment3 fragment3;
     private static String mKey;
-    private IntentTransmit its;
+    public IntentTransmit its;
     private CarBon3Adapter adapter;
     private RecyclerView rc_list;
     private int imgPostion = -1;   //用户点击拍照, 所对应的位置

@@ -46,7 +46,7 @@ public class HFCFragment4 extends Fragment {
     View rootView;
     private static HFCFragment4 fragment3;
     private static String mKey;
-    private IntentTransmit its;
+    public IntentTransmit its;
     private HFC4Adapter adapter;
     private RecyclerView rc_list;
     private int imgPostion = -1;   //用户点击拍照, 所对应的位置

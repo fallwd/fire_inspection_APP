@@ -45,7 +45,7 @@ public class FoamFireFragment1 extends Fragment {
     View rootView;
     private static  FoamFireFragment1 fragment3;
     private static String mKey;
-    private IntentTransmit its;
+    public IntentTransmit its;
     private FoamFireAdapter1 adapter;
     private RecyclerView rc_list;
     private List<YearCheck> checkDataEasy;

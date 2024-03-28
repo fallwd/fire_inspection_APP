@@ -45,7 +45,7 @@ public class DryPowderFireSystemFragment4 extends Fragment {
     View rootView;
     private static DryPowderFireSystemFragment4 fragment4;
     private static String mKey;
-    private IntentTransmit its;
+    public IntentTransmit its;
     private DryPowderFireSystemAdapter4 adapter;
     private RecyclerView rc_list;
     private List<YearCheck> checkDataEasy;

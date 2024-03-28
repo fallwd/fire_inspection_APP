@@ -7,14 +7,25 @@
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/iv_finish"
+    <RelativeLayout
+        android:id="@+id/iv_finish_onclick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:background="@mipmap/left_icon"
-        android:scaleX="0.6"
-        android:scaleY="0.6" />
+        android:clickable="true"
+        android:padding="10dp"> <!-- 设置点击监听器 -->
+
+        <ImageView
+            android:id="@+id/iv_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:scaleX="0.6"
+            android:scaleY="1.6"
+            android:background="@mipmap/left_icon" />
+
+</RelativeLayout>
+
+
 
     <TextView
         android:id="@+id/tv_inspection_pro"
@@ -35,6 +46,8 @@
             android:id="@+id/sys_number"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="15dp">
             <TextView
                 android:layout_width="wrap_content"
@@ -48,12 +61,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="位号显示区"
+                android:visibility="gone"
                 android:textColor="@color/title_black"
                 android:textSize="12sp" />
+            <EditText
+                android:id="@+id/sys_number_ed"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content">
+
+            </EditText>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/protect_area"
             android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp">
             <TextView
@@ -68,12 +90,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="保护区域显示区"
+                android:visibility="gone"
                 android:textColor="@color/title_black"
                 android:textSize="12sp" />
+            <EditText
+                android:id="@+id/protect_area_ed"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/check_date"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp">

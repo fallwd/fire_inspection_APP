@@ -49,6 +49,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
@@ -67,12 +68,16 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         mapSelection.clear();
     }
 
+    public View mView;
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.carbon_item1_input, parent, false);
+        mView = view;
         ViewHolder holder = new ViewHolder(view);
+        mParent = parent;
         return holder;
     }
 
@@ -150,6 +155,7 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             WorkIItemBean mWorkIItemBean = new WorkIItemBean();
             List<WorkIItemBean> workSelectData = mWorkIItemBean.getWorkSelectData(1);
             mapSelection.put(position, workSelectData);
+
         }
         vh.rl_9.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -341,6 +347,8 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private HrPopup hrPopup;
 
+    private ViewGroup mParent;
+
     //显示对话框,用户选择是否异常的弹框
     private void showPopWind(final TextView tv) {
         View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods, null);
@@ -350,13 +358,14 @@ public class CarBon1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
         RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
         RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
-        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         hrPopup.setBackgroundDrawable(new BitmapDrawable());
         hrPopup.setFocusable(true);
         hrPopup.setOutsideTouchable(true);
         hrPopup.setContentView(PopupRootView);
-        hrPopup.showAsDropDown(tv);
+//        hrPopup.showAsDropDown(tv);
+        hrPopup.showAtLocation(mParent, Gravity.BOTTOM,0,0);
         rl_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

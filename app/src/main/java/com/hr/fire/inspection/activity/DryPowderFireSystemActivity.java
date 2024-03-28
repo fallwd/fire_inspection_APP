@@ -2,9 +2,12 @@ package com.hr.fire.inspection.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.SpannableString;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -108,12 +111,51 @@ public class DryPowderFireSystemActivity extends AppCompatActivity {
             sys_number_text.setText(sys_number);
         }
 
+        EditText sys_number_ed = (EditText) this.findViewById(R.id.sys_number_ed);
+        if (sys_number == null || sys_number == "" || sys_number.isEmpty()) {
+            sys_number_ed.setText("");
+        } else {
+            sys_number_ed.setText(sys_number);
+        }
+
+
+        sys_number_ed.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+                // 文本变化之前执行的操作
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                // 文本变化时执行的操作
+                String inputText = charSequence.toString();
+                // 在这里处理输入文本的变化，例如实时搜索、动态更新UI等
+                DryPowderFireSystemFragment1.its.number = inputText;
+                DryPowderFireSystemFragment2.its.number = inputText;
+                DryPowderFireSystemFragment3.its.number = inputText;
+                DryPowderFireSystemFragment4.its.number = inputText;
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // 文本变化之后执行的操作
+
+            }
+        });
+
         // 保护区域文字显示
         TextView protect_area_text = (TextView) this.findViewById(R.id.protect_area_text);
         if (protect_area == null || protect_area == "" || protect_area.isEmpty()) {
             protect_area_text.setText("保护区域为空");
         } else {
             protect_area_text.setText(protect_area);
+        }
+
+        EditText protect_area_ed = (EditText) this.findViewById(R.id.protect_area_ed);
+        if (protect_area == null || protect_area == "" || protect_area.isEmpty()) {
+            protect_area_ed.setText("");
+        } else {
+            protect_area_ed.setText(protect_area);
         }
 
         // 检查时间文字显示
@@ -245,6 +287,12 @@ public class DryPowderFireSystemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        findViewById(R.id.iv_finish_onclick).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iv_finish.performClick();
             }
         });
     }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,7 @@ public class XJDelugeValveContentApapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.xj_deluge_valve_content_layout, parent, false);
         MyViewHolder holder = new MyViewHolder(view);
+        mParent = parent;
         return holder;
     }
 
@@ -104,6 +106,7 @@ public class XJDelugeValveContentApapter extends RecyclerView.Adapter {
 
 
     private HrPopup hrPopup;
+    private ViewGroup mParent;
 
     //显示对话框,用户选择是否异常的弹框
     private void showPopWind(TextView tv) {
@@ -114,13 +117,14 @@ public class XJDelugeValveContentApapter extends RecyclerView.Adapter {
         RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
         RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
         RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
-        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         hrPopup.setBackgroundDrawable(new BitmapDrawable());
         hrPopup.setFocusable(true);
         hrPopup.setOutsideTouchable(true);
         hrPopup.setContentView(PopupRootView);
-        hrPopup.showAsDropDown(tv);
+//        hrPopup.showAsDropDown(tv);
+        hrPopup.showAtLocation(mParent, Gravity.BOTTOM,0,0);
         rl_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -220,7 +220,8 @@ public class NjFireFightingWaterFragment2 extends Fragment {
 
 
     public void upData() {
-        int itemCount = table_tbody_id.getChildCount();
+//        int itemCount = table_tbody_id.getChildCount();
+        int itemCount = table_tbody_id.getAdapter().getItemCount();
         //通知数据库刷新数据， 才能在调用Update();
         Log.d("dong", "it.companyInfoId111==   " + it.companyInfoId + "   checkTypes.get(1).getId()   " + checkTypes.get(1).getId()+ "ITTTTTTTTTT" + it);
 
@@ -232,35 +233,51 @@ public class NjFireFightingWaterFragment2 extends Fragment {
             Toast.makeText(getActivity(), "暂无数据保存", Toast.LENGTH_SHORT).show();
             return;
         }
-        for (int i = 0; i < itemCount; i++) {
-            LinearLayout childAt = (LinearLayout) table_tbody_id.getChildAt(i);
-            TextView et_1 = childAt.findViewById(R.id.et_1);
-            EditText et_2 = childAt.findViewById(R.id.et_2);
-            EditText et_3 = childAt.findViewById(R.id.et_3);
-            EditText et_4 = childAt.findViewById(R.id.et_4);
-            EditText et_5 = childAt.findViewById(R.id.et_5);
-            EditText et_6 = childAt.findViewById(R.id.et_6);
-            EditText et_7 = childAt.findViewById(R.id.et_7);
-            TextView et_8 = childAt.findViewById(R.id.et_8);
-            TextView et_9 = childAt.findViewById(R.id.et_9);
-            ImageView et_10 = childAt.findViewById(R.id.et_10);
+        // 获取RecyclerView的LayoutManager
+        RecyclerView.LayoutManager layoutManager = table_tbody_id.getLayoutManager();
+
+        // 获取RecyclerView的Adapter
+        RecyclerView.Adapter adapter = table_tbody_id.getAdapter();
+
+        // 确保LayoutManager和Adapter都不为空
+        if (layoutManager != null && adapter != null) {
+            // 遍历RecyclerView的所有item，并获取每个item的子视图
+            for (int i = 0; i < adapter.getItemCount(); i++) {
+                View childAt = layoutManager.findViewByPosition(i);
+
+                if (childAt != null) {
+
+                    TextView et_1 = childAt.findViewById(R.id.et_1);
+                    EditText et_2 = childAt.findViewById(R.id.et_2);
+                    EditText et_3 = childAt.findViewById(R.id.et_3);
+                    EditText et_4 = childAt.findViewById(R.id.et_4);
+                    EditText et_5 = childAt.findViewById(R.id.et_5);
+                    EditText et_6 = childAt.findViewById(R.id.et_6);
+                    EditText et_7 = childAt.findViewById(R.id.et_7);
+                    TextView et_8 = childAt.findViewById(R.id.et_8);
+                    TextView et_9 = childAt.findViewById(R.id.et_9);
+                    ImageView et_10 = childAt.findViewById(R.id.et_10);
 
 
 
-            ItemInfo itemObj = itemDataList.get(i);
-            itemObj.setTypeNo(et_2.getText().toString());
-            itemObj.setNo(et_3.getText().toString());
-            itemObj.setProdFactory(et_4.getText().toString());
-            itemObj.setDeviceType(et_5.getText().toString());
-            Date date = TimeUtil.parse(et_6.getText().toString(),"yyyy-MM");
-            itemObj.setProdDate(date);
-            itemObj.setIsPass(et_9.getText().toString());
+                    ItemInfo itemObj = itemDataList.get(i);
+                    itemObj.setTypeNo(et_2.getText().toString());
+                    itemObj.setNo(et_3.getText().toString());
+                    itemObj.setProdFactory(et_4.getText().toString());
+                    itemObj.setDeviceType(et_5.getText().toString());
+                    Date date = TimeUtil.parse(et_6.getText().toString(),"yyyy-MM");
+                    itemObj.setProdDate(date);
+                    itemObj.setIsPass(et_9.getText().toString());
 //          itemObj.setCodePath(et_10.getImageAlpha());                  // 图片路径怎么填
 
-            itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
-            ServiceFactory.getYearCheckService().update(itemObj);
-            Toast.makeText(getContext(), "数据保存成功", Toast.LENGTH_SHORT).show();
+                    itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
+                    ServiceFactory.getYearCheckService().update(itemObj);
+                    Toast.makeText(getContext(), "数据保存成功", Toast.LENGTH_SHORT).show();
+
+                }
+            }
         }
+
     }
 
     @Override

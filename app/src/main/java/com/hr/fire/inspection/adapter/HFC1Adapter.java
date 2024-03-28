@@ -56,6 +56,7 @@ public class HFC1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Long checkid;  //检查表的Id
     private IntentTransmit intentTransmit;   //之前页面数据的传参,如系统号\公司id...
     private Map<Integer, List<WorkIItemBean>> mapSelection = new HashMap();
+    private ViewGroup mParent;
 
     public HFC1Adapter() {
 
@@ -74,6 +75,7 @@ public class HFC1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_hfc_form_input_new, parent, false);
         HFC1Adapter.ViewHolder holder = new HFC1Adapter.ViewHolder(view);
+        mParent = parent;
         return holder;
     }
 
@@ -286,13 +288,14 @@ public class HFC1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
         RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
         RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
-        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         hrPopup.setBackgroundDrawable(new BitmapDrawable());
         hrPopup.setFocusable(true);
         hrPopup.setOutsideTouchable(true);
         hrPopup.setContentView(PopupRootView);
-        hrPopup.showAsDropDown(tv6);
+//        hrPopup.showAsDropDown(tv6);
+        hrPopup.showAtLocation(mParent, Gravity.BOTTOM,0,0);
         rl_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

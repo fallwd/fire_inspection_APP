@@ -44,6 +44,7 @@ public class DFXIAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private IntentTransmit intentTransmit;   //之前页面数据的传参,如系统号\公司id...
     private HrPopup hrPopup; // 下拉框相关的引用
     private Map<Integer, List<DryPowderFireSysTabSelect1>> mapSelection = new HashMap();
+    private ViewGroup mParent;
 
     public DFXIAdapter2(Context mContext, List<ItemInfo> mData) {
         this.mContext = mContext;
@@ -58,6 +59,7 @@ public class DFXIAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.acitivty_dfxi2_input, parent, false);
         ViewHolder holder = new ViewHolder(view);
+        mParent = parent;
         return holder;
     }
 
@@ -177,13 +179,14 @@ public class DFXIAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
         RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
         RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
-        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         hrPopup.setBackgroundDrawable(new BitmapDrawable());
         hrPopup.setFocusable(true);
         hrPopup.setOutsideTouchable(true);
         hrPopup.setContentView(PopupRootView);
-        hrPopup.showAsDropDown(et_11);
+//        hrPopup.showAsDropDown(et_11);
+        hrPopup.showAtLocation(mParent, Gravity.BOTTOM,0,0);
         rl_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

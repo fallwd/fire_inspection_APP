@@ -232,7 +232,8 @@ public class AutomaticFireAlarm9 extends Fragment {
 
 
     public void upData() {
-        int itemCount = hz_table_tbody_id2.getChildCount();
+//        int itemCount = hz_table_tbody_id2.getChildCount();
+        int itemCount = hz_table_tbody_id2.getAdapter().getItemCount();
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(8).getId(), it.number == null ? "" : it.number, it.srt_Date);
 
         Log.d("dong", "upData==   " + itemCount + "   新的数据条数   " + itemDataList.size());
@@ -240,26 +241,38 @@ public class AutomaticFireAlarm9 extends Fragment {
             Toast.makeText(getActivity(), "暂无数据保存", Toast.LENGTH_SHORT).show();
             return;
         }
-        for (int i = 0; i < itemCount; i++) {
-            LinearLayout childAt = (LinearLayout) hz_table_tbody_id2.getChildAt(i);
-            TextView tv_1 = childAt.findViewById(R.id.tv_1);
-            EditText et_2 = childAt.findViewById(R.id.et_2);
-            EditText et_3 = childAt.findViewById(R.id.et_3);
-            EditText et_4 = childAt.findViewById(R.id.et_4);
-            EditText et_5 = childAt.findViewById(R.id.et_5);
-            EditText et_6 = childAt.findViewById(R.id.et_6);
-            TextView et_7 = childAt.findViewById(R.id.et_7);
-            TextView et_8 = childAt.findViewById(R.id.et_8);
-            TextView et_9 = childAt.findViewById(R.id.et_9);
-            TextView et_10 = childAt.findViewById(R.id.et_10);
-            TextView et_11= childAt.findViewById(R.id.et_11);
-            TextView et_12 = childAt.findViewById(R.id.et_12);
-            ImageView et_13 = childAt.findViewById(R.id.et_13);
-            ImageView et_14 = childAt.findViewById(R.id.et_14);
-            EditText et_15 = childAt.findViewById(R.id.et_15);
+        // 获取RecyclerView的LayoutManager
+        RecyclerView.LayoutManager layoutManager = hz_table_tbody_id2.getLayoutManager();
+
+        // 获取RecyclerView的Adapter
+        RecyclerView.Adapter adapter = hz_table_tbody_id2.getAdapter();
+
+        // 确保LayoutManager和Adapter都不为空
+        if (layoutManager != null && adapter != null) {
+            // 遍历RecyclerView的所有item，并获取每个item的子视图
+            for (int i = 0; i < adapter.getItemCount(); i++) {
+                View childAt = layoutManager.findViewByPosition(i);
+
+                if (childAt != null) {
+
+                    TextView tv_1 = childAt.findViewById(R.id.tv_1);
+                    EditText et_2 = childAt.findViewById(R.id.et_2);
+                    EditText et_3 = childAt.findViewById(R.id.et_3);
+                    EditText et_4 = childAt.findViewById(R.id.et_4);
+                    EditText et_5 = childAt.findViewById(R.id.et_5);
+                    EditText et_6 = childAt.findViewById(R.id.et_6);
+                    TextView et_7 = childAt.findViewById(R.id.et_7);
+                    TextView et_8 = childAt.findViewById(R.id.et_8);
+                    TextView et_9 = childAt.findViewById(R.id.et_9);
+                    TextView et_10 = childAt.findViewById(R.id.et_10);
+                    TextView et_11= childAt.findViewById(R.id.et_11);
+                    TextView et_12 = childAt.findViewById(R.id.et_12);
+                    ImageView et_13 = childAt.findViewById(R.id.et_13);
+                    ImageView et_14 = childAt.findViewById(R.id.et_14);
+                    EditText et_15 = childAt.findViewById(R.id.et_15);
 
 
-            //            序号 1
+                    //            序号 1
 //            设备位号5 no
 //            设备类型2  DeviceType
 //            生产厂家3 prodFactory
@@ -276,27 +289,31 @@ public class AutomaticFireAlarm9 extends Fragment {
 //            隐患描述 15 description
 
 
-            ItemInfo itemObj = itemDataList.get(i);
-            itemObj.setDeviceType(et_2.getText().toString());
-            itemObj.setProdFactory(et_3.getText().toString());
-            itemObj.setTypeNo(et_4.getText().toString());
-            itemObj.setNo(et_5.getText().toString());
+                    ItemInfo itemObj = itemDataList.get(i);
+                    itemObj.setDeviceType(et_2.getText().toString());
+                    itemObj.setProdFactory(et_3.getText().toString());
+                    itemObj.setTypeNo(et_4.getText().toString());
+                    itemObj.setNo(et_5.getText().toString());
 
-            itemObj.setPositionConformity(et_6.getText().toString());
-            itemObj.setAppearance(et_7.getText().toString());
-            itemObj.setCheck(et_8.getText().toString());
-            itemObj.setSlience(et_9.getText().toString());
-            itemObj.setReset(et_10.getText().toString());
-            itemObj.setPowerAlarmFunction(et_11.getText().toString());
-            itemObj.setAlarmFunction(et_12.getText().toString());
-            //      et_13 照片怎么上传 怎么获取
+                    itemObj.setPositionConformity(et_6.getText().toString());
+                    itemObj.setAppearance(et_7.getText().toString());
+                    itemObj.setCheck(et_8.getText().toString());
+                    itemObj.setSlience(et_9.getText().toString());
+                    itemObj.setReset(et_10.getText().toString());
+                    itemObj.setPowerAlarmFunction(et_11.getText().toString());
+                    itemObj.setAlarmFunction(et_12.getText().toString());
+                    //      et_13 照片怎么上传 怎么获取
 //          itemObj.setImageUrl(et_13.get);
 //          itemObj.setCodePath(et_14.getText().toString());
-            itemObj.setDescription(et_15.getText().toString());
-            itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
-            ServiceFactory.getYearCheckService().update(itemObj);
-            Toast.makeText(getActivity(), "数据保存成功", Toast.LENGTH_SHORT).show();
+                    itemObj.setDescription(et_15.getText().toString());
+                    itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
+                    ServiceFactory.getYearCheckService().update(itemObj);
+                    Toast.makeText(getActivity(), "数据保存成功", Toast.LENGTH_SHORT).show();
+
+                }
+            }
         }
+
     }
 
     @Override

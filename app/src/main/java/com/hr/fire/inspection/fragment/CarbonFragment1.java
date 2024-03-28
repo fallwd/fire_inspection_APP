@@ -46,7 +46,7 @@ public class CarbonFragment1 extends Fragment {
     private CarBon1Adapter adapter;
     private List<ItemInfo> itemDataList = new ArrayList<>();
     private RecyclerView rc_list;
-    private IntentTransmit its;
+    public IntentTransmit its;
     private List<CheckType> checkTypes;
 
     public static CarbonFragment1 newInstance(String key, IntentTransmit value) {
@@ -219,43 +219,65 @@ public class CarbonFragment1 extends Fragment {
 
 
     public void upData() {
-        int itemCount = rc_list.getChildCount();
+//        int itemCount = rc_list.getChildCount();
+        int itemCount = rc_list.getAdapter().getItemCount();
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(0).getId(), its.number == null ? "" : its.number, its.srt_Date);
+//        Log.e("AAA" , "itemCount =" + itemCount);
+//        Log.e("AAA" , "itemDataList.size() =" + itemDataList.size());
         if (itemCount == 0 || itemDataList.size() == 0 || itemDataList.size() != itemCount) {
             Toast.makeText(getActivity(), "暂无数据保存", Toast.LENGTH_SHORT).show();
             return;
         }
-        for (int i = 0; i < itemCount; i++) {
-            LinearLayout childAt = (LinearLayout) rc_list.getChildAt(i);
-            TextView tv_1 = childAt.findViewById(R.id.tv_1);
-            EditText et_2 = childAt.findViewById(R.id.et_2);
-            EditText et_3 = childAt.findViewById(R.id.et_3);
-            EditText et_4 = childAt.findViewById(R.id.et_4);
-            EditText et_5 = childAt.findViewById(R.id.et_5);
-            EditText et_6 = childAt.findViewById(R.id.et_6);
-            EditText et_7 = childAt.findViewById(R.id.et_7);
-            EditText et_8 = childAt.findViewById(R.id.et_8);
-            TextView tv_9 = childAt.findViewById(R.id.tv_9);
-            TextView tv_10 = childAt.findViewById(R.id.tv_10);
-            TextView tv_11 = childAt.findViewById(R.id.tv_11);
-            EditText et_12 = childAt.findViewById(R.id.et_12);
 
-            ItemInfo itemObj = itemDataList.get(i);
-            itemObj.setNo(et_2.getText().toString());
-            itemObj.setVolume(et_3.getText().toString());
-            itemObj.setWeight(et_4.getText().toString());
-            itemObj.setGoodsWeight(et_5.getText().toString());
-            itemObj.setProdFactory(et_6.getText().toString());
-            Date date = TimeUtil.parse(et_7.getText().toString(),"yyyy-MM");
-            Date date1 = TimeUtil.parse(et_8.getText().toString(),"yyyy-MM");
-            itemObj.setProdDate(date);
-            itemObj.setObserveDate(date1);
-            itemObj.setIsPass(tv_10.getText().toString());
-            itemObj.setTaskNumber(tv_11.getText().toString());
-            itemObj.setLabelNo(et_12.getText().toString());
-            itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
-            ServiceFactory.getYearCheckService().update(itemObj);
+
+        // 获取RecyclerView的LayoutManager
+        RecyclerView.LayoutManager layoutManager = rc_list.getLayoutManager();
+
+        // 获取RecyclerView的Adapter
+        RecyclerView.Adapter adapter = rc_list.getAdapter();
+
+        // 确保LayoutManager和Adapter都不为空
+        if (layoutManager != null && adapter != null) {
+            // 遍历RecyclerView的所有item，并获取每个item的子视图
+            for (int i = 0; i < adapter.getItemCount(); i++) {
+                View childAt = layoutManager.findViewByPosition(i);
+
+                if (childAt != null) {
+                    // 在这里处理你需要的操作，例如获取子视图中的控件等
+//                    Log.d("upData111", "upData: "+childAt);
+                    TextView tv_1 = childAt.findViewById(R.id.tv_1);
+                    EditText et_2 = childAt.findViewById(R.id.et_2);
+                    EditText et_3 = childAt.findViewById(R.id.et_3);
+                    EditText et_4 = childAt.findViewById(R.id.et_4);
+                    EditText et_5 = childAt.findViewById(R.id.et_5);
+                    EditText et_6 = childAt.findViewById(R.id.et_6);
+                    EditText et_7 = childAt.findViewById(R.id.et_7);
+                    EditText et_8 = childAt.findViewById(R.id.et_8);
+                    TextView tv_9 = childAt.findViewById(R.id.tv_9);
+                    TextView tv_10 = childAt.findViewById(R.id.tv_10);
+                    TextView tv_11 = childAt.findViewById(R.id.tv_11);
+                    EditText et_12 = childAt.findViewById(R.id.et_12);
+
+                    ItemInfo itemObj = itemDataList.get(i);
+                    itemObj.setNo(et_2.getText().toString());
+                    itemObj.setVolume(et_3.getText().toString());
+                    itemObj.setWeight(et_4.getText().toString());
+                    itemObj.setGoodsWeight(et_5.getText().toString());
+                    itemObj.setProdFactory(et_6.getText().toString());
+                    Date date = TimeUtil.parse(et_7.getText().toString(),"yyyy-MM");
+                    Date date1 = TimeUtil.parse(et_8.getText().toString(),"yyyy-MM");
+                    itemObj.setProdDate(date);
+                    itemObj.setObserveDate(date1);
+                    itemObj.setIsPass(tv_10.getText().toString());
+                    itemObj.setTaskNumber(tv_11.getText().toString());
+                    itemObj.setLabelNo(et_12.getText().toString());
+                    itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
+                    ServiceFactory.getYearCheckService().update(itemObj);
+                }
+            }
         }
+
+
         Toast.makeText(getContext(), "\"药剂瓶\"数据保存成功", Toast.LENGTH_SHORT).show();
     }
 

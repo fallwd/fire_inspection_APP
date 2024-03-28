@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class HFCGoodsAdapter extends BaseAdapter {
     private HrPopup hrPopup;
     private final List<YearCheck> dataEasy;//检查的条目数据
     private List<YearCheckResult> ycr;  //用户之前的填写记录
+    private ViewGroup mParent;
 
     public HFCGoodsAdapter(Activity rulesActivity, List<YearCheck> checkDataEasy, List<YearCheckResult> yearCheckResults) {
         this.mContext = rulesActivity;
@@ -54,6 +56,7 @@ public class HFCGoodsAdapter extends BaseAdapter {
     @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        mParent = parent;
         ViewHolder holder = null;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_goods_check, parent, false);
@@ -139,13 +142,14 @@ public class HFCGoodsAdapter extends BaseAdapter {
         RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
         RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
         RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
-        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         hrPopup.setBackgroundDrawable(new BitmapDrawable());
         hrPopup.setFocusable(true);
         hrPopup.setOutsideTouchable(true);
         hrPopup.setContentView(PopupRootView);
-        hrPopup.showAsDropDown(tv6);
+//        hrPopup.showAsDropDown(tv6);
+        hrPopup.showAtLocation(mParent, Gravity.BOTTOM,0,0);
         rl_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

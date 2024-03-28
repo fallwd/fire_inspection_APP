@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.Map;
 
 //二氧化碳年检记录
-public class CarbondioxideRecordAcitivty extends AppCompatActivity implements View.OnClickListener {
+public class  CarbondioxideRecordAcitivty extends AppCompatActivity implements View.OnClickListener {
     CarbondioxideRecordAcitivty mContext = this;
     public static int[] icon = {R.mipmap.file};
     private long sys_id;
