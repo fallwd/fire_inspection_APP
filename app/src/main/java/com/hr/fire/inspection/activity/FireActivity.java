@@ -87,6 +87,7 @@ public class FireActivity extends AppCompatActivity {
                 if (f_title.equals("高压二氧化碳灭火系统") || f_title.equals("七氟丙烷灭火系统")
                         || f_title.equals("海水雨淋灭火系统") || f_title.equals("固定式干粉灭火系统")
                         || f_title.equals("泡沫灭火系统")) {
+                    intent.putExtra("sys_number", ""); //改页面是没有这个参数的
 //                    intent.setClass(FireActivity.this, SystemTagProtectionAreaActivity.class);
                     intent.setClass(FireActivity.this, CarbondioxideRecordAcitivty.class);
                 } else {
