@@ -3,6 +3,7 @@ package com.hr.fire.inspection.utils;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
@@ -33,6 +34,7 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class ExcelUtils {
 
@@ -133,6 +135,7 @@ public class ExcelUtils {
             Map<String,Object> project = rows.get(i);
             int pictureIndex = -1;
             String imageUrl = "";
+            String videoUrl = "";
             for (int j = 0; j <names.length; j++) {
                 Cell dataCell = dataRow.createCell(j);
                 dataCell.setCellStyle(dataStyle);
@@ -140,6 +143,11 @@ public class ExcelUtils {
                 Log.d("tzw","name: " +names[j]+" obj:"+obj);
                 if(TextUtils.equals(names[j],"imageUrl") && obj != null){
                     imageUrl = (String) obj;
+                    Object video =  project.get("videoUrl");
+                    if(video != null){
+                        videoUrl = (String)video;
+                    }
+//                    Log.d("tzw videoUrl",videoUrl);
                     pictureIndex = j;
                 }
 
@@ -147,13 +155,28 @@ public class ExcelUtils {
                     dataCell.setCellValue(obj==null ? "" :
                             obj instanceof java.util.Date ? sdf.format(obj) : obj.toString());
                 }
+//                if(!TextUtils.isEmpty(videoUrl)){
+//                    dataCell.setCellValue(videoUrl);
+//                }
 
             }
 
             if(pictureIndex >= 0){
                 dataRow.setHeight((short) (10 * 256));
-                Uri uri = Uri.parse(imageUrl);
-                byte[] byteArrayOut = UriToByte(uri,context);
+                byte[] byteArrayOut = null;
+//                if(!TextUtils.isEmpty(videoUrl)){
+//                    MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+//                    retriever.setDataSource(videoUrl);
+//                    Bitmap  bitmap1= retriever.getFrameAtTime(1000, MediaMetadataRetriever.OPTION_CLOSEST_SYNC);
+//                    int size = bitmap1.getWidth() * bitmap1.getHeight() * 4;
+//                    ByteArrayOutputStream baos = new ByteArrayOutputStream(size);
+//                    bitmap1.compress(Bitmap.CompressFormat.PNG, 10, baos);
+//                    byteArrayOut = baos.toByteArray();
+//                }else {
+                    Uri uri = Uri.parse(imageUrl);
+                    byteArrayOut = UriToByte(uri,context);
+//                }
+
                 if(byteArrayOut != null){
                     HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0, 0, 0,(short) (pictureIndex), (i+3),(short) (pictureIndex+1), (i+4));
                     //插入图片
