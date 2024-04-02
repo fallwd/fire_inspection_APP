@@ -42,7 +42,7 @@ public class DryPowderFireSystemFragment2 extends Fragment {
     private DryPowderFireSystemAdapter2 adapter;
     private List<ItemInfo> itemDataList = new ArrayList<>();
     private RecyclerView rc_list;
-    private IntentTransmit its;
+    public IntentTransmit its;
     private List<CheckType> checkTypes;
 
     public static DryPowderFireSystemFragment2 newInstance(String key, IntentTransmit value) {
@@ -232,7 +232,8 @@ public class DryPowderFireSystemFragment2 extends Fragment {
 
 
     public void saveData() {
-        int itemCount = rc_list.getChildCount();
+//        int itemCount = rc_list.getChildCount();
+        int itemCount = rc_list.getAdapter().getItemCount();
         //通知数据库刷新数据， 才能在调用Update();
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(1).getId(), its.number == null ? "" : its.number, its.srt_Date);
         Log.d("dong", "upData==   " + itemCount + "   新的数据条数   " + itemDataList.size());
@@ -240,41 +241,57 @@ public class DryPowderFireSystemFragment2 extends Fragment {
             Toast.makeText(getActivity(), "暂无数据保存", Toast.LENGTH_SHORT).show();
             return;
         }
+        // 获取RecyclerView的LayoutManager
+        RecyclerView.LayoutManager layoutManager = rc_list.getLayoutManager();
 
-        for (int i = 0; i < itemCount; i++) {
-            LinearLayout childAt = (LinearLayout) rc_list.getChildAt(i);
-            TextView tv_1 = childAt.findViewById(R.id.tv_1);
-            EditText et_2 = childAt.findViewById(R.id.et_2);
-            EditText et_3 = childAt.findViewById(R.id.et_3);
-            EditText et_4 = childAt.findViewById(R.id.et_4);
-            EditText et_5 = childAt.findViewById(R.id.et_5);
-            EditText et_6 = childAt.findViewById(R.id.et_6);
-            EditText et_7 = childAt.findViewById(R.id.et_7);
-            EditText et_8 = childAt.findViewById(R.id.et_8);
-            TextView et_9 = childAt.findViewById(R.id.et_9);
-            TextView et_10 = childAt.findViewById(R.id.et_10);
-            EditText et_11 = childAt.findViewById(R.id.et_11);
-            ImageView et_12 = childAt.findViewById(R.id.et_12);
-            TextView tv_9 = childAt.findViewById(R.id.tv_9);
+        // 获取RecyclerView的Adapter
+        RecyclerView.Adapter adapter = rc_list.getAdapter();
 
-            ItemInfo itemObj = itemDataList.get(i);
-            itemObj.setNo(et_2.getText().toString());
-            itemObj.setVolume(et_3.getText().toString());
-            itemObj.setWeight(et_4.getText().toString());
-            itemObj.setPressure(et_5.getText().toString());
-            itemObj.setProdFactory(et_6.getText().toString());
-            Date date = TimeUtil.parse(et_7.getText().toString(),"yyyy-MM");
-            Date date1 = TimeUtil.parse(et_8.getText().toString(),"yyyy-MM");
-            itemObj.setProdDate(date);
-            itemObj.setObserveDate(date1);
-            itemObj.setTaskNumber(et_9.getText().toString());
-            itemObj.setIsPass(et_10.getText().toString());
-            itemObj.setLabelNo(et_11.getText().toString());
+        // 确保LayoutManager和Adapter都不为空
+        if (layoutManager != null && adapter != null) {
+            // 遍历RecyclerView的所有item，并获取每个item的子视图
+            for (int i = 0; i < adapter.getItemCount(); i++) {
+                View childAt = layoutManager.findViewByPosition(i);
+
+                if (childAt != null) {
+
+                    TextView tv_1 = childAt.findViewById(R.id.tv_1);
+                    EditText et_2 = childAt.findViewById(R.id.et_2);
+                    EditText et_3 = childAt.findViewById(R.id.et_3);
+                    EditText et_4 = childAt.findViewById(R.id.et_4);
+                    EditText et_5 = childAt.findViewById(R.id.et_5);
+                    EditText et_6 = childAt.findViewById(R.id.et_6);
+                    EditText et_7 = childAt.findViewById(R.id.et_7);
+                    EditText et_8 = childAt.findViewById(R.id.et_8);
+                    TextView et_9 = childAt.findViewById(R.id.et_9);
+                    TextView et_10 = childAt.findViewById(R.id.et_10);
+                    EditText et_11 = childAt.findViewById(R.id.et_11);
+                    ImageView et_12 = childAt.findViewById(R.id.et_12);
+                    TextView tv_9 = childAt.findViewById(R.id.tv_9);
+
+                    ItemInfo itemObj = itemDataList.get(i);
+                    itemObj.setNo(et_2.getText().toString());
+                    itemObj.setVolume(et_3.getText().toString());
+                    itemObj.setWeight(et_4.getText().toString());
+                    itemObj.setPressure(et_5.getText().toString());
+                    itemObj.setProdFactory(et_6.getText().toString());
+                    Date date = TimeUtil.parse(et_7.getText().toString(),"yyyy-MM");
+                    Date date1 = TimeUtil.parse(et_8.getText().toString(),"yyyy-MM");
+                    itemObj.setProdDate(date);
+                    itemObj.setObserveDate(date1);
+                    itemObj.setTaskNumber(et_9.getText().toString());
+                    itemObj.setIsPass(et_10.getText().toString());
+                    itemObj.setLabelNo(et_11.getText().toString());
 //            itemObj.setCodePath(et_12.getImageAlpha());  // 二维码路径？？？？？
-            itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
+                    itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
 
-            ServiceFactory.getYearCheckService().update(itemObj);
+                    ServiceFactory.getYearCheckService().update(itemObj);
+
+                }
+            }
         }
+
+
         Toast.makeText(getContext(), "数据保存成功", Toast.LENGTH_SHORT).show();
     }
 

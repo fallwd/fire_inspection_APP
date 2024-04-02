@@ -150,6 +150,13 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
         iv_add_table.setOnClickListener(this);
         iv_save.setOnClickListener(this);
 
+        findViewById(R.id.iv_finish_onclick).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iv_finish.performClick();
+            }
+        });
+
 
         //显示顶部展示系统位号、保护区域、检查时间的LinearLayout
         LinearLayout isShowTopText = (LinearLayout) this.findViewById(R.id.isShowTopText);
@@ -360,8 +367,8 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
      * 我们在Updara的时候先查询,如果没有没有数据就说明无数据更新  , 如果有就进行更新,
      */
     private void saveToUpdara() {
-        int itemCount = rl_content.getChildCount();
-
+//        int itemCount = rl_content.getChildCount();
+        int itemCount = rl_content.getAdapter().getItemCount();
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(companyInfoId, checkTypes.get(0).getId(), sys_number == null ? "" : sys_number, srt_Date);
 //        Log.d("dong", "upData==   " + itemCount + "   新的数据条数   " + itemDataList.size());
         if (itemCount == 0 || itemDataList.size() == 0 || itemDataList.size() != itemCount) {
@@ -369,51 +376,67 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
             return;
         }
 
-        for (int i = 0; i < itemCount; i++) {
-            LinearLayout childAt = (LinearLayout) rl_content.getChildAt(i);
+        // 获取RecyclerView的LayoutManager
+        RecyclerView.LayoutManager layoutManager = rl_content.getLayoutManager();
 
-            EditText et_fire1 = childAt.findViewById(R.id.et_fire1);
-            TextView tv_fire2 = childAt.findViewById(R.id.tv_fire2);
-            TextView tv_fire3 = childAt.findViewById(R.id.tv_fire3);
-            TextView tv_fire4 = childAt.findViewById(R.id.tv_fire4);
-            EditText et_fire5 = childAt.findViewById(R.id.et_fire5);
-            EditText et_fire6 = childAt.findViewById(R.id.et_fire6);
-            TextView tv_fire7 = childAt.findViewById(R.id.tv_fire7);
-            TextView tv_fire8 = childAt.findViewById(R.id.tv_fire8);
-            TextView tv_fire9 = childAt.findViewById(R.id.tv_fire9);
-            TextView tv_fire10 = childAt.findViewById(R.id.tv_fire10);
-            TextView tv_fire11 = childAt.findViewById(R.id.tv_fire11);
-            EditText et_fire12 = childAt.findViewById(R.id.et_fire12);
-            TextView tv_fire13 = childAt.findViewById(R.id.tv_fire13);
-            TextView tv_fire15 = childAt.findViewById(R.id.tv_fire15);
-            EditText et_fire16 = childAt.findViewById(R.id.et_fire16);
-            TextView et_fire14 = childAt.findViewById(R.id.et_fire14);
-            ImageView tv_fire17 = childAt.findViewById(R.id.tv_fire17);
+        // 获取RecyclerView的Adapter
+        RecyclerView.Adapter adapter = rl_content.getAdapter();
+
+        // 确保LayoutManager和Adapter都不为空
+        if (layoutManager != null && adapter != null) {
+            // 遍历RecyclerView的所有item，并获取每个item的子视图
+            for (int i = 0; i < adapter.getItemCount(); i++) {
+                View childAt = layoutManager.findViewByPosition(i);
+
+                if (childAt != null) {
+
+                    EditText et_fire1 = childAt.findViewById(R.id.et_fire1);
+                    TextView tv_fire2 = childAt.findViewById(R.id.tv_fire2);
+                    TextView tv_fire3 = childAt.findViewById(R.id.tv_fire3);
+                    TextView tv_fire4 = childAt.findViewById(R.id.tv_fire4);
+                    EditText et_fire5 = childAt.findViewById(R.id.et_fire5);
+                    EditText et_fire6 = childAt.findViewById(R.id.et_fire6);
+                    TextView tv_fire7 = childAt.findViewById(R.id.tv_fire7);
+                    TextView tv_fire8 = childAt.findViewById(R.id.tv_fire8);
+                    TextView tv_fire9 = childAt.findViewById(R.id.tv_fire9);
+                    TextView tv_fire10 = childAt.findViewById(R.id.tv_fire10);
+                    TextView tv_fire11 = childAt.findViewById(R.id.tv_fire11);
+                    EditText et_fire12 = childAt.findViewById(R.id.et_fire12);
+                    TextView tv_fire13 = childAt.findViewById(R.id.tv_fire13);
+                    TextView tv_fire15 = childAt.findViewById(R.id.tv_fire15);
+                    EditText et_fire16 = childAt.findViewById(R.id.et_fire16);
+                    TextView et_fire14 = childAt.findViewById(R.id.et_fire14);
+                    ImageView tv_fire17 = childAt.findViewById(R.id.tv_fire17);
 
 
-            ItemInfo itemObj = itemDataList.get(i);
-            itemObj.setTypeNo(et_fire1.getText().toString());
-            itemObj.setDeviceType(tv_fire2.getText().toString());
-            itemObj.setLevel(tv_fire3.getText().toString());
-            itemObj.setTaskNumber(tv_fire4.getText().toString());
-            itemObj.setProdFactory(et_fire5.getText().toString());
-            Date date1 = TimeUtil.parse(et_fire6.getText().toString(),"yyyy-MM");
-            itemObj.setProdDate(date1);
-            itemObj.setTypeConformity(tv_fire7.getText().toString());
-            itemObj.setPositionConformity(tv_fire8.getText().toString());
-            itemObj.setAppearance(tv_fire9.getText().toString());
-            itemObj.setIsPressure(tv_fire10.getText().toString());
-            itemObj.setEffectiveness(tv_fire11.getText().toString());
-            Date date2 = TimeUtil.parse(et_fire12.getText().toString(),"yyyy-MM");
-            itemObj.setObserveDate(date2);
-            itemObj.setIsPass(tv_fire13.getText().toString());
-            itemObj.setLabelNo(et_fire14.getText().toString());
+                    ItemInfo itemObj = itemDataList.get(i);
+                    itemObj.setTypeNo(et_fire1.getText().toString());
+                    itemObj.setDeviceType(tv_fire2.getText().toString());
+                    itemObj.setLevel(tv_fire3.getText().toString());
+                    itemObj.setTaskNumber(tv_fire4.getText().toString());
+                    itemObj.setProdFactory(et_fire5.getText().toString());
+                    Date date1 = TimeUtil.parse(et_fire6.getText().toString(),"yyyy-MM");
+                    itemObj.setProdDate(date1);
+                    itemObj.setTypeConformity(tv_fire7.getText().toString());
+                    itemObj.setPositionConformity(tv_fire8.getText().toString());
+                    itemObj.setAppearance(tv_fire9.getText().toString());
+                    itemObj.setIsPressure(tv_fire10.getText().toString());
+                    itemObj.setEffectiveness(tv_fire11.getText().toString());
+                    Date date2 = TimeUtil.parse(et_fire12.getText().toString(),"yyyy-MM");
+                    itemObj.setObserveDate(date2);
+                    itemObj.setIsPass(tv_fire13.getText().toString());
+                    itemObj.setLabelNo(et_fire14.getText().toString());
 //            itemObj.setImageUrl(tv_fire15.getText().toString());
-            itemObj.setDescription(et_fire16.getText().toString());
+                    itemObj.setDescription(et_fire16.getText().toString());
 //            itemObj.setCodePath(tv_fire17.getText().toString());  // 二维码路径？？？
-            itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
-            ServiceFactory.getYearCheckService().update(itemObj);
+                    itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
+                    ServiceFactory.getYearCheckService().update(itemObj);
+
+                }
+            }
         }
+
+
         Toast.makeText(this, "数据保存成功", Toast.LENGTH_SHORT).show();
     }
 
@@ -429,13 +452,13 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                     itemDataList.get(imgPostion).setImageUrl(fileNew.getAbsolutePath());
 //                    contentApapter.notifyItemChanged(imgPostion);
 
-                    contentApapter.notifyDataSetChanged();
+                    contentApapter.notifyItemChanged(imgPostion);
                 }
                 break;
             case 0:
                 if (videoNew.getAbsolutePath() != null && videoPostion != -1 && contentApapter != null) {
                     itemDataList.get(videoPostion).setVideoUrl(videoNew.getAbsolutePath());
-                    contentApapter.notifyDataSetChanged();
+                    contentApapter.notifyItemChanged(videoPostion);
                 }
                 Toast.makeText(this, "录像数据保存成功，请点击拍照图标进行录像观看", Toast.LENGTH_SHORT).show();
                 break;
@@ -445,7 +468,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                         Uri uri = data.getData();
                         itemDataList.get(imgPostion).setImageUrl(uri.toString());
 //                    contentApapter.notifyItemChanged(imgPostion);
-                        contentApapter.notifyDataSetChanged();
+                        contentApapter.notifyItemChanged(imgPostion);
                     } catch (Exception e) {
                         Log.e("Exception", e.getMessage(), e);
                 }

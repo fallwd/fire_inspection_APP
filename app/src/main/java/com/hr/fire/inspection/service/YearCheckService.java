@@ -77,7 +77,7 @@ public interface YearCheckService extends BaseService<Object>{
      * @param   itemData 为ItemInfo对象，属性对应输入内容即可
      * @return
      */
-    long insertItemData(ItemInfo itemData, String companyName, String oilfieldName, String platformName, String systemName, String tableName, String number);
+    long insertItemData(ItemInfo itemData, String companyName, String oilfieldName, String platformName, String systemName, String tableName, String number,String ProtectArea);
     long insertItemDataEasy(ItemInfo itemData, long companyInfoId,  long checkTypeId, String number, Date checkDate);
 
     /**
@@ -90,7 +90,7 @@ public interface YearCheckService extends BaseService<Object>{
      * @return
      */
     long insertCheckResultData(YearCheckResult checkResultData, long itemId,long checkId,String companyName, String oilfieldName, String platformName, String systemName, String itemTableName, String checkTableName);
-    long insertCheckResultDataEasy(YearCheckResult checkResultData, long itemId,long yearCheckId,long companyInfoId, long checkTypeId, String number, Date checkDate);
+    long insertCheckResultDataEasy(YearCheckResult checkResultData, long itemId,long yearCheckId,long companyInfoId, long checkTypeId, String number, Date checkDate,String protectArea);
 
     // 导出报告相关接口
     /**

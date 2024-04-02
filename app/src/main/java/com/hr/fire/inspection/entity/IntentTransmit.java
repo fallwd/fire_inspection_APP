@@ -14,6 +14,7 @@ public class IntentTransmit implements Serializable {
     public String end_time; // 结束时间
     public Date srt_Date;  //巡检时间
     public String number;  //系统位号
+    public String ProtectArea;//系统保护区域
 
 
     public long id;  //平台id
@@ -33,6 +34,7 @@ public class IntentTransmit implements Serializable {
                 ", parentId=" + parentId +
                 ", start_time=" + start_time +
                 ", end_time=" + end_time +
+                ", ProtectArea=" + ProtectArea +
                 ", name='" + name + '\'' +
                 '}';
     }

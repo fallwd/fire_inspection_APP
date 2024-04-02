@@ -202,7 +202,8 @@ public class AutomaticFireAlarm2 extends Fragment {
 
 
     public void upData() {
-        int itemCount = hz_table_tbody_id.getChildCount();
+//        int itemCount = hz_table_tbody_id.getChildCount();
+        int itemCount = hz_table_tbody_id.getAdapter().getItemCount();
         //通知数据库刷新数据， 才能在调用Update();
         itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(1).getId(), it.number == null ? "" : it.number, it.srt_Date);
 
@@ -211,36 +212,53 @@ public class AutomaticFireAlarm2 extends Fragment {
             Toast.makeText(getActivity(), "暂无数据保存", Toast.LENGTH_SHORT).show();
             return;
         }
-        for (int i = 0; i < itemCount; i++) {
-            LinearLayout childAt = (LinearLayout) hz_table_tbody_id.getChildAt(i);
-            TextView tv_1 = childAt.findViewById(R.id.tv_1);
-            EditText et_2 = childAt.findViewById(R.id.et_2);
-            EditText et_3 = childAt.findViewById(R.id.et_3);
-            EditText et_4 = childAt.findViewById(R.id.et_4);
-            EditText et_5 = childAt.findViewById(R.id.et_5);
-            TextView et_6 = childAt.findViewById(R.id.et_6);
-            EditText et_7 = childAt.findViewById(R.id.et_7);
-            TextView et_8 = childAt.findViewById(R.id.et_8);
-            ImageView tv_9 = childAt.findViewById(R.id.tv_9);
-            EditText tv_10 = childAt.findViewById(R.id.tv_10);
 
-            ItemInfo itemObj = itemDataList.get(i);
-            itemObj.setDeviceType(et_2.getText().toString());
-            itemObj.setProdFactory(et_3.getText().toString());
-            itemObj.setTypeNo(et_4.getText().toString());
-            itemObj.setNo(et_5.getText().toString());
-            itemObj.setAppearance(et_6.getText().toString());
-            itemObj.setResponseTime(et_7.getText().toString());
-            itemObj.setIsPass(et_8.getText().toString());
-            itemObj.setDescription(tv_10.getText().toString());
-            itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
+        // 获取RecyclerView的LayoutManager
+        RecyclerView.LayoutManager layoutManager = hz_table_tbody_id.getLayoutManager();
+
+        // 获取RecyclerView的Adapter
+        RecyclerView.Adapter adapter = hz_table_tbody_id.getAdapter();
+
+        // 确保LayoutManager和Adapter都不为空
+        if (layoutManager != null && adapter != null) {
+            // 遍历RecyclerView的所有item，并获取每个item的子视图
+            for (int i = 0; i < adapter.getItemCount(); i++) {
+                View childAt = layoutManager.findViewByPosition(i);
+
+                if (childAt != null) {
+
+                    TextView tv_1 = childAt.findViewById(R.id.tv_1);
+                    EditText et_2 = childAt.findViewById(R.id.et_2);
+                    EditText et_3 = childAt.findViewById(R.id.et_3);
+                    EditText et_4 = childAt.findViewById(R.id.et_4);
+                    EditText et_5 = childAt.findViewById(R.id.et_5);
+                    TextView et_6 = childAt.findViewById(R.id.et_6);
+                    EditText et_7 = childAt.findViewById(R.id.et_7);
+                    TextView et_8 = childAt.findViewById(R.id.et_8);
+                    ImageView tv_9 = childAt.findViewById(R.id.tv_9);
+                    EditText tv_10 = childAt.findViewById(R.id.tv_10);
+
+                    ItemInfo itemObj = itemDataList.get(i);
+                    itemObj.setDeviceType(et_2.getText().toString());
+                    itemObj.setProdFactory(et_3.getText().toString());
+                    itemObj.setTypeNo(et_4.getText().toString());
+                    itemObj.setNo(et_5.getText().toString());
+                    itemObj.setAppearance(et_6.getText().toString());
+                    itemObj.setResponseTime(et_7.getText().toString());
+                    itemObj.setIsPass(et_8.getText().toString());
+                    itemObj.setDescription(tv_10.getText().toString());
+                    itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
 
 //            itemObj.setCheckDate(new Date());
 //            序号  tv_1  瓶号 et_2     生产厂家et_6  生产时间et_7  合格et_8  拍照rl_9  隐患描述tv_10
-            Log.d("dong", "itemObj222222保存==   " + itemObj);
-            ServiceFactory.getYearCheckService().update(itemObj);
-            Toast.makeText(getContext(), "数据保存成功", Toast.LENGTH_SHORT).show();
+                    Log.d("dong", "itemObj222222保存==   " + itemObj);
+                    ServiceFactory.getYearCheckService().update(itemObj);
+                    Toast.makeText(getContext(), "数据保存成功", Toast.LENGTH_SHORT).show();
+
+                }
+            }
         }
+
     }
 
     @Override

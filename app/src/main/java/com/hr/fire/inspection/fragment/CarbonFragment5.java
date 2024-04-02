@@ -49,7 +49,7 @@ public class CarbonFragment5 extends Fragment {
     View rootView;
     private static CarbonFragment5 fragment5;
     private static String mKey;
-    private IntentTransmit its;
+    public IntentTransmit its;
     private CarBon5Adapter adapter;
     private RecyclerView rc_list;
     private int imgPostion = -1;   //用户点击拍照, 所对应的位置
@@ -132,7 +132,7 @@ public class CarbonFragment5 extends Fragment {
                         e.printStackTrace();
                     }
                     ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, checkDataEasy.get(i).getId(), its.companyInfoId,
-                            checkTypes.get(4).getId(), its.number, its.srt_Date);
+                            checkTypes.get(4).getId(), its.number, its.srt_Date,its.ProtectArea);
                 }
             }
             yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(4).getId(), its.number, its.srt_Date);
@@ -149,7 +149,7 @@ public class CarbonFragment5 extends Fragment {
                     ycr.setCheckDate(its.srt_Date);  //检查日期
                     ycr.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
                     ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, checkDataEasy.get(i).getId(), its.companyInfoId,
-                            checkTypes.get(4).getId(), its.number, its.srt_Date);
+                            checkTypes.get(4).getId(), its.number, its.srt_Date,its.ProtectArea);
                     yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(4).getId(), its.number, its.srt_Date);
                 }
             }

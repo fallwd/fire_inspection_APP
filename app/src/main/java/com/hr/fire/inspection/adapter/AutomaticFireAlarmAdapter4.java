@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,8 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
     private IntentTransmit intentTransmit;   //之前页面数据的传参,如系统号\公司id...
     private HrPopup hrPopup; // 下拉框相关的引用
 
+    private ViewGroup mParent;
+
     public AutomaticFireAlarmAdapter4(Context mContext, List<ItemInfo> mData) {
         this.mContext = mContext;
         this.mData = mData;
@@ -56,6 +59,7 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.acitivty_automatic_fire_alarm4_input, parent, false);
         ViewHolder holder = new ViewHolder(view);
+        mParent = parent;
         return holder;
     }
 
@@ -241,13 +245,14 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
         RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
         RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
         RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
-        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         hrPopup.setBackgroundDrawable(new BitmapDrawable());
         hrPopup.setFocusable(true);
         hrPopup.setOutsideTouchable(true);
         hrPopup.setContentView(PopupRootView);
-        hrPopup.showAsDropDown(et_7);
+//        hrPopup.showAsDropDown(et_7);
+        hrPopup.showAtLocation(mParent, Gravity.BOTTOM,0,0);
         rl_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -286,13 +291,14 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
         RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
         RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
         RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
-        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         hrPopup.setBackgroundDrawable(new BitmapDrawable());
         hrPopup.setFocusable(true);
         hrPopup.setOutsideTouchable(true);
         hrPopup.setContentView(PopupRootView);
-        hrPopup.showAsDropDown(et_8);
+//        hrPopup.showAsDropDown(et_8);
+        hrPopup.showAtLocation(mParent, Gravity.BOTTOM,0,0);
         rl_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -331,13 +337,14 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
         RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
         RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
         RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
-        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         hrPopup.setBackgroundDrawable(new BitmapDrawable());
         hrPopup.setFocusable(true);
         hrPopup.setOutsideTouchable(true);
         hrPopup.setContentView(PopupRootView);
-        hrPopup.showAsDropDown(et_9);
+//        hrPopup.showAsDropDown(et_9);
+        hrPopup.showAtLocation(mParent, Gravity.BOTTOM,0,0);
         rl_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -376,13 +383,14 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
         RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
         RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
         RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
-        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         hrPopup.setBackgroundDrawable(new BitmapDrawable());
         hrPopup.setFocusable(true);
         hrPopup.setOutsideTouchable(true);
         hrPopup.setContentView(PopupRootView);
-        hrPopup.showAsDropDown(et_10);
+//        hrPopup.showAsDropDown(et_10);
+        hrPopup.showAtLocation(mParent, Gravity.BOTTOM,0,0);
         rl_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -457,13 +465,14 @@ public class AutomaticFireAlarmAdapter4 extends RecyclerView.Adapter<RecyclerVie
         RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
         RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
         RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
-        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         hrPopup.setBackgroundDrawable(new BitmapDrawable());
         hrPopup.setFocusable(true);
         hrPopup.setOutsideTouchable(true);
         hrPopup.setContentView(PopupRootView);
-        hrPopup.showAsDropDown(et_12);
+//        hrPopup.showAsDropDown(et_12);
+        hrPopup.showAtLocation(mParent, Gravity.BOTTOM,0,0);
         rl_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

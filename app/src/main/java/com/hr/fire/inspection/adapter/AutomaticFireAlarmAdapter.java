@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +59,7 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.acitivty_automatic_fire_alarm1_input, parent, false);
         ViewHolder holder = new ViewHolder(view);
+        mParent = parent;
         return holder;
     }
 
@@ -184,6 +186,8 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
             }
         });
     }
+    private ViewGroup mParent;
+
 
     //显示对话框,用户选择是否异常的弹框
     private void showPopWind(final TextView et_8) {
@@ -194,13 +198,14 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
         RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
         RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
         RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
-        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         hrPopup.setBackgroundDrawable(new BitmapDrawable());
         hrPopup.setFocusable(true);
         hrPopup.setOutsideTouchable(true);
         hrPopup.setContentView(PopupRootView);
-        hrPopup.showAsDropDown(et_8);
+//        hrPopup.showAsDropDown(et_8);
+        hrPopup.showAtLocation(mParent, Gravity.BOTTOM,0,0);
         rl_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -230,6 +235,7 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
         });
     }
 
+
     //显示对话框,用户选择是否异常的弹框
     private void showPopWind6(final TextView et_6) {
         View PopupRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods, null);
@@ -239,13 +245,14 @@ public class AutomaticFireAlarmAdapter extends RecyclerView.Adapter<RecyclerView
         RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
         RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
         RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
-        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         hrPopup.setBackgroundDrawable(new BitmapDrawable());
         hrPopup.setFocusable(true);
         hrPopup.setOutsideTouchable(true);
         hrPopup.setContentView(PopupRootView);
-        hrPopup.showAsDropDown(et_6);
+//        hrPopup.showAsDropDown(et_6);
+        hrPopup.showAtLocation(mParent, Gravity.BOTTOM,0,0);
         rl_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

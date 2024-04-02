@@ -249,12 +249,12 @@ public class ImportDataActicity extends AppCompatActivity {
                                         ycr.setImageUrl(YearCheckResult.get(y).getImageUrl());
                                         ycr.setDescription(YearCheckResult.get(y).getDescription());
                                         ycr.setSystemNumber(number=="" ? null : number);
-                                        ycr.setProtectArea(" "); // 保护位号
+                                        ycr.setProtectArea(""); // 保护位号
                                         ycr.setCheckDate(srt_Date);  //检查日期
                                         ycr.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
 //                                          Log.i("AAAA","我的二级表右侧数据:"+ ycr);
                                         try {
-                                            ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, itemInfo.getId(), yearChecks.get(y).getId(), companyInfoId, checkTypes.get(i).getId(), number == "" ? null : number, srt_Date);
+                                            ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, itemInfo.getId(), yearChecks.get(y).getId(), companyInfoId, checkTypes.get(i).getId(), number == "" ? null : number, srt_Date,"");
                                         } catch (Exception e) {
                                             ServiceFactory.getYearCheckService().update(ycr);
                                         }
@@ -296,7 +296,7 @@ public class ImportDataActicity extends AppCompatActivity {
                                     long yearcheckId = parseLong(MapUtils.getString(map,"yearCheckId"));
                                     Log.i("AAAA","yearcheckIdyearcheckIdyearcheckId:"+ yearcheckId);
 
-                                    ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, yearcheckId, companyInfoId, checkTypes.get(i).getId(), number == "" ? null : number, srt_Date);
+                                    ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, yearcheckId, companyInfoId, checkTypes.get(i).getId(), number == "" ? null : number, srt_Date,"");
 
                                 } catch (Exception e) {
                                     e.printStackTrace();

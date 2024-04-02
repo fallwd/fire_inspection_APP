@@ -294,6 +294,12 @@ public class DFXIAcitivty extends AppCompatActivity {
                 finish();
             }
         });
+        findViewById(R.id.iv_finish_onclick).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iv_finish.performClick();
+            }
+        });
     }
 
     @Override

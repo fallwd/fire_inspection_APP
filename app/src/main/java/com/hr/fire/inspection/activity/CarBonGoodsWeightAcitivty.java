@@ -106,10 +106,10 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
 //                ycr.setImageUrl("暂无");  //可以在iv7中获取
 //                ycr.setDescription("无描述");
                 ycr.setSystemNumber(its.number);
-                ycr.setProtectArea(" "); // 保护位号
+                ycr.setProtectArea(its.ProtectArea); // 保护位号
                 ycr.setCheckDate(its.srt_Date);  //检查日期
                 ycr.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
-                ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, item_id, checkDataEasy.get(i).getId(), its.companyInfoId, check_id, its.number, its.srt_Date);
+                ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, item_id, checkDataEasy.get(i).getId(), its.companyInfoId, check_id, its.number, its.srt_Date,its.ProtectArea);
                 yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(divice_id, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
             }
         }
@@ -178,7 +178,7 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
                         yearCheckResult.setDescription(ev8.getText().toString().isEmpty() ? null : ev8.getText().toString());
                         yearCheckResult.setSystemNumber(its.number);
                         Log.e("哈哈哈", "系统位号：" + its.number);
-                        yearCheckResult.setProtectArea(" "); // 保护位号
+                        yearCheckResult.setProtectArea(its.ProtectArea); // 保护位号
                         yearCheckResult.setCheckDate(its.srt_Date);  //检查日期
                         yearCheckResult.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
                         ServiceFactory.getYearCheckService().update(yearCheckResult);
@@ -206,7 +206,7 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
                 // yearCheckResult.setImageUrl("暂无图片链接");  //可以在iv7中获取
                 yearCheckResult.setDescription(ev8.getText().toString().isEmpty() ? null : ev8.getText().toString());
                 yearCheckResult.setSystemNumber(its.number);
-                yearCheckResult.setProtectArea(" "); // 保护位号
+                yearCheckResult.setProtectArea(its.ProtectArea); // 保护位号
                 yearCheckResult.setCheckDate(its.srt_Date);  //检查日期
                 yearCheckResult.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
                 ServiceFactory.getYearCheckService().update(yearCheckResult);

@@ -62,13 +62,14 @@ public class CarBon2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         mapSelection.clear();
     }
 
-
+    private ViewGroup mParent;
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.carbon_item1_input, parent, false);
         ViewHolder holder = new ViewHolder(view);
+        mParent = parent;
         return holder;
     }
 
@@ -298,13 +299,14 @@ public class CarBon2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
         RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
         RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
-        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         hrPopup.setBackgroundDrawable(new BitmapDrawable());
         hrPopup.setFocusable(true);
         hrPopup.setOutsideTouchable(true);
         hrPopup.setContentView(PopupRootView);
-        hrPopup.showAsDropDown(tv);
+//        hrPopup.showAsDropDown(tv);
+        hrPopup.showAtLocation(mParent, Gravity.BOTTOM,0,0);
         rl_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

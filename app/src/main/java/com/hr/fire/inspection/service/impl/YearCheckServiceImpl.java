@@ -25,7 +25,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements YearCheckService {
 
@@ -78,6 +80,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 where(new WhereCondition.StringCondition(
 //                        String.format("COMPANY_INFO_ID=%s GROUP BY CHECK_DATE", companyId)));
                         String.format("COMPANY_INFO_ID=%s GROUP BY CHECK_DATE,SYSTEM_NUMBER", companyId)));
+
 //        Join checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
 //                where(CheckTypeDao.Properties.ParentId.eq(systemId));
 
@@ -95,6 +98,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
             String oilfieldName = ret.getCompanyInfo().getOilfieldName();
             String platformName = ret.getCompanyInfo().getPlatformName();
             String systemNumber = ret.getSystemNumber();
+            String prname  =ret.getProtectArea();
             Date checkDate = ret.getCheckDate();
 //            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
@@ -116,6 +120,8 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
             else{
                 comboData = companyName + "_" + oilfieldName + "_" + platformName + "_" + systemName + "_" + systemNumber +"_" + checkDateStr;
             }
+            Log.e("wzq" , "1systemId" + systemId);
+            Log.e("wzq" , "1DBsystemId" + DBsystemId);
             if(systemId==DBsystemId){
                 HashMap obj = new HashMap();
                 obj.put("ret",comboData);
@@ -123,33 +129,29 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 obj.put("systemId",systemId);
                 obj.put("checkDate",checkDate);
                 obj.put("systemNumber",systemNumber);
+                obj.put("pname",prname);
                 if (!resultList.contains(comboData)) {
                     disList.add(comboData);
                     resultList.add(obj);
                 }
             }
         }
-
+        Log.e("wzq" , "1resultList" + resultList.size());
         QueryBuilder<YearCheckResult> queryBuilder2 = daoSession.queryBuilder(YearCheckResult.class).
                 where(new WhereCondition.StringCondition(
 //                        String.format("COMPANY_INFO_ID=%s GROUP BY CHECK_DATE", companyId)));
                         String.format("COMPANY_INFO_ID=%s GROUP BY CHECK_DATE,SYSTEM_NUMBER", companyId)));
-//        Join checkTypeJoin = queryBuilder.join(ItemInfoDao.Properties.CheckTypeId, CheckType.class).
-//                where(CheckTypeDao.Properties.ParentId.eq(systemId));
-
-//        Log.i("getHistoryList:::",""+queryBuilder.toString());
         List<YearCheckResult> dataList2 = queryBuilder2.list();
         for(int i=0;i<dataList2.size();i++){
             YearCheckResult ret = dataList2.get(i);
-//            Log.i("getHistoryList:::",ret.toString());
             long DBsystemId = ret.getCheckType().getParent().getId();
             String systemName = ret.getCheckType().getParent().getName();
             String companyName = ret.getCompanyInfo().getCompanyName();
             String oilfieldName = ret.getCompanyInfo().getOilfieldName();
             String platformName = ret.getCompanyInfo().getPlatformName();
             String systemNumber = ret.getSystemNumber();
+            String pname = ret.getProtectArea();
             Date checkDate = ret.getCheckDate();
-//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
             String checkDateStr;
             if(checkDate!=null){
@@ -164,12 +166,13 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
             if(systemNumber =="" || systemNumber == null || systemNumber.isEmpty()) {
 
                 comboData = companyName + "_" + oilfieldName + "_" + platformName + "_" + systemName + "_" + checkDateStr;
-//            Log.i("getHistoryList:::",comboData);
             }
             else{
 
                 comboData = companyName + "_" + oilfieldName + "_" + platformName + "_" + systemName + "_" + systemNumber +"_" + checkDateStr;
             }
+            Log.e("wzq" , "2systemId" + systemId);
+            Log.e("wzq" , "2DBsystemId" + DBsystemId);
             if(systemId==DBsystemId){
                 HashMap obj = new HashMap();
                 obj.put("ret",comboData);
@@ -177,13 +180,30 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 obj.put("systemId",systemId);
                 obj.put("checkDate",checkDate);
                 obj.put("systemNumber",systemNumber);
+                obj.put("pname",pname);
                 if (!resultList.contains(comboData)){
                     disList.add(comboData);
 
                     resultList.add(obj);
                 }
             }
+            Log.e("wzq" , "2resultList" + resultList.size());
         }
+        //过滤
+//        String tempSystemId = "";
+//        Iterator<HashMap> iterator = resultList.iterator();
+//        while (iterator.hasNext()) {
+//            HashMap element = iterator.next();
+//            String tempSystemId2 = (String)element.get("systemId");
+//            if(tempSystemId2 != tempSystemId){
+//                tempSystemId = tempSystemId2;
+//            }else {
+//                iterator.remove();
+//            }
+//
+//        }
+
+
         resultList = new ArrayList<HashMap>(new HashSet<HashMap>(resultList));
         Log.e("bbbbbbbbb", "getHistoryList返回结果值：" + resultList);
         return resultList;
@@ -439,7 +459,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 
 
     @Override
-    public long insertItemData(ItemInfo itemData, String companyName, String oilfieldName, String platformName, String systemName, String tableName, String number) {
+    public long insertItemData(ItemInfo itemData, String companyName, String oilfieldName, String platformName, String systemName, String tableName, String number,String ProtectArea) {
 //    public long insertItemData(ItemInfo itemData, long companyInfoId,  long checkTypeId, String number, Date checkDate) {
 
         // 先查询到companyinfo和checktype的对象
@@ -466,6 +486,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 //        itemData.setCompanyInfoId(companyInfoId);
 //        itemData.setCheckTypeId(checkTypeId);
         itemData.setSystemNumber(number);
+        itemData.setProtectArea(ProtectArea);
 //        itemData.setCheckDate(checkDate);
         daoSession.insert(itemData);
 
@@ -477,7 +498,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
     @Override
 //    public long insertItemData(ItemInfo itemData, String companyName, String oilfieldName, String platformName, String systemName, String tableName, String number) {
     public long insertItemDataEasy(ItemInfo itemData, long companyInfoId,  long checkTypeId, String number, Date checkDate) {
-
+        Log.e("wzq" , "insertItemDataEasy---" + number);
         itemData.setCompanyInfoId(companyInfoId);
         itemData.setCheckTypeId(checkTypeId);
         itemData.setSystemNumber(number);
@@ -571,13 +592,14 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 
     @Override
 //    public long insertCheckResultData(YearCheckResult checkResultData, long itemId,long checkId,String companyName, String oilfieldName, String platformName, String systemName, String itemTableName, String checkTableName) {
-    public long insertCheckResultDataEasy(YearCheckResult checkResultData, long itemId,long yearCheckId,long companyInfoId, long checkTypeId, String number, Date checkDate) {
+    public long insertCheckResultDataEasy(YearCheckResult checkResultData, long itemId,long yearCheckId,long companyInfoId, long checkTypeId, String number, Date checkDate,String protectArea) {
 
-
+        Log.e("wzq" , "insertCheckResultDataEasy&&&&" + number);
         checkResultData.setItemInfoId(itemId);
         checkResultData.setTargetId(itemId);
         checkResultData.setYearCheckId(yearCheckId);
         checkResultData.setSystemNumber(number);
+        checkResultData.setProtectArea(protectArea);
         checkResultData.setCheckDate(checkDate);
         checkResultData.setCompanyInfoId(companyInfoId);
         checkResultData.setCheckTypeId(checkTypeId);

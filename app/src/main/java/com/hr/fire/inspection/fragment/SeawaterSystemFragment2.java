@@ -48,7 +48,7 @@ public class SeawaterSystemFragment2 extends Fragment {
     View rootView;
     private static SeawaterSystemFragment2 fragment3;
     private static String mKey;
-    private IntentTransmit its;
+    public IntentTransmit its;
     private SeawaterSystemAdapter2 adapter;
     private RecyclerView rc_list;
     private List<YearCheck> checkDataEasy;
@@ -118,7 +118,7 @@ public class SeawaterSystemFragment2 extends Fragment {
 //                    ycr.setDescription("无描述");
                     ycr.setImageUrl("暂无图片");
                     ycr.setSystemNumber(its.number);
-                    ycr.setProtectArea(" "); // 保护位号
+                    ycr.setProtectArea(its.ProtectArea); // 保护位号
                     ycr.setCheckDate(its.srt_Date);  //检查日期
                     ycr.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -130,7 +130,7 @@ public class SeawaterSystemFragment2 extends Fragment {
                         e.printStackTrace();
                     }
                     ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, checkDataEasy.get(i).getId(), its.companyInfoId,
-                            checkTypes.get(1).getId(), its.number, its.srt_Date);
+                            checkTypes.get(1).getId(), its.number, its.srt_Date,its.ProtectArea);
                 }
             }
             yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(1).getId(), its.number, its.srt_Date);
@@ -143,11 +143,11 @@ public class SeawaterSystemFragment2 extends Fragment {
 //                ycr.setImageUrl("暂无图片");  //可以在iv7中获取
 //                    ycr.setDescription("无描述");
                     ycr.setSystemNumber(its.number);
-                    ycr.setProtectArea(" "); // 保护位号
+                    ycr.setProtectArea(its.ProtectArea); // 保护位号
                     ycr.setCheckDate(its.srt_Date);  //检查日期
                     ycr.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
                     ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, checkDataEasy.get(i).getId(), its.companyInfoId,
-                            checkTypes.get(1).getId(), its.number, its.srt_Date);
+                            checkTypes.get(1).getId(), its.number, its.srt_Date,its.ProtectArea);
                     yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(1).getId(), its.number, its.srt_Date);
                 }
             }
@@ -205,7 +205,7 @@ public class SeawaterSystemFragment2 extends Fragment {
 //                yearCheckResult.setImageUrl("暂无图片链接");  //可以在iv7中获取
                 yearCheckResult.setDescription(ev8.getText().toString().isEmpty() ? null : ev8.getText().toString());
                 yearCheckResult.setSystemNumber(its.number);
-                yearCheckResult.setProtectArea(" "); // 保护位号
+                yearCheckResult.setProtectArea(its.ProtectArea); // 保护位号
                 yearCheckResult.setCheckDate(its.srt_Date);  //检查日期
                 yearCheckResult.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
                 Log.e("aaaa", "保存啦啦啦33:" + yearCheckResult);
@@ -232,7 +232,7 @@ public class SeawaterSystemFragment2 extends Fragment {
 //                yearCheckResult.setImageUrl("暂无图片链接");  //可以在iv7中获取
                 yearCheckResult.setDescription(ev8.getText().toString().isEmpty() ? null : ev8.getText().toString());
                 yearCheckResult.setSystemNumber(its.number);
-                yearCheckResult.setProtectArea(" "); // 保护位号
+                yearCheckResult.setProtectArea(its.ProtectArea); // 保护位号
                 yearCheckResult.setCheckDate(its.srt_Date);  //检查日期
                 yearCheckResult.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
                 ServiceFactory.getYearCheckService().update(yearCheckResult);

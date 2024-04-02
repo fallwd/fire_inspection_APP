@@ -46,7 +46,7 @@ public class FoamFireFragment1 extends Fragment {
     View rootView;
     private static  FoamFireFragment1 fragment3;
     private static String mKey;
-    private IntentTransmit its;
+    public IntentTransmit its;
     private FoamFireAdapter1 adapter;
     private RecyclerView rc_list;
     private List<YearCheck> checkDataEasy;
@@ -129,7 +129,7 @@ public class FoamFireFragment1 extends Fragment {
                         e.printStackTrace();
                     }
                     ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, checkDataEasy.get(i).getId(), its.companyInfoId,
-                            checkTypes.get(0).getId(), its.number, its.srt_Date);
+                            checkTypes.get(0).getId(), its.number, its.srt_Date,its.ProtectArea);
                 }
             }
             yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
@@ -145,7 +145,7 @@ public class FoamFireFragment1 extends Fragment {
                     ycr.setProtectArea(" "); // 保护位号
                     ycr.setCheckDate(its.srt_Date);  //检查日期
                     ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, checkDataEasy.get(i).getId(), its.companyInfoId,
-                            checkTypes.get(0).getId(), its.number, its.srt_Date);
+                            checkTypes.get(0).getId(), its.number, its.srt_Date,its.ProtectArea);
                     yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
                 }
             }

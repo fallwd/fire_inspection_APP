@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,7 @@ public class HFC4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_hfc3_form_input, parent, false);
         HFC4Adapter.ViewHolder holder = new HFC4Adapter.ViewHolder(view);
+        mParent = parent;
         return holder;
 
     }
@@ -160,6 +162,8 @@ public class HFC4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    private ViewGroup mParent;
+
     private HrPopup hrPopup;
 
     private void showPopWind(final TextView tv6) {
@@ -170,14 +174,14 @@ public class HFC4Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
         RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
         RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
-        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         hrPopup.setBackgroundDrawable(new BitmapDrawable());
         hrPopup.setFocusable(true);
         hrPopup.setOutsideTouchable(true);
         hrPopup.setContentView(PopupRootView);
-        hrPopup.showAsDropDown(tv6);
-
+//        hrPopup.showAsDropDown(tv6);
+        hrPopup.showAtLocation(mParent, Gravity.BOTTOM,0,0);
         rl_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

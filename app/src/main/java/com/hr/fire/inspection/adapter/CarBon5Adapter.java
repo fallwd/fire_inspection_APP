@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,7 @@ public class CarBon5Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private List<YearCheckResult> ycr;
     private Context mContext;
     private List<YearCheck> mData;
-
+    private ViewGroup mParent;
 
     public CarBon5Adapter(Context mContext, List<YearCheck> mData, List<YearCheckResult> yearCheckResults) {
         this.mContext = mContext;
@@ -52,6 +53,7 @@ public class CarBon5Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.carbon_item3_input, parent, false);
         ViewHolder holder = new ViewHolder(view);
+        mParent = parent;
         return holder;
 
     }
@@ -173,14 +175,14 @@ public class CarBon5Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         RelativeLayout rl_yes = PopupRootView.findViewById(R.id.rl_yes);
         RelativeLayout rl_no = PopupRootView.findViewById(R.id.rl_no);
         RelativeLayout rl_other = PopupRootView.findViewById(R.id.rl_other);
-        hrPopup.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        hrPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         hrPopup.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         hrPopup.setBackgroundDrawable(new BitmapDrawable());
         hrPopup.setFocusable(true);
         hrPopup.setOutsideTouchable(true);
         hrPopup.setContentView(PopupRootView);
-        hrPopup.showAsDropDown(tv6);
-
+//        hrPopup.showAsDropDown(tv6);
+        hrPopup.showAtLocation(mParent, Gravity.BOTTOM,0,0);
         rl_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
