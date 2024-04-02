@@ -115,6 +115,7 @@ public class ItemInfo   {
     private String ProtectArea;//保护区域
 
     private Date checkDate;//检查日期
+    
 
     @ToMany(referencedJoinProperty = "targetId")
     private List<YearCheckResult> checkResultList;
@@ -180,18 +181,14 @@ private transient DaoSession daoSession;
 private transient ItemInfoDao myDao;
 
 @Generated(hash = 180279690)
-public ItemInfo(Long id, String uuid, Long checkTypeId, Long companyInfoId,
-        String typeNo, String deviceType, String agentsType, Date fillingDate,
-        String no, String level, String volume, String weight,
-        String goodsWeight, String pressure, String prodFactory, Date prodDate,
-        String typeConformity, String positionConformity, String appearance,
-        String isPressure, String check, String slience, String reset,
-        String powerAlarmFunction, String alarmFunction, String effectiveness,
-        String responseTime, String description, String setAlarm25,
-        String setAlarm50, String testAlarm25, String testAlarm50,
-        Date observeDate, String taskNumber, String isPass, String labelNo,
-        String imageUrl, String videoUrl, String codePath, String SystemNumber,
-        String ProtectArea, Date checkDate) {
+public ItemInfo(Long id, String uuid, Long checkTypeId, Long companyInfoId, String typeNo, String deviceType,
+        String agentsType, Date fillingDate, String no, String level, String volume, String weight, String goodsWeight,
+        String pressure, String prodFactory, Date prodDate, String typeConformity, String positionConformity,
+        String appearance, String isPressure, String check, String slience, String reset, String powerAlarmFunction,
+        String alarmFunction, String effectiveness, String responseTime, String description, String setAlarm25,
+        String setAlarm50, String testAlarm25, String testAlarm50, Date observeDate, String taskNumber, String isPass,
+        String labelNo, String imageUrl, String videoUrl, String codePath, String SystemNumber, String ProtectArea,
+        Date checkDate) {
     this.id = id;
     this.uuid = uuid;
     this.checkTypeId = checkTypeId;
@@ -720,11 +717,11 @@ public void __setDaoSession(DaoSession daoSession) {
         if (this.SystemNumber != null || this.SystemNumber != "") {
             sb.append("系统位号：").append(this.SystemNumber).append("\n");
         }
-        if (this.ProtectArea != null || this.SystemNumber != "") {
+        if (this.ProtectArea != null || this.ProtectArea != "") {
             sb.append("保护区域：").append(this.ProtectArea).append("\n");
         }
 
-        if (this.checkDate != null || this.SystemNumber != "") {
+        if (this.checkDate != null) {
             sb.append("检查时间：").append(DateFormatUtils.format(this.checkDate,"yyyy-MM-dd")).append("\n");
         }
 
@@ -860,5 +857,6 @@ public void __setDaoSession(DaoSession daoSession) {
         return sb.toString();
 
     }
+
 
 }

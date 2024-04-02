@@ -72,6 +72,8 @@ public class  CarbondioxideRecordAcitivty extends AppCompatActivity implements V
         f_title = intent.getStringExtra("f_title");  //传过来的系统名称
         sys_number = intent.getStringExtra("sys_number");  //系统位号
         protect_area = intent.getStringExtra("protect_area");  //保护区域
+        Log.e("wzq" , "--1--" + sys_number);
+        Log.e("wzq" , "--2--" + protect_area);
         selected_tag = -1;
 
         checkTypes = ServiceFactory.getYearCheckService().gettableNameData(sys_id);
@@ -150,13 +152,16 @@ public class  CarbondioxideRecordAcitivty extends AppCompatActivity implements V
         String number = (String) hashMap.get("systemNumber");
         long systemId = (long) hashMap.get("systemId");
         Date checkDate = (Date) hashMap.get("checkDate"); //时间
+        String protectArea = (String) hashMap.get("pname");
+        Log.e("wzq" , "--11--" + number);
+        Log.e("wzq" , "--22--" + protectArea);
 
         Intent intent = regularIntent(); //不同的系统,匹配不同的跳转页面
         intent.putExtra("systemId", systemId);    //系统ID
         intent.putExtra("platform_id", companyId);    //公司ID
         intent.putExtra("f_title", f_title); //系统名称 :高压二氧化碳灭火系统
         intent.putExtra("sys_number", number); //系统位号 ：SD002(用户自己填写的)
-        intent.putExtra("protect_area", protect_area); //系统位号 ：SD002(用户自己填写的)
+        intent.putExtra("protect_area", protectArea); //系统位号 ：SD002(用户自己填写的)?/protect_area
         Log.i("aaa","我要查看编辑时候的时间"+ checkDate);
         intent.putExtra("srt_Date", checkDate); //记录的时间
 

@@ -133,7 +133,7 @@ public class DFXIFragment5 extends Fragment {
                         e.printStackTrace();
                     }
                     ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, checkDataEasy.get(i).getId(), its.companyInfoId,
-                            checkTypes.get(4).getId(), its.number, its.srt_Date);
+                            checkTypes.get(4).getId(), its.number, its.srt_Date,its.ProtectArea);
                 }
             }
             yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(4).getId(), its.number, its.srt_Date);
@@ -150,7 +150,7 @@ public class DFXIFragment5 extends Fragment {
                     ycr.setCheckDate(its.srt_Date);  //检查日期
                     ycr.setUuid(UUID.randomUUID().toString().replace("-",""));  // 数据导入时候做去重判断
                     ServiceFactory.getYearCheckService().insertCheckResultDataEasy(ycr, 0, checkDataEasy.get(i).getId(), its.companyInfoId,
-                            checkTypes.get(4).getId(), its.number, its.srt_Date);
+                            checkTypes.get(4).getId(), its.number, its.srt_Date,its.ProtectArea);
                     yearCheckResults = ServiceFactory.getYearCheckService().getCheckResultDataEasy(0, its.companyInfoId, checkTypes.get(4).getId(), its.number, its.srt_Date);
                 }
             }

@@ -5640,7 +5640,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 37;
         long yearCheckId = 30;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5649,7 +5649,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 37;
         yearCheckId = 31;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("是");
         retObj.setDescription("xxxxxx");
@@ -5658,7 +5658,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 38;
         yearCheckId = 32;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5667,7 +5667,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 38;
         yearCheckId = 33;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5676,7 +5676,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 39;
         yearCheckId = 34;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("是");
         retObj.setDescription("xxxxxx");
@@ -5685,7 +5685,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 39;
         yearCheckId = 35;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5694,7 +5694,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 39;
         yearCheckId = 36;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5704,7 +5704,7 @@ public class BaseData {
         // 泡沫灭火系统检查 55 56 57 58
         checkTypeId = 55;
         yearCheckId = 55;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5713,7 +5713,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 55;
         yearCheckId = 56;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5722,7 +5722,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 56;
         yearCheckId = 57;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("是");
         retObj.setDescription("xxxxxx");
@@ -5731,7 +5731,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 56;
         yearCheckId = 58;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5740,7 +5740,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 56;
         yearCheckId = 59;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("是");
         retObj.setDescription("xxxxxx");
@@ -5749,7 +5749,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 56;
         yearCheckId = 60;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5758,7 +5758,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 57;
         yearCheckId = 61;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5767,7 +5767,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 57;
         yearCheckId = 62;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("是");
         retObj.setDescription("xxxxxx");
@@ -5776,7 +5776,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 58;
         yearCheckId = 63;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5785,7 +5785,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 58;
         yearCheckId = 64;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5794,7 +5794,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 58;
         yearCheckId = 65;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
 
 
         ///// 海水雨淋灭火系统
@@ -5820,7 +5820,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 37;
         yearCheckId = 30;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5829,7 +5829,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 37;
         yearCheckId = 31;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5838,7 +5838,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 38;
         yearCheckId = 32;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5847,7 +5847,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 38;
         yearCheckId = 33;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5856,7 +5856,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 39;
         yearCheckId = 34;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5865,7 +5865,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 39;
         yearCheckId = 35;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5874,7 +5874,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 39;
         yearCheckId = 36;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5884,7 +5884,7 @@ public class BaseData {
         // 泡沫灭火系统检查 55 56 57 58
         checkTypeId = 55;
         yearCheckId = 55;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5893,7 +5893,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 55;
         yearCheckId = 56;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5902,7 +5902,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 56;
         yearCheckId = 57;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("是");
         retObj.setDescription("xxxxxx");
@@ -5911,7 +5911,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 56;
         yearCheckId = 58;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5920,7 +5920,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 56;
         yearCheckId = 59;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("是");
         retObj.setDescription("xxxxxx");
@@ -5929,7 +5929,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 56;
         yearCheckId = 60;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5938,7 +5938,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 57;
         yearCheckId = 61;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5947,7 +5947,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 57;
         yearCheckId = 62;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("是");
         retObj.setDescription("xxxxxx");
@@ -5956,7 +5956,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 58;
         yearCheckId = 63;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5965,7 +5965,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 58;
         yearCheckId = 64;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -5974,7 +5974,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 58;
         yearCheckId = 65;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
 
         ///// 海水雨淋灭火系统
         companyInfoId = 5;
@@ -5999,7 +5999,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 37;
         yearCheckId = 30;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -6008,7 +6008,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 37;
         yearCheckId = 31;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -6017,7 +6017,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 38;
         yearCheckId = 32;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -6026,7 +6026,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 38;
         yearCheckId = 33;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -6035,7 +6035,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 39;
         yearCheckId = 34;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -6044,7 +6044,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 39;
         yearCheckId = 35;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -6053,7 +6053,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 39;
         yearCheckId = 36;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -6063,7 +6063,7 @@ public class BaseData {
         // 泡沫灭火系统检查 55 56 57 58
         checkTypeId = 55;
         yearCheckId = 55;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -6072,7 +6072,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 55;
         yearCheckId = 56;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -6081,7 +6081,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 56;
         yearCheckId = 57;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("是");
         retObj.setDescription("xxxxxx");
@@ -6090,7 +6090,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 56;
         yearCheckId = 58;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -6099,7 +6099,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 56;
         yearCheckId = 59;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("是");
         retObj.setDescription("xxxxxx");
@@ -6108,7 +6108,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 56;
         yearCheckId = 60;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -6117,7 +6117,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 57;
         yearCheckId = 61;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -6126,7 +6126,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 57;
         yearCheckId = 62;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("是");
         retObj.setDescription("xxxxxx");
@@ -6135,7 +6135,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 58;
         yearCheckId = 63;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -6144,7 +6144,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 58;
         yearCheckId = 64;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
         retObj = new YearCheckResult();
         retObj.setIsPass("否");
         retObj.setDescription("xxxxxx");
@@ -6153,7 +6153,7 @@ public class BaseData {
         retObj.setSystemNumber(number);
         checkTypeId = 58;
         yearCheckId = 65;
-        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertCheckResultDataEasy(retObj,itemId,yearCheckId,companyInfoId,checkTypeId,number,checkDate,"");
 
         /////////////////插入巡检测试数据///////////////////////
         //灭火器

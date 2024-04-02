@@ -191,7 +191,10 @@ public class HFCFragment1 extends Fragment {
                 itemInfo.setTaskNumber("请选择");
                 itemInfo.setIsPass("请选择");
                 itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
+                Log.e("wzq" , "--9---" + it.ProtectArea);
+                itemInfo.setProtectArea(it.ProtectArea);
             }
+Log.e("wzq" , "it.number" + it.number);
             long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, it.companyInfoId, checkTypes.get(0).getId(), it.number, it.srt_Date);
             //表示数据插入成功,再次查询,拿到最新的数据
             if (l1 == 0) {
@@ -257,6 +260,7 @@ public class HFCFragment1 extends Fragment {
                     itemObj.setTaskNumber(tv_11.getText().toString());
                     itemObj.setLabelNo(et_10.getText().toString());
                     itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
+
                     ServiceFactory.getYearCheckService().update(itemObj);
 
                 }

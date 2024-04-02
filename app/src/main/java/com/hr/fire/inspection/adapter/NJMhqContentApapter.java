@@ -136,11 +136,13 @@ public class NJMhqContentApapter extends RecyclerView.Adapter {
                 myholder.tv_fire15.setVisibility(View.GONE);
                 myholder.iv_fire15.setVisibility(View.VISIBLE);
 
-//                Uri uri = Uri.parse(imageUrl);
 
-                Glide.with(mContext)
-                        .load(imageUrl) // 图片的 URL 或资源 ID
-                        .into(myholder.iv_fire15);
+//                Glide.with(mContext)
+//                        .load(imageUrl) // 图片的 URL 或资源 ID
+//                        .into(myholder.iv_fire15);
+
+                Uri uri = Uri.parse(imageUrl);
+                myholder.iv_fire15.setImageURI(uri);
             } else {
                 myholder.tv_fire15.setVisibility(View.VISIBLE);
                 myholder.iv_fire15.setVisibility(View.GONE);

@@ -167,6 +167,30 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
         } else {
             protect_area_ed.setText(protect_area);
         }
+        sys_number_ed.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+                // 文本变化之前执行的操作
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                // 文本变化时执行的操作
+                String inputText = charSequence.toString();
+                // 在这里处理输入文本的变化，例如实时搜索、动态更新UI等
+                carbonFragment1.its.number = inputText;
+                carbonFragment2.its.number = inputText;
+                carbonFragment3.its.number = inputText;
+                carbonFragment4.its.number = inputText;
+                carbonFragment5.its.number = inputText;
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // 文本变化之后执行的操作
+
+            }
+        });
 
         // 检查时间文字显示
         TextView check_date_text = (TextView) this.findViewById(R.id.check_date_text);

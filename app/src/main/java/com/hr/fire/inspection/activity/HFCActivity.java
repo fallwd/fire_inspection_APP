@@ -78,6 +78,7 @@ public class HFCActivity extends AppCompatActivity {
         Date srt_Date = (Date) intent.getSerializableExtra("srt_Date");  //传过来的时间
         f_title = intent.getStringExtra("f_title"); //传过来的名称
         sys_number = intent.getStringExtra("sys_number"); //传过来的名称
+        protect_area = intent.getStringExtra("protect_area");
         it = new IntentTransmit();
         it.companyInfoId = platform_id;
         it.systemId = systemId;
@@ -90,7 +91,7 @@ public class HFCActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         it.number = sys_number;
-        protect_area = intent.getStringExtra("protect_area"); //传过来的保护区域
+        it.ProtectArea=protect_area;
         check_date = srt_Date;
         String oldDataNext = intent.getStringExtra("oldDataNext"); //基于历史数据新建
         it.name = oldDataNext;
@@ -123,6 +124,13 @@ public class HFCActivity extends AppCompatActivity {
             sys_number_ed.setText(sys_number);
         }
 
+        EditText protect_area_ed = (EditText) this.findViewById(R.id.protect_area_ed);
+        Log.e("wzq" , "-----" + protect_area);
+        if (protect_area == null || protect_area == "" || protect_area.isEmpty()) {
+            protect_area_ed.setText("");
+        } else {
+            protect_area_ed.setText(protect_area);
+        }
 
         sys_number_ed.addTextChangedListener(new TextWatcher() {
             @Override
@@ -149,20 +157,30 @@ public class HFCActivity extends AppCompatActivity {
             }
         });
 
-        // 保护区域文字显示
-        TextView protect_area_text = (TextView) this.findViewById(R.id.protect_area_text);
-        if (protect_area == null || protect_area == "" || protect_area.isEmpty()) {
-            protect_area_text.setText("保护区域为空");
-        } else {
-            protect_area_text.setText(protect_area);
-        }
+        protect_area_ed.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+                // 文本变化之前执行的操作
+            }
 
-        EditText protect_area_ed = (EditText) this.findViewById(R.id.protect_area_ed);
-        if (protect_area == null || protect_area == "" || protect_area.isEmpty()) {
-            protect_area_ed.setText("");
-        } else {
-            protect_area_ed.setText(protect_area);
-        }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                // 文本变化时执行的操作
+                String inputText = charSequence.toString();
+                // 在这里处理输入文本的变化，例如实时搜索、动态更新UI等
+                mHFCFragment1.it.ProtectArea = inputText;
+                mHFCFragment2.it.ProtectArea = inputText;
+                mHFCFragment3.its.ProtectArea = inputText;
+                mHFCFragment4.its.ProtectArea = inputText;
+                mHFCFragment5.its.ProtectArea = inputText;
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // 文本变化之后执行的操作
+
+            }
+        });
 
 
         // 检查时间文字显示
