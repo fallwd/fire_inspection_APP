@@ -54,6 +54,10 @@ public class HFCFragment5 extends Fragment {
     private List<YearCheckResult> yearCheckResults;
     private RecyclerView listRrcycler;
 
+    private boolean isViewInitiated; // 标志位，标志Fragment是否已经初始化完成
+    private boolean isVisibleToUser; // 标志位，标志Fragment是否对用户可见
+    private boolean isDataInitiated; // 标志位，标志Fragment的数据是否已经初始化
+
     public static HFCFragment5 newInstance(String key, IntentTransmit value) {
         if (fragment3 == null) {
             fragment3 = new HFCFragment5();
@@ -82,6 +86,22 @@ public class HFCFragment5 extends Fragment {
             its.end_time = it.end_time;
             its.name = it.name;
             its.number = it.number;
+        }
+    }
+
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        // 更新标志位
+        this.isVisibleToUser = isVisibleToUser;
+        loadData(); // 尝试加载数据
+    }
+
+    private void loadData() {
+        // 判断是否满足加载数据的条件
+        if (isViewInitiated && isVisibleToUser && !isDataInitiated) {
+            // 加载数据操作...
+//            initData();
+            isDataInitiated = true; // 将数据初始化标志位设为true
         }
     }
 
