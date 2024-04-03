@@ -116,6 +116,13 @@ public class HFCActivity extends AppCompatActivity {
         } else {
             sys_number_text.setText(sys_number);
         }
+        // 保护区域文字显示
+        TextView protect_area_text = (TextView) this.findViewById(R.id.protect_area_text);
+        if (protect_area == null || protect_area == "" || protect_area.isEmpty()) {
+            protect_area_text.setText("保护区域为空");
+        } else {
+            protect_area_text.setText(protect_area);
+        }
 
         EditText sys_number_ed = (EditText) this.findViewById(R.id.sys_number_ed);
         if (sys_number == null || sys_number == "" || sys_number.isEmpty()) {

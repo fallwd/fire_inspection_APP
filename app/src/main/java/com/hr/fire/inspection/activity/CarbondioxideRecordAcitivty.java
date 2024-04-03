@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -57,6 +58,9 @@ public class  CarbondioxideRecordAcitivty extends AppCompatActivity implements V
     private List<YearCheck> checkDataEasy;   //左侧需要检查的内容
     private List<YearCheckResult> yearCheckResults; //右侧需要用户填写的内容
 
+    EditText sys_number_ed ;
+    EditText protect_area_ed ;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,6 +85,12 @@ public class  CarbondioxideRecordAcitivty extends AppCompatActivity implements V
             Toast.makeText(this, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
         }
         Log.i("获取checkTypes","checkTypes:"+ checkTypes);
+
+        sys_number_ed = findViewById(R.id.sys_number_ed1);
+        protect_area_ed = findViewById(R.id.protect_area_ed1);
+
+        regularUI();
+
     }
 
     @Override
@@ -171,6 +181,12 @@ public class  CarbondioxideRecordAcitivty extends AppCompatActivity implements V
 
     @Override
     public void onClick(View v) {
+        //todo
+
+        sys_number = sys_number_ed.getText().toString();
+        protect_area = protect_area_ed.getText().toString();
+        Log.e("wzq" , "sys_number ==" +sys_number);
+
         switch (v.getId()) {
             case R.id.iv_finish:
                 finish();
@@ -387,5 +403,41 @@ public class  CarbondioxideRecordAcitivty extends AppCompatActivity implements V
                 break;
         }
         return intent;
+    }
+
+    private void regularUI() {
+        LinearLayout xt_l = findViewById(R.id.xt_l);
+        //        f_title.equals("高压二氧化碳灭火系统") || f_title.equals("七氟丙烷灭火系统")
+//                || f_title.equals("海水雨淋灭火系统") || f_title.equals("固定式干粉灭火系统")
+//                || f_title.equals("泡沫灭火系统"))
+        switch ((int) sys_id) {
+            case 1:  //二氧化碳系统
+                xt_l.setVisibility(View.VISIBLE);
+                break;
+            case 9:  //七氟丙烷灭火系统
+                xt_l.setVisibility(View.VISIBLE);
+                break;
+            case 17:  //灭火器
+                break;
+            case 19:  //火灾自动报警系统
+                break;
+            case 29:  //厨房设备灭火装置
+                break;
+            case 36:  //海水雨淋灭火系统
+                xt_l.setVisibility(View.VISIBLE);
+
+                break;
+            case 40:  //消防水灭火系统
+                break;
+            case 47:  //固定式干粉灭火系统
+                xt_l.setVisibility(View.VISIBLE);
+
+                break;
+            case 54:  //泡沫灭火系统
+                xt_l.setVisibility(View.VISIBLE);
+                break;
+            case 59:  //消防员装备
+                break;
+        }
     }
 }
