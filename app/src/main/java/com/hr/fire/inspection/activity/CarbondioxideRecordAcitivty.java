@@ -171,7 +171,7 @@ public class  CarbondioxideRecordAcitivty extends AppCompatActivity implements V
         intent.putExtra("platform_id", companyId);    //公司ID
         intent.putExtra("f_title", f_title); //系统名称 :高压二氧化碳灭火系统
         intent.putExtra("sys_number", number); //系统位号 ：SD002(用户自己填写的)
-        intent.putExtra("protect_area", protectArea); //系统位号 ：SD002(用户自己填写的)?/protect_area
+        intent.putExtra("protect_area", protect_area); //系统位号 ：SD002(用户自己填写的)?/protect_area
         Log.i("aaa","我要查看编辑时候的时间"+ checkDate);
         intent.putExtra("srt_Date", checkDate); //记录的时间
 
@@ -181,12 +181,8 @@ public class  CarbondioxideRecordAcitivty extends AppCompatActivity implements V
 
     @Override
     public void onClick(View v) {
-        //todo
 
-        sys_number = sys_number_ed.getText().toString();
-        protect_area = protect_area_ed.getText().toString();
-        Log.e("wzq" , "sys_number ==" +sys_number);
-
+        regularUI();
         switch (v.getId()) {
             case R.id.iv_finish:
                 finish();
@@ -413,9 +409,15 @@ public class  CarbondioxideRecordAcitivty extends AppCompatActivity implements V
         switch ((int) sys_id) {
             case 1:  //二氧化碳系统
                 xt_l.setVisibility(View.VISIBLE);
+                sys_number = sys_number_ed.getText().toString();
+                protect_area = protect_area_ed.getText().toString();
+                Log.e("wzq" , "sys_number ==" +sys_number);
                 break;
             case 9:  //七氟丙烷灭火系统
                 xt_l.setVisibility(View.VISIBLE);
+                sys_number = sys_number_ed.getText().toString();
+                protect_area = protect_area_ed.getText().toString();
+                Log.e("wzq" , "sys_number ==" +sys_number);
                 break;
             case 17:  //灭火器
                 break;
@@ -425,16 +427,23 @@ public class  CarbondioxideRecordAcitivty extends AppCompatActivity implements V
                 break;
             case 36:  //海水雨淋灭火系统
                 xt_l.setVisibility(View.VISIBLE);
-
+                sys_number = sys_number_ed.getText().toString();
+                protect_area = protect_area_ed.getText().toString();
+                Log.e("wzq" , "sys_number ==" +sys_number);
                 break;
             case 40:  //消防水灭火系统
                 break;
             case 47:  //固定式干粉灭火系统
                 xt_l.setVisibility(View.VISIBLE);
-
+                sys_number = sys_number_ed.getText().toString();
+                protect_area = protect_area_ed.getText().toString();
+                Log.e("wzq" , "sys_number ==" +sys_number);
                 break;
             case 54:  //泡沫灭火系统
                 xt_l.setVisibility(View.VISIBLE);
+                sys_number = sys_number_ed.getText().toString();
+                protect_area = protect_area_ed.getText().toString();
+                Log.e("wzq" , "sys_number ==" +sys_number);
                 break;
             case 59:  //消防员装备
                 break;
