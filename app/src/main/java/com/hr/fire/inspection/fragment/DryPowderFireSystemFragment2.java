@@ -134,7 +134,7 @@ public class DryPowderFireSystemFragment2 extends Fragment {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, its.companyInfoId, checkTypes.get(1).getId(), its.number, its.srt_Date);
+                    ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, its.companyInfoId, checkTypes.get(1).getId(), its.number, its.srt_Date,its.ProtectArea);
                 }
             }
             itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(1).getId(), its.number == null ? "" : its.number, its.srt_Date);
@@ -216,7 +216,7 @@ public class DryPowderFireSystemFragment2 extends Fragment {
 //                二维码 codePath
 
             }
-            long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, its.companyInfoId, checkTypes.get(1).getId(), its.number, its.srt_Date);
+            long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, its.companyInfoId, checkTypes.get(1).getId(), its.number, its.srt_Date,its.ProtectArea);
             //表示数据插入成功,再次查询,拿到最新的数据
             if (l1 == 0) {
                 itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(1).getId(), its.number == null ? "" : its.number, its.srt_Date);

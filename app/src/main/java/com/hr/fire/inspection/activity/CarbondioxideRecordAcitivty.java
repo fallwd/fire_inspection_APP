@@ -37,6 +37,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 //二氧化碳年检记录
 public class  CarbondioxideRecordAcitivty extends AppCompatActivity implements View.OnClickListener {
@@ -97,6 +98,19 @@ public class  CarbondioxideRecordAcitivty extends AppCompatActivity implements V
     protected void onStart() {
         super.onStart();
         historyList = ServiceFactory.getYearCheckService().getHistoryList(platform_id, sys_id);
+// 创建一个新的 HashMap，用于存储去重后的数据
+        HashMap<Object, HashMap> uniqueHistoryMap = new HashMap<>();
+
+// 遍历 historyList，并根据 systemid 去重
+        for (HashMap<String, Object> hashMap : historyList) {
+            Object systemid = hashMap.get("systemNumber");
+            if (!uniqueHistoryMap.containsKey(systemid)) {
+                uniqueHistoryMap.put(systemid, hashMap);
+            }
+        }
+
+// 将去重后的数据重新放入 List 中
+        historyList = new ArrayList<>(uniqueHistoryMap.values());
         initView();
     }
 

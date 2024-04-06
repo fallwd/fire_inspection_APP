@@ -110,7 +110,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 checkDateStr = "noDate";
             }
             String comboData;
-            Log.e("aaaaaa", "getHistoryList系统位号：" + systemNumber);
+            Log.e("aaaaaa", "getHistoryList系统位号：" + systemNumber+"/"+prname);
             if(systemNumber =="" || systemNumber == null || systemNumber.isEmpty()) {
 
 
@@ -161,7 +161,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
                 checkDateStr = "noDate";
             }
             String comboData;
-            Log.e("bbbbbbbbb", "getHistoryList系统位号：" + systemNumber);
+            Log.e("bbbbbbbbb", "getHistoryList系统位号：" + systemNumber+"/"+pname);
 
             if(systemNumber =="" || systemNumber == null || systemNumber.isEmpty()) {
 
@@ -497,12 +497,13 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
 
     @Override
 //    public long insertItemData(ItemInfo itemData, String companyName, String oilfieldName, String platformName, String systemName, String tableName, String number) {
-    public long insertItemDataEasy(ItemInfo itemData, long companyInfoId,  long checkTypeId, String number, Date checkDate) {
+    public long insertItemDataEasy(ItemInfo itemData, long companyInfoId,  long checkTypeId, String number, Date checkDate,String protectArea) {
         Log.e("wzq" , "insertItemDataEasy---" + number);
         itemData.setCompanyInfoId(companyInfoId);
         itemData.setCheckTypeId(checkTypeId);
         itemData.setSystemNumber(number);
         itemData.setCheckDate(checkDate);
+        itemData.setProtectArea(protectArea);
         daoSession.insert(itemData);
 
 //        Log.i("insertItemData", "插入设备信息数据完成-------------------------------------------");

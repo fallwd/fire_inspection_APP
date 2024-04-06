@@ -3637,7 +3637,7 @@ public class BaseData {
 //        itemObj.setSystemNumber(systemNumber);
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
         companyInfoId = 3;
@@ -3692,7 +3692,7 @@ public class BaseData {
 //        itemObj.setSystemNumber(systemNumber);
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
         companyInfoId = 3;
@@ -3747,7 +3747,7 @@ public class BaseData {
 //        itemObj.setSystemNumber(systemNumber);
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         // companyInfoId 对应 辽东作业公司 SZ36-1 SZ36-1A--》3
         companyInfoId = 3;
@@ -3802,7 +3802,7 @@ public class BaseData {
 //        itemObj.setSystemNumber(systemNumber);
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 3;
         // checkTypeId 对应 氮气瓶 4
@@ -3856,7 +3856,7 @@ public class BaseData {
 //        itemObj.setSystemNumber(systemNumber);
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 3;
         // checkTypeId 对应 氮气瓶 4
@@ -3910,7 +3910,7 @@ public class BaseData {
 //        itemObj.setSystemNumber(systemNumber);
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         ///////////////////////////////////////////////////////
         // companyInfoId CompanyInfo{id=165, companyName='渤西作业公司', oilfieldName='BZ13-1', platformName='BZ13-1', isNecessary=1}
@@ -3966,7 +3966,7 @@ public class BaseData {
 //        itemObj.setSystemNumber(number);
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 药剂瓶 2
@@ -3996,7 +3996,7 @@ public class BaseData {
 //        itemObj.setSystemNumber(number);
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 药剂瓶 2
@@ -4026,7 +4026,7 @@ public class BaseData {
 //        itemObj.setSystemNumber(systemNumber);
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 药剂瓶 2
@@ -4056,7 +4056,7 @@ public class BaseData {
 //        itemObj.setSystemNumber(systemNumber);
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 药剂瓶 2
@@ -4086,7 +4086,7 @@ public class BaseData {
 //        itemObj.setSystemNumber(systemNumber);
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
 ///////////////////////////////////////////////////////////////////////////////////////////
         companyInfoId = 165;
@@ -4120,7 +4120,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 七氟丙烷钢瓶 10
@@ -4153,7 +4153,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 氮气驱动瓶 12
@@ -4186,7 +4186,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 氮气驱动瓶 12
@@ -4219,7 +4219,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 氮气驱动瓶 12
@@ -4252,7 +4252,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 灭火器 18
@@ -4290,7 +4290,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 灭火器 18
@@ -4328,7 +4328,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 灭火器 18
@@ -4366,7 +4366,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 灭火器 18
@@ -4404,7 +4404,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 灭火器 18
@@ -4442,7 +4442,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 感烟探测器 20
@@ -4471,7 +4471,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 感烟探测器 20
@@ -4500,7 +4500,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 感烟探测器 20
@@ -4529,7 +4529,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 感烟探测器 20
@@ -4558,7 +4558,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 感温探测器 21
@@ -4587,7 +4587,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 感温探测器 21
@@ -4616,7 +4616,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 感温探测器 21
@@ -4645,7 +4645,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 火焰探测器 22
@@ -4674,7 +4674,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 火焰探测器 22
@@ -4703,7 +4703,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 手动报警按钮 23
@@ -4732,7 +4732,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 手动报警按钮 23
@@ -4762,7 +4762,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 可燃气体探测器 24
@@ -4795,7 +4795,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 可燃气体探测器 24
@@ -4828,7 +4828,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 氢气探测器 25
@@ -4861,7 +4861,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 氢气探测器 25
@@ -4894,7 +4894,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
 
         companyInfoId = 165;
@@ -4928,7 +4928,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 硫化氢探测器 26
@@ -4961,7 +4961,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 CO探测器 27
@@ -4994,7 +4994,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 CO探测器 27
@@ -5027,7 +5027,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 CO探测器 27
@@ -5060,7 +5060,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 火灾报警控制器 28
@@ -5094,7 +5094,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 火灾报警控制器 28
@@ -5129,7 +5129,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
 
         companyInfoId = 165;
@@ -5160,7 +5160,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 厨房药剂瓶 30
@@ -5190,7 +5190,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 厨房驱动瓶 332
@@ -5216,7 +5216,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 厨房驱动瓶 332
@@ -5242,7 +5242,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 消防软管 41
@@ -5269,7 +5269,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 消防软管 41
@@ -5296,7 +5296,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 消防炮 43
@@ -5323,7 +5323,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
 
         companyInfoId = 165;
@@ -5351,7 +5351,7 @@ public class BaseData {
 //        itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
 
         companyInfoId = 165;
@@ -5382,7 +5382,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 干粉罐 48
@@ -5412,7 +5412,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 启动瓶 50
@@ -5441,7 +5441,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 启动瓶 50
@@ -5470,7 +5470,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 SCBA气瓶 60
@@ -5499,7 +5499,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 SCBA气瓶 60
@@ -5528,7 +5528,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 EEBD气瓶 62
@@ -5557,7 +5557,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 EEBD气瓶 62
@@ -5586,7 +5586,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         companyInfoId = 165;
         // checkTypeId 对应 EEBD气瓶 62
@@ -5615,7 +5615,7 @@ public class BaseData {
         itemObj.setTaskNumber("1,2,3,7");
         itemObj.setProtectArea(protectArea);
         itemObj.setCodePath(codePath);
-        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate);
+        ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj,companyInfoId,checkTypeId,number,checkDate,protectArea);
 
         ///// 海水雨淋灭火系统
         companyInfoId = 165;

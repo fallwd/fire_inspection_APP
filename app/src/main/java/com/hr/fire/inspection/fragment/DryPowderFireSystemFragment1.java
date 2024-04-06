@@ -137,7 +137,7 @@ public class DryPowderFireSystemFragment1 extends Fragment {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
+                    ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date, its.ProtectArea);
                 }
             }
             itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(0).getId(), its.number == null ? "" : its.number, its.srt_Date);
@@ -224,7 +224,7 @@ public class DryPowderFireSystemFragment1 extends Fragment {
                 itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
 
             }
-            long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date);
+            long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, its.companyInfoId, checkTypes.get(0).getId(), its.number, its.srt_Date,its.ProtectArea);
             //表示数据插入成功,再次查询,拿到最新的数据
             if (l1 == 0) {
                 itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(0).getId(), its.number == null ? "" : its.number, its.srt_Date);

@@ -78,7 +78,7 @@ public interface YearCheckService extends BaseService<Object>{
      * @return
      */
     long insertItemData(ItemInfo itemData, String companyName, String oilfieldName, String platformName, String systemName, String tableName, String number,String ProtectArea);
-    long insertItemDataEasy(ItemInfo itemData, long companyInfoId,  long checkTypeId, String number, Date checkDate);
+    long insertItemDataEasy(ItemInfo itemData, long companyInfoId,  long checkTypeId, String number, Date checkDate,String ProtectArea);
 
     /**
      * 插入一条检查表信息 分两种情况，一种是没有一级表，直接插入即可，itemId=0，另一种是有一级表，需要数据itemId

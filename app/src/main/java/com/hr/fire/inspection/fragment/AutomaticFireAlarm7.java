@@ -192,7 +192,7 @@ public class AutomaticFireAlarm7 extends Fragment {
 //                itemInfo.setProdFactory("请添加");
                 itemInfo.setUuid(UUID.randomUUID().toString().replace("-",""));
             }
-            long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, it.companyInfoId, checkTypes.get(6).getId(), it.number, it.srt_Date);
+            long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, it.companyInfoId, checkTypes.get(6).getId(), it.number, it.srt_Date,it.ProtectArea);
             //表示数据插入成功,再次查询,拿到最新的数据
             if (l1 == 0) {
                 itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(6).getId(), it.number == null ? "" : it.number, it.srt_Date);
