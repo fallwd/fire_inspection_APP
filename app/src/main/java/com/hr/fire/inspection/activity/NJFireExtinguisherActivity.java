@@ -452,13 +452,15 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                     itemDataList.get(imgPostion).setImageUrl(fileNew.getAbsolutePath());
 //                    contentApapter.notifyItemChanged(imgPostion);
 
-                    contentApapter.notifyItemChanged(imgPostion);
+                    contentApapter.notifyDataSetChanged();
+//                    contentApapter.notifyItemChanged(imgPostion);
                 }
                 break;
             case 0:
                 if (videoNew.getAbsolutePath() != null && videoPostion != -1 && contentApapter != null) {
                     itemDataList.get(videoPostion).setVideoUrl(videoNew.getAbsolutePath());
-                    contentApapter.notifyItemChanged(videoPostion);
+//                    contentApapter.notifyItemChanged(videoPostion);
+                    contentApapter.notifyDataSetChanged();
                 }
                 Toast.makeText(this, "录像数据保存成功，请点击拍照图标进行录像观看", Toast.LENGTH_SHORT).show();
                 break;
@@ -468,7 +470,8 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
                         Uri uri = data.getData();
                         itemDataList.get(imgPostion).setImageUrl(uri.toString());
 //                    contentApapter.notifyItemChanged(imgPostion);
-                        contentApapter.notifyItemChanged(imgPostion);
+//                        contentApapter.notifyItemChanged(imgPostion);
+                        contentApapter.notifyDataSetChanged();
                     } catch (Exception e) {
                         Log.e("Exception", e.getMessage(), e);
                 }
