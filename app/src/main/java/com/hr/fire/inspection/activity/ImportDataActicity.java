@@ -228,7 +228,7 @@ public class ImportDataActicity extends AppCompatActivity {
 
 
                                 try {
-                                    ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, companyInfoId, checkTypes.get(i).getId(), number=="" ? null : number, srt_Date);
+                                    ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, companyInfoId, checkTypes.get(i).getId(), number=="" ? null : number, srt_Date,"");
                                 } catch (Exception e) {
                                     ServiceFactory.getYearCheckService().update(itemInfo);
                                 }

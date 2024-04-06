@@ -160,7 +160,7 @@ public class NjFireExtinguisherFragment extends Fragment {
         itemObj.setUuid(UUID.randomUUID().toString().replace("-",""));
         Log.d("dong", "一直遍历吗兄弟?" + date1 + "  " + et_5.getText().toString());
 //        }
-        long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj, 201, 1, "HZ001", it.srt_Date);
+        long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemObj, 201, 1, "HZ001", it.srt_Date,"");
         if (l1 == 0) {
             Toast.makeText(getContext(), "药剂瓶数据保存成功", Toast.LENGTH_SHORT).show();
         }

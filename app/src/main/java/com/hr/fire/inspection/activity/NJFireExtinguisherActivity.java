@@ -348,7 +348,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
 //            Log.d("dong", "itemInfo增加" + itemInfo);
 //            Log.d("dong", "itemInfo增加" + companyInfoId + checkTypes.get(0).getId() + sys_number + srt_Date );
 
-            long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, companyInfoId, checkTypes.get(0).getId(), sys_number, srt_Date);
+            long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, companyInfoId, checkTypes.get(0).getId(), sys_number, srt_Date,"");
             //表示数据插入成功,再次查询,拿到最新的数据
             if (l1 == 0) {
                 itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(companyInfoId, checkTypes.get(0).getId(), sys_number == null ? "" : sys_number, srt_Date);
