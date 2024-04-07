@@ -54,6 +54,7 @@ public class ExcelUtils {
 
 
     public void exportExcel(Context mContext , String filename) {
+        Log.e("tzw exportExcel","filename: "+filename);
         try {
             //保存到年ExportData这个文件夹下
             File path = Environment.getExternalStorageDirectory();
