@@ -95,6 +95,7 @@ public class CarbonDioxideAcitivty extends AppCompatActivity {
             e.printStackTrace();
         }
         it.number = sys_number;
+        it.ProtectArea=protect_area;
         String oldDataNext = intent.getStringExtra("oldDataNext"); //基于历史数据新建
         it.name = oldDataNext;
     }

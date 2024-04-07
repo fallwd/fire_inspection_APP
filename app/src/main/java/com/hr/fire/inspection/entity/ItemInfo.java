@@ -854,6 +854,10 @@ public void __setDaoSession(DaoSession daoSession) {
             sb.append("标签号：").append(this.labelNo).append("\n");
         }
 
+        if (this.ProtectArea != null) {
+            sb.append("系统区域：").append(this.ProtectArea).append("\n");
+        }
+
         return sb.toString();
 
     }

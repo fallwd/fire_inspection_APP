@@ -86,6 +86,7 @@ public class DFXIFragment3 extends Fragment {
             its.end_time = it.end_time;
             its.name = it.name;
             its.number = it.number;
+            it.ProtectArea = its.ProtectArea;
         }
     }
 

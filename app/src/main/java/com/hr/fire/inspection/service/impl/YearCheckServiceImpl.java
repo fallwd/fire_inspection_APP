@@ -296,25 +296,85 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
         return dataList;
     }
 
+//    @Override
+//    public List<ItemInfo> getItemDataEasy(long companyInfoId, long checkTypeId, String number, Date checkDate) {
+//        QueryBuilder<ItemInfo> queryBuilder;
+////        if(number!=null && number!=""){
+//        if(number!=null){
+//            queryBuilder = daoSession.queryBuilder(ItemInfo.class).where(
+//                    ItemInfoDao.Properties.SystemNumber.eq(number),
+//                    ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+//                    ItemInfoDao.Properties.CheckTypeId.eq(checkTypeId),
+//                    ItemInfoDao.Properties.CheckDate.eq(checkDate)
+//            );
+//        }
+//        else {
+//            queryBuilder = daoSession.queryBuilder(ItemInfo.class).where(
+//                    ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+//                    ItemInfoDao.Properties.CheckTypeId.eq(checkTypeId),
+//                    ItemInfoDao.Properties.CheckDate.eq(checkDate)
+//            );
+//        }
+//
+//        List<ItemInfo> dataList = queryBuilder.list();
+////        List<ItemInfo> dataList =  queryBuilder.build().list();
+////        Log.i("info","查询完成01-------------------------------------------");
+////        for(int i = 0; i < dataList.size(); i++){
+////            ItemInfo result = dataList.get(i);
+////            Log.i("result", result.toString());
+////            Log.i("result", result.getCompanyInfo().toString());
+////            Log.i("result", result.getCheckType().toString());
+////            Log.i("result", result.getCheckResultList().toString());
+////            Log.i("result:getCheckDate", ""+ result.getCheckDate());
+////        }
+////        Log.i("info","查询完成01-------------------------------------------");
+//
+//        return dataList;
+//    }
+
     @Override
-    public List<ItemInfo> getItemDataEasy(long companyInfoId, long checkTypeId, String number, Date checkDate) {
+    public List<ItemInfo> getItemDataEasy(long companyInfoId, long checkTypeId, String number, Date checkDate, String area) {
+        Log.d("getItemDataEasy", "getItemDataEasy: "+area);
         QueryBuilder<ItemInfo> queryBuilder;
-//        if(number!=null && number!=""){
-        if(number!=null){
-            queryBuilder = daoSession.queryBuilder(ItemInfo.class).where(
-                    ItemInfoDao.Properties.SystemNumber.eq(number),
-                    ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
-                    ItemInfoDao.Properties.CheckTypeId.eq(checkTypeId),
-                    ItemInfoDao.Properties.CheckDate.eq(checkDate)
-            );
+
+        if(null == area){
+            if(number!=null){
+                queryBuilder = daoSession.queryBuilder(ItemInfo.class).where(
+                        ItemInfoDao.Properties.SystemNumber.eq(number),
+                        ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        ItemInfoDao.Properties.CheckTypeId.eq(checkTypeId),
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate)
+                );
+            }
+            else {
+                queryBuilder = daoSession.queryBuilder(ItemInfo.class).where(
+                        ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        ItemInfoDao.Properties.CheckTypeId.eq(checkTypeId),
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate)
+                );
+            }
+        }else {
+            //        if(number!=null && number!=""){
+            if(number!=null){
+                queryBuilder = daoSession.queryBuilder(ItemInfo.class).where(
+                        ItemInfoDao.Properties.SystemNumber.eq(number),
+                        ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        ItemInfoDao.Properties.CheckTypeId.eq(checkTypeId),
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        ItemInfoDao.Properties.ProtectArea.eq(area)
+                );
+            }
+            else {
+                queryBuilder = daoSession.queryBuilder(ItemInfo.class).where(
+                        ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
+                        ItemInfoDao.Properties.CheckTypeId.eq(checkTypeId),
+                        ItemInfoDao.Properties.CheckDate.eq(checkDate),
+                        ItemInfoDao.Properties.ProtectArea.eq(area)
+                );
+            }
         }
-        else {
-            queryBuilder = daoSession.queryBuilder(ItemInfo.class).where(
-                    ItemInfoDao.Properties.CompanyInfoId.eq(companyInfoId),
-                    ItemInfoDao.Properties.CheckTypeId.eq(checkTypeId),
-                    ItemInfoDao.Properties.CheckDate.eq(checkDate)
-            );
-        }
+
+
 
         List<ItemInfo> dataList = queryBuilder.list();
 //        List<ItemInfo> dataList =  queryBuilder.build().list();
@@ -498,7 +558,7 @@ public class YearCheckServiceImpl extends BaseServiceImpl<Object> implements Yea
     @Override
 //    public long insertItemData(ItemInfo itemData, String companyName, String oilfieldName, String platformName, String systemName, String tableName, String number) {
     public long insertItemDataEasy(ItemInfo itemData, long companyInfoId,  long checkTypeId, String number, Date checkDate,String protectArea) {
-        Log.e("wzq" , "insertItemDataEasy---" + number);
+        Log.e("wzq" , "insertItemDataEasy---" + number+"/"+protectArea);
         itemData.setCompanyInfoId(companyInfoId);
         itemData.setCheckTypeId(checkTypeId);
         itemData.setSystemNumber(number);

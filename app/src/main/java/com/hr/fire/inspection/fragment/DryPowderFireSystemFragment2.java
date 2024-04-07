@@ -73,6 +73,7 @@ public class DryPowderFireSystemFragment2 extends Fragment {
             its.end_time = it.end_time;
             its.name = it.name;
             its.number = it.number;
+            its.ProtectArea = it.ProtectArea;
         }
     }
 
@@ -104,7 +105,7 @@ public class DryPowderFireSystemFragment2 extends Fragment {
             Toast.makeText(getActivity(), "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
         }
         //参数1:公司id, 参数2:检查表类型对应的id, 参数3:输入的系统位号，如果没有就填"",或者SD002,否则没数据   参数4:日期
-        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(1).getId(), its.number == null ? "" : its.number, its.srt_Date);
+        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(1).getId(), its.number == null ? "" : its.number, its.srt_Date,its.ProtectArea);
         // 判断是否是基于历史数据新建，是的话，某些字段做空的处理
         if (its.name != null || its.name == "基于历史数据新建") {
             if (itemDataList != null && itemDataList.size() != 0) {
@@ -137,7 +138,7 @@ public class DryPowderFireSystemFragment2 extends Fragment {
                     ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, its.companyInfoId, checkTypes.get(1).getId(), its.number, its.srt_Date,its.ProtectArea);
                 }
             }
-            itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(1).getId(), its.number == null ? "" : its.number, its.srt_Date);
+            itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(1).getId(), its.number == null ? "" : its.number, its.srt_Date,its.ProtectArea);
         }
     }
 
@@ -219,7 +220,7 @@ public class DryPowderFireSystemFragment2 extends Fragment {
             long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, its.companyInfoId, checkTypes.get(1).getId(), its.number, its.srt_Date,its.ProtectArea);
             //表示数据插入成功,再次查询,拿到最新的数据
             if (l1 == 0) {
-                itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(1).getId(), its.number == null ? "" : its.number, its.srt_Date);
+                itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(1).getId(), its.number == null ? "" : its.number, its.srt_Date,its.ProtectArea);
                 adapter.setNewData(itemDataList);
             } else {
                 ToastUtil.show(getActivity(), "未知错误,新增失败", Toast.LENGTH_SHORT);
@@ -235,7 +236,7 @@ public class DryPowderFireSystemFragment2 extends Fragment {
 //        int itemCount = rc_list.getChildCount();
         int itemCount = rc_list.getAdapter().getItemCount();
         //通知数据库刷新数据， 才能在调用Update();
-        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(1).getId(), its.number == null ? "" : its.number, its.srt_Date);
+        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(its.companyInfoId, checkTypes.get(1).getId(), its.number == null ? "" : its.number, its.srt_Date,its.ProtectArea);
         Log.d("dong", "upData==   " + itemCount + "   新的数据条数   " + itemDataList.size());
         if (itemCount == 0 || itemDataList.size() == 0 || itemDataList.size() != itemCount) {
             Toast.makeText(getActivity(), "暂无数据保存", Toast.LENGTH_SHORT).show();

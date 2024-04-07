@@ -35,6 +35,7 @@ import com.hr.fire.inspection.utils.TimeUtil;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -104,7 +105,7 @@ public class  CarbondioxideRecordAcitivty extends AppCompatActivity implements V
 // 遍历 historyList，并根据 systemid 去重
         for (HashMap<String, Object> hashMap : historyList) {
             Object systemid = hashMap.get("systemNumber");
-            if (!uniqueHistoryMap.containsKey(systemid)) {
+            if (!uniqueHistoryMap.containsKey(systemid) && hashMap.get("pname") != null) {
                 uniqueHistoryMap.put(systemid, hashMap);
             }
         }
@@ -169,9 +170,46 @@ public class  CarbondioxideRecordAcitivty extends AppCompatActivity implements V
         });
     }
 
+    public static List<HashMap> filterNodes(List<HashMap> originalList) {
+        List<HashMap> filteredList = new ArrayList<>();
+        HashMap<String, HashMap> resultMap = new HashMap<>();
+
+        for (HashMap node : originalList) {
+            String systemNumber = (String) node.get("systemNumber");
+            if (!node.containsKey("pname") || node.get("pname") != null) {
+                // 如果pname不为null，或者pname为null但系统号对应的节点已存在非空pname的节点，则添加当前节点
+                if (!resultMap.containsKey(systemNumber) || resultMap.get(systemNumber).get("pname") != null) {
+                    resultMap.put(systemNumber, node);
+                }
+            }
+        }
+
+        filteredList.addAll(resultMap.values());
+        return filteredList;
+    }
+
+    public static void removeItemsWithNullPname(List<HashMap> dataList) {
+        Iterator<HashMap> iterator = dataList.iterator();
+        while (iterator.hasNext()) {
+            HashMap<String, Object> map = iterator.next();
+            // 根据条件去除pname为null的项
+            if (map.get("pname") == null) {
+                iterator.remove();
+            }
+        }
+    }
+
 
     private void startRecordAcitivty() {
+        //test
+//        Log.e("wzq" , "--66--" + historyList.toString());
+//        Log.e("wzq" , "--55--" + historyList.size());
+//        removeItemsWithNullPname(historyList);
+        Log.e("wzq" , "--33--" + historyList.toString());
+        Log.e("wzq" , "--44--" + historyList.size());
+//        HashMap hashMap = historyList.get(selected_tag);
         HashMap hashMap = historyList.get(selected_tag);
+
         long companyId = (long) hashMap.get("companyInfoId");
         String number = (String) hashMap.get("systemNumber");
         long systemId = (long) hashMap.get("systemId");
@@ -185,7 +223,7 @@ public class  CarbondioxideRecordAcitivty extends AppCompatActivity implements V
         intent.putExtra("platform_id", companyId);    //公司ID
         intent.putExtra("f_title", f_title); //系统名称 :高压二氧化碳灭火系统
         intent.putExtra("sys_number", number); //系统位号 ：SD002(用户自己填写的)
-        intent.putExtra("protect_area", protect_area); //系统位号 ：SD002(用户自己填写的)?/protect_area
+        intent.putExtra("protect_area", protectArea); //系统位号 ：SD002(用户自己填写的)?/protect_area
         Log.i("aaa","我要查看编辑时候的时间"+ checkDate);
         intent.putExtra("srt_Date", checkDate); //记录的时间
 
@@ -323,7 +361,7 @@ public class  CarbondioxideRecordAcitivty extends AppCompatActivity implements V
                             List<Map<String, Object>> items = new ArrayList<>();
                             if (i < checkResultIndex) {
                                 Log.i("checkType.getId()checkType.getId()" ,"checkType.getId()checkType.getId()" + checkType.getId());
-                                List<ItemInfo> itemDataEasy = ServiceFactory.getYearCheckService().getItemDataEasy(companyId, checkType.getId(), number == null ? "" : number, checkDate);
+                                List<ItemInfo> itemDataEasy = ServiceFactory.getYearCheckService().getItemDataEasy(companyId, checkType.getId(), number == null ? "" : number, checkDate,"");
                                 Log.i("itemDataEasyitemDataEasy" ,"itemDataEasy" + itemDataEasy);
                                 for (ItemInfo itemInfo : itemDataEasy) {
 

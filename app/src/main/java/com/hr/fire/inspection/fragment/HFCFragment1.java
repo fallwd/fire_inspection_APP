@@ -51,6 +51,7 @@ public class HFCFragment1 extends Fragment {
         mKey = key;
         Bundle args = new Bundle();
         args.putSerializable(key, value);
+        Log.d("newInstance", "newInstance: "+mKey);
         fragment1.setArguments(args);
         return fragment1;
     }
@@ -62,6 +63,7 @@ public class HFCFragment1 extends Fragment {
             // 建立当前页面的IntentTransmit，为了不影响其他页面的it
             it = new IntentTransmit();
             IntentTransmit its = (IntentTransmit) getArguments().getSerializable(mKey);
+            Log.d("IntentTransmit", "onCreate: "+mKey+"/"+its.toString());
             it.srt_Date = its.srt_Date;
             it.systemId = its.systemId;
             it.companyInfoId = its.companyInfoId;
@@ -98,7 +100,7 @@ public class HFCFragment1 extends Fragment {
             Toast.makeText(getActivity(), "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
         }
         //参数1:公司id, 参数2:检查表类型对应的id, 参数3:输入的系统位号，如果没有就填"",或者SD002,否则没数据   参数4:日期
-        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(0).getId(), it.number == null ? "" : it.number, it.srt_Date);
+        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(0).getId(), it.number == null ? "" : it.number, it.srt_Date,it.ProtectArea);
         HYLogUtil.getInstance().d("设备表信息,数据查看:" + itemDataList.size() + "  " + itemDataList.toString());
         // 判断是否是基于历史数据新建，是的话，某些字段做空的处理
         if (it.name != null || it.name == "基于历史数据新建") {
@@ -131,7 +133,7 @@ public class HFCFragment1 extends Fragment {
                     ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, it.companyInfoId, checkTypes.get(0).getId(), it.number, it.srt_Date,it.ProtectArea);
                 }
             }
-            itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(0).getId(), it.number == null ? "" : it.number, it.srt_Date);
+            itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(0).getId(), it.number == null ? "" : it.number, it.srt_Date,it.ProtectArea);
         }
     }
 
@@ -199,7 +201,7 @@ Log.e("wzq" , "it.number" + it.number);
             long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, it.companyInfoId, checkTypes.get(0).getId(), it.number, it.srt_Date,it.ProtectArea);
             //表示数据插入成功,再次查询,拿到最新的数据
             if (l1 == 0) {
-                itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(0).getId(), it.number == null ? "" : it.number, it.srt_Date);
+                itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(0).getId(), it.number == null ? "" : it.number, it.srt_Date,it.ProtectArea);
                 adapter.setNewData(itemDataList);
             } else {
                 ToastUtil.show(getActivity(), "未知错误,新增失败", Toast.LENGTH_SHORT);
@@ -213,7 +215,7 @@ Log.e("wzq" , "it.number" + it.number);
         int itemCount = rc_list.getAdapter().getItemCount();
         //通知数据库刷新数据， 才能在调用Update();
         Log.e("wzq" , "111" + it.companyInfoId + "--" + checkTypes.get(0).getId() +"--" + it.number + "--" + it.srt_Date);
-        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(0).getId(), it.number == null ? "" : it.number, it.srt_Date);
+        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(it.companyInfoId, checkTypes.get(0).getId(), it.number == null ? "" : it.number, it.srt_Date,it.ProtectArea);
         if (itemCount == 0 || itemDataList.size() == 0 || itemDataList.size() != itemCount) {
             Toast.makeText(getActivity(), "暂无数据保存", Toast.LENGTH_SHORT).show();
             return;

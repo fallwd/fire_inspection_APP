@@ -52,7 +52,8 @@ public interface YearCheckService extends BaseService<Object>{
      * @return
      */
     List<ItemInfo> getItemData(String companyName, String oilfieldName, String platformName, String systemName, String tableName, String number);
-    List<ItemInfo> getItemDataEasy(long companyInfoId, long checkTypeId, String number, Date checkDate);
+
+    List<ItemInfo> getItemDataEasy(long companyInfoId, long checkTypeId, String number, Date checkDate,String area);
 
     /**
      * 获取检查表结果信息

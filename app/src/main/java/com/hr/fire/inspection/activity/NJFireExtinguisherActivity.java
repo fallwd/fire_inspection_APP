@@ -130,7 +130,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
             Toast.makeText(this, "没有获取到检查表的数据", Toast.LENGTH_SHORT).show();
         }
         //参数1:公司id, 参数2:检查表类型对应的id, 参数3:输入的系统位号，如果没有就填"",或者SD002,否则没数据   参数4:日期
-        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(companyInfoId, checkTypes.get(0).getId(), sys_number == null ? "" : sys_number, srt_Date);
+        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(companyInfoId, checkTypes.get(0).getId(), sys_number == null ? "" : sys_number, srt_Date,"");
 
         HYLogUtil.getInstance().d("设备表信息,数据查看:" + itemDataList.size() + "  " + itemDataList.toString());
         // 一级表插入数据insertItemData
@@ -351,7 +351,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
             long l1 = ServiceFactory.getYearCheckService().insertItemDataEasy(itemInfo, companyInfoId, checkTypes.get(0).getId(), sys_number, srt_Date,"");
             //表示数据插入成功,再次查询,拿到最新的数据
             if (l1 == 0) {
-                itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(companyInfoId, checkTypes.get(0).getId(), sys_number == null ? "" : sys_number, srt_Date);
+                itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(companyInfoId, checkTypes.get(0).getId(), sys_number == null ? "" : sys_number, srt_Date,"");
 //                Log.d("dong", "itemDataList增加我要去传给adapter渲染啦啦" + itemDataList);
                 contentApapter.setNewData(itemDataList);
                 firstColumnApapter.setNewData(itemDataList);
@@ -369,7 +369,7 @@ public class NJFireExtinguisherActivity extends AppCompatActivity implements Vie
     private void saveToUpdara() {
 //        int itemCount = rl_content.getChildCount();
         int itemCount = rl_content.getAdapter().getItemCount();
-        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(companyInfoId, checkTypes.get(0).getId(), sys_number == null ? "" : sys_number, srt_Date);
+        itemDataList = ServiceFactory.getYearCheckService().getItemDataEasy(companyInfoId, checkTypes.get(0).getId(), sys_number == null ? "" : sys_number, srt_Date,"");
 //        Log.d("dong", "upData==   " + itemCount + "   新的数据条数   " + itemDataList.size());
         if (itemCount == 0 || itemDataList.size() == 0 || itemDataList.size() != itemCount) {
             Toast.makeText(this, "暂无数据保存", Toast.LENGTH_SHORT).show();
