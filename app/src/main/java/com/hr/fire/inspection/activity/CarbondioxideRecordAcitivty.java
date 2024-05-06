@@ -99,19 +99,22 @@ public class  CarbondioxideRecordAcitivty extends AppCompatActivity implements V
     protected void onStart() {
         super.onStart();
         historyList = ServiceFactory.getYearCheckService().getHistoryList(platform_id, sys_id);
-// 创建一个新的 HashMap，用于存储去重后的数据
-        HashMap<Object, HashMap> uniqueHistoryMap = new HashMap<>();
+
+        if(xt_l.getVisibility() == View.VISIBLE){
+            // 创建一个新的 HashMap，用于存储去重后的数据
+            HashMap<Object, HashMap> uniqueHistoryMap = new HashMap<>();
 
 // 遍历 historyList，并根据 systemid 去重
-        for (HashMap<String, Object> hashMap : historyList) {
-            Object systemid = hashMap.get("systemNumber");
-            if (!uniqueHistoryMap.containsKey(systemid) && hashMap.get("pname") != null) {
-                uniqueHistoryMap.put(systemid, hashMap);
+            for (HashMap<String, Object> hashMap : historyList) {
+                Object systemid = hashMap.get("systemNumber");
+                if (!uniqueHistoryMap.containsKey(systemid) && hashMap.get("pname") != null) {
+                    uniqueHistoryMap.put(systemid, hashMap);
+                }
             }
-        }
 
 // 将去重后的数据重新放入 List 中
-        historyList = new ArrayList<>(uniqueHistoryMap.values());
+            historyList = new ArrayList<>(uniqueHistoryMap.values());
+        }
         initView();
     }
 
@@ -454,8 +457,9 @@ public class  CarbondioxideRecordAcitivty extends AppCompatActivity implements V
         return intent;
     }
 
+    LinearLayout xt_l;
     private void regularUI() {
-        LinearLayout xt_l = findViewById(R.id.xt_l);
+         xt_l = findViewById(R.id.xt_l);
         //        f_title.equals("高压二氧化碳灭火系统") || f_title.equals("七氟丙烷灭火系统")
 //                || f_title.equals("海水雨淋灭火系统") || f_title.equals("固定式干粉灭火系统")
 //                || f_title.equals("泡沫灭火系统"))
