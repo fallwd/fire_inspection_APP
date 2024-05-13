@@ -160,7 +160,7 @@ public class CarBonGoodsWeightAcitivty extends AppCompatActivity {
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int childCount = listRrcycler.getAdapter().getItemCount();
+                int childCount = listRrcycler.getChildCount();
 //                Log.d("dong", "childCount==- " + childCount + "    数据条目 " + yearCheckResults.size());
                 //两边的数据条数是一样的.
                 if (yearCheckResults.size() == childCount) {

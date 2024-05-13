@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -90,6 +91,21 @@ public class GoodsRecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
 //            vh.ev8.setText(ycr.get(position).getDescription());
 
+            vh.tv3.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    Toast.makeText(mContext, yearCheck.getContent(), Toast.LENGTH_LONG).show();
+                    return false;
+                }
+            });
+
+            vh.tv4.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    Toast.makeText(mContext, yearCheck.getRequirement(), Toast.LENGTH_LONG).show();
+                    return false;
+                }
+            });
 
             //在左侧添加图片
             Drawable drawable = mContext.getResources().getDrawable(R.mipmap.goods_down);
